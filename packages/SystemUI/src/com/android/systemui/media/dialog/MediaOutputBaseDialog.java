@@ -56,7 +56,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class MediaOutputBaseDialog extends SystemUIDialog implements MediaOutputController.Callback, Window.Callback {
     public MediaOutputAdapter mAdapter;
     public Button mAppButton;
@@ -88,7 +87,6 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
     public boolean mShouldLaunchLeBroadcastDialog;
     public Button mStopButton;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LayoutManagerWrapper extends LinearLayoutManager {
         public LayoutManagerWrapper(Context context) {
             super(context);
@@ -508,7 +506,6 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
     public void onBroadcastIconClick() {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.dialog.MediaOutputBaseDialog$1, reason: invalid class name */
     public final class AnonymousClass1 implements BluetoothLeBroadcast.Callback {
         public AnonymousClass1() {

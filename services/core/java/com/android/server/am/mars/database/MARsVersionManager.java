@@ -8,7 +8,6 @@ import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.Base64;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsVersionManager {
     public ArrayList mExcludeTargetList;
     public ArrayMap mIsCurrentImportantMap;
@@ -40,7 +39,6 @@ public final class MARsVersionManager {
     };
     public static ArrayList mPolicyInfoList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdjustRestriction {
         public final String action;
         public final String actionMatchType;
@@ -75,7 +73,6 @@ public final class MARsVersionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdjustTargetCurrentImportant {
         public final int importantValue;
         public final int policyNum;
@@ -93,7 +90,6 @@ public final class MARsVersionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdjustTargetExcludePackage {
         public final int condition;
         public final String packageName;
@@ -119,10 +115,8 @@ public final class MARsVersionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MARsSettingsInfo {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsVersionManagerHolder {
         public static final MARsVersionManager INSTANCE;
 
@@ -137,7 +131,6 @@ public final class MARsVersionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyInfo {
         public final int action;
         public final int enabled;

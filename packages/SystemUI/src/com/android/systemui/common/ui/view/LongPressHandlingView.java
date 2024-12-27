@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LongPressHandlingView extends View {
     public final Lazy interactionHandler$delegate;
     public DeviceEntryIconViewBinder$bind$1 listener;
@@ -25,7 +24,6 @@ public final class LongPressHandlingView extends View {
         super(context, attributeSet);
         this.interactionHandler$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.common.ui.view.LongPressHandlingView$interactionHandler$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.common.ui.view.LongPressHandlingView$interactionHandler$2$2, reason: invalid class name */
             final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
                 public AnonymousClass2(Object obj) {

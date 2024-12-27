@@ -51,7 +51,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class TakeScreenshotService extends Service {
     public static boolean sConfigured = false;
     public final Executor mBgExecutor;
@@ -234,11 +233,9 @@ public class TakeScreenshotService extends Service {
         }
     });
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface RequestCallback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RequestCallbackImpl implements RequestCallback {
         public final Messenger mReplyTo;
 

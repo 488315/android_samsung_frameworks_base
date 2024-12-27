@@ -3,10 +3,8 @@ package com.android.systemui.qs.tiles.impl.alarm.domain.model;
 import android.app.AlarmManager;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface AlarmTileModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NextAlarmSet implements AlarmTileModel {
         public final AlarmManager.AlarmClockInfo alarmClockInfo;
         public final boolean is24HourFormat;
@@ -36,7 +34,6 @@ public interface AlarmTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NoAlarmSet implements AlarmTileModel {
         public static final NoAlarmSet INSTANCE = new NoAlarmSet();
 

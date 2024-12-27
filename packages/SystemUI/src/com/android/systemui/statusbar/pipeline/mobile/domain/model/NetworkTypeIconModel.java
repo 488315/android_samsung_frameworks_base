@@ -5,10 +5,8 @@ import com.android.systemui.log.table.Diffable;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface NetworkTypeIconModel extends Diffable {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultIcon implements NetworkTypeIconModel {
         public final int[] activityIcons;
         public final int contentDescription;
@@ -71,7 +69,6 @@ public interface NetworkTypeIconModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OverriddenIcon implements NetworkTypeIconModel {
         public final int[] activityIcons;
         public final int contentDescription;

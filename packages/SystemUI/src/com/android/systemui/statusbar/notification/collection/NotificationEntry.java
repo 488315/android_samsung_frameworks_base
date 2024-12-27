@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Objects;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationEntry extends ListEntry {
     public EditedSuggestionInfo editedSuggestionInfo;
     public boolean hasSentReply;
@@ -82,14 +81,12 @@ public final class NotificationEntry extends ListEntry {
     public ExpandableNotificationRow row;
     public int targetSdk;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum DismissState {
         NOT_DISMISSED,
         DISMISSED,
         PARENT_DISMISSED
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EditedSuggestionInfo {
         public final int index;
         public final CharSequence originalText;
@@ -100,7 +97,6 @@ public final class NotificationEntry extends ListEntry {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnSensitivityChangedListener {
         void onSensitivityChanged(NotificationEntry notificationEntry);
     }

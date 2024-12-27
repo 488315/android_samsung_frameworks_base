@@ -8,14 +8,12 @@ import android.view.IRotationWatcher;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RotationWatcherController {
     public volatile boolean mHasProposedRotationListeners;
     public final WindowManagerService mService;
     public final ArrayList mDisplayRotationWatchers = new ArrayList();
     public final ArrayList mProposedRotationListeners = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayRotationWatcher extends RotationWatcher {
         public final int mDisplayId;
 
@@ -28,7 +26,6 @@ public final class RotationWatcherController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProposedRotationListener extends RotationWatcher {
         public final IBinder mToken;
 
@@ -41,7 +38,6 @@ public final class RotationWatcherController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class RotationWatcher implements IBinder.DeathRecipient {
         public final int mOwnerUid = Binder.getCallingUid();
         public final IRotationWatcher mWatcher;

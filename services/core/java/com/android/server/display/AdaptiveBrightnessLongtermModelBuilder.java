@@ -65,7 +65,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AdaptiveBrightnessLongtermModelBuilder {
     public AdaptiveBrightnessStatsTracker mAdaptiveBrightnessStatsTracker;
     public boolean mAdaptiveBrightnessStatsTrackerStarted;
@@ -166,7 +165,6 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessChangeValues {
         public final float brightness;
         public final Spline brightnessSpline;
@@ -188,7 +186,6 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayListener implements DisplayManager.DisplayListener {
         public DisplayListener() {}
 
@@ -218,20 +215,17 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
         public final void onDisplayRemoved(int i) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public static AtomicFile getFile(String str) {
             return new AtomicFile(new File(Environment.getDataSystemDirectory(), str));
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LightData {
         public float lux;
         public long timestamp;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelBuilderHandler extends Handler {
         public ModelBuilderHandler(Looper looper) {
             super(looper, null, true);
@@ -544,7 +538,6 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AdaptiveBrightnessLongtermModelBuilder this$0;
@@ -675,7 +668,6 @@ public final class AdaptiveBrightnessLongtermModelBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

@@ -18,7 +18,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.navigationbar.buttons.ButtonInterface;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NavigationHandle extends FrameLayout implements ButtonInterface {
     public static final AnonymousClass1 PULSE_ANIMATION_PROGRESS = new FloatProperty("pulseAnimationProgress") { // from class: com.android.systemui.navigationbar.gestural.NavigationHandle.1
         @Override // android.util.Property

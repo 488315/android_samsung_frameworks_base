@@ -6,7 +6,6 @@ import android.util.DebugUtils;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ViewState {
     public final AutofillId id;
     public AutofillValue mAutofilledValue;
@@ -21,7 +20,6 @@ public final class ViewState {
     public int mState;
     public Rect mVirtualBounds;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {}
 
     public ViewState(AutofillId autofillId, Listener listener, int i, boolean z) {

@@ -22,14 +22,12 @@ import com.android.server.LocalServices;
 
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ArtManagerService extends IArtManager.Stub {
     public static final boolean DEBUG = Log.isLoggable("ArtManagerService", 3);
     public final Context mContext;
     public final Handler mHandler = new Handler(BackgroundThread.getHandler().getLooper());
     public IPackageManager mPackageManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ArtManagerInternalImpl extends ArtManagerInternal {
         /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
         java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null

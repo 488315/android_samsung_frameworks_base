@@ -22,7 +22,6 @@ import com.sec.ims.IMSParameter;
 import com.sec.ims.configuration.DATA;
 import com.sec.ims.settings.ImsProfile;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DemoModeFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
     public static final String[] STATUS_ICONS = {"volume", "bluetooth", "location", "alarm", "zen", "sync", "tty", "eri", "mute", "speakerphone", "managed_profile"};
     public final DemoModeController mDemoModeController;
@@ -31,7 +30,6 @@ public final class DemoModeFragment extends PreferenceFragment implements Prefer
     public final GlobalSettings mGlobalSettings;
     public SwitchPreference mOnSwitch;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Tracker extends DemoModeAvailabilityTracker {
         public Tracker(Context context, GlobalSettings globalSettings) {
             super(context, globalSettings);

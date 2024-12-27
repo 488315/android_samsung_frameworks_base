@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemSettingsHelper {
     public final PackageTagsListSetting mAdasPackageAllowlist;
     public final LongGlobalSetting mBackgroundThrottleIntervalMs;
@@ -40,7 +39,6 @@ public final class SystemSettingsHelper {
     public final StringListCachedSecureSetting mLocationPackageBlacklist;
     public final StringListCachedSecureSetting mLocationPackageWhitelist;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LongGlobalSetting extends ObservingSetting {
         public final Context mContext;
         public final String mSettingName;
@@ -67,7 +65,6 @@ public final class SystemSettingsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ObservingSetting extends ContentObserver {
         public final CopyOnWriteArrayList mListeners;
         public boolean mRegistered;
@@ -107,7 +104,6 @@ public final class SystemSettingsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageTagsListSetting implements DeviceConfig.OnPropertiesChangedListener {
         public final Supplier mBaseValuesSupplier;
         public PackageTagsList mCachedValue;
@@ -193,7 +189,6 @@ public final class SystemSettingsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StringListCachedSecureSetting extends ObservingSetting {
         public int mCachedUserId;
         public List mCachedValue;
@@ -254,7 +249,6 @@ public final class SystemSettingsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StringSetCachedGlobalSetting extends ObservingSetting {
         public final Supplier mBaseValuesSupplier;
         public ArraySet mCachedValue;

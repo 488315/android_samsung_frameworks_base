@@ -8,7 +8,6 @@ import android.hardware.usb.UsbDevice;
 import com.samsung.android.lib.dexcontrol.utils.SLog;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseModel {
     public Context mContext;
     public final AnonymousClass3 mUsbDeviceReceiver;
@@ -48,7 +47,6 @@ public abstract class BaseModel {
         }
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum TA_TYPE_CODE {
         PD("PD"),
         SDP("SDP"),
@@ -68,7 +66,6 @@ public abstract class BaseModel {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum USB_CLASS_CODE {
         AUDIO("AUDIO"),
         COMMUNICATIONS_AND_CDC_CONTROL("COMMUNICATIONS_AND_CDC_CONTROL"),

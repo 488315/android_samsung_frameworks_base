@@ -7,13 +7,11 @@ import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 
 import java.util.Optional;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FillResponseEventLogger {
     public final int mSessionId;
     public long startResponseProcessingTimestamp = -1;
     public Optional mEventInternal = Optional.empty();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FillResponseEventInternal {
         public int mAppPackageUid;
         public int mAvailableCount;

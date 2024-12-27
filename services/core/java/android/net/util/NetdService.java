@@ -6,13 +6,11 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.util.Log;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class NetdService {
     private static final long BASE_TIMEOUT_MS = 100;
     private static final long MAX_TIMEOUT_MS = 1000;
     private static final String TAG = "NetdService";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface NetdCommand {
         void run(INetd iNetd) throws RemoteException;
     }

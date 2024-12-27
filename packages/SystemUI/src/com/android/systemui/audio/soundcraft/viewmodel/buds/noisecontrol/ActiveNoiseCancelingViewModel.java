@@ -6,7 +6,6 @@ import com.android.systemui.audio.soundcraft.interfaces.connectivity.BluetoothDe
 import com.android.systemui.audio.soundcraft.model.ModelProvider;
 import com.android.systemui.audio.soundcraft.utils.ToastUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ActiveNoiseCancelingViewModel extends NoiseControlIconViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
     public final Context context;

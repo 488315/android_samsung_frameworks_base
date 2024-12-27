@@ -13,7 +13,6 @@ import com.android.systemui.slimindicator.SlimIndicatorKeyguardCarrierTextHelper
 import com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class CarrierText extends TextView {
     public final String mDebugLocation;
     public float mFontSize;
@@ -22,7 +21,6 @@ public class CarrierText extends TextView {
     public final boolean mShowMissingSim;
     public SlimIndicatorKeyguardCarrierTextHelper mSlimIndicatorKeyguardCarrierTextInterface;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CarrierTextTransformationMethod extends SingleLineTransformationMethod {
         public final boolean mAllCaps;
         public final Locale mLocale;

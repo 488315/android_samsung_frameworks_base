@@ -31,7 +31,6 @@ import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WirelessDexManager {
     public final Context mContext;
     public final AnonymousClass3 mDesktopPointerEventListener;
@@ -58,7 +57,6 @@ public final class WirelessDexManager {
     public int mFrequencyValue = 0;
     public String mConnectedDeviceName = "";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
         public Receiver() {}
 
@@ -134,7 +132,6 @@ public final class WirelessDexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StateListener extends StateManager.StateListener {
         public StateListener() {}
 

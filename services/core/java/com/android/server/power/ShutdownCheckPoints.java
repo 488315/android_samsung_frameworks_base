@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShutdownCheckPoints {
     public final ArrayList mCheckPoints = new ArrayList();
     public final Injector mInjector;
@@ -30,7 +29,6 @@ public final class ShutdownCheckPoints {
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
     public static final File[] EMPTY_FILE_ARRAY = new File[0];
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.ShutdownCheckPoints$1, reason: invalid class name */
     public final class AnonymousClass1 implements Injector {
         @Override // com.android.server.power.ShutdownCheckPoints.Injector
@@ -44,7 +42,6 @@ public final class ShutdownCheckPoints {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderCheckPoint extends SystemServerCheckPoint {
         public final int mCallerProcessId;
 
@@ -135,7 +132,6 @@ public final class ShutdownCheckPoints {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class CheckPoint {
         public final String mReason;
         public final long mTimestamp;
@@ -150,7 +146,6 @@ public final class ShutdownCheckPoints {
         public abstract String getOrigin();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileDumperThread extends Thread {
         public final File mBaseFile;
         public final int mFileCountLimit;
@@ -226,14 +221,12 @@ public final class ShutdownCheckPoints {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Injector {
         IActivityManager activityManager();
 
         long currentTimeMillis();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntentCheckPoint extends CheckPoint {
         public final String mIntentName;
         public final String mPackageName;
@@ -258,7 +251,6 @@ public final class ShutdownCheckPoints {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SystemServerCheckPoint extends CheckPoint {
         public final StackTraceElement[] mStackTraceElements;
 

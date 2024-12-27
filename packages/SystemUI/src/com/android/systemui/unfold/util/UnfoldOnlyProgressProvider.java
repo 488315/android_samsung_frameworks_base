@@ -5,13 +5,11 @@ import com.android.systemui.unfold.updates.FoldProvider;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UnfoldOnlyProgressProvider implements UnfoldTransitionProgressProvider {
     public final Executor executor;
     public boolean isFolded;
     public final ScopedUnfoldTransitionProgressProvider scopedProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldListener implements FoldProvider.FoldCallback {
         public FoldListener() {
         }
@@ -26,7 +24,6 @@ public final class UnfoldOnlyProgressProvider implements UnfoldTransitionProgres
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SourceTransitionListener implements UnfoldTransitionProgressProvider.TransitionProgressListener {
         public SourceTransitionListener() {
         }

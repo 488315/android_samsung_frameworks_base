@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SharedUserSetting extends SettingBase {
     public int mAppId;
     public final WatchedArraySet mDisabledPackages;
@@ -38,7 +37,6 @@ public final class SharedUserSetting extends SettingBase {
     public final int uidFlags;
     public final int uidPrivateFlags;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.SharedUserSetting$2, reason: invalid class name */
     public final class AnonymousClass2 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache

@@ -15,7 +15,6 @@ import com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor;
 import com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmShortTypeSender;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexStation extends FanControlModel {
     public static final HashMap mFanLevelMap = new HashMap() { // from class: com.samsung.android.lib.dexcontrol.model.dexstation.DexStation.1
         {
@@ -29,7 +28,6 @@ public final class DexStation extends FanControlModel {
     public final AnonymousClass2 mIResponseListener;
     public int preFanLevel;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.lib.dexcontrol.model.dexstation.DexStation$2, reason: invalid class name */
     public final class AnonymousClass2 implements IResponseListener {
         @Override // com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener

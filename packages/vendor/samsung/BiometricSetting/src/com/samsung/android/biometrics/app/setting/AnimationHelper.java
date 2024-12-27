@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class AnimationHelper {
     public final boolean mIsRepeat;
     public final float mLastPos;
@@ -65,7 +64,6 @@ public final class AnimationHelper {
         this.mLastPos = f;
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public final class Item {
         public final float defValue;
         public final PathInterpolator interpolator;

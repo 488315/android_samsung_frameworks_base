@@ -59,7 +59,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DomainVerificationService extends SystemService
         implements DomainVerificationManagerInternal {
     public final DomainVerificationStateMap mAttachedPkgStates;
@@ -77,7 +76,6 @@ public final class DomainVerificationService extends SystemService
     public final DomainVerificationManagerStub mStub;
     public final SystemConfig mSystemConfig;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetAttachedResult {
         public final int mErrorCode;
         public final DomainVerificationPkgState mPkgState;

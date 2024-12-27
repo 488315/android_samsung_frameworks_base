@@ -6,10 +6,8 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IOemNetdUnsolicitedEventListener extends IInterface {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IOemNetdUnsolicitedEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -20,10 +18,8 @@ public interface IOemNetdUnsolicitedEventListener extends IInterface {
         public void onRegistered() throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IOemNetdUnsolicitedEventListener {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         class Proxy implements IOemNetdUnsolicitedEventListener {
             public final IBinder mRemote;
 

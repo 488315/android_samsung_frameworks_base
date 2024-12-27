@@ -104,7 +104,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import libcore.util.EmptyArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PermissionManagerServiceImpl implements PermissionManagerServiceInterface {
     public static final long BACKUP_TIMEOUT_MILLIS = TimeUnit.SECONDS.toMillis(60);
     public static final int[] EMPTY_INT_ARRAY = new int[0];
@@ -137,7 +136,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
     public boolean mSystemReady;
     public final UserManagerInternal mUserManagerInt;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.permission.PermissionManagerServiceImpl$1, reason: invalid class name */
     public final class AnonymousClass1 extends PermissionCallback {
         public AnonymousClass1() {
@@ -261,7 +259,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnPermissionChangeListeners extends Handler {
         public final RemoteCallbackList mPermissionListeners;
 
@@ -297,7 +294,6 @@ public final class PermissionManagerServiceImpl implements PermissionManagerServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PermissionCallback {
         public abstract void onGidsChanged(int i, int i2);
 

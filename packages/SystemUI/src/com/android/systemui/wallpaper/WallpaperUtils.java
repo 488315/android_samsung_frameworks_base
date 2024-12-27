@@ -29,7 +29,6 @@ import com.android.systemui.widget.SystemUIWidgetUtil;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WallpaperUtils {
     public static boolean mIsAdaptiveColorMode = false;
     public static boolean mIsAdaptiveColorModeSub = false;

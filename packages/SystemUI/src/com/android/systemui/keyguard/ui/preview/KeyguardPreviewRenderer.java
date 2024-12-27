@@ -57,7 +57,6 @@ import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardPreviewRenderer {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CoroutineDispatcher backgroundDispatcher;
@@ -103,7 +102,6 @@ public final class KeyguardPreviewRenderer {
     public final int width;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ DisplayManager $displayManager;
@@ -144,7 +142,6 @@ public final class KeyguardPreviewRenderer {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

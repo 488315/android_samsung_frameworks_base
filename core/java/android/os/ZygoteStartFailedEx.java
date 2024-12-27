@@ -1,6 +1,5 @@
 package android.os;
 
-/* compiled from: ZygoteProcess.java */
 class ZygoteStartFailedEx extends Exception {
     ZygoteStartFailedEx(String s) {
         super(s);

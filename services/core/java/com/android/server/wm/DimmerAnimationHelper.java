@@ -9,7 +9,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DimmerAnimationHelper {
     public AnimationSpec mAlphaAnimationSpec;
     public final AnimationAdapterFactory mAnimationAdapterFactory;
@@ -17,10 +16,8 @@ public final class DimmerAnimationHelper {
     public final Change mCurrentProperties = new Change();
     public final Change mRequestedProperties = new Change();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimationAdapterFactory {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimationSpec implements LocalAnimationAdapter.AnimationSpec {
         public final AnimationExtremes mAlpha;
         public final AnimationExtremes mBlur;
@@ -29,7 +26,6 @@ public final class DimmerAnimationHelper {
         public int mCurrentBlur = 0;
         public boolean mStarted = false;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class AnimationExtremes {
             public final Object mFinishValue;
             public final Object mStartValue;
@@ -130,7 +126,6 @@ public final class DimmerAnimationHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Change {
         public float mAlpha = -1.0f;
         public int mBlurRadius = -1;

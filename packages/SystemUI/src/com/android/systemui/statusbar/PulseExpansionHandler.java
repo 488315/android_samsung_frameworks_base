@@ -33,7 +33,6 @@ import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
     public static final int SPRING_BACK_ANIMATION_LENGTH_MS;
     public boolean bouncerShowing;
@@ -57,7 +56,6 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
     public VelocityTracker velocityTracker;
     public final NotificationWakeUpCoordinator wakeUpCoordinator;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

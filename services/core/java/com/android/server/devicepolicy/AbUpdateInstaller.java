@@ -20,7 +20,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AbUpdateInstaller extends UpdateInstaller {
     public static final Map errorCodesMap;
     public static final Map errorStringsMap;
@@ -31,7 +30,6 @@ public final class AbUpdateInstaller extends UpdateInstaller {
     public long mSizeForUpdate;
     public boolean mUpdateInstalled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelegatingUpdateEngineCallback extends UpdateEngineCallback {
         public UpdateEngine mUpdateEngine;
         public UpdateInstaller mUpdateInstaller;

@@ -39,7 +39,6 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkTimeUpdateService extends Binder {
     public static boolean mBootCompleted;
     public static Context mMDMContext;
@@ -53,7 +52,6 @@ public final class NetworkTimeUpdateService extends Binder {
     public final Object mLock = new Object();
     public Network mDefaultNetwork = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.timedetector.NetworkTimeUpdateService$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public final ScheduledRefreshAlarmListener mOnAlarmListener;
@@ -70,7 +68,6 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutoTimeSettingObserver extends ContentObserver {
         public final Context mContext;
 
@@ -89,10 +86,8 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Engine {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class EngineImpl implements Engine {
         public static boolean mForceNtpSetByMDM;
         public static boolean mNtpSetByMDM;
@@ -180,7 +175,6 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MDMReceiver extends BroadcastReceiver implements Runnable {
         public MDMReceiver() {}
 
@@ -258,7 +252,6 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkConnectivityCallback extends ConnectivityManager.NetworkCallback {
         public NetworkConnectivityCallback() {}
 
@@ -290,7 +283,6 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScheduledRefreshAlarmListener
             implements AlarmManager.OnAlarmListener, Runnable {
         public ScheduledRefreshAlarmListener() {}

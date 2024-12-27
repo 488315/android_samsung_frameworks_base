@@ -14,7 +14,6 @@ import com.android.server.biometrics.sensors.face.aidl.FaceDetectClient;
 
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseClientMonitor implements IBinder.DeathRecipient {
     public static int sCount;
     public final BiometricContext mBiometricContext;
@@ -32,7 +31,6 @@ public abstract class BaseClientMonitor implements IBinder.DeathRecipient {
     public boolean mAlreadyDone = false;
     public ClientMonitorCallback mCallback = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.BaseClientMonitor$1, reason: invalid class name */
     public final class AnonymousClass1 implements ClientMonitorCallback {
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback

@@ -62,7 +62,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiTaskingController implements IController {
     public final ActivityEmbeddedPackageRepository mActivityEmbeddedPackageRepository;
     public final ActivityTaskManagerService mAtm;
@@ -99,7 +98,6 @@ public final class MultiTaskingController implements IController {
     public Task mAffordanceTargetTask = null;
     public final Queue mFocusableTaskIds = new LinkedList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -186,7 +184,6 @@ public final class MultiTaskingController implements IController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mDexFontScaleUri;
         public final Uri mDexForceImmersiveModeEnabledUri;

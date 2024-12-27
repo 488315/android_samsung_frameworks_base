@@ -79,7 +79,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VcnGatewayConnection extends StateMachine {
     static final String NETWORK_INFO_EXTRA_INFO = "VCN";
     static final String NETWORK_INFO_NETWORK_TYPE_STRING = "MOBILE";
@@ -126,7 +125,6 @@ public final class VcnGatewayConnection extends StateMachine {
     static final String SAFEMODE_TIMEOUT_ALARM = "VcnGatewayConnection_SAFEMODE_TIMEOUT_ALARM";
     public static final int[] MERGED_CAPABILITIES = {11, 18};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ActiveBaseState extends BaseState {
         public ActiveBaseState() {
             super();
@@ -138,7 +136,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BaseState extends State {
         public BaseState() {
         }
@@ -275,7 +272,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConnectedState extends ActiveBaseState {
         public final /* synthetic */ VcnGatewayConnection this$0$1;
 
@@ -630,7 +626,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConnectingState extends ActiveBaseState {
         public ConnectingState() {
             super();
@@ -700,11 +695,9 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisconnectedState extends BaseState {
         public DisconnectedState() {
             super();
@@ -751,7 +744,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisconnectingState extends ActiveBaseState {
         public boolean mSkipRetryTimeout;
 
@@ -842,7 +834,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventDataStallSuspectedInfo implements EventInfo {
         public final Network network;
 
@@ -862,7 +853,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventDisconnectRequestedInfo implements EventInfo {
         public final String reason;
         public final boolean shouldQuit;
@@ -886,7 +876,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventIkeConnectionInfoChangedInfo implements EventInfo {
         public final IkeSessionConnectionInfo ikeConnectionInfo;
 
@@ -906,11 +895,9 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface EventInfo {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventMigrationCompletedInfo implements EventInfo {
         public final IpSecTransform inTransform;
         public final IpSecTransform outTransform;
@@ -935,7 +922,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventSessionLostInfo implements EventInfo {
         public final Exception exception;
 
@@ -955,7 +941,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventSetupCompletedInfo implements EventInfo {
         public final VcnChildSessionConfiguration childSessionConfig;
 
@@ -976,7 +961,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventTransformCreatedInfo implements EventInfo {
         public final int direction;
         public final IpSecTransform transform;
@@ -1000,7 +984,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventUnderlyingNetworkChangedInfo implements EventInfo {
         public final UnderlyingNetworkRecord newUnderlying;
 
@@ -1020,7 +1003,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IkeSessionCallbackImpl implements IkeSessionCallback {
         public final int mToken;
 
@@ -1062,7 +1044,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RetryTimeoutState extends ActiveBaseState {
         public RetryTimeoutState() {
             super();
@@ -1132,7 +1113,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnChildSessionCallback implements ChildSessionCallback {
         public boolean mIsChildOpened = false;
         public final boolean mIsOpportunistic;
@@ -1225,7 +1205,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnChildSessionConfiguration {
         public final ChildSessionConfiguration mChildConfig;
 
@@ -1234,7 +1213,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnConnectivityDiagnosticsCallback extends ConnectivityDiagnosticsManager.ConnectivityDiagnosticsCallback {
         public VcnConnectivityDiagnosticsCallback() {
         }
@@ -1248,7 +1226,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnIkeSession {
         public final IkeSession mImpl;
 
@@ -1257,7 +1234,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnNetworkAgent {
         public final AnonymousClass1 mImpl;
 
@@ -1275,7 +1251,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnUnderlyingNetworkControllerCallback implements UnderlyingNetworkController.UnderlyingNetworkControllerCallback {
         public VcnUnderlyingNetworkControllerCallback() {
         }
@@ -1312,7 +1287,6 @@ public final class VcnGatewayConnection extends StateMachine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnWakeLock {
         public final PowerManager.WakeLock mImpl;
 

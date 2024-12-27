@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecStructureAdapter extends RecyclerView.Adapter {
     public final AUIFacade auiFacade;
     public final ControlsUtil controlsUtil;
@@ -41,7 +40,6 @@ public final class SecStructureAdapter extends RecyclerView.Adapter {
     public final LayoutUtil layoutUtil;
     public StructureModel model;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -39,7 +39,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecNotificationSnooze extends LinearLayout implements NotificationGuts.GutsContent, View.OnClickListener, GutContentInitializer {
     public TextView mCancel;
     public final Context mContext;

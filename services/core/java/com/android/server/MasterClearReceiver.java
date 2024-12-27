@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class MasterClearReceiver extends BroadcastReceiver {
     public static final /* synthetic */ int $r8$clinit = 0;
     public boolean mWipeEsims;
@@ -38,7 +37,6 @@ public class MasterClearReceiver extends BroadcastReceiver {
     public String requestedTimeArg = null;
     public String extraCmd = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WipeDataTask extends AsyncTask {
         public final Thread mChainedTask;
         public final Context mContext;

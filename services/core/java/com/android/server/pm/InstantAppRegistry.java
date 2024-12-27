@@ -54,7 +54,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InstantAppRegistry implements Watchable, Snappable {
     public final Context mContext;
     public final CookiePersistence mCookiePersistence;
@@ -69,7 +68,6 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final Object mLock = new Object();
     public final WatchableImpl mWatchable = new WatchableImpl();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.InstantAppRegistry$2, reason: invalid class name */
     public final class AnonymousClass2 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
@@ -81,7 +79,6 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CookiePersistence extends Handler {
         public final SparseArray mPendingPersistCookies;
 
@@ -185,7 +182,6 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UninstalledInstantAppState {
         public final InstantAppInfo mInstantAppInfo;
         public final long mTimestamp;

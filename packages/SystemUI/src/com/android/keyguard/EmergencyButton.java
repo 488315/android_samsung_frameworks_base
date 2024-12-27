@@ -20,7 +20,6 @@ import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.systemui.CscRune;
 import com.android.systemui.widget.SystemUIButton;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class EmergencyButton extends SystemUIButton {
     public int mDownX;
     public int mDownY;
@@ -29,7 +28,6 @@ public class EmergencyButton extends SystemUIButton {
     public boolean mLongPressWasDragged;
     public TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Samsung321Task extends AsyncTask {
         public /* synthetic */ Samsung321Task(EmergencyButton emergencyButton, int i) {
             this();

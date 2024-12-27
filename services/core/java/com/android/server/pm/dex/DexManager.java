@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexManager {
     public static final boolean DEBUG = Log.isLoggable("DexManager", 3);
     public final Context mContext;
@@ -36,7 +35,6 @@ public final class DexManager {
     public final Map mPackageCodeLocationsCache = new HashMap();
     public final PackageDexUsage mPackageDexUsage = new PackageDexUsage();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexSearchResult {
         public final int mOutcome;
         public final String mOwningPackageName;
@@ -53,7 +51,6 @@ public final class DexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageCodeLocations {
         public final Map mAppDataDirs;
         public String mBaseCodePath;
@@ -95,7 +92,6 @@ public final class DexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RegisterDexModuleResult {}
 
     public DexManager(

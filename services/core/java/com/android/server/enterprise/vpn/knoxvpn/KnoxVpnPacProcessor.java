@@ -46,7 +46,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class KnoxVpnPacProcessor {
     public static Context mContext;
     public static KnoxVpnPacProcessor mKnoxVpnPacProcessor;
@@ -60,7 +59,6 @@ public class KnoxVpnPacProcessor {
     public static final HashMap mproxyConnectionList = new HashMap();
     public static final boolean DBG = Debug.semIsProductDev();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DownloadUrlThread extends Thread {
         public final String hostname;
         public final String interfaceName;
@@ -101,7 +99,6 @@ public class KnoxVpnPacProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KnoxVpnPacConnection implements ServiceConnection {
         public final String profile;
         public final int userId;

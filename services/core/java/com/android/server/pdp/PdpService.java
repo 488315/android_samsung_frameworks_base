@@ -11,13 +11,11 @@ import android.util.Slog;
 import android.widget.Toast;
 import com.android.server.SystemService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PdpService extends SystemService {
     public final Context mContext;
     public SvcPdpHandler mSvcPdpHandler;
     public final AnonymousClass1 mSvcPdpThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SvcPdpHandler extends Handler {
         public SvcPdpHandler(Looper looper) {
             super(looper, null, true);

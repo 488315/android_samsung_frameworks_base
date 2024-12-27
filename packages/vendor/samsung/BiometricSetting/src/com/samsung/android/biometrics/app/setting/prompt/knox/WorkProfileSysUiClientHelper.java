@@ -27,7 +27,6 @@ import com.samsung.android.biometrics.app.setting.ResourceManager;
 import com.samsung.android.biometrics.app.setting.Utils;
 import com.samsung.android.biometrics.app.setting.prompt.PromptConfig;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class WorkProfileSysUiClientHelper implements KnoxSysUiClientHelper {
     public static final int[][] DETAIL_TEXTS = {
         new int[] {R.string.sec_draw_pattern_WC},
@@ -44,7 +43,6 @@ public final class WorkProfileSysUiClientHelper implements KnoxSysUiClientHelper
     public final PromptConfig mPromptConfig;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.prompt.knox.WorkProfileSysUiClientHelper$1, reason: invalid class name */
     public final class AnonymousClass1 implements DialogInterface.OnClickListener {
         @Override // android.content.DialogInterface.OnClickListener

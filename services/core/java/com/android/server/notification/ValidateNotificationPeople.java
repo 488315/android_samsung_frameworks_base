@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class ValidateNotificationPeople implements NotificationSignalExtractor {
     public Context mBaseContext;
     public boolean mEnabled;
@@ -62,7 +61,6 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
     };
     static final String[] PHONE_LOOKUP_PROJECTION = {"data4", "data1"};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class LookupResult {
         public float mAffinity = FullScreenMagnificationGestureHandler.MAX_SCALE;
         public boolean mHasPhone = false;
@@ -151,7 +149,6 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class PeopleRankingReconsideration extends RankingReconsideration {
         public float mContactAffinity;
         public final Context mContext;

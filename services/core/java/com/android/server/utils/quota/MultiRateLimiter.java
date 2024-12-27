@@ -6,13 +6,11 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiRateLimiter {
     public static final CountQuotaTracker[] EMPTY_TRACKER_ARRAY = new CountQuotaTracker[0];
     public final Object mLock = new Object();
     public final CountQuotaTracker[] mQuotaTrackers;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public final Context mContext;
         public final QuotaTracker.Injector mInjector;
@@ -41,7 +39,6 @@ public final class MultiRateLimiter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RateLimit {
         public final int mLimit;
         public final Duration mWindowSize;

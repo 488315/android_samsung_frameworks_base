@@ -7,13 +7,11 @@ import android.net.Uri;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PortFilter implements Filter {
     public static final AnonymousClass1 FACTORY = new AnonymousClass1("port");
     public final int mLowerBound;
     public final int mUpperBound;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.firewall.PortFilter$1, reason: invalid class name */
     public final class AnonymousClass1 extends FilterFactory {
         @Override // com.android.server.firewall.FilterFactory

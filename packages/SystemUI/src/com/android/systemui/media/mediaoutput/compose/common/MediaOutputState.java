@@ -11,11 +11,9 @@ import com.android.systemui.media.mediaoutput.compose.ext.CompositionExtKt;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface MediaOutputState {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -91,7 +89,6 @@ public interface MediaOutputState {
             if (rememberedValue == Composer.Companion.Empty) {
                 rememberedValue = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.common.MediaOutputState$Companion$rememberEnterState$1$1
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     public abstract /* synthetic */ class WhenMappings {
                         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -154,7 +151,6 @@ public interface MediaOutputState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateInfo {
         public static final /* synthetic */ StateInfo[] $VALUES;
         public static final StateInfo Dismissed;

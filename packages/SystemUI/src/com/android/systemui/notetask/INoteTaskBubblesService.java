@@ -8,17 +8,14 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.UserHandle;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface INoteTaskBubblesService extends IInterface {
     boolean areBubblesAvailable();
 
     void showOrHideAppBubble(Intent intent, UserHandle userHandle, Icon icon);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Stub extends Binder implements INoteTaskBubblesService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Proxy implements INoteTaskBubblesService {
             public final IBinder mRemote;
 

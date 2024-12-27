@@ -30,7 +30,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
 public final class ViewConfigCoordinator implements Coordinator, ConfigurationController.ConfigurationListener {
     private static final String TAG = "ViewConfigCoordinator";
@@ -207,7 +206,6 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

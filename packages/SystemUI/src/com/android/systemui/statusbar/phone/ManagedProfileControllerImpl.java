@@ -18,7 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ManagedProfileControllerImpl implements ManagedProfileController {
     public final Context mContext;
     public int mCurrentUser;
@@ -30,7 +29,6 @@ public final class ManagedProfileControllerImpl implements ManagedProfileControl
     public final UserTrackerCallback mUserTrackerCallback = new UserTrackerCallback(this, 0);
     public final LinkedList mProfiles = new LinkedList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class UserTrackerCallback implements UserTracker.Callback {
         public /* synthetic */ UserTrackerCallback(ManagedProfileControllerImpl managedProfileControllerImpl, int i) {
             this();

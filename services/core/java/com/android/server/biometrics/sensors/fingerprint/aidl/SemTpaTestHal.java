@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Callback {
     public CountDownLatch mActionDelayLatch;
     public long mChallenge;
@@ -47,7 +46,6 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
     public final SparseLongArray mAuthenticatorID = new SparseLongArray();
     public final SemTestSehFingerprint mSehFingerprint = new SemTestSehFingerprint();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISession.Stub {
         public final /* synthetic */ Handler val$handler;
@@ -344,7 +342,6 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$2, reason: invalid class name */
     public final class AnonymousClass2 extends ICancellationSignal.Stub {
         public final /* synthetic */ CancellationSignal val$cs;

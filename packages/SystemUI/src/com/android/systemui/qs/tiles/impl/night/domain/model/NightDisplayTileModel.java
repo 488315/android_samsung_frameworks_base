@@ -5,10 +5,8 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import java.time.LocalTime;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface NightDisplayTileModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AutoModeCustom implements NightDisplayTileModel {
         public final LocalTime endTime;
         public final boolean is24HourFormat;
@@ -69,7 +67,6 @@ public interface NightDisplayTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AutoModeOff implements NightDisplayTileModel {
         public final boolean isActivated;
         public final boolean isEnrolledInForcedNightDisplayAutoMode;
@@ -109,7 +106,6 @@ public interface NightDisplayTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AutoModeTwilight implements NightDisplayTileModel {
         public final boolean isActivated;
         public final boolean isEnrolledInForcedNightDisplayAutoMode;

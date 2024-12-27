@@ -76,7 +76,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OverviewProxyService implements CallbackController, NavigationModeController.ModeChangedListener, Dumpable {
     static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
     public Region mActiveNavBarRegion;
@@ -127,7 +126,6 @@ public final class OverviewProxyService implements CallbackController, Navigatio
     public ISystemUiProxy mSysUiProxy = new AnonymousClass1();
     public final OverviewProxyService$$ExternalSyntheticLambda0 mDeferredConnectionCallback = new OverviewProxyService$$ExternalSyntheticLambda0(this, 1);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.recents.OverviewProxyService$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISystemUiProxy.Stub {
         public final OverviewProxyService$1$$ExternalSyntheticLambda2 mOnNumberOfPackagesChangedListener = new FgsManagerController.OnNumberOfPackagesChangedListener() { // from class: com.android.systemui.recents.OverviewProxyService$1$$ExternalSyntheticLambda2
@@ -657,7 +655,6 @@ public final class OverviewProxyService implements CallbackController, Navigatio
         overviewProxyListener.onConnectionChanged(this.mOverviewProxy != null);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.recents.OverviewProxyService$5, reason: invalid class name */
     public final class AnonymousClass5 extends IVoiceInteractionSessionListener.Stub {
         public AnonymousClass5() {
@@ -677,7 +674,6 @@ public final class OverviewProxyService implements CallbackController, Navigatio
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OverviewProxyListener {
         default void onInitializedTaskbarNavigationBar() {
         }

@@ -42,7 +42,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.util.ArrayList;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LockscreenNotificationManager implements ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener, WakefulnessLifecycle.Observer, SemWindowManager.FoldStateListener {
     public static int mCurrentNotificationType;
     public int mBarState;
@@ -65,7 +64,6 @@ public final class LockscreenNotificationManager implements ConfigurationControl
     public final ArrayList mCallbacks = new ArrayList();
     public final LockscreenNotificationMgrHandler mHandler = new LockscreenNotificationMgrHandler(this, Looper.getMainLooper(), 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.LockscreenNotificationManager$3, reason: invalid class name */
     class AnonymousClass3 implements UserTracker.Callback {
         public AnonymousClass3() {
@@ -85,14 +83,12 @@ public final class LockscreenNotificationManager implements ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onNotificationInfoUpdated(ArrayList arrayList);
 
         void onNotificationTypeChanged(int i);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LockscreenNotificationMgrHandler extends Handler {
         public /* synthetic */ LockscreenNotificationMgrHandler(LockscreenNotificationManager lockscreenNotificationManager, Looper looper, int i) {
             this(looper);
@@ -146,7 +142,6 @@ public final class LockscreenNotificationManager implements ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationIconData {
         public int mColor;
         public final Context mContext;

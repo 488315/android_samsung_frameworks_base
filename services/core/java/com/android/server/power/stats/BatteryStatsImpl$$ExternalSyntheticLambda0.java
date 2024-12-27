@@ -9,7 +9,6 @@ import com.android.server.clipboard.ClipboardService;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 1;
     public final /* synthetic */ BatteryStatsImpl f$0;

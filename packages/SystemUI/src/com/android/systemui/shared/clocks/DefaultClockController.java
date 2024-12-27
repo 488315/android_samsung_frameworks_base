@@ -48,7 +48,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DefaultClockController implements ClockController {
     public final float burmeseLineSpacing;
     public final String burmeseNumerals;
@@ -64,7 +63,6 @@ public final class DefaultClockController implements ClockController {
     public final Resources resources;
     public final DefaultClockFaceController smallClock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationState {
         public float fraction;
         public boolean isActive;
@@ -88,7 +86,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -101,7 +98,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class DefaultClockAnimations implements ClockAnimations {
         public final AnimationState dozeState;
         public final AnimationState foldState;
@@ -204,7 +200,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class DefaultClockFaceController implements ClockFaceController {
         public DefaultClockAnimations animations;
         public final ClockFaceConfig config = new ClockFaceConfig(null, false, false, false, 15, null);
@@ -291,7 +286,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LargeClockFaceController extends DefaultClockFaceController {
         public final ClockFaceConfig config;
         public final DefaultClockFaceLayout layout;
@@ -436,7 +430,6 @@ public final class DefaultClockController implements ClockController {
         largeClockFaceController.events.onTimeTick();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LargeClockAnimations extends DefaultClockAnimations {
         public LargeClockAnimations(AnimatableClockView animatableClockView, float f, float f2) {
             super(DefaultClockController.this, animatableClockView, f, f2);
@@ -478,7 +471,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultClockEvents implements ClockEvents {
         public boolean isReactiveTouchInteractionEnabled;
 

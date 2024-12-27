@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardIndication {
     public final Drawable mBackground;
     public final boolean mForceAccessibilityLiveRegionAssertive;
@@ -16,7 +15,6 @@ public final class KeyguardIndication {
     public final Long mMinVisibilityMillis;
     public final View.OnClickListener mOnClickListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public boolean mForceAccessibilityLiveRegionAssertive;
         public CharSequence mMessage;

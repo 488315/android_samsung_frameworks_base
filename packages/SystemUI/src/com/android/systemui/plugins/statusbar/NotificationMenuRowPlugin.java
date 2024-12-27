@@ -13,14 +13,12 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 import com.android.systemui.plugins.statusbar.NotificationSwipeActionHelper;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = OnMenuEventListener.class), @DependsOn(target = MenuItem.class), @DependsOn(target = NotificationSwipeActionHelper.class), @DependsOn(target = NotificationSwipeActionHelper.SnoozeOption.class)})
 @ProvidesInterface(action = NotificationMenuRowPlugin.ACTION, version = 5)
 public interface NotificationMenuRowPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_NOTIFICATION_MENU_ROW";
     public static final int VERSION = 5;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public interface MenuItem {
         public static final int VERSION = 1;
@@ -32,7 +30,6 @@ public interface NotificationMenuRowPlugin extends Plugin {
         View getMenuView();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public interface OnMenuEventListener {
         public static final int VERSION = 1;

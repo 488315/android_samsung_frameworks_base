@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkPolicyLogger {
     public static final boolean LOGD = Log.isLoggable("NetworkPolicy", 3);
     public static final boolean LOGV = Log.isLoggable("NetworkPolicy", 2);
@@ -29,7 +28,6 @@ public final class NetworkPolicyLogger {
     public final LogBuffer mNetworkBlockedBuffer = new LogBuffer(MAX_NETWORK_BLOCKED_LOG_SIZE);
     public final LogBuffer mUidStateChangeBuffer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Data {
         public boolean bfield1;
         public boolean bfield2;
@@ -43,7 +41,6 @@ public final class NetworkPolicyLogger {
         public int type;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogBuffer {
         public final int mMaxSize;
         public static final SimpleDateFormat sFormatter =

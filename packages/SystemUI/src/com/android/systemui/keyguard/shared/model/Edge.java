@@ -9,12 +9,10 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class Edge {
     public static final Companion Companion = new Companion(null);
     public static final StateToState INVALID = null;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -39,7 +37,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SceneToState extends Edge {
         public final SceneKey from;
         public final KeyguardState to;
@@ -76,7 +73,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateToScene extends Edge {
         public final KeyguardState from;
         public final SceneKey to;
@@ -112,7 +108,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateToState extends Edge {
         public final KeyguardState from;
         public final KeyguardState to;

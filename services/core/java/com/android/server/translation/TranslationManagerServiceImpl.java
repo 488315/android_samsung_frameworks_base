@@ -45,7 +45,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TranslationManagerServiceImpl extends AbstractPerUserSystemService
         implements IBinder.DeathRecipient {
     public static final boolean DEBUG = Log.isLoggable("TranslationManagerServiceImpl", 3);
@@ -59,7 +58,6 @@ public final class TranslationManagerServiceImpl extends AbstractPerUserSystemSe
     public TranslationServiceInfo mTranslationServiceInfo;
     public final ArraySet mWaitingFinishedCallbackActivities;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveTranslation {
         public boolean isPaused = false;
         public final String packageName;
@@ -79,7 +77,6 @@ public final class TranslationManagerServiceImpl extends AbstractPerUserSystemSe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TranslationServiceRemoteCallback extends ITranslationServiceCallback.Stub {
         public TranslationServiceRemoteCallback() {}
 

@@ -26,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PowerManagerUtil {
     public static final int AUTO_BRIGHTNESS_TYPE;
     public static final int BRIGHTNESS_ANIMATION_MIN_LIMIT_HZ;
@@ -81,7 +80,6 @@ public abstract class PowerManagerUtil {
     public static final RingBuffer sScreenOffProfilers;
     public static final RingBuffer sScreenOnProfilers;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOffProfiler {
         public int mCfAnimationDuration;
         public long mCfAnimationStartTime;
@@ -186,7 +184,6 @@ public abstract class PowerManagerUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOnProfiler {
         public static boolean CHECK_FRAME = true;
         public static int mDisplayType = 1;
@@ -402,7 +399,6 @@ public abstract class PowerManagerUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StopwatchLogger {
         public long mStartTimeMillis;
     }

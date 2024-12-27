@@ -2,7 +2,6 @@ package android.media;
 
 import java.util.Vector;
 
-/* compiled from: ClosedCaptionRenderer.java */
 class Cea608CaptionTrack extends SubtitleTrack {
     private final Cea608CCParser mCCParser;
     private final Cea608CCWidget mRenderingWidget;

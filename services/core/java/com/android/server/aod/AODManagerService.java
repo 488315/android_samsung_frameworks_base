@@ -62,7 +62,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AODManagerService extends SystemService {
     public AODDozeCallbackRecord mAODCallback;
     public AODManager.AODChangeListener mAODChangeListener;
@@ -114,7 +113,6 @@ public final class AODManagerService extends SystemService {
     public static final boolean SUPPORT_AOD = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_AOD_ITEM", "").contains("aodversion");
     public static final boolean SUPPORT_AOD_LIVE_CLOCK = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_AOD_ITEM", "").contains("activeclock");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.aod.AODManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 extends Handler {
         public final /* synthetic */ int $r8$classId;
@@ -194,7 +192,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AODDozeCallbackRecord implements IBinder.DeathRecipient {
         public final AnonymousClass2 mHandler;
         public final int pid;
@@ -235,7 +232,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AODDozeLock implements IBinder.DeathRecipient {
         public final IBinder mLock;
         public final int mOwnerPid;
@@ -273,11 +269,9 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AODHandler extends Handler {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AODListenerRecord implements IBinder.DeathRecipient {
         public final int pid;
         public final IBinder token;
@@ -315,7 +309,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IAODManager.Stub {
         public BinderService() {
         }
@@ -645,7 +638,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends AODManagerInternal {
         public LocalService() {
         }
@@ -715,7 +707,6 @@ public final class AODManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mAODLowPowerUri;
         public final Uri mAODPowerSavingModeUri;

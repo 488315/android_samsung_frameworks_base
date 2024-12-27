@@ -5,13 +5,11 @@ import com.android.systemui.log.LogMessageImpl;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LogcatOnlyMessageBuffer implements MessageBuffer {
     private boolean isObtained;
     private final LogMessageImpl singleMessage;
     private final LogLevel targetLogLevel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

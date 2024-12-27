@@ -9,7 +9,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorModel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SlimIndicatorSettingsBackUpManager {
     public String mCachedBlackListDBValue = null;
     public int mSplitQuickPanelRatio = 0;
@@ -20,7 +19,6 @@ public final class SlimIndicatorSettingsBackUpManager {
     public boolean mIsBackup = false;
     public final SettingsListener mSettingsListener = new SettingsListener(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingsListener implements SettingsHelper.OnChangedCallback {
         public final Uri[] mSettingsValueList;
 

@@ -35,7 +35,6 @@ import com.samsung.android.biometrics.app.setting.AnimationHelper;
 import com.samsung.android.biometrics.app.setting.R;
 import com.samsung.android.biometrics.app.setting.Utils;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class FingerprintEnrollGuideFrame extends View {
     public final Bitmap mBmpFingerIcon;
     public final float mBottomBlackMaskHeight;

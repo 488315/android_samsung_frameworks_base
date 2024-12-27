@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceEntryForegroundViewModel$color$lambda$3$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ConfigurationInteractor $configurationInteractor$inlined;
     private /* synthetic */ Object L$0;
@@ -48,14 +47,12 @@ public final class DeviceEntryForegroundViewModel$color$lambda$3$$inlined$flatMa
             final DeviceEntryForegroundViewModel deviceEntryForegroundViewModel = this.this$0;
             FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$12 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new DeviceEntryForegroundViewModel$color$1$1$2(this.this$0, booleanValue, null), new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.DeviceEntryForegroundViewModel$color$lambda$3$lambda$2$$inlined$map$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.ui.viewmodel.DeviceEntryForegroundViewModel$color$lambda$3$lambda$2$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
                     public final /* synthetic */ boolean $useBgProtection$inlined;
                     public final /* synthetic */ DeviceEntryForegroundViewModel this$0;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.keyguard.ui.viewmodel.DeviceEntryForegroundViewModel$color$lambda$3$lambda$2$$inlined$map$1$2$1, reason: invalid class name */
                     public final class AnonymousClass1 extends ContinuationImpl {
                         Object L$0;

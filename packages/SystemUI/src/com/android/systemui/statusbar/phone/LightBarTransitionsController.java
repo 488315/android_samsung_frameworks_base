@@ -18,7 +18,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LightBarTransitionsController implements Dumpable {
     public final DarkIntensityApplier mApplier;
     public final Callback mCallback;
@@ -48,7 +47,6 @@ public final class LightBarTransitionsController implements Dumpable {
     public boolean needGrayIcon = false;
     public boolean iconColorChanged = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Callback implements CommandQueue.Callbacks, StatusBarStateController.StateListener {
         public final WeakReference mSelf;
 
@@ -117,14 +115,12 @@ public final class LightBarTransitionsController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DarkIntensityApplier {
         void applyDarkIntensity(float f);
 
         int getTintAnimationDuration();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         LightBarTransitionsController create(DarkIntensityApplier darkIntensityApplier);
     }

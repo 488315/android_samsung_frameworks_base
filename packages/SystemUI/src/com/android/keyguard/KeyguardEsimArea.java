@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 class KeyguardEsimArea extends Button implements View.OnClickListener {
     public final EuiccManager mEuiccManager;
     public final AnonymousClass1 mReceiver;

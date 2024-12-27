@@ -27,7 +27,6 @@ import com.android.systemui.statusbar.policy.HeadsUpManager;
 import com.android.systemui.statusbar.policy.HeadsUpUtil;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationTransitionAnimatorController implements ActivityTransitionAnimator.Controller {
     public final HeadsUpManager headsUpManager;
     public final boolean isLaunching;
@@ -41,7 +40,6 @@ public final class NotificationTransitionAnimatorController implements ActivityT
     public final NotificationListContainer notificationListContainer;
     public final Runnable onFinishAnimationCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

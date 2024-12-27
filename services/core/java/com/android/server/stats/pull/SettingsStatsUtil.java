@@ -17,7 +17,6 @@ import com.android.service.nano.StringListParamProto;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SettingsStatsUtil {
     public static final FlagsData[] GLOBAL_SETTINGS = {
         new FlagsData("GlobalFeature__boolean_whitelist", 1),
@@ -38,7 +37,6 @@ public abstract class SettingsStatsUtil {
         new FlagsData("SystemFeature__string_whitelist", 4)
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlagsData {
         public final int mDataType;
         public final String mFlagName;

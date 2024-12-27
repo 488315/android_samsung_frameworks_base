@@ -9,7 +9,6 @@ import com.android.systemui.SystemUIApplication;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.NotificationChannels;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class IncompatibleChargerNotification extends PowerUiNotification {
     public IncompatibleChargerNotification(Context context) {
         super(context);

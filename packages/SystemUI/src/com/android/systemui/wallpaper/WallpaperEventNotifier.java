@@ -17,7 +17,6 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WallpaperEventNotifier {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public final Handler mHandler;
@@ -30,7 +29,6 @@ public final class WallpaperEventNotifier {
     public boolean mIsThemeApplying = false;
     public final ArrayList mLogs = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DebugLog {
         public final String text;
         public final long time = System.currentTimeMillis();

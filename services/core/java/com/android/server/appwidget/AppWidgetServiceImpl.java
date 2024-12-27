@@ -154,7 +154,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implements WidgetBackupProvider, DevicePolicyManagerInternal.OnCrossProfileWidgetProvidersChangeListener {
     public static final int[] APPWIDGET_WIDGET_SUPPORTED_SIZES;
     public static final boolean DEBUG;
@@ -527,7 +526,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
     public int mProvidersHistoryIndex = 0;
     public int mAlarmHistoryIndex = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AddProviderLockedRunnable implements Runnable {
         public final int mIndex;
         public final CountDownLatch mLatch;
@@ -564,14 +562,12 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApiCounter {
         public final Map mCallCount;
         public int mMaxCallsPerInterval;
         public final LongSupplier mMonotonicClock;
         public long mResetIntervalMs;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ApiCallRecord {
             public int apiCallCount;
             public long lastResetTimeMs;
@@ -612,7 +608,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AppWidgetLogWrapper {
         public static final Logger widget_logger;
         public static final SimpleDateFormat formatter = new SimpleDateFormat("MM-dd HH:mm:ss.SSS: ", Locale.getDefault());
@@ -684,7 +679,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppWidgetManagerLocal extends AppWidgetManagerInternal {
         public AppWidgetManagerLocal() {
         }
@@ -771,14 +765,12 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BackupRestoreController {
         public boolean mHasSystemRestoreFinished;
         public final SparseArray mPrunedAppsPerUser = new SparseArray();
         public final HashMap mUpdatesByProvider = new HashMap();
         public final HashMap mUpdatesByHost = new HashMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RestoreUpdateRecord {
             public final int newId;
             public boolean notified = false;
@@ -981,7 +973,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackHandler extends Handler {
         public CallbackHandler(Looper looper) {
             super(looper, null, false);
@@ -1152,7 +1143,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Host {
         public IAppWidgetHost callbacks;
         public HostId id;
@@ -1237,7 +1227,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HostId {
         public final int hostId;
         public final String packageName;
@@ -1293,7 +1282,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoadedWidgetState {
         public final int hostTag;
         public final int providerTag;
@@ -1306,7 +1294,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Provider {
         public static final int[] WIDGET_CATEGORY_FLAGS = {1, 2, 4};
         public PendingIntent broadcast;
@@ -1478,7 +1465,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderId {
         public final ComponentName componentName;
         public final int uid;
@@ -1547,7 +1533,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveStateRunnable implements Runnable {
         public final int mUserId;
 
@@ -1566,7 +1551,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SecurityPolicy {
         public SecurityPolicy() {
         }
@@ -1727,7 +1711,6 @@ public final class AppWidgetServiceImpl extends IAppWidgetService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Widget {
         public int appWidgetId;
         public Host host;

@@ -17,7 +17,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowAnimationSpec implements LocalAnimationAdapter.AnimationSpec {
     public final Animation mAnimation;
     public final boolean mCanSkipFirstFrame;
@@ -28,7 +27,6 @@ public final class WindowAnimationSpec implements LocalAnimationAdapter.Animatio
     public final Rect mTmpRect;
     public final float mWindowCornerRadius;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TmpValues {
         public final Transformation transformation = new Transformation();
         public final float[] floats = new float[9];

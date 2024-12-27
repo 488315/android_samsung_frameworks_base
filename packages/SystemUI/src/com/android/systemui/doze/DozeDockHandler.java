@@ -6,12 +6,10 @@ import com.android.systemui.doze.DozeMachine;
 import com.android.systemui.settings.UserTracker;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeDockHandler implements DozeMachine.Part {
     public final DockEventListener mDockEventListener = new DockEventListener(this, 0);
     public final DockManager mDockManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.DozeDockHandler$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -30,7 +28,6 @@ public final class DozeDockHandler implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DockEventListener implements DockManager.DockEventListener {
         public boolean mRegistered;
 

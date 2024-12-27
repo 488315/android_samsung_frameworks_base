@@ -35,11 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class XmlUtils {
     private static final String STRING_ARRAY_SEPARATOR = ":";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForcedTypedXmlPullParser extends XmlPullParserWrapper
             implements TypedXmlPullParser {
         public final boolean getAttributeBoolean(int i) {
@@ -127,7 +125,6 @@ public class XmlUtils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForcedTypedXmlSerializer extends XmlSerializerWrapper
             implements TypedXmlSerializer {
         public final XmlSerializer attributeBoolean(String str, String str2, boolean z) {
@@ -171,13 +168,11 @@ public class XmlUtils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ReadMapCallback {
         Object readThisUnknownObjectXml(TypedXmlPullParser typedXmlPullParser, String str)
                 throws XmlPullParserException, IOException;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WriteMapCallback {
         void writeUnknownObject(Object obj, String str, TypedXmlSerializer typedXmlSerializer)
                 throws XmlPullParserException, IOException;

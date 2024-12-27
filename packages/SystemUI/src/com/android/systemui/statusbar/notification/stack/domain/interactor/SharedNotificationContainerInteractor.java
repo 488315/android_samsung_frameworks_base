@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SharedNotificationContainerInteractor {
     public final StateFlowImpl _notificationStackChanged;
     public final StateFlowImpl _topPosition;
@@ -35,7 +34,6 @@ public final class SharedNotificationContainerInteractor {
     public final ReadonlyStateFlow topPosition = FlowKt.asStateFlow(StateFlowKt.MutableStateFlow(Float.valueOf(0.0f)));
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 useExtraShelfSpace;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConfigurationBasedDimensions {
         public final int keyguardSplitShadeTopMargin;
         public final int marginBottom;
@@ -95,14 +93,12 @@ public final class SharedNotificationContainerInteractor {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new SharedNotificationContainerInteractor$configurationBasedDimensions$1(null), ((ConfigurationRepositoryImpl) configurationRepository).onAnyConfigurationChange);
         final Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ Lazy $largeScreenHeaderHelperLazy$inlined;
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ SharedNotificationContainerInteractor this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -223,12 +219,10 @@ public final class SharedNotificationContainerInteractor {
         new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardInteractor.ambientIndicationVisible, deviceEntryUdfpsInteractor.isUdfpsSupported, new SharedNotificationContainerInteractor$useExtraShelfSpace$1(null));
         this.isSplitShadeEnabled = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

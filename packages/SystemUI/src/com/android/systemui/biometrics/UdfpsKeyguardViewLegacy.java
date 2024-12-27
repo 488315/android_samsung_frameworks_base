@@ -22,7 +22,6 @@ import com.android.systemui.R;
 import com.android.systemui.biometrics.UdfpsKeyguardViewLegacy;
 import com.android.systemui.doze.util.BurnInHelperKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class UdfpsKeyguardViewLegacy extends UdfpsAnimationView {
     public int mAlpha;
     public int mAnimationType;
@@ -41,7 +40,6 @@ public class UdfpsKeyguardViewLegacy extends UdfpsAnimationView {
     public int mTextColorPrimary;
     public boolean mUdfpsRequested;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.UdfpsKeyguardViewLegacy$2, reason: invalid class name */
     public final class AnonymousClass2 implements AsyncLayoutInflater.OnInflateFinishedListener {
         public AnonymousClass2() {

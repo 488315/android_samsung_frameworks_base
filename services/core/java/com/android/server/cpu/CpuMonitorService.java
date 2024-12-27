@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CpuMonitorService extends SystemService {
     public static final long CACHE_DURATION_MILLISECONDS;
     public static final boolean DEBUG = Log.isLoggable("CpuMonitorService", 3);
@@ -50,11 +49,9 @@ public final class CpuMonitorService extends SystemService {
     public final long mNormalMonitoringIntervalMillis;
     public final boolean mShouldDebugMonitor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.cpu.CpuMonitorService$1, reason: invalid class name */
     public final class AnonymousClass1 {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpuMonitorBinder extends Binder {
         public final AnonymousClass1 mPriorityDumper =
                 new PriorityDump
@@ -101,13 +98,11 @@ public final class CpuMonitorService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpusetInfo {
         public final int cpuset;
         public CpuAvailabilityInfo mLatestCpuAvailabilityInfo;
         public final LongSparseArray mSnapshotsByUptime = new LongSparseArray();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Snapshot {
             public long totalNormalizedAvailableCpuFreqKHz;
             public int totalOfflineCpus;

@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class RequestSession {
     public final CancellationSignal mCancellationSignal;
     public final CallingAppInfo mClientAppInfo;
@@ -52,7 +51,6 @@ public abstract class RequestSession {
     public final RequestSessionDeathRecipient mDeathRecipient = new RequestSessionDeathRecipient();
     public RequestSessionStatus mRequestSessionStatus = RequestSessionStatus.IN_PROGRESS;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RequestSessionDeathRecipient implements IBinder.DeathRecipient {
         public RequestSessionDeathRecipient() {}
 
@@ -69,7 +67,6 @@ public abstract class RequestSession {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class RequestSessionStatus {
         public static final /* synthetic */ RequestSessionStatus[] $VALUES;
         public static final RequestSessionStatus COMPLETE;

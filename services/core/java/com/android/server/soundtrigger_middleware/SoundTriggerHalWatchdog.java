@@ -9,12 +9,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerHalWatchdog implements ISoundTriggerHal {
     public final UptimeTimer mTimer = new UptimeTimer();
     public final ISoundTriggerHal mUnderlying;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Watchdog implements AutoCloseable {
         public final Exception mException = new Exception();
         public final UptimeTimer.TaskImpl mTask;

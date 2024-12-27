@@ -1,6 +1,5 @@
 package com.att.iqi.lib.metrics.hw;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface HwConstants {
     public static final byte IQ_BATTERY_EVENT_CHARGER_CONNECTED = 2;
     public static final byte IQ_BATTERY_EVENT_CHARGER_DISCONNECTED = 3;

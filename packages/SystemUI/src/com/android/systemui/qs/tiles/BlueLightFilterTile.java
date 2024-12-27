@@ -39,7 +39,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BlueLightFilterTile extends SQSTileImpl {
     public static final Intent EYECOMFORT_SETTINGS;
     public final AnonymousClass3 COLOR_ADJUSTMENT_FEATURE;
@@ -60,7 +59,6 @@ public final class BlueLightFilterTile extends SQSTileImpl {
     private final SettingsHelper mSettingsHelper;
     public String mToasMsg;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$1, reason: invalid class name */
     public final class AnonymousClass1 implements Feature {
         public AnonymousClass1() {
@@ -78,7 +76,6 @@ public final class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$2, reason: invalid class name */
     public final class AnonymousClass2 implements Feature {
         public AnonymousClass2() {
@@ -96,7 +93,6 @@ public final class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$3, reason: invalid class name */
     public final class AnonymousClass3 implements Feature {
         public AnonymousClass3() {
@@ -114,7 +110,6 @@ public final class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$4, reason: invalid class name */
     public final class AnonymousClass4 implements Feature {
         public AnonymousClass4() {
@@ -132,7 +127,6 @@ public final class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Feature {
         String getName();
 

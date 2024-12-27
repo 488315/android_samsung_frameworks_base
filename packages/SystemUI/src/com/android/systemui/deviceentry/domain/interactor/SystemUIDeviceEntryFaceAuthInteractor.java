@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemUIDeviceEntryFaceAuthInteractor implements DeviceEntryFaceAuthInteractor {
     public final ChannelLimitedFlowMerge authenticationStatus;
     public final BiometricSettingsRepository biometricSettingsRepository;
@@ -42,7 +41,6 @@ public final class SystemUIDeviceEntryFaceAuthInteractor implements DeviceEntryF
     public final StateFlow isLockedOut;
     public final DeviceEntryFaceAuthRepository repository;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

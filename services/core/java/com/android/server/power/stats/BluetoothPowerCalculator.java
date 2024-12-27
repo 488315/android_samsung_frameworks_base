@@ -11,7 +11,6 @@ import com.android.internal.os.PowerProfile;
 
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BluetoothPowerCalculator extends PowerCalculator {
     public static final BatteryConsumer.Key[] UNINITIALIZED_KEYS = new BatteryConsumer.Key[0];
     public final boolean mHasBluetoothPowerController;
@@ -19,7 +18,6 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
     public final double mRxMa;
     public final double mTxMa;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerAndDuration {
         public long durationMs;
         public BatteryConsumer.Key[] keys;

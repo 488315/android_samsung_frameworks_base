@@ -3,7 +3,6 @@ package android.telephony;
 import java.lang.ref.WeakReference;
 import java.util.function.Supplier;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */
 class TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda1
         implements Supplier {

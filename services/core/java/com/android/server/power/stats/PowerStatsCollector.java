@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PowerStatsCollector {
     public final Clock mClock;
     public boolean mEnabled;
@@ -47,7 +46,6 @@ public abstract class PowerStatsCollector {
     public long mLastScheduledUpdateMs = -1;
     public volatile List mConsumerList = Collections.emptyList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.PowerStatsCollector$1, reason: invalid class name */
     public final class AnonymousClass1 implements PowerStatsUidResolver.Listener {
         public AnonymousClass1() {
@@ -73,7 +71,6 @@ public abstract class PowerStatsCollector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConsumedEnergyRetrieverImpl {
         public EnergyConsumer[] mEnergyConsumers;
         public final PowerStatsService.LocalService mPowerStatsInternal;

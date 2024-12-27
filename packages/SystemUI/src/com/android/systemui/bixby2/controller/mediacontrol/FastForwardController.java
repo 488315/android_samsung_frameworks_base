@@ -3,7 +3,6 @@ package com.android.systemui.bixby2.controller.mediacontrol;
 import com.android.systemui.bixby2.CommandActionResponse;
 import com.android.systemui.bixby2.actionresult.ActionResults;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FastForwardController extends MediaCommandType {
     public static final int $stable = 0;
 

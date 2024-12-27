@@ -13,7 +13,6 @@ import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AssistDataRequester extends IAssistDataReceiver.Stub {
     public final AppOpsManager mAppOpsManager;
     public final AssistDataRequesterCallbacks mCallbacks;
@@ -29,7 +28,6 @@ public final class AssistDataRequester extends IAssistDataReceiver.Stub {
     public IActivityTaskManager mActivityTaskManager = ActivityTaskManager.getService();
     public final int mRequestStructureAppOps = 49;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AssistDataRequesterCallbacks {
         boolean canHandleReceivedAssistDataLocked();
 

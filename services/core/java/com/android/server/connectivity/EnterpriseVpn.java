@@ -73,7 +73,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class EnterpriseVpn {
     public static final boolean DBG = Debug.semIsProductDev();
     public String mAddress;
@@ -102,7 +101,6 @@ public class EnterpriseVpn {
     public boolean isVpnObjectRemoved = false;
     public final Set knoxVpnUidRanges = new ArraySet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.connectivity.EnterpriseVpn$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$android$net$NetworkInfo$DetailedState;
@@ -141,7 +139,6 @@ public class EnterpriseVpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements ServiceConnection {
         public IBinder mService;
 

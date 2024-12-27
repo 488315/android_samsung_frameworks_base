@@ -90,7 +90,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CertificatePolicy extends ICertificatePolicy.Stub implements EnterpriseServiceCallback {
     public boolean mBootCompleted;
     public final AnonymousClass2 mBootReceiver;
@@ -117,7 +116,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
     public final TrustedCertificateStore mCertStore = new TrustedCertificateStore();
     public final AnonymousClass1 mCheckRevocation = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.certificate.CertificatePolicy$1, reason: invalid class name */
     public final class AnonymousClass1 extends ThreadLocal {
         @Override // java.lang.ThreadLocal
@@ -126,7 +124,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RollbackRefreshHandler extends Handler {
         public RollbackRefreshHandler(Looper looper) {
             super(looper);
@@ -157,7 +154,6 @@ public final class CertificatePolicy extends ICertificatePolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrustListOperation {
         public final int mAction;
         public final CertificateCache mCache;

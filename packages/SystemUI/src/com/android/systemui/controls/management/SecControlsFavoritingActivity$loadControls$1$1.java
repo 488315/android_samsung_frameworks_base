@@ -4,7 +4,6 @@ import com.android.systemui.controls.controller.ControlsController;
 import com.android.systemui.controls.controller.ControlsControllerKt$createLoadDataObject$1;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecControlsFavoritingActivity$loadControls$1$1 implements Consumer {
     public final /* synthetic */ SecControlsFavoritingActivity this$0;
 

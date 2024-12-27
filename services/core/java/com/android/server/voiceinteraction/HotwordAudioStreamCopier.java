@@ -15,7 +15,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HotwordAudioStreamCopier {
     static final int DEFAULT_COPY_BUFFER_LENGTH_BYTES = 32768;
     static final int MAX_COPY_BUFFER_LENGTH_BYTES = 65536;
@@ -26,7 +25,6 @@ public final class HotwordAudioStreamCopier {
     public final String mVoiceInteractorPackageName;
     public final int mVoiceInteractorUid;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CopyTaskInfo {
         public final int mCopyBufferLength;
         public final ParcelFileDescriptor mSink;
@@ -42,7 +40,6 @@ public final class HotwordAudioStreamCopier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HotwordDetectedResultCopyTask implements Runnable {
         public final List mCopyTaskInfos;
         public final ExecutorService mExecutorService = Executors.newCachedThreadPool();
@@ -231,7 +228,6 @@ public final class HotwordAudioStreamCopier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SingleAudioStreamCopyTask implements Callable {
         public final ParcelFileDescriptor mAudioSink;
         public final ParcelFileDescriptor mAudioSource;

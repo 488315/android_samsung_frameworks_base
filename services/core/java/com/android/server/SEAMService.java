@@ -8,7 +8,6 @@ import android.os.Process;
 import com.samsung.android.knox.seams.ISEAMS;
 import com.samsung.android.knox.seams.SEAMSPolicy;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SEAMService extends ISEAMS.Stub {
     public static int SELF_PID;
     public static final SKLogger mSKLog = SKLogger.getLogger();
@@ -16,7 +15,6 @@ public final class SEAMService extends ISEAMS.Stub {
     public final Object mLock = new Object[0];
     public final Handler mSKHandler = new Handler();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {}
@@ -28,7 +26,6 @@ public final class SEAMService extends ISEAMS.Stub {
                 KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SEAMService").getLooper());
         new Thread() { // from class: com.android.server.SEAMService.1
 
-            /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             /* renamed from: com.android.server.SEAMService$1$1, reason: invalid class name and collision with other inner class name */
             public final class RunnableC00051 implements Runnable {
                 @Override // java.lang.Runnable

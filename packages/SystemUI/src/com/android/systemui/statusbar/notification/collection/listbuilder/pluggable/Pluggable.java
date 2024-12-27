@@ -2,12 +2,10 @@ package com.android.systemui.statusbar.notification.collection.listbuilder.plugg
 
 import android.os.Trace;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class Pluggable {
     private PluggableListener mListener;
     private final String mName;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface PluggableListener {
         void onPluggableInvalidated(Object obj, String str);
     }

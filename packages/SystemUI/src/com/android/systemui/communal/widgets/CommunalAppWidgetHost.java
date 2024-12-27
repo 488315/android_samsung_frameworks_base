@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalAppWidgetHost extends AppWidgetHost {
     public final SharedFlowImpl _appWidgetIdToRemove;
     public final ReadonlySharedFlow appWidgetIdToRemove;
@@ -26,7 +25,6 @@ public final class CommunalAppWidgetHost extends AppWidgetHost {
     public final Logger logger;
     public final Set observers;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -36,7 +34,6 @@ public final class CommunalAppWidgetHost extends AppWidgetHost {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Observer {
     }
 

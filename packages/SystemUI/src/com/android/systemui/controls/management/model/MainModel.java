@@ -2,13 +2,11 @@ package com.android.systemui.controls.management.model;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class MainModel {
     public boolean needToMakeDim;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type COMPONENT;

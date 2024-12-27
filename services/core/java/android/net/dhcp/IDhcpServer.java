@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDhcpServer extends IInterface {
     public static final String DESCRIPTOR = "android$net$dhcp$IDhcpServer".replace('$', '.');
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
@@ -17,7 +16,6 @@ public interface IDhcpServer extends IInterface {
     public static final int STATUS_UNKNOWN_ERROR = 3;
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDhcpServer {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -55,7 +53,6 @@ public interface IDhcpServer extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDhcpServer {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -64,7 +61,6 @@ public interface IDhcpServer extends IInterface {
         static final int TRANSACTION_stop = 3;
         static final int TRANSACTION_updateParams = 2;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDhcpServer {
             public String mCachedHash;
             public int mCachedVersion;

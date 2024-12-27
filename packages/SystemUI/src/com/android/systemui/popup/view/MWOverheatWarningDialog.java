@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.popup.data.MWOverheatWarningData;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class MWOverheatWarningDialog implements PopupUIAlertDialog {
     private static final String TAG = "MWOverheatWarningDialog";
     private Context mContext;

@@ -40,7 +40,6 @@ import kotlin.reflect.KProperty;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserTrackerImpl extends BroadcastReceiver implements UserTracker, Dumpable {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final CoroutineDispatcher backgroundContext;
@@ -58,7 +57,6 @@ public final class UserTrackerImpl extends BroadcastReceiver implements UserTrac
     public final SynchronizedDelegate userProfiles$delegate = new SynchronizedDelegate(EmptyList.INSTANCE);
     public final List callbacks = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -311,7 +309,6 @@ public final class UserTrackerImpl extends BroadcastReceiver implements UserTrac
         new Pair(createContextAsUser, profiles);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SynchronizedDelegate implements ReadWriteProperty {
         public Object value;
 

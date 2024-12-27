@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.vector.ImageVector;
 import com.android.keyguard.KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ImageString implements CharSequence {
     public final ImageVector image;
     public final int resId;

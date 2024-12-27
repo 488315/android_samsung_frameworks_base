@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NandswapManager extends JobService {
     public static final boolean SUPPORT_RAM_EXPAND_SWITCH;
     public static final AnonymousClass1 intentReceiver;
@@ -40,7 +39,6 @@ public final class NandswapManager extends JobService {
     public static NandswapClient mClient = null;
     public static NandSwapBigdataManager mNandBigData = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.NandswapManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
@@ -156,7 +154,6 @@ public final class NandswapManager extends JobService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandSwapBigdataManager {
         public static final String[] bigdataJsonFormat = {
             "count_average",
@@ -543,7 +540,6 @@ public final class NandswapManager extends JobService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandswapClient {
         public final int state;
         public final boolean supportBigdataState;
@@ -778,7 +774,6 @@ public final class NandswapManager extends JobService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessingManager {
         public final ArrayList countList = new ArrayList();
         public final ArrayList sizeList = new ArrayList();

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotifStats {
     public static final Companion Companion = new Companion(null);
     public static final NotifStats empty = new NotifStats(0, false, false, false, false);
@@ -14,7 +13,6 @@ public final class NotifStats {
     public final boolean hasNonClearableSilentNotifs;
     public final int numActiveNotifs;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

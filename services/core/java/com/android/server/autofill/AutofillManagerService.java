@@ -82,7 +82,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutofillManagerService extends AbstractMasterSystemService {
     public static int sPartitionMaxCount = 10;
     public static int sVisibleDatasetsMaxCount;
@@ -111,7 +110,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
     public final LocalLog mUiLatencyHistory;
     public final LocalLog mWtfHistory;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AugmentedAutofillState extends GlobalWhitelistState {
         public final SparseArray mServicePackages = new SparseArray();
         public final SparseBooleanArray mTemporaryServices = new SparseBooleanArray();
@@ -210,7 +208,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutoFillManagerServiceStub extends IAutoFillManager.Stub {
         public AutoFillManagerServiceStub() {
         }
@@ -1031,7 +1028,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutofillDisabledInfo {
         public ArrayMap mDisabledActivities;
         public ArrayMap mDisabledApps;
@@ -1144,7 +1140,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisabledInfoCache {
         public SparseArray mCache;
         public final Object mLock;
@@ -1221,7 +1216,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends AutofillManagerInternal {
         public LocalService() {
         }
@@ -1309,7 +1303,6 @@ public final class AutofillManagerService extends AbstractMasterSystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageCompatState {
         public final long maxVersionCode;
         public final String[] urlBarResourceIds;

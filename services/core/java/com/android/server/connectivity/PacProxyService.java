@@ -40,7 +40,6 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PacProxyService extends IPacProxyManager.Stub {
     public AlarmManager mAlarmManager;
     public AnonymousClass2 mConnection;
@@ -119,7 +118,6 @@ public final class PacProxyService extends IPacProxyManager.Stub {
             };
     public int mLastPort = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.connectivity.PacProxyService$2, reason: invalid class name */
     public final class AnonymousClass2 implements ServiceConnection {
         public final /* synthetic */ int $r8$classId;
@@ -226,7 +224,6 @@ public final class PacProxyService extends IPacProxyManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PacRefreshIntentReceiver extends BroadcastReceiver {
         public PacRefreshIntentReceiver() {}
 

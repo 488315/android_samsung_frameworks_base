@@ -58,7 +58,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TextClassificationManagerService extends ITextClassifierService.Stub {
     public static final AnonymousClass1 NO_OP_CALLBACK = new AnonymousClass1();
     public final Context mContext;
@@ -70,7 +69,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
     public final String mSystemTextClassifierPackage;
     public final SparseArray mUserStates = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.textclassifier.TextClassificationManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 implements ITextClassifierCallback {
         public final IBinder asBinder() {
@@ -84,7 +82,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackWrapper extends ITextClassifierCallback.Stub {
         public final ITextClassifierCallback mWrapped;
 
@@ -184,7 +181,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final TextClassificationManagerService mManagerService;
 
@@ -295,7 +291,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingRequest implements IBinder.DeathRecipient {
         public final IBinder mBinder;
         public final String mName;
@@ -352,7 +347,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceState {
         public final int mBindServiceFlags;
         public boolean mBinding;
@@ -367,7 +361,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         public ComponentName mBoundComponentName = null;
         public int mBoundServiceUid = -1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class TextClassifierServiceConnection implements ServiceConnection {
             public final int mUserId;
 
@@ -534,7 +527,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionCache {
         public final Object mLock;
         public final AnonymousClass1 mDeathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.textclassifier.TextClassificationManagerService.SessionCache.1
@@ -586,7 +578,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StrippedTextClassificationContext {
         public final boolean useDefaultTextClassifier;
         public final int userId;
@@ -598,7 +589,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TextClassifierSettingsListener implements DeviceConfig.OnPropertiesChangedListener {
         public final Context mContext;
         public String mServicePackageOverride;
@@ -628,7 +618,6 @@ public final class TextClassificationManagerService extends ITextClassifierServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserState {
         public final ServiceState mDefaultServiceState;
         public final ServiceState mSystemServiceState;

@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PluginManagerImpl extends BroadcastReceiver implements PluginManager {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final PluginActionManager.Factory mActionManagerFactory;
@@ -39,7 +38,6 @@ public final class PluginManagerImpl extends BroadcastReceiver implements Plugin
     public final ArrayMap mPluginMap = new ArrayMap();
     public final Map mClassLoaders = new ArrayMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClassLoaderFilter extends ClassLoader {
         public final ClassLoader mBase;
         public final String[] mPackages;
@@ -61,14 +59,12 @@ public final class PluginManagerImpl extends BroadcastReceiver implements Plugin
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class CrashWhilePluginActiveException extends RuntimeException {
         public CrashWhilePluginActiveException(Throwable th) {
             super(th);
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PluginExceptionHandler implements Thread.UncaughtExceptionHandler {
         public /* synthetic */ PluginExceptionHandler(PluginManagerImpl pluginManagerImpl, int i) {
             this();

@@ -41,7 +41,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceState {
     public static final int CAPTURED_BLUR_THRESHOLD_WIDTH = 720;
     private static final int ESIM_SWITCHING_SLOT_INDEX_UNKNOWN = 1;

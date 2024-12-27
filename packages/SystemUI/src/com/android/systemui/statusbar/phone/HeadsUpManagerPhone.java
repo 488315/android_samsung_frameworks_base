@@ -41,7 +41,6 @@ import java.util.function.Consumer;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HeadsUpManagerPhone extends BaseHeadsUpManager implements HeadsUpRepository, OnHeadsUpChangedListener {
     public NotificationStackScrollLayoutController$$ExternalSyntheticLambda13 mAnimationStateHandler;
     public final KeyguardBypassController mBypassController;
@@ -65,7 +64,6 @@ public final class HeadsUpManagerPhone extends BaseHeadsUpManager implements Hea
     public boolean mTrackingHeadsUp;
     public final VisualStabilityProvider mVisualStabilityProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.HeadsUpManagerPhone$1, reason: invalid class name */
     public final class AnonymousClass1 implements Pools.Pool {
         public final Stack mPoolObjects = new Stack();
@@ -307,7 +305,6 @@ public final class HeadsUpManagerPhone extends BaseHeadsUpManager implements Hea
         this.mTopHeadsUpRow.setValue((HeadsUpRowRepository) getTopHeadsUpEntry());
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HeadsUpEntryPhone extends BaseHeadsUpManager.HeadsUpEntry implements HeadsUpRowRepository {
         public boolean extended;
         public boolean mGutsShownPinned;

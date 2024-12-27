@@ -19,7 +19,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AudioManagerController implements VolumeMiddleware {
     public final Lazy infraMediator$delegate;
     public Boolean isHeadsetConnected;
@@ -27,7 +26,6 @@ public final class AudioManagerController implements VolumeMiddleware {
     public final Lazy log$delegate;
     public final Lazy store$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -37,7 +35,6 @@ public final class AudioManagerController implements VolumeMiddleware {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;

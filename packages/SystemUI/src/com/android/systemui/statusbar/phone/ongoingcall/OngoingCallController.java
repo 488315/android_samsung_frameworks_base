@@ -53,7 +53,6 @@ import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OngoingCallController implements CallbackController, Dumpable, CoreStartable {
     public final ActivityStarter activityStarter;
     public CallNotificationInfo callNotificationInfo;
@@ -226,7 +225,6 @@ public final class OngoingCallController implements CallbackController, Dumpable
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CallAppUidObserver extends UidObserver {
         public Integer callAppUid;
         public boolean isCallAppVisible;
@@ -615,7 +613,6 @@ public final class OngoingCallController implements CallbackController, Dumpable
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CallNotificationInfo {
         public final int callChipColor;
         public final long callStartTime;

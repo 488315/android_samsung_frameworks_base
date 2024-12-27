@@ -4,7 +4,6 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.window.TaskSnapshot;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SnapshotCache {
     public static int sMaxSnapshotCache = 5;
     public final String mName;
@@ -12,7 +11,6 @@ public abstract class SnapshotCache {
     public final ArrayMap mAppIdMap = new ArrayMap();
     public final ArrayMap mRunningCache = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CacheEntry {
         public final TaskSnapshot snapshot;
         public final long timestamp = SystemClock.elapsedRealtime();

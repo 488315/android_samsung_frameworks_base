@@ -20,27 +20,23 @@ import com.android.systemui.accessibility.floatingmenu.AccessibilityTargetAdapte
 import com.samsung.android.settings.accessibility.advanced.shortcut.WrappedDrawable;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AccessibilityTargetAdapter extends RecyclerView.Adapter {
     public int mIconWidthHeight;
     public int mItemPadding;
     public final List mTargets;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BottomViewHolder extends ViewHolder {
         public BottomViewHolder(View view) {
             super(view);
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TopViewHolder extends ViewHolder {
         public TopViewHolder(View view) {
             super(view);
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView mIconView;
 

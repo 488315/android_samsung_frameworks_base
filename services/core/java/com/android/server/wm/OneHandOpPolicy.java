@@ -15,7 +15,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import com.samsung.android.onehandop.IOneHandOpWatcher;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OneHandOpPolicy {
     public boolean mBootCompleted;
     public Context mContext;
@@ -27,7 +26,6 @@ public final class OneHandOpPolicy {
     public OneHandOpPolicy$$ExternalSyntheticLambda0 mRestartRunnable;
     public WindowManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OneHandOpMonitor implements IBinder.DeathRecipient {
         public IOneHandOpWatcher mWatcher;
 

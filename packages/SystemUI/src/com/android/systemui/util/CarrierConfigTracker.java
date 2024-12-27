@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.policy.CallbackController;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class CarrierConfigTracker extends BroadcastReceiver implements CallbackController {
     private final CarrierConfigManager mCarrierConfigManager;
     private boolean mDefaultAlwaysShowPrimarySignalBarInOpportunisticNetworkConfig;
@@ -36,12 +35,10 @@ public class CarrierConfigTracker extends BroadcastReceiver implements CallbackC
     private final Set<CarrierConfigChangedListener> mListeners = new ArraySet();
     private final Set<DefaultDataSubscriptionChangedListener> mDataListeners = new ArraySet();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface CarrierConfigChangedListener {
         void onCarrierConfigChanged();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DefaultDataSubscriptionChangedListener {
         void onDefaultSubscriptionChanged(int i);
     }

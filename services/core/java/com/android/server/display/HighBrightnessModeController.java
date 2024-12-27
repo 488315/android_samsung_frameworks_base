@@ -26,7 +26,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HighBrightnessModeController {
     public static final boolean DEBUG = DebugUtils.isDebuggable("HighBrightnessModeController");
     public static final boolean FEATURE_SUPPORT_HDR_SOLUTION =
@@ -75,12 +74,10 @@ public final class HighBrightnessModeController {
     public boolean mUseTimeAllowance;
     public int mWidth;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface HdrBrightnessDeviceConfig {
         float getHdrBrightnessFromSdr(float f, float f2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class HdrListener extends SurfaceControlHdrLayerInfoListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public boolean mIsBrightnessScaledUp = false;
@@ -168,10 +165,8 @@ public final class HighBrightnessModeController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mLowPowerModeSetting;
         public boolean mStarted;

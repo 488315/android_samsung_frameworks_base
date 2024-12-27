@@ -10,7 +10,6 @@ import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.QpRune;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSClockBellAlternateCalendarUtil {
     private SettingsHelper.OnChangedCallback mAlternateCalendarSettingCallback;
     public String mCachedAlternateCalendar = ".";
@@ -21,7 +20,6 @@ public final class QSClockBellAlternateCalendarUtil {
     public static final Uri SETTING_KEY_LUNAR_CALENDAR_URI = Settings.System.getUriFor(SettingsHelper.INDEX_LUNAR_CALENDAR);
     public static final Uri SETTING_KEY_HIJRI_CALENDAR_URI = Settings.System.getUriFor(SettingsHelper.INDEX_HIJRI_CALENDAR);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateHelperByContent extends ContentObserver {
         public UpdateHelperByContent(Handler handler) {
             super(handler);

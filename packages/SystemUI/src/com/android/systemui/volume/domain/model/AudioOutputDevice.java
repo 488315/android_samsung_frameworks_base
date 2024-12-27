@@ -4,10 +4,8 @@ import android.graphics.drawable.Drawable;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface AudioOutputDevice {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Bluetooth implements AudioOutputDevice {
         public final CachedBluetoothDevice cachedBluetoothDevice;
         public final Drawable icon;
@@ -51,7 +49,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BuiltIn implements AudioOutputDevice {
         public final Drawable icon;
         public final String name;
@@ -93,7 +90,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Unknown implements AudioOutputDevice {
         public static final Unknown INSTANCE = new Unknown();
 
@@ -123,7 +119,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Wired implements AudioOutputDevice {
         public final Drawable icon;
         public final String name;

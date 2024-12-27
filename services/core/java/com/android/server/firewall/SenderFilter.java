@@ -12,7 +12,6 @@ import com.android.server.pm.PackageManagerService;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SenderFilter {
     public static final AnonymousClass1 FACTORY = new AnonymousClass1("sender");
     public static final AnonymousClass2 SIGNATURE;
@@ -20,7 +19,6 @@ public abstract class SenderFilter {
     public static final AnonymousClass2 SYSTEM_OR_SIGNATURE;
     public static final AnonymousClass2 USER_ID;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.firewall.SenderFilter$1, reason: invalid class name */
     public final class AnonymousClass1 extends FilterFactory {
         @Override // com.android.server.firewall.FilterFactory

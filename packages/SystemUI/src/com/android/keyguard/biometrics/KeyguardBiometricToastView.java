@@ -37,7 +37,6 @@ import com.android.systemui.vibrate.VibrationUtil;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardBiometricToastView extends FrameLayout {
     public static final PathInterpolator INTERPOLATOR = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
     public static float mToastIconFrom = 1.28f;
@@ -59,7 +58,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
     public int mToastViewMinWidth;
     public VibrationUtil mVibrationUtil;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum ToastType {
         Authenticating,
         /* JADX INFO: Fake field, exist only in values array */
@@ -390,7 +388,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
         this.mHandler = new Handler(Looper.getMainLooper());
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.biometrics.KeyguardBiometricToastView$3, reason: invalid class name */
     public final class AnonymousClass3 implements Animator.AnimatorListener {
         public final /* synthetic */ ToastType val$type;

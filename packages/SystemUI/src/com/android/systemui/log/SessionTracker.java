@@ -19,7 +19,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SessionTracker implements CoreStartable {
     public static final boolean DEBUG = Log.isLoggable("SessionTracker", 3);
     public final AuthController mAuthController;
@@ -73,7 +72,6 @@ public final class SessionTracker implements CoreStartable {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum SessionUiEvent implements UiEventLogger.UiEventEnum {
         KEYGUARD_SESSION_END_KEYGUARD_GOING_AWAY(1354),
         KEYGUARD_SESSION_END_GOING_TO_SLEEP(1355);

@@ -13,7 +13,6 @@ import com.android.systemui.res.R$styleable;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SystemUIImageButton extends ImageButton implements SystemUIWidgetCallback {
     public final int mAttrCount;
     public String mDefaultArea;
@@ -25,7 +24,6 @@ public class SystemUIImageButton extends ImageButton implements SystemUIWidgetCa
     public final ResData mResData;
     public long mUpdateFlag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResData {
         public String mGroup;
         public boolean mMovable;

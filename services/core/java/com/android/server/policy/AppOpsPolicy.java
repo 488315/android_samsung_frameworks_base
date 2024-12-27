@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppOpsPolicy implements AppOpsManagerInternal.CheckOpsDelegate {
     public static final String LOG_TAG = AppOpsPolicy.class.getName();
     public static final boolean SYSPROP_HOTWORD_DETECTION_SERVICE_REQUIRED =

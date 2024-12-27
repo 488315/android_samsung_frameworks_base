@@ -6,14 +6,11 @@ import android.os.IInterface;
 import android.os.Parcel;
 import com.android.systemui.screenshot.proxy.SystemUiProxyClient$dismissKeyguard$onDoneBinder$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface IOnDoneCallback extends IInterface {
     void onDone(boolean z);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Stub extends Binder implements IOnDoneCallback {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Proxy implements IOnDoneCallback {
             public final IBinder mRemote;
 

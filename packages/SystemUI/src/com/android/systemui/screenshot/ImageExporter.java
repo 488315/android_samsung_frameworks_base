@@ -35,7 +35,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ImageExporter {
     public static String mCapturedAppInfo;
     public static int mHeight;
@@ -55,7 +54,6 @@ public final class ImageExporter {
     public Bitmap.CompressFormat mCompressFormat = Bitmap.CompressFormat.PNG;
     public final int mQuality = 100;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.ImageExporter$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$android$graphics$Bitmap$CompressFormat;
@@ -86,7 +84,6 @@ public final class ImageExporter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class ImageExportException extends IOException {
         public ImageExportException(String str) {
             super(str);
@@ -97,7 +94,6 @@ public final class ImageExporter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Result {
         public String fileName;
         public Bitmap.CompressFormat format;
@@ -122,7 +118,6 @@ public final class ImageExporter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Task {
         public final Bitmap mBitmap;
         public final ZonedDateTime mCaptureTime;

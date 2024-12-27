@@ -12,14 +12,12 @@ import com.android.server.am.mars.filter.IFilter;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccessibilityAppFilter implements IFilter {
     public Context mContext = null;
     public AnonymousClass1 mAccessibilityContentObserver = null;
     public boolean mRegisteredAccessibilityContentObserver = false;
     public final ArrayList mEnabledAccessibilityPackages = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AccessibilityAppFilterHolder {
         public static final AccessibilityAppFilter INSTANCE = new AccessibilityAppFilter();
     }

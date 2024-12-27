@@ -24,7 +24,6 @@ import com.android.systemui.util.concurrency.RepeatableExecutor;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SeekBarViewModel {
     public Progress _data = new Progress(false, false, false, false, null, 0, false);
     public final MutableLiveData _progress;
@@ -43,12 +42,10 @@ public final class SeekBarViewModel {
     public boolean scrubbing;
     public ScrubbingChangeListener scrubbingChangeListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface EnabledChangeListener {
         void onEnabledChanged(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Progress {
         public final int duration;
         public final Integer elapsedTime;
@@ -123,12 +120,10 @@ public final class SeekBarViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ScrubbingChangeListener {
         void onScrubbingChanged(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public final FalsingManager falsingManager;
         public final SeekBarViewModel viewModel;
@@ -405,7 +400,6 @@ public final class SeekBarViewModel {
         checkIfPollingNeeded();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarTouchListener implements View.OnTouchListener, GestureDetector.OnGestureListener {
         public final SeekBar bar;
         public final GestureDetectorCompat detector;

@@ -20,7 +20,6 @@ import dagger.Lazy;
 import java.io.PrintWriter;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeSuppressor implements DozeMachine.Part {
     public final Lazy mBiometricUnlockControllerLazy;
     public final AmbientDisplayConfiguration mConfig;
@@ -30,7 +29,6 @@ public final class DozeSuppressor implements DozeMachine.Part {
     public DozeMachine mMachine;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.DozeSuppressor$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;

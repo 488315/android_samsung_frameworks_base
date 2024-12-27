@@ -6,7 +6,6 @@ import android.location.LocationResult;
 import java.time.Clock;
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocationFudger {
     static final long OFFSET_UPDATE_INTERVAL_MS = 3600000;
     public static final double OLD_WEIGHT = Math.sqrt(0.9991d);

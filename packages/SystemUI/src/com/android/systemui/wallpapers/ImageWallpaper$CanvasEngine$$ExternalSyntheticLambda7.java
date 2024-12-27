@@ -12,7 +12,6 @@ import com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper;
 import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.android.systemui.wallpapers.ImageWallpaper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda7 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;

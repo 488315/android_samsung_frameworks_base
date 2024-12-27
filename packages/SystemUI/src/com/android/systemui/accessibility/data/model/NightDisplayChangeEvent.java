@@ -5,10 +5,8 @@ import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
 import java.time.LocalTime;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface NightDisplayChangeEvent {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnActivatedChanged implements NightDisplayChangeEvent {
         public final boolean isActivated;
 
@@ -32,7 +30,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnAutoModeChanged implements NightDisplayChangeEvent {
         public final int autoMode;
 
@@ -56,7 +53,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnCustomEndTimeChanged implements NightDisplayChangeEvent {
         public final LocalTime endTime;
 
@@ -84,7 +80,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnCustomStartTimeChanged implements NightDisplayChangeEvent {
         public final LocalTime startTime;
 
@@ -112,7 +107,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnForceAutoModeChanged implements NightDisplayChangeEvent {
         public final boolean shouldForceAutoMode;
 
@@ -136,7 +130,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnLocationEnabledChanged implements NightDisplayChangeEvent {
         public final boolean locationEnabled;
 

@@ -23,14 +23,12 @@ import com.android.server.SystemService;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DataLoaderManagerService extends SystemService {
     public final DataLoaderManagerBinderService mBinderService;
     public final Context mContext;
     public final Handler mHandler;
     public final SparseArray mServiceConnections;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataLoaderManagerBinderService extends IDataLoaderManager.Stub {
         public DataLoaderManagerBinderService() {}
 
@@ -172,7 +170,6 @@ public final class DataLoaderManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataLoaderServiceConnection
             implements ServiceConnection, IBinder.DeathRecipient {
         public IDataLoader mDataLoader = null;

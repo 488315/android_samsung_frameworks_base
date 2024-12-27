@@ -66,7 +66,6 @@ import java.util.Objects;
 import libcore.io.IoUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class UriGrantsManagerService extends IUriGrantsManager.Stub implements UriMetricsHelper.PersistentUriGrantsProvider {
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     public ActivityManagerInternal mAmInternal;
@@ -78,7 +77,6 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub implements U
     public final ArrayList mUriPermissionHistory = new ArrayList();
     public final H mH = new H(IoThread.get().getLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.uri.UriGrantsManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends UriGrantsManagerService {
         @Override // com.android.server.uri.UriGrantsManagerService
@@ -92,7 +90,6 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub implements U
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper, null, true);
@@ -165,7 +162,6 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub implements U
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final Context mContext;
         public final UriGrantsManagerService mService;
@@ -232,7 +228,6 @@ public class UriGrantsManagerService extends IUriGrantsManager.Stub implements U
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService implements UriGrantsManagerInternal {
         public LocalService() {
         }

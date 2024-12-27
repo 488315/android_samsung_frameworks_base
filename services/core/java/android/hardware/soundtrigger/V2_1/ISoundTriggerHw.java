@@ -20,10 +20,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ISoundTriggerHw extends android.hardware.soundtrigger.V2_0.ISoundTriggerHw {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements ISoundTriggerHw {
         public IHwBinder mRemote;
 
@@ -402,7 +400,6 @@ public interface ISoundTriggerHw extends android.hardware.soundtrigger.V2_0.ISou
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundModel {
         public final /* synthetic */ int $r8$classId;
         public Object data;

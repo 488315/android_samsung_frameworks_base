@@ -110,7 +110,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsageStatsService extends SystemService
         implements UserUsageStatsService.StatsUpdatedListener {
     public static final File COMMON_USAGE_STATS_DIR;
@@ -158,13 +157,11 @@ public final class UsageStatsService extends SystemService
     public static final boolean DEBUG_RESPONSE_STATS = Log.isLoggable("UsageStatsService", 3);
     public static final File KERNEL_COUNTER_FILE = new File("/proc/uid_procstat/set");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.usage.UsageStatsService$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActivityData {
         public int lastEvent = 0;
         public final String mTaskRootClass;
@@ -178,7 +175,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IUsageStatsManager.Stub {
         public BinderService() {}
 
@@ -1819,7 +1815,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -1947,10 +1942,8 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LaunchTimeAlarmQueue extends AlarmQueue {
         public final int mUserId;
 
@@ -1976,7 +1969,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends UsageStatsManagerInternal {
         public LocalService() {}
 
@@ -2095,7 +2087,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyPackageMonitor extends PackageMonitor {
         public MyPackageMonitor() {}
 
@@ -2152,7 +2143,6 @@ public final class UsageStatsService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidRemovedReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ UsageStatsService this$0;

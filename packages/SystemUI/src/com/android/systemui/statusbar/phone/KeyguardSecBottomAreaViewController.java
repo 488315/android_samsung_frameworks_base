@@ -88,7 +88,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecBottomAreaViewController extends KeyguardBottomAreaViewController {
     public static final long APPEAR_ANIM_DURATION;
     public static final String KEY_HELP_TEXT_BOTTOM;
@@ -143,7 +142,6 @@ public final class KeyguardSecBottomAreaViewController extends KeyguardBottomAre
     public final KeyguardSecBottomAreaViewController$startDelayRunnable$1 startDelayRunnable;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

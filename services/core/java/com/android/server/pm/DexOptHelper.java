@@ -72,7 +72,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexOptHelper {
     public static final String[] designatedPkgs = {
         "com.samsung.android.messaging",
@@ -86,7 +85,6 @@ public final class DexOptHelper {
     public volatile long mBootDexoptStartTime;
     public final PackageManagerService mPm;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgDexOptHelper implements ArtManagerLocal.DexoptDoneCallback {
         public static int SurfaceTemperatureThreshold = 0;
         public static int abortCount = 0;
@@ -98,7 +96,6 @@ public final class DexOptHelper {
         public MyHandler mHandler;
         public volatile boolean mObserveStarted;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class MyHandler extends Handler {
             public MyHandler(Handler handler) {
                 super(handler.getLooper());
@@ -199,7 +196,6 @@ public final class DexOptHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexoptDoneHandler implements ArtManagerLocal.DexoptDoneCallback {
         public DexoptDoneHandler() {}
 

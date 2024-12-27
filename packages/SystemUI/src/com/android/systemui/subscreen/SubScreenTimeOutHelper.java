@@ -14,7 +14,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubScreenTimeOutHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final SubScreenTimeOutHelper$contentObserver$1 contentObserver;
@@ -24,7 +23,6 @@ public final class SubScreenTimeOutHelper {
     public final Supplier subScreenQsWindowViewSupplier;
     public final Supplier windowManagerSupplier;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -9,7 +9,6 @@ import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.IoThread;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SensorPrivacyStateControllerImpl {
     public static SensorPrivacyStateControllerImpl sInstance;
     public static SensorPrivacyStateControllerImpl sInstance$1;

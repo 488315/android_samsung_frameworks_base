@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WallpaperController {
     public final WallpaperController$$ExternalSyntheticLambda2 mComputeMaxZoomOutFunction;
     public final DisplayContent mDisplayContent;
@@ -61,7 +60,6 @@ public final class WallpaperController {
     public int mWallpaperDrawState = 0;
     public Point mLargestDisplaySize = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FindWallpaperTargetResult {
         public boolean isWallpaperTargetForLetterbox;
         public boolean mNeedsShowWhenLockedWallpaper;
@@ -69,14 +67,12 @@ public final class WallpaperController {
         public boolean useTopWallpaperAsTarget;
         public WindowState wallpaperTarget;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class TopWallpaper {
             public WindowState mTopHideWhenLockedWallpaper;
             public WindowState mTopShowWhenLockedWallpaper;
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteWallpaperAnimationAdapter
             implements AnimationAdapter, IBinder.DeathRecipient {
         public final int mCallingPid;

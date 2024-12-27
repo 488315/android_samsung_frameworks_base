@@ -1,9 +1,7 @@
 package android.os;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IVoldListener extends IInterface {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IVoldListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -51,7 +49,6 @@ public interface IVoldListener extends IInterface {
         public void sendVoldMessage(String str) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IVoldListener {
         public static final String DESCRIPTOR = "android.os.IVoldListener";
         static final int TRANSACTION_onDiskCreated = 1;
@@ -67,7 +64,6 @@ public interface IVoldListener extends IInterface {
         static final int TRANSACTION_onVolumeStateChanged = 6;
         static final int TRANSACTION_sendVoldMessage = 11;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IVoldListener {
             public IBinder mRemote;
 

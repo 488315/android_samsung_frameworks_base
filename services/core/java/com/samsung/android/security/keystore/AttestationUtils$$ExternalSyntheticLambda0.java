@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.security.samsungattestation.ISamsungAttestation;
 import android.system.keystore2.KeyDescriptor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class AttestationUtils$$ExternalSyntheticLambda0 {
     public final /* synthetic */ KeyDescriptor f$0;
     public final /* synthetic */ KeyParameter[] f$1;

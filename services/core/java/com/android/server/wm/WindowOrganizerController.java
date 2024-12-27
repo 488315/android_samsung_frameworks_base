@@ -42,7 +42,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.IntSupplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowOrganizerController extends IWindowOrganizerController.Stub
         implements BLASTSyncEngine.TransactionReadyListener {
     public final DisplayAreaOrganizerController mDisplayAreaOrganizerController;
@@ -57,7 +56,6 @@ public final class WindowOrganizerController extends IWindowOrganizerController.
     public final Rect mTmpBounds0 = new Rect();
     public final Rect mTmpBounds1 = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallerInfo {
         public final int mPid = Binder.getCallingPid();
         public final int mUid = Binder.getCallingUid();

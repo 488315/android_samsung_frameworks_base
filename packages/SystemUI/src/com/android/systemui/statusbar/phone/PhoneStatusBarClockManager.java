@@ -12,7 +12,6 @@ import com.android.systemui.slimindicator.SlimIndicatorViewSubscriber;
 import com.android.systemui.statusbar.policy.QSClockIndicatorView;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PhoneStatusBarClockManager implements SlimIndicatorViewSubscriber {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
     public final QSClockIndicatorView mClockView;
@@ -27,7 +26,6 @@ public final class PhoneStatusBarClockManager implements SlimIndicatorViewSubscr
     public boolean mClockBlocked = false;
     public boolean mIsChangedClockPosition = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum POSITION {
         NONE,
         LEFT,

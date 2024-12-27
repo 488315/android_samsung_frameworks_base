@@ -6,7 +6,6 @@ import com.android.systemui.Flags;
 import com.android.systemui.keyguard.shared.model.KeyguardSection;
 import com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSliceViewSection extends KeyguardSection {
     public KeyguardSliceViewSection(LockscreenSmartspaceController lockscreenSmartspaceController) {
     }

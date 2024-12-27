@@ -30,7 +30,6 @@ import java.io.PrintWriter;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardClockSwitch extends RelativeLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     boolean mAnimateOnLayout;

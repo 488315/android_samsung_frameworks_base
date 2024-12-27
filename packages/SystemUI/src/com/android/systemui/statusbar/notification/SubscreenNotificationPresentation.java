@@ -23,7 +23,6 @@ import com.android.systemui.util.wakelock.WakeLock;
 import com.samsung.android.aod.AODManager;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenNotificationPresentation extends Dialog {
     public final ViewGroup contents;
     public final SubscreenDeviceModelParent mDeviceModel;

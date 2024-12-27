@@ -15,14 +15,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PanelScreenShotLogger implements Dumpable {
     public static final PanelScreenShotLogger INSTANCE = new PanelScreenShotLogger();
     public static final ArrayList assembledLogs = new ArrayList();
     public static final Map providers = new LinkedHashMap();
     public static final PanelScreenShotBufferLogger panelScreenShotBufferLogger = (PanelScreenShotBufferLogger) Dependency.sDependency.getDependencyInner(PanelScreenShotBufferLogger.class);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface LogProvider {
         ArrayList gatherState();
     }

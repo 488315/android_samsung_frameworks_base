@@ -8,11 +8,9 @@ import android.util.SparseArray;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseAppStateDurationsTracker extends BaseAppStateEventsTracker {
     public final SparseArray mUidStateDurations;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SimplePackageDurations extends BaseAppStateDurations {
         public SimplePackageDurations(
                 int i,
@@ -28,7 +26,6 @@ public abstract class BaseAppStateDurationsTracker extends BaseAppStateEventsTra
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStateDurations extends SimplePackageDurations {}
 
     public BaseAppStateDurationsTracker(

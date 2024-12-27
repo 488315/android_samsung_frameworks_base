@@ -11,7 +11,6 @@ import com.android.server.display.state.DisplayStateController;
 import com.android.server.display.utils.DebugUtils;
 import com.android.server.power.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayOffloadSessionImpl
         implements DisplayManagerInternal.DisplayOffloadSession {
     public static final boolean DEBUG = DebugUtils.isDebuggable("DisplayOffloadSessionImpl");

@@ -31,7 +31,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: Cea708CaptionRenderer.java */
 class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.DisplayListener {
     private final CCHandler mCCHandler;
 
@@ -72,7 +71,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         ((ViewGroup) this.mClosedCaptionLayout).draw(canvas);
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     static class ScaledLayout extends ViewGroup {
         private static final boolean DEBUG = false;
         private static final String TAG = "ScaledLayout";
@@ -92,7 +90,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             super(context);
         }
 
-        /* compiled from: Cea708CaptionRenderer.java */
         static class ScaledLayoutParams extends ViewGroup.LayoutParams {
             public static final float SCALE_UNSPECIFIED = -1.0f;
             public float scaleEndCol;
@@ -284,7 +281,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     static class CCLayout extends ScaledLayout implements ClosedCaptionWidget.ClosedCaptionLayout {
         private static final float SAFE_TITLE_AREA_SCALE_END_X = 0.9f;
         private static final float SAFE_TITLE_AREA_SCALE_END_Y = 0.9f;
@@ -336,7 +332,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     static class CCHandler implements Handler.Callback {
         private static final int CAPTION_ALL_WINDOWS_BITMAP = 255;
         private static final long CAPTION_CLEAR_INTERVAL_MS = 60000;
@@ -600,7 +595,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     static class CCWindowLayout extends RelativeLayout implements View.OnLayoutChangeListener {
         private static final int ANCHOR_HORIZONTAL_16_9_MAX = 209;
         private static final int ANCHOR_HORIZONTAL_MODE_CENTER = 1;
@@ -987,7 +981,6 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     static class CCView extends SubtitleView {
         private static final CaptioningManager.CaptionStyle DEFAULT_CAPTION_STYLE =
                 CaptioningManager.CaptionStyle.DEFAULT;

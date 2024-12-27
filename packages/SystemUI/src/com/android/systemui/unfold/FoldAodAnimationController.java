@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FoldAodAnimationController implements CallbackController, ScreenOffAnimation, WakefulnessLifecycle.Observer {
     public boolean alwaysOnEnabled;
     public Runnable cancelAnimation;
@@ -75,12 +74,10 @@ public final class FoldAodAnimationController implements CallbackController, Scr
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface FoldAodAnimationStatus {
         void onFoldToAodAnimationChanged();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldListener extends DeviceStateManager.FoldStateListener {
         public FoldListener(final FoldAodAnimationController foldAodAnimationController) {
             super(foldAodAnimationController.context, new Consumer() { // from class: com.android.systemui.unfold.FoldAodAnimationController.FoldListener.1
@@ -102,7 +99,6 @@ public final class FoldAodAnimationController implements CallbackController, Scr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldToAodLatencyTracker {
         public FoldToAodLatencyTracker() {
         }

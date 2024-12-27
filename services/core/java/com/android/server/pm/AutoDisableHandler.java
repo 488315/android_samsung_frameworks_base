@@ -9,11 +9,9 @@ import android.os.Process;
 import com.android.server.am.MARsPackageInfo;
 import com.android.server.am.MARsPolicyManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutoDisableHandler {
     public ADHandler mAutoDisableHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ADHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -61,7 +59,6 @@ public final class AutoDisableHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutoDisableThread extends Thread {
         public final int mPriority;
 

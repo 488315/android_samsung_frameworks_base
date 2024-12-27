@@ -66,7 +66,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayDeviceConfig {
     static final float BRIGHTNESS_DEFAULT = 0.5f;
     public static final boolean DEBUG = DebugUtils.isDebuggable("DisplayDeviceConfig");
@@ -153,7 +152,6 @@ public final class DisplayDeviceConfig {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessLimitMapType {
         public static final /* synthetic */ BrightnessLimitMapType[] $VALUES;
         public static final BrightnessLimitMapType ADAPTIVE;
@@ -179,7 +177,6 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HighBrightnessModeData {
         public boolean allowInLowPowerMode;
         public float minimumHdrPercentOfScreen;
@@ -208,7 +205,6 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerThrottlingConfigData {
         public final float brightnessLowestCapAllowed;
         public final int pollingWindowMillis;
@@ -227,11 +223,9 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerThrottlingData {
         public final List throttlingLevels;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ThrottlingLevel {
             public final float powerQuotaMilliWatts;
             public final int thermalStatus;
@@ -332,11 +326,9 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalBrightnessThrottlingData {
         public final List throttlingLevels;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ThrottlingLevel {
             public final float brightness;
             public final int thermalStatus;

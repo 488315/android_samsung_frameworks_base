@@ -2,7 +2,6 @@ package android.permission;
 
 import java.util.concurrent.CountDownLatch;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class PermissionControllerService$1$$ExternalSyntheticLambda0
         implements Runnable {
     public final /* synthetic */ CountDownLatch f$0;

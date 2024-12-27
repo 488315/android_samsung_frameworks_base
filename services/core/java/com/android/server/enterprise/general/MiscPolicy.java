@@ -93,7 +93,6 @@ import java.util.List;
 import java.util.Vector;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServiceCallback {
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
     public static PackageManager mPackageManager;
@@ -110,7 +109,6 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     public int credentialsFailsState = 0;
     public final ArrayList mStartNFCHistoryList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SIMCardUpdateMonitor {
         public final Context mCtxt;
         public final AnonymousClass1 mIntentReceiver;
@@ -451,7 +449,6 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemFontChanger {
         public TypefaceFinder mTypefaceFinder = null;
 

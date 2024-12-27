@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VcnNetworkProvider extends NetworkProvider {
     public final Context mContext;
     public final Dependencies mDeps;
@@ -19,10 +18,8 @@ public final class VcnNetworkProvider extends NetworkProvider {
     public final Set mListeners;
     public final Set mRequests;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface NetworkRequestListener {}
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */

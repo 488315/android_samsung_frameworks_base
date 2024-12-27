@@ -15,12 +15,10 @@ import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UpdateLockService extends IUpdateLock.Stub {
     public final Context mContext;
     public final LockWatcher mLocks = new LockWatcher(new Handler());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockWatcher extends TokenWatcher {
         public LockWatcher(Handler handler) {
             super(handler, "UpdateLocks");

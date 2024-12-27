@@ -16,7 +16,6 @@ import com.android.server.usb.UsbDeviceManager;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbGadgetAidl implements UsbGadgetHal {
     public static final String USB_GADGET_AIDL_SERVICE =
             AudioOffloadInfo$$ExternalSyntheticOutline0.m(
@@ -27,7 +26,6 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
     public final IndentingPrintWriter mPw;
     public UsbGadgetCallback mUsbGadgetCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbGadgetCallback extends IUsbGadgetCallback.Stub {
         public final boolean mChargingFunctions;
         public final long mFunctions;

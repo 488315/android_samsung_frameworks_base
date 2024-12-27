@@ -7,7 +7,6 @@ import com.android.systemui.scene.ui.composable.ComposableScene;
 import dagger.Lazy;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LockscreenScene implements ComposableScene {
     public final ReadonlyStateFlow destinationScenes;
     public final SceneKey key = Scenes.Lockscreen;

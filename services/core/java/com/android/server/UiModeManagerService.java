@@ -103,7 +103,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UiModeManagerService extends SystemService {
     public static final Set SUPPORTED_NIGHT_MODE_CUSTOM_TYPES = new ArraySet(new Integer[] {0, 1});
     public static final DateTimeFormatter sFormatter =
@@ -189,7 +188,6 @@ public final class UiModeManagerService extends SystemService {
     public boolean mWatch;
     public WindowManagerInternal mWindowManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.UiModeManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public int mNightModeValue;
@@ -202,7 +200,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.UiModeManagerService$16, reason: invalid class name */
     public final class AnonymousClass16 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -232,7 +229,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.UiModeManagerService$9, reason: invalid class name */
     public final class AnonymousClass9 extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
@@ -328,10 +324,8 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
 
@@ -362,7 +356,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LogWrapper {
         public static final Logger logger;
         public static final SimpleDateFormat formatter =
@@ -441,7 +434,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProjectionHolder implements IBinder.DeathRecipient {
         public final IBinder mBinder;
         public final String mPackageName;
@@ -477,7 +469,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Shell extends ShellCommand {
         public final IUiModeManager mInterface;
 
@@ -603,7 +594,6 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Stub extends IUiModeManager.Stub {
         public Stub(Context context) {
             super(PermissionEnforcer.fromContext(context));

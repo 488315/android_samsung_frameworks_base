@@ -22,7 +22,6 @@ import com.android.server.LocalServices;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HqmDataDispatcher {
     public final BatteryManagerInternal mBatteryManagerInternal;
     public final Context mContext;
@@ -31,7 +30,6 @@ public final class HqmDataDispatcher {
     public final DispatchHandler mHandler;
     public final SemHqmManager mHqmManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DispatchHandler extends Handler {
         public DispatchHandler(Looper looper) {
             super(looper);
@@ -47,7 +45,6 @@ public final class HqmDataDispatcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayStat {
         public static final int BRIGHTNESS_DIM =
                 Math.max(
@@ -85,12 +82,10 @@ public final class HqmDataDispatcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class HqmDataDispatcherHolder {
         public static HqmDataDispatcher INSTANCE;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HqmDataSetBuilder {
         public final JSONObject mJsonObj = new JSONObject();
 
@@ -107,7 +102,6 @@ public final class HqmDataDispatcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HqmRequestReceiver extends BroadcastReceiver {
         public HqmRequestReceiver() {}
 
@@ -216,7 +210,6 @@ public final class HqmDataDispatcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Timer {
         public long startTimeMillis;
     }

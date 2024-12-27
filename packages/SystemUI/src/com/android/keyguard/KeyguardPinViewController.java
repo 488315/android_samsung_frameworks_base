@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.policy.DevicePostureControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewController {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final LockPatternUtils mLockPatternUtils;
@@ -28,7 +27,6 @@ public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewContr
     public final DevicePostureController mPostureController;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum PinBouncerUiEvent implements UiEventLogger.UiEventEnum {
         ATTEMPT_UNLOCK_WITH_AUTO_CONFIRM_FEATURE(1547);
 

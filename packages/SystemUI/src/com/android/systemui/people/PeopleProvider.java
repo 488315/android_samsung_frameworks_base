@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import com.android.systemui.SystemUIAppComponentFactoryBase;
 import com.android.systemui.people.widget.PeopleSpaceWidgetManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PeopleProvider extends ContentProvider implements SystemUIAppComponentFactoryBase.ContextInitializer {
     public SystemUIAppComponentFactoryBase.ContextAvailableCallback mCallback;
     public PeopleSpaceWidgetManager mPeopleSpaceWidgetManager;

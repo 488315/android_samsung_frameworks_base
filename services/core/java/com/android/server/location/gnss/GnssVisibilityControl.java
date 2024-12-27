@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class GnssVisibilityControl {
     public static final String[] NO_LOCATION_ENABLED_PROXY_APPS = new String[0];
     public static boolean mIsNfwLocationAccessProxyAppsUpdated;
@@ -90,7 +89,6 @@ class GnssVisibilityControl {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfwNotification {
         public final boolean mInEmergencyMode;
         public final boolean mIsCachedLocation;
@@ -143,7 +141,6 @@ class GnssVisibilityControl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProxyAppState {
         public boolean mHasLocationPermission;
         public boolean mIsLocationIconOn;

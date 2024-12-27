@@ -9,20 +9,16 @@ import com.android.server.wm.WindowManagerInternal;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SpenGestureScreenShotManager {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FutureScreenShot extends FutureTask implements ScreenShot {
         public FutureScreenShot(Callable callable) {
             super(callable);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Host {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealScreenShot implements ScreenShot {
         public final Bitmap bitmap;
 
@@ -33,6 +29,5 @@ public final class SpenGestureScreenShotManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ScreenShot {}
 }

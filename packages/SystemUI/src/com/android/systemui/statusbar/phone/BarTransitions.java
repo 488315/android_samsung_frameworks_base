@@ -24,7 +24,6 @@ import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BarTransitions {
     public BarBackgroundDrawable mBarBackground;
     public int mMode;
@@ -106,7 +105,6 @@ public class BarTransitions {
         onTransition(i2, this.mMode, z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BarBackgroundDrawable extends Drawable {
         public boolean mAnimating;
         public int mColor;

@@ -39,7 +39,6 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardPunchHoleVIViewController extends ViewController implements SystemUIWidgetCallback {
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass5 mConfigurationListener;
@@ -62,14 +61,12 @@ public final class KeyguardPunchHoleVIViewController extends ViewController impl
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final AnonymousClass3 mWakefulnessObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final ConfigurationController mConfigurationController;
         public final DisplayLifecycle mDisplayLifecycle;

@@ -22,11 +22,9 @@ import com.android.server.SystemService;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RestrictionsManagerService extends SystemService {
     public final RestrictionsManagerImpl mRestrictionsManagerImpl;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RestrictionsManagerImpl extends IRestrictionsManager.Stub {
         public final Context mContext;
         public final IDevicePolicyManager mDpm;

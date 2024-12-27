@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements SettingsHelper.OnChangedCallback {
     public static final Interpolator INTERPOLATOR = new PathInterpolator(0.37f, 0.3f, 0.14f, 1.34f);
     public SecQSImplAnimatorManager.AnonymousClass2 mAnimStateCallback;
@@ -152,7 +151,6 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DetailCallback {
         void hideDetailAnimEnd();
 

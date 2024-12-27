@@ -43,7 +43,6 @@ import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerStatsService extends SystemService {
     public final Clock mClock;
     public final Context mContext;
@@ -62,7 +61,6 @@ public final class PowerStatsService extends SystemService {
     public PowerStatsLogger mPowerStatsLogger;
     public final AnonymousClass1 mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.powerstats.PowerStatsService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IPowerStatsService.Stub {
         public AnonymousClass1() {}
@@ -254,7 +252,6 @@ public final class PowerStatsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public final Executor mExecutor;
 
@@ -277,12 +274,10 @@ public final class PowerStatsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public PowerStatsHALWrapper$IPowerStatsHALWrapper mPowerStatsHALWrapper;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
 
@@ -305,7 +300,6 @@ public final class PowerStatsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerMonitorState {
         public long energyUws = -1;
         public final int id;

@@ -2,7 +2,6 @@ package android.telephony;
 
 import java.util.function.Consumer;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class BinderCacheManager$BinderDeathTracker$$ExternalSyntheticLambda0
         implements Consumer {
     @Override // java.util.function.Consumer

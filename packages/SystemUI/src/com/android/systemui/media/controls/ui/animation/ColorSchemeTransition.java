@@ -21,7 +21,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ColorSchemeTransition {
     public final AnimatingColorTransition accentPrimary;
     public final int bgColor;
@@ -32,7 +31,6 @@ public final class ColorSchemeTransition {
     public final MultiRippleController multiRippleController;
     public final TurbulenceNoiseController turbulenceNoiseController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.animation.ColorSchemeTransition$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();

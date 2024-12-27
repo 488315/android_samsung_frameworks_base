@@ -18,7 +18,6 @@ import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
 import java.io.PrintWriter;
 import java.util.function.IntSupplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ScreenOnKeeper {
     public final VcnManagementService$$ExternalSyntheticLambda10 mClock;
     public final Context mContext;
@@ -34,7 +33,6 @@ public final class ScreenOnKeeper {
     public final IntSupplier mWakeLockSummarySupplier;
     public int mWakefulness;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOnKeeperHandlerCallback implements Handler.Callback {
         public ScreenOnKeeperHandlerCallback() {}
 
@@ -73,7 +71,6 @@ public final class ScreenOnKeeper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

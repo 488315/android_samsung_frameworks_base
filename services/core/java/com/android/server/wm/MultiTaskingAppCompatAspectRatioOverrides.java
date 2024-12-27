@@ -17,11 +17,9 @@ import com.samsung.android.server.packagefeature.PackageFeatureUserChangePersist
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiTaskingAppCompatAspectRatioOverrides {
     public final MinAspectRatioOverrides mMinAspectRatioOverrides = new MinAspectRatioOverrides();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MinAspectRatioOverrides {
         public final SystemUserMinAspectRatioOverrides mSystemOverrides;
         public final PackageFeatureUserChange mUserOverrides =
@@ -41,7 +39,6 @@ public final class MultiTaskingAppCompatAspectRatioOverrides {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class SystemUserMinAspectRatioOverrides extends ConcurrentHashMap
             implements PackageFeatureCallback {
         public SystemUserMinAspectRatioOverrides() {

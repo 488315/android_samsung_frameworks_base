@@ -7,7 +7,6 @@ import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.power.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RampAnimator {
     public float mAnimatedValue;
     public boolean mAnimating;
@@ -24,7 +23,6 @@ public final class RampAnimator {
     public float mTarget;
     public float mTargetHlgValue;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DualRampAnimator {
         public boolean mAwaitingCallback;
         public final RampAnimator mFirst;

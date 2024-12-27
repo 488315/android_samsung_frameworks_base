@@ -4,17 +4,14 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PromptKind {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Biometric implements PromptKind {
         public final BiometricModalities activeModalities;
         public final PaneType paneType;
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class PaneType {
             public static final /* synthetic */ PaneType[] $VALUES;
             public static final PaneType ONE_PANE_LARGE_SCREEN_LANDSCAPE;
@@ -101,7 +98,6 @@ public interface PromptKind {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class DefaultImpls {
         public static boolean isCredential(PromptKind promptKind) {
             return (promptKind instanceof Pin) || (promptKind instanceof Pattern) || (promptKind instanceof Password);
@@ -118,7 +114,6 @@ public interface PromptKind {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class None implements PromptKind {
         public static final None INSTANCE = new None();
 
@@ -146,7 +141,6 @@ public interface PromptKind {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Password implements PromptKind {
         public static final Password INSTANCE = new Password();
 
@@ -186,7 +180,6 @@ public interface PromptKind {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Pattern implements PromptKind {
         public static final Pattern INSTANCE = new Pattern();
 
@@ -226,7 +219,6 @@ public interface PromptKind {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Pin implements PromptKind {
         public static final Pin INSTANCE = new Pin();
 

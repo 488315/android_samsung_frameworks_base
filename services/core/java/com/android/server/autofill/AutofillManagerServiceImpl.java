@@ -66,7 +66,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutofillManagerServiceImpl extends AbstractPerUserSystemService {
     public static final Random sRandom = new Random();
     public FillEventHistory mAugmentedAutofillEventHistory;
@@ -92,7 +91,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     public UserData mUserData;
     public final LocalLog mWtfHistory;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.AutofillManagerServiceImpl$1, reason: invalid class name */
     public final class AnonymousClass1
             implements RemoteAugmentedAutofillService.RemoteAugmentedAutofillServiceCallbacks {
@@ -109,7 +107,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InlineSuggestionRenderCallbacksImpl
             implements AbstractRemoteService.VultureCallback {
         public InlineSuggestionRenderCallbacksImpl() {}
@@ -124,7 +121,6 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PruneTask extends AsyncTask {
         public PruneTask() {}
 

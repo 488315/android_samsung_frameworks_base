@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = BcSmartspaceDataPlugin.ACTION, version = 1)
 public interface BcSmartspaceDataPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_BC_SMARTSPACE_DATA";
@@ -27,17 +26,14 @@ public interface BcSmartspaceDataPlugin extends Plugin {
     public static final String UI_SURFACE_MEDIA = "media_data_manager";
     public static final int VERSION = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SmartspaceEventNotifier {
         void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SmartspaceTargetListener {
         void onSmartspaceTargetsUpdated(List<? extends Parcelable> list);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface TimeChangedDelegate {
         void register(Runnable runnable);
 
@@ -72,7 +68,6 @@ public interface BcSmartspaceDataPlugin extends Plugin {
         throw new UnsupportedOperationException("Not implemented by " + getClass());
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface IntentStarter {
         default void startFromAction(SmartspaceAction smartspaceAction, View view, boolean z) {
             try {
@@ -103,7 +98,6 @@ public interface BcSmartspaceDataPlugin extends Plugin {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SmartspaceView {
         default int getCurrentCardTopPadding() {
             throw new UnsupportedOperationException("Not implemented by " + getClass());

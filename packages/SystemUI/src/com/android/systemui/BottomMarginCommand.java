@@ -14,7 +14,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BottomMarginCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public static final Companion Companion;
@@ -23,7 +22,6 @@ public final class BottomMarginCommand extends ParseableCommand {
     public final SingleArgParamOptional marginBottomDp$delegate;
     public final SingleArgParamOptional rotationDegrees$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

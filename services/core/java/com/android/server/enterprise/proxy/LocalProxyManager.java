@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocalProxyManager {
     public static volatile ProxyProperties sDefaultProxy;
     public static volatile ProxyProperties sGlobalProxy;
@@ -63,7 +62,6 @@ public final class LocalProxyManager {
     public static final Object mNetworkCallbackLock = new Object();
     public static volatile List sPendinOperationsList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.proxy.LocalProxyManager$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
         public final /* synthetic */ int $r8$classId;

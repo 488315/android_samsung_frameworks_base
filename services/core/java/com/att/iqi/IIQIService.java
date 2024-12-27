@@ -9,11 +9,9 @@ import android.os.RemoteException;
 
 import com.att.iqi.lib.Metric;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IIQIService extends IInterface {
     public static final String DESCRIPTOR = "com.att.iqi.IIQIService";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IIQIService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -76,7 +74,6 @@ public interface IIQIService extends IInterface {
                 IProfileChangedCallback iProfileChangedCallback) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IIQIService {
         static final int TRANSACTION_disableService = 12;
         static final int TRANSACTION_forceStopService = 11;
@@ -92,7 +89,6 @@ public interface IIQIService extends IInterface {
         static final int TRANSACTION_unregisterMetricSourcingCallback = 6;
         static final int TRANSACTION_unregisterProfileChangedCallback = 8;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         class Proxy implements IIQIService {
             private IBinder mRemote;
 
@@ -388,7 +384,6 @@ public interface IIQIService extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class _Parcel {
         /* JADX INFO: Access modifiers changed from: private */
         public static Object readTypedObject(Parcel parcel, Parcelable.Creator creator) {

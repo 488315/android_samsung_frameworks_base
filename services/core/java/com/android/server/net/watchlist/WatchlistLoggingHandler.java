@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WatchlistLoggingHandler extends Handler {
     static final int FORCE_REPORT_RECORDS_NOW_FOR_TEST_MSG = 3;
     static final int LOG_WATCHLIST_EVENT_MSG = 1;

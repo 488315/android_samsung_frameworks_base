@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SemDisplayQualityAP {
     protected static final int SCREEN_MODE_ADAPTIVE = 4;
     protected static final int SCREEN_MODE_AMOLED_CINEMA = 0;
@@ -35,7 +34,6 @@ public abstract class SemDisplayQualityAP {
     protected static final Uri SCREEN_MODE_SETTING_URI =
             Settings.System.getUriFor(SCREEN_MODE_SETTING);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ScreenStatusReceiver extends BroadcastReceiver {
         private ScreenStatusReceiver() {}
 
@@ -79,7 +77,6 @@ public abstract class SemDisplayQualityAP {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

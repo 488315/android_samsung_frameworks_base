@@ -5,14 +5,12 @@ import com.android.systemui.plank.command.PlankDispatcherFactory;
 import com.android.systemui.plank.monitor.TestInputMonitor;
 import com.android.systemui.plank.protocol.Protocol;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ProtocolManagerImpl {
     public final ApiLogger apiLogger;
     public final PlankDispatcherFactory plankDispatcherFactory;
     public final Protocol protocol;
     public final TestInputMonitor testInputMonitor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

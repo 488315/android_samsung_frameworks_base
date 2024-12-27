@@ -21,13 +21,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackupTransportClient {
     public final IBackupTransport mTransportBinder;
     public final TransportStatusCallbackPool mCallbackPool = new TransportStatusCallbackPool();
     public final TransportFutures mTransportFutures = new TransportFutures();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransportFutures {
         public final Object mActiveFuturesLock = new Object();
         public final Set mActiveFutures = new HashSet();
@@ -47,7 +45,6 @@ public final class BackupTransportClient {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransportStatusCallbackPool {
         public final Object mPoolLock = new Object();
         public final Queue mCallbackPool = new ArrayDeque();

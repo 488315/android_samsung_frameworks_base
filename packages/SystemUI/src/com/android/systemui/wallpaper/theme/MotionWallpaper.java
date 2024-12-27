@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MotionWallpaper extends FrameLayout implements SensorEventListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ValueAnimator mAlphaAnimator;
@@ -65,7 +64,6 @@ public final class MotionWallpaper extends FrameLayout implements SensorEventLis
     public final WallpaperManager mWallpaperManager;
     public String mXmlName;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MotionBitmap implements Cloneable {
         public int alpha;
         public float calculatedSum;

@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSmartspaceViewModel {
     public static final Companion Companion = new Companion(null);
     public final ReadonlyStateFlow bcSmartspaceVisibility;
@@ -25,7 +24,6 @@ public final class KeyguardSmartspaceViewModel {
     public final ReadonlyStateFlow isWeatherEnabled;
     public final ReadonlyStateFlow isWeatherVisible;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -42,12 +40,10 @@ public final class KeyguardSmartspaceViewModel {
         final ReadonlyStateFlow readonlyStateFlow2 = keyguardClockViewModel.hasCustomWeatherDataDisplay;
         Flow flow = new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

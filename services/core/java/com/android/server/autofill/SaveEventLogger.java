@@ -7,13 +7,11 @@ import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 
 import java.util.Optional;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SaveEventLogger {
     public Optional mEventInternal;
     public final int mSessionId;
     public final long mSessionStartTimestamp;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveEventInternal {
         public int mAppPackageUid;
         public boolean mCancelButtonClicked;

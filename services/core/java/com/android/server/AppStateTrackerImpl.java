@@ -41,7 +41,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppStateTrackerImpl implements AppStateTracker {
     static final int TARGET_OP = 70;
     public ActivityManagerInternal mActivityManagerInternal;
@@ -170,7 +169,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppOpsWatcher extends IAppOpsCallback.Stub {
         public AppOpsWatcher() {}
 
@@ -243,7 +241,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FeatureFlagsObserver extends ContentObserver {
         public FeatureFlagsObserver() {
             super(null);
@@ -274,7 +271,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Listener {
         public void handleUidCachedChanged(int i, boolean z) {}
 
@@ -299,7 +295,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         public void updateJobsForUidPackage(int i, boolean z) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -546,7 +541,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandbyTracker extends AppStandbyInternal.AppIdleStateChangeListener {
         public StandbyTracker() {}
 
@@ -567,7 +561,6 @@ public final class AppStateTrackerImpl implements AppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidObserver extends android.app.UidObserver {
         public UidObserver() {}
 

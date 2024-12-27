@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $authenticateAfterError;
     final /* synthetic */ BiometricModality $failedModality;
@@ -26,7 +25,6 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
     int label;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.ui.viewmodel.PromptViewModel$showTemporaryError$3$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ boolean $authenticateAfterError;

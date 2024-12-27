@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AnnouncementAggregator extends ICloseHandle.Stub {
     public static final boolean DEBUG = Log.isLoggable("BcRadioAidlSrv.AnnAggr", 3);
     public final DeathRecipient mDeathRecipient;
@@ -25,7 +24,6 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
     public final Object mLock;
     public final List mModuleWatchers;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IBinder.DeathRecipient {
         public DeathRecipient() {}
 
@@ -43,7 +41,6 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModuleWatcher extends IAnnouncementListener.Stub {
         public ICloseHandle mCloseHandle;
         public List mCurrentList = new ArrayList();

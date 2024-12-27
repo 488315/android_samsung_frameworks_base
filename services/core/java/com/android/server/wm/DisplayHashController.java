@@ -28,7 +28,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayHashController {
     public final Context mContext;
     public Map mDisplayHashAlgorithms;
@@ -46,12 +45,10 @@ public final class DisplayHashController {
     public final Handler mHandler = new Handler(Looper.getMainLooper());
     public final byte[] mSalt = UUID.randomUUID().toString().getBytes();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Command {
         void run(IDisplayHashingService iDisplayHashingService);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayHashingServiceConnection implements ServiceConnection {
         public ArrayList mQueuedCommands;
         public IDisplayHashingService mRemoteService;
@@ -101,7 +98,6 @@ public final class DisplayHashController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Handler extends android.os.Handler {
         public Handler(Looper looper) {
             super(looper);
@@ -127,7 +123,6 @@ public final class DisplayHashController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncCommand {
         public final CountDownLatch mCountDownLatch = new CountDownLatch(1);
         public Bundle mResult;

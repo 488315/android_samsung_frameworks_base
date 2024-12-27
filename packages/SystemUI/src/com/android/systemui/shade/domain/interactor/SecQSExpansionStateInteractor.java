@@ -21,7 +21,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQSExpansionStateInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Lazy repository$delegate;
@@ -47,7 +46,6 @@ public final class SecQSExpansionStateInteractor {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -65,7 +63,6 @@ public final class SecQSExpansionStateInteractor {
     public SecQSExpansionStateInteractor(final CoroutineScope coroutineScope, final ShadeRepository shadeRepository) {
         this.repository$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteractor$repository$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteractor$repository$2$1, reason: invalid class name */
             final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
                 public AnonymousClass1(Object obj) {

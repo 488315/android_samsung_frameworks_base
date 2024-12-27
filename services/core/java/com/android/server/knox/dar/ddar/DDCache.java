@@ -8,7 +8,6 @@ import android.os.UserHandle;
 import com.samsung.android.knox.ISemPersonaManager;
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DDCache extends IProxyAgentService {
     public static volatile DDCache _instance;
     public ISemPersonaManager semPersonaManager;

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaRoute2ProviderWatcher {
     public static final boolean DEBUG = Log.isLoggable("MR2ProviderWatcher", 3);
     public static final PackageManager.ResolveInfoFlags RESOLVE_INFO_FLAGS =
@@ -57,7 +56,6 @@ public final class MediaRoute2ProviderWatcher {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
     public static void $r8$lambda$uxDP7YbvEhxettSyL1qhqc8pTDY(

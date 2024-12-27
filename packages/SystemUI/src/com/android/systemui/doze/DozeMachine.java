@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DozeMachine {
     public static final boolean DEBUG = DozeService.DEBUG;
     public final DozeHost mDozeHost;
@@ -30,10 +29,8 @@ public class DozeMachine {
     public final WakeLock mWakeLock;
     public boolean mWakeLockHeldForCurrentState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Service {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public class Delegate implements Service {
             public final Executor mBgExecutor;
             public final Service mDelegate;
@@ -86,7 +83,6 @@ public class DozeMachine {
         void setDozeScreenState(int i, boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum State {
         UNINITIALIZED,
         INITIALIZED,
@@ -184,7 +180,6 @@ public class DozeMachine {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Part {
         void transitionTo(State state, State state2);
 

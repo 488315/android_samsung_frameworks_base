@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppBatteryTracker extends BaseAppStateTracker {
     public static final ImmutableBatteryUsage BATTERY_USAGE_NONE = new ImmutableBatteryUsage();
     public final SparseBooleanArray mActiveUserIdStates;
@@ -55,7 +54,6 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
     public final SparseArray mUidBatteryUsage;
     public final SparseArray mUidBatteryUsageInWindow;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppBatteryPolicy extends BaseAppStatePolicy {
         public volatile BatteryConsumer.Dimensions[] mBatteryDimensions;
         public int mBatteryFullChargeMah;
@@ -877,7 +875,6 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BatteryUsage {
         public static final BatteryConsumer.Dimensions[] BATT_DIMENS = {
             new BatteryConsumer.Dimensions(-1, 0),
@@ -1044,7 +1041,6 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImmutableBatteryUsage extends BatteryUsage {
         @Override // com.android.server.am.AppBatteryTracker.BatteryUsage
         public final void add(BatteryUsage batteryUsage) {

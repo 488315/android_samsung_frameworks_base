@@ -3,7 +3,6 @@ package com.android.systemui.shade;
 import android.graphics.Rect;
 import java.util.function.BooleanSupplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class NotificationPanelViewController$$ExternalSyntheticLambda1 implements BooleanSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ NotificationPanelViewController f$0;

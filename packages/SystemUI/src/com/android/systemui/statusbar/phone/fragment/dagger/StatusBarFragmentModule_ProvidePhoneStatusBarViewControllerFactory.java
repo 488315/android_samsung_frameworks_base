@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.phone.PhoneStatusBarViewController;
 import com.android.systemui.unfold.util.ScopedUnfoldTransitionProgressProvider;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarFragmentModule_ProvidePhoneStatusBarViewControllerFactory implements Provider {
     public final javax.inject.Provider phoneStatusBarViewControllerFactoryProvider;
     public final javax.inject.Provider phoneStatusBarViewProvider;

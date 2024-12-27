@@ -102,7 +102,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SecurityPolicy extends ISecurityPolicy.Stub
         implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
     public static Map mBannerMap;
@@ -122,7 +121,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
     public IStatusBarService mStatusBarService;
     public final IBinder mToken;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FactoryWipeReceiver extends MasterClearReceiver {
         public FactoryWipeReceiver() {}
 
@@ -138,7 +136,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Context mContext;
 
@@ -147,7 +144,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends SecurityPolicyInternal {
         public LocalService() {}
 
@@ -156,7 +152,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResetKeyChain extends AsyncTask {
         public ResetKeyChain() {}
 
@@ -192,7 +187,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResponseHandler extends Handler {
         public ResponseHandler() {}
 
@@ -220,7 +214,6 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchObserver extends IUserSwitchObserver.Stub {
         public final void onBeforeUserSwitching(int i) {}
 

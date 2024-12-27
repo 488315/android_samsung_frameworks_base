@@ -5,7 +5,6 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.systemui.R;
 import com.android.systemui.bluetooth.qsdialog.DeviceItemFactory;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ConnectedDeviceItemFactory extends DeviceItemFactory {
     @Override // com.android.systemui.bluetooth.qsdialog.DeviceItemFactory
     public final DeviceItem create(Context context, CachedBluetoothDevice cachedBluetoothDevice) {

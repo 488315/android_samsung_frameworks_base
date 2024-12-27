@@ -10,13 +10,11 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class UserSwitcherInteractor$switchUser$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Runnable $runnable;
     int label;
     final /* synthetic */ UserSwitcherInteractor this$0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$switchUser$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Runnable $runnable;

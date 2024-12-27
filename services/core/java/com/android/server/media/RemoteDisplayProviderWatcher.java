@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteDisplayProviderWatcher {
     public static final boolean DEBUG = Log.isLoggable("RemoteDisplayProvider", 3);
     public final Callback mCallback;
@@ -50,7 +49,6 @@ public final class RemoteDisplayProviderWatcher {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
     /* renamed from: -$$Nest$mscanPackages, reason: not valid java name */

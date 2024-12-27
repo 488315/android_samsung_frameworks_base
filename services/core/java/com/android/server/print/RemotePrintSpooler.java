@@ -30,7 +30,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemotePrintSpooler {
     public static final long BIND_SPOOLER_SERVICE_TIMEOUT;
     public final UserState mCallbacks;
@@ -53,7 +52,6 @@ public final class RemotePrintSpooler {
     public final MyServiceConnection mServiceConnection = new MyServiceConnection();
     public final PrintSpoolerClient mClient = new PrintSpoolerClient(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyServiceConnection implements ServiceConnection {
         public MyServiceConnection() {}
 
@@ -92,7 +90,6 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PrintSpoolerClient extends IPrintSpoolerClient.Stub {
         public final WeakReference mWeakSpooler;
 
@@ -166,11 +163,9 @@ public final class RemotePrintSpooler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SetPrintJobTagCaller extends TimedRemoteCaller {
         public final AnonymousClass1 mCallback;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.print.RemotePrintSpooler$SetPrintJobTagCaller$1, reason: invalid class name */
         public final class AnonymousClass1 extends IPrintSpoolerCallbacks.Stub {
             public final /* synthetic */ int $r8$classId = 0;

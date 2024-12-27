@@ -5,13 +5,11 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SecureKeyInfo implements Parcelable {
     public static final Parcelable.Creator CREATOR = new AnonymousClass1();
     public Certificate[] attestedCertificates;
     public byte[] blob;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: android.security.securekeygeneration.SecureKeyInfo$1, reason: invalid class name */
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator

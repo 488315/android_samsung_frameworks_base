@@ -6,10 +6,8 @@ import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface DumpsysEntry {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DumpableEntry implements DumpsysEntry {
         public final Dumpable dumpable;
         public final String name;
@@ -46,7 +44,6 @@ public interface DumpsysEntry {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LogBufferEntry implements DumpsysEntry {
         public final LogBuffer buffer;
         public final String name;
@@ -82,7 +79,6 @@ public interface DumpsysEntry {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TableLogBufferEntry implements DumpsysEntry {
         public final String name;
         public final TableLogBuffer table;

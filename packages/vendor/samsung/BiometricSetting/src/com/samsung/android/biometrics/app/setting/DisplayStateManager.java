@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class DisplayStateManager implements DisplayManager.DisplayListener, Handler.Callback {
     static final int AOD_DEFAULT_HIGH_BRIGHTNESS_NIT = 60;
     static final int AOD_DEFAULT_LOW_BRIGHTNESS_NIT = 2;
@@ -61,7 +60,6 @@ public final class DisplayStateManager implements DisplayManager.DisplayListener
     public final IBinder mTokenForRefreshRate;
     public final AtomicBoolean mVirtualHbmNode;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.DisplayStateManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISemBiometricSysUiDisplayStateCallback.Stub {
         public AnonymousClass1() {}
@@ -77,7 +75,6 @@ public final class DisplayStateManager implements DisplayManager.DisplayListener
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.DisplayStateManager$2, reason: invalid class name */
     public final class AnonymousClass2 extends FileObserver {
         public AnonymousClass2(File file) {
@@ -118,7 +115,6 @@ public final class DisplayStateManager implements DisplayManager.DisplayListener
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public class Injector {
         public final Context mContext;
         public DisplayManager mDisplayManager;
@@ -155,7 +151,6 @@ public final class DisplayStateManager implements DisplayManager.DisplayListener
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public interface LimitDisplayStateCallback {
         void onLimitDisplayStateChanged(boolean z);
     }

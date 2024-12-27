@@ -10,7 +10,6 @@ import android.hardware.fingerprint.FingerprintAuthenticateOptions;
 import android.hardware.fingerprint.IFingerprintService;
 import android.os.IBinder;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FingerprintAuthenticator extends IBiometricAuthenticator.Stub {
     public final IFingerprintService mFingerprintService;
     public final int mSensorId;

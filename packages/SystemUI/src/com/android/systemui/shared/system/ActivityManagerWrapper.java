@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ActivityManagerWrapper {
     public static final ActivityManagerWrapper sInstance = new ActivityManagerWrapper();
     public final ActivityTaskManager mAtm = ActivityTaskManager.getInstance();

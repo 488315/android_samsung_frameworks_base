@@ -4,13 +4,11 @@ import com.android.internal.logging.UiEventLogger;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskEventLogger {
     public final UiEventLogger uiEventLogger;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NoteTaskUiEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ NoteTaskUiEvent[] $VALUES;
         public static final NoteTaskUiEvent NOTE_CLOSED_VIA_STYLUS_TAIL_BUTTON;
@@ -56,7 +54,6 @@ public final class NoteTaskEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

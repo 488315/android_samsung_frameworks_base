@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class Heimdall {
     public boolean DISABLED;
     public final boolean KILL_DISABLED;
@@ -40,7 +39,6 @@ public class Heimdall {
     public final Uri mUriReportHourInterval;
     public final Uri mUriSpecUpdate;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhaseHandler extends Handler {
         public final AtomicInteger mNumberOfPendingMessages;
 
@@ -81,7 +79,6 @@ public class Heimdall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScpmManager extends BroadcastReceiver {
         public final Uri POLICY_ITEM_URI =
                 Uri.withAppendedPath(
@@ -149,7 +146,6 @@ public class Heimdall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver() {
             super(Heimdall.this.mPhaseHandler);

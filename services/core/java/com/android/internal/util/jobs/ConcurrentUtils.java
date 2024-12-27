@@ -14,11 +14,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class ConcurrentUtils {
     public static final Executor DIRECT_EXECUTOR = new DirectExecutor();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DirectExecutor implements Executor {
         @Override // java.util.concurrent.Executor
         public final void execute(Runnable runnable) {

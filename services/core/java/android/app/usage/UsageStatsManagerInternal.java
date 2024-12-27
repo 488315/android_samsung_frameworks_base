@@ -3,10 +3,8 @@ package android.app.usage;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class UsageStatsManagerInternal {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppUsageLimitData {
         public final long mTotalUsageLimit;
         public final long mUsageRemaining;
@@ -17,7 +15,6 @@ public abstract class UsageStatsManagerInternal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UsageEventListener {
         void onUsageEvent(int i, UsageEvents.Event event);
     }

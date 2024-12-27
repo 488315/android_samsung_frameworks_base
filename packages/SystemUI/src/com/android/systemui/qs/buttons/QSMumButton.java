@@ -50,7 +50,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.knox.SemPersonaManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsContainer.CloseTooltipWindow {
     public final CommandQueue mCommandQueue;
     public final Context mContext;
@@ -65,7 +64,6 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
     public final int mToolTipString;
     public final UserSwitcherInteractor mUserSwitcherInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MumAndDexHelper implements UserInfoController.OnUserInfoChangedListener, DesktopManager.Callback {
         public AnonymousClass1 mBaseUserAdapter;
         public final UserManager mUserManager;
@@ -85,7 +83,6 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         public final UserInfoController mUserInfoController = (UserInfoController) Dependency.sDependency.getDependencyInner(UserInfoController.class);
         public final UserSwitcherController mUserSwitcherController = (UserSwitcherController) Dependency.sDependency.getDependencyInner(UserSwitcherController.class);
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.qs.buttons.QSMumButton$MumAndDexHelper$1, reason: invalid class name */
         public final class AnonymousClass1 extends BaseUserSwitcherAdapter {
             public AnonymousClass1(UserSwitcherController userSwitcherController) {

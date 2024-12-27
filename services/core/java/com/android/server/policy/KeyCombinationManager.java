@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyCombinationManager {
     public static final int[] HW_KEY_LIST_EXCEPT_POWER;
     public static final Set KEYCODE_BLOCK_DELAY_DISPATCHING_KEY_LIST;
@@ -32,7 +31,6 @@ public final class KeyCombinationManager {
     public final ArrayList mActiveRules = new ArrayList();
     public final KeyCombinationManager$$ExternalSyntheticLambda5 mResetKeyDownEventRunnable = new KeyCombinationManager$$ExternalSyntheticLambda5(2, this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class TwoKeysCombinationRule {
         public final int mKeyCode1;
         public final int mKeyCode2;

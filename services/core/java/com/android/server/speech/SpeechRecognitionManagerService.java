@@ -13,10 +13,8 @@ import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 import com.android.server.infra.FrameworkResourcesServiceNameResolver;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SpeechRecognitionManagerService extends AbstractMasterSystemService {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpeechRecognitionManagerServiceStub extends IRecognitionServiceManager.Stub {
         public SpeechRecognitionManagerServiceStub() {}
 

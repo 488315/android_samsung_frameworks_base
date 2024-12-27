@@ -2,14 +2,11 @@ package com.android.systemui.qs.ui.adapter;
 
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface QSSceneAdapter {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface State {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class CLOSED implements State {
             public static final CLOSED INSTANCE = new CLOSED();
             public static final Function0 squishiness = new Function0() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapter$State$CLOSED$squishiness$1
@@ -50,7 +47,6 @@ public interface QSSceneAdapter {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
             public static final Expanding QQS = null;
@@ -65,7 +61,6 @@ public interface QSSceneAdapter {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Expanding implements State {
             public final float expansion;
             public final boolean isVisible = true;

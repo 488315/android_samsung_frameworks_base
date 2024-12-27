@@ -5,12 +5,10 @@ import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotifInflationErrorManager {
     public final ArraySet mErroredNotifs = new ArraySet();
     public final List mListeners = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NotifInflationErrorListener {
         void onNotifInflationError(NotificationEntry notificationEntry, Exception exc);
 

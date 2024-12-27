@@ -20,7 +20,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BarOrderRepository {
     public final Context context;
     public final TunerService tunerService;
@@ -31,7 +30,6 @@ public final class BarOrderRepository {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BarClsName {
         public static final /* synthetic */ BarClsName[] $VALUES;
         public static final BarClsName SECURITY_FOOTER_BAR;
@@ -65,7 +63,6 @@ public final class BarOrderRepository {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

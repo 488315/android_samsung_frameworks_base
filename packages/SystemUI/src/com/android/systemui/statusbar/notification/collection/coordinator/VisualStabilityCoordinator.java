@@ -48,7 +48,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class VisualStabilityCoordinator implements Coordinator, Dumpable {
     protected static final long ALLOW_SECTION_CHANGE_TIMEOUT = 500;
     public static final boolean DEBUG = false;

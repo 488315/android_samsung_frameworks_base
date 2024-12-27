@@ -11,14 +11,12 @@ import com.android.server.accessibility.magnification.MagnificationConnectionMan
 
 import com.samsung.android.os.SemDvfsManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemBiometricBoostingManager {
     public static SemBiometricBoostingManager sInstance;
     public boolean mIsEnabledSsrm;
     public final SparseArray mDvfsMgrs = new SparseArray();
     public final SparseArray mReleasers = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Releaser implements Runnable {
         public final int mBiometricType;
         public final Context mContext;

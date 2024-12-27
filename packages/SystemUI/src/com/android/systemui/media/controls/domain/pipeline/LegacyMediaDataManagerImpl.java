@@ -99,7 +99,6 @@ import kotlin.sequences.TransformingSequence;
 import kotlin.sequences.TransformingSequence$iterator$1;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LegacyMediaDataManagerImpl implements Dumpable, BcSmartspaceDataPlugin.SmartspaceTargetListener, MediaDataManager {
     public static final String EXTRAS_MEDIA_SOURCE_PACKAGE_NAME;
     public static final int MAX_COMPACT_ACTIONS;
@@ -130,7 +129,6 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, BcSmartspaceD
     public boolean useMediaResumption;
     public final boolean useQsMediaPlayer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

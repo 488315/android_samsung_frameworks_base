@@ -15,7 +15,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Dispatchers;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MotionPauseDetector {
     public final boolean directionY;
     public boolean hasEverBeenPaused;
@@ -32,7 +31,6 @@ public final class MotionPauseDetector {
     public final ScopeTimer timer;
     public final SystemVelocityProvider velocityProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -42,7 +40,6 @@ public final class MotionPauseDetector {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SystemVelocityProvider {
         public final VelocityTracker velocityTracker = VelocityTracker.obtain();
     }

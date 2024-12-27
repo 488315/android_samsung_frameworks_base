@@ -10,10 +10,8 @@ import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface SignalIconModel extends Diffable {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -25,7 +23,6 @@ public interface SignalIconModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Satellite implements SignalIconModel {
         public final Icon.Resource icon;
         public final int level;
@@ -100,7 +97,6 @@ public interface SignalIconModel extends Diffable {
 
     void logPartial(SignalIconModel signalIconModel, TableLogBuffer.TableRowLoggerImpl tableRowLoggerImpl);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Cellular implements SignalIconModel {
         public final boolean carrierNetworkChange;
         public final int iconId;

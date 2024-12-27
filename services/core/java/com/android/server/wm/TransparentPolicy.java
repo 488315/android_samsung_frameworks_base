@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TransparentPolicy {
     public static final RecentsAnimation$$ExternalSyntheticLambda2
             FIRST_OPAQUE_NOT_FINISHING_ACTIVITY_PREDICATE =
@@ -18,7 +17,6 @@ public final class TransparentPolicy {
             mIsTranslucentLetterboxingEnabledSupplier;
     public final TransparentPolicyState mTransparentPolicyState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransparentPolicyState {
         public final ActivityRecord mActivityRecord;
         public ActivityRecord mFirstOpaqueActivity;

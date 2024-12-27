@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.util.Log;
 import android.view.View;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class KeyguardFMMViewController$$ExternalSyntheticLambda3 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ KeyguardFMMViewController f$0;

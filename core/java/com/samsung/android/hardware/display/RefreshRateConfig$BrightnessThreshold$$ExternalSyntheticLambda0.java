@@ -2,7 +2,6 @@ package com.samsung.android.hardware.display;
 
 import java.util.function.ToIntFunction;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class RefreshRateConfig$BrightnessThreshold$$ExternalSyntheticLambda0
         implements ToIntFunction {
     @Override // java.util.function.ToIntFunction

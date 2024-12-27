@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PhysicsBasedUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider, FoldStateProvider.FoldUpdatesListener, DynamicAnimation.OnAnimationEndListener {
     public ValueAnimator cannedAnimator;
     public final Interpolator emphasizedInterpolator;
@@ -41,7 +40,6 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
     public final SpringAnimation springAnimation;
     public float transitionProgress;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationProgressProperty extends FloatProperty {
         public static final AnimationProgressProperty INSTANCE = new AnimationProgressProperty();
 
@@ -60,7 +58,6 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CannedAnimationListener extends AnimatorListenerAdapter {
         public CannedAnimationListener() {
         }

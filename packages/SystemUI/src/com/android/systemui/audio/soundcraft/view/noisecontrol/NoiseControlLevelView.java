@@ -16,13 +16,11 @@ import com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseCo
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoiseControlLevelView {
     public final LevelSeekBarViewBinding binding;
     public final LifecycleOwner lifecycleOwner;
     public final NoiseControlLevelViewModel viewModel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -94,7 +92,6 @@ public final class NoiseControlLevelView {
         });
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekbarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public SeekbarChangeListener() {
         }

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IGsiService extends IInterface {
     public static final String DESCRIPTOR = "android.gsi.IGsiService";
     public static final int INSTALL_ERROR_FILE_SYSTEM_CLUTTERED = 3;
@@ -20,7 +19,6 @@ public interface IGsiService extends IInterface {
     public static final int STATUS_NO_OPERATION = 0;
     public static final int STATUS_WORKING = 1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IGsiService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -158,7 +156,6 @@ public interface IGsiService extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IGsiService {
         static final int TRANSACTION_cancelGsiInstall = 8;
         static final int TRANSACTION_closeInstall = 19;
@@ -187,7 +184,6 @@ public interface IGsiService extends IInterface {
         static final int TRANSACTION_suggestScratchSize = 26;
         static final int TRANSACTION_zeroPartition = 22;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IGsiService {
             public IBinder mRemote;
 

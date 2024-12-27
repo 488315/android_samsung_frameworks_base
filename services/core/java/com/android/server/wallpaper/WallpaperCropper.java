@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WallpaperCropper {
     static final int ADD = 1;
     static final int BALANCE = 3;
@@ -24,7 +23,6 @@ public final class WallpaperCropper {
     static final int REMOVE = 2;
     public final WallpaperDisplayHelper mWallpaperDisplayHelper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WallpaperCropUtils {}
 
     public WallpaperCropper(

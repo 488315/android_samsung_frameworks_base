@@ -29,7 +29,6 @@ import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyboardBacklightDialog extends Dialog {
     public static final int BACKLIGHT_ICON_ID;
     public static final int[] LEFT_CORNERS_INDICES;
@@ -50,7 +49,6 @@ public final class KeyboardBacklightDialog extends Dialog {
     public LinearLayout rootView;
     public StepViewProperties stepProperties;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BacklightIconProperties {
         public final int height;
         public final int padding;
@@ -87,7 +85,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -97,7 +94,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RootProperties {
         public final float cornerRadius;
         public final int horizontalPadding;
@@ -134,7 +130,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StepViewProperties {
         public final int height;
         public final int horizontalMargin;

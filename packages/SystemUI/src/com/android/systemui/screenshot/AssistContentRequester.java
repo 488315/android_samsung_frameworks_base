@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AssistContentRequester {
     public final String mAttributionTag;
     public final Executor mCallbackExecutor;
@@ -24,7 +23,6 @@ public final class AssistContentRequester {
     public final Map mPendingCallbacks = Collections.synchronizedMap(new WeakHashMap());
     public final IActivityTaskManager mActivityTaskManager = ActivityTaskManager.getService();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
@@ -35,7 +33,6 @@ public final class AssistContentRequester {
         this.mAttributionTag = context.getAttributionTag();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AssistDataReceiver extends IAssistDataReceiver.Stub {
         public final Object mCallbackKey;
         public final WeakReference mParentRef;

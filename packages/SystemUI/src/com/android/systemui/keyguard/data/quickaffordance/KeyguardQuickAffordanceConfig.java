@@ -11,10 +11,8 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface KeyguardQuickAffordanceConfig {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -26,10 +24,8 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class LockScreenState {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Hidden extends LockScreenState {
             public static final Hidden INSTANCE = new Hidden();
 
@@ -41,7 +37,6 @@ public interface KeyguardQuickAffordanceConfig {
         private LockScreenState() {
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Visible extends LockScreenState {
             public final ActivationState activationState;
             public final Icon icon;
@@ -81,10 +76,8 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class OnTriggeredResult {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Handled extends OnTriggeredResult {
             public static final Handled INSTANCE = new Handled();
 
@@ -93,7 +86,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ShowDialog extends OnTriggeredResult {
             public final AlertDialog dialog;
             public final Expandable expandable;
@@ -126,7 +118,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class StartActivity extends OnTriggeredResult {
             public final boolean canShowWhileLocked;
             public final Intent intent;
@@ -165,10 +156,8 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class PickerScreenState {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Default extends PickerScreenState {
             public final Intent configureIntent;
 
@@ -205,7 +194,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Disabled extends PickerScreenState {
             public final Intent actionIntent;
             public final String actionText;
@@ -255,7 +243,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class UnavailableOnDevice extends PickerScreenState {
             public static final UnavailableOnDevice INSTANCE = new UnavailableOnDevice();
 

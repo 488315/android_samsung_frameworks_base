@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DisplayLifecycle extends SecLifecycle implements Dumpable {
     public final AnonymousClass1 mDisplayListener;
     public final DisplayManager mDisplayManager;
@@ -226,7 +225,6 @@ public final class DisplayLifecycle extends SecLifecycle implements Dumpable {
         return z2;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Observer {
         default void onDisplayAdded(int i) {
         }

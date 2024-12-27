@@ -18,12 +18,10 @@ import com.android.internal.util.Preconditions;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShortcutRequestPinProcessor {
     public final Object mLock;
     public final ShortcutService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinAppWidgetRequestInner extends PinItemRequestInner {
         public final AppWidgetProviderInfo mAppWidgetProviderInfo;
         public final Bundle mExtras;
@@ -45,7 +43,6 @@ public final class ShortcutRequestPinProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PinItemRequestInner extends IPinItemRequest.Stub {
         public boolean mAccepted;
         public final int mLauncherUid;
@@ -114,7 +111,6 @@ public final class ShortcutRequestPinProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinShortcutRequestInner extends PinItemRequestInner {
         public final String launcherPackage;
         public final int launcherUserId;

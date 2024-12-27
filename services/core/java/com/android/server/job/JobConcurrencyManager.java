@@ -55,7 +55,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class JobConcurrencyManager {
     public static final WorkConfigLimitsPerMemoryTrimLevel CONFIG_LIMITS_SCREEN_OFF;
     public static final WorkConfigLimitsPerMemoryTrimLevel CONFIG_LIMITS_SCREEN_ON;
@@ -209,7 +208,6 @@ public final class JobConcurrencyManager {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class AssignmentInfo {
         public long minPreferredUidOnlyWaitingTimeMs;
         public int numRunningEj;
@@ -218,7 +216,6 @@ public final class JobConcurrencyManager {
         public int numRunningUi;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ContextAssignment {
         public JobServiceContext context;
         public JobStatus newJob;
@@ -241,7 +238,6 @@ public final class JobConcurrencyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class GracePeriodObserver extends UserSwitchObserver {
         int mGracePeriod;
         final SparseLongArray mGracePeriodExpiration = new SparseLongArray();
@@ -296,10 +292,8 @@ public final class JobConcurrencyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class PackageStats {
         public int numRunningEj;
         public int numRunningRegular;
@@ -331,7 +325,6 @@ public final class JobConcurrencyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WorkConfigLimitsPerMemoryTrimLevel {
         public final WorkTypeConfig critical;
         public final WorkTypeConfig low;
@@ -350,7 +343,6 @@ public final class JobConcurrencyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class WorkCountTracker {
         public int mConfigMaxTotal;
         public final SparseIntArray mConfigNumReservedSlots = new SparseIntArray(7);
@@ -480,7 +472,6 @@ public final class JobConcurrencyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class WorkTypeConfig {
         static final String KEY_PREFIX_MAX_RATIO = "concurrency_max_ratio_";
         static final String KEY_PREFIX_MAX_TOTAL = "concurrency_max_total_";

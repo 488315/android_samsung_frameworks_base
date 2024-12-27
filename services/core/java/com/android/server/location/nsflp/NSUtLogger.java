@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NSUtLogger extends Handler {
     public long mDirectorySize;
     public int mFileCount;
@@ -20,7 +19,6 @@ public final class NSUtLogger extends Handler {
     public final NSKmlWriter mNsKmlWriter;
     public int mOccurredExceptionCount;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogInfo {
         public String data;
         public String path;

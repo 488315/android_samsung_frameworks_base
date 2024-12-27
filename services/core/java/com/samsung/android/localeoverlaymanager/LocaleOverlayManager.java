@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocaleOverlayManager extends HandlerThread implements ExtractionCompleteCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public Context mContext;
@@ -55,7 +54,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
     public Handler progressHandler;
     public LocaleOverlayManager$$ExternalSyntheticLambda0 progressResetRunnable;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApplyObserver extends ISamsungOverlayCallback.Stub {
         public final List mObservingPackages;
 
@@ -131,7 +129,6 @@ public final class LocaleOverlayManager extends HandlerThread implements Extract
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverlayHandler extends Handler {
         public OverlayHandler(Looper looper) {
             super(looper);

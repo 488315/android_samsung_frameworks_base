@@ -31,7 +31,6 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LaunchParamsPersister {
     public PackageList mPackageList;
     public final PersisterQueue mPersisterQueue;
@@ -40,7 +39,6 @@ public final class LaunchParamsPersister {
     public final SparseArray mLaunchParamsMap = new SparseArray();
     public final ArrayMap mWindowLayoutAffinityMap = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CleanUpComponentQueueItem implements PersisterQueue.WriteQueueItem {
         public final List mComponentFiles;
 
@@ -58,7 +56,6 @@ public final class LaunchParamsPersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LaunchParamsWriteQueueItem implements PersisterQueue.WriteQueueItem {
         public final ComponentName mComponentName;
         public PersistableLaunchParams mLaunchParams;
@@ -129,7 +126,6 @@ public final class LaunchParamsPersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageListObserver implements PackageManagerInternal.PackageListObserver {
         public PackageListObserver() {}
 
@@ -153,7 +149,6 @@ public final class LaunchParamsPersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PersistableLaunchParams {
         public int mDisplayDeviceType;
         public String mDisplayUniqueId;

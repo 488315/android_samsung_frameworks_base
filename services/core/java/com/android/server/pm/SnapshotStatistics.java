@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SnapshotStatistics {
     public static final long SNAPSHOT_LOG_INTERVAL_US = TimeUnit.DAYS.toMicros(1);
     public final AnonymousClass1 mHandler;
@@ -24,7 +23,6 @@ public final class SnapshotStatistics {
     public final BinMap mTimeBins = new BinMap(new int[]{1, 2, 5, 10, 20, 50, 100});
     public final BinMap mUseBins = new BinMap(new int[]{1, 10, 100, 1000, 10000});
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinMap {
         public final int mCount;
         public final int mMaxBin;
@@ -55,7 +53,6 @@ public final class SnapshotStatistics {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Stats {
         public int mBigBuilds;
         public int mMaxBuildTimeUs;

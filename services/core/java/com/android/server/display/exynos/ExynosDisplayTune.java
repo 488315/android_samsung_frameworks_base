@@ -5,7 +5,6 @@ import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyn
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ExynosDisplayTune {
     public String CALIB_DATA_XML_PATH;
     public String CGC17_CON_SYSFS_PATH;
@@ -29,7 +28,6 @@ public final class ExynosDisplayTune {
     public long mPeriodMs;
     public Timer mTuneTimer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum CalibOrder {
         none("none"),
         cgc_dither,
@@ -49,7 +47,6 @@ public final class ExynosDisplayTune {
 
         private final int id;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public abstract class CalibCounter {
             public static int nid;
         }

@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StackStateAnimator {
     public final AnonymousClass1 mAnimationProperties;
     public ValueAnimator mBottomOverScrollAnimator;
@@ -43,7 +42,6 @@ public final class StackStateAnimator {
     public final AnimationFilter mAnimationFilter = new AnimationFilter();
     public final ArrayList mTransientViewsToRemove = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.StackStateAnimator$1, reason: invalid class name */
     public final class AnonymousClass1 extends AnimationProperties {
         public AnonymousClass1() {

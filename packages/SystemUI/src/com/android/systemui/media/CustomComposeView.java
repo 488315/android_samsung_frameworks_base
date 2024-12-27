@@ -58,7 +58,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class CustomComposeView extends FrameLayout implements LifecycleOwner, SavedStateRegistryOwner, ViewModelStoreOwner, OnBackPressedDispatcherOwner, HasDefaultViewModelProviderFactory {
     public final Lazy _viewModelStore$delegate;
     public final Lazy contentView$delegate;
@@ -68,7 +67,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
     public final SavedStateRegistryController savedStateRegistryController;
     public final ViewModelFactory viewModelProviderFactory;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -216,7 +214,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
         });
         LifecycleEventObserver lifecycleEventObserver = new LifecycleEventObserver() { // from class: com.android.systemui.media.CustomComposeView$lifecycleObserver$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

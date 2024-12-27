@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$onCreate$1;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SeekBarWithIconButtonsView extends LinearLayout {
     public final ImageView mIconEnd;
     public final ViewGroup mIconEndFrame;
@@ -25,11 +24,9 @@ public class SeekBarWithIconButtonsView extends LinearLayout {
     public boolean mSetProgressFromButtonFlag;
     public String[] mStateLabels;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnSeekBarWithIconButtonsChangeListener extends SeekBar.OnSeekBarChangeListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public OnSeekBarWithIconButtonsChangeListener mOnSeekBarChangeListener;
 

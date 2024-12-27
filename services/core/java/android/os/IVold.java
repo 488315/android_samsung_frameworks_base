@@ -4,7 +4,6 @@ import android.os.incremental.IncrementalFileSystemControlParcel;
 
 import java.io.FileDescriptor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IVold extends IInterface {
     public static final int DDP_NG_ENOSPC = 2;
     public static final int DDP_NG_TOOBIG = 1;
@@ -40,7 +39,6 @@ public interface IVold extends IInterface {
     public static final int VOLUME_TYPE_PUBLIC = 0;
     public static final int VOLUME_TYPE_STUB = 5;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IVold {
         @Override // android.os.IVold
         public void abortChanges(String str, boolean z) throws RemoteException {}
@@ -480,7 +478,6 @@ public interface IVold extends IInterface {
         public void unmountIncFs(String str) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IVold {
         public static final String DESCRIPTOR = "android.os.IVold";
         static final int TRANSACTION_abortChanges = 63;
@@ -594,7 +591,6 @@ public interface IVold extends IInterface {
         static final int TRANSACTION_unmountAppStorageDirs = 22;
         static final int TRANSACTION_unmountIncFs = 79;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IVold {
             public IBinder mRemote;
 

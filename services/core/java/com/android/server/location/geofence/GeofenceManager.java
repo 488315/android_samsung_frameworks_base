@@ -36,7 +36,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GeofenceManager extends ListenerMultiplexer implements LocationListener {
     public final Context mContext;
     public Location mLastLocation;
@@ -81,7 +80,6 @@ public final class GeofenceManager extends ListenerMultiplexer implements Locati
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GeofenceKey {
         public final Geofence mGeofence;
         public final PendingIntent mPendingIntent;
@@ -107,7 +105,6 @@ public final class GeofenceManager extends ListenerMultiplexer implements Locati
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GeofenceRegistration extends RemovableListenerRegistration
             implements PendingIntent.CancelListener {
         public Location mCachedLocation;

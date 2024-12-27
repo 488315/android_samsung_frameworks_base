@@ -2,7 +2,6 @@ package com.android.server.power.stats;
 
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerStatsExporter {
     public static final long BATTERY_SESSION_TIME_SPAN_SLACK_MILLIS = TimeUnit.MINUTES.toMillis(2);
     public final long mBatterySessionTimeSpanSlackMillis = BATTERY_SESSION_TIME_SPAN_SLACK_MILLIS;

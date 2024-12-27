@@ -25,14 +25,12 @@ import com.android.server.people.PeopleServiceInternal;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppPredictionPerUserService extends AbstractPerUserSystemService
         implements RemoteAppPredictionService.RemoteAppPredictionServiceCallbacks {
     public RemoteAppPredictionService mRemoteService;
     public final ArrayMap mSessionInfos;
     public boolean mZombie;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppPredictionSessionInfo {
         public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
         public final IBinder.DeathRecipient mDeathRecipient;

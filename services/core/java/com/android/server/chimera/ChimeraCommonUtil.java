@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ChimeraCommonUtil {
     public static final int[] ADJ_LEVELS = {
         999,
@@ -31,7 +30,6 @@ public abstract class ChimeraCommonUtil {
     };
     public static final Map mAppLaunchInfoMap = new ConcurrentHashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum PsiDataType {
         AVG10("avg10"),
         TOTAL("total");
@@ -43,7 +41,6 @@ public abstract class ChimeraCommonUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PsiFile {
         public boolean mIsEmptyFile;
         public long mPsiFullTotal;
@@ -58,7 +55,6 @@ public abstract class ChimeraCommonUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum PsiFileType {
         /* JADX INFO: Fake field, exist only in values array */
         EF0("/proc/pressure/io"),
@@ -77,7 +73,6 @@ public abstract class ChimeraCommonUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum TriggerSource {
         TRIGGER_SOURCE_LMKD("LMKD"),
         TRIGGER_SOURCE_BOTTLENECK_HINT("BottleneckHint"),

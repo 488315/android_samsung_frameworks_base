@@ -42,7 +42,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationLogger implements StatusBarStateController.StateListener, CoreStartable, NotificationRowStatsLogger {
     public final IStatusBarService mBarService;
     public final ExpansionStateLogger mExpansionStateLogger;
@@ -105,14 +104,12 @@ public final class NotificationLogger implements StatusBarStateController.StateL
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExpansionStateLogger {
         public final Executor mUiBgExecutor;
         public final Map mExpansionStates = new ArrayMap();
         public final Map mLoggedExpansionState = new ArrayMap();
         IStatusBarService mBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class State {
             public Boolean mIsExpanded;
             public Boolean mIsUserAction;

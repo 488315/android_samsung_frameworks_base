@@ -8,14 +8,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class EFSProperties {
     public static final String[] STORAGE_TYPES = {
         "eSE", "SIM", "SD", "eSE1", "SIM1", "SD1", "eSE2", "SIM2", "SD2", "ETC"
     };
     public static final String[] SCP_TYPES = {"NONE", "SCP11a", "SCP11b", "SCPCustom"};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyguardProperties {
         public byte[] AID;
         public byte[] csName;
@@ -27,7 +25,6 @@ public abstract class EFSProperties {
         public int storageType;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ODEProperties {
         public int enabledUCSInODE = 0;
         public byte[] AID = null;

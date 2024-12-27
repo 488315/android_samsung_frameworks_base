@@ -25,7 +25,6 @@ import com.android.server.backup.utils.BackupEligibilityRules;
 import java.util.List;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActiveRestoreSession extends IRestoreSession.Stub {
     public final BackupEligibilityRules mBackupEligibilityRules;
     public final UserBackupManagerService mBackupManagerService;
@@ -37,7 +36,6 @@ public final class ActiveRestoreSession extends IRestoreSession.Stub {
     public boolean mEnded = false;
     public boolean mTimedOut = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EndRestoreRunnable implements Runnable {
         public final UserBackupManagerService mBackupManager;
         public final ActiveRestoreSession mSession;

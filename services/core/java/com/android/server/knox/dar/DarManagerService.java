@@ -85,7 +85,6 @@ import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DarManagerService extends IDarManagerService.Stub {
     public static final UserInfo NULL_USER = new UserInfo(-10000, (String) null, (String) null, 0);
     public final ActivityManagerInternal mActivityManagerInternal;
@@ -101,7 +100,6 @@ public final class DarManagerService extends IDarManagerService.Stub {
     public final AnonymousClass1 mUserSwitchObserver;
     public final VirtualLockImpl mVirtualLockImpl;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DarHandler extends Handler {
         public DarHandler(Looper looper) {
             super(looper);
@@ -272,7 +270,6 @@ public final class DarManagerService extends IDarManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public final Context mContext;
         public final DarDatabaseCache mDarDatabaseCache;

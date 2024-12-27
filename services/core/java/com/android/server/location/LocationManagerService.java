@@ -180,7 +180,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocationManagerService extends ILocationManager.Stub
         implements LocationProviderManager.StateChangedListener {
     public static ISLocationManager mISLocationManager;
@@ -207,13 +206,11 @@ public final class LocationManagerService extends ILocationManager.Stub
     public final ProcessListener mProcessListener = new ProcessListener();
     public final Handler mHandler = LocationServiceThread.getHandler();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final LocationManagerService mService;
         public final SystemInjector mSystemInjector;
         public final LifecycleUserInfoHelper mUserInfoHelper;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LifecycleUserInfoHelper {
             public IActivityManager mActivityManager;
             public ActivityManagerInternal mActivityManagerInternal;
@@ -1264,7 +1261,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends LocationManagerInternal {
         public LocalService() {}
 
@@ -1383,7 +1379,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessListener implements ActivityManager.SemProcessListener {
         public ProcessListener() {}
 
@@ -1418,7 +1413,6 @@ public final class LocationManagerService extends ILocationManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemInjector implements Injector {
         public final SystemAlarmHelper mAlarmHelper;
         public final SystemAppForegroundHelper mAppForegroundHelper;

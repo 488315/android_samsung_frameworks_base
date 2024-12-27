@@ -41,7 +41,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBasedSatelliteRepository {
     public static final Companion Companion = new Companion(null);
     public final CoroutineDispatcher bgDispatcher;
@@ -60,13 +59,11 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
     public final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 telephonyProcessCrashedEvent;
     public final LogBuffer verboseLogBuffer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             int label;
@@ -119,7 +116,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$1$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             int label;
@@ -237,7 +233,6 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -284,12 +279,10 @@ public final class DeviceBasedSatelliteRepositoryImpl implements RealDeviceBased
         final Flow pairwise = com.android.systemui.util.kotlin.FlowKt.pairwise(FlowKt.stateIn(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(deviceBasedSatelliteRepositoryImpl$radioPowerState$1), coroutineDispatcher), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), 2));
         FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new DeviceBasedSatelliteRepositoryImpl$telephonyProcessCrashedEvent$2(null), new Flow() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$special$$inlined$mapNotNull$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$special$$inlined$mapNotNull$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$special$$inlined$mapNotNull$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

@@ -82,7 +82,6 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BinaryTransparencyService extends SystemService {
     static final String BINARY_HASH_ERROR = "SHA256HashError";
     static final String KEY_ENABLE_BIOMETRIC_PROPERTY_VERIFICATION =
@@ -102,7 +101,6 @@ public final class BinaryTransparencyService extends SystemService {
     public final BinaryTransparencyServiceImpl mServiceImpl;
     public String mVbmetaDigest;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinaryTransparencyServiceImpl extends IBinaryTransparencyService.Stub {
         public BinaryTransparencyServiceImpl() {}
 
@@ -1440,14 +1438,12 @@ public final class BinaryTransparencyService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BiometricLogger {
         public static final BiometricLogger sInstance = new BiometricLogger();
 
         private BiometricLogger() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Digest extends Record {
         public final int algorithm;
         public final byte[] value;
@@ -1503,7 +1499,6 @@ public final class BinaryTransparencyService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageUpdatedReceiver extends BroadcastReceiver {
         public PackageUpdatedReceiver() {}
 
@@ -1553,7 +1548,6 @@ public final class BinaryTransparencyService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class UpdateMeasurementsJobService extends JobService {
         public static final /* synthetic */ int $r8$clinit = 0;
         public static long sTimeLastRanMs;

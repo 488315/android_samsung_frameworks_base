@@ -3,7 +3,6 @@ package com.android.server.wm;
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class ActivityTaskManagerService$$ExternalSyntheticLambda16
         implements Runnable {
     public final /* synthetic */ ActivityTaskManagerService f$0;

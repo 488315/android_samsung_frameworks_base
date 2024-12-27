@@ -49,7 +49,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LegacyNotificationIconAreaControllerImpl implements NotificationIconAreaController, DarkIconDispatcher.DarkReceiver, StatusBarStateController.StateListener, NotificationWakeUpCoordinator.WakeUpListener, DemoMode {
     public boolean mAnimationsEnabled;
     public final Optional mBubblesOptional;
@@ -82,14 +81,12 @@ public final class LegacyNotificationIconAreaControllerImpl implements Notificat
     public final ArrayList mTintAreas = new ArrayList();
     public boolean mShowLowPriority = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl$1, reason: invalid class name */
     public final class AnonymousClass1 implements NotificationListener.NotificationSettingsListener {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl$3, reason: invalid class name */
     class AnonymousClass3 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass3() {

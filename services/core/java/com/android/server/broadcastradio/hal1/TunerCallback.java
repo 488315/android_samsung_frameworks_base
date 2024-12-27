@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class TunerCallback implements ITunerCallback {
     public static final String TAG = "BcRadio1Srv.TunerCallback";
     public final ITunerCallback mClientCallback;
@@ -23,7 +22,6 @@ class TunerCallback implements ITunerCallback {
     public final AtomicReference mProgramListFilter = new AtomicReference();
     public boolean mInitialConfigurationDone = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface RunnableThrowingRemoteException {
         void run();
     }

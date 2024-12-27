@@ -16,7 +16,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.MutableSharedFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Set<NotificationEntry> $notificationsSeenWhileLocked;
     final /* synthetic */ Map<NotificationEntry, Job> $trackingJobsByEntry;
@@ -53,7 +52,6 @@ final class KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$
             final Set<NotificationEntry> set = this.$notificationsSeenWhileLocked;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2.1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2$1$2, reason: invalid class name */
                 final class AnonymousClass2 extends SuspendLambda implements Function2 {
                     final /* synthetic */ NotificationEntry $entry;

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutView {
     public static final Companion Companion = new Companion(null);
     public final AuthController authController;
@@ -48,7 +47,6 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
     public boolean showScanningAnim;
     public final StatusBarStateController statusBarStateController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

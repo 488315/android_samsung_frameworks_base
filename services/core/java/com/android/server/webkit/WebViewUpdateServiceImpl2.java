@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInterface {
     public final Context mContext;
     public final WebViewProviderInfo mDefaultProvider;
@@ -43,7 +42,6 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
     public PackageInfo mCurrentWebViewPackage = null;
     public final Object mLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderAndPackageInfo {
         public final WebViewProviderInfo provider;
 
@@ -52,7 +50,6 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class WebViewPackageMissingException extends Exception {
         public WebViewPackageMissingException(String str) {
             super(str);

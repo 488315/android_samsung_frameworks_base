@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccessibilityInputFilter extends InputFilter
         implements EventStreamTransformation {
     public final AccessibilityManagerService mAms;
@@ -63,7 +62,6 @@ public final class AccessibilityInputFilter extends InputFilter
     public final SparseArray mTouchScreenStreamStates;
     public int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class EventStreamState {
         public int mSource = -1;
 
@@ -97,7 +95,6 @@ public final class AccessibilityInputFilter extends InputFilter
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GenericMotionEventStreamState extends EventStreamState {
         public GenericMotionEventStreamState() {}
 
@@ -108,7 +105,6 @@ public final class AccessibilityInputFilter extends InputFilter
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardEventStreamState extends EventStreamState {
         public SparseBooleanArray mEventSequenceStartedMap;
 
@@ -140,7 +136,6 @@ public final class AccessibilityInputFilter extends InputFilter
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MouseEventStreamState extends EventStreamState {
         public boolean mMotionSequenceStarted;
 
@@ -170,7 +165,6 @@ public final class AccessibilityInputFilter extends InputFilter
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TouchScreenEventStreamState extends EventStreamState {
         public boolean mHoverSequenceStarted;
         public boolean mTouchSequenceStarted;

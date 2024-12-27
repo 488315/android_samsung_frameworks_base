@@ -12,7 +12,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardQuickAffordanceLegacySettingSyncer {
     public static final List BINDINGS;
     public final CoroutineDispatcher backgroundDispatcher;
@@ -20,7 +19,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer {
     public final SecureSettings secureSettings;
     public final KeyguardQuickAffordanceLocalUserSelectionManager selectionsManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Binding {
         public final String affordanceId;
         public final String settingsKey;
@@ -57,7 +55,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

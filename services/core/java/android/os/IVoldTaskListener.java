@@ -1,9 +1,7 @@
 package android.os;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IVoldTaskListener extends IInterface {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IVoldTaskListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,13 +15,11 @@ public interface IVoldTaskListener extends IInterface {
         public void onStatus(int i, PersistableBundle persistableBundle) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IVoldTaskListener {
         public static final String DESCRIPTOR = "android.os.IVoldTaskListener";
         static final int TRANSACTION_onFinished = 2;
         static final int TRANSACTION_onStatus = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IVoldTaskListener {
             public IBinder mRemote;
 

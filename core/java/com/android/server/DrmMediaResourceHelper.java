@@ -7,7 +7,6 @@ import com.samsung.android.media.SemMediaResourceHelper;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: DrmEventService.java */
 class DrmMediaResourceHelper {
     private String TAG = "DrmMediaResourceHelper";
     private SemMediaResourceHelper mSemMediaResourceHelper = null;

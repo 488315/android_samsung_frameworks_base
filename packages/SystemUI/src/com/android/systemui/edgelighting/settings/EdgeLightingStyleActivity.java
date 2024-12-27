@@ -76,7 +76,6 @@ import com.samsung.android.sdk.routines.v3.data.ParameterValues;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class EdgeLightingStyleActivity extends AppCompatActivity implements View.OnClickListener {
     public static boolean sConfigured = false;
     public static int sFlipFont;
@@ -294,7 +293,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$10, reason: invalid class name */
     public final class AnonymousClass10 implements SeslColorPickerDialog.OnColorSetListener {
         public AnonymousClass10() {
@@ -328,7 +326,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$13, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass13 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$edgelighting$data$style$EdgeLightingStyleOption;
@@ -351,7 +348,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$9, reason: invalid class name */
     public final class AnonymousClass9 {
         public AnonymousClass9() {
@@ -374,7 +370,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ColorListAdapter extends BaseAdapter {
         public boolean mAreDisabledAll;
         public final AnonymousClass1 mOnColorClickListener = new View.OnClickListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.ColorListAdapter.1
@@ -505,14 +500,12 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ColorListViewHolder {
         public RelativeLayout container;
         public Button iconView;
         public ImageView selectIV;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EdgeLightingStyleEffectAdapter extends BaseAdapter {
         public final ArrayList mEdgeLightingStyleList = new ArrayList();
         public final AnonymousClass1 mEffectOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.EdgeLightingStyleEffectAdapter.1
@@ -641,7 +634,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EffectListViewHolder {
         public ImageView checkIv;
         public ImageView effectIv;

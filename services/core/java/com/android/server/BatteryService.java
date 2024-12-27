@@ -91,7 +91,6 @@ import java.util.stream.IntStream;
 import org.json.JSONObject;
 import vendor.samsung.hardware.health.SehHealthInfo;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatteryService extends SystemService {
     public static final boolean FEATURE_SUPPORTED_DAILY_BOARD;
     public static final boolean FEATURE_WIRELESS_FAST_CHARGER_CONTROL;
@@ -256,7 +255,6 @@ public final class BatteryService extends SystemService {
     public static final String ACTION_ENTER_DESK_MODE = "com.samsung.android.desktopmode.action.ENTER_DESKTOP_MODE";
     public static final String ACTION_EXIT_DESK_MODE = "com.samsung.android.desktopmode.action.EXIT_DESKTOP_MODE";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$1, reason: invalid class name */
     public final class AnonymousClass1 extends Handler {
         public final /* synthetic */ int $r8$classId;
@@ -363,7 +361,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$15, reason: invalid class name */
     public final class AnonymousClass15 extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
@@ -496,7 +493,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$16, reason: invalid class name */
     public final class AnonymousClass16 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -628,7 +624,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$17, reason: invalid class name */
     public final class AnonymousClass17 implements Runnable {
         @Override // java.lang.Runnable
@@ -644,7 +639,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -1040,7 +1034,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$22, reason: invalid class name */
     public final class AnonymousClass22 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -1166,7 +1159,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$27, reason: invalid class name */
     public final class AnonymousClass27 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -1200,7 +1192,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$31, reason: invalid class name */
     public final class AnonymousClass31 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -1459,7 +1450,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$34, reason: invalid class name */
     public final class AnonymousClass34 implements Runnable {
         public final /* synthetic */ int $r8$classId = 0;
@@ -1512,7 +1502,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BatteryService$5, reason: invalid class name */
     public final class AnonymousClass5 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
@@ -1523,13 +1512,11 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BattCallbackImpl {
         public BattCallbackImpl() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BatteryPropertiesRegistrar extends IBatteryPropertiesRegistrar.Stub {
         public BatteryPropertiesRegistrar() {
         }
@@ -1699,7 +1686,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends Binder {
         public BinderService() {
         }
@@ -1753,7 +1739,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Led {
         public final LightsService.LightImpl mBatteryLight;
         public int mLedStatus = 0;
@@ -1842,7 +1827,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends BatteryManagerInternal {
         public LocalService() {
         }
@@ -1989,7 +1973,6 @@ public final class BatteryService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Shell extends ShellCommand {
         public Shell() {
         }

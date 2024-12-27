@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InsetsPolicy {
     public static final int CONTROLLABLE_TYPES =
             (WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars())
@@ -51,7 +50,6 @@ public final class InsetsPolicy {
     public final BarWindow mNavBar = new BarWindow(2);
     public final PolicyControlTarget mPolicyControlTarget = new PolicyControlTarget();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BarWindow {
         public final int mId;
         public int mState = 0;
@@ -109,7 +107,6 @@ public final class InsetsPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ControlTarget implements InsetsControlTarget, Runnable {
         public final WindowManagerGlobalLock mGlobalLock;
         public final WindowManagerService.H mHandler;
@@ -148,7 +145,6 @@ public final class InsetsPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Host implements InsetsController.Host {
         public final Handler mHandler;
         public final String mName;
@@ -237,7 +233,6 @@ public final class InsetsPolicy {
         public final void updateRequestedVisibleTypes(int i) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImmersiveControlTarget extends ControlTarget {
         public final int VISIBLE_TYPES;
 
@@ -261,7 +256,6 @@ public final class InsetsPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyControlTarget implements InsetsControlTarget {
         public PolicyControlTarget() {}
 

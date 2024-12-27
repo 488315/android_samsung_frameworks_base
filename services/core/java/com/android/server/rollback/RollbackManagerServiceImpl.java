@@ -73,7 +73,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RollbackManagerServiceImpl extends IRollbackManager.Stub
         implements RollbackManagerInternal {
     public final AppDataRollbackHelper mAppDataRollbackHelper;
@@ -96,7 +95,6 @@ public final class RollbackManagerServiceImpl extends IRollbackManager.Stub
     public final LongArrayQueue mSleepDuration = new LongArrayQueue();
     public long mRelativeBootTime = System.currentTimeMillis() - SystemClock.elapsedRealtime();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.rollback.RollbackManagerServiceImpl$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -393,7 +391,6 @@ public final class RollbackManagerServiceImpl extends IRollbackManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionCallback extends PackageInstaller.SessionCallback {
         public SessionCallback() {}
 

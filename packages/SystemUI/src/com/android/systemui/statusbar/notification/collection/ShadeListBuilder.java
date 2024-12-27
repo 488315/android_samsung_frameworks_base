@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShadeListBuilder implements Dumpable, PipelineDumpable {
     public static final AnonymousClass2 DEFAULT_SECTIONER = new NotifSectioner("UnknownSection", 0) { // from class: com.android.systemui.statusbar.notification.collection.ShadeListBuilder.2
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
@@ -119,7 +118,6 @@ public final class ShadeListBuilder implements Dumpable, PipelineDumpable {
     };
     public final ShadeListBuilder$$ExternalSyntheticLambda4 mGroupChildrenComparator = new ShadeListBuilder$$ExternalSyntheticLambda4();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.collection.ShadeListBuilder$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {

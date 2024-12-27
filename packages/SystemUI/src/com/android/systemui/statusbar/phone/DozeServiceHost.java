@@ -58,7 +58,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.LongConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeServiceHost implements DozeHost {
     public AODOverlayContainer mAODOverlayContainer;
     public boolean mAlwaysOnSuppressed;
@@ -100,7 +99,6 @@ public final class DozeServiceHost implements DozeHost {
     boolean mWakeLockScreenPerformsAuth;
     public final WakefulnessLifecycle mWakefulnessLifecycle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface HasPendingScreenOffCallbackChangeListener {
         void onHasPendingScreenOffCallbackChanged(boolean z);
     }

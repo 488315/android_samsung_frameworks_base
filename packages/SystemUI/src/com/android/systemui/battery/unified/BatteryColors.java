@@ -2,11 +2,9 @@ package com.android.systemui.battery.unified;
 
 import android.graphics.Color;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface BatteryColors {
     public static final LightThemeColors LIGHT_THEME_COLORS;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -18,7 +16,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DarkThemeColors implements BatteryColors {
         public static final DarkThemeColors INSTANCE = null;
         public static final int activeFill = 0;
@@ -55,7 +52,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LightThemeColors implements BatteryColors {
         public static final LightThemeColors INSTANCE = new LightThemeColors();
         public static final int activeFill = 0;

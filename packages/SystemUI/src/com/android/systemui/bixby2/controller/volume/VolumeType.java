@@ -11,7 +11,6 @@ import com.android.systemui.bixby2.util.AudioManagerWrapper;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class VolumeType {
     public static final int $stable = 0;
     public static final Companion Companion = new Companion(null);
@@ -25,7 +24,6 @@ public abstract class VolumeType {
     private final String statusCode = "success";
     private final String streamTypeToString = "";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

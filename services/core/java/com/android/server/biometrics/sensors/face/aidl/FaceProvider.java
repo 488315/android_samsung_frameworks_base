@@ -94,7 +94,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FaceProvider implements IBinder.DeathRecipient, BiometricServiceProvider {
     public final AuthSessionCoordinator mAuthSessionCoordinator;
     public final AuthenticationStateListeners mAuthenticationStateListeners;
@@ -113,7 +112,6 @@ public final class FaceProvider implements IBinder.DeathRecipient, BiometricServ
     public boolean mTestHalEnabled;
     public final UsageStats mUsageStats;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.FaceProvider$3, reason: invalid class name */
     public final class AnonymousClass3 implements ClientMonitorCallback {
         public final /* synthetic */ FaceAuthenticationClient val$client;
@@ -176,7 +174,6 @@ public final class FaceProvider implements IBinder.DeathRecipient, BiometricServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BiometricTaskStackListener extends TaskStackListener
             implements ActivityManager.SemProcessListener {
         public BiometricTaskStackListener() {}

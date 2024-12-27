@@ -58,7 +58,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ComponentResolver extends ComponentResolverLocked implements Snappable {
     public static final Set PROTECTED_ACTIONS;
     public static final ComponentResolver$$ExternalSyntheticLambda0 RESOLVE_PRIORITY_SORTER;
@@ -66,7 +65,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
     public List mProtectedFilters;
     public final AnonymousClass1 mSnapshot;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ActivityIntentResolver extends MimeGroupsAwareIntentResolver {
         public final HashMap mActivities;
         public final UserNeedsBadgingCache mUserNeedsBadging;
@@ -321,7 +319,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstantAppIntentResolver extends IntentResolver {
         public final ArrayMap mOrderResult = new ArrayMap();
         public final UserManagerService mUserManager;
@@ -397,7 +394,6 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MimeGroupsAwareIntentResolver extends IntentResolver {
         public boolean mIsUpdatingMimeGroup;
         public final ArrayMap mMimeGroupToFilter;
@@ -531,10 +527,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReceiverIntentResolver extends ActivityIntentResolver {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceIntentResolver extends MimeGroupsAwareIntentResolver {
         public final /* synthetic */ int $r8$classId;
         public final Object mServices;

@@ -20,7 +20,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.knox.accounts.HostAuth;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardTextBuilder {
     public static KeyguardTextBuilder sInstance;
     public int mAddRemainingAttempt;
@@ -37,7 +36,6 @@ public final class KeyguardTextBuilder {
     public StrongAuthPopup mStrongAuthPopup;
     public int mUserId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardTextBuilder$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardConstants$KeyguardDismissActionType;
@@ -79,7 +77,6 @@ public final class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum Biometric {
         Fingerprint("fingerprint"),
         Face("face"),
@@ -97,7 +94,6 @@ public final class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum BiometricSecurityLevel {
         Strong("strong"),
         Weak("weak"),
@@ -114,7 +110,6 @@ public final class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum DismissActionType {
         /* JADX INFO: Fake field, exist only in values array */
         Active(SystemUIAnalytics.QPBSE_KEY_ACTIVE),
@@ -135,7 +130,6 @@ public final class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum PromptReason {
         Restart("restart"),
         Timeout("timeout"),
@@ -154,7 +148,6 @@ public final class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum Security {
         PIN("pin"),
         Pattern("pattern"),

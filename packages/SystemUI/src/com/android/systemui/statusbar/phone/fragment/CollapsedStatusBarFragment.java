@@ -97,7 +97,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CollapsedStatusBarFragment extends Fragment implements CommandQueue.Callbacks, StatusBarStateController.StateListener, SystemStatusAnimationCallback, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final SystemStatusAnimationScheduler mAnimationScheduler;
@@ -153,14 +152,12 @@ public final class CollapsedStatusBarFragment extends Fragment implements Comman
     public StatusBarSystemEventDefaultAnimator mSystemEventAnimator;
     public final AnonymousClass7 mVolumeSettingObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$5, reason: invalid class name */
     public final class AnonymousClass5 implements StatusBarVisibilityChangeListener {
         public AnonymousClass5() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$6, reason: invalid class name */
     public final class AnonymousClass6 extends AnimatorListenerAdapter {
         public final /* synthetic */ boolean val$statusBarHidden;
@@ -177,7 +174,6 @@ public final class CollapsedStatusBarFragment extends Fragment implements Comman
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OngoingActivityListenerImpl {
         public /* synthetic */ OngoingActivityListenerImpl(CollapsedStatusBarFragment collapsedStatusBarFragment, int i) {
             this();

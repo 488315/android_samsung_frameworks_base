@@ -36,7 +36,6 @@ import kotlin.jvm.internal.TypeIntrinsics;
 import kotlin.sequences.MergingSequence$iterator$1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaTimeoutListener implements MediaDataManager.Listener {
     public final MediaTimeoutLogger logger;
     public final DelayableExecutor mainExecutor;
@@ -49,7 +48,6 @@ public final class MediaTimeoutListener implements MediaDataManager.Listener {
     public final SystemClock systemClock;
     public Function2 timeoutCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PlaybackStateListener extends MediaController.Callback {
         public Runnable cancellation;
         public boolean destroyed;
@@ -313,7 +311,6 @@ public final class MediaTimeoutListener implements MediaDataManager.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RecommendationListener {
         public Runnable cancellation;
         public long expiration;

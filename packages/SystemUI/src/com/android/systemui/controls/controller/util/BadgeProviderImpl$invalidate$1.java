@@ -4,7 +4,6 @@ import androidx.appcompat.view.menu.MenuItemImpl;
 import com.android.systemui.R;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BadgeProviderImpl$invalidate$1 implements Runnable {
     public final /* synthetic */ BadgeProviderImpl this$0;
 

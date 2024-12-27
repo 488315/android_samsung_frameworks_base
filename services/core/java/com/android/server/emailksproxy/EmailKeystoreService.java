@@ -31,12 +31,10 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EmailKeystoreService extends ISemKeyStoreService.Stub {
     public static final boolean DBG = Debug.semIsProductDev();
     public Context mContext;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyChainConnection implements Closeable {
         public final Context context;
         public final IKeyChainService service;

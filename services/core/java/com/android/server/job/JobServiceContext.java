@@ -41,7 +41,6 @@ import com.android.server.job.controllers.JobStatus;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class JobServiceContext implements ServiceConnection {
     public static final boolean DEBUG = JobSchedulerService.DEBUG;
     public static final boolean DEBUG_STANDBY = JobSchedulerService.DEBUG_STANDBY;
@@ -102,7 +101,6 @@ public final class JobServiceContext implements ServiceConnection {
     public int mPendingStopReason = 0;
     public int mDeathMarkStopReason = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobCallback extends IJobCallback.Stub {
         public String mStoppedReason;
         public long mStoppedTime;
@@ -416,7 +414,6 @@ public final class JobServiceContext implements ServiceConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobServiceHandler extends Handler {
         public JobServiceHandler(Looper looper) {
             super(looper);

@@ -15,7 +15,6 @@ import java.io.StringWriter;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DumpUtils {
     public static final ComponentName[] CRITICAL_SECTION_COMPONENTS = {
         new ComponentName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.SystemUIService")
@@ -23,17 +22,14 @@ public final class DumpUtils {
     private static final boolean DEBUG = false;
     private static final String TAG = "DumpUtils";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Dump {
         void dump(PrintWriter printWriter, String str);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface KeyDumper {
         void dump(int i, int i2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ValueDumper {
         void dump(Object obj);
     }

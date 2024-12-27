@@ -48,7 +48,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HotwordDetectionConnection {
     public static final boolean SYSPROP_VISUAL_QUERY_SERVICE_ENABLED = SystemProperties.getBoolean("ro.hotword.visual_query_service_enabled", false);
     public final AccessibilitySettingsListener mAccessibilitySettingsListener;
@@ -79,7 +78,6 @@ public final class HotwordDetectionConnection {
     public final int mVoiceInteractionServiceUid;
     public final Identity mVoiceInteractorIdentity;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccessibilitySettingsListener extends IVoiceInteractionAccessibilitySettingsListener.Stub {
         public AccessibilitySettingsListener() {
         }
@@ -94,7 +92,6 @@ public final class HotwordDetectionConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ServiceConnection extends ServiceConnector.Impl {
         private final int mBindingFlags;
         private final int mDetectionServiceType;
@@ -233,7 +230,6 @@ public final class HotwordDetectionConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceConnectionFactory {
         public final int mBindingFlags;
         public final int mDetectionServiceType;
@@ -376,7 +372,6 @@ public final class HotwordDetectionConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundTriggerCallback extends IRecognitionStatusCallback.Stub {
         public final Context mContext;
         public final IHotwordRecognitionStatusCallback mExternalCallback;

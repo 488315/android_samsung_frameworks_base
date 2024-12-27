@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BiometricScheduler {
     public final IBiometricService mBiometricService;
     public final ArrayDeque mCrashStates;
@@ -41,7 +40,6 @@ public final class BiometricScheduler {
     public int mTotalOperationsHandled;
     public final UserSwitchProvider mUserSwitchProvider;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.BiometricScheduler$1, reason: invalid class name */
     public final class AnonymousClass1 implements ClientMonitorCallback {
         public AnonymousClass1() {}
@@ -59,7 +57,6 @@ public final class BiometricScheduler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CrashState {
         public final String currentOperation;
         public final List pendingOperations;
@@ -92,7 +89,6 @@ public final class BiometricScheduler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchClientCallback implements ClientMonitorCallback {
         public final BaseClientMonitor mOwner;
 

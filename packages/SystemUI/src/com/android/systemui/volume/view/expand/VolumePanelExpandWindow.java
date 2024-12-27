@@ -28,7 +28,6 @@ import kotlin.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumePanelExpandWindow extends Dialog implements VolumeObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final LogWrapper log;
@@ -38,7 +37,6 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
     public final SystemConfigImpl systemConfig;
     public final VolumeDependencyBase volDeps;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -48,7 +46,6 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

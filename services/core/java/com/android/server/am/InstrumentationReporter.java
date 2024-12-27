@@ -7,13 +7,11 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InstrumentationReporter {
     public final Object mLock = new Object();
     public ArrayList mPendingReports;
     public MyThread mThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyThread extends Thread {
         public MyThread() {
             super("InstrumentationReporter");
@@ -142,7 +140,6 @@ public final class InstrumentationReporter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Report {
         public final ComponentName mName;
         public final int mResultCode;

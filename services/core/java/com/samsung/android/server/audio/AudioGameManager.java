@@ -12,14 +12,12 @@ import com.samsung.android.server.audio.utils.AudioUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AudioGameManager {
     public final AudioSystemAdapter mAudioSystem;
     public final Context mContext;
     public final SemGameManager mSemGameManager;
     public final ArrayList mUidList;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioGameThread extends Thread {
         public AudioGameThread() {
             super("AudioGameThread");

@@ -9,7 +9,6 @@ import android.util.Slog;
 import android.view.IPinnedTaskListener;
 import android.window.PictureInPictureSurfaceTransaction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PinnedTaskController {
     public boolean mDeferOrientationChanging;
     public Rect mDestRotatedBounds;
@@ -27,7 +26,6 @@ public final class PinnedTaskController {
     public final PinnedTaskController$$ExternalSyntheticLambda0 mDeferOrientationTimeoutRunnable =
             new PinnedTaskController$$ExternalSyntheticLambda0(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnedTaskListenerDeathHandler implements IBinder.DeathRecipient {
         public PinnedTaskListenerDeathHandler() {}
 

@@ -61,7 +61,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedListener, StatusBarStateController.StateListener, ShadeExpansionListener, Dumpable {
     public static final NotificationWakeUpCoordinator$Companion$delayedDozeAmount$1 delayedDozeAmount;
     public static final NotificationWakeUpCoordinator$Companion$notificationVisibility$1 notificationVisibility;
@@ -100,7 +99,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
     public final Interpolator dozeAmountInterpolator = Interpolators.FAST_OUT_SLOW_IN;
     public final Set mEntrySetToClearWhenFinished = new LinkedHashSet();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.NotificationWakeUpCoordinator$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -153,7 +151,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -865,7 +862,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface WakeUpListener {
         void onFullyHiddenChanged(boolean z);
 

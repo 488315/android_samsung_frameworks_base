@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.function.Function;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PivotViewController extends ViewAnimationController {
     public int affordancePivotX;
     public int affordancePivotY;

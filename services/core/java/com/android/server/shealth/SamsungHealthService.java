@@ -16,14 +16,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SamsungHealthService extends Binder {
     public static final List HEALTH_KEY_LIST =
             Arrays.asList(
                     "14aafbdad4dd99765346a1de191320328465b8420713bc22cc4f8b211b87cd3a",
                     "c88c9048f6d0fe9d8561926240f2ccc1982e24721150929350384659aa54aef6");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateReceiver extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {

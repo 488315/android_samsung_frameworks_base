@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemStateTracker extends Handler {
     public static final /* synthetic */ int $r8$clinit = 0;
     public BootStateListener mBootStateListener;
@@ -47,7 +46,6 @@ public final class SystemStateTracker extends Handler {
     public BootStateListener mUserStateListener;
     public final List mUserStateObservers;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BootStateListener extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ SystemStateTracker this$0;
@@ -98,7 +96,6 @@ public final class SystemStateTracker extends Handler {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class EbpfType {
         public static final /* synthetic */ EbpfType[] $VALUES = {
             new EbpfType("CPU_UID_SYSTEM_TIME", 0), new EbpfType("CPU_UID_ACTIVE_TIME", 1)
@@ -116,7 +113,6 @@ public final class SystemStateTracker extends Handler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LicenseStateListener implements IActivationKlmElmObserver {
         public LicenseStateListener() {}
 
@@ -134,7 +130,6 @@ public final class SystemStateTracker extends Handler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockStateListener {
         public LockStateListener() {}
     }

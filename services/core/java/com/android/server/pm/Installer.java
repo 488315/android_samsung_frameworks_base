@@ -28,7 +28,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class Installer extends SystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
     public volatile boolean mDeferSetFirstBoot;
@@ -37,7 +36,6 @@ public class Installer extends SystemService {
     public final boolean mIsolated;
     public volatile Object mWarnIfHeld;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Batch {
         public boolean mExecuted;
         public final List mArgs = new ArrayList();
@@ -108,7 +106,6 @@ public class Installer extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class InstallerException extends Exception {
         public InstallerException(String str) {
             super(str);
@@ -119,7 +116,6 @@ public class Installer extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class LegacyDexoptDisabledException extends Exception {
         public LegacyDexoptDisabledException() {
             super("Invalid call to legacy dexopt method while ART Service is in use.");

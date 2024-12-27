@@ -3,10 +3,8 @@ package com.android.systemui.qs.tiles.impl.custom.data.entity;
 import android.graphics.drawable.Icon;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface CustomTileDefaults {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Error implements CustomTileDefaults {
         public static final Error INSTANCE = new Error();
 
@@ -26,7 +24,6 @@ public interface CustomTileDefaults {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Result implements CustomTileDefaults {
         public final Icon icon;
         public final CharSequence label;

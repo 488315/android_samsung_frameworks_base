@@ -13,7 +13,6 @@ import com.samsung.android.sepunion.Log;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverDisabler {
     public final PowerManager.WakeLock mDisableCoverManagerWakeLock;
     public final CoverDisablerHandler mHandler;
@@ -22,7 +21,6 @@ public final class CoverDisabler {
     public boolean mCoverManagerDisabled = false;
     public boolean mRealCoverSwitchState = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverDisablerHandler extends Handler {
         public CoverDisablerHandler(Looper looper) {
             super(looper, null, true);
@@ -40,7 +38,6 @@ public final class CoverDisabler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisableRecord implements IBinder.DeathRecipient {
         public boolean disable;
         public String pkg;

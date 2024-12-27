@@ -5,7 +5,6 @@ import com.android.internal.infra.AndroidFuture;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class PermissionControllerService$1$$ExternalSyntheticLambda1
         implements Consumer {
     public final /* synthetic */ AndroidFuture f$0;

@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefaultsRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CoroutineDispatcher backgroundDispatcher;
@@ -36,7 +35,6 @@ public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefault
     public final ReadonlySharedFlow defaults;
     public final SharedFlowImpl defaultsRequests;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -46,7 +44,6 @@ public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefault
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultsResult {
         public final CustomTileDefaults data;
         public final UserHandle user;
@@ -97,13 +94,11 @@ public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefault
         final DistinctFlowImpl distinctUntilChangedBy$FlowKt__DistinctKt = FlowKt__DistinctKt.distinctUntilChangedBy$FlowKt__DistinctKt(MutableSharedFlow$default, function1, customTileDefaultsRepositoryImpl$defaults$1);
         this.defaults = FlowKt.shareIn(new Flow() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ CustomTileDefaultsRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -226,7 +221,6 @@ public final class CustomTileDefaultsRepositoryImpl implements CustomTileDefault
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), 1);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultsRequest {
         public final ComponentName componentName;
         public final boolean force;

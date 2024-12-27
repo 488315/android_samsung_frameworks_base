@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockInstanceData {
     private static final int MAIN_HOME = 4;
     private static final int MAIN_LOCK = 1;
@@ -23,7 +22,6 @@ public class PluginLockInstanceData {
     @SerializedName("version")
     private Integer mVersion = 3;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Data {
 
         @SerializedName(CABContract.CABBusinessContactPhone.NUMBER)
@@ -153,7 +151,6 @@ public class PluginLockInstanceData {
             return "[" + this.mPackageName + "," + this.mNumber + "," + l + "," + this.mWhich + ", " + this.mRecoverData + "]";
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public class RecoverData {
 
             @SerializedName("clock_state")

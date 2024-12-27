@@ -17,7 +17,6 @@ import com.samsung.android.knox.IBasicCommand;
 
 import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxForesightService extends IBasicCommand.Stub {
     public static String KFAgentVersion;
     public static int sClassLoadCount;
@@ -26,7 +25,6 @@ public final class KnoxForesightService extends IBasicCommand.Stub {
     public DexClassLoader dexClassLoader;
     public Context mContext;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForesightPackageReceiver extends BroadcastReceiver {
         public ForesightPackageReceiver() {}
 

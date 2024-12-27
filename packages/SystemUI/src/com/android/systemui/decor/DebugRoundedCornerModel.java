@@ -6,7 +6,6 @@ import androidx.compose.animation.core.KeyframesSpec$KeyframeEntity$$ExternalSyn
 import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DebugRoundedCornerModel {
     public final int height;
     public final Path path;

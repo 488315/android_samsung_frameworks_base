@@ -4,7 +4,6 @@ import com.android.systemui.R;
 import com.android.systemui.accessibility.AccessibilityLogger;
 import com.android.systemui.accessibility.Magnification;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class Magnification$4$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Magnification.AnonymousClass4 f$0;

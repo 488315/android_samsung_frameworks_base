@@ -11,13 +11,11 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AdditionalSubtypeMapRepository {
     public static final SparseArray sPerUserMap = new SparseArray();
     public static final SingleThreadedBackgroundWriter sWriter =
             new SingleThreadedBackgroundWriter();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SingleThreadedBackgroundWriter {
         public final ReentrantLock mLock;
         public final Condition mLockNotifier;
@@ -76,7 +74,6 @@ public abstract class AdditionalSubtypeMapRepository {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WriteTask extends Record {
         public final InputMethodMap inputMethodMap;
         public final AdditionalSubtypeMap subtypeMap;

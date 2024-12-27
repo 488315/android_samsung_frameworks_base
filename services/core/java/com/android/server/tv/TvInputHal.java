@@ -13,7 +13,6 @@ import android.view.Surface;
 
 import com.android.internal.os.SomeArgs;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 final class TvInputHal implements Handler.Callback {
     public static final boolean DEBUG = false;
     public static final int ERROR_NO_INIT = -1;
@@ -33,7 +32,6 @@ final class TvInputHal implements Handler.Callback {
     public final SparseArray mStreamConfigs = new SparseArray();
     public final Handler mHandler = new Handler(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
     public TvInputHal(Callback callback) {

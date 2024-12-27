@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CameraAccessController extends CameraManager.AvailabilityCallback
         implements AutoCloseable {
     public final VirtualDeviceManagerService$$ExternalSyntheticLambda2 mBlockedCallback;
@@ -34,13 +33,11 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
     public final ArrayMap mPackageToSessionData = new ArrayMap();
     public final ArrayMap mAppsToBlockOnVirtualDevice = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InjectionSessionData {
         public int appUid;
         public final ArrayMap cameraIdToSession = new ArrayMap();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OpenCameraInfo {
         public String packageName;
         public Set packageUids;

@@ -68,7 +68,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DesktopModeService extends IDesktopMode.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ActivityManagerService mActivityManagerService;
@@ -120,7 +119,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
     public WirelessDexManager mWirelessDexManager;
     public int mWirelessDexSetting;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.DesktopModeService$1, reason: invalid class name */
     public final class AnonymousClass1 extends StateManager.StateListener {
         public final /* synthetic */ int $r8$classId;
@@ -435,7 +433,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.DesktopModeService$2, reason: invalid class name */
     public final class AnonymousClass2 extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
@@ -468,7 +465,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.DesktopModeService$6, reason: invalid class name */
     public final class AnonymousClass6 extends UiManager.InternalUiCallback {
         public final /* synthetic */ String val$firstConnectionKey;
@@ -497,7 +493,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final Injector mInjector;
         public final DesktopModeService mService;
@@ -651,7 +646,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends DesktopModeManagerInternal {
         public LocalService() {}
 
@@ -1088,7 +1082,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhonePreconditionChecker {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DesktopModeService this$0;
@@ -1127,7 +1120,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
         public Receiver() {}
 
@@ -1155,7 +1147,6 @@ public final class DesktopModeService extends IDesktopMode.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WelcomeActivityListener extends UiManager.InternalUiCallback {
         public boolean mShown = false;
         public boolean mOverlayShown = false;

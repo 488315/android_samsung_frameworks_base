@@ -26,21 +26,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PaymentManagerService extends IPaymentManager.Stub {
     public static Context mContext;
     public final Map mRegisteredFWKClientMap = new HashMap();
     public static final boolean DEBUG = !SystemProperties.getBoolean("ro.product_ship", true);
     public static final String COUNTRYISO_CODE = SystemProperties.get("ro.csc.countryiso_code");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FrameworkClient {
         public final ClientBinderDeathReceiver mBinderDeathReceiver;
         public final PaymentTZServiceCommnInfo mCommnInfo;
         public final String mPackageName;
         public final int mPid;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ClientBinderDeathReceiver implements IBinder.DeathRecipient {
             public IBinder mReceiver;
 

@@ -7,7 +7,6 @@ import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView;
 import com.android.systemui.plugins.keyguardstatusview.PluginKnoxStateMonitor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FaceWidgetKnoxStateMonitorWrapper extends KnoxStateMonitorCallback implements PluginKnoxStateMonitor {
     public final KnoxStateMonitor mKnoxStateMonitor;
     public PluginKeyguardStatusView mPluginKeyguardStatusView;

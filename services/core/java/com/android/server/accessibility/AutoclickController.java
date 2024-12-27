@@ -10,7 +10,6 @@ import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutoclickController extends BaseEventStreamTransformation {
     public ClickDelayObserver mClickDelayObserver;
     public ClickScheduler mClickScheduler;
@@ -18,7 +17,6 @@ public final class AutoclickController extends BaseEventStreamTransformation {
     public final AccessibilityTraceManager mTrace;
     public final int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClickDelayObserver extends ContentObserver {
         public final Uri mAutoclickDelaySettingUri;
         public ClickScheduler mClickScheduler;
@@ -45,7 +43,6 @@ public final class AutoclickController extends BaseEventStreamTransformation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClickScheduler implements Runnable {
         public boolean mActive;
         public final MotionEvent.PointerCoords mAnchorCoords;

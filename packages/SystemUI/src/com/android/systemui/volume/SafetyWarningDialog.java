@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SafetyWarningDialog extends SystemUIDialog implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
     public static final String TAG = Util.logTag(SafetyWarningDialog.class);
     public final AudioManager mAudioManager;

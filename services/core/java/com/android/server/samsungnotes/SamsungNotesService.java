@@ -9,10 +9,8 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.util.Log;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SamsungNotesService extends Binder {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateReceiver extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {

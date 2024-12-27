@@ -7,12 +7,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UncaughtExceptionPreHandlerManager {
     public final List handlers = new CopyOnWriteArrayList();
     public final GlobalUncaughtExceptionHandler globalUncaughtExceptionPreHandler = new GlobalUncaughtExceptionHandler();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GlobalUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
         public GlobalUncaughtExceptionHandler() {
         }

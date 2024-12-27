@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserAutoAddRepository {
     public static final Companion Companion = null;
     public final CoroutineScope applicationScope;
@@ -18,7 +17,6 @@ public final class UserAutoAddRepository {
     public final SecureSettings secureSettings;
     public final int userId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -28,7 +26,6 @@ public final class UserAutoAddRepository {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
     }
 

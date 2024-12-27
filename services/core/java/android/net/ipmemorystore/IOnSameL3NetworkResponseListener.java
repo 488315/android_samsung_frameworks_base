@@ -6,14 +6,12 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IOnSameL3NetworkResponseListener extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$ipmemorystore$IOnSameL3NetworkResponseListener".replace('$', '.');
     public static final String HASH = "d5ea5eb3ddbdaa9a986ce6ba70b0804ca3e39b0c";
     public static final int VERSION = 10;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IOnSameL3NetworkResponseListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,13 +35,11 @@ public interface IOnSameL3NetworkResponseListener extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IOnSameL3NetworkResponseListener {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onSameL3NetworkResponse = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IOnSameL3NetworkResponseListener {
             public String mCachedHash;
             public int mCachedVersion;

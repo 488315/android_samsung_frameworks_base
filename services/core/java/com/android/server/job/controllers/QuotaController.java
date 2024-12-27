@@ -49,7 +49,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class QuotaController extends StateController {
     public static final boolean DEBUG;
     static final int MSG_END_GRACE_PERIOD = 6;
@@ -110,7 +109,6 @@ public final class QuotaController extends StateController {
     public final SparseArrayMap mTrackedJobs;
     public final UidConstraintUpdater mUpdateUidConstraints;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarliestEndTimeFunctor implements Consumer {
         public long earliestEndElapsed;
 
@@ -124,7 +122,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ExecutionStats {
         public long allowedTimePerPeriodMs;
         public int bgJobCountInMaxPeriod;
@@ -159,7 +156,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InQuotaAlarmQueue extends AlarmQueue {
         public InQuotaAlarmQueue(Context context, Looper looper) {
             super(context, looper, "*job.quota_check*", "In quota", false, 60000L);
@@ -179,7 +175,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class QcConstants {
         static final String KEY_ALLOWED_TIME_PER_PERIOD_ACTIVE_MS = "qc_allowed_time_per_period_active_ms";
         static final String KEY_ALLOWED_TIME_PER_PERIOD_EXEMPTED_MS = "qc_allowed_time_per_period_exempted_ms";
@@ -293,7 +288,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class QcHandler extends Handler {
         public QcHandler(Looper looper) {
             super(looper);
@@ -331,7 +325,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class QcUidObserver extends UidObserver {
         public QcUidObserver() {
         }
@@ -341,7 +334,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class QuotaBump implements TimedEvent {
         public final long eventTimeElapsed;
 
@@ -362,7 +354,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ShrinkableDebits {
         public long mDebitTally;
         public int mStandbyBucket;
@@ -391,7 +382,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandbyTracker extends AppStandbyInternal.AppIdleStateChangeListener {
         public StandbyTracker() {
         }
@@ -423,7 +413,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TempAllowlistTracker implements PowerAllowlistInternal.TempAllowlistChangeListener {
         public TempAllowlistTracker() {
         }
@@ -469,14 +458,12 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface TimedEvent {
         void dump(IndentingPrintWriter indentingPrintWriter);
 
         long getEndTimeElapsed();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimedEventTooOldPredicate implements Predicate {
         public long mNowElapsed;
 
@@ -486,7 +473,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Timer {
         public int mBgJobCount;
         public long mDebitAdjustment;
@@ -714,7 +700,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimerChargingUpdateFunctor implements Consumer {
         public boolean mIsCharging;
         public long mNowElapsed;
@@ -729,7 +714,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class TimingSession implements TimedEvent {
         public final int bgJobCount;
         public final long endTimeElapsed;
@@ -785,7 +769,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TopAppTimer {
         public final SparseArray mActivities = new SparseArray();
         public final UserPackage mPkg;
@@ -841,7 +824,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidConstraintUpdater implements Consumer {
         public final SparseArrayMap mToScheduleStartAlarms = new SparseArrayMap();
         public final ArraySet changedJobs = new ArraySet();
@@ -872,7 +854,6 @@ public final class QuotaController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsageEventTracker implements UsageStatsManagerInternal.UsageEventListener {
         public UsageEventTracker() {
         }

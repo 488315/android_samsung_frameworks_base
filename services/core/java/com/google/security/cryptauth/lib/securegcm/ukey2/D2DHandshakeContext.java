@@ -1,12 +1,10 @@
 package com.google.security.cryptauth.lib.securegcm.ukey2;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class D2DHandshakeContext {
     public final long contextPtr;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NextProtocol {
         public static final /* synthetic */ NextProtocol[] $VALUES;
         public static final NextProtocol AES_256_CBC_HMAC_SHA256;
@@ -32,7 +30,6 @@ public class D2DHandshakeContext {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Role {
         public static final /* synthetic */ Role[] $VALUES;
         public static final Role INITIATOR;

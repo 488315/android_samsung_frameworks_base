@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InstalledTilesComponentRepositoryImpl implements InstalledTilesComponentRepository {
     public static final PackageManager.ResolveInfoFlags FLAGS;
     public static final Intent INTENT;
@@ -31,7 +30,6 @@ public final class InstalledTilesComponentRepositoryImpl implements InstalledTil
     public final PackageChangeRepository packageChangeRepository;
     public final Map userMap = new LinkedHashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -63,7 +61,6 @@ public final class InstalledTilesComponentRepositoryImpl implements InstalledTil
             final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new InstalledTilesComponentRepositoryImpl$getForUserLocked$1$1(null), ((PackageChangeRepositoryImpl) this.packageChangeRepository).packageChanged(UserHandle.of(i)));
             obj = FlowKt.stateIn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getForUserLocked$lambda$5$$inlined$map$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getForUserLocked$lambda$5$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ PackageManager $packageManager$inlined;
@@ -71,7 +68,6 @@ public final class InstalledTilesComponentRepositoryImpl implements InstalledTil
                     public final /* synthetic */ int $userId$inlined;
                     public final /* synthetic */ InstalledTilesComponentRepositoryImpl this$0;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getForUserLocked$lambda$5$$inlined$map$1$2$1, reason: invalid class name */
                     public final class AnonymousClass1 extends ContinuationImpl {
                         Object L$0;

@@ -25,7 +25,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationHistoryManager {
     public static final boolean DEBUG = NotificationManagerService.DBG;
     static final String DIRECTORY_PER_USER = "notification_history";
@@ -39,7 +38,6 @@ public final class NotificationHistoryManager {
     public final SparseBooleanArray mHistoryEnabled = new SparseBooleanArray();
     public final SparseBooleanArray mUserPendingHistoryDisables = new SparseBooleanArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri NOTIFICATION_HISTORY_URI;
 

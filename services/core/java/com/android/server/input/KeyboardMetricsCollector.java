@@ -12,13 +12,11 @@ import com.android.internal.util.FrameworkStatsLog;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class KeyboardMetricsCollector {
     public static final boolean DEBUG = Log.isLoggable("KeyboardMetricCollector", 3);
     public static final String DEFAULT_LANGUAGE_TAG = "None";
     static final String DEFAULT_LAYOUT_NAME = "Default";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardConfigurationEvent {
         public final InputDevice mInputDevice;
         public final boolean mIsFirstConfiguration;
@@ -44,7 +42,6 @@ public abstract class KeyboardMetricsCollector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum KeyboardLogEvent {
         /* JADX INFO: Fake field, exist only in values array */
         EF0("UNSPECIFIED", "INVALID_KEYBOARD_EVENT"),
@@ -152,7 +149,6 @@ public abstract class KeyboardMetricsCollector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class LayoutConfiguration {
         public final String imeLanguageTag;
         public final int imeLayoutType;

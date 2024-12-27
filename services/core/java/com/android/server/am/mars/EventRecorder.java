@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EventRecorder {
     public static boolean FEATURE_ENABLE = true;
     public static File file;
@@ -40,12 +39,10 @@ public final class EventRecorder {
     public final ArrayMap mLatestUnfreezeEvent = new ArrayMap();
     public final ArrayDeque mPendingWrite = new ArrayDeque();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Converter {
         public final ArrayMap hashCache = new ArrayMap();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Event {
         public final EventType eventType;
         public Integer procStateAfterEvent;
@@ -120,13 +117,11 @@ public final class EventRecorder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class EventRecorderHolder {
         public static final EventRecorder INSTANCE = new EventRecorder();
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum EventType {
         UID_RUN("UID_RUN"),
         UID_STOP("UID_STOP"),
@@ -159,7 +154,6 @@ public final class EventRecorder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class RemoveOutdatedJobService extends JobService {
         public static final /* synthetic */ int $r8$clinit = 0;
         public volatile boolean isJobCancelled = false;

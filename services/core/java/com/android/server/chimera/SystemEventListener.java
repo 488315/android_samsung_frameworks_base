@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemEventListener extends BroadcastReceiver {
     public static boolean mFirstTriggeredAfterBooting;
     public final AppLaunchIntent mAppLaunchObserver;
@@ -47,10 +46,8 @@ public final class SystemEventListener extends BroadcastReceiver {
     public final List mOneHourTimerListeners = new ArrayList();
     public final List mQuotaListeners = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AlwaysRunningQuotaExceedListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppLaunchIntent extends ActivityMetricsLaunchObserver {
         public AppLaunchIntent() {}
 
@@ -88,25 +85,18 @@ public final class SystemEventListener extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AppLaunchIntentListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface CameraStateListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface CarModeChangeListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DeviceIdleListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface HomeLaunchListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LmkdEventListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LmkdEventServerThread extends Thread {
         public Handler mHandler;
         public LocalServerSocket mServerSocket;
@@ -161,7 +151,6 @@ public final class SystemEventListener extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemEventHandler extends Handler {
         public SystemEventHandler(Looper looper) {
             super(looper);

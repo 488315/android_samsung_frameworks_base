@@ -10,7 +10,6 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.util.NotificationChannels;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class TipsNotificationService extends Service {
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {

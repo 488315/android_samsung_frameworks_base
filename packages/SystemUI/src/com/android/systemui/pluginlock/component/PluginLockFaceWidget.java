@@ -25,7 +25,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockFaceWidget extends AbstractPluginLockItem {
     private static final String KEY_CLOCK_POS_CHANGED = "clock_position_changed";
     private static final String KEY_CLOCK_SCALE = "clock_scale";

@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GmsAlarmManager {
     public NetWorkStats avaStats;
     public final boolean isChinaMode;
@@ -106,7 +105,6 @@ public final class GmsAlarmManager {
     public final AnonymousClass1 mIntentReceiver = new AnonymousClass1(this, 0);
     public final ArrayList mGmsUidOfMultiUser = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.alarm.GmsAlarmManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -288,7 +286,6 @@ public final class GmsAlarmManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GmsHandler extends Handler {
         public GmsHandler(Looper looper) {
             super(looper);
@@ -352,14 +349,12 @@ public final class GmsAlarmManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetWorkStats {
         public long mCount = 0;
         public long mTime = 0;
         public final ArrayList data = new ArrayList();
         public final Object mLock = new Object();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class NetWorkData {
             public long endTime;
             public long startTime;
@@ -490,7 +485,6 @@ public final class GmsAlarmManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SmartManagerSettingsObserver extends ContentObserver {
         public SmartManagerSettingsObserver(Handler handler) {
             super(handler);

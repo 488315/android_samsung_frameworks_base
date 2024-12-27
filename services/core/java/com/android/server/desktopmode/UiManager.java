@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UiManager {
     public final UiManager$$ExternalSyntheticLambda6 mBindServiceRunnable;
     public boolean mBound;
@@ -43,7 +42,6 @@ public final class UiManager {
     public final IStateManager mStateManager;
     public final UiManager$$ExternalSyntheticLambda6 mUnbindServiceRunnable;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.UiManager$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
         public AnonymousClass1() {}
@@ -73,7 +71,6 @@ public final class UiManager {
         public final void onServiceDisconnected(ComponentName componentName) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.UiManager$5, reason: invalid class name */
     public final class AnonymousClass5 extends IDesktopModeUiServiceCallback.Stub {
         public final /* synthetic */ int $r8$classId;
@@ -164,7 +161,6 @@ public final class UiManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DockTaWarningDialogMessage implements Runnable {
         public Runnable mNotFastChargerDialogCommand;
 
@@ -178,7 +174,6 @@ public final class UiManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class InternalUiCallback {
         public void onAnimationComplete() {}
 
@@ -189,7 +184,6 @@ public final class UiManager {
         public void onShow() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UiCommandHandler extends Handler {
         public final DockTaWarningDialogMessage mDockTaWarningDialogMessage;
 

@@ -24,7 +24,6 @@ import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.UiThread;
 import com.android.server.autofill.Helper;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SaveUi {
     public final boolean mCompatMode;
     public final ComponentName mComponentName;
@@ -41,7 +40,6 @@ public final class SaveUi {
     public final CharSequence mTitle;
     public final int mType;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.ui.SaveUi$2, reason: invalid class name */
     public final class AnonymousClass2 implements CompoundButton.OnCheckedChangeListener {
         public final /* synthetic */ SaveInfo val$info;
@@ -72,7 +70,6 @@ public final class SaveUi {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnSaveListener {
         void onCancel(IntentSender intentSender);
 
@@ -83,7 +80,6 @@ public final class SaveUi {
         void startIntentSender(IntentSender intentSender, Intent intent);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OneActionThenDestroyListener implements OnSaveListener {
         public boolean mDone;
         public final OnSaveListener mRealListener;

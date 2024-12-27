@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class LogWriter {
     public static void logDebugInfoAndLogcat(String str, String str2) {
         Log.i(str, str2);

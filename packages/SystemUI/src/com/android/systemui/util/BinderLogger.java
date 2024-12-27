@@ -20,7 +20,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.random.Random;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BinderLogger implements CoreStartable, Binder.ProxyTransactListener {
     private static final String AOSP_SOURCE_FILE_MARKER = "go/retraceme ";
     private static final String KEYGUARD_PKG = "com.android.keyguard";
@@ -33,14 +32,12 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class BinderTransactionAnalysis {
         public static final Companion Companion = new Companion(null);
         private final boolean isSystemUi;
         private final String logMessage;
         private final String traceMessage;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -102,7 +99,6 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

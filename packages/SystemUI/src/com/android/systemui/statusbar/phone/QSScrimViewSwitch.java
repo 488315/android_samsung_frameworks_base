@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSScrimViewSwitch {
     public final StateFlowImpl _scrimBehindAlpha;
     public int currentVisibility;
@@ -39,7 +38,6 @@ public final class QSScrimViewSwitch {
     public final ScrimView scrimInFront;
     public int visibility;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.QSScrimViewSwitch$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function3 {
         /* synthetic */ int I$0;
@@ -90,7 +88,6 @@ public final class QSScrimViewSwitch {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -100,7 +97,6 @@ public final class QSScrimViewSwitch {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -136,7 +132,6 @@ public final class QSScrimViewSwitch {
         final Flow[] flowArr = {((KeyguardRepositoryImpl) keyguardRepository).statusBarState, keyguardTransitionInteractor.currentKeyguardState, keyguardTransitionInteractor.transitionState, powerInteractor.screenPowerState, shadeRepositoryImpl.lockscreenShadeExpansion, shadeRepositoryImpl.legacyShadeExpansion, shadeRepositoryImpl.qsExpansion, asStateFlow};
         FlowKt.launchIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;

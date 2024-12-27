@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PowerRepositoryImpl implements PowerRepository {
     public final StateFlowImpl _screenPowerState;
     public final StateFlowImpl _wakefulness;
@@ -27,7 +26,6 @@ public final class PowerRepositoryImpl implements PowerRepository {
     public final SystemClock systemClock;
     public final ReadonlyStateFlow wakefulness;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

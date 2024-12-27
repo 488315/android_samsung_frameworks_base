@@ -24,7 +24,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceEntryIconView extends FrameLayout {
     public AccessibilityHintType accessibilityHintType;
     public final LottieDrawable aodFpDrawable;
@@ -34,7 +33,6 @@ public final class DeviceEntryIconView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AccessibilityHintType {
         public static final /* synthetic */ AccessibilityHintType[] $VALUES;
         public static final AccessibilityHintType BOUNCER;
@@ -67,7 +65,6 @@ public final class DeviceEntryIconView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
         public static final IconType FINGERPRINT;
@@ -107,7 +104,6 @@ public final class DeviceEntryIconView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -225,7 +221,6 @@ public final class DeviceEntryIconView extends FrameLayout {
             public final AccessibilityNodeInfo.AccessibilityAction accessibilityBouncerHint;
             public final AccessibilityNodeInfo.AccessibilityAction accessibilityEnterHint;
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

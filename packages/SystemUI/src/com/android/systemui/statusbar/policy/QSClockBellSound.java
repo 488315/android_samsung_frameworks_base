@@ -5,7 +5,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSClockBellSound {
     public final String DateText;
     public final boolean Demo;
@@ -16,7 +15,6 @@ public final class QSClockBellSound {
     public final String TimeText;
     public final String TimeTextWithSeconds;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

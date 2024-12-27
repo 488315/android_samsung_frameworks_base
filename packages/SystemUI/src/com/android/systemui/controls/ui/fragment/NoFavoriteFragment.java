@@ -25,7 +25,6 @@ import com.android.systemui.controls.util.ControlsUtil;
 import com.android.systemui.controls.util.SALogger;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoFavoriteFragment extends Fragment {
     public BadgeObserver badgeObserver;
     public final BadgeSubject badgeSubject;
@@ -34,7 +33,6 @@ public final class NoFavoriteFragment extends Fragment {
     public View mView;
     public final SALogger saLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

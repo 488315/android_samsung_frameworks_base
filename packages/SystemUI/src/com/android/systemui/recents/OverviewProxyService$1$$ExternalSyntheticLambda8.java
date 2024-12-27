@@ -8,7 +8,6 @@ import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.shade.ShadeViewController;
 import dagger.Lazy;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class OverviewProxyService$1$$ExternalSyntheticLambda8 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ OverviewProxyService.AnonymousClass1 f$0;

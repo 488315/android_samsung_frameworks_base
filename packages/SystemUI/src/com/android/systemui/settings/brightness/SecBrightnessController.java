@@ -16,7 +16,6 @@ import kotlin.Lazy;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecBrightnessController {
     public final BrightnessControllerObserver brightnessControllerObserver;
     public BrightnessDialog brightnessDialog;
@@ -35,7 +34,6 @@ public final class SecBrightnessController {
     public static final Uri SCREEN_DISPLAY_OUTDOOR_MODE_URI = Settings.System.getUriFor("display_outdoor_mode");
     public static final Uri SEC_AUTO_BRIGHTNESS_TRANSITION_TIME_URI = Settings.System.getUriFor(SettingsHelper.INDEX_AUTO_BRIGHTNESS_TRANSITION_TIME);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

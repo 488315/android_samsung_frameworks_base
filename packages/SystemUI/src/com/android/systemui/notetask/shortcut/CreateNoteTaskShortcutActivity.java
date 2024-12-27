@@ -7,7 +7,6 @@ import android.os.UserHandle;
 import androidx.activity.ComponentActivity;
 import com.android.systemui.notetask.NoteTaskRoleManagerExt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CreateNoteTaskShortcutActivity extends ComponentActivity {
     public final RoleManager roleManager;
     public final ShortcutManager shortcutManager;

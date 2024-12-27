@@ -4,7 +4,6 @@ import android.net.Uri;
 import com.android.systemui.plugins.FalsingManager;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecFalsingManagerDummy implements FalsingManager {
     @Override // com.android.systemui.plugins.FalsingManager
     public final boolean isClassifierEnabled() {

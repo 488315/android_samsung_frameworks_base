@@ -7,7 +7,6 @@ import com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl
 import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecHideNotificationShadeInMirrorInteractor$notify$1 implements Runnable {
     public final /* synthetic */ SecHideNotificationShadeInMirrorInteractor this$0;
 

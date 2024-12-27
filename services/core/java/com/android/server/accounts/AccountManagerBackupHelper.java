@@ -27,7 +27,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccountManagerBackupHelper {
     public final AccountManagerInternal mAccountManagerInternal;
     public final AccountManagerService mAccountManagerService;
@@ -36,7 +35,6 @@ public final class AccountManagerBackupHelper {
     public RestorePackageMonitor mRestorePackageMonitor;
     public List mRestorePendingAppPermissions;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CancelRestoreCommand implements Runnable {
         public CancelRestoreCommand() {}
 
@@ -60,7 +58,6 @@ public final class AccountManagerBackupHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingAppPermission {
         public final String accountDigest;
         public final String certDigest;
@@ -136,7 +133,6 @@ public final class AccountManagerBackupHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RestorePackageMonitor extends PackageMonitor {
         public RestorePackageMonitor() {}
 

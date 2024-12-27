@@ -8,7 +8,6 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.statusbar.CommandQueue;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskInitializer$callbacks$1 extends KeyguardUpdateMonitorCallback implements CommandQueue.Callbacks, UserTracker.Callback, OnRoleHoldersChangedListener {
     public final /* synthetic */ NoteTaskInitializer this$0;
 

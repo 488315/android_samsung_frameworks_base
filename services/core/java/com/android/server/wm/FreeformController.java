@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FreeformController implements IController {
     public final ActivityTaskManagerService mAtm;
     public boolean mBlockToAddForceHideFreeformTasks;
@@ -61,7 +60,6 @@ public final class FreeformController implements IController {
     public final ArrayList mForceHiddenFreeformTasks = new ArrayList();
     public final SparseArray mFreeformCornerRadius = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);

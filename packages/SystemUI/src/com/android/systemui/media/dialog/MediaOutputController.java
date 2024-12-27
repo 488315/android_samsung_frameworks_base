@@ -69,7 +69,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaOutputController implements LocalMediaManager.DeviceCallback, INearbyMediaDevicesUpdateCallback {
     public static final boolean DEBUG = Log.isLoggable("MediaOutputController", 3);
     public final float mActiveRadius;
@@ -134,18 +133,15 @@ public final class MediaOutputController implements LocalMediaManager.DeviceCall
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum BroadcastNotifyDialog {
         /* JADX INFO: Fake field, exist only in values array */
         ACTION_FIRST_LAUNCH,
         ACTION_BROADCAST_INFO_ICON
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         MediaOutputController create(String str, UserHandle userHandle, MediaSession.Token token);
     }

@@ -56,7 +56,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeTriggers implements DozeMachine.Part {
     public static boolean sWakeDisplaySensorState = true;
     public final boolean mAllowPulseTriggers;
@@ -87,7 +86,6 @@ public final class DozeTriggers implements DozeMachine.Part {
     public boolean mWantSensors;
     public boolean mWantTouchScreenSensors;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.DozeTriggers$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -142,7 +140,6 @@ public final class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DockEventListener implements DockManager.DockEventListener {
         public /* synthetic */ DockEventListener(DozeTriggers dozeTriggers, int i) {
             this(dozeTriggers);
@@ -152,7 +149,6 @@ public final class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum DozingUpdateUiEvent implements UiEventLogger.UiEventEnum {
         DOZING_UPDATE_NOTIFICATION(433),
         DOZING_UPDATE_SIGMOTION(434),
@@ -207,7 +203,6 @@ public final class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TriggerReceiver extends BroadcastReceiver {
         public boolean mRegistered;
 

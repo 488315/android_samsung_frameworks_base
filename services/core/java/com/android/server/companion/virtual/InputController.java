@@ -33,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class InputController {
     public static final AtomicLong sNextPhysId = new AtomicLong(1);
     public final AttributionSource mAttributionSource;
@@ -46,7 +45,6 @@ class InputController {
     public final DisplayManagerInternal mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
     public final InputManagerService.LocalService mInputManagerInternal = (InputManagerService.LocalService) LocalServices.getService(InputManagerService.LocalService.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderDeathRecipient implements IBinder.DeathRecipient {
         public final IBinder mDeviceToken;
 
@@ -61,19 +59,16 @@ class InputController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class DeviceCreationException extends Exception {
         public DeviceCreationException(String str) {
             super(str);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface DeviceCreationThreadVerifier {
         boolean isValidThread();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class InputDeviceDescriptor {
         public static final AtomicLong sNextCreationOrderNumber = new AtomicLong(1);
         public final long mCreationOrderNumber = sNextCreationOrderNumber.getAndIncrement();
@@ -96,7 +91,6 @@ class InputController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NativeWrapper {
         public final void closeUinput(long j) {
             InputController.nativeCloseUinput(j);
@@ -155,7 +149,6 @@ class InputController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WaitForDevice implements AutoCloseable {
         public final CountDownLatch mDeviceAddedLatch = new CountDownLatch(1);
         public int mInputDeviceId = -2;

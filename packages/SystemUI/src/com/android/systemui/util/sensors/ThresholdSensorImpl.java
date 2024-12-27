@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ThresholdSensorImpl implements ThresholdSensor {
     private final Execution mExecution;
     private Boolean mLastBelow;
@@ -33,7 +32,6 @@ public class ThresholdSensorImpl implements ThresholdSensor {
     private static final String TAG = "ThresholdSensor";
     private static final boolean DEBUG = Log.isLoggable(TAG, 3);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Builder {
         private final Execution mExecution;
         private final Resources mResources;
@@ -137,7 +135,6 @@ public class ThresholdSensorImpl implements ThresholdSensor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BuilderFactory {
         private final Execution mExecution;
         private final Resources mResources;

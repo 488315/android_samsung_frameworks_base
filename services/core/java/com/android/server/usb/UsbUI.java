@@ -40,7 +40,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbUI implements ActivityTaskManagerInternal.ScreenObserver {
     public final AnonymousClass1 mBatteryEventReceiver;
     public final ContentResolver mContentResolver;
@@ -70,7 +69,6 @@ public final class UsbUI implements ActivityTaskManagerInternal.ScreenObserver {
     public boolean mIsUsbBlkNotiShown = false;
     public String mUsbBlkPendingIntent = "";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationWrapper {
         public final Notification.Action action;
         public final boolean alertOnce;
@@ -168,7 +166,6 @@ public final class UsbUI implements ActivityTaskManagerInternal.ScreenObserver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbUIHandler extends Handler {
         public final HashMap currentOngoings;
         public final HashMap pendingJobs;

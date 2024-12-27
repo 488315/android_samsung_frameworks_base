@@ -36,7 +36,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserRepositoryImpl implements UserRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final StateFlowImpl _userInfos;
@@ -60,7 +59,6 @@ public final class UserRepositoryImpl implements UserRepository {
     public final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 userInfos;
     public final ReadonlyStateFlow userSwitcherSettings;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -91,13 +89,11 @@ public final class UserRepositoryImpl implements UserRepository {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new UserRepositoryImpl$_userSwitcherSettings$1(null), SettingsProxyExt.INSTANCE.observerFlow(globalSettings, "lockscreenSimpleUserSwitcher", "add_users_when_locked", SettingsHelper.INDEX_USER_SWITCHER_ENABLED));
         Flow flow = new Flow() { // from class: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -229,12 +225,10 @@ public final class UserRepositoryImpl implements UserRepository {
         this.selectedUser = stateIn2;
         this.selectedUserInfo = new Flow() { // from class: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.data.repository.UserRepositoryImpl$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

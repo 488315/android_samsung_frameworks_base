@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PDSController {
     public static final boolean DEBUG_ENG;
     public ActivityManagerService mAm;
@@ -44,10 +43,8 @@ public final class PDSController {
     public static final boolean DEBUG_HIGH =
             SystemProperties.get("ro.boot.debug_level", "").equals("0x4948");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PDSControllerHolder {
         public static final PDSController INSTANCE;
 
@@ -64,14 +61,12 @@ public final class PDSController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PkgStatusInfo {
         public String name;
         public int uid;
         public int userId;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Policy {
         public final boolean enabled;
         public final String name;

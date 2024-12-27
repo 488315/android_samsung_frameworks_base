@@ -76,7 +76,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KioskModeService extends IKioskMode.Stub
         implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
     public static final boolean SUPPORT_EDGE_MUM;
@@ -115,7 +114,6 @@ public final class KioskModeService extends IKioskMode.Stub
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.kioskmode.KioskModeService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -230,7 +228,6 @@ public final class KioskModeService extends IKioskMode.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KioskHandler extends Handler {
         public KioskHandler(Looper looper) {
             super(looper);
@@ -394,7 +391,6 @@ public final class KioskModeService extends IKioskMode.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KioskModeCache {
         public Map mBlockedHwKeys = null;
 
@@ -420,7 +416,6 @@ public final class KioskModeService extends IKioskMode.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum PenDetachmentOption {
         /* JADX INFO: Fake field, exist only in values array */
         EF0("NONE"),
@@ -435,7 +430,6 @@ public final class KioskModeService extends IKioskMode.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyDefinition {
         public final String defaultMessage;
         public final int defaultValue;

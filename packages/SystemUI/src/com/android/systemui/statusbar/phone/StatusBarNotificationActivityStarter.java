@@ -75,7 +75,6 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarNotificationActivityStarter implements NotificationActivityStarter {
     public final ActivityIntentHelper mActivityIntentHelper;
     public final ActivityStarter mActivityStarter;
@@ -114,7 +113,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
     public NotificationEntry mPendingFullscreenEntry = null;
     public Boolean mIsStartFullscreenIntentWhenSubscreen = Boolean.FALSE;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter$2, reason: invalid class name */
     public final class AnonymousClass2 implements ActivityStarter.OnDismissAction {
         public final /* synthetic */ boolean val$animate;
@@ -164,7 +162,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter$3, reason: invalid class name */
     public final class AnonymousClass3 implements ActivityStarter.OnDismissAction {
         public final /* synthetic */ boolean val$animate;
@@ -222,7 +219,6 @@ public final class StatusBarNotificationActivityStarter implements NotificationA
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnKeyguardDismissedAction {
         void onDismiss(PendingIntent pendingIntent, boolean z, boolean z2, boolean z3);
     }

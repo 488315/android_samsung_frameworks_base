@@ -3,10 +3,8 @@ package com.android.systemui.qs.tiles.impl.qr.domain.model;
 import android.content.Intent;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface QRCodeScannerTileModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Available implements QRCodeScannerTileModel {
         public final Intent intent;
 
@@ -30,7 +28,6 @@ public interface QRCodeScannerTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TemporarilyUnavailable implements QRCodeScannerTileModel {
         public static final TemporarilyUnavailable INSTANCE = new TemporarilyUnavailable();
 

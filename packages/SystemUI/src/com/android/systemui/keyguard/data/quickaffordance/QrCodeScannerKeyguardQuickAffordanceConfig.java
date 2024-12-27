@@ -13,7 +13,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QrCodeScannerKeyguardQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public final Context context;
     public final QRCodeScannerController controller;
@@ -21,7 +20,6 @@ public final class QrCodeScannerKeyguardQuickAffordanceConfig implements Keyguar
     public final String key = "qr_code_scanner";
     public final int pickerIconResourceId = R.drawable.ic_qr_code_scanner;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

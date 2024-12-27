@@ -9,7 +9,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LaunchParamsController {
     public final LaunchParamsPersister mPersister;
     public final ActivityTaskManagerService mService;
@@ -18,7 +17,6 @@ public final class LaunchParamsController {
     public final LaunchParams mTmpCurrent = new LaunchParams();
     public final LaunchParams mTmpResult = new LaunchParams();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LaunchParams {
         public int mDisplayDeviceType;
         public int mOrientation;
@@ -104,7 +102,6 @@ public final class LaunchParamsController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LaunchParamsModifier {}
 
     public LaunchParamsController(

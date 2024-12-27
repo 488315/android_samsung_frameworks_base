@@ -98,7 +98,6 @@ import java.util.List;
 import java.util.Map;
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CocktailBarManagerServiceContainer extends ICocktailBarService.Stub implements CocktailBarManagerServiceListener, CocktailPolicyManager.OnCocktailBarPolicyListener, CocktailBarUsageStateWatcher.OnCocktailBarWatcherListener, DevicePolicyManagerInternal.OnCrossProfileWidgetProvidersChangeListener {
     public static final boolean SUPPORT_EDGE_MUM;
     public final AppOpsManager mAppOpsManager;
@@ -124,7 +123,6 @@ public final class CocktailBarManagerServiceContainer extends ICocktailBarServic
     public final SparseIntArray mLoadedUserIds = new SparseIntArray();
     public int mCurrentUserId = -10;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailBarHandler extends Handler {
         public CocktailBarHandler(Looper looper) {
             super(looper);
@@ -451,7 +449,6 @@ public final class CocktailBarManagerServiceContainer extends ICocktailBarServic
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SecurityPolicy {
         public SecurityPolicy() {
         }

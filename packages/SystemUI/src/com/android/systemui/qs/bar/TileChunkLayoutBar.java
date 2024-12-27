@@ -24,7 +24,6 @@ import com.android.systemui.util.ConfigurationState;
 import com.android.systemui.util.SettingsHelper;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TileChunkLayoutBar extends BarItemImpl {
     public static final float BUTTON_WIDTH_MAX_RATIO;
     public static final float BUTTON_WIDTH_MIN_RATIO;

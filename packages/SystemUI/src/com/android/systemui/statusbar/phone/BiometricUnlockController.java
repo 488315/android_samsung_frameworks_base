@@ -72,7 +72,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BiometricUnlockController extends KeyguardUpdateMonitorCallback implements Dumpable {
     public static final UiEventLogger UI_EVENT_LOGGER = new UiEventLoggerImpl();
     public final AuthController mAuthController;
@@ -129,7 +128,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.BiometricUnlockController$3, reason: invalid class name */
     public final class AnonymousClass3 implements WakefulnessLifecycle.Observer {
         public AnonymousClass3() {
@@ -168,7 +166,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.BiometricUnlockController$5, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass5 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -211,7 +208,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
     	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
      */
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BiometricUiEvent implements UiEventLogger.UiEventEnum {
         /* JADX INFO: Fake field, exist only in values array */
         BIOMETRIC_FINGERPRINT_SUCCESS(396),
@@ -265,7 +261,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PendingAuthenticated {
         public final BiometricSourceType biometricSourceType;
         public final boolean isStrongBiometric;
@@ -843,7 +838,6 @@ public class BiometricUnlockController extends KeyguardUpdateMonitorCallback imp
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface BiometricUnlockEventsListener {
         default void onResetMode() {
         }

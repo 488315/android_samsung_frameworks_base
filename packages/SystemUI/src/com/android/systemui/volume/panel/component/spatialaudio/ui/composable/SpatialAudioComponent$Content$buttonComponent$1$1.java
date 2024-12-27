@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 extends FunctionReferenceImpl implements Function2 {
     public SpatialAudioComponent$Content$buttonComponent$1$1(Object obj) {
         super(2, obj, SpatialAudioPopup.class, "show", "show(Lcom/android/systemui/animation/Expandable;I)V", 0);

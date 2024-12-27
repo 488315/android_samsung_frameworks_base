@@ -11,7 +11,6 @@ import com.android.systemui.util.animation.AnimationUtil;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimationCallback {
     public boolean isAnimationRunning;
     public final Function1 onAlphaChanged;

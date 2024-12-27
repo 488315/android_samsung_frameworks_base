@@ -11,7 +11,6 @@ import android.provider.Settings;
 
 import com.samsung.android.sepunion.Log;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverTestModeUtils {
     public static final boolean SHIPPED = !Debug.semIsProductDev();
     public static int sCurrentTestMode = -1;
@@ -31,7 +30,6 @@ public final class CoverTestModeUtils {
             };
     public final AnonymousClass3 mVisibleRectObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnCoverTestModeChanged {
         void onCoverTestModeChanged(int i, boolean z);
     }

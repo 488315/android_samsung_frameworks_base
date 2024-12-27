@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class AnimatableProperty {
     public static final AnonymousClass7 ALPHA;
     public static final AnonymousClass7 SCALE_X;
@@ -15,7 +14,6 @@ public abstract class AnimatableProperty {
     public static final AnonymousClass7 TRANSLATION_X;
     public static final AnonymousClass7 Y;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$5, reason: invalid class name */
     public final class AnonymousClass5 extends FloatProperty {
         public final /* synthetic */ Function val$getter;
@@ -39,7 +37,6 @@ public abstract class AnimatableProperty {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$6, reason: invalid class name */
     public final class AnonymousClass6 extends AnimatableProperty {
         public final /* synthetic */ int val$animatorTag;
@@ -75,7 +72,6 @@ public abstract class AnimatableProperty {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$7, reason: invalid class name */
     public final class AnonymousClass7 extends AnimatableProperty {
         public final /* synthetic */ int val$animatorTag;

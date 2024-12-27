@@ -32,7 +32,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShortcutHelperActivity extends ComponentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ShortcutHelperViewModel viewModel;
@@ -143,7 +142,6 @@ public final class ShortcutHelperActivity extends ComponentActivity {
                 final ShortcutHelperActivity shortcutHelperActivity = ShortcutHelperActivity.this;
                 PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-1735153527, composer, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.view.ShortcutHelperActivity$setUpComposeView$1$1.1
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.keyboard.shortcut.ui.view.ShortcutHelperActivity$setUpComposeView$1$1$1$1, reason: invalid class name and collision with other inner class name */
                     final /* synthetic */ class C01121 extends FunctionReferenceImpl implements Function0 {
                         public C01121(Object obj) {

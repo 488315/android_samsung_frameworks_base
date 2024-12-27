@@ -35,7 +35,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarContentInsetsProvider implements CallbackController, ConfigurationController.ConfigurationListener, Dumpable {
     public final ConfigurationController configurationController;
     public final Context context;
@@ -56,7 +55,6 @@ public final class StatusBarContentInsetsProvider implements CallbackController,
         }
     });
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CacheKey {
         public final DisplayCutout displayCutout;
         public final Rect displaySize;
@@ -100,7 +98,6 @@ public final class StatusBarContentInsetsProvider implements CallbackController,
         DumpManager.registerDumpable$default(dumpManager, "StatusBarInsetsProvider", this);
         commandRegistry.registerCommand("status-bar-insets", new Function0() { // from class: com.android.systemui.statusbar.phone.StatusBarContentInsetsProvider.1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.phone.StatusBarContentInsetsProvider$1$1, reason: invalid class name and collision with other inner class name */
             public final class C02001 implements StatusBarInsetsCommand.Callback {
                 public final /* synthetic */ StatusBarContentInsetsProvider this$0;

@@ -78,7 +78,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppRestrictionController {
     public static final String[] ROLES_IN_INTEREST = {"android.app.role.DIALER", "android.app.role.EMERGENCY"};
     public String errorMsg;
@@ -118,7 +117,6 @@ public final class AppRestrictionController {
     public final AnonymousClass5 mUidObserver;
     public final SparseArray mUidRolesMapping;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.AppRestrictionController$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -366,7 +364,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgHandler extends Handler {
         public final Injector mInjector;
 
@@ -529,7 +526,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConstantsObserver implements DeviceConfig.OnPropertiesChangedListener {
         public volatile long mBgAbusiveNotificationMinIntervalMs;
         public volatile boolean mBgAutoRestrictAbusiveApps;
@@ -764,7 +760,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public ActivityManagerInternal mActivityManagerInternal;
         public AppBatteryExemptionTracker mAppBatteryExemptionTracker;
@@ -817,7 +812,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationHelper {
         public final AppRestrictionController mBgController;
         public final Context mContext;
@@ -863,7 +857,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneCarrierPrivilegesCallback implements TelephonyManager.CarrierPrivilegesCallback {
         public final int mPhoneId;
 
@@ -878,11 +871,9 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RestrictionSettings {
         public final SparseArrayMap mRestrictionLevels = new SparseArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PkgSettings {
             public long[] mLastNotificationShownTime;
             public long mLevelChangeTime;
@@ -1388,7 +1379,6 @@ public final class AppRestrictionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrackerInfo {
         public final byte[] mInfo;
         public final int mType;

@@ -7,15 +7,12 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ICrossProfileService extends IInterface {
     void launchIntent(Intent intent, Bundle bundle);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Stub extends Binder implements ICrossProfileService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Proxy implements ICrossProfileService {
             public final IBinder mRemote;
 

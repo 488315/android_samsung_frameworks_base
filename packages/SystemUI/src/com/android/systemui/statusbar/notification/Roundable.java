@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.notification;
 import java.util.LinkedHashMap;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface Roundable {
     default void applyRoundnessAndInvalidate() {
         getRoundableState().targetView.invalidate();

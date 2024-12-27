@@ -21,7 +21,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DualDarInnerLockScreenController {
     public KeyguardInputView mBaseView;
     public KeyguardInputViewController mBaseViewController;
@@ -52,7 +51,6 @@ public final class DualDarInnerLockScreenController {
     };
     public final AnonymousClass4 mCallback = new AnonymousClass4();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.DualDarInnerLockScreenController$4, reason: invalid class name */
     public final class AnonymousClass4 implements KeyguardSecurityCallback {
         public AnonymousClass4() {
@@ -114,7 +112,6 @@ public final class DualDarInnerLockScreenController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final Context mContext;
         public final Handler mHandler;

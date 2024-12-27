@@ -60,7 +60,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppFunctionManagerServiceImpl extends IAppFunctionManager.Stub {
     public final AppFunctionAgentPolicyManager mAppFunctionAgentPolicyManager;
     public final AppFunctionLoggerHelper mAppFunctionLoggerHelper;
@@ -71,7 +70,6 @@ public final class AppFunctionManagerServiceImpl extends IAppFunctionManager.Stu
     public final RemoteServiceCaller mRemoteServiceCaller;
     public final ServiceConfig mServiceConfig;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppFunctionMetadataObserver implements ObserverCallback {
         public final MetadataSyncAdapter mPerUserMetadataSyncAdapter;
 
@@ -100,7 +98,6 @@ public final class AppFunctionManagerServiceImpl extends IAppFunctionManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class DisabledAppFunctionException extends RuntimeException {
         public /* synthetic */ DisabledAppFunctionException() {
             this("The app function is disabled");

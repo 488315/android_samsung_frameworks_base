@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: ContentProviderNative.java */
 final class ContentProviderProxy implements IContentProvider {
     private IBinder mRemote;
 

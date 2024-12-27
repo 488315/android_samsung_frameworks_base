@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface INetdEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$metrics$INetdEventListener".replace('$', '.');
@@ -21,7 +20,6 @@ public interface INetdEventListener extends IInterface {
     public static final int REPORTING_LEVEL_NONE = 0;
     public static final int VERSION = 1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetdEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -75,7 +73,6 @@ public interface INetdEventListener extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements INetdEventListener {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -86,7 +83,6 @@ public interface INetdEventListener extends IInterface {
         static final int TRANSACTION_onTcpSocketStatsEvent = 5;
         static final int TRANSACTION_onWakeupEvent = 4;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements INetdEventListener {
             public String mCachedHash;
             public int mCachedVersion;

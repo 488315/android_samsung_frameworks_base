@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UriPermission {
     public ArraySet mReadOwners;
     public ArraySet mWriteOwners;
@@ -31,7 +30,6 @@ public final class UriPermission {
     public int persistedModeFlags = 0;
     public long persistedCreateTime = Long.MIN_VALUE;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PersistedTimeComparator implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
@@ -41,7 +39,6 @@ public final class UriPermission {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Snapshot {
         public final long persistedCreateTime;
         public final int persistedModeFlags;

@@ -5,14 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public interface IDlcService extends IInterface {
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public abstract class Stub extends Binder implements IDlcService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
         public final class Proxy implements IDlcService {
             public IBinder mRemote;
 

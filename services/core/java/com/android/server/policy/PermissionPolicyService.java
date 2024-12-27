@@ -75,7 +75,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PermissionPolicyService extends SystemService {
     public List mAppOpPermissions;
     public AnonymousClass2 mAppOpsCallback;
@@ -97,11 +96,9 @@ public final class PermissionPolicyService extends SystemService {
     public final AnonymousClass4 mSimConfigBroadcastReceiver;
     public TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Internal {
         public final AnonymousClass1 mActivityInterceptorCallback = new AnonymousClass1();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.policy.PermissionPolicyService$Internal$1, reason: invalid class name */
         public final class AnonymousClass1 implements ActivityInterceptorCallback {
             public AnonymousClass1() {}
@@ -416,7 +413,6 @@ public final class PermissionPolicyService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PermissionToOpSynchroniser {
         public final AppOpsManager mAppOpsManager;
         public final Context mContext;
@@ -429,7 +425,6 @@ public final class PermissionPolicyService extends SystemService {
                 (AppOpsManagerInternal) LocalServices.getService(AppOpsManagerInternal.class);
         public final ArrayMap mRuntimeAndTheirBgPermissionInfos = new ArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class OpToChange {
             public final int code;
             public final String packageName;
@@ -617,7 +612,6 @@ public final class PermissionPolicyService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneCarrierPrivilegesCallback
             implements TelephonyManager.CarrierPrivilegesCallback {
         public final int mPhoneId;

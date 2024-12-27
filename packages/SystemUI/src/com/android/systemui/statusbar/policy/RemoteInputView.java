@@ -68,7 +68,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class RemoteInputView extends LinearLayout implements View.OnClickListener {
     public static final Object VIEW_TAG = new Object();
     public boolean mColorized;
@@ -101,7 +100,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     public RemoteInputViewController mViewController;
     public NotificationViewWrapper mWrapper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EditorActionHandler implements TextView.OnEditorActionListener {
         public /* synthetic */ EditorActionHandler(RemoteInputView remoteInputView, int i) {
             this();
@@ -131,7 +129,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum NotificationRemoteInputEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_REMOTE_INPUT_OPEN(795),
         NOTIFICATION_REMOTE_INPUT_CLOSE(796),
@@ -150,7 +147,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class RemoteEditText extends EditText {
         public static final /* synthetic */ int $r8$clinit = 0;
         public InputMethodManager mInputMethodManager;
@@ -340,7 +336,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SendButtonTextWatcher implements TextWatcher {
         public /* synthetic */ SendButtonTextWatcher(RemoteInputView remoteInputView, int i) {
             this();

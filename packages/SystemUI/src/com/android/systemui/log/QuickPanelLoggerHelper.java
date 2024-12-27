@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QuickPanelLoggerHelper {
     public final TouchLogger dispatchTouchEventLogger;
     public final FlingLogger flingLogger;
@@ -17,7 +16,6 @@ public final class QuickPanelLoggerHelper {
     public final TouchLogger onTouchEventLogger;
     public final PanelStateLogger panelStateLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -27,7 +25,6 @@ public final class QuickPanelLoggerHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FlingLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final StringBuilder logBuilder = new StringBuilder();
@@ -37,7 +34,6 @@ public final class QuickPanelLoggerHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PanelStateLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final StringBuilder logBuilder = new StringBuilder();
@@ -62,7 +58,6 @@ public final class QuickPanelLoggerHelper {
         this.panelStateLogger = new PanelStateLogger(quickPanelExternalLogger);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TouchLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final String header;

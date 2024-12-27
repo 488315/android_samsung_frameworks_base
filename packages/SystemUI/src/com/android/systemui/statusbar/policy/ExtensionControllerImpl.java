@@ -13,13 +13,11 @@ import java.util.Comparator;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ExtensionControllerImpl implements ExtensionController {
     public final Context mDefaultContext;
     public final LeakDetector mLeakDetector;
     public final PluginManager mPluginManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExtensionBuilder {
         public final ExtensionImpl mExtension;
 
@@ -45,14 +43,12 @@ public final class ExtensionControllerImpl implements ExtensionController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExtensionImpl implements ExtensionController.Extension {
         public final ArrayList mCallbacks;
         public Object mItem;
         public Context mPluginContext;
         public final ArrayList mProducers;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Default implements Item {
             public final Supplier mSupplier;
 
@@ -71,7 +67,6 @@ public final class ExtensionControllerImpl implements ExtensionController {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class PluginItem implements Item, PluginListener {
             public Plugin mItem;
 
@@ -140,7 +135,6 @@ public final class ExtensionControllerImpl implements ExtensionController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Item {
         Object get();
 

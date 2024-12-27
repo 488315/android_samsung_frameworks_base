@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgeLightingSettingManager {
     public static EdgeLightingSettingManager sInstance;
     public final boolean mAllApplication;
@@ -31,7 +30,6 @@ public final class EdgeLightingSettingManager {
     public final Context mContext;
     public final HashMap mEnableSet;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GetAppNameListAsyncTask extends AsyncTask {
         public /* synthetic */ GetAppNameListAsyncTask(EdgeLightingSettingManager edgeLightingSettingManager, int i) {
             this();

@@ -11,12 +11,10 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class Screen {
     public final List navArgument;
     public final String route;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CastSetting extends Screen {
         public static final CastSetting INSTANCE = new CastSetting();
 
@@ -37,7 +35,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -47,7 +44,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LabsHome extends Screen {
         public static final LabsHome INSTANCE = new LabsHome();
 
@@ -68,7 +64,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Phone extends Screen {
         public static final Phone INSTANCE = new Phone();
 
@@ -100,7 +95,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Selector extends Screen {
         public static final Selector INSTANCE = new Selector();
 
@@ -121,7 +115,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingHome extends Screen {
         public static final SettingHome INSTANCE = new SettingHome();
 
@@ -142,7 +135,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TV extends Screen {
         public static final TV INSTANCE = new TV();
 

@@ -8,7 +8,6 @@ import com.android.systemui.touch.TouchInsetManager$$ExternalSyntheticLambda0;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ComplicationLayoutEngine implements Complication.VisibilityController {
     public final int mFadeInDuration;
     public final int mFadeOutDuration;
@@ -16,12 +15,10 @@ public final class ComplicationLayoutEngine implements Complication.VisibilityCo
     public final HashMap mEntries = new HashMap();
     public final HashMap mPositions = new HashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DirectionGroup implements ViewEntry.Parent {
         public final Parent mParent;
         public final ArrayList mViews = new ArrayList();
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Parent {
         }
 
@@ -30,7 +27,6 @@ public final class ComplicationLayoutEngine implements Complication.VisibilityCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Margins {
         public final int bottom;
         public final int end;
@@ -53,7 +49,6 @@ public final class ComplicationLayoutEngine implements Complication.VisibilityCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PositionGroup implements DirectionGroup.Parent {
         public final int mDefaultDirectionalSpacing;
         public final HashMap mDirectionGroups = new HashMap();
@@ -65,7 +60,6 @@ public final class ComplicationLayoutEngine implements Complication.VisibilityCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewEntry implements Comparable {
         public final int mCategory;
         public final ComplicationLayoutParams mLayoutParams;
@@ -73,7 +67,6 @@ public final class ComplicationLayoutEngine implements Complication.VisibilityCo
         public final TouchInsetManager.TouchInsetSession mTouchInsetSession;
         public final View mView;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Parent {
         }
 

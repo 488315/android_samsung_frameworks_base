@@ -6,18 +6,15 @@ import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AuthenticationWipeModel {
     public final int failedAttempts;
     public final int remainingAttempts;
     public final WipeTarget wipeTarget;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class WipeTarget {
         public final int messageIdForAlmostWipe;
         public final int messageIdForWipe;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ManagedProfile extends WipeTarget {
             public static final ManagedProfile INSTANCE = new ManagedProfile();
 
@@ -38,7 +35,6 @@ public final class AuthenticationWipeModel {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class User extends WipeTarget {
             public static final User INSTANCE = new User();
 
@@ -59,7 +55,6 @@ public final class AuthenticationWipeModel {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class WholeDevice extends WipeTarget {
             public static final WholeDevice INSTANCE = new WholeDevice();
 

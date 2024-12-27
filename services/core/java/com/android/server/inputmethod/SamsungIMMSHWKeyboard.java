@@ -22,7 +22,6 @@ import com.android.server.input.InputManagerService;
 
 import com.samsung.android.knoxguard.service.utils.Constants;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SamsungIMMSHWKeyboard {
     public int keyboardState;
     public int mBTKeyboardCount;
@@ -30,7 +29,6 @@ public final class SamsungIMMSHWKeyboard {
     public int mUSBKeyboardCount;
     public int mUSBKeyboardCountOld;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BTKeyboardReceiver extends BroadcastReceiver {
         public boolean mIsBTConnect = false;
 
@@ -161,7 +159,6 @@ public final class SamsungIMMSHWKeyboard {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KMSKeyboardReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ SamsungIMMSHWKeyboard this$0;
@@ -312,13 +309,11 @@ public final class SamsungIMMSHWKeyboard {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class POGOKeyboardReceiver extends BroadcastReceiver {
         public final InputManagerService mInputManagerService =
                 IInputManager.Stub.asInterface(ServiceManager.getService("input"));
         public final AnonymousClass1 mCallbacks = new AnonymousClass1();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.inputmethod.SamsungIMMSHWKeyboard$POGOKeyboardReceiver$1, reason: invalid class name */
         public final class AnonymousClass1
                 implements InputManagerService.InputMethodManagerCallbacks {

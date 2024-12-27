@@ -4,7 +4,6 @@ import com.android.server.LocalServices;
 import com.android.server.appop.AppOpMigrationHelperImpl;
 import com.android.server.pm.permission.PermissionMigrationHelperImpl;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PackageVersionMigration {
     public static int
             getVersion$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(

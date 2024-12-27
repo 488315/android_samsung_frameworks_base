@@ -15,7 +15,6 @@ import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FingerprintGestureDispatcher extends IFingerprintClientActiveCallback.Stub
         implements Handler.Callback {
     public final IFingerprintService mFingerprintService;
@@ -25,7 +24,6 @@ public final class FingerprintGestureDispatcher extends IFingerprintClientActive
     public final List mCapturingClients = new ArrayList(0);
     public final Handler mHandler = new Handler(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface FingerprintGestureClient {
         boolean isCapturingFingerprintGestures();
 

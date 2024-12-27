@@ -10,7 +10,6 @@ import android.util.Slog;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SmartStorageMaintIdler extends JobService {
     public static final ComponentName SMART_STORAGE_MAINT_SERVICE =
             new ComponentName("android", SmartStorageMaintIdler.class.getName());
@@ -18,7 +17,6 @@ public class SmartStorageMaintIdler extends JobService {
     public final AtomicBoolean mStarted = new AtomicBoolean(false);
     public final AnonymousClass1 mFinishCallback = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.SmartStorageMaintIdler$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {}

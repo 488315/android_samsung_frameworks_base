@@ -25,7 +25,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class PackageManagerShellCommandDataLoader extends DataLoaderService {
     public static final char ARGS_DELIM = '&';
     public static final int INVALID_SHELL_COMMAND_ID = -1;
@@ -38,7 +37,6 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
     public static final SecureRandom sRandom = new SecureRandom();
     public static final SparseArray sShellCommands = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataLoader implements DataLoaderService.DataLoader {
         public DataLoaderService.FileSystemConnector mConnector;
         public DataLoaderParams mParams;
@@ -127,7 +125,6 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Metadata {
         public static final AtomicLong sGlobalSalt = new AtomicLong(new SecureRandom().nextLong());
         public final byte[] mData;

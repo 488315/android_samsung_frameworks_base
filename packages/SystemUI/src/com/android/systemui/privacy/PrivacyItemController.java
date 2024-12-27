@@ -20,7 +20,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PrivacyItemController implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final DelayableExecutor bgExecutor;
@@ -50,12 +49,10 @@ public final class PrivacyItemController implements Dumpable {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback extends PrivacyConfig.Callback {
         void onPrivacyItemsChanged(List list);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -68,7 +65,6 @@ public final class PrivacyItemController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyExecutor implements Executor {
         public final DelayableExecutor delegate;
         public Runnable listeningCanceller;
@@ -83,7 +79,6 @@ public final class PrivacyItemController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotifyChangesToCallback implements Runnable {
         public final Callback callback;
         public final List list;

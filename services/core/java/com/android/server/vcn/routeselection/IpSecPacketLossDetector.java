@@ -22,7 +22,6 @@ import java.util.BitSet;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IpSecPacketLossDetector extends NetworkMetricMonitor {
     static final int IPSEC_PACKET_LOSS_PERCENT_THRESHOLD_DISABLE_DETECTOR = -1;
     static final int MIN_VALID_EXPECTED_RX_PACKET_NUM = 10;
@@ -37,10 +36,8 @@ public final class IpSecPacketLossDetector extends NetworkMetricMonitor {
     public long mPollIpSecStateIntervalMs;
     public final PowerManager mPowerManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IpSecTransformStateReceiver implements OutcomeReceiver {
         public IpSecTransformStateReceiver() {}
 
@@ -204,7 +201,6 @@ public final class IpSecPacketLossDetector extends NetworkMetricMonitor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class PacketLossCalculationResult {
         public final int mPacketLossRatePercent;
         public final int mResultType;
@@ -239,10 +235,8 @@ public final class IpSecPacketLossDetector extends NetworkMetricMonitor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class PacketLossCalculator {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PollIpSecStateRunnable implements Runnable {
         public PollIpSecStateRunnable() {}
 

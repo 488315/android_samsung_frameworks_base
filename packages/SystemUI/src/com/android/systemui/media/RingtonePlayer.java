@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RingtonePlayer implements CoreStartable {
     public final Context mContext;
     public final NotificationPlayer mAsyncPlayer = new NotificationPlayer("RingtonePlayer");
@@ -170,7 +169,6 @@ public final class RingtonePlayer implements CoreStartable {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Client implements IBinder.DeathRecipient {
         public final Ringtone mRingtone;
         public final IBinder mToken;

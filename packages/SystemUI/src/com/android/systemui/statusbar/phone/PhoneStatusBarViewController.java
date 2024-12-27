@@ -63,7 +63,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PhoneStatusBarViewController extends ViewController implements IndicatorGarden, Dumpable {
     public final IndicatorGardenContainer centerContainer;
     public final CentralSurfaces centralSurfaces;
@@ -97,7 +96,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
     public final IndicatorGardenViewTreeLogHelper viewTreeLogHelper;
     public final ViewUtil viewUtil;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final CentralSurfaces centralSurfaces;
         public final ConfigurationController configurationController;
@@ -154,7 +152,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PhoneStatusBarViewTouchHandler implements Gefingerpoken {
         public PhoneStatusBarViewTouchHandler() {
         }
@@ -204,7 +201,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StatusBarViewsCenterProvider implements UnfoldMoveFromCenterAnimator.ViewCenterProvider {
         public static void getViewEdgeCenter(View view, Point point, boolean z) {
             boolean z2 = z ^ (view.getResources().getConfiguration().getLayoutDirection() == 1);

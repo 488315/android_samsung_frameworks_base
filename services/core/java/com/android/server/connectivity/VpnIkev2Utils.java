@@ -48,10 +48,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class VpnIkev2Utils {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChildSessionCallbackImpl implements ChildSessionCallback {
         public final Vpn.IkeV2VpnRunnerCallback mCallback;
         public final int mToken;
@@ -305,7 +303,6 @@ public abstract class VpnIkev2Utils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IkeSessionCallbackImpl implements IkeSessionCallback {
         public final Vpn.IkeV2VpnRunnerCallback mCallback;
         public final int mToken;
@@ -378,7 +375,6 @@ public abstract class VpnIkev2Utils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Ikev2VpnNetworkCallback extends ConnectivityManager.NetworkCallback {
         public final Vpn.IkeV2VpnRunnerCallback mCallback;
         public final Executor mExecutor;

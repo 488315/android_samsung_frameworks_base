@@ -48,7 +48,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenNotificationController implements NotifCollectionListener, SemWindowManager.FoldStateListener {
     public final Optional bubblesOptional;
     public final Context context;
@@ -69,7 +68,6 @@ public final class SubscreenNotificationController implements NotifCollectionLis
     public final StatusBarStateController statusBarStateController;
     public final List subscreenStateListenerList;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.SubscreenNotificationController$1, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass1 implements BindEventManager.Listener, FunctionAdapter {
         public AnonymousClass1() {
@@ -171,7 +169,6 @@ public final class SubscreenNotificationController implements NotifCollectionLis
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

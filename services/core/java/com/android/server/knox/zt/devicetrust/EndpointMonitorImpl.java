@@ -54,7 +54,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EndpointMonitorImpl {
     public static final String KZT_FW_PKG_NAME = "com.samsung.android.knox.zt.framework";
     public static final String TAG = "EndpointMonitorImpl";
@@ -68,7 +67,6 @@ public final class EndpointMonitorImpl {
     public final MonitoringSession mSession;
     public final Object mSessionLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public final long mBootTimeNanos;
         public Context mContext;
@@ -180,7 +178,6 @@ public final class EndpointMonitorImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends EndpointMonitorInternal {
         public LocalService() {}
 
@@ -211,7 +208,6 @@ public final class EndpointMonitorImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class MonitoringSession {
         public final Object mLock;
         public final Map mTasks = new HashMap();

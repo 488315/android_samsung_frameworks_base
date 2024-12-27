@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: Html.java */
 class HtmlToSpannedConverter implements ContentHandler {
     private static Pattern sBackgroundColorPattern;
     private static Pattern sForegroundColorPattern;
@@ -706,62 +705,50 @@ class HtmlToSpannedConverter implements ContentHandler {
     @Override // org.xml.sax.ContentHandler
     public void skippedEntity(String name) throws SAXException {}
 
-    /* compiled from: Html.java */
     private static class Bold {
         private Bold() {}
     }
 
-    /* compiled from: Html.java */
     private static class Italic {
         private Italic() {}
     }
 
-    /* compiled from: Html.java */
     private static class Underline {
         private Underline() {}
     }
 
-    /* compiled from: Html.java */
     private static class Strikethrough {
         private Strikethrough() {}
     }
 
-    /* compiled from: Html.java */
     private static class Big {
         private Big() {}
     }
 
-    /* compiled from: Html.java */
     private static class Small {
         private Small() {}
     }
 
-    /* compiled from: Html.java */
     private static class Monospace {
         private Monospace() {}
     }
 
-    /* compiled from: Html.java */
     private static class Blockquote {
         private Blockquote() {}
     }
 
-    /* compiled from: Html.java */
     private static class Super {
         private Super() {}
     }
 
-    /* compiled from: Html.java */
     private static class Sub {
         private Sub() {}
     }
 
-    /* compiled from: Html.java */
     private static class Bullet {
         private Bullet() {}
     }
 
-    /* compiled from: Html.java */
     private static class Font {
         public String mFace;
 
@@ -770,7 +757,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Href {
         public String mHref;
 
@@ -779,7 +765,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Foreground {
         private int mForegroundColor;
 
@@ -788,7 +773,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Background {
         private int mBackgroundColor;
 
@@ -797,7 +781,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Heading {
         private int mLevel;
 
@@ -806,7 +789,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Newline {
         private int mNumNewlines;
 
@@ -815,7 +797,6 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    /* compiled from: Html.java */
     private static class Alignment {
         private Layout.Alignment mAlignment;
 

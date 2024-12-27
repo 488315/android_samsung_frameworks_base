@@ -10,7 +10,6 @@ import com.samsung.android.server.packagefeature.PackageFeatureUserChange;
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiTaskingAppCompatOrientationPolicy {
     public static final boolean SUPPORTS_MULTI_STAR =
             CoreRune.MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
@@ -19,7 +18,6 @@ public final class MultiTaskingAppCompatOrientationPolicy {
     public final Rect mTmpPrevBounds = new Rect();
     public final int mRotationCompatPolicy = 2;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.MultiTaskingAppCompatOrientationPolicy$1, reason: invalid class name */
     public final class AnonymousClass1
             implements MultiTaskingAppCompatController.OverridesObserver {

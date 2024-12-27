@@ -9,7 +9,6 @@ import com.android.systemui.keyguard.domain.interactor.KeyguardLongPressInteract
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardSettingsMenuViewModel;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSettingsButtonOnTouchListener implements View.OnTouchListener {
     public final PointF downPositionDisplayCoords = new PointF();
     public final KeyguardSettingsMenuViewModel viewModel;

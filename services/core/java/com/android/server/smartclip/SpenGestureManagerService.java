@@ -85,7 +85,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SpenGestureManagerService extends ISpenGestureService.Stub {
     public static Context mContext;
     public int ALLOWANCE_HOVER_TIME;
@@ -135,7 +134,6 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
     public final int mSpenUspLevel;
     public final SpenThemeManager mThemeManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.smartclip.SpenGestureManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 extends PackageMonitor {
         public final void onPackageDataCleared(String str, int i) {
@@ -145,7 +143,6 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AcSettingsObserver extends ContentObserver {
         public AcSettingsObserver(AnonymousClass5 anonymousClass5) {
             super(anonymousClass5);
@@ -162,21 +159,18 @@ public final class SpenGestureManagerService extends ISpenGestureService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PenDataStruct {
         public long EnterTime;
         public int RawX;
         public int RawY;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PenDetectionInfo {
         public int action;
         public long eventTime;
         public String penName;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SPenGestureInputEventReceiver implements WindowManagerPolicyConstants.PointerEventListener {
         public ICustomFrequencyManager sCfmsService = null;
 

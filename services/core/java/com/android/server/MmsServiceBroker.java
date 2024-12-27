@@ -27,7 +27,6 @@ import com.android.server.uri.UriGrantsManagerService;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MmsServiceBroker extends SystemService {
     public volatile AppOpsManager mAppOpsManager;
     public final AnonymousClass2 mConnection;
@@ -42,7 +41,6 @@ public final class MmsServiceBroker extends SystemService {
     public static final Uri FAKE_SMS_DRAFT_URI = Uri.parse("content://sms/draft/0");
     public static final Uri FAKE_MMS_DRAFT_URI = Uri.parse("content://mms/draft/0");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IMms.Stub {
         public BinderService() {}
 

@@ -10,13 +10,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class Log {
     public static final DateTimeFormatter FORMATTER;
     public static final EvictingArrayQueue SAVED_LOGS;
     public static final EvictingArrayQueue SAVED_STATES;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EvictingArrayQueue {
         public final int mCapacity;
         public final ArrayDeque mElements;

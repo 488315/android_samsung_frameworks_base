@@ -6,7 +6,6 @@ import com.android.systemui.log.SamsungServiceLoggerImpl;
 import com.android.systemui.log.core.LogLevel;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LogWrapper {
     public final LogWrapper$logger$1 logger = new Object() { // from class: com.android.systemui.basic.util.LogWrapper$logger$1
     };

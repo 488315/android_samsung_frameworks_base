@@ -43,7 +43,6 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ImageWallpaperCanvasHelper {
     public final String TAG;
     public Bitmap mBitmap;
@@ -78,11 +77,9 @@ public final class ImageWallpaperCanvasHelper {
     public boolean mIsFolded = false;
     public final HashMap mDownScaledSourceBitmapSet = new HashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DownScaledSourceBitmap {
         public final Bitmap mBitmap;
         public final float mScale;

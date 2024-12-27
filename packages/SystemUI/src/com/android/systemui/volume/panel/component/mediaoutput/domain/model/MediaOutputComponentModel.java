@@ -5,10 +5,8 @@ import com.android.systemui.volume.domain.model.AudioOutputDevice;
 import com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface MediaOutputComponentModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Calling implements MediaOutputComponentModel {
         public final AudioOutputDevice device;
         public final boolean isInAudioSharing;
@@ -48,7 +46,6 @@ public interface MediaOutputComponentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Idle implements MediaOutputComponentModel {
         public final AudioOutputDevice device;
         public final boolean isInAudioSharing;
@@ -88,7 +85,6 @@ public interface MediaOutputComponentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaSession implements MediaOutputComponentModel {
         public final AudioOutputDevice device;
         public final boolean isInAudioSharing;

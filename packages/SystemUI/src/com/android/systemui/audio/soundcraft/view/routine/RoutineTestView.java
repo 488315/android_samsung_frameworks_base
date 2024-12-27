@@ -15,7 +15,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RoutineTestView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Lazy viewModel$delegate;

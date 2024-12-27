@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class ShadeControllerSceneImpl$setVisibilityListener$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ShadeController.ShadeVisibilityListener $listener;
     int label;
@@ -48,7 +47,6 @@ final class ShadeControllerSceneImpl$setVisibilityListener$1 extends SuspendLamb
             final ShadeController.ShadeVisibilityListener shadeVisibilityListener = this.$listener;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.shade.ShadeControllerSceneImpl$setVisibilityListener$1.1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.shade.ShadeControllerSceneImpl$setVisibilityListener$1$1$1, reason: invalid class name and collision with other inner class name */
                 final class C01841 extends SuspendLambda implements Function2 {
                     final /* synthetic */ boolean $isVisible;

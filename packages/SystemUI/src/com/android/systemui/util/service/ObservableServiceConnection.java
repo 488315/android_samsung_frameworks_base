@@ -24,7 +24,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ObservableServiceConnection<T> implements ServiceConnection {
     public static final int DISCONNECT_REASON_BINDING_DIED = 3;
     public static final int DISCONNECT_REASON_DISCONNECTED = 2;
@@ -43,19 +42,16 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     private final ArrayList<WeakReference<Callback<T>>> mCallbacks = new ArrayList<>();
     private Optional<Integer> mLastDisconnectReason = Optional.empty();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback<T> {
         void onConnected(ObservableServiceConnection<T> observableServiceConnection, T t);
 
         void onDisconnected(ObservableServiceConnection<T> observableServiceConnection, int i);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @Retention(RetentionPolicy.SOURCE)
     public @interface DisconnectReason {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ServiceTransformer<T> {
         T convert(IBinder iBinder);
     }

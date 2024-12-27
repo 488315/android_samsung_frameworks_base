@@ -66,7 +66,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class WindowContainer extends ConfigurationContainer implements Comparable, SurfaceAnimator.Animatable, InsetsControlTarget {
     private static final int INVALID_SYNC_ID = -1;
     static final int POSITION_BOTTOM = Integer.MIN_VALUE;
@@ -132,7 +131,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
     private final LinkedList mTmpChain1 = new LinkedList();
     private final LinkedList mTmpChain2 = new LinkedList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimationRunnerBuilder {
         public final List mOnAnimationFinished = new LinkedList();
         public final List mOnAnimationCancelled = new LinkedList();
@@ -141,11 +139,9 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ConfigurationMerger {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IBinder.DeathRecipient {
         public final IBinder mOwner;
         public final ArraySet mSourceIds = new ArraySet();
@@ -191,7 +187,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForAllWindowsConsumerWrapper implements ToBooleanFunction {
         public Consumer mConsumer;
 
@@ -204,7 +199,6 @@ public abstract class WindowContainer extends ConfigurationContainer implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteToken extends IWindowContainerToken.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final WeakReference mWeakRef;

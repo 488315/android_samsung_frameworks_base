@@ -167,7 +167,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     public static SemBioFaceManager sFaceManager;
     public final String[] RemoteLockString;
@@ -282,7 +281,6 @@ public final class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     public final KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda14 mWaitingFocusRunnable;
     public final IWindowManager mWindowManagerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecUpdateMonitorImpl$8, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass8 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;

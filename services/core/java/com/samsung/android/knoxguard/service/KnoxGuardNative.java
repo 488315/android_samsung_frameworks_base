@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class KnoxGuardNative {
     public static int KGTA_FAILED = -1000;
     public static int KGTA_PARAM_DEFAULT = 0;
@@ -42,7 +41,6 @@ public class KnoxGuardNative {
     public static int KG_CMD_VERIFY_REGISTRATION_INFO = 2;
     public static String TAG = "KnoxGuardTANative";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyStorageManager {
         public static int DATA_READ_ERROR = -3;
         public static int FILE_MISSING_CANNOT_CREATE = -2;

@@ -36,7 +36,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable {
     public static final Uri EMERGENCY_MODE_URI = Settings.System.getUriFor(SettingsHelper.INDEX_EMERGENCY_MODE);
     public boolean mBrightnessBarOnTop;
@@ -56,7 +55,6 @@ public final class MediaDevicesBar extends BarItemImpl implements TunerService.T
     private final SettingsHelper.OnChangedCallback mSettingsListener;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.bar.MediaDevicesBar$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {

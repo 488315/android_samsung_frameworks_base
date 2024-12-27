@@ -30,7 +30,6 @@ import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 import com.android.wm.shell.animation.FlingAnimationUtils;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BouncerSwipeTouchHandler implements TouchHandler {
     public final float mBouncerZoneScreenPercentage;
     public Boolean mCapture;
@@ -87,14 +86,12 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum DreamEvent implements UiEventLogger.UiEventEnum {
         DREAM_SWIPED(988),
         DREAM_BOUNCER_FULLY_VISIBLE(1056);
@@ -110,11 +107,9 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ValueAnimatorCreator {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface VelocityTrackerFactory {
     }
 

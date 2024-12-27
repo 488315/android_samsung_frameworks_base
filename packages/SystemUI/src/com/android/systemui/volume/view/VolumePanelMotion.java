@@ -12,7 +12,6 @@ import androidx.dynamicanimation.animation.SpringForce;
 import com.android.systemui.volume.store.StoreInteractor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumePanelMotion {
     public static final PathInterpolator HIDE_INTERPOLATOR;
     public static final PathInterpolator SETTING_BUTTON_ROTATION_INTERPOLATOR;
@@ -21,7 +20,6 @@ public final class VolumePanelMotion {
     public SpringAnimation singleShowSpringAnimation;
     public final StoreInteractor storeInteractor = new StoreInteractor(null, null, 3, null);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

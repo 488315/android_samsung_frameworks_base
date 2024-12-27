@@ -23,7 +23,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DragDropController {
     public Task mDragSourceTask;
     public DragState mDragState;
@@ -54,11 +53,9 @@ public final class DragDropController {
             };
     public final AtomicReference mCallback = new AtomicReference(new AnonymousClass2());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.DragDropController$2, reason: invalid class name */
     public final class AnonymousClass2 implements WindowManagerInternal.IDragDropCallback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DragHandler extends Handler {
         public final WindowManagerService mService;
 

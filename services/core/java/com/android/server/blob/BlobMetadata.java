@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BlobMetadata {
     public File mBlobFile;
     public final BlobHandle mBlobHandle;
@@ -44,7 +43,6 @@ public final class BlobMetadata {
     public final ArraySet mLeasees = new ArraySet();
     public final ArrayMap mRevocableFds = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Accessor {
         public final String packageName;
         public final int uid;
@@ -81,7 +79,6 @@ public final class BlobMetadata {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Committer extends Accessor {
         public final BlobAccessMode blobAccessMode;
         public final long commitTimeMs;
@@ -104,7 +101,6 @@ public final class BlobMetadata {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Leasee extends Accessor {
         public final CharSequence description;
         public final String descriptionResEntryName;

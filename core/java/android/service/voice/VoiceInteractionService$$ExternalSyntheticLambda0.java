@@ -2,7 +2,6 @@ package android.service.voice;
 
 import java.util.function.Consumer;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class VoiceInteractionService$$ExternalSyntheticLambda0
         implements Consumer {
     public final /* synthetic */ VoiceInteractionService f$0;

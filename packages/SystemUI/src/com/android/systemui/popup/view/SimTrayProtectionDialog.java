@@ -23,7 +23,6 @@ import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.popup.data.SimTrayProtectionData;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SimTrayProtectionDialog implements PopupUIAlertDialog {
     private static final String TAG = "SimTrayProtectionDialog";
     public static final float TINY_TEXT_SCALE = 0.9f;

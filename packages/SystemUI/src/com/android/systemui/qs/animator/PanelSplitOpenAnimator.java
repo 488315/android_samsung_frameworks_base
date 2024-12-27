@@ -32,7 +32,6 @@ import java.util.Iterator;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final BarController barController;
     public final BarOrderInteractor barOrderInteractor;
@@ -65,7 +64,6 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final float buttonYDiff = 50.0f;
     public final float xDiff = 100.0f;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

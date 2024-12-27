@@ -56,7 +56,6 @@ import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BrightnessBar extends BarItemImpl implements TunerService.Tunable, TileHostable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int mBarBottomMargin;
@@ -84,7 +83,6 @@ public final class BrightnessBar extends BarItemImpl implements TunerService.Tun
     public ToggleSeekBar mToggleSeekBar;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.bar.BrightnessBar$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {

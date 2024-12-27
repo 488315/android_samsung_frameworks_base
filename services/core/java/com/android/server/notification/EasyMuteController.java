@@ -17,7 +17,6 @@ import com.samsung.android.gesture.SemMotionRecognitionManager;
 
 import java.lang.reflect.Method;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EasyMuteController {
     public final AudioManager mAudioManager;
     public final Context mContext;
@@ -66,7 +65,6 @@ public final class EasyMuteController {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EasyMuteSettingObserver extends ContentObserver {
         public EasyMuteSettingObserver(Handler handler) {
             super(handler);

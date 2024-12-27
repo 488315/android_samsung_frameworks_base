@@ -72,7 +72,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkManagementService extends INetworkManagementService.Stub {
     public static final boolean DBG = Log.isLoggable("NetworkManagement", 3);
     public HashMap mActiveAlerts;
@@ -108,15 +107,12 @@ public final class NetworkManagementService extends INetworkManagementService.St
     public SparseBooleanArray mUidRejectOnMetered;
     public final boolean mUseMeteredFirewallChains;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Dependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetdTetherEventListener extends Binder implements INetdTetherEventListener {
         public NetdTetherEventListener() {
             attachInterface(this, "com.android.internal.net.INetdTetherEventListener");
@@ -160,7 +156,6 @@ public final class NetworkManagementService extends INetworkManagementService.St
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetdUnsolicitedEventListener extends INetdUnsolicitedEventListener.Stub {
         public NetdUnsolicitedEventListener() {}
 
@@ -319,7 +314,6 @@ public final class NetworkManagementService extends INetworkManagementService.St
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface NetworkManagementEventCallback {
         void sendCallback(INetworkManagementEventObserver iNetworkManagementEventObserver);
     }

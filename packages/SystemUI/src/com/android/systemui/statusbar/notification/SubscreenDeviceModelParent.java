@@ -93,7 +93,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubscreenDeviceModelParent {
     public ActivityManager activityManager;
     public int bubbleReply;
@@ -283,7 +282,6 @@ public class SubscreenDeviceModelParent {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -293,7 +291,6 @@ public class SubscreenDeviceModelParent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MainListHashMapItem {
         public NotificationEntry mEntry;
         public SubscreenNotificationInfo mInfo;

@@ -30,7 +30,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SideCoverContentView implements ContentView, ViewStateController {
     public final ConditionChecker mConditionChecker;
     public ViewGroup mConfirmView;
@@ -53,7 +52,6 @@ public final class SideCoverContentView implements ContentView, ViewStateControl
     public final AnonymousClass1 mSideCoverAnimatorCallback = new AnonymousClass1();
     public ViewAnimationState mViewAnimationState = ViewAnimationState.IDLE;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.globalactions.presentation.view.SideCoverContentView$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public String toastMessage;
@@ -62,7 +60,6 @@ public final class SideCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SideCoverContentAdapter extends ArrayAdapter {
         public View mLastAnimatedView;
         public final List mTempViewModelList;
@@ -107,7 +104,6 @@ public final class SideCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SideCoverContentGridView extends GridView {
         public long mLastTime;
         public float mLastX;
@@ -151,7 +147,6 @@ public final class SideCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SideCoverContentRootView extends FrameLayout {
         public SideCoverContentRootView(Context context) {
             super(context);

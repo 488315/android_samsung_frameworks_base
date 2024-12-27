@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.Vector;
 
-/* compiled from: TtmlRenderer.java */
 class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.RenderingWidget {
     private static final float LINE_HEIGHT_RATIO = 0.0533f;
     private CaptioningManager mCaptionManager;
@@ -128,7 +127,6 @@ class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.Renderin
         }
     }
 
-    /* compiled from: TtmlRenderer.java */
     private static class CustomTextView extends TextView {
         public CustomTextView(Context context) {
             super(context);

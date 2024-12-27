@@ -22,7 +22,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSCPopupButtonController {
     public boolean barChanged;
     public final ArrayList children = new ArrayList(((AbstractCollection) POPUPTYPE.$ENTRIES).size());
@@ -34,7 +33,6 @@ public final class QSCPopupButtonController {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class POPUPTYPE {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ POPUPTYPE[] $VALUES;
@@ -44,7 +42,6 @@ public final class QSCPopupButtonController {
         private final int second;
         private final int title;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class BRIGHTNESS extends POPUPTYPE {
             public BRIGHTNESS(String str, int i) {
                 super(str, i, R.string.sec_brightness_control, R.string.qs_panel_detail_popup_menu_always_text, R.string.qs_panel_detail_popup_menu_when_expanded_text, null);
@@ -67,7 +64,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class DEVICEMEDIA extends POPUPTYPE {
             public DEVICEMEDIA(String str, int i) {
                 super(str, i, R.string.sec_devices_and_media_control, R.string.qs_panel_detail_popup_menu_when_collapsed_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -90,7 +86,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class HIDE_SMART_VIEW_LARGE_TILE extends POPUPTYPE {
             public HIDE_SMART_VIEW_LARGE_TILE(String str, int i) {
                 super(str, i, R.string.sec_smart_view_large_tile_info, R.string.qs_panel_detail_popup_menu_when_expanded_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -112,7 +107,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class MULTISIM extends POPUPTYPE {
             public MULTISIM(String str, int i) {
                 super(str, i, R.string.sec_multi_sim_info_control, R.string.qs_panel_detail_popup_menu_when_expanded_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -184,7 +178,6 @@ public final class QSCPopupButtonController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

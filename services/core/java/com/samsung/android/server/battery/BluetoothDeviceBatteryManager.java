@@ -14,13 +14,11 @@ import com.android.server.SystemService;
 
 import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BluetoothDeviceBatteryManager {
     public DeviceBatteryInfoService mBatteryInfoServiceInternal;
     public Context mContext;
     public Handler mHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum CHARGE_STATE {
         CHARGE_STATE_DISCHARGE("CHARGE_STATE_DISCHARGE"),
         CHARGE_STATE_WIRED_CHARGE("CHARGE_STATE_WIRED_CHARGE"),
@@ -33,7 +31,6 @@ public final class BluetoothDeviceBatteryManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ManufacturerData {
         public final int MANUFACTURER_OFFSET_SS_LE_ASSOCIATED_SERVICE_DATA_LENGTH;
         public final byte[] mDeviceId = new byte[2];

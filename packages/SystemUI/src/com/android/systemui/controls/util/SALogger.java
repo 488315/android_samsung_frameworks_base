@@ -30,12 +30,10 @@ import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SALogger {
     public static final Companion Companion = new Companion(null);
     public final SystemUIAnalyticsWrapper systemUIAnalyticsWrapper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppStatus {
 
         @SerializedName(SystemUIAnalytics.CONTROL_KEY_APP_NAME)
@@ -69,7 +67,6 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppStatusList {
 
         @SerializedName("AppList")
@@ -95,7 +92,6 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -105,10 +101,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Event {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class AddDevices extends Event {
             public static final AddDevices INSTANCE = new AddDevices();
 
@@ -137,7 +131,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseAppOnOff extends Event {
             public final boolean checked;
 
@@ -159,7 +152,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseAppOnOffOnManageApps extends Event {
             public final boolean checked;
 
@@ -181,7 +173,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class IntroStart extends Event {
             public final int selectedApps;
             public final int totalApps;
@@ -209,7 +200,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchDevices extends Event {
             public static final LaunchDevices INSTANCE = new LaunchDevices();
 
@@ -238,7 +228,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchFullController extends Event {
             public static final LaunchFullController INSTANCE = new LaunchFullController();
 
@@ -267,7 +256,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchSmartThings extends Event {
             public static final LaunchSmartThings INSTANCE = new LaunchSmartThings();
 
@@ -296,7 +284,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LeftChooseDevices extends Event {
             public final String appName;
             public final int numberOfSelectedControls;
@@ -340,7 +327,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoveCard extends Event {
             public static final MoveCard INSTANCE = new MoveCard();
 
@@ -369,7 +355,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OpenSpinner extends Event {
             public static final OpenSpinner INSTANCE = new OpenSpinner();
 
@@ -398,7 +383,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class QuitDevices extends Event {
             public final Screen screen;
 
@@ -416,7 +400,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Reorder extends Event {
             public static final Reorder INSTANCE = new Reorder();
 
@@ -445,7 +428,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SettingsControlDevicesOnOff extends Event {
             public final boolean checked;
 
@@ -467,7 +449,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SettingsShowDevicesOnOff extends Event {
             public final boolean checked;
 
@@ -489,7 +470,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapAppList extends Event {
             public static final TapAppList INSTANCE = new TapAppList();
 
@@ -518,7 +498,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapAppListOnManageApps extends Event {
             public static final TapAppListOnManageApps INSTANCE = new TapAppListOnManageApps();
 
@@ -547,7 +526,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapCardLayout extends Event {
             public final ControlViewHolder cvh;
 
@@ -580,7 +558,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapMainActionButton extends Event {
             public final ControlViewHolder cvh;
 
@@ -611,7 +588,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapMenuDevicesToShow extends Event {
             public final Screen screen;
 
@@ -629,7 +605,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapMenuManageApp extends Event {
             public final Screen screen;
 
@@ -647,7 +622,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapMenuSetting extends Event {
             public final Screen screen;
 
@@ -665,7 +639,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapSmallTypeCard extends Event {
             public final String deviceName;
             public final String deviceType;
@@ -691,7 +664,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapSpinnerApp extends Event {
             public final String selectedApp;
 
@@ -736,10 +708,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Screen {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseDevices extends Screen {
             public static final ChooseDevices INSTANCE = new ChooseDevices();
 
@@ -765,7 +735,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class CustomPanel extends Screen {
             public static final CustomPanel INSTANCE = new CustomPanel();
 
@@ -791,7 +760,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Intro extends Screen {
             public static final Intro INSTANCE = new Intro();
 
@@ -817,7 +785,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class IntroNoAppsToShow extends Screen {
             public static final IntroNoAppsToShow INSTANCE = new IntroNoAppsToShow();
 
@@ -843,7 +810,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MainScreen extends Screen {
             public static final MainScreen INSTANCE = new MainScreen();
 
@@ -869,7 +835,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ManageApps extends Screen {
             public static final ManageApps INSTANCE = new ManageApps();
 
@@ -895,7 +860,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NoDeviceSelected extends Screen {
             public static final NoDeviceSelected INSTANCE = new NoDeviceSelected();
 
@@ -921,7 +885,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Settings extends Screen {
             public static final Settings INSTANCE = new Settings();
 
@@ -957,10 +920,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class StatusEvent {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DeviceAppStatus extends StatusEvent {
             public final AppStatusList appList;
 
@@ -980,7 +941,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NumberOfApps extends StatusEvent {
             public final int selectedApps;
             public final int totalApps;

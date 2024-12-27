@@ -43,7 +43,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.List;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecNotificationAppInfo extends FrameLayout implements NotificationGuts.GutsContent, GutContentInitializer {
     public int mActualHeight;
     public boolean mAlertAllowed;
@@ -82,7 +81,6 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
     public TextView mTurnOffConFirmButton;
     public UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateAppLevelSettingRunnable implements Runnable {
         public final int mAppUid;
         public final boolean mCurrentAlertAllowed;

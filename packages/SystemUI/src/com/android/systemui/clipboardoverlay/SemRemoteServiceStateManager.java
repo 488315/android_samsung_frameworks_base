@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SemRemoteServiceStateManager {
     public static final ArrayList remoteServiceKeySet = new ArrayList(Arrays.asList("mcf_continuity_nearby_device_state", "samsungflow_clipboard_sync_state", "ltw_clipboard_sync_state", "multi_control_connection_state"));
     public final BroadcastSender mBoardcasteSender;
@@ -23,7 +22,6 @@ public final class SemRemoteServiceStateManager {
     public final Context mContext;
     public final HashMap mRemoteServiceStateMap;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConnectionStateClearHandler extends Handler {
         public ConnectionStateClearHandler(Looper looper) {
             super(looper);
@@ -47,7 +45,6 @@ public final class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DexOnPcConnectionStateChangeObserver extends ContentObserver {
         public DexOnPcConnectionStateChangeObserver() {
             super(new Handler());
@@ -62,7 +59,6 @@ public final class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LinkToWindowConnectionStateChangeObserver extends ContentObserver {
         public LinkToWindowConnectionStateChangeObserver() {
             super(new Handler());
@@ -77,7 +73,6 @@ public final class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class McfContinuityConnectionStateChangeObserver extends ContentObserver {
         public McfContinuityConnectionStateChangeObserver() {
             super(new Handler());
@@ -92,7 +87,6 @@ public final class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MultiControlConnectionStateChangeObserver extends ContentObserver {
         public MultiControlConnectionStateChangeObserver() {
             super(new Handler());
@@ -107,7 +101,6 @@ public final class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SamsungFlowConnectionStateChangeObserver extends ContentObserver {
         public SamsungFlowConnectionStateChangeObserver() {
             super(new Handler());

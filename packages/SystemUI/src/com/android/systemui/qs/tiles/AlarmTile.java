@@ -26,7 +26,6 @@ import java.util.Locale;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AlarmTile extends QSTileImpl {
     public final AlarmTile$callback$1 callback;
     public final Intent defaultIntent;
@@ -34,7 +33,6 @@ public final class AlarmTile extends QSTileImpl {
     public AlarmManager.AlarmClockInfo lastAlarmInfo;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

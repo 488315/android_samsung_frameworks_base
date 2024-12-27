@@ -79,7 +79,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AudioDeviceBroker {
     public static final Set MESSAGES_SAR_RCV_CONTROL;
     public static long sLastDeviceConnectMsgTime;
@@ -130,7 +129,6 @@ public final class AudioDeviceBroker {
     public final LinkedList mCommunicationRouteClients = new LinkedList();
     public AudioDeviceAttributes mCurrentCallDevice = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioModeInfo {
         public final int mMode;
         public final int mPid;
@@ -152,7 +150,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BleVolumeInfo {
         public final int mIndex;
         public final int mMaxIndex;
@@ -165,7 +162,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrokerHandler extends Handler {
         public BrokerHandler() {}
 
@@ -188,7 +184,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrokerThread extends Thread {
         public BrokerThread() {
             super("AudioDeviceBroker");
@@ -205,7 +200,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BtDeviceChangedData {
         public final String mEventSource;
         public final BluetoothProfileConnectionInfo mInfo;
@@ -234,7 +228,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BtDeviceInfo {
         public final int mAudioSystemDevice;
         public final BluetoothDevice mDevice;
@@ -327,7 +320,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CommunicationDeviceInfo {
         public final IBinder mCb;
         public final AudioDeviceAttributes mDevice;
@@ -393,7 +385,6 @@ public final class AudioDeviceBroker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CommunicationRouteClient implements IBinder.DeathRecipient {
         public final IBinder mCb;
         public final AudioDeviceAttributes mDevice;

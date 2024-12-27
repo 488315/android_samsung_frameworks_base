@@ -112,7 +112,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PermissionService implements PermissionManagerServiceInterface {
     public static final long BACKUP_TIMEOUT_MILLIS;
     public static final ArrayMap FULLER_PERMISSIONS;
@@ -140,7 +139,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
     public UserManagerService userManagerService;
     public VirtualDeviceManagerInternal virtualDeviceManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnPermissionFlagsChangedListener
             implements AppIdPermissionPolicy.OnPermissionFlagsChangedListener,
                     DevicePermissionPolicy.OnDevicePermissionFlagsChangedListener {
@@ -350,7 +348,6 @@ public final class PermissionService implements PermissionManagerServiceInterfac
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnPermissionsChangeListeners extends Handler {
         public final RemoteCallbackList listeners;
 

@@ -19,7 +19,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SelinuxAuditLogsService extends JobService {
     public static final SelinuxAuditLogsJob LOGS_COLLECTOR_JOB;
     public static final QuotaLimiter QUOTA_LIMITER;
@@ -28,7 +27,6 @@ public class SelinuxAuditLogsService extends JobService {
             new ComponentName("android", SelinuxAuditLogsService.class.getName());
     public static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogsCollectorJobScheduler
             implements DeviceConfig.OnPropertiesChangedListener {
         public final JobScheduler mJobScheduler;

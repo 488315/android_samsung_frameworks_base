@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCompatOverridesService {
     public static final List SUPPORTED_NAMESPACES = Arrays.asList("app_compat_overrides");
     public final Context mContext;
@@ -42,7 +41,6 @@ public final class AppCompatOverridesService {
     public final IPlatformCompat mPlatformCompat;
     public final List mSupportedNamespaces;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public final Context mContext;
         public final String mNamespace;
@@ -86,7 +84,6 @@ public final class AppCompatOverridesService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public AppCompatOverridesService mService;
 
@@ -108,7 +105,6 @@ public final class AppCompatOverridesService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageReceiver extends BroadcastReceiver {
         public final Context mContext;
         public final IntentFilter mIntentFilter;

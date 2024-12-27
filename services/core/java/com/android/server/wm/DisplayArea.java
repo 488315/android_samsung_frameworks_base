@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class DisplayArea extends WindowContainer {
     boolean mDisplayAreaAppearedSent;
     final int mFeatureId;
@@ -38,7 +37,6 @@ public class DisplayArea extends WindowContainer {
     private final Configuration mTmpConfiguration;
     protected final Type mType;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dimmable extends DisplayArea {
         private final Dimmer mDimmer;
 
@@ -78,7 +76,6 @@ public class DisplayArea extends WindowContainer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Tokens extends DisplayArea {
         public final DisplayArea$Tokens$$ExternalSyntheticLambda1 mGetOrientingWindow;
         public int mLastKeyguardForcedOrientation;
@@ -222,7 +219,6 @@ public class DisplayArea extends WindowContainer {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type ABOVE_TASKS;

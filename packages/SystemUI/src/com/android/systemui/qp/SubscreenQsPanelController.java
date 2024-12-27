@@ -13,7 +13,6 @@ import com.android.systemui.util.QsResetSettingsManager;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenQsPanelController implements QsResetSettingsManager.ResetSettingsApplier, QsResetSettingsManager.DemoResetSettingsApplier {
     public ViewController mBaseViewController;
     public final SubroomQuickSettingsBaseViewFactory mBaseViewFactory;
@@ -23,7 +22,6 @@ public final class SubscreenQsPanelController implements QsResetSettingsManager.
     public final InjectionInflationController mInjectionInflater;
     public SubscreenSubRoomQuickSettings mSubRoomQuickSettings;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SubroomQuickSettingsBaseViewFactory {
         public SubroomQuickSettingsBaseViewFactory() {
         }

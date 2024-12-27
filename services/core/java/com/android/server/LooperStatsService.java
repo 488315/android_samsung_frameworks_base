@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LooperStatsService extends Binder {
     public final Context mContext;
     public final LooperStats mStats;
@@ -37,7 +36,6 @@ public final class LooperStatsService extends Binder {
     public boolean mTrackScreenInteractive = false;
     public boolean mIgnoreBatteryStatus = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final LooperStatsService mService;
         public final SettingsObserver mSettingsObserver;
@@ -77,7 +75,6 @@ public final class LooperStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LooperShellCommand extends ShellCommand {
         public LooperShellCommand() {}
 
@@ -121,7 +118,6 @@ public final class LooperStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final LooperStatsService mService;
 

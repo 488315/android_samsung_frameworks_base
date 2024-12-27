@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GroupHelper {
     public final int mAutoGroupAtCount;
     public final NotificationManagerService.AnonymousClass2 mCallback;
@@ -26,7 +25,6 @@ public final class GroupHelper {
     public final PackageManager mPackageManager;
     public final ArrayMap mUngroupedNotifications = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationAttributes {
         public final int flags;
         public final Icon icon;

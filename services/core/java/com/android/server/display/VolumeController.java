@@ -8,7 +8,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VolumeController {
     public final WifiDisplayController mDisplayController;
     public final DlnaController mDlnaController;
@@ -27,7 +26,6 @@ public final class VolumeController {
     public boolean mMuted;
     public int mVolume;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.VolumeController$3, reason: invalid class name */
     public final class AnonymousClass3 implements Runnable {
         public AnonymousClass3() {}

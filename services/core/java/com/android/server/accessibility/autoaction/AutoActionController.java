@@ -13,14 +13,12 @@ import android.widget.Toast;
 
 import com.android.server.accessibility.BaseEventStreamTransformation;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutoActionController extends BaseEventStreamTransformation {
     public ActionScheduler mActionScheduler;
     public AutoActionObserver mAutoActionObserver;
     public final Context mContext;
     public final int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActionScheduler implements Runnable {
         public boolean mActive;
         public final MotionEvent.PointerCoords mAnchorCoords;
@@ -38,7 +36,6 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         public MotionEvent.PointerProperties[] mTempPointerProperties;
         public int mType;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.accessibility.autoaction.AutoActionController$ActionScheduler$3, reason: invalid class name */
         public final class AnonymousClass3 implements Runnable {
             public AnonymousClass3() {}
@@ -144,7 +141,6 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutoActionObserver extends ContentObserver {
         public ActionScheduler mActionScheduler;
         public final Uri mAutoActionDelaySettingUri;

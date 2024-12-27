@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.view.animation.DecelerateInterpolator;
 import com.android.internal.graphics.ColorUtils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScrimDrawable extends Drawable {
     public ValueAnimator mColorAnimation;
     public ConcaveInfo mConcaveInfo;
@@ -29,7 +28,6 @@ public final class ScrimDrawable extends Drawable {
     public int mAlpha = 255;
     public float mBottomEdgeRadius = -1.0f;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConcaveInfo {
         public float mPathOverlap;
         public final Path mPath = new Path();

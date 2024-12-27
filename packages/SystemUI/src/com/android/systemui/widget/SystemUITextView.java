@@ -23,7 +23,6 @@ import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SystemUITextView extends TextView implements SystemUIWidgetCallback {
     public final int mAttrCount;
     public final BlurSettingsListener mBlurSettings;
@@ -43,7 +42,6 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     public final ResData mResData;
     public long mUpdateFlag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BlurSettingsListener implements SettingsHelper.OnChangedCallback {
         public BlurSettingsListener() {
             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(this, Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY));
@@ -61,7 +59,6 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResData {
         public String mCompoundDrawable;
         public int mCompoundDrawableId;

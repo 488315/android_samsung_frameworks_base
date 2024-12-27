@@ -175,7 +175,6 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stub {
     public static final int TYPE_LIMIT = 35;
     public static final int TYPE_LIMIT_SNOOZED = 36;
@@ -325,7 +324,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
     public static final String KEY_SM_PROVIDER_METHOR_UPDATE_ALARM = "updateAlarmFromSM";
     public static final String KEY_ONLY_SHOW_LIMIT_ALERT = "only_show_limit_alert";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveDataSubIdListener extends TelephonyCallback
             implements TelephonyCallback.ActiveDataSubscriptionIdListener {
         public int mActiveDataSubId;
@@ -349,7 +347,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallAttributesListener extends TelephonyCallback
             implements TelephonyCallback.CallAttributesListener {
         public CallAttributesListener() {}
@@ -412,7 +409,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Dependencies {
         public final NetworkStatsManager mNetworkStatsManager;
 
@@ -462,7 +458,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IfaceQuotas {
         public final String iface;
         public final long limit;
@@ -475,7 +470,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetPolicyAppIdleStateChangeListener
             extends AppStandbyInternal.AppIdleStateChangeListener {
         public NetPolicyAppIdleStateChangeListener() {}
@@ -506,7 +500,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkPolicyManagerInternalImpl {
         public NetworkPolicyManagerInternalImpl() {}
 
@@ -602,7 +595,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationId {
         public final int mId;
         public final String mTag;
@@ -631,7 +623,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RestrictedModeObserver extends ContentObserver {
         public final Context mContext;
         public final NetworkPolicyManagerService$$ExternalSyntheticLambda8 mListener;
@@ -667,7 +658,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsCallback extends NetworkStatsManager.UsageCallback {
         public boolean mIsAnyCallbackReceived = false;
 
@@ -684,7 +674,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class UidBlockedState {
         public static final int[] BLOCKED_REASONS = {
             1,
@@ -1009,7 +998,6 @@ public final class NetworkPolicyManagerService extends INetworkPolicyManager.Stu
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStateCallbackInfo {
         public int capability;
         public boolean isPending;

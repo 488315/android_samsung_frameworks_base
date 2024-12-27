@@ -32,7 +32,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccountsDb implements AutoCloseable {
     public static final String[] ACCOUNT_TYPE_COUNT_PROJECTION = {"type", "count(type)"};
     public static final String[] COLUMNS_AUTHTOKENS_TYPE_AND_AUTHTOKEN = {"type", "authtoken"};
@@ -44,7 +43,6 @@ public final class AccountsDb implements AutoCloseable {
     public final Object mDebugStatementLock = new Object();
     public volatile long mDebugDbInsertionPoint = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CeDatabaseHelper extends SQLiteOpenHelper {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -106,7 +104,6 @@ public final class AccountsDb implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeDatabaseHelper extends SQLiteOpenHelper {
         public volatile boolean mCeAttached;
         public final int mUserId;
@@ -220,7 +217,6 @@ public final class AccountsDb implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PreNDatabaseHelper extends SQLiteOpenHelper {
         public final Context mContext;
         public final int mUserId;

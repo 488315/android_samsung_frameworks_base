@@ -6,12 +6,10 @@ import android.content.pm.PackageManager;
 import java.util.Comparator;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCompatOverridesParser {
     public static final Pattern BOOLEAN_PATTERN = Pattern.compile("true|false", 2);
     public final PackageManager mPackageManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PackageOverrideComparator implements Comparator {
         public static long getVersionProximity(PackageOverride packageOverride, long j) {
             if (isVersionAfterRange(packageOverride, j)) {

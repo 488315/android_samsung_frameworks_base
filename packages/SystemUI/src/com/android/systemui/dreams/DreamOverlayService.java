@@ -47,7 +47,6 @@ import java.util.HashSet;
 import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DreamOverlayService extends android.service.dreams.DreamOverlayService implements LifecycleOwner {
     public static final boolean DEBUG = Log.isLoggable("DreamOverlayService", 3);
     public final AmbientTouchComponent mAmbientTouchComponent;
@@ -82,7 +81,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
     public final WindowManager mWindowManager;
     public final String mWindowTitle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$1, reason: invalid class name */
     class AnonymousClass1 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass1() {
@@ -106,7 +104,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$2, reason: invalid class name */
     public final class AnonymousClass2 implements Consumer {
         public AnonymousClass2() {
@@ -118,7 +115,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$3, reason: invalid class name */
     public final class AnonymousClass3 implements Consumer {
         public AnonymousClass3() {
@@ -130,7 +126,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum DreamOverlayEvent implements UiEventLogger.UiEventEnum {
         DREAM_OVERLAY_ENTER_START(989),
         DREAM_OVERLAY_COMPLETE_START(990);

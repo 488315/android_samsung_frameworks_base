@@ -88,7 +88,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ClipboardService extends SystemService {
     public static final long DEFAULT_CLIPBOARD_TIMEOUT_MILLIS = 3600000;
     public boolean mAllowVirtualDeviceSilos;
@@ -116,7 +115,6 @@ public final class ClipboardService extends SystemService {
     public final WindowManagerInternal mWm;
     public final Handler mWorkerHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Clipboard {
         public final HashSet activePermissionOwners;
         public final int deviceId;
@@ -140,11 +138,9 @@ public final class ClipboardService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClipboardImpl extends IClipboard.Stub {
         public final ClipboardClearHandler mClipboardClearHandler;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ClipboardClearHandler extends Handler {
             public ClipboardClearHandler(Looper looper) {
                 super(looper);
@@ -818,7 +814,6 @@ public final class ClipboardService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerInfo {
         public final String mAttributionTag;
         public final String mPackageName;

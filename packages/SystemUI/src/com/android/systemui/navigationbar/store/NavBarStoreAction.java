@@ -16,10 +16,8 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface NavBarStoreAction {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Action {
         public final boolean a11yClickable;
         public final boolean a11yLongClickable;
@@ -151,7 +149,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ForceHideGestureHint implements NavBarStoreAction {
         public final Action action;
 
@@ -232,7 +229,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GestureHintVIInfo {
         public final int distanceX;
         public final int distanceY;
@@ -281,7 +277,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class InvalidateRemoteView implements NavBarStoreAction {
         public final Action action;
 
@@ -362,7 +357,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MoveHintVI implements NavBarStoreAction {
         public final Action action;
 
@@ -443,7 +437,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NavBarIconMarquee implements NavBarStoreAction {
         public final Action action;
 
@@ -524,7 +517,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NavBarLayoutInfo {
         public final int gravity;
         public final int height;
@@ -577,7 +569,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OneHandModeInfo {
         public final int offsetX;
         public final int offsetY;
@@ -622,7 +613,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RecalculateGestureInsetScale implements NavBarStoreAction {
         public final Action action;
 
@@ -703,7 +693,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ReevaluateNavBar implements NavBarStoreAction {
         public final Action action;
 
@@ -784,7 +773,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ReinflateNavBar implements NavBarStoreAction {
         public final Action action;
 
@@ -865,7 +853,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RemoteViewShortcut {
         public final int position;
         public final int priority;
@@ -918,7 +905,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResetHintVI implements NavBarStoreAction {
         public final Action action;
 
@@ -999,7 +985,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SetGestureHintViewGroup implements NavBarStoreAction {
         public final Action action;
 
@@ -1080,7 +1065,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SetNavBarVisibility implements NavBarStoreAction {
         public final Action action;
 
@@ -1161,7 +1145,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShowA11ySwipeUpTipPopup implements NavBarStoreAction {
         public final Action action;
 
@@ -1242,7 +1225,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StartHintVI implements NavBarStoreAction {
         public final Action action;
 
@@ -1323,7 +1305,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SysUiFlagInfo {
         public final long flag;
         public final boolean value;
@@ -1361,7 +1342,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateA11YStatus implements NavBarStoreAction {
         public final Action action;
 
@@ -1442,7 +1422,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateDefaultNavigationBarStatus implements NavBarStoreAction {
         public final Action action;
 
@@ -1523,7 +1502,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateEdgeBackGestureDisabledPolicy implements NavBarStoreAction {
         public final Action action;
 
@@ -1604,7 +1582,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateGestureHintVisibility implements NavBarStoreAction {
         public final Action action;
 
@@ -1685,7 +1662,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateIndicatorSpringParams implements NavBarStoreAction {
         public final Action action;
 
@@ -1766,7 +1742,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarGoneStateFlag implements NavBarStoreAction {
         public final Action action;
 
@@ -1847,7 +1822,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarIconAndHints implements NavBarStoreAction {
         public final Action action;
 
@@ -1928,7 +1902,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarLayoutParams implements NavBarStoreAction {
         public final Action action;
 
@@ -2009,7 +1982,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarNormalStyle implements NavBarStoreAction {
         public final Action action;
 
@@ -2090,7 +2062,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarOpaqueColor implements NavBarStoreAction {
         public final Action action;
 
@@ -2171,7 +2142,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavBarSUWStyle implements NavBarStoreAction {
         public final Action action;
 
@@ -2252,7 +2222,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateNavigationIcon implements NavBarStoreAction {
         public final Action action;
 
@@ -2333,7 +2302,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateOneHandModeInfo implements NavBarStoreAction {
         public final Action action;
 
@@ -2414,7 +2382,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateRegionSamplingRect implements NavBarStoreAction {
         public final Action action;
 
@@ -2495,7 +2462,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateRemoteViewContainer implements NavBarStoreAction {
         public final Action action;
 
@@ -2576,7 +2542,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateRemoteViewDarkIntensity implements NavBarStoreAction {
         public final Action action;
 
@@ -2657,7 +2622,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateRemoteViewShortcut implements NavBarStoreAction {
         public final Action action;
 
@@ -2738,7 +2702,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateSUWA11yIcon implements NavBarStoreAction {
         public final Action action;
 
@@ -2819,7 +2782,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateSUWDarkIntensity implements NavBarStoreAction {
         public final Action action;
 
@@ -2900,7 +2862,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateSUWDisabled implements NavBarStoreAction {
         public final Action action;
 
@@ -2981,7 +2942,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateSUWIconHints implements NavBarStoreAction {
         public final Action action;
 
@@ -3062,7 +3022,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateSysUiFlags implements NavBarStoreAction {
         public final Action action;
 
@@ -3143,7 +3102,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateTaskBarIconsAndHints implements NavBarStoreAction {
         public final Action action;
 
@@ -3224,7 +3182,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateTaskBarNavBarEvents implements NavBarStoreAction {
         public final Action action;
 
@@ -3305,7 +3262,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateTaskbarStatus implements NavBarStoreAction {
         public final Action action;
 

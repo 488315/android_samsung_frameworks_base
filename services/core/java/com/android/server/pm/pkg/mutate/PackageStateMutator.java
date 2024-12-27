@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageStateMutator {
     public static final AtomicLong sStateChangeSequence = new AtomicLong();
     public final Function mActiveStateFunction;
@@ -18,7 +17,6 @@ public final class PackageStateMutator {
     public final StateWriteWrapper mStateWrite = new StateWriteWrapper();
     public final ArraySet mChangedStates = new ArraySet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InitialState {
         public final int mPackageSequence;
         public final long mStateSequence;
@@ -29,7 +27,6 @@ public final class PackageStateMutator {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Result {
         public final boolean mCommitted;
         public final boolean mPackagesChanged;
@@ -49,12 +46,10 @@ public final class PackageStateMutator {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StateWriteWrapper {
         public PackageSetting mState;
         public final UserStateWriteWrapper mUserStateWrite = new UserStateWriteWrapper();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UserStateWriteWrapper {
             public PackageUserStateImpl mUserState;
         }

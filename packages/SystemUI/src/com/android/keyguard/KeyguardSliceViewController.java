@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSliceViewController extends ViewController implements Dumpable {
     public final ActivityStarter mActivityStarter;
     public final Handler mBgHandler;
@@ -52,7 +51,6 @@ public final class KeyguardSliceViewController extends ViewController implements
     public final KeyguardSliceViewController$$ExternalSyntheticLambda0 mTunable;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSliceViewController$2, reason: invalid class name */
     public final class AnonymousClass2 implements Observer {
         public AnonymousClass2() {

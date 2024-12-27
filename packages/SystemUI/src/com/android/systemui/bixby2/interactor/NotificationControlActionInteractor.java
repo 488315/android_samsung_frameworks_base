@@ -28,7 +28,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationControlActionInteractor implements ActionInteractor {
     static final String CATEGORY_APP_NOTIFICATION_NOT_RECEIVED = "APP_NOTIFICATION_NOT_RECEIVED";
     static final String CATEGORY_NOTIFICATION_NOT_RECEIVED = "NOTIFICATION_NOT_RECEIVED";
@@ -63,7 +62,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
     private boolean DEBUG = DeviceType.isEngOrUTBinary();
     private Gson mGson = new Gson();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum Action {
         read_notification_withid,
         delete_notification,
@@ -76,7 +74,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         query_notification_settings
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class DisplayContent {
 
         @SerializedName("appName")
@@ -107,7 +104,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class NotificationList {
 
         @SerializedName("appName")
@@ -194,7 +190,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Result {
 
         @SerializedName("contentForDisplay")

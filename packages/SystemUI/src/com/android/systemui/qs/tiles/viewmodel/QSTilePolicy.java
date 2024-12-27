@@ -3,10 +3,8 @@ package com.android.systemui.qs.tiles.viewmodel;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface QSTilePolicy {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NoRestrictions implements QSTilePolicy {
         public static final NoRestrictions INSTANCE = new NoRestrictions();
 
@@ -26,7 +24,6 @@ public interface QSTilePolicy {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Restricted implements QSTilePolicy {
         public final List userRestrictions;
 

@@ -34,7 +34,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.HexExtensionsKt;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ColoredBGHelper implements StatusBarStateController.StateListener, OnSemColorsChangedListener, ShadeExpansionListener, SettingsHelper.OnChangedCallback, ConfigurationController.ConfigurationListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ConfigurationController configurationController;
@@ -60,7 +59,6 @@ public final class ColoredBGHelper implements StatusBarStateController.StateList
     public final int WALLPAPER_FIXED_ALPHA = HexExtensionsKt.hexToInt$default("3d");
     public final int THEME_FIXED_ALPHA = HexExtensionsKt.hexToInt$default(DATA.DM_FIELD_INDEX.PREF_CSCF_PORT);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

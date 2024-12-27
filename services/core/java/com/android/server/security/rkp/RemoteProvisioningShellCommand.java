@@ -44,14 +44,12 @@ import java.util.LinkedList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteProvisioningShellCommand extends ShellCommand {
     public static final Duration BIND_TIMEOUT = Duration.ofSeconds(10);
     public final int mCallerUid;
     public final Context mContext;
     public final Injector mInjector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public static IRemotelyProvisionedComponent getIrpcBinder(String str) {
             IRemotelyProvisionedComponent iRemotelyProvisionedComponent;
@@ -83,7 +81,6 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OutcomeFuture implements OutcomeReceiver {
         public final CompletableFuture mFuture = new CompletableFuture();
 

@@ -23,7 +23,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ChallengeDialogs {
     public static final ChallengeDialogs INSTANCE = new ChallengeDialogs();
     public static final int STYLE = 2132018525;

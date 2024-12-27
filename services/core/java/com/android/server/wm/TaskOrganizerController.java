@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TaskOrganizerController extends ITaskOrganizerController.Stub {
     public final WindowManagerGlobalLock mGlobalLock;
     public final ActivityTaskManagerService mService;
@@ -46,7 +45,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     public final ArrayMap mTaskOrganizerStates = new ArrayMap();
     public final HashSet mInterceptBackPressedOnRootTasks = new HashSet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class DeathRecipient implements IBinder.DeathRecipient {
         public final ITaskOrganizer mTaskOrganizer;
 
@@ -77,7 +75,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingTaskEvent {
         public final int mEventType;
         public boolean mForce;
@@ -90,7 +87,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartingWindowAnimationAdaptor implements AnimationAdapter {
         @Override // com.android.server.wm.AnimationAdapter
         public final void dump(PrintWriter printWriter, String str) {}
@@ -124,7 +120,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                 SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskOrganizerCallbacks {
         public final ITaskOrganizer mTaskOrganizer;
 
@@ -133,7 +128,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskOrganizerPendingEventsQueue {
         public final TaskOrganizerState mOrganizerState;
         public ActivityManager.RunningTaskInfo mTmpTaskInfo;
@@ -233,7 +227,6 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class TaskOrganizerState {
         public final DeathRecipient mDeathRecipient;
         public final ArrayList mOrganizedTasks = new ArrayList();

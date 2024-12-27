@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FragmentService implements Dumpable {
     public final AnonymousClass1 mConfigurationListener;
     public final FragmentHostManager.Factory mFragmentHostManagerFactory;
@@ -23,7 +22,6 @@ public final class FragmentService implements Dumpable {
     public final ArrayMap mInjectionMap = new ArrayMap();
     public final Handler mHandler = new Handler();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FragmentHostState {
         public final FragmentHostManager mFragmentHostManager;
         public final View mView;

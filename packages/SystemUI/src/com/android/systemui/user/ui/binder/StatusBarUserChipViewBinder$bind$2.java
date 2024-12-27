@@ -17,14 +17,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class StatusBarUserChipViewBinder$bind$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Function1 $userCountCallback;
     final /* synthetic */ StatusBarUserChipViewModel $viewModel;
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.ui.binder.StatusBarUserChipViewBinder$bind$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Function1 $userCountCallback;
@@ -32,7 +30,6 @@ final class StatusBarUserChipViewBinder$bind$2 extends SuspendLambda implements 
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.user.ui.binder.StatusBarUserChipViewBinder$bind$2$1$1, reason: invalid class name and collision with other inner class name */
         final class C02661 extends SuspendLambda implements Function2 {
             final /* synthetic */ Function1 $userCountCallback;

@@ -10,11 +10,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTracker {
     public UidProcessMap mUidPackageStates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppBatteryExemptionPolicy
             extends BaseAppStateEventsTracker.BaseAppStateEventsPolicy {
         @Override // com.android.server.am.BaseAppStateEventsTracker.BaseAppStateEventsPolicy,
@@ -68,7 +66,6 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidBatteryStates extends BaseAppStateDurations {
         /* JADX WARN: Removed duplicated region for block: B:46:0x0113  */
         /* JADX WARN: Removed duplicated region for block: B:61:0x017a  */
@@ -157,7 +154,6 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStateEventWithBattery extends BaseAppStateTimeEvents$BaseTimeEvent {
         public AppBatteryTracker.ImmutableBatteryUsage mBatteryUsage;
         public boolean mIsStart;

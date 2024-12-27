@@ -15,14 +15,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $onLongPress;
     final /* synthetic */ PointerEventPass $pass;
     final /* synthetic */ PointerInputScope $this_detectLongPressGesture;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$detectLongPressGesture$2$1, reason: invalid class name */
     final class AnonymousClass1 extends RestrictedSuspendLambda implements Function2 {
         final /* synthetic */ Function1 $onLongPress;
@@ -31,7 +29,6 @@ final class PointerInputScopeExtKt$detectLongPressGesture$2 extends SuspendLambd
         Object L$1;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$detectLongPressGesture$2$1$1, reason: invalid class name and collision with other inner class name */
         final class C00761 extends RestrictedSuspendLambda implements Function2 {
             final /* synthetic */ PointerEventPass $pass;

@@ -11,12 +11,10 @@ import com.android.systemui.animation.GhostedViewTransitionAnimatorController;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InteractionHandlerDelegate implements RemoteViews.InteractionHandler {
     public final Function1 findViewToAnimate;
     public final IntentStarter intentStarter;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface IntentStarter {
         void startPendingIntent(PendingIntent pendingIntent, Intent intent, ActivityOptions activityOptions, GhostedViewTransitionAnimatorController ghostedViewTransitionAnimatorController);
     }

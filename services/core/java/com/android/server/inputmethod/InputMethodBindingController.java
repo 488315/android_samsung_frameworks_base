@@ -34,7 +34,6 @@ import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.wm.WindowManagerInternal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InputMethodBindingController {
     static final int IME_CONNECTION_BIND_FLAGS = 1082654725;
     static final int IME_VISIBLE_BIND_FLAGS = 738201601;

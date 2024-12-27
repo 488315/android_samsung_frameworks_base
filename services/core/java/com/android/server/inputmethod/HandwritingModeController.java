@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.OptionalInt;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HandwritingModeController {
     public final Context mContext;
     public String mDelegatePackageName;
@@ -56,7 +55,6 @@ public final class HandwritingModeController {
     public final PackageManagerInternal mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
     public int mCurrentRequestId = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HandwritingSession {
         public final InputChannel mHandwritingChannel;
         public final List mRecordedEvents;

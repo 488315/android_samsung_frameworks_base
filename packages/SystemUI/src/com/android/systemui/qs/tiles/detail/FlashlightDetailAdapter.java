@@ -24,7 +24,6 @@ import com.android.systemui.statusbar.policy.SecFlashlightControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FlashlightDetailAdapter implements DetailAdapter {
     public final Context mContext;
     public final FlashlightController mFlashlightController;
@@ -66,7 +65,6 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ boolean val$state;

@@ -15,12 +15,10 @@ import com.android.server.compat.CompatChange;
 import com.android.server.compat.PlatformCompat;
 import com.android.server.pm.resolution.ComponentResolverApi;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SaferIntentUtils {
     public static final ThreadLocal DISABLE_ENFORCE_INTENTS_TO_MATCH_INTENT_FILTERS =
             ThreadLocal.withInitial(new SaferIntentUtils$$ExternalSyntheticLambda1());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntentArgs {
         public final int callingPid;
         public final int callingUid;

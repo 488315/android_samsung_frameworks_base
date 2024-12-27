@@ -1,9 +1,7 @@
 package android.os;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IStoraged extends IInterface {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IStoraged {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,14 +20,12 @@ public interface IStoraged extends IInterface {
         public void onUserStopped(int i) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IStoraged {
         public static final String DESCRIPTOR = "android.os.IStoraged";
         static final int TRANSACTION_getRecentPerf = 3;
         static final int TRANSACTION_onUserStarted = 1;
         static final int TRANSACTION_onUserStopped = 2;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IStoraged {
             public IBinder mRemote;
 

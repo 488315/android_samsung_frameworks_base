@@ -45,7 +45,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Vcn extends Handler {
     public static final List CAPS_REQUIRING_MOBILE_DATA = Arrays.asList(12, 2);
     public VcnConfig mConfig;
@@ -61,10 +60,8 @@ public final class Vcn extends Handler {
     public final VcnContext mVcnContext;
     public final Map mVcnGatewayConnections;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VcnContentResolver {
         public final ContentResolver mImpl;
 
@@ -73,7 +70,6 @@ public final class Vcn extends Handler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface VcnGatewayStatusCallback {
         void onGatewayConnectionError(int i, String str, String str2, String str3);
 
@@ -82,7 +78,6 @@ public final class Vcn extends Handler {
         void onSafeModeStatusChanged();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnGatewayStatusCallbackImpl implements VcnGatewayStatusCallback {
         public final VcnGatewayConnectionConfig mGatewayConnectionConfig;
 
@@ -110,7 +105,6 @@ public final class Vcn extends Handler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnMobileDataContentObserver extends ContentObserver {
         public VcnMobileDataContentObserver(Handler handler) {
             super(handler);
@@ -123,13 +117,11 @@ public final class Vcn extends Handler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnNetworkRequestListener
             implements VcnNetworkProvider.NetworkRequestListener {
         public VcnNetworkRequestListener() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class VcnUserMobileDataStateListener extends TelephonyCallback
             implements TelephonyCallback.UserMobileDataStateListener {
         public VcnUserMobileDataStateListener() {}

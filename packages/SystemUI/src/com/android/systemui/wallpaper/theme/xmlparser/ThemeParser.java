@@ -3,7 +3,6 @@ package com.android.systemui.wallpaper.theme.xmlparser;
 import android.text.TextUtils;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ThemeParser {
     public final ParserData mParserData;
     public HashMap mParserMap;

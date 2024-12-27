@@ -21,7 +21,6 @@ import com.android.systemui.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class QSPanel extends LinearLayout implements TunerService.Tunable {
     public final boolean mCanCollapse;
     public final ArrayMap mChildrenLayoutTop;
@@ -31,7 +30,6 @@ public class QSPanel extends LinearLayout implements TunerService.Tunable {
     public final boolean mShouldMoveMediaOnExpansion;
     public QSTileLayout mTileLayout;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface QSTileLayout {
         void addTile(QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord);
 

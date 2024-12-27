@@ -9,12 +9,10 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SystemLocaleWrapper {
     public static final AtomicReference sSystemLocale =
             new AtomicReference(new LocaleList(Locale.getDefault()));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocaleChangeListener extends BroadcastReceiver {
         public final InputMethodManagerService$$ExternalSyntheticLambda2 mCallback;
         public final Context mContext;

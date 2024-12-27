@@ -16,7 +16,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KProperty;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class ParseableCommand implements Command {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public static final Companion Companion;
@@ -25,7 +24,6 @@ public abstract class ParseableCommand implements Command {
     public final String name;
     public final CommandParser parser;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

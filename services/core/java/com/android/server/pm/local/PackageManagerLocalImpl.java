@@ -22,11 +22,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageManagerLocalImpl implements PackageManagerLocal {
     public final PackageManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BaseSnapshotImpl implements AutoCloseable {
         public boolean mClosed;
         public Computer mSnapshot;
@@ -48,7 +46,6 @@ public final class PackageManagerLocalImpl implements PackageManagerLocal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FilteredSnapshotImpl extends BaseSnapshotImpl
             implements PackageManagerLocal.FilteredSnapshot {
         public final int mCallingUid;
@@ -110,7 +107,6 @@ public final class PackageManagerLocalImpl implements PackageManagerLocal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UnfilteredSnapshotImpl extends BaseSnapshotImpl
             implements PackageManagerLocal.UnfilteredSnapshot {
         public Map mCachedUnmodifiableDisabledSystemPackageStates;

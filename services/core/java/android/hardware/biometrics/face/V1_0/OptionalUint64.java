@@ -7,7 +7,6 @@ import android.os.HwParcel;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OptionalUint64 {
     public int status = 0;
     public long value = 0;

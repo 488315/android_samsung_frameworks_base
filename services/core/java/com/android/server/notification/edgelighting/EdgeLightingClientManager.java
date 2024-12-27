@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EdgeLightingClientManager {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public int mCondition;
@@ -48,7 +47,6 @@ public final class EdgeLightingClientManager {
     public final EdgeLightingListenerManager mEdgeLightingListenerManager =
             new EdgeLightingListenerManager();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.edgelighting.EdgeLightingClientManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends Handler {
         public final /* synthetic */ int $r8$classId = 1;
@@ -167,7 +165,6 @@ public final class EdgeLightingClientManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EdgeLightingHost implements IBinder.DeathRecipient {
         public final ComponentName component;
         public int condition;
@@ -176,7 +173,6 @@ public final class EdgeLightingClientManager {
         public final IBinder token;
         public final int uid;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class HostLightingInfo {
             public SemEdgeLightingInfo mInfo;
             public String mPackageName;
@@ -308,7 +304,6 @@ public final class EdgeLightingClientManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EdgeLightingSettingObserver extends ContentObserver {
         public final Uri EDGE_LIGHTING_SETTING;
         public final Uri EDGE_LIGHTING_SHOW_CONDITION;

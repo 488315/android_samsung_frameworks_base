@@ -11,14 +11,12 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SameL3NetworkResponseParcelable implements Parcelable {
     public static final Parcelable.Creator CREATOR = new AnonymousClass1();
     public float confidence = FullScreenMagnificationGestureHandler.MAX_SCALE;
     public String l2Key1;
     public String l2Key2;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: android.net.ipmemorystore.SameL3NetworkResponseParcelable$1, reason: invalid class name */
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator

@@ -28,7 +28,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class UdfpsAnimationViewController extends ViewController implements Dumpable {
     public ValueAnimator dialogAlphaAnimator;
     public final UdfpsAnimationViewController$dialogListener$1 dialogListener;
@@ -40,13 +39,11 @@ public abstract class UdfpsAnimationViewController extends ViewController implem
     public final StatusBarStateController statusBarStateController;
     public final UdfpsOverlayInteractor udfpsOverlayInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.UdfpsAnimationViewController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.biometrics.UdfpsAnimationViewController$1$1, reason: invalid class name and collision with other inner class name */
         final class C00261 extends SuspendLambda implements Function2 {
             private /* synthetic */ Object L$0;

@@ -2,11 +2,9 @@ package com.android.systemui.deviceentry.shared.model;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class DeviceUnlockSource {
     public final boolean dismissesLockscreen;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BouncerInput extends DeviceUnlockSource {
         public static final BouncerInput INSTANCE = new BouncerInput();
 
@@ -27,7 +25,6 @@ public abstract class DeviceUnlockSource {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FaceWithBypass extends DeviceUnlockSource {
         public static final FaceWithBypass INSTANCE = new FaceWithBypass();
 
@@ -48,7 +45,6 @@ public abstract class DeviceUnlockSource {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FaceWithoutBypass extends DeviceUnlockSource {
         public static final FaceWithoutBypass INSTANCE = new FaceWithoutBypass();
 
@@ -69,7 +65,6 @@ public abstract class DeviceUnlockSource {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Fingerprint extends DeviceUnlockSource {
         public static final Fingerprint INSTANCE = new Fingerprint();
 
@@ -90,7 +85,6 @@ public abstract class DeviceUnlockSource {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TrustAgent extends DeviceUnlockSource {
         public static final TrustAgent INSTANCE = new TrustAgent();
 

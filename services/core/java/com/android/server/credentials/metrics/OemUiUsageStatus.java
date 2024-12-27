@@ -2,7 +2,6 @@ package com.android.server.credentials.metrics;
 
 import android.credentials.selection.IntentCreationResult;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public enum OemUiUsageStatus {
     UNKNOWN("UNKNOWN"),
     SUCCESS("SUCCESS"),
@@ -12,7 +11,6 @@ public enum OemUiUsageStatus {
 
     private final int mLoggingInt;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.credentials.metrics.OemUiUsageStatus$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[]

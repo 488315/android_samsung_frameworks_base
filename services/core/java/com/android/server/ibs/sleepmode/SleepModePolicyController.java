@@ -28,7 +28,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SleepModePolicyController {
     public final AlarmManager mAlarmManager;
     public final Context mContext;
@@ -53,7 +52,6 @@ public final class SleepModePolicyController {
     public final SleepModeReceiver mReceiver = new SleepModeReceiver();
     public final SleepModeReceiver mDeviceStatusReceiver = new SleepModeReceiver();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActionEntry {
         public SleepModeCallBack callBack;
         public String tag;
@@ -72,7 +70,6 @@ public final class SleepModePolicyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalTime {
         public final int hourOfDay;
         public final int minute;
@@ -150,7 +147,6 @@ public final class SleepModePolicyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SleepModeAction {
         public final AnonymousClass1 btCallBack;
         public final AnonymousClass1 cameraFlashNotificationCallBack;
@@ -2347,14 +2343,12 @@ public final class SleepModePolicyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SleepModeCallBack {
         void cancelAction();
 
         void triggerAction();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SleepModeHandler extends Handler {
         public SleepModeHandler(Looper looper) {
             super(looper);
@@ -2595,7 +2589,6 @@ public final class SleepModePolicyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SleepModeReceiver extends BroadcastReceiver {
         public SleepModeReceiver() {}
 

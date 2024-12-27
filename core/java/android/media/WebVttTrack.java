@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-/* compiled from: WebVttRenderer.java */
 class WebVttTrack extends SubtitleTrack implements WebVttCueListener {
     private static final String TAG = "WebVttTrack";
     private Long mCurrentRunID;

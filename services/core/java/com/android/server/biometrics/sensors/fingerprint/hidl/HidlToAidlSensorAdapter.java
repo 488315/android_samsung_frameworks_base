@@ -32,7 +32,6 @@ import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerp
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.DeathRecipient {
     public final AidlResponseHandler$AidlResponseHandlerCallback mAidlResponseHandlerCallback;
     public final AuthSessionCoordinator mAuthSessionCoordinator;
@@ -44,7 +43,6 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
     public AidlSession mSession;
     public final HidlToAidlSensorAdapter$$ExternalSyntheticLambda0 mUserStartedCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.hidl.HidlToAidlSensorAdapter$1, reason: invalid class name */
     public final class AnonymousClass1
             implements AidlResponseHandler$AidlResponseHandlerCallback, UserSwitchProvider {

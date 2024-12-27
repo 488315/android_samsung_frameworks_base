@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MobileSignalController extends SignalController {
     public static final SimpleDateFormat SSDF = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
     public MobileMappings.Config mConfig;
@@ -57,7 +56,6 @@ public final class MobileSignalController extends SignalController {
     public final TelephonyManager mPhone;
     public final SubscriptionInfo mSubscriptionInfo;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.connectivity.MobileSignalController$1, reason: invalid class name */
     public final class AnonymousClass1 implements MobileStatusTracker.Callback {
         public String mLastStatus;
@@ -101,7 +99,6 @@ public final class MobileSignalController extends SignalController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class QsInfo {
         public final CharSequence description;
         public final IconState icon;
@@ -118,7 +115,6 @@ public final class MobileSignalController extends SignalController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SbInfo {
         public final IconState icon;
         public final int ratTypeIcon;

@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UdfpsOverlayInteractor {
     public final StateFlowImpl _requestId;
     public final StateFlowImpl _shouldHandleTouches;
@@ -39,7 +38,6 @@ public final class UdfpsOverlayInteractor {
     public final ReadonlyStateFlow shouldHandleTouches;
     public final ReadonlyStateFlow udfpsOverlayParams;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -77,13 +75,11 @@ public final class UdfpsOverlayInteractor {
         this.udfpsOverlayParams = stateIn;
         this.iconPadding = new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UdfpsOverlayInteractor this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

@@ -14,13 +14,11 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BroadcastReceiverManager {
     public final BroadcastDispatcher broadcastDispatcher;
     public final Map broadcastReceiverItemMap;
     public final LogWrapper logWrapper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -108,7 +106,6 @@ public final class BroadcastReceiverManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BroadcastReceiverItem {
         public final IntentFilter intentFilter;
         public BroadcastReceiver receiver;

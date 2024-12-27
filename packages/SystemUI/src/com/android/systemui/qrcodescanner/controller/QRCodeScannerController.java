@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QRCodeScannerController implements CallbackController {
     public final boolean mConfigEnableLockScreenButton;
     public final Context mContext;
@@ -39,7 +38,6 @@ public final class QRCodeScannerController implements CallbackController {
     public final AtomicInteger mDefaultQRCodeScannerChangeEvents = new AtomicInteger(0);
     public Boolean mIsCameraAvailable = null;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qrcodescanner.controller.QRCodeScannerController$1, reason: invalid class name */
     public final class AnonymousClass1 extends ContentObserver {
         public AnonymousClass1(Handler handler) {
@@ -230,7 +228,6 @@ public final class QRCodeScannerController implements CallbackController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onQRCodeScannerActivityChanged();
 

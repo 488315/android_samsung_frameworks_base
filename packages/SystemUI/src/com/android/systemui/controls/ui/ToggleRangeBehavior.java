@@ -34,7 +34,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActionButtonBehavior {
     public static final Companion Companion = new Companion(null);
     public static boolean inProgress;
@@ -52,7 +51,6 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
     public CharSequence currentStatusText = "";
     public String currentRangeValue = "";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -497,7 +495,6 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
         controlViewHolder.setStatusText(str, false);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SecToggleRangeGestureListener extends GestureDetector.SimpleOnGestureListener {
         public boolean isDragging;
         public final View v;

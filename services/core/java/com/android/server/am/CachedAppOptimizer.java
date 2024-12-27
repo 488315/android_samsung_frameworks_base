@@ -59,7 +59,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CachedAppOptimizer {
     static final long DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB = 8000;
     static final long DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB = 12000;
@@ -163,7 +162,6 @@ public final class CachedAppOptimizer {
     static final Uri CACHED_APP_FREEZER_ENABLED_URI =
             Settings.Global.getUriFor("cached_apps_freezer");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AggregatedCompactionStats {
         public long mFullCompactPerformed;
         public long mFullCompactRequested;
@@ -283,7 +281,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AggregatedProcessCompactionStats extends AggregatedCompactionStats {
         public final String processName;
 
@@ -292,7 +289,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AggregatedSourceCompactionStats extends AggregatedCompactionStats {
         public final CompactSource sourceType;
 
@@ -301,12 +297,10 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CachedAppOptimizerReclaimer extends UnifiedMemoryReclaimer.Reclaimer {}
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CancelCompactReason {
         public static final /* synthetic */ CancelCompactReason[] $VALUES;
         public static final CancelCompactReason OOM_IMPROVEMENT;
@@ -332,7 +326,6 @@ public final class CachedAppOptimizer {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CompactProfile {
         public static final /* synthetic */ CompactProfile[] $VALUES;
         public static final CompactProfile ANON;
@@ -366,7 +359,6 @@ public final class CachedAppOptimizer {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CompactSource {
         public static final /* synthetic */ CompactSource[] $VALUES;
         public static final CompactSource APP;
@@ -389,7 +381,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultProcessDependencies implements ProcessDependencies {
         public static volatile int mPidCompacting = -1;
 
@@ -412,7 +403,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FreezeHandler extends Handler
             implements ProcLocksReader.ProcLocksReaderCallback {
         public FreezeHandler() {
@@ -794,7 +784,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemCompactionHandler extends Handler {
         public MemCompactionHandler() {
             super(CachedAppOptimizer.this.mCachedAppOptimizerThread.getLooper());
@@ -849,19 +838,16 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface ProcessDependencies {
         long[] getRss(int i);
 
         void performCompaction(CompactProfile compactProfile, int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface PropertyChangedCallbackForTest {
         void onPropertyChanged();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsContentObserver extends ContentObserver {
         public SettingsContentObserver() {
             super(CachedAppOptimizer.this.mAm.mHandler);
@@ -877,7 +863,6 @@ public final class CachedAppOptimizer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SingleCompactionStats {
         public static final Random mRandom = new Random();
         public final long mAnonMemFreedKBs;

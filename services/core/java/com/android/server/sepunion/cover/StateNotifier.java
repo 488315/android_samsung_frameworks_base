@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StateNotifier {
     public final Context mContext;
     public final H mHandler;
@@ -39,7 +38,6 @@ public final class StateNotifier {
     public boolean mBootComplete = false;
     public StateNotifier$$ExternalSyntheticLambda0 mGoToSleepRunnable = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverStateListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;
@@ -135,7 +133,6 @@ public final class StateNotifier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper, null, true);
@@ -198,7 +195,6 @@ public final class StateNotifier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LcdOffDisableListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;
@@ -224,7 +220,6 @@ public final class StateNotifier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LcdOffDisabledByAppListener {
         void onLcdOffByCoverEnabled();
     }

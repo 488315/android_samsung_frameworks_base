@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class AppControlActionInteractor implements ActionInteractor {
     private final String TAG = "AppControlActionInteractor";
     private final AppController mAppController;
@@ -34,7 +33,6 @@ public class AppControlActionInteractor implements ActionInteractor {
     private Gson mGson;
     private final MWBixbyController mMWBixbyController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum Action {
         close_application,
         close_all_application,

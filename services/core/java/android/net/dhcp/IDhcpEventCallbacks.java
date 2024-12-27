@@ -10,14 +10,12 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDhcpEventCallbacks extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$dhcp$IDhcpEventCallbacks".replace('$', '.');
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDhcpEventCallbacks {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,14 +39,12 @@ public interface IDhcpEventCallbacks extends IInterface {
         public void onNewPrefixRequest(IpPrefix ipPrefix) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDhcpEventCallbacks {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onLeasesChanged = 1;
         static final int TRANSACTION_onNewPrefixRequest = 2;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDhcpEventCallbacks {
             public String mCachedHash;
             public int mCachedVersion;
@@ -194,7 +190,6 @@ public interface IDhcpEventCallbacks extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class _Parcel {
         /* JADX INFO: Access modifiers changed from: private */
         public static void writeTypedList(Parcel parcel, List list, int i) {

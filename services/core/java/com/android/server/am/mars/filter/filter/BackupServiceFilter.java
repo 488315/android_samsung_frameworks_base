@@ -7,10 +7,8 @@ import com.android.server.am.MARsPolicyManager;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackupServiceFilter implements IFilter {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BackupServiceFilterHolder {
         public static final BackupServiceFilter INSTANCE = new BackupServiceFilter();
     }

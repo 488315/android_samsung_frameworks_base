@@ -22,7 +22,6 @@ import com.android.server.PermissionThread;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OneTimePermissionUserManager {
     public final AlarmManager mAlarmManager;
     public final Context mContext;
@@ -51,7 +50,6 @@ public final class OneTimePermissionUserManager {
     public final ActivityManagerInternal mActivityManagerInternal =
             (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageInactivityListener implements AlarmManager.OnAlarmListener {
         public final int mDeviceId;
         public boolean mIsAlarmSet;

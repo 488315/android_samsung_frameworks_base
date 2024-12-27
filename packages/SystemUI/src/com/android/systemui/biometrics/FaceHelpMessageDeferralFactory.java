@@ -7,7 +7,6 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.log.LogBuffer;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FaceHelpMessageDeferralFactory {
     public final DumpManager dumpManager;
     public final LogBuffer logBuffer;

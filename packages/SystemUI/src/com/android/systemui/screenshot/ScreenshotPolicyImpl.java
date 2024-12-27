@@ -25,7 +25,6 @@ import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenshotPolicyImpl implements ScreenshotPolicy {
     public final IActivityTaskManager atmService;
     public final CoroutineDispatcher bgDispatcher;

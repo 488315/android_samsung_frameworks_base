@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
     final ArrayList mActions;
     public int mActiveRoutingPath;
@@ -47,7 +46,6 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
     public int mPreferredAddress;
     public HdmiCecStandbyModeHandler mStandbyHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDevice$4, reason: invalid class name */
     public final class AnonymousClass4 implements PendingActionClearedCallback {
         public final /* synthetic */ PendingActionClearedCallback val$originalCallback;
@@ -63,7 +61,6 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveSource {
         public int logicalAddress;
         public int physicalAddress;
@@ -108,7 +105,6 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveSourceHistoryRecord extends HdmiCecController.Dumpable {
         public final ActiveSource mActiveSource;
         public final String mCaller;
@@ -134,12 +130,10 @@ public abstract class HdmiCecLocalDevice extends HdmiLocalDevice {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PendingActionClearedCallback {
         void onCleared(HdmiCecLocalDevice hdmiCecLocalDevice);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StandbyCompletedCallback {}
 
     /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.hdmi.HdmiCecLocalDevice$1] */

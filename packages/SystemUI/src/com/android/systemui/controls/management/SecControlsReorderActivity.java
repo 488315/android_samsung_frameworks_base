@@ -33,7 +33,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecControlsReorderActivity extends BaseActivity {
     public final AUIFacade auiFacade;
     public final BroadcastDispatcher broadcastDispatcher;
@@ -45,7 +44,6 @@ public final class SecControlsReorderActivity extends BaseActivity {
     public SecStructureAdapter structureAdapter;
     public ReorderStructureModel structureModel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

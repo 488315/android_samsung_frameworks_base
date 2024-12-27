@@ -23,7 +23,6 @@ import com.android.systemui.wallet.ui.WalletScreenController;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class WalletCardCarousel extends RecyclerView {
     public static final /* synthetic */ int $r8$clinit = 0;
     public float mCardCenterToScreenCenterDistancePx;
@@ -41,7 +40,6 @@ public class WalletCardCarousel extends RecyclerView {
     public int mTotalCardWidth;
     public final WalletCardCarouselAdapter mWalletCardCarouselAdapter;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CardCarouselAccessibilityDelegate extends RecyclerViewAccessibilityDelegate {
         public /* synthetic */ CardCarouselAccessibilityDelegate(WalletCardCarousel walletCardCarousel, RecyclerView recyclerView, int i) {
             this(recyclerView);
@@ -62,7 +60,6 @@ public class WalletCardCarousel extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CardCarouselScrollListener extends RecyclerView.OnScrollListener {
         public int mOldState;
 
@@ -103,7 +100,6 @@ public class WalletCardCarousel extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CarouselSnapHelper extends PagerSnapHelper {
         public /* synthetic */ CarouselSnapHelper(WalletCardCarousel walletCardCarousel, int i) {
             this();
@@ -152,15 +148,12 @@ public class WalletCardCarousel extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnCardScrollListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnSelectionListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WalletCardCarouselAdapter extends RecyclerView.Adapter {
         public List mData;
 

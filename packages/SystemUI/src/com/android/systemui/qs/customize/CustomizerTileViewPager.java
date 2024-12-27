@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class CustomizerTileViewPager extends ViewPager {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass1 mAdapter;
@@ -44,7 +43,6 @@ public class CustomizerTileViewPager extends ViewPager {
     public int mRows;
     public boolean mShowLabel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.customize.CustomizerTileViewPager$1, reason: invalid class name */
     public final class AnonymousClass1 extends PagerAdapter {
         public AnonymousClass1() {
@@ -89,14 +87,12 @@ public class CustomizerTileViewPager extends ViewPager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.customize.CustomizerTileViewPager$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class CustomizerTilePage extends CustomizerTileLayout {
         public int mCurrentRows;
 

@@ -27,7 +27,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BLASTSyncEngine {
     public final Handler mHandler;
     public final WindowManagerService mWm;
@@ -38,13 +37,11 @@ public final class BLASTSyncEngine {
     public final ArrayList mTmpFinishQueue = new ArrayList();
     public final ArrayList mTmpFringe = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingSyncSet {
         public Runnable mApplySync;
         public Runnable mStartSync;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncGroup {
         public static final ArrayList NO_DEPENDENCIES = new ArrayList();
         public final TransactionReadyListener mListener;
@@ -59,7 +56,6 @@ public final class BLASTSyncEngine {
         public boolean mIgnoreIndirectMembers = false;
         public ArrayList mDependencies = NO_DEPENDENCIES;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.wm.BLASTSyncEngine$SyncGroup$1CommitCallback, reason: invalid class name */
         public final class C1CommitCallback implements Runnable {
             public boolean ran = false;
@@ -339,7 +335,6 @@ public final class BLASTSyncEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface TransactionReadyListener {
         default void onReadyTimeout() {}
 

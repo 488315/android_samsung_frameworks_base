@@ -151,7 +151,6 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatteryStatsService extends IBatteryStats.Stub
         implements PowerManagerInternal.LowPowerModeListener,
                 BatteryStatsImpl.PlatformIdleStateCallback,
@@ -189,13 +188,11 @@ public final class BatteryStatsService extends IBatteryStats.Stub
     public final PowerStatsUidResolver mPowerStatsUidResolver = new PowerStatsUidResolver();
     public volatile boolean mMonitorEnabled = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.BatteryStatsService$3, reason: invalid class name */
     public final class AnonymousClass3 extends BatteryStatsImpl.UserInfoProvider {
         public UserManagerInternal umi;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends BatteryStatsInternal {
         public LocalService() {}
 
@@ -332,7 +329,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
         public StatsPullAtomCallbackImpl() {}
 
@@ -470,7 +466,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeupReasonThread extends Thread {
         public CharsetDecoder mDecoder;
         public CharBuffer mUtf16Buffer;

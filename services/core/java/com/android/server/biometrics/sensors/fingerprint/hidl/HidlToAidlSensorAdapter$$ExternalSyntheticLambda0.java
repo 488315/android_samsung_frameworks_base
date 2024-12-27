@@ -3,7 +3,6 @@ package com.android.server.biometrics.sensors.fingerprint.hidl;
 import com.android.server.biometrics.sensors.StartUserClient;
 import com.android.server.biometrics.sensors.StopUserClient;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class HidlToAidlSensorAdapter$$ExternalSyntheticLambda0
         implements StartUserClient.UserStartedCallback,
                 LockoutFrameworkImpl.LockoutResetCallback,

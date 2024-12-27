@@ -40,7 +40,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BriefNowBarController {
     public static final String NOWBAR_KEY = "AI_BRIEF_KEY";
     public static final String NOWBAR_PACKAGE = "com.android.systemui.aibrief";
@@ -66,7 +65,6 @@ public final class BriefNowBarController {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.aibrief.control.BriefNowBarController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -122,7 +120,6 @@ public final class BriefNowBarController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

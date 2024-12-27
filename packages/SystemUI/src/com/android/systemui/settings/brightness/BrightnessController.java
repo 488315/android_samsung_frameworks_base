@@ -34,7 +34,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BrightnessController implements ToggleSlider.Listener {
     public static final Uri BRIGHTNESS_MODE_URI = Settings.System.getUriFor("screen_brightness_mode");
     public volatile boolean mAutomatic;
@@ -155,7 +154,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$10, reason: invalid class name */
     public final class AnonymousClass10 implements Runnable {
         public AnonymousClass10() {
@@ -173,7 +171,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$4, reason: invalid class name */
     public final class AnonymousClass4 implements Runnable {
         public AnonymousClass4() {
@@ -186,7 +183,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$5, reason: invalid class name */
     public final class AnonymousClass5 implements Runnable {
         public AnonymousClass5() {
@@ -206,7 +202,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BrightnessObserver extends ContentObserver {
         public boolean mObserving;
 
@@ -234,7 +229,6 @@ public final class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         BrightnessController create(ToggleSlider toggleSlider);
     }

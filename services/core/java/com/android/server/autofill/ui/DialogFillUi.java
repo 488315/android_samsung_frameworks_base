@@ -48,7 +48,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DialogFillUi {
     public final ItemsAdapter mAdapter;
     public AnnounceFilterResult mAnnounceFilterResult;
@@ -64,7 +63,6 @@ public final class DialogFillUi {
     public final int mThemeId;
     public final int mVisibleDatasetsMaxCount;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnnounceFilterResult implements Runnable {
         public AnnounceFilterResult() {}
 
@@ -90,12 +88,10 @@ public final class DialogFillUi {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ItemsAdapter extends BaseAdapter implements Filterable {
         public final List mAllItems;
         public final List mFilteredItems;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.autofill.ui.DialogFillUi$ItemsAdapter$1, reason: invalid class name */
         public final class AnonymousClass1 extends Filter {
             public AnonymousClass1() {}
@@ -214,7 +210,6 @@ public final class DialogFillUi {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ViewItem {
         public final Dataset dataset;
         public final Pattern filter;

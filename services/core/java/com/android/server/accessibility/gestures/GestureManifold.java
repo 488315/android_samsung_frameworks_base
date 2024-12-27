@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GestureManifold implements GestureMatcher.StateChangeListener {
     public final List mEvents;
     public final List mGestures;
@@ -24,7 +23,6 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
     public boolean mTwoFingerPassthroughEnabled;
     public final List mTwoFingerSwipes;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {}
 
     public GestureManifold(Context context, Listener listener, TouchState touchState) {

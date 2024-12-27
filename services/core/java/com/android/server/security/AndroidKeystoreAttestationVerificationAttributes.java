@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AndroidKeystoreAttestationVerificationAttributes {
     public Map mApplicationPackageNameVersion;
     public ByteString mAttestationChallenge;
@@ -37,7 +36,6 @@ public final class AndroidKeystoreAttestationVerificationAttributes {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SecurityLevel {
         public static final /* synthetic */ SecurityLevel[] $VALUES;
         public static final SecurityLevel SOFTWARE;
@@ -65,7 +63,6 @@ public final class AndroidKeystoreAttestationVerificationAttributes {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class VerifiedBootState {
         public static final /* synthetic */ VerifiedBootState[] $VALUES;
         public static final VerifiedBootState FAILED;

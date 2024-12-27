@@ -49,7 +49,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubDisplayVolumePanelPresentation extends Presentation implements VolumeObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int mActiveStream;
@@ -68,7 +67,6 @@ public final class SubDisplayVolumePanelPresentation extends Presentation implem
     public final VolumePanelMotion mVolumePanelMotion;
     public final TextView mWarningToastPopup;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumePanelPresentation$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType;

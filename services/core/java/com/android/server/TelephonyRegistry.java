@@ -97,7 +97,6 @@ import java.util.Set;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     public static final List INVALID_LCE_LIST =
             new ArrayList(Arrays.asList(new LinkCapacityEstimate(2, -1, -1)));
@@ -272,7 +271,6 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             };
     public final IBatteryStats mBatteryStats = BatteryStatsService.getService();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.TelephonyRegistry$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[]
@@ -295,10 +293,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConfigurationProvider {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Record {
         public IBinder binder;
         public IPhoneStateListener callback;
@@ -369,7 +365,6 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TelephonyRegistryDeathRecipient implements IBinder.DeathRecipient {
         public final IBinder binder;
 

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.android.internal.os.SomeArgs;
 import com.android.server.DisplayThread;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ToastDialog {
     public AlertDialog mAlertDialog;
     public final Context mContext;
@@ -20,7 +19,6 @@ public final class ToastDialog {
             new ToastDialogHandler(DisplayThread.get().getLooper());
     public Toast mToast;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ToastDialogHandler extends Handler {
         public ToastDialogHandler(Looper looper) {
             super(looper, null, true);

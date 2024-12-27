@@ -6,7 +6,6 @@ import com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QuickSettingsControllerSceneImpl implements QuickSettingsController {
     public final QSSceneAdapter qsSceneAdapter;
     public final ShadeInteractor shadeInteractor;

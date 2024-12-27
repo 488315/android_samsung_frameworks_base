@@ -40,12 +40,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SearchManagerService extends ISearchManager.Stub {
     public final Context mContext;
     public final SparseArray mSearchables = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GlobalSearchProviderObserver extends ContentObserver {
         public GlobalSearchProviderObserver(ContentResolver contentResolver) {
             super(null);
@@ -70,7 +68,6 @@ public final class SearchManagerService extends ISearchManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final AnonymousClass1 mBootCompleteReceiver;
         public SearchManagerService mService;
@@ -137,7 +134,6 @@ public final class SearchManagerService extends ISearchManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyPackageMonitor extends PackageMonitor {
         public final ArrayList mChangedPackages = new ArrayList();
         public boolean mSearchablePackageAppeared = false;

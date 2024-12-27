@@ -11,7 +11,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class InternetDialogDelegate$$ExternalSyntheticLambda10 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ InternetDialogDelegate f$0;

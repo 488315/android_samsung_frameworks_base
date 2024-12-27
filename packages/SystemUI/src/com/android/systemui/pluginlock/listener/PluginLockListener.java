@@ -6,10 +6,8 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PluginLockListener {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Window {
         void onScreenOrientationChangeRequired(boolean z);
 
@@ -26,7 +24,6 @@ public interface PluginLockListener {
         void updateWindowSecureState(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface State {
         default int getMaxKeyguardNotifications(int i) {
             return 1;

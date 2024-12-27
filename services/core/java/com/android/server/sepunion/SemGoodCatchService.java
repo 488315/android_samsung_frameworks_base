@@ -47,7 +47,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemGoodCatchService extends IGoodCatchManager.Stub
         implements AbsSemSystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,7 +62,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
     public GoodCatchObserver mGoodCatchObserver;
     public final AnonymousClass1 mIntentReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureDetectAds extends SecFeature {
         public boolean mActiveState;
         public int mForegroundUid;
@@ -224,14 +222,12 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureEvent extends SecFeature {
         public FeatureEvent() {
             super("FeatureEvent");
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureSetting extends SecFeature {
         public FeatureSetting() {
             super("FeatureSetting");
@@ -367,14 +363,12 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureSettingsProvider extends SecFeature {
         public FeatureSettingsProvider() {
             super("FeatureSettingsProvider");
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureWakeUp extends SecFeature {
         public final AnonymousClass1 mOnStateListener;
 
@@ -485,7 +479,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GoodCatchClient implements IBinder.DeathRecipient {
         public IBinder mCb;
         public IGoodCatchDispatcher mDispatcher;
@@ -587,7 +580,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GoodCatchHandler extends Handler {
         public GoodCatchHandler() {}
 
@@ -673,7 +665,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GoodCatchObserver extends ContentObserver {
         public GoodCatchObserver() {
             super(new Handler());
@@ -698,7 +689,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GoodCatchThread extends Thread {
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public GoodCatchThread() {
@@ -718,7 +708,6 @@ public final class SemGoodCatchService extends IGoodCatchManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SecFeature {
         public final String mName;
         public boolean mOn = false;

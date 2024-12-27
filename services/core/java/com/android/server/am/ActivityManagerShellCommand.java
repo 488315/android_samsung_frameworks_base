@@ -132,7 +132,6 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityManagerShellCommand extends ShellCommand {
     public int mActivityType;
     public String mAgent;
@@ -170,7 +169,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
     public int mRepeat = 0;
     public final IPackageManager mPm = AppGlobals.getPackageManager();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntentReceiver extends IIntentReceiver.Stub {
         public boolean mFinished = false;
         public final PrintWriter mPw;
@@ -196,7 +194,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyActivityController extends IActivityController.Stub {
         public final boolean mAlwaysContinue;
         public final boolean mAlwaysKill;
@@ -490,7 +487,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyUidObserver extends UidObserver implements ActivityManagerService.OomAdjObserver {
         public final InputStream mInput;
         public final ActivityManagerService mInterface;
@@ -615,7 +611,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessObserver extends IProcessObserver.Stub {
         public IActivityManager mIam;
         public PrintWriter mPw;
@@ -646,7 +641,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProgressWaiter extends IProgressListener.Stub {
         public final CountDownLatch mFinishedLatch = new CountDownLatch(1);
         public final int mUserId;
@@ -675,7 +669,6 @@ public final class ActivityManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StopUserCallback extends IStopUserCallback.Stub {
         public boolean mFinished = false;
         public final int mUserId;

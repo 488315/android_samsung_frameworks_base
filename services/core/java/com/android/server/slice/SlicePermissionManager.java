@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SlicePermissionManager implements DirtyTracker {
     public final H mHandler;
     public final File mSliceDir;
@@ -36,7 +35,6 @@ public final class SlicePermissionManager implements DirtyTracker {
     public final ArrayMap mCachedClients = new ArrayMap();
     public final ArraySet mDirty = new ArraySet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -80,7 +78,6 @@ public final class SlicePermissionManager implements DirtyTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ParserHolder implements AutoCloseable {
         public InputStream input;
         public XmlPullParser parser;
@@ -91,7 +88,6 @@ public final class SlicePermissionManager implements DirtyTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PkgUser {
         public final String mPkg;
         public final int mUserId;

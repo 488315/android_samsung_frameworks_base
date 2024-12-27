@@ -28,7 +28,6 @@ import com.android.systemui.shared.system.QuickStepContract;
 import com.sec.ims.settings.ImsProfile;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NavigationBarInflaterView extends FrameLayout {
     public boolean mAlternativeOrder;
     SparseArray<ButtonDispatcher> mButtonDispatchers;
@@ -44,7 +43,6 @@ public class NavigationBarInflaterView extends FrameLayout {
     public final OverviewProxyService mOverviewProxyService;
     public FrameLayout mVertical;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Listener implements NavigationModeController.ModeChangedListener {
         public final WeakReference mSelf;
 

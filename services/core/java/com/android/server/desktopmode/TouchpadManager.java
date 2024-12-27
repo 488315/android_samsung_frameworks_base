@@ -20,7 +20,6 @@ import com.samsung.android.desktopmode.DesktopModeFeature;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TouchpadManager {
     public final AnonymousClass2 mAutoRunSettingChangedListener;
     public final Context mContext;
@@ -83,7 +82,6 @@ public final class TouchpadManager {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.TouchpadManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends UiManager.InternalUiCallback {
         public AnonymousClass1() {}
@@ -120,7 +118,6 @@ public final class TouchpadManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StateListener extends StateManager.StateListener {
         public StateListener() {}
 

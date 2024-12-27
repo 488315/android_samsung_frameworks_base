@@ -46,7 +46,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultipathPolicyTracker {
     public ConnectivityManager mCM;
     public final Context mContext;
@@ -64,7 +63,6 @@ public final class MultipathPolicyTracker {
                     new Clock[] {SystemClock.currentNetworkTimeClock(), Clock.systemUTC()});
     public final ConfigChangeReceiver mConfigChangeReceiver = new ConfigChangeReceiver();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.connectivity.MultipathPolicyTracker$2, reason: invalid class name */
     public final class AnonymousClass2 extends NetworkPolicyManager.Listener {
         public AnonymousClass2() {}
@@ -82,7 +80,6 @@ public final class MultipathPolicyTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConfigChangeReceiver extends BroadcastReceiver {
         public ConfigChangeReceiver() {}
 
@@ -93,7 +90,6 @@ public final class MultipathPolicyTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MultipathTracker {
         public volatile long mMultipathBudget;
         public NetworkCapabilities mNetworkCapabilities;
@@ -317,7 +313,6 @@ public final class MultipathPolicyTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

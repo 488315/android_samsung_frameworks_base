@@ -113,7 +113,6 @@ import java.util.function.Consumer;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceIdleController extends SystemService implements AnyMotionDetector.DeviceIdleCallback {
     public static final boolean DEBUG = Log.isLoggable("DeviceIdleController", 3);
     static final int LIGHT_STATE_ACTIVE = 0;
@@ -247,7 +246,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
     public final SparseArray mTempWhitelistAppIdEndTimes;
     public final boolean mUseMotionSensor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AllowlistHistoryInfo {
         public final TargetPkg caller;
         public final TargetPkg target;
@@ -343,7 +341,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BatteryLevel {
         public float prev = -1.0f;
         public float curr = -1.0f;
@@ -351,7 +348,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         public long currTime = 0;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IDeviceIdleController.Stub {
         public BinderService() {
         }
@@ -922,7 +918,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Constants extends ContentObserver implements DeviceConfig.OnPropertiesChangedListener {
         public long DNA_REQUEST_VERSION;
         public long FLEX_TIME_SHORT;
@@ -1350,7 +1345,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EmergencyCallListener extends TelephonyCallback implements TelephonyCallback.OutgoingEmergencyCallListener, TelephonyCallback.CallStateListener {
         public volatile boolean mIsEmergencyCallActive;
 
@@ -1382,7 +1376,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public ConnectivityManager mConnectivityManager;
         public Constants mConstants;
@@ -1394,7 +1387,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalPowerAllowlistService implements PowerAllowlistInternal {
         public LocalPowerAllowlistService() {
         }
@@ -1414,7 +1406,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService implements DeviceIdleInternal {
         public LocalService() {
         }
@@ -1578,7 +1569,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ModeManagerOffBodyStateConsumer implements Consumer {
         /* renamed from: -$$Nest$monModeManagerOffBodyChangedLocked, reason: not valid java name */
         public static void m61$$Nest$monModeManagerOffBodyChangedLocked(ModeManagerOffBodyStateConsumer modeManagerOffBodyStateConsumer) {
@@ -1606,7 +1596,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ModeManagerQuickDozeRequestConsumer implements Consumer {
         /* renamed from: -$$Nest$monModeManagerRequestChangedLocked, reason: not valid java name */
         public static void m62$$Nest$monModeManagerRequestChangedLocked(ModeManagerQuickDozeRequestConsumer modeManagerQuickDozeRequestConsumer) {
@@ -1636,7 +1625,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class MotionListener extends TriggerEventListener implements SensorEventListener {
         public long activatedTimeElapsed;
         public boolean active = false;
@@ -1667,7 +1655,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -1866,7 +1853,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Shell extends ShellCommand {
         public int userId = 0;
 
@@ -1882,7 +1868,6 @@ public final class DeviceIdleController extends SystemService implements AnyMoti
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TargetPkg {
         public final String pkgName;
         public final int uid;

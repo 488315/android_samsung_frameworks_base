@@ -111,7 +111,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         implements EnterpriseServiceCallback {
     public static INetd mNetdService;
@@ -151,7 +150,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
     public static volatile boolean mIsCaptiveExempt = false;
     public static final Object NULL_OBJECT = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChainingStateMachine extends Thread {
         public final String profileName;
         public long threadStartTime = -1;
@@ -294,7 +292,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Context mContext;
 
@@ -303,7 +300,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KnoxVpnHandler extends Handler {
         public KnoxVpnHandler(Looper looper) {
             super(looper);
@@ -327,7 +323,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VpnReceiver extends BroadcastReceiver {
         public VpnReceiver() {}
 
@@ -571,7 +566,6 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VpnServiceConnection implements ServiceConnection {
         public final int adminUid;
         public final int containerId;

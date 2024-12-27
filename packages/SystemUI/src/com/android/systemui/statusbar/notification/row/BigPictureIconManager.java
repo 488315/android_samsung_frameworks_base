@@ -27,7 +27,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BigPictureIconManager implements NotificationIconManager, Dumpable {
     public final CoroutineDispatcher bgDispatcher;
     public final Context context;
@@ -42,11 +41,9 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
     public final BigPictureStatsManager statsManager;
     public final boolean viewShown;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class DrawableState {
         public final Icon icon;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Empty extends DrawableState {
             public static final Empty INSTANCE = new Empty();
 
@@ -67,7 +64,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class FullImage extends DrawableState {
             public final Size drawableSize;
             public final Icon icon;
@@ -98,7 +94,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Initial extends DrawableState {
             public static final Initial INSTANCE = new Initial();
 
@@ -119,7 +114,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class PlaceHolder extends DrawableState {
             public final Size drawableSize;
             public final Icon icon;

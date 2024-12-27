@@ -40,7 +40,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSCMainViewController extends ViewControllerBase {
     public final String TAG;
     public final QSCMainViewController$accessibilityDelegate$1 accessibilityDelegate;
@@ -59,7 +58,6 @@ public final class QSCMainViewController extends ViewControllerBase {
     public QsTransitionAnimator transitionAnimator;
     public final Lazy viewControllerRepo$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

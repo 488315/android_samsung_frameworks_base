@@ -47,7 +47,6 @@ import com.android.systemui.shared.system.TaskStackChangeListeners;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.util.settings.SecureSettings;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Callbacks, TaskStackChangeListener {
     public static boolean sConfirmed;
     public ClingWindowView mClingWindow;
@@ -81,7 +80,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.ImmersiveModeConfirmation$2, reason: invalid class name */
     public final class AnonymousClass2 extends IVrStateCallbacks.Stub {
         public AnonymousClass2() {
@@ -97,7 +95,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClingWindowView extends FrameLayout {
         public ViewGroup mClingLayout;
         public final ColorDrawable mColor;
@@ -230,7 +227,6 @@ public final class ImmersiveModeConfirmation implements CoreStartable, CommandQu
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);

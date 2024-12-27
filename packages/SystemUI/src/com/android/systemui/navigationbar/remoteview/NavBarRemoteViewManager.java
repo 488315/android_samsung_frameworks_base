@@ -25,7 +25,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavBarRemoteViewManager {
     public int adaptivePosition;
     public final NavBarRemoteViewManager$comparator$1 comparator;
@@ -39,7 +38,6 @@ public final class NavBarRemoteViewManager {
     private final SettingsHelper settingsHelper;
     public boolean showInGestureMode;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

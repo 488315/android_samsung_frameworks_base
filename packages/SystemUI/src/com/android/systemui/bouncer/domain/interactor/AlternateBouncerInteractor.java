@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AlternateBouncerInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ReadonlyStateFlow alternateBouncerSupported;
@@ -44,7 +43,6 @@ public final class AlternateBouncerInteractor {
     public final StatusBarStateController statusBarStateController;
     public final SystemClock systemClock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -70,12 +68,10 @@ public final class AlternateBouncerInteractor {
         final ReadonlyStateFlow readonlyStateFlow = ((FingerprintPropertyRepositoryImpl) fingerprintPropertyRepository).sensorType;
         Flow flow = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -180,12 +176,10 @@ public final class AlternateBouncerInteractor {
         final MutableSharedFlow transitionValue = ((KeyguardTransitionInteractor) lazy3.get()).transitionValue(KeyguardState.DOZING);
         Flow flow2 = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -281,12 +275,10 @@ public final class AlternateBouncerInteractor {
         final MutableSharedFlow transitionValue2 = ((KeyguardTransitionInteractor) lazy3.get()).transitionValue(KeyguardState.AOD);
         this.isDozingOrAod = FlowKt.distinctUntilChanged(booleanFlowOperators.anyOf(flow2, new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$3
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor$special$$inlined$map$3$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ServiceHolder implements IBinder.DeathRecipient {
     public final Function mCastFunction;
     public final Executor mExecutor;
@@ -28,7 +27,6 @@ public final class ServiceHolder implements IBinder.DeathRecipient {
     public final AnonymousClass2 mServiceProvider;
     public final String mTag;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.ServiceHolder$2, reason: invalid class name */
     public final class AnonymousClass2 {}
 

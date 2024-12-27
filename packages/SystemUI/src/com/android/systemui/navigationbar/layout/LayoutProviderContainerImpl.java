@@ -6,7 +6,6 @@ import android.view.Display;
 import com.samsung.systemui.splugins.navigationbar.LayoutProvider;
 import com.samsung.systemui.splugins.navigationbar.LayoutProviderContainer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LayoutProviderContainerImpl implements LayoutProviderContainer {
     public final Context context;
 

@@ -14,7 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DreamOverlayAnimationsController {
     public final DreamViewModel dreamViewModel;
     public final Logger logger;
@@ -32,7 +31,6 @@ public final class DreamOverlayAnimationsController {
     public final AmbientStatusBarViewController mStatusBarViewController;
     public View view;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

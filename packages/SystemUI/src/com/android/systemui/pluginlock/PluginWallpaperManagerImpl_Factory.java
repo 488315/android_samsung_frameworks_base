@@ -5,7 +5,6 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.util.SettingsHelper;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PluginWallpaperManagerImpl_Factory implements Provider {
     private final javax.inject.Provider contextProvider;
     private final javax.inject.Provider delegateAppProvider;

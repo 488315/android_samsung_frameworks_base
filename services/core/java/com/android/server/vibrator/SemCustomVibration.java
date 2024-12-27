@@ -3,7 +3,6 @@ package com.android.server.vibrator;
 import android.content.Context;
 import android.os.vibrator.SemHapticSegment;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemCustomVibration extends SemVibration {
     public final Context mContext;
     public final SemHapticSegment mSemHapticSegment;

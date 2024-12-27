@@ -22,7 +22,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CountryDetectorService extends ICountryDetector.Stub {
     public final Context mContext;
     public CountryDetectorBase mCountryDetector;
@@ -31,7 +30,6 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
     public final HashMap mReceivers;
     public boolean mSystemReady;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver implements IBinder.DeathRecipient {
         public final IBinder mKey;
         public final ICountryListener mListener;

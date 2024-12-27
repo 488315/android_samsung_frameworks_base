@@ -101,7 +101,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSTileHost implements QSHost, TunerService.Tunable, PluginListener, ProtoDumpable, PanelInteractor, CustomTileAddedRepository {
     public static final boolean DEBUG = Log.isLoggable("QSTileHost", 3);
     public static final boolean LOGGING_DEBUG = Log.isLoggable(SystemUIAnalytics.TAG_QUICK_SETTINGS, 3);
@@ -157,7 +156,6 @@ public final class QSTileHost implements QSHost, TunerService.Tunable, PluginLis
     public final ArrayList mTileSpecs = new ArrayList();
     public final List mCallbacks = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.QSTileHost$3, reason: invalid class name */
     public final class AnonymousClass3 extends KnoxStateMonitorCallback {
         public AnonymousClass3() {
@@ -229,7 +227,6 @@ public final class QSTileHost implements QSHost, TunerService.Tunable, PluginLis
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TilesMap {
         public static final HashMap mTilesMap = new HashMap();
         public static TilesMap sInstance = null;

@@ -30,7 +30,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CredentialManagerUi {
     public final RequestSession mCallbacks;
     public final Context mContext;
@@ -162,7 +161,6 @@ public final class CredentialManagerUi {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class UiStatus {
         public static final /* synthetic */ UiStatus[] $VALUES;
         public static final UiStatus IN_PROGRESS;

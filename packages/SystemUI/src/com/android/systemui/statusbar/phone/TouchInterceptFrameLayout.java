@@ -9,14 +9,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TouchInterceptFrameLayout extends FrameLayout {
     public View.OnClickListener customClickListener;
     public final GestureDetector gestureDetector;
     public boolean isTouchInProgress;
     public View touchForwardView;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -26,7 +24,6 @@ public final class TouchInterceptFrameLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         public final TouchInterceptFrameLayout view;
 

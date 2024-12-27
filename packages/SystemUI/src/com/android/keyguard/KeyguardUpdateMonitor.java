@@ -117,7 +117,6 @@ import java.util.stream.Collectors;
 import javax.inject.Provider;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpable, CoreStartable, KeyguardSecUpdateMonitor {
     public static final int BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED = -1;
     protected static final int BIOMETRIC_STATE_CANCELLING = 2;
@@ -243,7 +242,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     public static final ComponentName FALLBACK_HOME_COMPONENT = new ComponentName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.FallbackHome");
     public static final List ABSENT_SIM_STATE_LIST = Arrays.asList(1, 0, 6);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$2, reason: invalid class name */
     public final class AnonymousClass2 extends IBiometricEnabledOnKeyguardCallback.Stub {
         public AnonymousClass2() {
@@ -254,7 +252,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$20, reason: invalid class name */
     public final class AnonymousClass20 implements AuthController.Callback {
         public AnonymousClass20() {
@@ -285,7 +282,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$24, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass24 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -304,7 +300,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class BiometricAuthenticated {
         public final boolean mAuthenticated;
         public final boolean mIsStrongBiometric;
@@ -315,7 +310,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SimData {
         public int simState;
         public int slotId;
@@ -337,7 +331,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker {
         public StrongAuthTracker(Context context) {
             super(context);

@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-/* compiled from: GLFrame.java */
 class GLFrameTimer {
     private static StopWatchMap mTimer = null;
 

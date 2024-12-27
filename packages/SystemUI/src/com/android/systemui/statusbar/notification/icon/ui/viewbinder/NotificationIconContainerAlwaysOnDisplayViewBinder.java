@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.notification.icon.ui.viewmodel.Notificatio
 import com.android.systemui.statusbar.phone.ScreenOffAnimationController;
 import com.android.systemui.statusbar.ui.SystemBarUtilsState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationIconContainerAlwaysOnDisplayViewBinder {
     public final ConfigurationState configuration;
     public final StatusBarIconViewBindingFailureTracker failureTracker;

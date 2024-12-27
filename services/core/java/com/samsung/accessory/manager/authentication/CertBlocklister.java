@@ -12,14 +12,12 @@ import com.samsung.accessory.manager.authentication.cover.CoverAuthenticator;
 
 import java.io.File;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CertBlocklister extends Binder {
     public static final String PUBKEY_PATH;
     public static BlocklistObserver mBlocklistObserver;
     public static CertBlocklistListener mCertBlocklistListener;
     public static boolean mIsBlocked;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthenticationSettingObserver extends ContentObserver {
         public final ContentResolver mContentResolver;
         public final String mKey;
@@ -46,7 +44,6 @@ public final class CertBlocklister extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlocklistObserver extends ContentObserver {
         public static final boolean DBG = Debug.semIsProductDev();
         public String mBlocklist;
@@ -55,7 +52,6 @@ public final class CertBlocklister extends Binder {
         public final String mPath;
         public final File mTmpDir;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.samsung.accessory.manager.authentication.CertBlocklister$BlocklistObserver$1, reason: invalid class name */
         public final class AnonymousClass1 extends Thread {
             public final /* synthetic */ int $r8$classId;
@@ -110,7 +106,6 @@ public final class CertBlocklister extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface CertBlocklistListener {}
 
     static {

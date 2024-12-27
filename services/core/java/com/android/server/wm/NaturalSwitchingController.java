@@ -15,7 +15,6 @@ import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NaturalSwitchingController implements IController {
     public final ActivityTaskManagerService mAtm;
     public IBinder mClient;
@@ -26,7 +25,6 @@ public final class NaturalSwitchingController implements IController {
     public boolean mNaturalSwitchingRunning = false;
     public final Rect mTmpRect = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IBinder.DeathRecipient {
         public DeathRecipient() {}
 

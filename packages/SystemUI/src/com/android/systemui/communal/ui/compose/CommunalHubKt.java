@@ -180,10 +180,8 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class CommunalHubKt {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -1393,7 +1391,6 @@ public abstract class CommunalHubKt {
                 final CommunalContentModel.WidgetContent.Widget widget2 = widget;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$WidgetConfigureButton$1.1
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.communal.ui.compose.CommunalHubKt$WidgetConfigureButton$1$1$1, reason: invalid class name and collision with other inner class name */
                     final class C00751 extends SuspendLambda implements Function2 {
                         final /* synthetic */ CommunalContentModel.WidgetContent.Widget $model;

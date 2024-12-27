@@ -7,7 +7,6 @@ import android.os.Handler;
 
 import com.android.server.am.mars.filter.IFilter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCastFilter implements IFilter {
     public static final Uri URI_APP_CAST_ENABLED =
             Uri.parse("content://com.samsung.android.smartmirroring/app_cast_sent_result");
@@ -19,7 +18,6 @@ public final class AppCastFilter implements IFilter {
     public Context mContext;
     public boolean mIsAppCastEnabled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AppCastFilterHolder {
         public static final AppCastFilter INSTANCE;
 

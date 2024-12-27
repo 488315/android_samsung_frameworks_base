@@ -23,7 +23,6 @@ import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteAnimationController implements IBinder.DeathRecipient {
     public boolean mCanceled;
     public final DisplayContent mDisplayContent;
@@ -47,7 +46,6 @@ public final class RemoteAnimationController implements IBinder.DeathRecipient {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FinishedCallback extends IRemoteAnimationFinishedCallback.Stub {
         public RemoteAnimationController mOuter;
 
@@ -73,7 +71,6 @@ public final class RemoteAnimationController implements IBinder.DeathRecipient {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteAnimationAdapterWrapper implements AnimationAdapter {
         public int mAnimationType;
         public SurfaceAnimator.OnAnimationFinishedCallback mCapturedFinishCallback;
@@ -212,7 +209,6 @@ public final class RemoteAnimationController implements IBinder.DeathRecipient {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteAnimationRecord {
         public RemoteAnimationAdapterWrapper mAdapter;
         public int mBackdropColor = 0;

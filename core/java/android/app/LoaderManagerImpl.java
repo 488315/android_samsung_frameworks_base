@@ -10,7 +10,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
 
-/* compiled from: LoaderManager.java */
 class LoaderManagerImpl extends LoaderManager {
     static boolean DEBUG = false;
     static final String TAG = "LoaderManager";
@@ -23,7 +22,6 @@ class LoaderManagerImpl extends LoaderManager {
     final SparseArray<LoaderInfo> mLoaders = new SparseArray<>(0);
     final SparseArray<LoaderInfo> mInactiveLoaders = new SparseArray<>(0);
 
-    /* compiled from: LoaderManager.java */
     final class LoaderInfo
             implements Loader.OnLoadCompleteListener<Object>,
                     Loader.OnLoadCanceledListener<Object> {

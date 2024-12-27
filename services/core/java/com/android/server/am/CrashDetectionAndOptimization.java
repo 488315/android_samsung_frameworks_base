@@ -12,19 +12,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CrashDetectionAndOptimization {
     public static final List dexOptimizedPackages = new ArrayList();
     public static final List crashPackages = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CrashPackage {
         public int crashCount;
         public long mTimeStamp;
         public String packageName;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexOptimizationThread extends Thread {
         public final int maxPossibleCount = 4;
         public final ProcessRecord processRecord;

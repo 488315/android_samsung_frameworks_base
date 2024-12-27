@@ -25,7 +25,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Letterbox {
     public static final Rect EMPTY_RECT = new Rect();
     public static final Point ZERO_POINT = new Point(0, 0);
@@ -45,7 +44,6 @@ public final class Letterbox {
     public final Rect mOuter = new Rect();
     public final Rect mInner = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DoubleTapListener extends GestureDetector.SimpleOnGestureListener {
         public final WindowManagerService mWmService;
 
@@ -90,7 +88,6 @@ public final class Letterbox {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputInterceptor implements Runnable {
         public final InputChannel mClientChannel;
         public final Handler mHandler;
@@ -138,7 +135,6 @@ public final class Letterbox {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LetterboxSurface {
         public Color mColor;
         public boolean mHasWallpaperBackground;
@@ -322,7 +318,6 @@ public final class Letterbox {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TapEventReceiver extends InputEventReceiver {
         public final GestureDetector mDoubleTapDetector;
 

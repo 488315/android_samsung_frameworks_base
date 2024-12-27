@@ -35,19 +35,15 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class WindowManagerInternal {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AccessibilityControllerInternal {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public interface UiChangesForAccessibilityCallbacks {
             void onRectangleOnScreenRequested(int i, int i2, int i3, int i4, int i5);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AppTransitionListener {
         public void onAppTransitionCancelledLocked(boolean z) {}
 
@@ -60,7 +56,6 @@ public abstract class WindowManagerInternal {
         public void onAppTransitionTimeoutLocked() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IDragDropCallback {
         static CompletableFuture registerInputChannel(
                 final DragState dragState,
@@ -153,7 +148,6 @@ public abstract class WindowManagerInternal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImeTargetInfo {
         public final String focusedWindowName;
         public final String imeControlTargetName;
@@ -170,24 +164,18 @@ public abstract class WindowManagerInternal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface MagnificationCallbacks {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnHardKeyboardStatusChangeListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnImeRequestedChangedListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnWindowRemovedListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface TaskSystemBarsListener {
         void onTransientSystemBarsVisibilityChanged(int i, boolean z, boolean z2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WindowsForAccessibilityCallback {}
 
     public abstract void addBlockScreenCaptureForApps(ArraySet arraySet);

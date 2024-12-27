@@ -9,7 +9,6 @@ import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyn
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AggressivePolicyHandler extends PolicyHandler {
     public long mAdjustTargetFreeEndTime;
     public double mAdjustTargetFreeFactor;
@@ -23,7 +22,6 @@ public final class AggressivePolicyHandler extends PolicyHandler {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ProtectLevel {
         public static final /* synthetic */ ProtectLevel[] $VALUES;
         public static final ProtectLevel HEAVY;

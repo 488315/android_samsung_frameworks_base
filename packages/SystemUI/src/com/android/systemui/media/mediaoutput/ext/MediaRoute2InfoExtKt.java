@@ -18,7 +18,6 @@ import com.android.systemui.media.mediaoutput.icons.device.TwsKt;
 import com.android.systemui.media.mediaoutput.icons.device.UsbKt;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class MediaRoute2InfoExtKt {
     public static final CharSequence getDisplayName(MediaRoute2Info mediaRoute2Info) {
         Integer valueOf;

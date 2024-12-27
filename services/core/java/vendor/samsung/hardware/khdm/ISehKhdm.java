@@ -6,16 +6,13 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ISehKhdm extends IInterface {
     public static final String DESCRIPTOR =
             "vendor$samsung$hardware$khdm$ISehKhdm".replace('$', '.');
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements ISehKhdm {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements ISehKhdm {
             public IBinder mRemote;
 

@@ -7,7 +7,6 @@ import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.EmptyCoroutineContext;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalTutorialIndicatorViewBinder {
     public static final CommunalTutorialIndicatorViewBinder INSTANCE = new CommunalTutorialIndicatorViewBinder();
 

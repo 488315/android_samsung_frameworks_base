@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccessibilityWindowManager {
     public static int sNextWindowId;
     public final AccessibilityEventSender mAccessibilityEventSender;
@@ -50,10 +49,8 @@ public final class AccessibilityWindowManager {
     public final SparseArray mWindowIdMap = new SparseArray();
     public final SparseArray mWindowAttributes = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AccessibilityEventSender {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayWindowsObserver
             implements WindowManagerInternal.WindowsForAccessibilityCallback {
         public final int mDisplayId;
@@ -228,7 +225,6 @@ public final class AccessibilityWindowManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteAccessibilityConnection implements IBinder.DeathRecipient {
         public final IAccessibilityInteractionConnection mConnection;
         public final String mPackageName;

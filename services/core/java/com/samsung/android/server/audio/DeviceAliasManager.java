@@ -3,12 +3,10 @@ package com.samsung.android.server.audio;
 import android.media.AudioSystem;
 import android.util.SparseArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceAliasManager {
     public final SparseArray mDevices;
     public final SparseArray mLeOnlyDevices;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceAlias {
         public final int[] mAliases;
         public final int mExcludeStreams;
@@ -23,7 +21,6 @@ public final class DeviceAliasManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DeviceAliasRunner {
         void run(int i);
     }

@@ -21,14 +21,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayAreaOrganizerController extends IDisplayAreaOrganizerController.Stub {
     public final WindowManagerGlobalLock mGlobalLock;
     public int mNextTaskDisplayAreaFeatureId = 20002;
     public final HashMap mOrganizersByFeatureIds = new HashMap();
     public final ActivityTaskManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IBinder.DeathRecipient {
         public final int mFeature;
         public final IDisplayAreaOrganizer mOrganizer;
@@ -77,7 +75,6 @@ public final class DisplayAreaOrganizerController extends IDisplayAreaOrganizerC
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayAreaOrganizerState {
         public final DeathRecipient mDeathRecipient;
         public final IDisplayAreaOrganizer mOrganizer;

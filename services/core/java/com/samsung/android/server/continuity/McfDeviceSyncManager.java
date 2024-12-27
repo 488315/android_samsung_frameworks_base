@@ -30,7 +30,6 @@ import com.samsung.android.server.continuity.common.ExecutorUtil;
 import com.samsung.android.server.continuity.common.Utils;
 import com.samsung.android.server.continuity.sem.SemWrapper;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class McfDeviceSyncManager {
     static final int MSG_AVAILABLE_MCF = 5;
     static final int MSG_BIND_MCF = 2;
@@ -344,13 +343,11 @@ public final class McfDeviceSyncManager {
     public boolean mIsValidState;
     public final PreconditionObserver mPreconditionObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.continuity.McfDeviceSyncManager$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.continuity.McfDeviceSyncManager$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public int mBindReason;

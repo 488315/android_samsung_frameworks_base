@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WiredAccessoryManager implements InputManagerService.WiredAccessoryCallbacks {
     public final AudioManager mAudioManager;
     public final Context mContext;
@@ -204,7 +203,6 @@ public final class WiredAccessoryManager implements InputManagerService.WiredAcc
             };
     public boolean mBikeMode = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WiredAccessoryExtconObserver extends ExtconUEventObserver {
         public WiredAccessoryExtconObserver() {
             ExtconUEventObserver.ExtconInfo.getExtconInfoForTypes(
@@ -245,11 +243,9 @@ public final class WiredAccessoryManager implements InputManagerService.WiredAcc
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WiredAccessoryObserver extends UEventObserver {
         public final List mUEventInfo;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UEventInfo {
             public final String mDevName;
             public final int mState1Bits;

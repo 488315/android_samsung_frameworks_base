@@ -3,7 +3,6 @@ package com.android.systemui.ambient.touch.scrim;
 import com.android.systemui.shade.ShadeExpansionChangeEvent;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BouncerScrimController implements ScrimController {
     public final StatusBarKeyguardViewManager mStatusBarKeyguardViewManager;
 

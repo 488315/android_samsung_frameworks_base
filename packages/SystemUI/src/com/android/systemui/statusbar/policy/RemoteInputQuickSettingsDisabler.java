@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RemoteInputQuickSettingsDisabler implements ConfigurationController.ConfigurationListener {
     public final Context context;
     public boolean isLandscape;

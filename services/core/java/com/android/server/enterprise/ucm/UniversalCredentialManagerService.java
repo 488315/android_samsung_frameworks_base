@@ -75,7 +75,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UniversalCredentialManagerService extends IUniversalCredentialManager.Stub
         implements EnterpriseServiceCallback {
     public final Context mContext;
@@ -106,13 +105,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public KeyguardManager mKgm = null;
     public boolean mIsSystemReceiverRegistered = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RequestIdGenerator {
         public int fraction;
         public Random random;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UCSMHandler extends Handler {
         public UCSMHandler() {}
 

@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppSyncInfo extends AppSyncWrapper {
     public static final /* synthetic */ int $r8$clinit = 0;
     public static long EXP_MIN_INEXACT_WINDOW = 300000;
@@ -54,7 +53,6 @@ public final class AppSyncInfo extends AppSyncWrapper {
     public final ArrayList mTargetPackages;
     public final Set preloadedPackages;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.alarm.AppSyncInfo$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -133,7 +131,6 @@ public final class AppSyncInfo extends AppSyncWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccountListener implements OnAccountsUpdateListener {
         public AccountListener() {
         }
@@ -158,7 +155,6 @@ public final class AppSyncInfo extends AppSyncWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageList {
         public final HashSet mPackageSet = new HashSet();
         public final ArrayList mRegExpList = new ArrayList();
@@ -284,7 +280,6 @@ public final class AppSyncInfo extends AppSyncWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Sales {
         public static final boolean ATT;
         public static final boolean JAPAN;

@@ -48,7 +48,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HistoricalRegistry {
     public AppOpsManager.HistoricalOps mCurrentHistoricalOps;
     public volatile DiscreteRegistry mDiscreteRegistry;
@@ -65,7 +64,6 @@ public final class HistoricalRegistry {
     public long mBaseSnapshotInterval = DEFAULT_SNAPSHOT_INTERVAL_MILLIS;
     public long mIntervalCompressionMultiplier = 10;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Persistence {
         public static final AtomicDirectory sHistoricalAppOpsDir =
                 new AtomicDirectory(
@@ -616,7 +614,6 @@ public final class HistoricalRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StringDumpVisitor implements AppOpsManager.HistoricalOpsVisitor {
         public final String mAttributionPrefix;
         public final String mEntryPrefix;

@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface INetd extends IInterface {
     public static final int CLAT_MARK = -559038041;
     public static final int CONF = 1;
@@ -62,7 +61,6 @@ public interface INetd extends IInterface {
     public static final int UNREACHABLE_NET_ID = 52;
     public static final int VERSION = 15;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetd {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -522,7 +520,6 @@ public interface INetd extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements INetd {
         public static final String DESCRIPTOR = "android$net$INetd".replace('$', '.');
         static final int TRANSACTION_bandwidthAddNaughtyApp = 50;
@@ -638,7 +635,6 @@ public interface INetd extends IInterface {
         static final int TRANSACTION_wakeupAddInterface = 31;
         static final int TRANSACTION_wakeupDelInterface = 32;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements INetd {
             public String mCachedHash;
             public int mCachedVersion;

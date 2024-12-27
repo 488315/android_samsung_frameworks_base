@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerModule
         implements IBinder.DeathRecipient, ISoundTriggerHal.GlobalCallback {
     public final Set mActiveSessions = new HashSet();
@@ -33,7 +32,6 @@ public final class SoundTriggerModule
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ModelState {
         public static final /* synthetic */ ModelState[] $VALUES;
         public static final ModelState ACTIVE;
@@ -59,13 +57,11 @@ public final class SoundTriggerModule
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Session implements ISoundTriggerModule {
         public ISoundTriggerCallback mCallback;
         public final Map mLoadedModels;
         public final IBinder mToken;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Model implements ISoundTriggerHal.ModelCallback {
             public int mHandle;
             public SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession mSession;

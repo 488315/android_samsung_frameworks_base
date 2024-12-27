@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
         implements EnterpriseServiceCallback {
     public Context mContext;
@@ -40,7 +39,6 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
     public int mMDMConfigVersion;
     public HashMap mPendingGetApnList;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Carriers {
         public static final Uri CONTENT_URI = Uri.parse("content://telephony/carriers");
         public static final Uri PREFERAPN_URI = Uri.parse("content://telephony/carriers/preferapn");

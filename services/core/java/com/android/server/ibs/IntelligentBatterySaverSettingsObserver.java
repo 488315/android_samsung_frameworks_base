@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IntelligentBatterySaverSettingsObserver {
     public Context mContext;
     public Handler mHandler;
@@ -16,7 +15,6 @@ public final class IntelligentBatterySaverSettingsObserver {
     public IntelligentBatterySaverSettingsObserver$$ExternalSyntheticLambda0 mRunnable;
     public SettingsObserver mSettingsObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver() {
             super(new Handler());

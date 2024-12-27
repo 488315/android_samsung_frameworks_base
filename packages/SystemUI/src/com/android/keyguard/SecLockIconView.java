@@ -26,7 +26,6 @@ import com.android.systemui.vibrate.VibrationUtil;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIImageView;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecLockIconView extends LockIconView {
     public ObjectAnimator mAnimTranslationX;
     public final SparseArray mDrawableCache;

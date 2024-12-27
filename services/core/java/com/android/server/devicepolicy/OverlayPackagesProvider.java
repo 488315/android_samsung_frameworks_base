@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayPackagesProvider {
     public static final Map sActionToMetadataKeyMap;
     public static final Set sAllowedActions;
@@ -31,7 +30,6 @@ public final class OverlayPackagesProvider {
     public final RecursiveStringArrayResourceResolver mRecursiveStringArrayResourceResolver;
     public final String salesCode;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultInjector implements Injector {
         @Override // com.android.server.devicepolicy.OverlayPackagesProvider.Injector
         public final String getActiveApexPackageNameContainingPackage(String str) {
@@ -65,7 +63,6 @@ public final class OverlayPackagesProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Injector {
         String getActiveApexPackageNameContainingPackage(String str);
 

@@ -6,7 +6,6 @@ import android.net.Uri;
 import com.android.systemui.edgelighting.interfaces.IEdgeLightingStyle;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ELPlusStyle implements IEdgeLightingStyle {
     public final String mDBName;
     public final String mEffectName;

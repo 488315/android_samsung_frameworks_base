@@ -18,7 +18,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final UnfoldTransitionProgressProvider progressProvider;
     public ViewGroup rootView;
@@ -28,7 +27,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction END;
@@ -62,7 +60,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewToTranslate {
         public final Direction direction;
         public final Function2 translateFunc;
@@ -161,7 +158,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewIdToTranslate {
         public final Direction direction;
         public final Function0 shouldBeAnimated;

@@ -25,7 +25,6 @@ import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.view.SemWindowManager;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AccessibilityFloatingMenuController implements AccessibilityButtonModeObserver.ModeChangedListener, AccessibilityButtonTargetsObserver.TargetsChangedListener {
     public final AccessibilityButtonModeObserver mAccessibilityButtonModeObserver;
     public final AccessibilityButtonTargetsObserver mAccessibilityButtonTargetsObserver;
@@ -106,7 +105,6 @@ public final class AccessibilityFloatingMenuController implements AccessibilityB
     public boolean mIsKeyguardVisible = false;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$2, reason: invalid class name */
     public final class AnonymousClass2 implements SemDesktopModeManager.DesktopModeListener {
         public AnonymousClass2() {

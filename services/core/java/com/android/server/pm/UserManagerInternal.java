@@ -11,7 +11,6 @@ import com.android.server.locksettings.LockSettingsService;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class UserManagerInternal {
     public static final int USER_ASSIGNMENT_RESULT_FAILURE = -1;
     public static final int USER_ASSIGNMENT_RESULT_SUCCESS_ALREADY_VISIBLE = 3;
@@ -21,19 +20,16 @@ public abstract class UserManagerInternal {
     public static final int USER_START_MODE_BACKGROUND_VISIBLE = 3;
     public static final int USER_START_MODE_FOREGROUND = 1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UserLifecycleListener {
         default void onUserCreated(UserInfo userInfo, Object obj) {}
 
         default void onUserRemoved(UserInfo userInfo) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UserRestrictionsListener {
         void onUserRestrictionsChanged(int i, Bundle bundle, Bundle bundle2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UserVisibilityListener {
         void onUserVisibilityChanged(int i, boolean z);
     }

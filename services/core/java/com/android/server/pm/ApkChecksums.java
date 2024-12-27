@@ -61,11 +61,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ApkChecksums {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.ApkChecksums$1, reason: invalid class name */
     public final class AnonymousClass1 implements ByteBufferFactory {
         public final ByteBuffer create(int i) {
@@ -73,14 +71,12 @@ public abstract class ApkChecksums {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Producer mContext;
         public final Producer mHandlerProducer;
         public final Producer mIncrementalManagerProducer;
         public final Producer mPackageManagerInternalProducer;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         interface Producer {
             Object produce();
         }

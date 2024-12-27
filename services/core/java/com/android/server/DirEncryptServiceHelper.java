@@ -38,7 +38,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DirEncryptServiceHelper {
     public static boolean mMountSDcardToHelper;
     public static final Object mSync = new Object();
@@ -62,7 +61,6 @@ public final class DirEncryptServiceHelper {
     public long mProgressTime = -1;
     public int mPrevPercent = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimatingNotification implements Runnable {
         public final Context mContext;
         public boolean mStop = false;
@@ -124,7 +122,6 @@ public final class DirEncryptServiceHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SDStorageEventListener extends StorageEventListener {
         public SDStorageEventListener() {}
 

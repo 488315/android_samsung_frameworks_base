@@ -6,7 +6,6 @@ import android.content.Context;
 import android.view.animation.Animation;
 import com.android.systemui.util.Assert;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeepAwakeAnimationListener extends AnimatorListenerAdapter implements Animation.AnimationListener {
     private static final String TAG = "KeepAwakeAnimListener";
     static WakeLock sWakeLock;

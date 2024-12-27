@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppPermissionTracker extends BaseAppStateTracker
         implements PackageManager.OnPermissionsChangedListener {
     public final SparseArray mAppOpsCallbacks;
@@ -36,7 +35,6 @@ public final class AppPermissionTracker extends BaseAppStateTracker
     public volatile boolean mLockedBootCompleted;
     public final SparseArray mUidGrantedPermissionsInMonitor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppPermissionPolicy extends BaseAppStatePolicy {
         public static final String[] DEFAULT_BG_PERMISSIONS_IN_MONITOR = {
             "android.permission.ACCESS_FINE_LOCATION",
@@ -136,7 +134,6 @@ public final class AppPermissionTracker extends BaseAppStateTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyAppOpsCallback extends IAppOpsCallback.Stub {
         public MyAppOpsCallback() {}
 
@@ -145,7 +142,6 @@ public final class AppPermissionTracker extends BaseAppStateTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public AppPermissionTracker mTracker;
 
@@ -264,7 +260,6 @@ public final class AppPermissionTracker extends BaseAppStateTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidGrantedPermissionState {
         public final int mAppOp;
         public final boolean mAppOpAllowed;

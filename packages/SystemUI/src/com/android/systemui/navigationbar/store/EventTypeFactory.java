@@ -25,14 +25,12 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EventTypeFactory {
     public static final Companion Companion = new Companion(null);
     public static volatile EventTypeFactory INSTANCE;
     public final Context context;
     public final List updatableEvents = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -42,10 +40,8 @@ public final class EventTypeFactory {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface EventType {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetBarLayoutParams implements EventType {
             public final int rotation;
 
@@ -69,7 +65,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetDeadZoneSize implements EventType {
             public final boolean maxSize;
 
@@ -93,7 +88,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetDefaultLayout implements EventType {
             public final boolean noArguments;
 
@@ -125,7 +119,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetImeInsets implements EventType {
             public final boolean canMove;
             public final int insetHeight;
@@ -166,7 +159,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetInflateButtonWidth implements EventType {
             public final String buttonSpec;
             public final boolean landscape;
@@ -196,7 +188,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetInflateLayoutID implements EventType {
             public final boolean vertical;
 
@@ -220,7 +211,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetMandatoryInsets implements EventType {
             public final boolean canMove;
             public final int rotation;
@@ -250,7 +240,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetNavBarInsets implements EventType {
             public final int insetHeight;
             public final int insetWidth;
@@ -287,7 +276,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetNavBarLargeCoverScreenPadding implements EventType {
             public final int rotation;
 
@@ -311,7 +299,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class GetNavBarSidePadding implements EventType {
             public final boolean landscape;
 
@@ -335,7 +322,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoveBottomGestureHintDistance implements EventType {
             public final int distanceX;
             public final int distanceY;
@@ -376,7 +362,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnBarLayoutParamsProviderChanged implements EventType {
             public final BarLayoutParams layoutParamsProvider;
 
@@ -404,7 +389,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnBottomSensitivityChanged implements EventType {
             public final boolean noArguments;
 
@@ -436,7 +420,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnButtonOrderChanged implements EventType {
             public final boolean noArguments;
 
@@ -468,7 +451,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnButtonPositionChanged implements EventType {
             public final boolean noArguments;
 
@@ -500,7 +482,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnButtonToHideKeyboardChanged implements EventType {
             public final boolean noArguments;
 
@@ -532,7 +513,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnConfigChanged implements EventType {
             public final Configuration newConfig;
 
@@ -556,7 +536,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnCoverRotationChanged implements EventType {
             public final int rotation;
 
@@ -588,7 +567,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnDesktopModeChanged implements EventType {
             public final SemDesktopModeState state;
 
@@ -616,7 +594,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnDeviceProvisionedChanged implements EventType {
             public final boolean provisioned;
 
@@ -640,7 +617,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnEdgeBackGestureDisabledByPolicyChanged implements EventType {
             public final boolean disabled;
 
@@ -664,7 +640,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnFakeNavBarEventOccurred implements EventType {
             public final boolean noArguments;
 
@@ -696,7 +671,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnFoldStateChanged implements EventType {
             public final boolean folded;
 
@@ -720,7 +694,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnHardKeyIntentPolicyChanged implements EventType {
             public final boolean intentStatus;
 
@@ -744,7 +717,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnInvalidateRemoteViews implements EventType {
             public final boolean noArguments;
 
@@ -776,7 +748,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnLayoutContainerChanged implements EventType {
             public final LayoutProviderContainer layoutProviderContainer;
 
@@ -800,7 +771,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnLightBarControllerCreated implements EventType {
             public final LightBarController lightBarController;
 
@@ -824,7 +794,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarAttachedToWindow implements EventType {
             public final NavigationBarTransitions navbarTransitions;
             public final NavigationBarView navigationBarView;
@@ -854,7 +823,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarButtonForcedVisibleChanged implements EventType {
             public final boolean userSetupComplete;
 
@@ -886,7 +854,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarConfigChanged implements EventType {
             public boolean canMove;
             public final boolean imeDownButtonForAllRotation;
@@ -931,7 +898,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarCreated implements EventType {
             public final KeyguardStateController keyguardStateController;
             public final NavigationBar navigationBar;
@@ -961,7 +927,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarDetachedFromWindow implements EventType {
             public final boolean noArguments;
 
@@ -993,7 +958,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarIconHintChanged implements EventType {
             public final int iconHint;
 
@@ -1017,7 +981,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarIconMarquee implements EventType {
             public final boolean noArguments;
 
@@ -1049,7 +1012,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarKnoxPolicyChanged implements EventType {
             public final boolean noArguments;
 
@@ -1081,7 +1043,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarLargeCoverScreenVisibilityChanged implements EventType {
             public final boolean coverTask;
             public final boolean imeShown;
@@ -1111,7 +1072,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarStyleChanged implements EventType {
             public final boolean noArguments;
 
@@ -1143,7 +1103,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarTransitionModeChanged implements EventType {
             public final int transitionMode;
 
@@ -1167,7 +1126,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarUpdateA11YService implements EventType {
             public final boolean clickable;
             public final boolean longClickable;
@@ -1197,7 +1155,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarWindowStateHidden implements EventType {
             public final boolean noArguments;
 
@@ -1229,7 +1186,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNavBarWindowStateShowing implements EventType {
             public final boolean noArguments;
 
@@ -1261,7 +1217,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnNewDexModeChanged implements EventType {
             public final boolean enabled;
 
@@ -1285,7 +1240,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnOneHandModeChanged implements EventType {
             public final String info;
 
@@ -1313,7 +1267,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnOpenThemeChanged implements EventType {
             public final boolean noArguments;
 
@@ -1345,7 +1298,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnPackageRemoved implements EventType {
             public final String packageName;
 
@@ -1369,7 +1321,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnRotationChanged implements EventType {
             public final int rotation;
 
@@ -1393,7 +1344,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnRotationLockedChanged implements EventType {
             public final boolean rotationLocked;
 
@@ -1417,7 +1367,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnSetDisableFlags implements EventType {
             public final int disable1;
             public final int disable2;
@@ -1450,7 +1399,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnSetGestureHintVisibility implements EventType {
             public final boolean backVisible;
             public final boolean homeVisible;
@@ -1487,7 +1435,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnSetRemoteView implements EventType {
             public final int position;
             public final int priority;
@@ -1532,7 +1479,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnSettingsSoftReset implements EventType {
             public final boolean noArguments;
 
@@ -1564,7 +1510,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnShowA11YSwipeUpTipPopup implements EventType {
             public final boolean noArguments;
 
@@ -1596,7 +1541,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnTaskbarAttachedToWindow implements EventType {
             public final boolean noArguments;
 
@@ -1628,7 +1572,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnTaskbarDetachedFromWindow implements EventType {
             public final boolean noArguments;
 
@@ -1660,7 +1603,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateBackGestureActiveIndicatorParams implements EventType {
             public final float dampingRatio;
             public final float stiffness;
@@ -1690,7 +1632,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateDarkIntensity implements EventType {
             public final float darkIntensity;
 
@@ -1714,7 +1655,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateNavBarVisibility implements EventType {
             public final int visibility;
 
@@ -1738,7 +1678,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateRegionSamplingListener implements EventType {
             public final boolean registered;
 
@@ -1762,7 +1701,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateRemoteViewContainer implements EventType {
             public final boolean contextualButtonVisible;
             public final float darkIntensity;
@@ -1804,7 +1742,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateSideBackGestureInsets implements EventType {
             public final int leftWidth;
             public final int rightWidth;
@@ -1837,7 +1774,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateSpayVisibility implements EventType {
             public final boolean showing;
             public final int width;
@@ -1867,7 +1803,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateSysUiStateFlag implements EventType {
             public final boolean noArguments;
 
@@ -1899,7 +1834,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUpdateTaskbarAvailable implements EventType {
             public final boolean noArguments;
 
@@ -1931,7 +1865,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUseThemeDefaultChanged implements EventType {
             public final boolean noArguments;
 
@@ -1963,7 +1896,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OnUserSwitched implements EventType {
             public final boolean noArguments;
 
@@ -1995,7 +1927,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ResetBottomGestureHintVI implements EventType {
             public final boolean noArguments;
 
@@ -2027,7 +1958,6 @@ public final class EventTypeFactory {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class StartBottomGestureHintVI implements EventType {
             public final int hintId;
 

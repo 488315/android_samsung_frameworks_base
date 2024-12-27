@@ -5,7 +5,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Events {
     public static final String TAG = Util.logTag(Events.class);
     public static final String[] EVENT_TAGS = {"show_dialog", "dismiss_dialog", "active_stream_changed", "expand", "key", "collection_started", "collection_stopped", "icon_click", "settings_click", "touch_level_changed", "level_changed", "internal_ringer_mode_changed", "external_ringer_mode_changed", "zen_mode_changed", "suppressor_changed", "mute_changed", "touch_level_done", "zen_mode_config_changed", "ringer_toggle", "show_usb_overheat_alarm", "dismiss_usb_overheat_alarm", "odi_captions_click", "odi_captions_tooltip_click", "slider_touch_tracking"};
@@ -14,7 +13,6 @@ public final class Events {
     static MetricsLogger sLegacyLogger = new MetricsLogger();
     static UiEventLogger sUiEventLogger = new UiEventLoggerImpl();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum VolumeDialogCloseEvent implements UiEventLogger.UiEventEnum {
         INVALID(0),
         VOLUME_DIALOG_DISMISS_TOUCH_OUTSIDE(134),
@@ -36,7 +34,6 @@ public final class Events {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum VolumeDialogEvent implements UiEventLogger.UiEventEnum {
         INVALID(0),
         VOLUME_DIALOG_SETTINGS_CLICK(143),
@@ -71,7 +68,6 @@ public final class Events {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum VolumeDialogOpenEvent implements UiEventLogger.UiEventEnum {
         INVALID(0),
         VOLUME_DIALOG_SHOW_VOLUME_CHANGED(128),
@@ -89,7 +85,6 @@ public final class Events {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum ZenModeEvent implements UiEventLogger.UiEventEnum {
         INVALID(0),
         ZEN_MODE_OFF(335),

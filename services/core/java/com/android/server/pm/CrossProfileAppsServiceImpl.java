@@ -54,13 +54,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CrossProfileAppsServiceImpl extends ICrossProfileApps.Stub {
     public final Context mContext;
     public final Injector mInjector;
     public final LocalService mLocalService = new LocalService();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Injector {
         int checkComponentPermission(int i, String str);
 
@@ -93,7 +91,6 @@ public final class CrossProfileAppsServiceImpl extends ICrossProfileApps.Stub {
         void withCleanCallingIdentity(FunctionalUtils.ThrowingRunnable throwingRunnable);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InjectorImpl implements Injector {
         public final Context mContext;
 
@@ -196,7 +193,6 @@ public final class CrossProfileAppsServiceImpl extends ICrossProfileApps.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends CrossProfileAppsInternal {
         public LocalService() {}
 

@@ -20,7 +20,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TimeController extends StateController {
     public static final boolean DEBUG;
     static final long DELAY_COALESCE_TIME_MS = 30000;
@@ -32,7 +31,6 @@ public final class TimeController extends StateController {
     public long mNextJobExpiredElapsedMillis;
     public final PriorityQueue mTrackedJobs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.controllers.TimeController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator

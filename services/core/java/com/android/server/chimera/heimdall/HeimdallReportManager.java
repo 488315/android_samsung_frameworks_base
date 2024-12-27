@@ -34,7 +34,6 @@ import java.util.Locale;
 import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HeimdallReportManager {
     public static int sRandomSampleRate = 10;
     public final BigdataManager mBigdataManager;
@@ -45,7 +44,6 @@ public final class HeimdallReportManager {
     public final CopyOnWriteArraySet mReportedAlwaysRunningProcesses = new CopyOnWriteArraySet();
     public final ActivityManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BigdataInfo {
         public int globalKillCnt;
         public int memoryUsage;
@@ -98,7 +96,6 @@ public final class HeimdallReportManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BigdataManager {
         public final ArrayList mBigdataInfoList = new ArrayList();
         public final SemHqmManager mSemHqmManager;
@@ -193,7 +190,6 @@ public final class HeimdallReportManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastManager extends BroadcastReceiver {
         public BroadcastManager() {}
 
@@ -288,7 +284,6 @@ public final class HeimdallReportManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReportHandler extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Object lock;

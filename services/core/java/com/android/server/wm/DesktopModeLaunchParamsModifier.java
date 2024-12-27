@@ -4,7 +4,6 @@ import android.R;
 import android.content.Context;
 import android.os.SystemProperties;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class DesktopModeLaunchParamsModifier
         implements LaunchParamsController.LaunchParamsModifier {
     public static final boolean ENFORCE_DEVICE_RESTRICTIONS;

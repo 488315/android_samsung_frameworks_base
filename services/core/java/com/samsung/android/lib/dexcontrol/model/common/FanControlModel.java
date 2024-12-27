@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class FanControlModel extends BaseModel {
     public boolean isSiopLevelValid;
     public boolean isTestAppSIOPEnable;
@@ -40,7 +39,6 @@ public abstract class FanControlModel extends BaseModel {
     public int mSiopLevel;
     public final TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.lib.dexcontrol.model.common.FanControlModel$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {

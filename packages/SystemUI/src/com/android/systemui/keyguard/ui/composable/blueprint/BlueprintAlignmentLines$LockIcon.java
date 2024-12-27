@@ -4,7 +4,6 @@ import androidx.compose.ui.layout.HorizontalAlignmentLine;
 import androidx.compose.ui.layout.VerticalAlignmentLine;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BlueprintAlignmentLines$LockIcon {
     public static final BlueprintAlignmentLines$LockIcon INSTANCE = new BlueprintAlignmentLines$LockIcon();
     public static final VerticalAlignmentLine Left = new VerticalAlignmentLine(new Function2() { // from class: com.android.systemui.keyguard.ui.composable.blueprint.BlueprintAlignmentLines$LockIcon$Left$1

@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BiometricContextProvider implements BiometricContext {
     public static BiometricContextProvider sInstance;
     public final AuthSessionCoordinator mAuthSessionCoordinator;
@@ -50,7 +49,6 @@ public final class BiometricContextProvider implements BiometricContext {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.log.BiometricContextProvider$2, reason: invalid class name */
     public final class AnonymousClass2 extends IBiometricContextListener.Stub {
         public AnonymousClass2() {}
@@ -125,7 +123,6 @@ public final class BiometricContextProvider implements BiometricContext {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.log.BiometricContextProvider$3, reason: invalid class name */
     public final class AnonymousClass3 extends ISessionListener.Stub {
         public AnonymousClass3() {}

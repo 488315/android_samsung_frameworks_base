@@ -2,7 +2,6 @@ package com.android.server.am.mars.database;
 
 import android.net.Uri;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class FASTableContract {
     public static final Uri SMART_MGR_FORCED_APP_STANDBY_URI =
             Uri.parse("content://com.sec.android.sdhms.fasprovider/ForcedAppStandby");

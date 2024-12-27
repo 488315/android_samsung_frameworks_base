@@ -70,7 +70,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateController.StateListener, Dumpable {
     public final KeyguardBypassController mBypassController;
     public final CommandQueue mCommandQueue;
@@ -119,7 +118,6 @@ public final class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateC
     public final int[] mTmpLocation = new int[2];
     public final ListeningAndVisibilityLifecycleOwner mListeningAndVisibilityLifecycleOwner = new ListeningAndVisibilityLifecycleOwner();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class ListeningAndVisibilityLifecycleOwner implements LifecycleOwner {
         public final LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
         public boolean mDestroyed = false;

@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LockTaskController {
     public static final SparseArray STATUS_BAR_FLAG_MAP_LOCKED;
     static final int STATUS_BAR_MASK_LOCKED = 128319488;
@@ -60,7 +59,6 @@ public final class LockTaskController {
     public int mPendingDisableFromDismiss = -10000;
     public boolean mInteractionControlEnabled = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.LockTaskController$1, reason: invalid class name */
     public final class AnonymousClass1 extends IKeyguardDismissCallback.Stub {
         public final /* synthetic */ int val$userId;
@@ -83,7 +81,6 @@ public final class LockTaskController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockTaskToken extends Binder {}
 
     static {

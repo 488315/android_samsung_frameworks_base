@@ -23,7 +23,6 @@ import com.android.server.power.PowerManagerUtil;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutomaticBrightnessStrategy extends AutomaticBrightnessStrategy2
         implements DisplayBrightnessStrategy {
     public boolean mAppliedAutoBrightness;
@@ -49,12 +48,10 @@ public final class AutomaticBrightnessStrategy extends AutomaticBrightnessStrate
     public boolean mUseAutoBrightness;
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Injector {
         BrightnessEvent getBrightnessEvent(int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealInjector implements Injector {
         @Override // com.android.server.display.brightness.strategy.AutomaticBrightnessStrategy.Injector
         public final BrightnessEvent getBrightnessEvent(int i) {

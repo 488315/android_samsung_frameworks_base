@@ -16,14 +16,12 @@ import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocationEventLog extends LocalEventLog {
     public static final LocationEventLog EVENT_LOG = new LocationEventLog();
     public final ArrayMap mAggregateStats;
     public final ArrayMap mGnssMeasAggregateStats;
     public final LocationsEventLog mLocationsLog;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AggregateStats {
         public int mActiveRequestCount;
         public long mActiveTimeLastUpdateRealtimeMs;
@@ -89,7 +87,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssMeasurementAggregateStats {
         public int mAddedRequestCount;
         public long mAddedTimeLastUpdateRealtimeMs;
@@ -137,7 +134,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssMeasurementClientRegisterEvent {
         public final GnssMeasurementRequest mGnssMeasurementRequest;
         public final CallerIdentity mIdentity;
@@ -163,7 +159,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssMeasurementDeliverEvent {
         public final CallerIdentity mIdentity;
         public final int mNumGnssMeasurements;
@@ -181,7 +176,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationEnabledEvent {
         public final /* synthetic */ int $r8$classId;
         public final boolean mEnabled;
@@ -217,7 +211,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationPowerSaveModeEvent {
         public final int mLocationPowerSaveMode;
 
@@ -243,10 +236,8 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationsEventLog extends LocalEventLog {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderClientPermittedEvent extends ProviderEvent {
         public final /* synthetic */ int $r8$classId;
         public final Object mIdentity;
@@ -291,7 +282,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderClientRegisterEvent extends ProviderEvent {
         public final CallerIdentity mIdentity;
         public final LocationRequest mLocationRequest;
@@ -326,7 +316,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderDeliverLocationEvent extends ProviderEvent {
         public final CallerIdentity mIdentity;
         public final int mNumLocations;
@@ -346,7 +335,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderEnabledEvent extends ProviderEvent {
         public final boolean mEnabled;
         public final int mUserId;
@@ -368,7 +356,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ProviderEvent {
         public final String mProvider;
 
@@ -377,7 +364,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderMockedEvent extends ProviderEvent {
         public final boolean mMocked;
 
@@ -397,7 +383,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderReceiveLocationEvent extends ProviderEvent {
         public final int mNumLocations;
 
@@ -414,7 +399,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderUpdateEvent extends ProviderEvent {
         public final ProviderRequest mRequest;
 
@@ -428,7 +412,6 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchedEvent {
         public final int mUserIdFrom;
         public final int mUserIdTo;

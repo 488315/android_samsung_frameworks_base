@@ -22,7 +22,6 @@ import com.samsung.server.wallpaper.DefaultWallpaper;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LegibilityColor {
     public final WallpaperManagerService.SemCallback mCallback;
     public ContentResolver mContentResolver;
@@ -67,7 +66,6 @@ public final class LegibilityColor {
         }
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver() {
             super(new Handler());

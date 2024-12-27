@@ -41,7 +41,6 @@ import java.util.function.Predicate;
 import libcore.io.IoUtils;
 import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TaskPersister implements PersisterQueue.Listener {
     public final Object mIoLock;
     public final PersisterQueue mPersisterQueue;
@@ -52,7 +51,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
     public final ActivityTaskSupervisor mTaskSupervisor;
     public final ArraySet mTmpTaskIds;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.TaskPersister$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -65,7 +63,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DedicatedProcessWriteQueueItem implements PersisterQueue.WriteQueueItem {
         public final HashMap mProcToPkgList;
         public final ActivityTaskManagerService mService;
@@ -145,7 +142,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImageWriteQueueItem implements PersisterQueue.WriteQueueItem {
         public final String mFilePath;
         public Bitmap mImage;
@@ -209,7 +205,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecentTaskFile {
         public final File mFile;
         public final int mTaskId;
@@ -222,7 +217,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecentTaskFiles {
         public final ArrayList mLoadedFiles;
         public final File[] mUserTaskFiles;
@@ -233,7 +227,6 @@ public final class TaskPersister implements PersisterQueue.Listener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskWriteQueueItem implements PersisterQueue.WriteQueueItem {
         public final ActivityTaskManagerService mService;
         public final Task mTask;

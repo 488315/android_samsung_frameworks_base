@@ -34,7 +34,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PeopleTileViewHelper {
     public final int mAppWidgetId;
     public final Context mContext;
@@ -53,7 +52,6 @@ public final class PeopleTileViewHelper {
     public static final Pattern ANY_DOUBLE_MARK_PATTERN = Pattern.compile("[!?][!?]+");
     public static final Pattern MIXED_MARK_PATTERN = Pattern.compile("![?].*|.*[?]!");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RemoteViewsAndSizes {
         public final int mAvatarSize;
         public final RemoteViews mRemoteViews;

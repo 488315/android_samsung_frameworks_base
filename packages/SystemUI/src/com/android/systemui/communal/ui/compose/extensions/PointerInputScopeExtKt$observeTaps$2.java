@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $onTap;
     final /* synthetic */ PointerEventPass $pass;
@@ -23,7 +22,6 @@ public final class PointerInputScopeExtKt$observeTaps$2 extends SuspendLambda im
     final /* synthetic */ PointerInputScope $this_observeTaps;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$observeTaps$2$1, reason: invalid class name */
     final class AnonymousClass1 extends RestrictedSuspendLambda implements Function2 {
         final /* synthetic */ Function1 $onTap;

@@ -134,7 +134,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class AlarmManagerService extends SystemService {
     public static final Intent NEXT_ALARM_CLOCK_CHANGED_INTENT = new Intent("android.app.action.NEXT_ALARM_CLOCK_CHANGED").addFlags(553648128);
     public static PackageManagerInternal pmInternalForMARs;
@@ -237,7 +236,6 @@ public class AlarmManagerService extends SystemService {
     public PowerManager.WakeLock mWakeLock;
     public final RingBuffer mWakeupAlarmHistory;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.alarm.AlarmManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 extends IAlarmListener.Stub {
         public AnonymousClass2() {
@@ -268,7 +266,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.alarm.AlarmManagerService$5, reason: invalid class name */
     public final class AnonymousClass5 implements Comparator {
         public final /* synthetic */ int $r8$classId;
@@ -303,7 +300,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AddedAlarm {
         public final boolean mAlarmClock;
         public final int mFlags;
@@ -370,7 +366,6 @@ public class AlarmManagerService extends SystemService {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class AlarmHandler extends Handler {
         public AlarmHandler() {
             super(Looper.myLooper());
@@ -492,7 +487,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AlarmThread extends Thread {
         public int mFalseWakeups;
         public int mWtfThreshold;
@@ -524,7 +518,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppStandbyTracker extends AppStandbyInternal.AppIdleStateChangeListener {
         public AppStandbyTracker() {
         }
@@ -564,7 +557,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class AppWakeupHistory {
         public final ArrayMap mPackageHistory = new ArrayMap();
         public final long mWindowSize = ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
@@ -629,7 +621,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastStats {
         public long aggregateTime;
         public int count;
@@ -675,7 +666,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ChargingReceiver extends BroadcastReceiver {
         public ChargingReceiver() {
             AlarmManagerService.this.getContext().registerReceiver(this, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.os.action.CHARGING", "android.os.action.DISCHARGING"));
@@ -689,7 +679,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ClockReceiver extends BroadcastReceiver {
         public ClockReceiver() {
             AlarmManagerService.this.getContext().registerReceiver(this, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.DATE_CHANGED"));
@@ -728,7 +717,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Constants implements DeviceConfig.OnPropertiesChangedListener {
         static final String KEY_ALLOW_WHILE_IDLE_COMPAT_QUOTA = "allow_while_idle_compat_quota";
         static final String KEY_ALLOW_WHILE_IDLE_COMPAT_WINDOW = "allow_while_idle_compat_window";
@@ -1201,7 +1189,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeliveredAlarm {
         public final String mHash;
         public final long mOrigWhen;
@@ -1238,7 +1225,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeliveryTracker extends IAlarmCompleteListener.Stub implements PendingIntent.OnFinished {
         public DeliveryTracker() {
         }
@@ -1391,7 +1377,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExpiredRecord {
         public final long mDiff;
         public final long mFlags;
@@ -1436,7 +1421,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FilterStats {
         public long aggregateTime;
         public int count;
@@ -1482,7 +1466,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InFlight {
         public final int mAlarmType;
         public final BroadcastStats mBroadcastStats;
@@ -1579,7 +1562,6 @@ public class AlarmManagerService extends SystemService {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public Context mContext;
         public long mNativeData;
@@ -1598,17 +1580,14 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class RemoveFailedRequest {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemovedAlarm {
         public final Alarm.Snapshot mAlarmSnapshot;
         public final String mHash;
@@ -1689,7 +1668,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShellCmd extends ShellCommand {
         public ShellCmd() {
         }
@@ -1793,12 +1771,10 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TemporaryQuotaReserve {
         public final ArrayMap mQuotaBuffer = new ArrayMap();
         public final long mMaxDuration = BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class QuotaInfo {
             public long expirationTime;
             public long lastUsage;
@@ -1830,7 +1806,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UninstallReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AlarmManagerService this$0;
@@ -1880,7 +1855,6 @@ public class AlarmManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeupRecord {
         public final String mTag;
         public final int mUid;

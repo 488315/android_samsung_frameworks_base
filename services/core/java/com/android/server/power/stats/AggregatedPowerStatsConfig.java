@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AggregatedPowerStatsConfig {
     public static final AnonymousClass1 NO_OP_PROCESSOR;
     public static final String[] STATE_LABELS_PROCESS_STATE;
@@ -16,7 +15,6 @@ public final class AggregatedPowerStatsConfig {
     public static final String[] STATE_LABELS_POWER = {"pwr-battery", "pwr-other"};
     public static final String[] STATE_LABELS_SCREEN = {"scr-on", "scr-other"};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.AggregatedPowerStatsConfig$1, reason: invalid class name */
     public final class AnonymousClass1 extends PowerStatsProcessor {
         @Override // com.android.server.power.stats.PowerStatsProcessor
@@ -24,7 +22,6 @@ public final class AggregatedPowerStatsConfig {
                 PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerComponent {
         public final int mPowerComponentId;
         public Supplier mProcessorSupplier;

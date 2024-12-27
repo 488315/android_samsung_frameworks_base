@@ -40,7 +40,6 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CrossDeviceSyncController {
     public final CallManager mCallManager;
     public final CompanionTransportManager mCompanionTransportManager;
@@ -52,7 +51,6 @@ public final class CrossDeviceSyncController {
     public final Set mBlocklist = new HashSet();
     public final List mCallFacilitators = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class CallManager {
         public final PhoneAccountManager mPhoneAccountManager;
         public final TelecomManager mTelecomManager;
@@ -66,7 +64,6 @@ public final class CrossDeviceSyncController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneAccountHandleIdentifier {
         public final String mAppIdentifier;
         public final int mAssociationId;
@@ -93,7 +90,6 @@ public final class CrossDeviceSyncController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneAccountManager {
         public final ComponentName mConnectionServiceComponentName;
         public final Map mPhoneAccountHandles = new HashMap();

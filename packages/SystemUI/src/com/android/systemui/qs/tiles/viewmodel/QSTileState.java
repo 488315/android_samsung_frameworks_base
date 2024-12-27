@@ -17,7 +17,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KClass;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSTileState {
     public static final Companion Companion = new Companion(null);
     public final ActivationState activationState;
@@ -34,7 +33,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ActivationState {
         public static final /* synthetic */ ActivationState[] $VALUES;
         public static final ActivationState ACTIVE;
@@ -43,7 +41,6 @@ public final class QSTileState {
         public static final ActivationState UNAVAILABLE;
         private final int legacyState;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -83,7 +80,6 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public CharSequence contentDescription;
         public Function0 icon;
@@ -103,7 +99,6 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -146,7 +141,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EnabledState {
         public static final /* synthetic */ EnabledState[] $VALUES;
         public static final EnabledState DISABLED;
@@ -174,10 +168,8 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SideViewIcon {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Chevron implements SideViewIcon {
             public static final Chevron INSTANCE = new Chevron();
 
@@ -197,7 +189,6 @@ public final class QSTileState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Custom implements SideViewIcon {
             public final Icon icon;
 
@@ -221,7 +212,6 @@ public final class QSTileState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class None implements SideViewIcon {
             public static final None INSTANCE = new None();
 
@@ -244,7 +234,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UserAction {
         public static final /* synthetic */ UserAction[] $VALUES;
         public static final UserAction CLICK;

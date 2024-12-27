@@ -19,14 +19,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxNetworkEventFirewall {
     public static KnoxNetworkEventFirewall mKnoxNwEventFw;
     public static final Map mangleChains;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventType {
         public static final /* synthetic */ EventType[] $VALUES;
         public static final EventType ABNORMAL_PACKETS;
@@ -54,7 +52,6 @@ public final class KnoxNetworkEventFirewall {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class IpRestoreActionType {
         public static final /* synthetic */ IpRestoreActionType[] $VALUES;
         public static final IpRestoreActionType APPEND;
@@ -89,7 +86,6 @@ public final class KnoxNetworkEventFirewall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IpRestoreParam {
         public final String actionChain;
         public IpRestoreActionType actionType;

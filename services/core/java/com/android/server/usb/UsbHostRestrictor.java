@@ -37,7 +37,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbHostRestrictor implements ActivityTaskManagerInternal.ScreenObserver {
     public static boolean bRestrictHostAPI = false;
     public static boolean isEMTokenEnabled = false;
@@ -65,7 +64,6 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     public final AnonymousClass2 mUsbHostRestrictionReceiver;
     public final Object mUsbRestrictLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockTimer implements Runnable {
         public LockTimer() {}
 

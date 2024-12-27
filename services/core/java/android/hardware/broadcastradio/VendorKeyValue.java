@@ -9,13 +9,11 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VendorKeyValue implements Parcelable {
     public static final Parcelable.Creator CREATOR = new AnonymousClass1();
     public String key;
     public String value;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: android.hardware.broadcastradio.VendorKeyValue$1, reason: invalid class name */
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator

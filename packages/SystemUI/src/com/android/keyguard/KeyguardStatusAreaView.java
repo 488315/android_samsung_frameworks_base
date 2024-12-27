@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.AnimatableProperty;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardStatusAreaView extends LinearLayout {
     public static final AnimatableProperty.AnonymousClass7 TRANSLATE_X_AOD;
     public static final AnimatableProperty.AnonymousClass7 TRANSLATE_X_CLOCK_DESIGN;
@@ -20,7 +19,6 @@ public final class KeyguardStatusAreaView extends LinearLayout {
     public float translateYFromClockDesign;
     public float translateYFromClockSize;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

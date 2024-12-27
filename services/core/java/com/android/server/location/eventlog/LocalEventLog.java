@@ -12,7 +12,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class LocalEventLog {
     public static final int IS_FILLER_OFFSET;
     static final int MAX_TIME_DELTA;
@@ -25,7 +24,6 @@ public abstract class LocalEventLog {
     public long mModificationCount;
     public long mStartTime;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogIterator {
         public int mCount;
         public Object mCurrentLogEvent;

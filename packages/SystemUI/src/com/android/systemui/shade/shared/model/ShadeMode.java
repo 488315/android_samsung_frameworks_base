@@ -2,10 +2,8 @@ package com.android.systemui.shade.shared.model;
 
 import com.android.systemui.bixby2.actionresult.ActionResults;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ShadeMode {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Dual implements ShadeMode {
         public static final Dual INSTANCE = null;
 
@@ -29,7 +27,6 @@ public interface ShadeMode {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Single implements ShadeMode {
         public static final Single INSTANCE = new Single();
 
@@ -49,7 +46,6 @@ public interface ShadeMode {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Split implements ShadeMode {
         public static final Split INSTANCE = new Split();
 

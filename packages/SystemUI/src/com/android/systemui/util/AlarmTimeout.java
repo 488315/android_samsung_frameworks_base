@@ -6,7 +6,6 @@ import android.os.SystemClock;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import androidx.activity.ComponentActivity$1$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class AlarmTimeout implements AlarmManager.OnAlarmListener {
     public static final int MODE_CRASH_IF_SCHEDULED = 0;
     public static final int MODE_IGNORE_IF_SCHEDULED = 1;

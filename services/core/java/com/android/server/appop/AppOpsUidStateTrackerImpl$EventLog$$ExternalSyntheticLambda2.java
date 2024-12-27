@@ -2,7 +2,6 @@ package com.android.server.appop;
 
 import com.android.internal.util.function.QuintConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class AppOpsUidStateTrackerImpl$EventLog$$ExternalSyntheticLambda2
         implements QuintConsumer {
     public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {

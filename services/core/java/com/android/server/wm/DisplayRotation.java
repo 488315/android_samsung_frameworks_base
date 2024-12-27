@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayRotation {
     public final boolean isDefaultDisplay;
     public final boolean mAllowRotationResolver;
@@ -90,7 +89,6 @@ public final class DisplayRotation {
     public int mCameraRotationMode = 0;
     public int mFixedToUserRotation = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FoldController {
         public final AnonymousClass1 mActivityBoundsUpdateCallback;
         public final boolean mAllowHalfFoldAutoRotationOverride;
@@ -236,7 +234,6 @@ public final class DisplayRotation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OrientationListener extends WindowOrientationListener implements Runnable {
         public transient boolean mEnabled;
 
@@ -300,17 +297,14 @@ public final class DisplayRotation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RotationAnimationPair {
         public int mEnter;
         public int mExit;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RotationHistory {
         public final ArrayDeque mRecords;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Record {
             public final DeviceStateController.DeviceState mDeviceState;
             public final String mDisplayRotationCompatPolicySummary;
@@ -401,7 +395,6 @@ public final class DisplayRotation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

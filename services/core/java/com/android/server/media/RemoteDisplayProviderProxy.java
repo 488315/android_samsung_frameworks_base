@@ -16,7 +16,6 @@ import android.util.Slog;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteDisplayProviderProxy implements ServiceConnection {
     public Connection mActiveConnection;
     public boolean mBound;
@@ -33,7 +32,6 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
     public String mSelectedDisplayId;
     public final int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.media.RemoteDisplayProviderProxy$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -131,10 +129,8 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements IBinder.DeathRecipient {
         public final ProviderCallback mCallback = new ProviderCallback(this);
         public final IRemoteDisplayProvider mProvider;
@@ -149,7 +145,6 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderCallback extends IRemoteDisplayCallback.Stub {
         public final WeakReference mConnectionRef;
 

@@ -7,7 +7,6 @@ import com.android.systemui.doze.DozeLog;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.phone.ScrimController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeScrimController implements StatusBarStateController.StateListener {
     public final DozeLog mDozeLog;
     public final DozeParameters mDozeParameters;
@@ -56,7 +55,6 @@ public final class DozeScrimController implements StatusBarStateController.State
     };
     public final AnonymousClass3 mPulseOut = new AnonymousClass3();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.DozeScrimController$3, reason: invalid class name */
     public final class AnonymousClass3 implements Runnable {
         public AnonymousClass3() {

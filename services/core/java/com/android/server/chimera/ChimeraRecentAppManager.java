@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ChimeraRecentAppManager {
     public final RecentAppHandler mHandler;
     final SystemRepository.ChimeraProcessObserver mProcessObserver;
@@ -37,7 +36,6 @@ public final class ChimeraRecentAppManager {
     Map mPsiSomeTotalList = new HashMap();
     Map mPsiFullTotalList = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecentAppHandler extends Handler {
         public RecentAppHandler(Looper looper) {
             super(looper);
@@ -59,7 +57,6 @@ public final class ChimeraRecentAppManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResourceUsageInfo {}
 
     public ChimeraRecentAppManager(

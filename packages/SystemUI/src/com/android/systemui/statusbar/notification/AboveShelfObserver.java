@@ -5,13 +5,11 @@ import android.view.ViewGroup;
 import com.android.systemui.shade.NotificationsQuickSettingsContainer;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AboveShelfObserver {
     public boolean mHasViewsAboveShelf = false;
     public final ViewGroup mHostLayout;
     public HasViewAboveShelfChangedListener mListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface HasViewAboveShelfChangedListener {
     }
 

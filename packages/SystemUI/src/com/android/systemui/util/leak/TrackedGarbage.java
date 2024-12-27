@@ -10,14 +10,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class TrackedGarbage {
     private static final long GARBAGE_COLLECTION_DEADLINE_MILLIS = 60000;
     private final HashSet<LeakReference> mGarbage = new HashSet<>();
     private final ReferenceQueue<Object> mRefQueue = new ReferenceQueue<>();
     private final TrackedCollections mTrackedCollections;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class LeakReference extends WeakReference<Object> {
         private final Class<?> clazz;
         private final long createdUptimeMillis;

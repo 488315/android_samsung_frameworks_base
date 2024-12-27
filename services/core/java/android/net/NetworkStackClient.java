@@ -14,7 +14,6 @@ import android.util.Slog;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class NetworkStackClient {
     private static final int NETWORKSTACK_TIMEOUT_MS = 10000;
     private static final String TAG = "NetworkStackClient";
@@ -24,7 +23,6 @@ public class NetworkStackClient {
     private final ArrayList mPendingNetStackRequests;
     private volatile boolean mWasSystemServerInitialized;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Dependencies {
         void addToServiceManager(IBinder iBinder);
 
@@ -33,7 +31,6 @@ public class NetworkStackClient {
         ConnectivityModuleConnector getConnectivityModuleConnector();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DependenciesImpl implements Dependencies {
         @Override // android.net.NetworkStackClient.Dependencies
         public final void addToServiceManager(IBinder iBinder) {
@@ -57,12 +54,10 @@ public class NetworkStackClient {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface NetworkStackCallback {
         void onNetworkStackConnected(INetworkStackConnector iNetworkStackConnector);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkStackConnection
             implements ConnectivityModuleConnector.ModuleServiceCallback {
         public NetworkStackConnection() {}

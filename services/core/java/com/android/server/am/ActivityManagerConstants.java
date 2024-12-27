@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityManagerConstants extends ContentObserver {
     public static final Uri ACTIVITY_MANAGER_CONSTANTS_URI;
     public static final Uri ACTIVITY_STARTS_LOGGING_ENABLED_URI;
@@ -187,7 +186,6 @@ public final class ActivityManagerConstants extends ContentObserver {
     public final long mSystemServerAutomaticHeapDumpPssThresholdBytes;
     public volatile long mVisibleToInvisibleUijScheduleGraceDurationMs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerConstants$1, reason: invalid class name */
     public final class AnonymousClass1 implements DeviceConfig.OnPropertiesChangedListener {
         public final /* synthetic */ int $r8$classId;

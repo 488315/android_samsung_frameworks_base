@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecControlsUiControllerImpl$controlsPanelCallback$1 {
     public final /* synthetic */ SecControlsUiControllerImpl this$0;
 
@@ -49,7 +48,6 @@ public final class SecControlsUiControllerImpl$controlsPanelCallback$1 {
                 final PendingIntent pendingIntent2 = pendingIntent;
                 Consumer consumer = new Consumer() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$controlsPanelCallback$1$onPanelUpdated$1.1
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.controls.ui.SecControlsUiControllerImpl$controlsPanelCallback$1$onPanelUpdated$1$1$1, reason: invalid class name and collision with other inner class name */
                     final /* synthetic */ class C00791 extends FunctionReferenceImpl implements Function0 {
                         public C00791(Object obj) {

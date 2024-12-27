@@ -31,7 +31,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DemoModeController implements CallbackController, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final BroadcastDispatcher broadcastDispatcher;
@@ -44,7 +43,6 @@ public final class DemoModeController implements CallbackController, Dumpable {
     public final List receivers = new ArrayList();
     public final DemoModeController$tracker$1 tracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

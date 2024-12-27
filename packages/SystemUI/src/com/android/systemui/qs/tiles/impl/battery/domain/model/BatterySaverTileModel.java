@@ -3,10 +3,8 @@ package com.android.systemui.qs.tiles.impl.battery.domain.model;
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface BatterySaverTileModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Extreme implements BatterySaverTileModel {
         public final boolean isExtremeSaving;
         public final boolean isPluggedIn;
@@ -53,7 +51,6 @@ public interface BatterySaverTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Standard implements BatterySaverTileModel {
         public final boolean isPluggedIn;
         public final boolean isPowerSaving;

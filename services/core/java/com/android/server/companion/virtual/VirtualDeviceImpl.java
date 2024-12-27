@@ -90,7 +90,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 final class VirtualDeviceImpl extends IVirtualDevice.Stub
         implements IBinder.DeathRecipient,
                 GenericWindowPolicyController.RunningAppsChangedListener {
@@ -128,7 +127,6 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub
     public final VirtualDeviceLog mVirtualDeviceLog;
     public final SparseArray mVirtualDisplays;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingTrampoline {
         public final int mDisplayId;
         public final PendingIntent mPendingIntent;
@@ -151,10 +149,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PendingTrampolineCallback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VirtualDisplayWrapper {
         public final IVirtualDisplayCallback mToken;
         public final PowerManager.WakeLock mWakeLock;

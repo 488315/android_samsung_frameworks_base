@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class RefreshRateController {
     public static Context mContext;
     public static SystemHistory mDisplayModeDirectorHistory;
@@ -53,7 +52,6 @@ public class RefreshRateController {
     public final AtomicBoolean mUpdateRefreshRateMode = new AtomicBoolean(false);
     public final AtomicBoolean mPassive = new AtomicBoolean(false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LowRefreshRateToken extends RefreshRateToken {
         @Override // com.android.server.display.mode.RefreshRateToken
         public final void accept() {
@@ -69,7 +67,6 @@ public class RefreshRateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NullController extends RefreshRateController {
         public final /* synthetic */ int $r8$classId;
 
@@ -174,7 +171,6 @@ public class RefreshRateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PassiveModeToken extends RefreshRateToken {
         public PassiveModeToken() {}
 
@@ -193,7 +189,6 @@ public class RefreshRateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RefreshRateMaxLimitToken extends RefreshRateToken {
         public RefreshRateMaxLimitToken() {}
 
@@ -241,7 +236,6 @@ public class RefreshRateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RefreshRateMinLimitToken extends RefreshRateToken {
         @Override // com.android.server.display.mode.RefreshRateToken
         public final void accept() {
@@ -278,7 +272,6 @@ public class RefreshRateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SeamlessPlusController extends RefreshRateController {
         public static final AtomicInteger mReportedLfd = new AtomicInteger(-1);
 

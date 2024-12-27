@@ -196,7 +196,6 @@ import java.util.function.BiFunction;
 import libcore.io.IoUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserManagerService extends IUserManager.Stub {
     static final int MAX_RECENTLY_REMOVED_IDS_SIZE = 100;
     static final int MAX_USER_ID = 21473;
@@ -262,7 +261,6 @@ public final class UserManagerService extends IUserManager.Stub {
     public static final String USER_INFO_DIR = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("system"), File.separator, "users");
     public static final long PRIVATE_SPACE_AUTO_LOCK_INACTIVITY_ALARM_WINDOW_MS = TimeUnit.SECONDS.toMillis(55);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.UserManagerService$5, reason: invalid class name */
     public final class AnonymousClass5 implements Runnable {
         public AnonymousClass5() {
@@ -289,7 +287,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.UserManagerService$7, reason: invalid class name */
     public final class AnonymousClass7 extends IIntentReceiver.Stub {
         public final /* synthetic */ int val$userId;
@@ -312,7 +309,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisableQuietModeUserUnlockedCallback extends IProgressListener.Stub {
         public final IntentSender mTarget;
 
@@ -343,7 +339,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LifeCycle extends SystemService {
         public UserManagerService mUms;
 
@@ -482,7 +477,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends UserManagerInternal {
         public LocalService() {
         }
@@ -1179,7 +1173,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public MainHandler(Looper looper) {
             super(looper);
@@ -1214,7 +1207,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PrivateSpaceAutoLockTimer implements AlarmManager.OnAlarmListener {
         public final int mUserId;
 
@@ -1235,7 +1227,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(MainHandler mainHandler) {
             super(mainHandler);
@@ -1251,7 +1242,6 @@ public final class UserManagerService extends IUserManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class UserData {
         public String account;
         public UserInfo info;
@@ -1267,7 +1257,6 @@ public final class UserManagerService extends IUserManager.Stub {
         public UserProperties userProperties;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WatchedUserStates {
         public final SparseIntArray states = new SparseIntArray();
 

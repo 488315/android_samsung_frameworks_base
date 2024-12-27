@@ -59,7 +59,6 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HintManagerService extends SystemService {
     static final int CLEAN_UP_UID_DELAY_MILLIS = 1000;
     public final ArrayMap mActiveSessions;
@@ -81,7 +80,6 @@ public final class HintManagerService extends SystemService {
     public int mSystemUiUid;
     final MyUidObserver mUidObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class AppHintSession extends IHintSession.Stub implements IBinder.DeathRecipient {
         public static final /* synthetic */ int $r8$clinit = 0;
         public long mHalSessionPtr;
@@ -530,7 +528,6 @@ public final class HintManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BinderService extends IHintManager.Stub {
         public BinderService() {}
 
@@ -663,7 +660,6 @@ public final class HintManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChannelItem implements IBinder.DeathRecipient {
         public final int mTgid;
         public final IBinder mToken;
@@ -721,7 +717,6 @@ public final class HintManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CleanUpHandler extends Handler {
         public CleanUpHandler(Looper looper) {
             super(looper);
@@ -945,10 +940,8 @@ public final class HintManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class MyUidObserver extends UidObserver {
         public final SparseIntArray mProcStatesCache = new SparseIntArray();
 
@@ -1094,7 +1087,6 @@ public final class HintManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NativeWrapper {
         private static native void nativeCloseHintSession(long j);
 

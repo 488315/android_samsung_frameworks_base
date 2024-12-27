@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AlertDialog;
 import com.android.systemui.power.SecBatterySnapshot;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class PowerUiDialog {
     public final Context mContext;
     public String mDoNotShowTag;

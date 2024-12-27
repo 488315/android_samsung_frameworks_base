@@ -9,7 +9,6 @@ import android.util.Slog;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemFileBackupManager {
     public static final long DEFAULT_BACKUP_PERIOD = TimeUnit.DAYS.toMillis(1);
     public static final ComponentName sFileBackupServiceName =
@@ -20,7 +19,6 @@ public final class SystemFileBackupManager {
     public boolean mSystemReady = false;
     public final AtomicBoolean mIsBackupRunning = new AtomicBoolean(false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BackupJobService extends JobService {
         public static final /* synthetic */ int $r8$clinit = 0;
 

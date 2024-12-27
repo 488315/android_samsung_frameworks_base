@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SafeUIStatusBarWindowController implements CoreStartable {
     public final Context mContext;
     public WindowManager.LayoutParams mLp;

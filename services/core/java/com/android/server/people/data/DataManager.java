@@ -67,7 +67,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import libcore.util.EmptyArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DataManager {
     static final int MAX_CACHED_RECENT_SHORTCUTS = 30;
     public final SparseArray mBroadcastReceivers;
@@ -90,7 +89,6 @@ public final class DataManager {
     public final SparseArray mUserDataArray;
     public UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallLogContentObserver extends ContentObserver implements BiConsumer {
         public final CallLogQueryHelper mCallLogQueryHelper;
         public long mLastCallTimestamp;
@@ -238,11 +236,9 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContactsContentObserver extends ContentObserver {
         public long mLastUpdatedTimestamp;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ConversationSelector {
             public ConversationInfo mConversationInfo;
             public ConversationStore mConversationStore;
@@ -310,11 +306,9 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MmsSmsContentObserver extends ContentObserver implements BiConsumer {
         public long mLastMmsTimestamp;
         public long mLastSmsTimestamp;
@@ -451,7 +445,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationListener extends NotificationListenerService {
         public final Map mActiveNotifKeys = new ArrayMap();
         public final int mUserId;
@@ -576,7 +569,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PerUserBroadcastReceiver extends BroadcastReceiver {
         public final int mUserId;
 
@@ -599,7 +591,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PerUserPackageMonitor extends PackageMonitor {
         public PerUserPackageMonitor() {
         }
@@ -613,7 +604,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShortcutServiceCallback implements LauncherApps.ShortcutChangeCallback {
         public ShortcutServiceCallback() {
         }
@@ -629,7 +619,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShutdownBroadcastReceiver extends BroadcastReceiver {
         public ShutdownBroadcastReceiver() {
         }
@@ -640,7 +629,6 @@ public final class DataManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsageStatsQueryRunnable implements Runnable {
         public long mLastEventTimestamp;
         public final UsageStatsQueryHelper mUsageStatsQueryHelper;

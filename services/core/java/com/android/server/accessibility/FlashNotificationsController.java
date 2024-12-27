@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FlashNotificationsController {
     static final String ACTION_FLASH_NOTIFICATION_START_PREVIEW =
             "com.android.internal.intent.action.FLASH_NOTIFICATION_START_PREVIEW";
@@ -100,7 +99,6 @@ public final class FlashNotificationsController {
     public final AnonymousClass1 mTorchCallback;
     public final PowerManager.WakeLock mWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FlashBroadcastReceiver extends BroadcastReceiver {
         public FlashBroadcastReceiver() {}
 
@@ -185,7 +183,6 @@ public final class FlashNotificationsController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlashContentObserver extends ContentObserver {
         public final Uri mCameraFlashNotificationUri;
         public final Uri mScreenFlashNotificationUri;
@@ -245,7 +242,6 @@ public final class FlashNotificationsController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlashNotification {
         public final int mColor;
         public final IBinder.DeathRecipient mDeathRecipient;
@@ -442,7 +438,6 @@ public final class FlashNotificationsController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlashNotificationThread extends Thread {
         public final FlashNotification mFlashNotification;
         public int mColor = 0;

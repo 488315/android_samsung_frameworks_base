@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.format;
 
 import java.util.function.Function;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class StapleMutableMediaFormat$$ExternalSyntheticLambda2
         implements Function {
     @Override // java.util.function.Function

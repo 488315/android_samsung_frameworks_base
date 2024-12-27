@@ -20,13 +20,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ResumeOnRebootServiceProvider {
     public static final String PROVIDER_PACKAGE = DeviceConfig.getString("ota", "resume_on_reboot_service_package", "");
     public final Context mContext;
     public final PackageManager mPackageManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResumeOnRebootServiceCallback implements RemoteCallback.OnResultListener {
         public Bundle mResult;
         public final CountDownLatch mResultLatch;
@@ -41,7 +39,6 @@ public final class ResumeOnRebootServiceProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResumeOnRebootServiceConnection {
         public IResumeOnRebootService mBinder;
         public final ComponentName mComponentName;

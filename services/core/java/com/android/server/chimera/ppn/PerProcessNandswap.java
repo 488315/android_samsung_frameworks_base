@@ -58,7 +58,6 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PerProcessNandswap {
     public ChimeraStrategy mChimeraStrategy;
     public QuickSwap mQuickSwap;
@@ -109,7 +108,6 @@ public final class PerProcessNandswap {
         }
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.chimera.ppn.PerProcessNandswap$3, reason: invalid class name */
     public final class AnonymousClass3 implements Comparator {
         @Override // java.util.Comparator
@@ -123,7 +121,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LastNandswapStats {
         public final String mName;
         public final long[] mRssAfterNandswap;
@@ -134,7 +131,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemoryItem {
         public final String label;
         public final long lastNandswapTimeDiff;
@@ -152,7 +148,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandswapHandler extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String TAG;
@@ -696,7 +691,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class NandswapLogger {
         public static final ArrayList mHistory = new ArrayList();
 
@@ -721,7 +715,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandswapMsgHandler extends Handler {
         public final String[] LAUNCHER_APP_PKGNAME;
         public final String TAG;
@@ -932,7 +925,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandswapRecord implements Comparable {
         public int adj;
         public long lastNandswapTime;
@@ -966,7 +958,6 @@ public final class PerProcessNandswap {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ZramInfo {
         public static final String TAG;
         public static int mWritebackEnabled;

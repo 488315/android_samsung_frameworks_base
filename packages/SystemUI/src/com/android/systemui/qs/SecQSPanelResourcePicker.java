@@ -11,7 +11,6 @@ import com.android.systemui.qs.panelresource.SecQSPanelResourcePickHelper;
 import com.android.systemui.tuner.TunerService;
 import kotlin.text.Regex;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQSPanelResourcePicker {
     public final SecQSPanelResourcePickHelper resourcePickHelper = new SecQSPanelResourcePickHelper();
 

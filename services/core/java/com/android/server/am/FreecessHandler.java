@@ -47,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FreecessHandler {
     public static int mScreenOnQuickFreezeCheckDelay = 6000;
     public static int mScreenOnQuickFreezeDelayInterval = 5000;
@@ -58,7 +57,6 @@ public final class FreecessHandler {
     public HandleAmsLockHandler mHandleAmsLockHandler;
     public MainHandler mMainHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothHandler extends Handler {
         public BluetoothHandler(Looper looper) {
             super(looper);
@@ -99,7 +97,6 @@ public final class FreecessHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class FreecessHandlerHolder {
         public static final FreecessHandler INSTANCE;
 
@@ -110,7 +107,6 @@ public final class FreecessHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FreecessThread extends HandlerThread {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ FreecessHandler this$0;
@@ -150,7 +146,6 @@ public final class FreecessHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HandleAmsLockHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -295,7 +290,6 @@ public final class FreecessHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public Bundle extras;
         public final FreecessController mFreecessController;
@@ -1054,7 +1048,6 @@ public final class FreecessHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetLinkReceiverThread extends Thread {
         public final /* synthetic */ FreecessHandler this$0 = FreecessHandlerHolder.INSTANCE;
 

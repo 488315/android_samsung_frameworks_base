@@ -40,7 +40,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UpdatableFontDir {
     public final AtomicFile mConfigFile;
     public final Function mConfigSupplier;
@@ -52,7 +51,6 @@ public final class UpdatableFontDir {
     public long mLastModifiedMillis;
     public final OtfFontFileParser mParser;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FontFileInfo {
         public final File mFile;
         public final String mPsName;

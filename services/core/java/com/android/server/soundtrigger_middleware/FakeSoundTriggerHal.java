@@ -31,7 +31,6 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FakeSoundTriggerHal extends ISoundTriggerHw.Stub {
     public IBinder.DeathRecipient mDeathRecipient;
     public CallbackDispatcher mGlobalCallbackDispatcher;
@@ -44,7 +43,6 @@ public final class FakeSoundTriggerHal extends ISoundTriggerHw.Stub {
     public int mModelKeyCounter = 101;
     public boolean mIsDead = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.soundtrigger_middleware.FakeSoundTriggerHal$1, reason: invalid class name */
     public final class AnonymousClass1 extends IInjectGlobalEvent.Stub {
         public AnonymousClass1() {}
@@ -115,7 +113,6 @@ public final class FakeSoundTriggerHal extends ISoundTriggerHw.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackDispatcher {
         public final Object mCallback;
 
@@ -162,13 +159,11 @@ public final class FakeSoundTriggerHal extends ISoundTriggerHw.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ExecutorHolder {
         public static final Executor CALLBACK_EXECUTOR = Executors.newSingleThreadExecutor();
         public static final Executor INJECTION_EXECUTOR = Executors.newSingleThreadExecutor();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelSession extends IInjectModelEvent.Stub {
         public final CallbackDispatcher mCallbackDispatcher;
         public final boolean mIsKeyphrase;
@@ -177,7 +172,6 @@ public final class FakeSoundTriggerHal extends ISoundTriggerHw.Stub {
         public int mThreshold = 0;
         public boolean mIsUnloaded = false;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RecognitionSession extends IInjectRecognitionEvent.Stub {
             public RecognitionSession() {}
 

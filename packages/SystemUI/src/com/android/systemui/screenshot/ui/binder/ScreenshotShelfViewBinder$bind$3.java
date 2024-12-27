@@ -35,7 +35,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Function3 {
     final /* synthetic */ LinearLayout $actionsContainer;
     final /* synthetic */ ImageView $badgeView;
@@ -51,7 +50,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
     int label;
     final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
@@ -68,7 +66,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
         int label;
         final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1, reason: invalid class name and collision with other inner class name */
         final class C01681 extends SuspendLambda implements Function2 {
             final /* synthetic */ LinearLayout $actionsContainer;
@@ -85,7 +82,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
             int label;
             final /* synthetic */ ScreenshotShelfViewBinder this$0;
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$1, reason: invalid class name and collision with other inner class name */
             final class C01691 extends SuspendLambda implements Function2 {
                 final /* synthetic */ View $previewBorder;
@@ -158,7 +154,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 final /* synthetic */ ImageView $scrollingScrim;
@@ -217,7 +212,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$3, reason: invalid class name */
             final class AnonymousClass3 extends SuspendLambda implements Function2 {
                 final /* synthetic */ ImageView $scrollablePreview;
@@ -294,7 +288,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$4, reason: invalid class name */
             final class AnonymousClass4 extends SuspendLambda implements Function2 {
                 final /* synthetic */ ImageView $badgeView;
@@ -349,7 +342,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$5, reason: invalid class name */
             final class AnonymousClass5 extends SuspendLambda implements Function2 {
                 final /* synthetic */ ImageView $previewView;
@@ -414,7 +406,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$6, reason: invalid class name */
             final class AnonymousClass6 extends SuspendLambda implements Function2 {
                 final /* synthetic */ LinearLayout $actionsContainer;
@@ -475,7 +466,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$7, reason: invalid class name */
             final class AnonymousClass7 extends SuspendLambda implements Function2 {
                 final /* synthetic */ LayoutInflater $layoutInflater;
@@ -537,7 +527,6 @@ final class ScreenshotShelfViewBinder$bind$3 extends SuspendLambda implements Fu
                 }
             }
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$bind$3$1$1$8, reason: invalid class name */
             final class AnonymousClass8 extends SuspendLambda implements Function2 {
                 final /* synthetic */ LayoutInflater $layoutInflater;

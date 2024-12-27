@@ -68,7 +68,6 @@ import com.android.systemui.util.wakelock.WakeLock;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardIndicationController {
     public final AccessibilityManager mAccessibilityManager;
     public final AlternateBouncerInteractor mAlternateBouncerInteractor;
@@ -150,7 +149,6 @@ public class KeyguardIndicationController {
     public String mSleepChargingEventFinishTime = null;
     public boolean mResumedChargingAdaptiveProtection = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.KeyguardIndicationController$4, reason: invalid class name */
     public final class AnonymousClass4 implements StatusBarStateController.StateListener {
         public AnonymousClass4() {
@@ -177,7 +175,6 @@ public class KeyguardIndicationController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BaseKeyguardCallback extends KeyguardUpdateMonitorCallback {
         public BaseKeyguardCallback() {
         }

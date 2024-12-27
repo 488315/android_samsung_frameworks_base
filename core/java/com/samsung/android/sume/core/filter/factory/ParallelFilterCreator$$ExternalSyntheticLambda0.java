@@ -4,7 +4,6 @@ import com.samsung.android.sume.core.descriptor.MFDescriptor;
 
 import java.util.function.Function;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class ParallelFilterCreator$$ExternalSyntheticLambda0
         implements Function {
     public final /* synthetic */ MediaFilterFactory f$0;

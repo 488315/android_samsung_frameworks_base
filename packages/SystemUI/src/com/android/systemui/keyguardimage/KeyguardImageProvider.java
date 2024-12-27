@@ -13,7 +13,6 @@ import android.util.Log;
 import com.android.systemui.keyguardimage.ImageOptionCreator;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardImageProvider extends ContentProvider {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ImageCreator[] mClockImageCreator;
@@ -22,7 +21,6 @@ public class KeyguardImageProvider extends ContentProvider {
     public final Handler mHandler = new Handler(Looper.getMainLooper());
     public boolean mWasShortcutEnabled = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyWriter implements ContentProvider.PipeDataWriter {
         private MyWriter() {
         }

@@ -20,7 +20,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexCompatController implements IController {
     public final ActivityTaskManagerService mAtm;
     public final WindowManagerGlobalLock mGlobalLock;
@@ -29,7 +28,6 @@ public final class DexCompatController implements IController {
     public final SparseArray mDecorCaptionHeightInFullscreen = new SparseArray();
     public final SparseArray mDecorCaptionHeightInFreeform = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -53,7 +51,6 @@ public final class DexCompatController implements IController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Request {
         public SafeActivityOptions activityOptions;
         public String callingFeatureId;

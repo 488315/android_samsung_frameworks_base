@@ -19,7 +19,6 @@ import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyboardShortcutManager {
     public static final int[] SHORT_TYPE_LIST = {0, 1, 2, 3, 4};
     public final Context mContext;
@@ -29,7 +28,6 @@ public final class KeyboardShortcutManager {
     public boolean mIsTriggeredMeta = false;
     public boolean mIsConsumedMeta = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Behavior {
         public final Context mContext;
         public Intent mIntent;
@@ -64,7 +62,6 @@ public final class KeyboardShortcutManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultBehavior extends Behavior {
         public final /* synthetic */ int $r8$classId;
 
@@ -130,7 +127,6 @@ public final class KeyboardShortcutManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SFinderBehavior extends Behavior {
         public final String[] mDeniedActivities;
 

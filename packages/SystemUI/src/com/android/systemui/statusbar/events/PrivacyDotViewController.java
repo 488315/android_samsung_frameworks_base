@@ -37,7 +37,6 @@ import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PrivacyDotViewController {
     public final SystemStatusAnimationScheduler animationScheduler;
     public boolean applyDelayNextViewState;
@@ -60,11 +59,9 @@ public class PrivacyDotViewController {
     public View tr;
     public DelayableExecutor uiExecutor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface CreateListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ShowingListener {
     }
 

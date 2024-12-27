@@ -1,9 +1,7 @@
 package com.android.systemui.screenrecord.data.model;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ScreenRecordModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DoingNothing implements ScreenRecordModel {
         public static final DoingNothing INSTANCE = new DoingNothing();
 
@@ -23,7 +21,6 @@ public interface ScreenRecordModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Recording implements ScreenRecordModel {
         public static final Recording INSTANCE = new Recording();
 
@@ -43,7 +40,6 @@ public interface ScreenRecordModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Starting implements ScreenRecordModel {
         public final long millisUntilStarted;
 

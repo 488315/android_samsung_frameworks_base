@@ -34,7 +34,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PluginWallpaperController implements PluginWallpaper, PluginWallpaperCallback {
     public final Context mContext;
     public MultiPackDispatcher mMultiPackDispatcher;
@@ -46,7 +45,6 @@ public final class PluginWallpaperController implements PluginWallpaper, PluginW
     public final WallpaperLogger mWallpaperLogger;
     public final WallpaperManager mWallpaperManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.PluginWallpaperController$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1(PluginWallpaperController pluginWallpaperController) {

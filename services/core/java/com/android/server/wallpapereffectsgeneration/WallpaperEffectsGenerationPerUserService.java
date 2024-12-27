@@ -13,14 +13,12 @@ import com.android.server.ambientcontext.AmbientContextManagerPerUserService$$Ex
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WallpaperEffectsGenerationPerUserService extends AbstractPerUserSystemService
         implements RemoteWallpaperEffectsGenerationService
                 .RemoteWallpaperEffectsGenerationServiceCallback {
     public CinematicEffectListenerWrapper mCinematicEffectListenerWrapper;
     public RemoteWallpaperEffectsGenerationService mRemoteService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CinematicEffectListenerWrapper {
         public final ICinematicEffectListener mListener;
         public final String mTaskId;

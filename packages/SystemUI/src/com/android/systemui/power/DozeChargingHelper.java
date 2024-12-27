@@ -13,7 +13,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeChargingHelper {
     public IDisplayManager displayManager;
     public PowerManager.WakeLock dozeChargingDrawWakelock;
@@ -24,7 +23,6 @@ public final class DozeChargingHelper {
     public final IBinder displayStateLock = new Binder();
     public final IBinder passiveModeLock = new Binder();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

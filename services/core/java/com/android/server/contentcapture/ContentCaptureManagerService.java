@@ -86,7 +86,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentCaptureManagerService extends AbstractMasterSystemService {
     public boolean activityStartAssistDataEnabled;
     public ActivityManagerInternal mAm;
@@ -118,7 +117,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
     public final Set mPackagesWithShareRequests;
     public final LocalLog mRequestsHistory;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContentCaptureManagerServiceStub extends IContentCaptureManager.Stub {
         public ContentCaptureManagerServiceStub() {}
 
@@ -556,7 +554,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataShareCallbackDelegate extends IDataShareCallback.Stub {
         public final IDataShareWriteAdapter mClientAdapter;
         public final DataShareRequest mDataShareRequest;
@@ -1037,7 +1034,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GlobalContentCaptureOptions extends GlobalWhitelistState {
         public final SparseArray mServicePackages = new SparseArray();
         public final SparseBooleanArray mTemporaryServices = new SparseBooleanArray();
@@ -1244,7 +1240,6 @@ public final class ContentCaptureManagerService extends AbstractMasterSystemServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
 

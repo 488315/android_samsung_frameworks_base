@@ -3,7 +3,6 @@ package android.app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: FragmentManager.java */
 final class FragmentManagerState implements Parcelable {
     public static final Parcelable.Creator<FragmentManagerState> CREATOR =
             new Parcelable.Creator<

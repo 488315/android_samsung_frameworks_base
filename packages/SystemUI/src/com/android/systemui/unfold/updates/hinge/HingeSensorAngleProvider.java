@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HingeSensorAngleProvider implements HingeAngleProvider {
     public final Handler listenerHandler;
     public final SensorManager sensorManager;
@@ -64,7 +63,6 @@ public final class HingeSensorAngleProvider implements HingeAngleProvider {
         });
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HingeAngleSensorListener implements SensorEventListener {
         public HingeAngleSensorListener() {
         }

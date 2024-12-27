@@ -13,12 +13,10 @@ import vendor.samsung.hardware.health.ISehHealth;
 import vendor.samsung.hardware.health.ISehHealthInfoCallback;
 import vendor.samsung.hardware.health.SehHealthInfo;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class HealthRegCallbackAidl {
     public final HalInfoCallback mHalInfoCallback = new HalInfoCallback();
     public final BatteryService$$ExternalSyntheticLambda11 mServiceInfoCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HalInfoCallback extends Binder implements ISehHealthInfoCallback {
         public HalInfoCallback() {
             markVintfStability();

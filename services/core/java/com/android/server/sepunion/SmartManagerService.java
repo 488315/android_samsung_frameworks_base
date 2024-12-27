@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SmartManagerService extends ISmartManagerService.Stub
         implements AbsSemSystemService {
     public final Context mContext;
@@ -161,7 +160,6 @@ public final class SmartManagerService extends ISmartManagerService.Stub
                     KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SmartManagerService")
                             .getLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgWorkerHandler extends Handler {
         public BgWorkerHandler(Looper looper) {
             super(looper);
@@ -344,7 +342,6 @@ public final class SmartManagerService extends ISmartManagerService.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProtectedAppChangedObserver extends ContentObserver {
         public ProtectedAppChangedObserver(Handler handler) {
             super(handler);
@@ -360,7 +357,6 @@ public final class SmartManagerService extends ISmartManagerService.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RunningProcessObserver extends IProcessObserver.Stub {
         public RunningProcessObserver() {}
 

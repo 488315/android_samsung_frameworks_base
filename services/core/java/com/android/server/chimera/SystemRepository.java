@@ -60,7 +60,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemRepository {
     public static final boolean IS_SHIP_BUILD =
             SystemProperties.get("ro.boot.debug_level", "0x4f4c").equals("0x4f4c");
@@ -88,7 +87,6 @@ public final class SystemRepository {
     public final Map mPkgIconMap = new ArrayMap();
     public final List mChimeraUidObservers = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraProcInfo {
         public long closeRss;
         public final String name;
@@ -100,18 +98,15 @@ public final class SystemRepository {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ChimeraProcessObserver {
         void onForegroundActivitiesChanged(
                 int i, int i2, boolean z, int i3, String[] strArr, boolean z2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForegroundActivityManager {
         public final SparseArray mForegroundActivities = new SparseArray();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RunningAppProcessInfo {
         public long avgPss;
         public int flags;
@@ -127,7 +122,6 @@ public final class SystemRepository {
         public int uid;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SmartSwitchEventReceiver extends BroadcastReceiver {
         public boolean mOnStart;
         public boolean mOnTransfer;

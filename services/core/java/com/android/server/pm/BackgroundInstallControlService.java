@@ -51,7 +51,6 @@ import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackgroundInstallControlService extends SystemService {
     public SparseSetArray mBackgroundInstalledPackages;
     public final BinderService mBinderService;
@@ -65,7 +64,6 @@ public final class BackgroundInstallControlService extends SystemService {
     protected final PackageManagerInternal.PackageListObserver mPackageObserver;
     public final PermissionManagerService.PermissionManagerServiceInternalImpl mPermissionManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IBackgroundInstallControlService.Stub {
         public final BackgroundInstallControlService mService;
 
@@ -123,7 +121,6 @@ public final class BackgroundInstallControlService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventHandler extends Handler {
         public final BackgroundInstallControlService mService;
 
@@ -335,7 +332,6 @@ public final class BackgroundInstallControlService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForegroundTimeFrame implements Comparable {
         public final long startTimeStampMillis;
         public long endTimeStampMillis = 0;
@@ -357,10 +353,8 @@ public final class BackgroundInstallControlService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InjectorImpl implements Injector {
         public final Context mContext;
 

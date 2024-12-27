@@ -18,7 +18,6 @@ import com.android.server.display.utils.SensorUtils;
 import com.android.server.power.PowerManagerUtil;
 import com.android.server.power.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayPowerProximityStateController {
     static final int MSG_PROXIMITY_SENSOR_DEBOUNCED = 1;
     static final int PROXIMITY_POSITIVE = 1;
@@ -120,10 +119,8 @@ public final class DisplayPowerProximityStateController {
     public int mSensorPositiveDebounceDelay = -1;
     public int mSensorNegativeDebounceDelay = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayPowerProximityStateHandler extends Handler {
         public DisplayPowerProximityStateHandler(Looper looper) {
             super(looper, null, true);
@@ -148,7 +145,6 @@ public final class DisplayPowerProximityStateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.display.DisplayPowerProximityStateController$1] */

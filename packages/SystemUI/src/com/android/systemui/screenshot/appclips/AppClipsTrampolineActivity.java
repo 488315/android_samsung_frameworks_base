@@ -25,7 +25,6 @@ import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class AppClipsTrampolineActivity extends Activity {
     public final ServiceConnector mAppClipsServiceConnector;
     public final Executor mBgExecutor;
@@ -43,7 +42,6 @@ public class AppClipsTrampolineActivity extends Activity {
     public static final String EXTRA_CALLING_PACKAGE_NAME = AbstractResolvableFuture$$ExternalSyntheticOutline0.m("AppClipsTrampolineActivity", "CALLING_PACKAGE_NAME");
     public static final PackageManager.ApplicationInfoFlags APPLICATION_INFO_FLAGS = PackageManager.ApplicationInfoFlags.of(0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppClipsResultReceiver extends ResultReceiver {
         public AppClipsResultReceiver(Handler handler) {
             super(handler);

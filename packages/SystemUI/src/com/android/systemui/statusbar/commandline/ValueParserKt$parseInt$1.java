@@ -4,7 +4,6 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import kotlin.Result;
 import kotlin.text.StringsKt__StringNumberConversionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ValueParserKt$parseInt$1 implements ValueParser {
     public static final ValueParserKt$parseInt$1 INSTANCE = new ValueParserKt$parseInt$1();
 

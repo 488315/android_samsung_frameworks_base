@@ -24,7 +24,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeToggleSeekBar extends SeekBar {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int currentProgress;
@@ -43,7 +42,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
     public VolumeManager volumeManager;
     public VolumeSeekBar volumeSeekBar;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -53,7 +51,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VolumeSeekbarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public VolumeSeekbarChangeListener() {
         }

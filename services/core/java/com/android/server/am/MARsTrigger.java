@@ -39,7 +39,6 @@ import com.samsung.android.knoxguard.service.utils.Constants;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsTrigger {
     public AlarmManager mAlarm;
     public AnonymousClass5 mAppStartUpIntentReceiver;
@@ -63,7 +62,6 @@ public final class MARsTrigger {
     public AnonymousClass1 mUserIntentReceiver;
     public UserHandle user;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsTriggerHolder {
         public static final MARsTrigger INSTANCE;
 

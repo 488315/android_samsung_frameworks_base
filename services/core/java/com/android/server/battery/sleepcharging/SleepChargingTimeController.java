@@ -27,7 +27,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.TimeZone;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SleepChargingTimeController {
     public static final LocalTime mRuglarUpdateCheckTime = LocalTime.of(16, 0);
     public Context mContext;
@@ -50,7 +49,6 @@ public final class SleepChargingTimeController {
     public Map mSleepPatterns;
     public AnonymousClass2 mTimeReachedReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.battery.sleepcharging.SleepChargingTimeController$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -125,7 +123,6 @@ public final class SleepChargingTimeController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SleepChargingStatus {
         public final LocalDateTime bedDateTime;
         public final float confidence;

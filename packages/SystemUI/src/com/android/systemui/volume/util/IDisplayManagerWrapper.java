@@ -13,7 +13,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class IDisplayManagerWrapper {
     public final Context context;
     public IRefreshRateToken iRefreshRateMinLimitToken;
@@ -76,7 +75,6 @@ public final class IDisplayManagerWrapper {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.pipeline.mobile.util;
 import android.telephony.TelephonyManager;
 import androidx.compose.foundation.lazy.LazyListMeasuredItem$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SimCardInfoUtil {
     public final TelephonyManager telephonyManager;
 

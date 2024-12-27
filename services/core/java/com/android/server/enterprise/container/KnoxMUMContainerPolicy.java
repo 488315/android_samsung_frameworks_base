@@ -138,7 +138,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         implements EnterpriseServiceCallback {
     public static final boolean DEBUG = "eng".equals(SystemProperties.get("ro.build.type"));
@@ -176,7 +175,6 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
     public final List mTypeList;
     public UserManager mUms;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.container.KnoxMUMContainerPolicy$6, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass6 {
         public static final /* synthetic */ int[]
@@ -240,7 +238,6 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContainerHandler extends Handler {
         public ContainerHandler() {}
 
@@ -262,7 +259,6 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContainerLicenseObserver implements IActivationKlmElmObserver {
         public ContainerLicenseObserver() {}
 
@@ -323,12 +319,10 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CrossProfileIntentFilter {
         public IntentFilter filter;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Context mContext;
 
@@ -337,12 +331,10 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProvisioningProcessObserver extends IProcessObserver.Stub {
         public ProvisioningProcessObserver() {}
 
@@ -425,7 +417,6 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProvisioningState {
         public int state = 0;
         public int requestId = 0;
@@ -690,7 +681,6 @@ public final class KnoxMUMContainerPolicy extends IKnoxContainerManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RequestIdGenerator {
         public int fraction;
         public Random random;

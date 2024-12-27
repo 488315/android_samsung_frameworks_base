@@ -24,7 +24,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentRecorder implements WindowContainerListener {
     public final boolean mCorrectForAnisotropicPixels;
     public final DisplayContent mDisplayContent;
@@ -37,7 +36,6 @@ public final class ContentRecorder implements WindowContainerListener {
     public int mLastOrientation = 0;
     public int mLastWindowingMode = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface MediaProjectionManagerWrapper {
         void notifyActiveProjectionCapturedContentResized(int i, int i2);
 
@@ -48,7 +46,6 @@ public final class ContentRecorder implements WindowContainerListener {
         void stopActiveProjection();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteMediaProjectionManagerWrapper
             implements MediaProjectionManagerWrapper {
         public final int mDisplayId;

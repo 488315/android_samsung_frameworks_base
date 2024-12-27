@@ -21,7 +21,6 @@ import com.android.server.SystemServiceManager;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CountQuotaTracker extends QuotaTracker {
     public static final String ALARM_TAG_CLEANUP =
             XmlUtils$$ExternalSyntheticOutline0.m("*", "CountQuotaTracker", ".cleanup*");
@@ -38,7 +37,6 @@ public final class CountQuotaTracker extends QuotaTracker {
     public long mMaxPeriodMs;
     public long mNextCleanupTimeElapsed;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CqtHandler extends Handler {
         public CqtHandler(Looper looper) {
             super(looper);
@@ -55,7 +53,6 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeleteEventTimesFunctor implements Consumer {
         public long mMaxPeriodMs;
 
@@ -78,7 +75,6 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarliestEventTimeFunctor implements Consumer {
         public long earliestTimeElapsed;
 
@@ -92,7 +88,6 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ExecutionStats {
         public int countInWindow;
         public int countLimit;

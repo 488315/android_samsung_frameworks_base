@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecTileQueryHelper {
     public final Executor mBgExecutor;
     public final Context mContext;
@@ -28,7 +27,6 @@ public final class SecTileQueryHelper {
     public final ArraySet mSpecs = new ArraySet();
     public final SecQSPanelResourcePicker mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TileCollector implements QSTile.Callback {
         public final boolean mIsTopEdit;
         public final QSHost mQSHost;
@@ -100,7 +98,6 @@ public final class SecTileQueryHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class TileInfo {
         public boolean isActive;
         public String spec;
@@ -115,7 +112,6 @@ public final class SecTileQueryHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TilePair {
         public boolean mReady;
         public final QSTile mTile;

@@ -13,12 +13,10 @@ import com.android.server.pm.pkg.AndroidPackage;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SoftRestrictedPermissionPolicy {
     public static final AnonymousClass1 DUMMY_POLICY = new AnonymousClass1();
     public static final HashSet sForcedScopedStorageAppWhitelist;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.policy.SoftRestrictedPermissionPolicy$1, reason: invalid class name */
     public final class AnonymousClass1 extends SoftRestrictedPermissionPolicy {
         @Override // com.android.server.policy.SoftRestrictedPermissionPolicy

@@ -24,13 +24,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public final Context context;
     public final FlashlightController flashlightController;
     public final Flow lockScreenState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -40,10 +38,8 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class FlashlightState {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OffAvailable extends FlashlightState {
             public static final OffAvailable INSTANCE = new OffAvailable();
 
@@ -60,7 +56,6 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class On extends FlashlightState {
             public static final On INSTANCE = new On();
 
@@ -77,7 +72,6 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Unavailable extends FlashlightState {
             public static final Unavailable INSTANCE = new Unavailable();
 

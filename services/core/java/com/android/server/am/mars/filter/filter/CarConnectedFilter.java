@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CarConnectedFilter implements IFilter {
     public static AnonymousClass1 listener;
     public CarConnectionQueryHandler carConnectionQueryHandler;
@@ -29,18 +28,15 @@ public final class CarConnectedFilter implements IFilter {
     public final ArrayList logExcludeList =
             new ArrayList(List.of("com.google.android.projection.gearhead"));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.mars.filter.filter.CarConnectedFilter$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AndroidAutoFilterHolder {
         public static final CarConnectedFilter INSTANCE = new CarConnectedFilter();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CarConnectionQueryHandler extends AsyncQueryHandler {
         @Override // android.content.AsyncQueryHandler
         public final void onQueryComplete(int i, Object obj, Cursor cursor) {
@@ -78,7 +74,6 @@ public final class CarConnectedFilter implements IFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CarConnectionReceiver extends BroadcastReceiver {
         public CarConnectionReceiver() {}
 

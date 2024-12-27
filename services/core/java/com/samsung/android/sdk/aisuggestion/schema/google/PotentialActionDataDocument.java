@@ -6,7 +6,6 @@ import android.app.appsearch.GenericDocument;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knoxguard.service.SystemIntentProcessor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PotentialActionDataDocument extends GenericDocument {
     public static final AppSearchSchema schema =
             new AppSearchSchema.Builder("ContextualInsightData:PotentialAction")
@@ -61,7 +60,6 @@ public final class PotentialActionDataDocument extends GenericDocument {
                                     .build())
                     .build();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder extends GenericDocument.Builder {
         public Builder() {
             super("ContextualInsightData", "", "ContextualInsightData:PotentialAction");

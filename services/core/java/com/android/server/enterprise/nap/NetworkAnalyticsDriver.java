@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class NetworkAnalyticsDriver {
     public static final boolean DBG = NetworkAnalyticsService.DBG;
     public static int REATTEMPT_COMMAND_ACTIVATE = 1;
@@ -30,7 +29,6 @@ class NetworkAnalyticsDriver {
                 + " \"brecv\":\"4500\", \"hostname\":\"www.space.com\", \"protocol\":\"tcp\","
                 + " \"hash\":\"a0627953\" }";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KernelDataFetch extends AsyncTask {
         public KernelDataFetch() {}
 

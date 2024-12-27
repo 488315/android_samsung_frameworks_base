@@ -14,7 +14,6 @@ import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaSession2Record extends MediaSessionRecordImpl {
     public static final boolean DEBUG = Log.isLoggable("MediaSession2Record", 3);
     public final MediaController2 mController;
@@ -25,7 +24,6 @@ public final class MediaSession2Record extends MediaSessionRecordImpl {
     public final MediaSessionService mService;
     public final Session2Token mSessionToken;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Controller2Callback extends MediaController2.ControllerCallback {
         public Controller2Callback() {}
 

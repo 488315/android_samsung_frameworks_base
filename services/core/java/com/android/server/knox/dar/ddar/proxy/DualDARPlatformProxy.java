@@ -7,7 +7,6 @@ import com.android.server.knox.dar.ddar.DDLog;
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
 import com.samsung.android.knox.ddar.IDualDARPolicy;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DualDARPlatformProxy extends IProxyAgentService {
     public static DualDARPlatformProxy mInstance;
     public final Context mContext;

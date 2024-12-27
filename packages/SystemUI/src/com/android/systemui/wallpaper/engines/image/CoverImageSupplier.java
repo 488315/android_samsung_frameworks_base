@@ -8,7 +8,6 @@ import com.android.systemui.wallpaper.CoverWallpaperController;
 import com.android.systemui.wallpaper.engines.image.ImageSource;
 import com.android.systemui.wallpaper.utils.IntelligentCropHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CoverImageSupplier implements ImageSource.ImageSupplier {
     public final CoverWallpaper mCoverWallpaper;
     public final WallpaperManager mWallpaperManager;

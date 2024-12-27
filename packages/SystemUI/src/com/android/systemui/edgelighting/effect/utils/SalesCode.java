@@ -2,7 +2,6 @@ package com.android.systemui.edgelighting.effect.utils;
 
 import android.os.SemSystemProperties;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SalesCode {
     public static final boolean isChn;
     public static final boolean isIND;

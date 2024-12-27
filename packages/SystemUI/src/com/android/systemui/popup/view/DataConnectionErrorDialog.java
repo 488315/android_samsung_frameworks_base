@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.popup.data.DataConnectionErrorData;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DataConnectionErrorDialog implements PopupUIAlertDialog {
     private static final int INVALID_TYPE = -1;
     private static final String TAG = "DataConnectionErrorDialog";

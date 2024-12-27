@@ -3,7 +3,6 @@ package com.android.server.chimera.heimdall;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HeimdallTriggerManager {
     public boolean ENABLE_GLOBAL_KILL;
     public boolean ENABLE_SPEC_KILL;
@@ -12,7 +11,6 @@ public final class HeimdallTriggerManager {
     public HeimdallSpecManager mSpecManager;
     public int mSpecVersion;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HeimdallProcSpec {
         public boolean allowAlwaysRunning;
         public int alwaysRunningSpecSize;
@@ -70,7 +68,6 @@ public final class HeimdallTriggerManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HeimdallSpecManager {
         public final boolean mLoadSuccess;
         public final HashMap mSpecMap;

@@ -26,7 +26,6 @@ import kotlin.text.MatcherMatchResult$groupValues$1;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LogcatEchoTrackerCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final SingleArgParamOptional buffer$delegate;
@@ -35,7 +34,6 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
     public final Flag list$delegate;
     public final SingleArgParamOptional tag$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FragmentHostManager {
     public final InterestingConfigChanges mConfigChanges;
     public final Context mContext;
@@ -36,7 +35,6 @@ public final class FragmentHostManager {
     public final Handler mHandler = new Handler(Looper.getMainLooper());
     public final HashMap mListeners = new HashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExtensionFragmentManager {
         public final ArrayMap mExtensionLookup = new ArrayMap();
 
@@ -70,7 +68,6 @@ public final class FragmentHostManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         FragmentHostManager create(View view);
     }
@@ -155,7 +152,6 @@ public final class FragmentHostManager {
         Trace.endSection();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface FragmentListener {
         void onFragmentViewCreated(Fragment fragment);
 
@@ -163,7 +159,6 @@ public final class FragmentHostManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HostCallbacks extends FragmentHostCallback {
         public HostCallbacks() {
             super(FragmentHostManager.this.mContext, FragmentHostManager.this.mHandler, 0);

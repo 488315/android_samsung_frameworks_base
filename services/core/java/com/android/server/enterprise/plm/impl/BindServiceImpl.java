@@ -8,7 +8,6 @@ import android.util.Log;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.plm.context.ProcessContext;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BindServiceImpl {
     public int mAliveEvent;
     public final Context mContext;
@@ -17,7 +16,6 @@ public final class BindServiceImpl {
     public ConnectionHelper mConnectionHelper = null;
     public Handler mObserver = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.plm.impl.BindServiceImpl$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {}

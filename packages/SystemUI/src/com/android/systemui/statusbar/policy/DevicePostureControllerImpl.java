@@ -19,7 +19,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.PropertyReference0Impl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DevicePostureControllerImpl implements DevicePostureController {
     public DeviceState mCurrentDeviceState;
     public final List mSupportedStates;
@@ -27,7 +26,6 @@ public final class DevicePostureControllerImpl implements DevicePostureControlle
     public int mCurrentDevicePosture = 0;
     public final SparseIntArray mDeviceStateToPostureMap = new SparseIntArray();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.policy.DevicePostureControllerImpl$1, reason: invalid class name */
     public final class AnonymousClass1 implements DeviceStateManager.DeviceStateCallback {
         public AnonymousClass1() {

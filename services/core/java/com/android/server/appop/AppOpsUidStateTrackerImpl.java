@@ -18,7 +18,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
     public static final boolean DEBUG =
             "0x4948".equals(SystemProperties.get("ro.boot.debug_level", "unknown"));
@@ -39,12 +38,10 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
     public final SparseBooleanArray mPendingGone = new SparseBooleanArray();
     public final ArrayMap mUidStateChangedCallbacks = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface DelayableExecutor extends Executor {
         void executeDelayed(Runnable runnable, long j);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventLog {
         public final int[][] mCommitUidStateLog;
         public int mCommitUidStateLogHead;

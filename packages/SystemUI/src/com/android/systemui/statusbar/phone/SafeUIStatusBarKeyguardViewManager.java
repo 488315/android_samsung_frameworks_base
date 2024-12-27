@@ -85,7 +85,6 @@ import kotlin.Unit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewManager {
     public final ActivityStarter mActivityStarter;
     public ActivityStarter.OnDismissAction mAfterKeyguardGoneAction;
@@ -149,7 +148,6 @@ public final class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardV
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
     public final ViewMediatorCallback mViewMediatorCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DismissWithActionRequest {
         public final boolean afterKeyguardGone;
         public final Runnable cancelAction;

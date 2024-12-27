@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HeimdallPhaseManager {
     public final HeimdallKillManager mHeimdallKillManager;
     public final HeimdallProcessList mHeimdallProcessList;
@@ -29,7 +28,6 @@ public final class HeimdallPhaseManager {
     public final DefaultStrategy mDefaultStrategy = new DefaultStrategy(this, 0);
     public final DefaultStrategy mAllowedStrategy = new DefaultStrategy(this, 1);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultStrategy {
         public static final String[] sBgTrimPackages = {KnoxCustomManagerService.LAUNCHER_PACKAGE};
         public final /* synthetic */ int $r8$classId;

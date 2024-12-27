@@ -10,14 +10,12 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaHostStatesManager {
     public final Set callbacks = new LinkedHashSet();
     public final Set controllers = new LinkedHashSet();
     public final Map carouselSizes = new LinkedHashMap();
     public final Map mediaHostStates = new LinkedHashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onHostStateChanged(int i, MediaHostState mediaHostState);
     }

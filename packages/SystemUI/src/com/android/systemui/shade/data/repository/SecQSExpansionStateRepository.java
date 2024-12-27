@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQSExpansionStateRepository {
     public final StateFlowImpl _isCustomizerShowing;
     public final StateFlowImpl _isDetailClosing;
@@ -37,7 +36,6 @@ public final class SecQSExpansionStateRepository {
     public final ReadonlyStateFlow panelTransitionEnabled;
     public final ReadonlyStateFlow panelTransitionState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.shade.data.repository.SecQSExpansionStateRepository$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function6 {
         final /* synthetic */ Function1 $notify;
@@ -106,7 +104,6 @@ public final class SecQSExpansionStateRepository {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

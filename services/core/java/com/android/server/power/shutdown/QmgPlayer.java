@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class QmgPlayer extends AnimationPlayer {
     public final Bitmap[] bitmapQ;
     public int bitmapQFront;
@@ -36,7 +35,6 @@ public final class QmgPlayer extends AnimationPlayer {
     public final LibQmg subLoopImage;
     public final Bitmap[] subbitmapQ;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DrawHandler extends Handler {
         public boolean finished = false;
         public int maxSleep;
@@ -106,7 +104,6 @@ public final class QmgPlayer extends AnimationPlayer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImageLoader implements Runnable {
         public boolean running = true;
 

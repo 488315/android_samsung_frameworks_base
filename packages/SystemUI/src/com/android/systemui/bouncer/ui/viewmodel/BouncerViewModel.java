@@ -47,7 +47,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BouncerViewModel {
     public final ReadonlyStateFlow actionButton;
     public final Context applicationContext;
@@ -72,7 +71,6 @@ public final class BouncerViewModel {
     public final ReadonlyStateFlow userSwitcherDropdown;
     public final StateFlowImpl wipeDialogMessage;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DialogViewModel {
         public final Function0 onDismiss;
         public final String text;
@@ -102,7 +100,6 @@ public final class BouncerViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UserSwitcherDropdownItemViewModel {
         public final Icon icon;
         public final Function0 onClick;
@@ -144,12 +141,10 @@ public final class BouncerViewModel {
         this.selectedUserInteractor = selectedUserInteractor;
         Flow flow5 = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -239,13 +234,11 @@ public final class BouncerViewModel {
         final BouncerInteractor$special$$inlined$map$2 bouncerInteractor$special$$inlined$map$2 = bouncerInteractor.dismissDestination;
         this.destinationScenes = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ BouncerViewModel receiver$inlined;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -337,13 +330,11 @@ public final class BouncerViewModel {
         final Flow flow6 = authenticationInteractor.authenticationMethod;
         final ReadonlyStateFlow stateIn = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$3
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ BouncerViewModel receiver$inlined;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$3$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -398,13 +389,11 @@ public final class BouncerViewModel {
         FlowKt.stateIn(flow4, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
         Flow flow7 = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$4
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ BouncerViewModel this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$4$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -514,13 +503,11 @@ public final class BouncerViewModel {
         FlowKt.stateIn(flow7, coroutineScope, WhileSubscribed$default, Boolean.valueOf(((FeatureFlagsClassicRelease) bouncerRepository.flags).isEnabled(Flags.FULL_SCREEN_USER_SWITCHER) || !(authMethodBouncerViewModel instanceof PasswordBouncerViewModel)));
         FlowKt.stateIn(new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$5
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ BouncerViewModel this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$5$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -612,12 +599,10 @@ public final class BouncerViewModel {
         final BouncerMessageViewModel$special$$inlined$map$1 bouncerMessageViewModel$special$$inlined$map$1 = bouncerMessageViewModel.isLockoutMessagePresent;
         Flow flow8 = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$6
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$6$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerViewModel$special$$inlined$map$6$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

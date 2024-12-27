@@ -8,7 +8,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ConditionalRestarter implements Restarter {
     public final CoroutineScope applicationScope;
     public final CoroutineContext backgroundDispatcher;
@@ -17,7 +16,6 @@ public final class ConditionalRestarter implements Restarter {
     public final long restartDelaySec;
     public final SystemExitRestarter systemExitRestarter;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -27,7 +25,6 @@ public final class ConditionalRestarter implements Restarter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Condition {
         Flow getCanRestartNow();
     }

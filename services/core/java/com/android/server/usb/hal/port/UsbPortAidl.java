@@ -27,7 +27,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbPortAidl implements UsbPortHal {
     public static final LongSparseArray sCallbacks = new LongSparseArray();
     public IBinder mBinder;
@@ -38,7 +37,6 @@ public final class UsbPortAidl implements UsbPortHal {
     public boolean mSystemReady;
     public long mTransactionId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HALCallback extends Binder implements IUsbCallback {
         public UsbPortManager mPortManager;
         public IndentingPrintWriter mPw;

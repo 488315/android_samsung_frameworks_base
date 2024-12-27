@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.gesture.SwipeUpGestureLogger;
 import com.android.systemui.util.ConvenienceExtensionsKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SwipeChipbarAwayGestureHandler extends SwipeUpGestureHandler {
     public Function0 viewFetcher;
 

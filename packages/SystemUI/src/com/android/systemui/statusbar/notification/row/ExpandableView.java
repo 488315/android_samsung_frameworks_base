@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class ExpandableView extends FrameLayout implements Dumpable, Roundable {
     public static final Rect mClipRect = new Rect();
     public int mActualHeight;
@@ -52,13 +51,11 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
     public final ExpandableViewState mViewState;
     public boolean mWillBeGone;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum ClipSide {
         TOP,
         BOTTOM
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnHeightChangedListener {
         void onHeightChanged(ExpandableView expandableView, boolean z);
 

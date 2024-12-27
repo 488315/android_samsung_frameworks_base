@@ -20,12 +20,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayWindowSettingsProvider {
     public FileData mBaseSettings;
     public final WritableSettings mOverrideSettings;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AtomicFileStorage implements WritableSettingsStorage {
         public final AtomicFile mAtomicFile;
 
@@ -47,7 +45,6 @@ public final class DisplayWindowSettingsProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class FileData {
         public int mIdentifierType;
         public final /* synthetic */ int $r8$classId = 0;
@@ -125,10 +122,8 @@ public final class DisplayWindowSettingsProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ReadableSettingsStorage {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WritableSettings extends FileData {
         public final WritableSettingsStorage mSettingsStorage;
         public final ArraySet mVirtualDisplayIdentifiers;
@@ -341,7 +336,6 @@ public final class DisplayWindowSettingsProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WritableSettingsStorage extends ReadableSettingsStorage {}
 
     public DisplayWindowSettingsProvider(

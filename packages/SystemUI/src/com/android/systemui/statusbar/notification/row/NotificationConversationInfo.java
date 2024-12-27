@@ -45,7 +45,6 @@ import com.android.systemui.statusbar.notification.row.NotificationGuts;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationConversationInfo extends LinearLayout implements NotificationGuts.GutsContent {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int mActualHeight;
@@ -83,7 +82,6 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
     boolean mSkipPost;
     public UserManager mUm;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateChannelRunnable implements Runnable {
         public final int mAction;
         public final String mAppPkg;

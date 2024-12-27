@@ -5,7 +5,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final /* synthetic */ class CommunalHubKt$CtaTileInViewModeContent$1$1$1$2 extends AdaptedFunctionReference implements Function0 {
     public CommunalHubKt$CtaTileInViewModeContent$1$1$1$2(Object obj) {
         super(0, obj, BaseCommunalViewModel.class, "onOpenWidgetEditor", "onOpenWidgetEditor(Ljava/lang/String;Z)V", 0);

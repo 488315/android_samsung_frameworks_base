@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationMessagingTemplateViewWrapper extends NotificationTemplateViewWrapper {
     public ViewGroup mImageMessageContainer;
     public final MessagingLayout mMessagingLayout;
@@ -32,7 +31,6 @@ public final class NotificationMessagingTemplateViewWrapper extends Notification
     public final View mTitle;
     public final View mTitleInHeader;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.row.wrapper.NotificationMessagingTemplateViewWrapper$1, reason: invalid class name */
     public final class AnonymousClass1 extends ViewTransformationHelper.CustomTransformation {
         @Override // com.android.systemui.statusbar.ViewTransformationHelper.CustomTransformation

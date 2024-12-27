@@ -8,13 +8,11 @@ import android.util.Slog;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundPlayer implements PlayerInterface {
     public final Context context;
     public boolean silentShutdown = false;
     public SoundThread soundThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.shutdown.SoundPlayer$1, reason: invalid class name */
     public final class AnonymousClass1 extends Thread {
         @Override // java.lang.Thread, java.lang.Runnable
@@ -28,7 +26,6 @@ public final class SoundPlayer implements PlayerInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundThread extends Thread implements MediaPlayer.OnCompletionListener {
         public final MediaPlayer mediaPlayer;
         public final CountDownLatch completeSignal = new CountDownLatch(1);

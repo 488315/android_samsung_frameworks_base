@@ -5,7 +5,6 @@ import android.os.Trace;
 import java.io.File;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class ParallelPackageParser$$ExternalSyntheticLambda0
         implements Runnable {
     public final /* synthetic */ ParallelPackageParser f$0;

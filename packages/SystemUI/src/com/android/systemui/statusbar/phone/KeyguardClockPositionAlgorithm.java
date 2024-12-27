@@ -17,7 +17,6 @@ import com.android.systemui.shade.NotificationPanelViewController$$ExternalSynth
 import com.android.systemui.statusbar.notification.NotificationUtils;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardClockPositionAlgorithm {
     public boolean mBypassEnabled;
     public float mClockBottom;
@@ -42,7 +41,6 @@ public class KeyguardClockPositionAlgorithm {
     public int mUserSwitchHeight;
     public int mUserSwitchPreferredY;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Result {
         public float clockAlpha;
         public float clockScale;

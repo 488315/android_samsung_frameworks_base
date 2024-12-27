@@ -33,7 +33,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.GraphicsUtils;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VideoEngine extends WallpaperEngine {
     public final String TAG;
     public boolean mBouncerVisible;
@@ -50,7 +49,6 @@ public final class VideoEngine extends WallpaperEngine {
     public final VideoSource mVideoSource;
     public final Handler mWorkerHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoEngine$1, reason: invalid class name */
     public final class AnonymousClass1 implements VideoController.Callback {
         public AnonymousClass1() {
@@ -75,7 +73,6 @@ public final class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoEngine$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$wallpaper$live$sdk$data$DisplayState;
@@ -102,7 +99,6 @@ public final class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateSnapshot {
         public final DisplayState mDisplayState;
 

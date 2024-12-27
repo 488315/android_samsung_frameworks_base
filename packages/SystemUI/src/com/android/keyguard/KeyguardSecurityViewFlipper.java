@@ -13,11 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ViewFlipper;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSecurityViewFlipper extends ViewFlipper {
     public final Rect mTempRect;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LayoutParams extends FrameLayout.LayoutParams {
         public final int maxHeight;
         public final int maxWidth;

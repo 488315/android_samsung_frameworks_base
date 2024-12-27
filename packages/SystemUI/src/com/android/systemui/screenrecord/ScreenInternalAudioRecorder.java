@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenInternalAudioRecorder {
     public final AudioRecord mAudioRecord;
     public final AudioRecord mAudioRecordMic;
@@ -32,7 +31,6 @@ public final class ScreenInternalAudioRecorder {
     public long mTotalBytes;
     public int mTrackId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Config {
         public final int channelOutMask = 4;
         public final int channelInMask = 16;

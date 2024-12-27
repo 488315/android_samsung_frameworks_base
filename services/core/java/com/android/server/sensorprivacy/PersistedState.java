@@ -8,17 +8,14 @@ import android.util.SparseArray;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersistedState {
     public final AtomicFile mAtomicFile;
     public final ArrayMap mStates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PVersion0 {
         public SparseArray mIndividualEnabled;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PVersion1 {
         public final SparseArray mIndividualEnabled = new SparseArray();
 
@@ -29,7 +26,6 @@ public final class PersistedState {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PVersion2 {
         public final ArrayMap mStates = new ArrayMap();
 
@@ -40,7 +36,6 @@ public final class PersistedState {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TypeUserSensor {
         public final int mSensor;
         public final int mType;

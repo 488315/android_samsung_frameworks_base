@@ -23,14 +23,12 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ScreenControlActionInteractor implements ActionInteractor {
     private static final String PACKAGE_NAME = "packageName";
     private static final String TAG = "ScreenControlActionInteractor";
     private final Context mContext;
     private final ScreenController mScreenController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum Action {
         goto_homescreen,
         back,

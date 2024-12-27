@@ -18,14 +18,12 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SliceClientPermissions implements DirtyTracker, DirtyTracker.Persistable {
     public final ArrayMap mAuths = new ArrayMap();
     public boolean mHasFullAccess;
     public final SlicePermissionManager.PkgUser mPkg;
     public final DirtyTracker mTracker;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SliceAuthority implements DirtyTracker.Persistable {
         public final String mAuthority;
         public final ArraySet mPaths = new ArraySet();

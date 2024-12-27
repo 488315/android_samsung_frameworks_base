@@ -72,7 +72,6 @@ import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserSwitcherInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final StateFlowImpl _dialogDismissRequests;
@@ -105,7 +104,6 @@ public final class UserSwitcherInteractor {
     public final ReadonlyStateFlow userRecords;
     public final UserRestrictionChecker userRestrictionChecker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -136,7 +134,6 @@ public final class UserSwitcherInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function3 {
         /* synthetic */ Object L$0;
@@ -166,7 +163,6 @@ public final class UserSwitcherInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$5, reason: invalid class name */
     final class AnonymousClass5 extends SuspendLambda implements Function2 {
         /* synthetic */ Object L$0;
@@ -212,13 +208,11 @@ public final class UserSwitcherInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$6, reason: invalid class name */
     final class AnonymousClass6 extends SuspendLambda implements Function2 {
         final /* synthetic */ KeyguardUpdateMonitor $keyguardUpdateMonitor;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$6$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             final /* synthetic */ KeyguardUpdateMonitor $keyguardUpdateMonitor;
@@ -293,7 +287,6 @@ public final class UserSwitcherInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -303,7 +296,6 @@ public final class UserSwitcherInteractor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface UserCallback {
         default boolean isEvictable() {
             return false;
@@ -312,7 +304,6 @@ public final class UserSwitcherInteractor {
         void onUserStateChanged();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -364,12 +355,10 @@ public final class UserSwitcherInteractor {
         final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = userRepositoryImpl.userInfos;
         ?? r5 = new Flow() { // from class: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -475,13 +464,11 @@ public final class UserSwitcherInteractor {
         final UserRepositoryImpl$special$$inlined$map$2 userRepositoryImpl$special$$inlined$map$2 = userRepositoryImpl.selectedUserInfo;
         this.selectedUserRecord = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserSwitcherInteractor this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

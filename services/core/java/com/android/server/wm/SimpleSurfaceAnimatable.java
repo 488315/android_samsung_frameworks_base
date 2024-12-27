@@ -4,7 +4,6 @@ import android.view.SurfaceControl;
 
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SimpleSurfaceAnimatable implements SurfaceAnimator.Animatable {
     public final Supplier mAnimationLeashFactory;
     public final SurfaceControl mAnimationLeashParent;
@@ -16,7 +15,6 @@ public final class SimpleSurfaceAnimatable implements SurfaceAnimator.Animatable
     public final Supplier mSyncTransaction;
     public final int mWidth;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public Supplier mAnimationLeashFactory;
         public SurfaceControl mAnimationLeashParent;

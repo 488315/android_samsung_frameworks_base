@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActiveMusicRecordFilter implements IFilter {
     public String FM_RADIO_PACKAGE_NAME;
     public String SILENT_AUDIO_PREX;
@@ -47,7 +46,6 @@ public final class ActiveMusicRecordFilter implements IFilter {
     public ArrayList mTTSPkgsUid;
     public ExecutorService threadPool;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ActiveMusicRecordFilterHolder {
         public static final ActiveMusicRecordFilter INSTANCE;
 

@@ -10,7 +10,6 @@ import android.content.pm.ResolveInfo;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 public interface ActivityInterceptorCallback {
     public static final int DREAM_MANAGER_ORDERED_ID = 4;
@@ -24,7 +23,6 @@ public interface ActivityInterceptorCallback {
     public static final int SYSTEM_LAST_ORDERED_ID = 6;
     public static final int VIRTUAL_DEVICE_SERVICE_ORDERED_ID = 3;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
     public final class ActivityInterceptResult {
         public final ActivityOptions mActivityOptions;
@@ -54,7 +52,6 @@ public interface ActivityInterceptorCallback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
     public final class ActivityInterceptorInfo {
         public final ActivityInfo mActivityInfo;
@@ -71,7 +68,6 @@ public interface ActivityInterceptorCallback {
         public final String mResolvedType;
         public final int mUserId;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Builder {
             public final ActivityInfo mActivityInfo;
             public final int mCallingPid;
@@ -205,7 +201,6 @@ public interface ActivityInterceptorCallback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
     public @interface OrderedId {}
 

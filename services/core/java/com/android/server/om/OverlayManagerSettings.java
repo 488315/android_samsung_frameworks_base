@@ -24,19 +24,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayManagerSettings {
     public final Object mItemsLock = new Object();
     public final ArrayList mItems = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BadKeyException extends Exception {
         public BadKeyException(OverlayIdentifier overlayIdentifier, int i) {
             super("Bad key '" + overlayIdentifier + "' for user " + i);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Serializer {
         static final int CURRENT_VERSION = 4;
 
@@ -131,7 +128,6 @@ public final class OverlayManagerSettings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsItem {
         public String mBaseCodePath;
         public OverlayInfo mCache = null;

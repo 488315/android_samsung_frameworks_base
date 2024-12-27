@@ -21,19 +21,16 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AbstractProtoDiskReadWriter {
     public final File mRootDir;
     public final ScheduledExecutorService mScheduledExecutorService;
     public final Map mScheduledFileDataMap = new ArrayMap();
     public ScheduledFuture mScheduledFuture;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProtoStreamReader {
         Object read(ProtoInputStream protoInputStream);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProtoStreamWriter {
         void write(ProtoOutputStream protoOutputStream, Object obj);
     }

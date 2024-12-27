@@ -17,12 +17,10 @@ import com.samsung.android.rune.CoreRune;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BlurFacadeImpl implements BlurFacade {
     public final SemMultiWindowManager multiWindowManager = new SemMultiWindowManager();
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

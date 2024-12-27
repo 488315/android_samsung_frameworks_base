@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ScreenRecordingCallbackController {
     public WindowContainer mRecordedWC;
     public final WindowManagerService mWms;
@@ -28,7 +27,6 @@ public final class ScreenRecordingCallbackController {
     public final ArrayMap mLastInvokedStateByUid = new ArrayMap();
     public boolean mWatcherCallbackRegistered = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Callback implements IBinder.DeathRecipient {
         public final IScreenRecordingCallback mCallback;
         public final int mUid;
@@ -44,7 +42,6 @@ public final class ScreenRecordingCallbackController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaProjectionWatcherCallback extends IMediaProjectionWatcherCallback.Stub {
         public MediaProjectionWatcherCallback() {}
 

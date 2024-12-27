@@ -14,13 +14,11 @@ import android.util.Slog;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HdmiEarcController {
     public Handler mControlHandler;
     public final EarcNativeWrapper mEarcNativeWrapperImpl;
     public final HdmiControlService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarcAidlCallback extends Binder implements IEArcCallback {
         public EarcAidlCallback() {
             markVintfStability();
@@ -231,7 +229,6 @@ public final class HdmiEarcController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface EarcNativeWrapper {
         byte[] nativeGetLastReportedAudioCapabilities(int i);
 
@@ -246,7 +243,6 @@ public final class HdmiEarcController {
         void nativeSetEarcEnabled(boolean z);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarcNativeWrapperImpl implements EarcNativeWrapper, IBinder.DeathRecipient {
         public IEArc mEarc;
         public EarcAidlCallback mEarcCallback;

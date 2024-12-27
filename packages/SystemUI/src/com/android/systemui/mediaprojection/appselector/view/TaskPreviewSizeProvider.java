@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TaskPreviewSizeProvider implements CallbackController, ConfigurationController.ConfigurationListener, DefaultLifecycleObserver {
     public final ConfigurationController configurationController;
     public final Context context;
@@ -21,7 +20,6 @@ public final class TaskPreviewSizeProvider implements CallbackController, Config
     public final Rect size = calculateSize();
     public final ArrayList listeners = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface TaskPreviewSizeListener {
         void onTaskSizeChanged();
     }

@@ -5,14 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class FirewallDefinitions {
     public static final List EXEMPT_PACKAGE_LIST;
     public static final Pattern PATTERN_NUMERAL_ENDING_SUFIX = Pattern.compile("[0-9]*$");
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Table {
         public static final /* synthetic */ Table[] $VALUES;
         public static final Table FILTER;

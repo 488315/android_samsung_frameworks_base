@@ -36,7 +36,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceStorageMonitorService extends SystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
     public static final long BOOT_IMAGE_STORAGE_REQUIREMENT;
@@ -65,7 +64,6 @@ public final class DeviceStorageMonitorService extends SystemService {
     public final AtomicInteger mSeq;
     public final ArrayMap mStates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.storage.DeviceStorageMonitorService$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {}
@@ -80,7 +78,6 @@ public final class DeviceStorageMonitorService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CacheFileDeletedObserver extends FileObserver {
         @Override // android.os.FileObserver
         public final void onEvent(int i, String str) {
@@ -88,12 +85,10 @@ public final class DeviceStorageMonitorService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileNodeState {
         public int level;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Shell extends ShellCommand {
         public Shell() {}
 
@@ -208,7 +203,6 @@ public final class DeviceStorageMonitorService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class State {
         public static boolean isExhaustion;
         public long lastUsableBytes;

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BroadcastStats {
     public static final AnonymousClass1 ACTIONS_COMPARATOR = new AnonymousClass1();
     public long mEndRealtime;
@@ -20,7 +19,6 @@ public final class BroadcastStats {
     public final long mStartRealtime = SystemClock.elapsedRealtime();
     public final long mStartUptime = SystemClock.uptimeMillis();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.BroadcastStats$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -34,7 +32,6 @@ public final class BroadcastStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActionEntry {
         public final String mAction;
         public long mMaxDispatchTime;
@@ -49,12 +46,10 @@ public final class BroadcastStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageEntry {
         public int mSendCount;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ViolationEntry {
         public int mCount;
     }

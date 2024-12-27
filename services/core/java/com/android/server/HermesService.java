@@ -31,13 +31,11 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HermesService extends IHermesService.Stub implements AbsSemSystemService {
     public static Context mContext;
     public final HermesHalAdapter halAdapter;
     public final AnonymousClass3 mReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.HermesService$1, reason: invalid class name */
     public final class AnonymousClass1 extends Thread {
         @Override // java.lang.Thread, java.lang.Runnable

@@ -19,7 +19,6 @@ import com.android.server.input.KeyboardMetricsCollector;
 
 import java.text.SimpleDateFormat;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsFreezeStateRecord {
     public long freezedTime;
     public long initialStateTime;
@@ -37,7 +36,6 @@ public final class MARsFreezeStateRecord {
     public String unfreezedReason;
     public long unfreezedTime;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum FreezeReasonType {
         FREEZE_TOTAL("FREEZE_TOTAL", "Total"),
         /* JADX INFO: Fake field, exist only in values array */
@@ -60,7 +58,6 @@ public final class MARsFreezeStateRecord {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum UnfreezeReasonType {
         UNFREEZE_TOTAL("UNFREEZE_TOTAL", "Total"),
         UNFREEZE_REASON_ALARM("UNFREEZE_REASON_ALARM", "Alarm"),

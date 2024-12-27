@@ -1,6 +1,5 @@
 package com.android.systemui.controls.controller;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ControlsControllerImpl$saveCurrentFavorites$1 implements Runnable {
     public final /* synthetic */ ControlsControllerImpl this$0;
 

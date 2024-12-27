@@ -48,7 +48,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EyeComfortSolutionService {
     public final int ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS;
     public final int BOPR_MAX_VALUE;
@@ -107,7 +106,6 @@ public final class EyeComfortSolutionService {
     public int mWakeupTime_wednesday;
     public int prevTotalStep;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ECSControlHandler extends Handler {
         public ECSControlHandler(Looper looper) {
             super(looper, null);
@@ -187,7 +185,6 @@ public final class EyeComfortSolutionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
         public ScreenWatchingReceiver() {}
 
@@ -282,7 +279,6 @@ public final class EyeComfortSolutionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(ECSControlHandler eCSControlHandler) {
             super(eCSControlHandler);

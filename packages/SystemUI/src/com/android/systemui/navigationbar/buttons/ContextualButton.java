@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import com.samsung.systemui.splugins.navigationbar.IconType;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ContextualButton extends ButtonDispatcher {
     public ContextualButtonGroup mGroup;
     public final int mIconResId;

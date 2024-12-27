@@ -55,7 +55,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShortcutPackage extends ShortcutPackageItem {
     public int mApiCallCount;
     public final Executor mExecutor;
@@ -71,7 +70,6 @@ public final class ShortcutPackage extends ShortcutPackageItem {
     public final ArrayMap mShortcuts;
     public final ArrayMap mTransientShortcuts;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.ShortcutPackage$1, reason: invalid class name */
     public final class AnonymousClass1 implements BatchResultCallback {
         public final /* synthetic */ Consumer val$cb;

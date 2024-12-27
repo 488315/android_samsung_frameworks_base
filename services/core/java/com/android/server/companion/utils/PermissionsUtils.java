@@ -17,7 +17,6 @@ import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyn
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PermissionsUtils {
     public static final Map DEVICE_PROFILE_TO_PERMISSION;
     public static IAppOpsService sAppOpsService;

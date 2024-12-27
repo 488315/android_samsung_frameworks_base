@@ -84,7 +84,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageArchiver {
     public AppOpsManager mAppOpsManager;
     public final AppStateHelper mAppStateHelper;
@@ -106,7 +105,6 @@ public final class PackageArchiver {
             ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
                     Environment.getDataDirectory().getPath() + "/system/", "package-version.dat");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FixedSizeBitmapDrawable extends BitmapDrawable {
         @Override // android.graphics.drawable.BitmapDrawable, android.graphics.drawable.Drawable
         public final int getIntrinsicHeight() {
@@ -119,7 +117,6 @@ public final class PackageArchiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UnarchiveIntentSender extends IIntentSender.Stub {
         public UnarchiveIntentSender() {}
 

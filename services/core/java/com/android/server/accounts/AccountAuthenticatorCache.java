@@ -13,12 +13,10 @@ import com.android.internal.R;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccountAuthenticatorCache extends RegisteredServicesCache
         implements IAccountAuthenticatorCache {
     public static final MySerializer sSerializer = new MySerializer();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MySerializer implements XmlSerializerAndParser {
         public final Object createFromXml(TypedXmlPullParser typedXmlPullParser) {
             return AuthenticatorDescription.newKey(

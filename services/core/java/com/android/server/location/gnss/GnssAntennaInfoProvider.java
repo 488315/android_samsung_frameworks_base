@@ -17,14 +17,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssAntennaInfoProvider extends ListenerMultiplexer
         implements GnssNative.BaseCallbacks, GnssNative.AntennaInfoCallbacks {
     public volatile List mAntennaInfos;
     public final GnssNative mGnssNative;
     public NSLocationProviderHelper mNSLocationProviderHelper = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AntennaInfoListenerRegistration extends BinderListenerRegistration {
         public final CallerIdentity mIdentity;
 

@@ -2,7 +2,6 @@ package com.samsung.android.camera.scpm;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ScpmList {
     public String mVersion = null;
     public String mConfigurationName = null;
@@ -12,7 +11,6 @@ public abstract class ScpmList {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyType {
         public static final /* synthetic */ PolicyType[] $VALUES;
         public static final PolicyType CAMERA_3RD_PARTY;

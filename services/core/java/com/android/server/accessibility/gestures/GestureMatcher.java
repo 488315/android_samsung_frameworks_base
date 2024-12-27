@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.accessibility.Flags;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class GestureMatcher {
     public final int mGestureId;
     public final Handler mHandler;
@@ -15,7 +14,6 @@ public abstract class GestureMatcher {
     public int mState = 0;
     public final DelayedTransition mDelayedTransition = new DelayedTransition();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelayedTransition implements Runnable {
         public MotionEvent mEvent;
         public int mPolicyFlags;
@@ -86,7 +84,6 @@ public abstract class GestureMatcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StateChangeListener {
         void onStateChanged(
                 int i, int i2, int i3, MotionEvent motionEvent, MotionEvent motionEvent2);

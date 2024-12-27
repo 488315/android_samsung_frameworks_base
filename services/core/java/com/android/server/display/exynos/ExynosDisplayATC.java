@@ -30,7 +30,6 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ExynosDisplayATC {
     public static boolean TUNE_MODE;
     public final String mApsInit;
@@ -274,7 +273,6 @@ public final class ExynosDisplayATC {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.exynos.ExynosDisplayATC$2, reason: invalid class name */
     public final class AnonymousClass2 extends CountDownTimer {
         public AnonymousClass2(long j, long j2) {
@@ -330,7 +328,6 @@ public final class ExynosDisplayATC {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LightData {
         public float lux;
         public long timestamp;

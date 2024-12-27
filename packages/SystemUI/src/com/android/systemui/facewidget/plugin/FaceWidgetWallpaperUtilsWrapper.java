@@ -17,12 +17,10 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FaceWidgetWallpaperUtilsWrapper implements PluginSystemUIWallpaperUtils, Dumpable {
     public final HashMap mCallbackMap = new HashMap();
     public final KeyguardWallpaper mKeyguardWallpaper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FaceWidgetSystemUIWidgetCallbackWrapper implements SystemUIWidgetCallback, Dumpable {
         public final long mArea;
         public final PluginSystemUIWidgetCallback mCallback;

@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class HdmiUtils {
     public static final Map ADDRESS_TO_TYPE =
             Map.ofEntries(
@@ -55,7 +54,6 @@ public abstract class HdmiUtils {
         "Secondary_TV"
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CodecSad {
         public final int audioCodec;
         public final byte[] sad;
@@ -79,7 +77,6 @@ public abstract class HdmiUtils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfig {
         public final String name;
         public final List supportedCodecs;
@@ -103,7 +100,6 @@ public abstract class HdmiUtils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ShortAudioDescriptorXmlParser {
         /* JADX WARN: Removed duplicated region for block: B:113:0x01af A[SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:116:0x0019 A[SYNTHETIC] */

@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DarDatabaseCache {
     public final HashMap mCache =
             new LinkedHashMap() { // from class: com.android.server.knox.dar.DarDatabaseCache.1
@@ -28,7 +27,6 @@ public final class DarDatabaseCache {
             };
     public final DatabaseHelper mDatabaseHelper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DatabaseHelper extends SQLiteOpenHelper {
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {

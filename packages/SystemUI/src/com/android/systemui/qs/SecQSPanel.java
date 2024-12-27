@@ -20,13 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecQSPanel extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public Runnable mCollapseExpandAction;
     public final List mOnConfigurationChangedListeners;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnConfigurationChangedListener {
         void onConfigurationChange(Configuration configuration);
     }
@@ -90,7 +88,6 @@ public class SecQSPanel extends LinearLayout {
         Log.d("SecQSPanel", "setVisibility " + Debug.getCallers(5, " - "));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface QSTileLayout {
         void addTile(SecQSPanelControllerBase.TileRecord tileRecord);
 

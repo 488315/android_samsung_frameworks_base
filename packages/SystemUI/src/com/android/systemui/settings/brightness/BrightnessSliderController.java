@@ -31,7 +31,6 @@ import com.android.systemui.util.time.SystemClock;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BrightnessSliderController extends ViewController implements ToggleSlider {
     public final ActivityStarter mActivityStarter;
     public final SeekbarHapticPlugin mBrightnessSliderHapticPlugin;
@@ -45,7 +44,6 @@ public final class BrightnessSliderController extends ViewController implements 
     public boolean mTracking;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final ActivityStarter mActivityStarter;
         public final FalsingManager mFalsingManager;

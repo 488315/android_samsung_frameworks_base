@@ -21,7 +21,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.LongSupplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
     protected static final long MOBILE_RADIO_POWER_STATE_UPDATE_FREQ_MS = 600000;
     static final int[] NETWORK_TYPES = {0, 1, 2, 3, 4, 5, 6};

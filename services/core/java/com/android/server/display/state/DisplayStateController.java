@@ -9,7 +9,6 @@ import com.android.server.display.DisplayPowerProximityStateController;
 import com.android.server.display.WakelockController;
 import com.android.server.display.WakelockController$$ExternalSyntheticLambda0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayStateController {
     public final int mDisplayId;
     public final DisplayPowerProximityStateController mDisplayPowerProximityStateController;

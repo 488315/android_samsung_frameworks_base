@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.os.Message;
 import android.window.TaskSnapshot;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
     public TaskChangeNotifier mCallback;
     public AnonymousClass1 mHandler;

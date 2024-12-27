@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SessionController {
     public final MutableLiveData _mediaInfo;
     public final Context context;
@@ -29,7 +28,6 @@ public abstract class SessionController {
     public static final List LAUNCH_BLOCKED_LIST = CollectionsKt__CollectionsKt.listOf("com.google.android.videos", "com.samsung.android.video", "org.videolan.vlc", "com.gretech.gomplayerko", "com.mxtech.videoplayer.ad", "com.samsung.android.app.soundpicker", "com.baidu.searchbox", "com.samsung.android.bixby.agent", "com.uplus.onphone", "com.uplus.musicshow");
     public static final List RECENT_BLOCKED_LIST = CollectionsKt__CollectionsKt.listOf("com.google.android.youtube", "com.google.android.videos", "com.google.android.apps.youtube.music", "com.samsung.android.app.soundpicker", "com.baidu.searchbox", "vkr.co.millie.millieshelf", "mp3.music.download.player.music.search", "kr.co.kbs.kong");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

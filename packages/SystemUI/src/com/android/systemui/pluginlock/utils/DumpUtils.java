@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DumpUtils {
     private static final String DUMP_DIR = "/data/user_de/0/com.android.systemui/files/pluginlock/";
     private static final String DUMP_FILE = "dump.txt";
@@ -37,7 +36,6 @@ public class DumpUtils {
     };
     private String mDumpString = "";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class HandlerExecutor {
         private final Handler mHandler;
 

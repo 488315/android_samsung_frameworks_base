@@ -10,13 +10,11 @@ import android.os.ParcelFileDescriptor;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LogWritter {
     public CircularBuffer mCircularBuffer;
     public LooperThread mLooperThread;
     public Admin mObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LooperThread extends Thread {
         public SaveLogHandler mHandler;
 
@@ -30,7 +28,6 @@ public final class LogWritter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveLogHandler extends Handler {
         public Bundle data;
 

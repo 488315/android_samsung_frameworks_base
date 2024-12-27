@@ -4,10 +4,8 @@ import com.samsung.android.server.packagefeature.core.PackageFeatureManagerServi
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ScpmController {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ConsumerInfo {
         public final String mAppId;
         public final String mPackageName;

@@ -45,7 +45,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AmbientContextManagerService extends AbstractMasterSystemService {
     public static final Set DEFAULT_EVENT_SET = Sets.newHashSet(new Integer[] {1, 2, 3});
     public final Context mContext;
@@ -53,7 +52,6 @@ public final class AmbientContextManagerService extends AbstractMasterSystemServ
     public boolean mIsServiceEnabled;
     public boolean mIsWearableServiceEnabled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AmbientContextManagerInternal extends IAmbientContextManager.Stub {
         public AmbientContextManagerInternal() {}
 
@@ -456,7 +454,6 @@ public final class AmbientContextManagerService extends AbstractMasterSystemServ
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientRequest {
         public final IAmbientContextObserver mObserver;
         public final String mPackageName;

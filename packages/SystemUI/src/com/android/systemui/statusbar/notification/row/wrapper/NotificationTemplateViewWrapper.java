@@ -31,7 +31,6 @@ import com.android.systemui.statusbar.notification.row.HybridNotificationView;
 import com.android.systemui.statusbar.notification.row.wrapper.NotificationTemplateViewWrapper;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapper {
     public NotificationActionListLayout mActions;
     public View mActionsContainer;
@@ -49,7 +48,6 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
     public TextView mText;
     public TextView mTitle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class ActionPendingIntentCancellationHandler implements View.OnAttachStateChangeListener {
         public static UiOffloadThread sUiOffloadThread;
         public final AnonymousClass1 mCancelListener = new AnonymousClass1();
@@ -57,7 +55,6 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
         public final PendingIntent mPendingIntent;
         public final View mView;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.row.wrapper.NotificationTemplateViewWrapper$ActionPendingIntentCancellationHandler$1, reason: invalid class name */
         public final class AnonymousClass1 implements PendingIntent.CancelListener {
             public AnonymousClass1() {

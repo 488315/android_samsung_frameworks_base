@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import com.android.systemui.dreams.DreamOverlayStateController;
 import com.android.systemui.dreams.DreamOverlayStateController$$ExternalSyntheticLambda3;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ComplicationCollectionLiveData extends LiveData {
     public final DreamOverlayStateController mDreamOverlayStateController;
     public final DreamOverlayStateController.Callback mStateControllerCallback = new DreamOverlayStateController.Callback() { // from class: com.android.systemui.complication.ComplicationCollectionLiveData.1

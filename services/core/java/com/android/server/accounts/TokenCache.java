@@ -11,11 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TokenCache {
     public TokenLruCache mCachedTokens;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Key {
         public final Account account;
         public final String packageName;
@@ -47,12 +45,10 @@ public final class TokenCache {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TokenLruCache extends LruCache {
         public HashMap mAccountEvictors;
         public HashMap mTokenEvictors;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Evictor {
             public final List mKeys = new ArrayList();
 
@@ -90,7 +86,6 @@ public final class TokenCache {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Value {
         public final long expiryEpochMillis;
         public final String token;

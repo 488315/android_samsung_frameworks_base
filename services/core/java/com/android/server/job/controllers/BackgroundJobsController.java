@@ -31,7 +31,6 @@ import com.android.server.pm.PackageManagerService;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackgroundJobsController extends StateController {
     public static final boolean DEBUG;
     public final ActivityManagerInternal mActivityManagerInternal;
@@ -42,7 +41,6 @@ public final class BackgroundJobsController extends StateController {
     public final SparseArrayMap mPackageStoppedState;
     public final UpdateJobFunctor mUpdateJobFunctor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateJobFunctor implements Consumer {
         public int mActiveState;
         public final ArraySet mChangedJobs = new ArraySet();

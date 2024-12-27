@@ -16,13 +16,11 @@ import java.util.TreeSet;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ColorUpdateLogger implements Dumpable {
     public static final Companion Companion = new Companion(null);
     public static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
     public final List frames = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -32,7 +30,6 @@ public final class ColorUpdateLogger implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Frame {
         public final List events;
         public final long startTime;
@@ -170,7 +167,6 @@ public final class ColorUpdateLogger implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Event {
         public final String extraValue;
         public final String notificationKey;

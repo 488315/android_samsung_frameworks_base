@@ -11,7 +11,6 @@ import android.view.DisplayInfo;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiWindowFoldController implements IController {
     public final ActivityTaskManagerService mAtm;
     public final WindowManagerGlobalLock mGlobalLock;
@@ -20,7 +19,6 @@ public final class MultiWindowFoldController implements IController {
     public final Rect[] mMainDisplayBounds = {new Rect(), new Rect()};
     public final Rect[] mCoverDisplayBounds = {new Rect(), new Rect()};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);

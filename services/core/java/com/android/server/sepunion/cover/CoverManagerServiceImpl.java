@@ -52,7 +52,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverManagerServiceImpl
         implements CoverServiceManager.OnCoverStateProvider,
                 StateNotifier.LcdOffDisabledByAppListener {
@@ -104,7 +103,6 @@ public final class CoverManagerServiceImpl
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.sepunion.cover.CoverManagerServiceImpl$4, reason: invalid class name */
     public final class AnonymousClass4 implements Runnable {
         @Override // java.lang.Runnable
@@ -114,7 +112,6 @@ public final class CoverManagerServiceImpl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverManagerHandler extends Handler {
         public CoverManagerHandler(Looper looper) {
             super(looper, null, true);

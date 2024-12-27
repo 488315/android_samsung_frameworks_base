@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCategoryListParserWithScpm extends AppCategoryListParser {
     public static final String FILE_PATH;
     public static final Pattern NAME_PATTERN;

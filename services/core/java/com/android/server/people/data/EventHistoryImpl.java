@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EventHistoryImpl implements EventHistory {
     public final EventsProtoDiskReadWriter mEventIndexesProtoDiskReadWriter;
     public final EventsProtoDiskReadWriter mEventsProtoDiskReadWriter;
@@ -31,7 +30,6 @@ public final class EventHistoryImpl implements EventHistory {
     public final SparseArray mEventIndexArray = new SparseArray();
     public final EventList mRecentEvents = new EventList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventsProtoDiskReadWriter extends AbstractProtoDiskReadWriter {
         public final /* synthetic */ int $r8$classId;
 
@@ -67,7 +65,6 @@ public final class EventHistoryImpl implements EventHistory {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
     public EventHistoryImpl(

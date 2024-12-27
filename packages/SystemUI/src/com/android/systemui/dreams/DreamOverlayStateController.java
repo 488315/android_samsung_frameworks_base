@@ -21,7 +21,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DreamOverlayStateController implements CallbackController {
     public final ArrayList mCallbacks = new ArrayList();
     public final Collection mComplications = new HashSet();
@@ -154,7 +153,6 @@ public final class DreamOverlayStateController implements CallbackController {
         this.mExecutor.execute(new DreamOverlayStateController$$ExternalSyntheticLambda3(this, callback, 1));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         default void onAvailableComplicationTypesChanged() {
         }

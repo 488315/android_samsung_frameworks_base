@@ -9,7 +9,6 @@ import android.provider.Settings;
 import android.util.Log;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ScreenshotResetReceiver extends BroadcastReceiver {
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {

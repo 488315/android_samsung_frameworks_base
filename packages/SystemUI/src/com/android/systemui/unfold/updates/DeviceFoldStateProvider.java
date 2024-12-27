@@ -30,7 +30,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceFoldStateProvider implements FoldStateProvider {
     public final CurrentActivityTypeProvider activityTypeProvider;
     public final Context context;
@@ -67,7 +66,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
     };
     public boolean isUnfoldHandled = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldRotationListener implements RotationChangeProvider.RotationListener {
         public FoldRotationListener() {
         }
@@ -82,7 +80,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldStateListener implements FoldProvider.FoldCallback {
         public FoldStateListener() {
         }
@@ -112,7 +109,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HingeAngleListener implements Consumer {
         public HingeAngleListener() {
         }
@@ -185,7 +181,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ScreenStatusListener {
         public ScreenStatusListener() {
         }

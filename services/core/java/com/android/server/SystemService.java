@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 public abstract class SystemService {
     protected static final boolean DEBUG_USER = false;
@@ -32,11 +31,9 @@ public abstract class SystemService {
     private final Context mContext;
     private final List mDependencies;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
     public @interface BootPhase {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
     public final class TargetUser {
         public final boolean mFull;
@@ -96,14 +93,12 @@ public abstract class SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserCompletedEventType {
         public static final int EVENT_TYPE_USER_STARTING = 1;
         public static final int EVENT_TYPE_USER_SWITCHING = 4;
         public static final int EVENT_TYPE_USER_UNLOCKED = 2;
         public final int mEventType;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         @Retention(RetentionPolicy.SOURCE)
         public @interface EventTypesFlag {}
 

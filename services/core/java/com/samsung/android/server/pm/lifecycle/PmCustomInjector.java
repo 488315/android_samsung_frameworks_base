@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PmCustomInjector {
     public final Singleton mAppCategoryFilterProducer;
     public final Singleton mAsecInstallHelperProducer;
@@ -49,14 +48,12 @@ public final class PmCustomInjector {
     public final Singleton mUnknownSourceAppManagerProducer;
     public final Singleton mUserManagerHandlerProducer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Producer {
         Object produce(
                 PackageManagerService packageManagerService,
                 PackageManagerServiceInjector packageManagerServiceInjector);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Singleton {
         public volatile Object mInstance = null;
         public final Producer mProducer;

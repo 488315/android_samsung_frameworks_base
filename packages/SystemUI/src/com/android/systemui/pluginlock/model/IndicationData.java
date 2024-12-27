@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class IndicationData {
 
     @SerializedName("help_text")
@@ -11,7 +10,6 @@ public class IndicationData {
     @SerializedName("lock_icon")
     private LockIconData mLockIconData;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class HelpTextData {
 
         @SerializedName("visibility")
@@ -83,7 +81,6 @@ public class IndicationData {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class LockIconData {
 
         @SerializedName("visibility")

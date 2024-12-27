@@ -8,7 +8,6 @@ import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSScopeModule_Companion_ProvidesPanelQSPanelHostFactory implements Provider {
     public final javax.inject.Provider hostProvider;
     public final javax.inject.Provider metricsLoggerProvider;

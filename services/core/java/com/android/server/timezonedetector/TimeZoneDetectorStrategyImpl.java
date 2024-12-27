@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TimeZoneDetectorStrategyImpl implements TimeZoneDetectorStrategy {
     public static final int TELEPHONY_SCORE_HIGH = 3;
     public static final int TELEPHONY_SCORE_HIGHEST = 4;
@@ -49,7 +48,6 @@ public final class TimeZoneDetectorStrategyImpl implements TimeZoneDetectorStrat
     public final ReferenceWithHistory mLatestManualSuggestion = new ReferenceWithHistory(10);
     public final List mStateChangeListeners = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Environment {
         void addDebugLogEntry(String str);
 
@@ -68,7 +66,6 @@ public final class TimeZoneDetectorStrategyImpl implements TimeZoneDetectorStrat
         void setDeviceTimeZoneAndConfidence(int i, String str, String str2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class QualifiedTelephonyTimeZoneSuggestion {
         public final int score;
         public final TelephonyTimeZoneSuggestion suggestion;

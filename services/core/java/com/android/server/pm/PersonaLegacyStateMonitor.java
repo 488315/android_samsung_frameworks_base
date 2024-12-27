@@ -20,7 +20,6 @@ import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersonaLegacyStateMonitor {
     public final Context mContext;
     public final EnterpriseDeviceManager mEdm;
@@ -139,7 +138,6 @@ public final class PersonaLegacyStateMonitor {
             };
     public final RemoteCallbackList mObserverList = new RemoteCallbackList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.PersonaLegacyStateMonitor$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[]

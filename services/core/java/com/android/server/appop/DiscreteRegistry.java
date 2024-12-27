@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DiscreteRegistry {
     public static int sDiscreteFlags;
     public static long sDiscreteHistoryCutoff;
@@ -50,14 +49,12 @@ public final class DiscreteRegistry {
     public static final long DEFAULT_DISCRETE_HISTORY_QUANTIZATION =
             Duration.ofMinutes(1).toMillis();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttributionChain {
         public ArrayList mChain;
         public Set mExemptPkgs;
         public OpEvent mLastVisibleEvent;
         public OpEvent mStartEvent;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class OpEvent {
             public String mAttributionTag;
             public int mOpCode;
@@ -104,7 +101,6 @@ public final class DiscreteRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DiscreteOp {
         public ArrayMap mAttributedOps = new ArrayMap();
         public final /* synthetic */ DiscreteRegistry this$0;
@@ -122,7 +118,6 @@ public final class DiscreteRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DiscreteOpEvent {
         public final int mAttributionChainId;
         public final int mAttributionFlags;
@@ -141,7 +136,6 @@ public final class DiscreteRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DiscreteOps {
         public int mChainIdOffset;
         public int mLargestChainId;
@@ -741,7 +735,6 @@ public final class DiscreteRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DiscretePackageOps {
         public final ArrayMap mPackageOps = new ArrayMap();
 
@@ -758,7 +751,6 @@ public final class DiscreteRegistry {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DiscreteUidOps {
         public ArrayMap mPackages = new ArrayMap();
 

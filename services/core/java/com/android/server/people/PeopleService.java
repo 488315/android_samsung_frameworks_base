@@ -69,14 +69,12 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PeopleService extends SystemService {
     public ConversationListenerHelper mLazyConversationListenerHelper;
     public DataManager mLazyDataManager;
     public PackageManagerInternal mPackageManagerInternal;
     final IBinder mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConversationListenerHelper {
         final RemoteCallbackList mListeners = new RemoteCallbackList();
 
@@ -113,7 +111,6 @@ public final class PeopleService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerKey {
         public final String mPackageName;
         public final String mShortcutId;
@@ -144,7 +141,6 @@ public final class PeopleService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LocalService extends PeopleServiceInternal {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Map mSessions = new ArrayMap();

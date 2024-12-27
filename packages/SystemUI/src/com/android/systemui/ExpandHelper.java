@@ -27,7 +27,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ExpandHelper implements Gefingerpoken {
     public static final AnonymousClass1 VIEW_SCALER_HEIGHT_PROPERTY = new FloatProperty("ViewScalerHeight") { // from class: com.android.systemui.ExpandHelper.1
         @Override // android.util.Property
@@ -74,11 +73,9 @@ public final class ExpandHelper implements Gefingerpoken {
     public int mExpansionStyle = 0;
     public boolean mEnabled = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewScaler {
         public ExpandableView mView;
 

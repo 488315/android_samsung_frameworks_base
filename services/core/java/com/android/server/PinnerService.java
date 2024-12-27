@@ -68,7 +68,6 @@ import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PinnerService extends SystemService {
     public final ActivityManagerInternal mAmInternal;
     public final ActivityTaskManagerInternal mAtmInternal;
@@ -96,7 +95,6 @@ public final class PinnerService extends SystemService {
     public static final long DEFAULT_ANON_SIZE =
             SystemProperties.getLong("pinner.pin_shared_anon_size", 0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IPinnerService.Stub {
         public BinderService() {}
 
@@ -279,21 +277,17 @@ public final class PinnerService extends SystemService {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinRange {
         public int length;
         public int start;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PinRangeSource {
         public abstract boolean read(PinRange pinRange);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinRangeSourceStatic extends PinRangeSource {
         public boolean mDone;
 
@@ -307,7 +301,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinRangeSourceStream extends PinRangeSource {
         public boolean mDone = false;
         public final DataInputStream mStream;
@@ -330,7 +323,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnedApp {
         public boolean active;
         public final ArrayList mFiles = new ArrayList();
@@ -343,7 +335,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnedFile implements AutoCloseable {
         public final int bytesPinned;
         public final String fileName;
@@ -381,7 +372,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnedFileStats {
         public final String filename;
         public final int sizeKb;
@@ -395,7 +385,6 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnerHandler extends Handler {
         public PinnerHandler(Looper looper) {
             super(looper, null, true);

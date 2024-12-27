@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageFeatureUserChangePersister {
     public static final String ASPECT_RATIO_DIRECTORY;
     public static final String EMBED_ACTIVITY_DIRECTORY;
@@ -35,7 +34,6 @@ public final class PackageFeatureUserChangePersister {
     public final Map mSaveRequestFlagsWithUserId;
     public boolean mThreadStarted;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -69,13 +67,11 @@ public final class PackageFeatureUserChangePersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final PackageFeatureUserChangePersister sPackageFeatureUserChangePersister =
                 new PackageFeatureUserChangePersister();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LazyThread extends Thread {
         public LazyThread() {
             super("PackageFeatureUserChangePersister");

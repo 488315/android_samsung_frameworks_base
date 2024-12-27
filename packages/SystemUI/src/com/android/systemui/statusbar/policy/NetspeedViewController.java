@@ -39,7 +39,6 @@ import com.sec.ims.IMSParameter;
 import java.util.Observable;
 import java.util.Observer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NetspeedViewController extends ViewController implements ConfigurationController.ConfigurationListener {
     public static String sActiveInterface = null;
     public static boolean sNetspeedSwitch = false;
@@ -60,7 +59,6 @@ public final class NetspeedViewController extends ViewController implements Conf
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final AnonymousClass2 mWakefulnessObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.policy.NetspeedViewController$3, reason: invalid class name */
     class AnonymousClass3 implements UserTracker.Callback {
         public AnonymousClass3() {
@@ -73,7 +71,6 @@ public final class NetspeedViewController extends ViewController implements Conf
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NetworkSpeedManager extends Observable {
         public static volatile NetworkSpeedManager sInstance;
         public final AnonymousClass1 mHandler = new Handler() { // from class: com.android.systemui.statusbar.policy.NetspeedViewController.NetworkSpeedManager.1
@@ -156,7 +153,6 @@ public final class NetspeedViewController extends ViewController implements Conf
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NetworkStatsThread extends Thread {
         public /* synthetic */ NetworkStatsThread(NetspeedViewController netspeedViewController, int i) {
             this();
@@ -192,7 +188,6 @@ public final class NetspeedViewController extends ViewController implements Conf
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingObserver implements SettingsHelper.OnChangedCallback {
         public final Uri mSettingsValue;
 

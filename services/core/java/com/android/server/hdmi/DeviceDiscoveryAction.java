@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
     public final DeviceDiscoveryCallback mCallback;
     public final ArrayList mDevices;
@@ -23,12 +22,10 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
     public int mProcessedDeviceCount;
     public int mTimeoutRetry;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DeviceDiscoveryCallback {
         void onDeviceDiscoveryDone(List list);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceInfo {
         public final int mLogicalAddress;
         public int mPhysicalAddress = GnssNative.GNSS_AIDING_TYPE_ALL;

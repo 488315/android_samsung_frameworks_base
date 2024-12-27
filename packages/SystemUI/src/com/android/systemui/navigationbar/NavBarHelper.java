@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavBarHelper implements AccessibilityManager.AccessibilityServicesStateChangeListener, AccessibilityButtonModeObserver.ModeChangedListener, AccessibilityButtonTargetsObserver.TargetsChangedListener, OverviewProxyService.OverviewProxyListener, NavigationModeController.ModeChangedListener, Dumpable, CommandQueue.Callbacks, ConfigurationController.ConfigurationListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass3 dispatchRotation;
@@ -102,7 +101,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     public final SparseIntArray mWindowStateDisplays;
     public final IWindowManager mWm;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.NavBarHelper$2, reason: invalid class name */
     public final class AnonymousClass2 extends IWallpaperVisibilityListener.Stub {
         public AnonymousClass2() {
@@ -128,7 +126,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.NavBarHelper$4, reason: invalid class name */
     public final class AnonymousClass4 extends IRotationWatcher.Stub {
         public AnonymousClass4() {
@@ -585,7 +582,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         systemActions.mA11yManager.registerSystemAction(systemActions.createRemoteAction(i2, str), i);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CurrentSysuiState {
         public final int mWindowState;
         public final int mWindowStateDisplayId;
@@ -601,7 +597,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NavbarTaskbarStateUpdater {
         void updateAccessibilityServicesState();
 

@@ -13,7 +13,6 @@ import com.samsung.android.knoxguard.service.utils.Constants;
 
 import java.util.Comparator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationComparator implements Comparator {
     public final Context mContext;
     public String mDefaultPhoneApp;
@@ -21,7 +20,6 @@ public final class NotificationComparator implements Comparator {
     public final AnonymousClass1 mPhoneAppBroadcastReceiver;
     public final Object mStateLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.NotificationComparator$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {}

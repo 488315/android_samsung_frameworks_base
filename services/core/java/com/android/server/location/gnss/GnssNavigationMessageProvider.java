@@ -13,13 +13,11 @@ import com.android.server.location.injector.SystemAppOpsHelper;
 
 import java.util.Collection;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssNavigationMessageProvider extends GnssListenerMultiplexer
         implements GnssNative.BaseCallbacks, GnssNative.NavigationMessageCallbacks {
     public final SystemAppOpsHelper mAppOpsHelper;
     public final GnssNative mGnssNative;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssNavigationMessageListenerRegistration
             extends GnssListenerMultiplexer.GnssListenerRegistration {
         @Override // com.android.server.location.gnss.GnssListenerMultiplexer.GnssListenerRegistration, com.android.server.location.listeners.BinderListenerRegistration, com.android.server.location.listeners.RemovableListenerRegistration

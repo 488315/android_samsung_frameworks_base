@@ -11,11 +11,9 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import java.util.Base64;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BlobStoreManagerShellCommand extends ShellCommand {
     public final BlobStoreManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ParsedArgs {
         public long blobId;
         public byte[] digest;

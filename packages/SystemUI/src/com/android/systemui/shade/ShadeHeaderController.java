@@ -94,7 +94,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShadeHeaderController extends ViewController implements Dumpable, LockscreenShadeTransitionController.Callback {
     public final ActivityStarter activityStarter;
     public final BatteryMeterView batteryIcon;
@@ -144,7 +143,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
     public static final int LARGE_SCREEN_HEADER_CONSTRAINT = R.id.large_screen_header_constraint;
     public static final Intent DEFAULT_CLOCK_INTENT = new Intent("android.intent.action.SHOW_ALARMS");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -172,7 +170,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomizerAnimationListener extends AnimatorListenerAdapter {
         public final boolean enteringCustomizing;
 

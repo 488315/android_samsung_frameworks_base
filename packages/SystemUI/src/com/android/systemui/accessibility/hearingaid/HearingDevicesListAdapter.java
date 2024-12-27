@@ -20,12 +20,10 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import java.util.List;
 import kotlin.Pair;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HearingDevicesListAdapter extends RecyclerView.Adapter {
     public final HearingDeviceItemCallback mCallback;
     public final List mItemList;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DeviceItemViewHolder extends RecyclerView.ViewHolder {
         public final View mContainer;
         public final Context mContext;
@@ -45,7 +43,6 @@ public final class HearingDevicesListAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface HearingDeviceItemCallback {
     }
 

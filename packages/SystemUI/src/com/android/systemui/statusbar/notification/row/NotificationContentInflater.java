@@ -71,7 +71,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationContentInflater implements NotificationRowContentBinder {
     public final ConversationNotificationProcessor mConversationProcessor;
     public final HeadsUpStyleProvider mHeadsUpStyleProvider;
@@ -84,14 +83,12 @@ public class NotificationContentInflater implements NotificationRowContentBinder
     public final NotifRemoteViewCache mRemoteViewCache;
     public final SmartReplyStateInflater mSmartReplyStateInflater;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     abstract class ApplyCallback {
         public abstract RemoteViews getRemoteView();
 
         public abstract void setResultView(View view);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AsyncInflationTask extends AsyncTask implements NotificationRowContentBinder.InflationCallback, InflationTask {
         public final NotificationRowContentBinder.InflationCallback mCallback;
         public CancellationSignal mCancellationSignal;
@@ -114,7 +111,6 @@ public class NotificationContentInflater implements NotificationRowContentBinder
         public final boolean mUsesIncreasedHeadsUpHeight;
         public final boolean mUsesIncreasedHeight;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class RtlEnabledContext extends ContextWrapper {
             public /* synthetic */ RtlEnabledContext(Context context, int i) {
                 this(context);
@@ -301,7 +297,6 @@ public class NotificationContentInflater implements NotificationRowContentBinder
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class InflationProgress {
         public InflatedSmartReplyViewHolder expandedInflatedSmartReplies;
         public InflatedSmartReplyViewHolder headsUpInflatedSmartReplies;

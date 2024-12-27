@@ -6,14 +6,12 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface INetdUnsolicitedEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$INetdUnsolicitedEventListener".replace('$', '.');
     public static final String HASH = "2be6ff6fb01645cdddb3bb60f6de5727e5733267";
     public static final int VERSION = 15;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetdUnsolicitedEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -69,7 +67,6 @@ public interface INetdUnsolicitedEventListener extends IInterface {
         public void onStrictCleartextDetected(int i, String str) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements INetdUnsolicitedEventListener {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -85,7 +82,6 @@ public interface INetdUnsolicitedEventListener extends IInterface {
         static final int TRANSACTION_onRouteChanged = 10;
         static final int TRANSACTION_onStrictCleartextDetected = 11;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements INetdUnsolicitedEventListener {
             public String mCachedHash;
             public int mCachedVersion;

@@ -11,7 +11,6 @@ import com.android.server.compat.PlatformCompat;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ComponentAliasResolver {
     public final Context mContext;
     public boolean mEnabledByDeviceConfig;
@@ -21,7 +20,6 @@ public final class ComponentAliasResolver {
     public final Object mLock = new Object();
     public final ArrayMap mFromTo = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Resolution {
         public final Object resolved;
         public final Object source;

@@ -16,13 +16,11 @@ import com.samsung.android.knox.accounts.IExchangeAccountPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccountsReceiver {
     public static final Map mSmimeCerticateList = new HashMap();
     public Context mContext;
     public AnonymousClass1 mReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SMIMEThread extends Thread {
         public long mAccId;
         public AccountSMIMECertificate mSMIMECertificate;

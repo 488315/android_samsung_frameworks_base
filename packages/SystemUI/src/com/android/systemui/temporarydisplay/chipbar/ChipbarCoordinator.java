@@ -66,7 +66,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ChipbarCoordinator extends TemporaryViewDisplayController {
     public static final VibrationAttributes VIBRATION_ATTRIBUTES;
     public final ChipbarAnimator chipbarAnimator;
@@ -78,7 +77,6 @@ public final class ChipbarCoordinator extends TemporaryViewDisplayController {
     public final ViewUtil viewUtil;
     public final WindowManager.LayoutParams windowLayoutParams;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -88,7 +86,6 @@ public final class ChipbarCoordinator extends TemporaryViewDisplayController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LoadingDetails {
         public final ObjectAnimator animator;
         public final View loadingView;

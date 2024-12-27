@@ -70,7 +70,6 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CameraServiceWorker extends SystemService
         implements Handler.Callback, IBinder.DeathRecipient {
     public static final boolean DEBUG;
@@ -99,7 +98,6 @@ public final class CameraServiceWorker extends SystemService
     public final ShakeEventListener mShakeEventListener;
     public final VtCameraProviderObserver mVtCameraProviderObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.camera.CameraServiceWorker$3, reason: invalid class name */
     public final class AnonymousClass3 extends ICameraServiceWorker.Stub {
         public AnonymousClass3() {}
@@ -528,7 +526,6 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BootCompleteReceiver extends BroadcastReceiver {
         public BootCompleteReceiver() {
             CameraServiceWorker.this.mContext.registerReceiver(
@@ -668,7 +665,6 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CPRCommandReceiver extends BroadcastReceiver {
         public final String ACTION_RESET_CAMERAPROVIDER = "com.samsung.cmh.action.cameraprovider";
 
@@ -691,17 +687,14 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraUsageEvent {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceInjectorRequirementChecker extends BroadcastReceiver {
         public boolean mDexMode = false;
         public boolean mExternalCameraPresent = false;
         public boolean mRequirementMet = false;
         public final ArrayMap mExternalDeviceMap = new ArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.samsung.android.camera.CameraServiceWorker$DeviceInjectorRequirementChecker$1, reason: invalid class name */
         public final class AnonymousClass1 extends CameraManager.AvailabilityCallback {
             public AnonymousClass1() {}
@@ -843,7 +836,6 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateListener implements DeviceStateManager.DeviceStateCallback {
         public DeviceStateListener() {}
 
@@ -863,7 +855,6 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayWindowListener extends IDisplayWindowListener.Stub {
         public DisplayWindowListener() {}
 
@@ -893,7 +884,6 @@ public final class CameraServiceWorker extends SystemService
         public final void onKeepClearAreasChanged(int i, List list, List list2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskInfo extends Record {
         public final int displayId;
         public final int frontTaskId;
@@ -970,7 +960,6 @@ public final class CameraServiceWorker extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WorkerOrientationListener extends OrientationEventListener {
         public int mLatestOrientation;
 

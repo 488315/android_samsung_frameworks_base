@@ -14,7 +14,6 @@ import com.android.systemui.subscreen.SubScreenManager;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DesktopManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardPluginControllerImpl {
     public final Context mContext;
     public final DesktopManager mDesktopManager;
@@ -31,7 +30,6 @@ public final class KeyguardPluginControllerImpl {
     public final SubScreenManager mSubScreenManager;
     public final ViewMediatorCallback mViewMediatorCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardPluginControllerImpl$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -54,7 +52,6 @@ public final class KeyguardPluginControllerImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final Context mContext;
         public final DesktopManager mDesktopManager;

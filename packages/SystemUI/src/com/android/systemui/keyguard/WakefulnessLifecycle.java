@@ -11,7 +11,6 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.util.time.SystemClock;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WakefulnessLifecycle extends SecLifecycle implements Dumpable {
     public final Context mContext;
     public final DisplayMetrics mDisplayMetrics;
@@ -47,7 +46,6 @@ public final class WakefulnessLifecycle extends SecLifecycle implements Dumpable
         return this.mWakefulness;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Observer {
         default void onFinishedGoingToSleep() {
         }

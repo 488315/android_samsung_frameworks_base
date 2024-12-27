@@ -114,7 +114,6 @@ import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VoiceInteractionManagerService extends SystemService {
     public final ActivityManagerInternal mAmInternal;
     public final ActivityTaskManagerInternal mAtmInternal;
@@ -133,7 +132,6 @@ public final class VoiceInteractionManagerService extends SystemService {
     public final RemoteCallbackList mVoiceInteractionSessionListeners;
     public final WindowManagerInternal mWmInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends VoiceInteractionManagerInternal {
         public LocalService() {}
 
@@ -399,7 +397,6 @@ public final class VoiceInteractionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VoiceInteractionManagerServiceStub
             extends IVoiceInteractionManagerService.Stub {
         public final boolean IS_HDS_REQUIRED;
@@ -701,7 +698,6 @@ public final class VoiceInteractionManagerService extends SystemService {
                     }
                 };
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RoleObserver implements OnRoleHoldersChangedListener {
             public final PackageManager mPm;
             public final RoleManager mRm;
@@ -832,7 +828,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class SettingsObserver extends ContentObserver {
             public SettingsObserver(Handler handler) {
                 super(handler);
@@ -855,7 +850,6 @@ public final class VoiceInteractionManagerService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class SoundTriggerSession extends IVoiceInteractionSoundTriggerSession.Stub {
             public final SoundTriggerService.LocalSoundTriggerService.SessionImpl mSession;
             public IHotwordRecognitionStatusCallback mSessionExternalCallback;

@@ -42,7 +42,6 @@ import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.util.DeviceType;
 import com.sec.ims.presence.ServiceTuple;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyButtonView extends ImageView implements ButtonInterface {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AudioManager mAudioManager;
@@ -70,7 +69,6 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     public final UiEventLogger mUiEventLogger;
     public final VibratorHelper mVibratorHelper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum NavBarButtonEvent implements UiEventLogger.UiEventEnum {
         NAVBAR_HOME_BUTTON_TAP(533),
         NAVBAR_BACK_BUTTON_TAP(534),

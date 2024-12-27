@@ -130,12 +130,10 @@ import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LauncherAppsService extends SystemService {
     public static final Set WM_TRACE_FILE_PERMISSIONS = Set.of(PosixFilePermission.OWNER_WRITE, PosixFilePermission.GROUP_READ, PosixFilePermission.OTHERS_READ, PosixFilePermission.OWNER_READ);
     public final LauncherAppsImpl mLauncherAppsImpl;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastCookie {
         public final int callingPid;
         public final int callingUid;
@@ -151,7 +149,6 @@ public final class LauncherAppsService extends SystemService {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class LauncherAppsImpl extends ILauncherApps.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final ActivityManagerInternal mActivityManagerInternal;
@@ -178,7 +175,6 @@ public final class LauncherAppsService extends SystemService {
         public final PackageCallbackList mListeners = new PackageCallbackList();
         public final PackageRemovedListener mPackageRemovedListener = new PackageRemovedListener();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LauncherAppsShellCommand extends ShellCommand {
             public LauncherAppsShellCommand() {
             }
@@ -238,7 +234,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LocalService {
             public LocalService() {
             }
@@ -250,7 +245,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class MyPackageMonitor extends PackageMonitor implements ShortcutServiceInternal.ShortcutChangeListener {
             public MyPackageMonitor() {
             }
@@ -538,7 +532,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PackageCallbackList extends RemoteCallbackList {
             public PackageCallbackList() {
             }
@@ -565,7 +558,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PackageLoadingProgressCallback {
             public final PackageManagerInternal$InstalledLoadingProgressCallback$LoadingProgressCallbackBinder mBinder;
             public final Executor mExecutor;
@@ -608,7 +600,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PackageRemovedListener extends BroadcastReceiver {
             public PackageRemovedListener() {
             }
@@ -673,7 +664,6 @@ public final class LauncherAppsService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ShortcutChangeHandler implements LauncherApps.ShortcutChangeCallback {
             public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
             public final UserManagerInternal mUserManagerInternal;

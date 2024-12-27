@@ -27,7 +27,6 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WirelessChargerAuthenticator extends LocalAuthenticator
         implements SAccessoryManager.AuthenticationResultCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -52,7 +51,6 @@ public final class WirelessChargerAuthenticator extends LocalAuthenticator
     public final LinkedList mAuthenticationHistory = new LinkedList();
     public AuthenticationSession mCurrentSession = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.wirelesscharger.WirelessChargerAuthenticator$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -99,7 +97,6 @@ public final class WirelessChargerAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WirelessChargerAuthHandler extends Handler {
         public WirelessChargerAuthHandler(Looper looper) {
             super(looper, null, true);

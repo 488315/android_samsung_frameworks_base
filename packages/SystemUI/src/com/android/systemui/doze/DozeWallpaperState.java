@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.phone.BiometricUnlockController;
 import com.android.systemui.statusbar.phone.DozeParameters;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeWallpaperState implements DozeMachine.Part {
     public static final boolean DEBUG = Log.isLoggable("DozeWallpaperState", 3);
     public final BiometricUnlockController mBiometricUnlockController;
@@ -17,7 +16,6 @@ public final class DozeWallpaperState implements DozeMachine.Part {
     public boolean mIsAmbientMode;
     public final IWallpaperManager mWallpaperManagerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.DozeWallpaperState$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;

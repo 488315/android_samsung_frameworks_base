@@ -40,7 +40,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.settings.SecureSettings;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WindowMagnificationSettings implements MagnificationGestureDetector.OnGestureListener {
     public final boolean mAllowDiagonalScrolling;
     public SwitchCompat mAllowDiagonalScrollingSwitch;
@@ -171,7 +170,6 @@ public final class WindowMagnificationSettings implements MagnificationGestureDe
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.WindowMagnificationSettings$1, reason: invalid class name */
     public final class AnonymousClass1 extends ContentObserver {
         public AnonymousClass1(Handler handler) {
@@ -184,7 +182,6 @@ public final class WindowMagnificationSettings implements MagnificationGestureDe
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SliderA11yDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ SliderA11yDelegate(WindowMagnificationSettings windowMagnificationSettings, int i) {
             this(windowMagnificationSettings);
@@ -200,7 +197,6 @@ public final class WindowMagnificationSettings implements MagnificationGestureDe
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ZoomSeekbarChangeListener implements SecSeekBarWithIconButtonsView.OnSeekBarWithIconButtonsChangeListener {
         public /* synthetic */ ZoomSeekbarChangeListener(WindowMagnificationSettings windowMagnificationSettings, int i) {
             this();

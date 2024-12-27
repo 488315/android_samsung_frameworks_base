@@ -40,7 +40,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class JobStore {
     static final int INVALID_UID = -2;
     static final String JOB_FILE_SPLIT_PREFIX = "jobs_";
@@ -73,7 +72,6 @@ public final class JobStore {
     public int mCurrentJobSetSize = 0;
     public int mScheduledJob30MinHighWaterMark = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobStore$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {}
@@ -91,13 +89,11 @@ public final class JobStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobStore$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final SparseArray mJobFiles = new SparseArray();
         public final CopyConsumer mPersistedJobCopier = new CopyConsumer();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.job.JobStore$2$CopyConsumer */
         public final class CopyConsumer implements Consumer {
             public boolean mCopyAllJobs;
@@ -450,7 +446,6 @@ public final class JobStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobSet {
         final SparseArray mJobs = new SparseArray();
         final SparseArray mJobsPerSourceUid = new SparseArray();
@@ -562,7 +557,6 @@ public final class JobStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadJobMapFromDiskRunnable implements Runnable {
         public final JobSet jobSet;
         public final CountDownLatch mCompletionLatch;

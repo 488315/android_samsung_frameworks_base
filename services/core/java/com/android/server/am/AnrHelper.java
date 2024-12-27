@@ -16,7 +16,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AnrHelper {
     public static final long CONSECUTIVE_ANR_TIME_MS;
     public static final long EXPIRED_REPORT_TIME_MS = TimeUnit.SECONDS.toMillis(10);
@@ -32,7 +31,6 @@ public final class AnrHelper {
     public final ActivityManagerService mService;
     public final Set mTempDumpedPids;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnrConsumerThread extends Thread {
         public AnrConsumerThread() {
             super("AnrConsumer");
@@ -111,7 +109,6 @@ public final class AnrHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnrRecord {
         public final boolean mAboveSystem;
         public final String mActivityShortComponentName;

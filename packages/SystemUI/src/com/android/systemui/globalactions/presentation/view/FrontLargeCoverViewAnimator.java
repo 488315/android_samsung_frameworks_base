@@ -27,7 +27,6 @@ import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FrontLargeCoverViewAnimator implements GlobalActionsAnimator {
     public FrontLargeCoverContentView.AnonymousClass3 mCallback;
     public final ConditionChecker mConditionChecker;

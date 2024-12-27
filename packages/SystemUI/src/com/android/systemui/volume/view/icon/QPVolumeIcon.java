@@ -20,7 +20,6 @@ import com.android.systemui.volume.util.ColorUtils;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QPVolumeIcon extends FrameLayout {
     public BluetoothDeviceManager bluetoothDeviceManager;
     public int currentMediaIconState;
@@ -35,7 +34,6 @@ public final class QPVolumeIcon extends FrameLayout {
     public final QPVolumeIconMotion volumeIconMotion;
     public VolumeManager volumeManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

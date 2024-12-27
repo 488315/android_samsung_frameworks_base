@@ -20,7 +20,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PhoneCallStateHandler {
     public final DeviceStateHandler mCallback;
     public final ExecutorService mExecutor;
@@ -30,7 +29,6 @@ public final class PhoneCallStateHandler {
     public final List mListenerList = new ArrayList();
     public final AtomicBoolean mIsPhoneCallOngoing = new AtomicBoolean(false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyCallStateListener extends TelephonyCallback implements TelephonyCallback.CallStateListener {
         public final TelephonyManager mTelephonyManagerForSubId;
 

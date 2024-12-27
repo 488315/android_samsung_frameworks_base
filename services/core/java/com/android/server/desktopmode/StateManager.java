@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StateManager implements IStateManager {
     public final Handler mHandler;
     public volatile InternalState mInternalState;
@@ -23,7 +22,6 @@ public final class StateManager implements IStateManager {
     public final Object mLock = new Object();
     public final CopyOnWriteArrayList mStateListeners = new CopyOnWriteArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InternalState {
         public DisplayInfo mConnectedDisplay;
         public CoverState mCoverState;
@@ -179,7 +177,6 @@ public final class StateManager implements IStateManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class StateListener {
         public void onBootCompleted() {}
 

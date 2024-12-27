@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider, UnfoldTransitionProgressProvider.TransitionProgressListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public boolean isReadyToHandleTransition;
@@ -21,7 +20,6 @@ public final class ScopedUnfoldTransitionProgressProvider implements UnfoldTrans
     public Handler progressHandler;
     public final UnfoldTransitionProgressProvider source;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

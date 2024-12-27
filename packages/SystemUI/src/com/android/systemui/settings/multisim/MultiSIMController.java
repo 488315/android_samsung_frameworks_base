@@ -57,7 +57,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MultiSIMController {
     public static final Uri INTERNAL_URI = Uri.parse("content://com.samsung.android.app.telephonyui.internal");
     public final ActivityStarter mActivityStarter;
@@ -97,14 +96,12 @@ public final class MultiSIMController {
     public boolean mHasOpportunisticESim = false;
     public boolean mNeedCheckOpportunisticESim = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.settings.multisim.MultiSIMController$14, reason: invalid class name */
     public final class AnonymousClass14 {
         public AnonymousClass14() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum ButtonType {
         VOICE(0),
         SMS(1),
@@ -123,7 +120,6 @@ public final class MultiSIMController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum KoreanSimCarrier {
         /* JADX INFO: Fake field, exist only in values array */
         KT("45008"),
@@ -141,7 +137,6 @@ public final class MultiSIMController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface MultiSIMDataChangedCallback {
         default boolean isPhoneNumberNeeded() {
             return false;
@@ -150,11 +145,9 @@ public final class MultiSIMController {
         void onDataChanged(MultiSIMData multiSIMData);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface MultiSIMVisibilityChangedCallback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum PhoneNumberSource {
         /* JADX INFO: Fake field, exist only in values array */
         CARRIER(2),

@@ -42,7 +42,6 @@ import com.android.systemui.util.ViewController;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSSecurityFooter extends ViewController implements View.OnClickListener, DialogInterface.OnClickListener {
     public final ActivityStarter mActivityStarter;
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -81,7 +80,6 @@ public final class QSSecurityFooter extends ViewController implements View.OnCli
     public final QSSecurityFooter$$ExternalSyntheticLambda0 mWorkProfileMonitoringStringSupplier;
     public final QSSecurityFooter$$ExternalSyntheticLambda0 mWorkProfileNetworkStringSupplier;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Callback implements SecurityController.SecurityControllerCallback {
         public /* synthetic */ Callback(QSSecurityFooter qSSecurityFooter, int i) {
             this();
@@ -96,7 +94,6 @@ public final class QSSecurityFooter extends ViewController implements View.OnCli
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public /* synthetic */ H(QSSecurityFooter qSSecurityFooter, Looper looper, int i) {
             this(looper);
@@ -127,7 +124,6 @@ public final class QSSecurityFooter extends ViewController implements View.OnCli
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VpnSpan extends ClickableSpan {
         public VpnSpan() {
         }

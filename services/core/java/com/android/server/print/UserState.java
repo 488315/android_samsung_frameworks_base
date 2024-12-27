@@ -55,7 +55,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserState {
     public final Context mContext;
     public boolean mDestroyed;
@@ -77,7 +76,6 @@ public final class UserState {
     public final Set mDisabledServices = new ArraySet();
     public final PrintJobForAppCache mPrintJobForAppCache = new PrintJobForAppCache();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.print.UserState$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public boolean mIsDestroyed;
@@ -438,7 +436,6 @@ public final class UserState {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.print.UserState$2, reason: invalid class name */
     public final class AnonymousClass2 implements IBinder.DeathRecipient {
         public final int appId;
@@ -462,7 +459,6 @@ public final class UserState {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.print.UserState$3, reason: invalid class name */
     public final class AnonymousClass3 implements IBinder.DeathRecipient {
         public final /* synthetic */ int $r8$classId;
@@ -515,7 +511,6 @@ public final class UserState {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PrintJobForAppCache {
         public final SparseArray mPrintJobsForRunningApp = new SparseArray();
 

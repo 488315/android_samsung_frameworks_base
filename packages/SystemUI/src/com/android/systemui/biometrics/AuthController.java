@@ -78,7 +78,6 @@ import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AuthController implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks, DozeReceiver {
     public final ActivityTaskManager mActivityTaskManager;
     public boolean mAllFingerprintAuthenticatorsRegistered;
@@ -138,7 +137,6 @@ public final class AuthController implements CoreStartable, ConfigurationControl
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.AuthController$4, reason: invalid class name */
     public final class AnonymousClass4 extends BiometricStateListener {
         public AnonymousClass4() {
@@ -149,7 +147,6 @@ public final class AuthController implements CoreStartable, ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.AuthController$5, reason: invalid class name */
     public final class AnonymousClass5 extends BiometricStateListener {
         public AnonymousClass5() {
@@ -160,7 +157,6 @@ public final class AuthController implements CoreStartable, ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.AuthController$6, reason: invalid class name */
     public final class AnonymousClass6 extends IFingerprintAuthenticatorsRegisteredCallback.Stub {
         public AnonymousClass6() {
@@ -171,7 +167,6 @@ public final class AuthController implements CoreStartable, ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.AuthController$7, reason: invalid class name */
     public final class AnonymousClass7 extends IFaceAuthenticatorsRegisteredCallback.Stub {
         public AnonymousClass7() {
@@ -182,7 +177,6 @@ public final class AuthController implements CoreStartable, ConfigurationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         default void onEnrollmentsChanged(int i) {
         }

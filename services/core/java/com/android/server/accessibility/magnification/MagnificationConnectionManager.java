@@ -39,7 +39,6 @@ import com.android.server.wm.WindowManagerInternal;
 
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MagnificationConnectionManager
         implements PanningScalingHandler.MagnificationDelegate,
                 WindowManagerInternal.AccessibilityControllerInternal
@@ -75,7 +74,6 @@ public final class MagnificationConnectionManager
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConnectionCallback extends IMagnificationConnectionCallback.Stub
             implements IBinder.DeathRecipient {
         public boolean mExpiredDeathRecipient = false;
@@ -281,7 +279,6 @@ public final class MagnificationConnectionManager
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WindowMagnifier {
         public static final AtomicLongFieldUpdater SUM_TIME_UPDATER =
                 AtomicLongFieldUpdater.newUpdater(

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AutoHideController {
     public final AccessibilityManager mAccessibilityManager;
     public final AutoHideController$$ExternalSyntheticLambda1 mAutoHide = new AutoHideController$$ExternalSyntheticLambda1(this, 0);
@@ -27,7 +26,6 @@ public final class AutoHideController {
     public AutoHideUiElement mStatusBar;
     public final IWindowManager mWindowManagerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AutoHideUiElementObserver extends SystemBarObserver {
         public final List mList;
 
@@ -44,7 +42,6 @@ public final class AutoHideController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final Handler mHandler;
         public final IWindowManager mIWindowManager;

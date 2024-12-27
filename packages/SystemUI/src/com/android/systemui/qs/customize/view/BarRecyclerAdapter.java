@@ -24,13 +24,11 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BarRecyclerAdapter extends RecyclerView.Adapter {
     public static final Interpolator DOWN_INTERPOLATOR;
     public final ArrayList barItems = new ArrayList();
     public final FullChunkResizeableFrame tileLayoutContainer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BorderOutlineViewHolder extends RecyclerView.ViewHolder {
         public final FrameLayout barView;
         public final ValueAnimator downAnimator;
@@ -49,7 +47,6 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

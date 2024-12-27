@@ -12,14 +12,12 @@ import com.android.systemui.QpRune;
 import com.android.systemui.res.R$styleable;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PseudoGridView extends ViewGroup {
     public final int mFixedChildWidth;
     public final int mHorizontalSpacing;
     public final int mNumColumns;
     public final int mVerticalSpacing;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewGroupAdapterBridge extends DataSetObserver {
         public final BaseAdapter mAdapter;
         public boolean mReleased = false;

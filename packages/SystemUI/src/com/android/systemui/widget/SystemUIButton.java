@@ -20,7 +20,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIButton;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SystemUIButton extends Button implements SystemUIWidgetCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final int mAttrCount;
@@ -38,7 +37,6 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
     public final ResData mResData;
     public long mUpdateFlag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BlurSettingsListener implements SettingsHelper.OnChangedCallback {
         public BlurSettingsListener() {
             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(this, Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY));
@@ -59,7 +57,6 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResData {
         public String mGroup;
         public boolean mMovable;

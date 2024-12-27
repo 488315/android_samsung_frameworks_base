@@ -12,7 +12,6 @@ import android.os.UserHandle;
 
 import java.util.concurrent.Executor;
 
-/* compiled from: ContextImpl.java */
 class ReceiverRestrictedContext extends ContextWrapper {
     ReceiverRestrictedContext(Context base) {
         super(base);

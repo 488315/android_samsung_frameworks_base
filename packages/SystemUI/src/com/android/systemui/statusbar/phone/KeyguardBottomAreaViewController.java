@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import kotlin.NotImplementedError;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardBottomAreaViewController extends ViewController implements KeyguardStateController.Callback, PluginLockBottomAreaCallback, Dumpable {
     public KeyguardBottomAreaViewController(KeyguardBottomAreaView keyguardBottomAreaView, LockscreenSmartspaceController lockscreenSmartspaceController, FeatureFlagsClassic featureFlagsClassic) {
         super(keyguardBottomAreaView);

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.util.Pair;
 import com.android.systemui.assist.ui.CornerPathRenderer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PerimeterPathGuide {
     public final int mBottomCornerRadiusPx;
     public final CornerPathRenderer mCornerPathRenderer;
@@ -20,7 +19,6 @@ public final class PerimeterPathGuide {
     public int mRotation = 0;
     public final RegionAttributes[] mRegions = new RegionAttributes[8];
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum Region {
         BOTTOM,
         BOTTOM_RIGHT,
@@ -32,7 +30,6 @@ public final class PerimeterPathGuide {
         BOTTOM_LEFT
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RegionAttributes {
         public float absoluteLength;
         public float endCoordinate;

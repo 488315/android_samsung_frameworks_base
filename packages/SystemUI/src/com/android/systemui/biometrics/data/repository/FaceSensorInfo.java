@@ -2,7 +2,6 @@ package com.android.systemui.biometrics.data.repository;
 
 import com.android.systemui.biometrics.shared.model.SensorStrength;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FaceSensorInfo {
     public final int id;
     public final SensorStrength strength;

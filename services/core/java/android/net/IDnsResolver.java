@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDnsResolver extends IInterface {
     public static final String DESCRIPTOR = "android$net$IDnsResolver".replace('$', '.');
     public static final int DNS_RESOLVER_LOG_DEBUG = 1;
@@ -46,7 +45,6 @@ public interface IDnsResolver extends IInterface {
     public static final int TRANSPORT_WIFI_AWARE = 5;
     public static final int VERSION = 9;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDnsResolver {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -123,7 +121,6 @@ public interface IDnsResolver extends IInterface {
         public void stopPrefix64Discovery(int i) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDnsResolver {
         static final int TRANSACTION_createNetworkCache = 8;
         static final int TRANSACTION_destroyNetworkCache = 9;
@@ -142,7 +139,6 @@ public interface IDnsResolver extends IInterface {
         static final int TRANSACTION_startPrefix64Discovery = 5;
         static final int TRANSACTION_stopPrefix64Discovery = 6;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDnsResolver {
             public String mCachedHash;
             public int mCachedVersion;

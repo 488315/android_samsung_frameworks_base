@@ -38,7 +38,6 @@ import com.samsung.systemui.splugins.edgelightingplus.PluginEdgeLightingPlus;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ClipboardOverlayController implements ClipboardOverlayView.ClipboardOverlayCallbacks {
     public final Executor mBgExecutor;
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -59,7 +58,6 @@ public final class ClipboardOverlayController implements ClipboardOverlayView.Cl
     public final ClipboardOverlayView mView;
     public final ClipboardOverlayWindow mWindow;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.clipboardoverlay.ClipboardOverlayController$9, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass9 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$clipboardoverlay$ClipboardModel$Type;
@@ -86,7 +84,6 @@ public final class ClipboardOverlayController implements ClipboardOverlayView.Cl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClipboardLogger {
         public boolean mGuarded = false;
         public final UiEventLogger mUiEventLogger;

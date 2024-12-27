@@ -37,7 +37,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.samsung.android.graphics.spr.animation.interpolator.SineInOut90;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSecPinViewController extends KeyguardPinViewController {
     public final LinearLayout mBottomView;
     public final KeyguardSecPinViewController$$ExternalSyntheticLambda1 mClickCallback;

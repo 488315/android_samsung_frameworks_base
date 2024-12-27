@@ -13,7 +13,6 @@ import com.android.systemui.wallpaper.engines.video.VideoSource;
 import com.samsung.android.media.SemMediaPlayer;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VideoController {
     public final String TAG;
     public PlayerSession mActiveSession;
@@ -25,18 +24,15 @@ public final class VideoController {
     public boolean mIsReleased = false;
     public final VideoController mLock = this;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoController$1, reason: invalid class name */
     public final class AnonymousClass1 implements PlayerSession.Callback {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Command {
         public final CommandAction mAction;
 
@@ -49,7 +45,6 @@ public final class VideoController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum CommandAction {
         PLAY,
         PAUSE,
@@ -57,7 +52,6 @@ public final class VideoController {
         PAUSE_N_SEEK_TO_0
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CommandQueue {
         public final ArrayList mQueue;
 
@@ -98,7 +92,6 @@ public final class VideoController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PauseAndSeekToFirstFrameCommand extends Command {
         public final boolean mAllowRelease;
 
@@ -116,7 +109,6 @@ public final class VideoController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PauseCommand extends Command {
         public final boolean mAllowRelease;
 
@@ -134,7 +126,6 @@ public final class VideoController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PlayerSession {
         public static int sNextId;
         public final String TAG;
@@ -160,7 +151,6 @@ public final class VideoController {
             }
         };
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Callback {
         }
 
@@ -452,7 +442,6 @@ public final class VideoController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum PlayerState {
         INITIALIZING,
         PLAYER_READY,
@@ -460,7 +449,6 @@ public final class VideoController {
         RELEASED
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekCommand extends Command {
         public final int mSeekTime;
 

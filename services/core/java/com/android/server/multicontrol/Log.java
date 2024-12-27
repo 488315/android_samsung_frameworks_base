@@ -7,14 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class Log {
     public static final DateTimeFormatter sFormatter =
             DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     public static final EvictingArrayQueue sSavedLogs = new EvictingArrayQueue(200);
     public static final EvictingArrayQueue sSavedStates = new EvictingArrayQueue(100);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EvictingArrayQueue {
         public final int mCapacity;
         public final Object mLock = new Object();

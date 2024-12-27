@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OtaDexoptService extends IOtaDexopt.Stub {
     public long availableSpaceAfterBulkDelete;
     public long availableSpaceAfterDexopt;
@@ -50,7 +49,6 @@ public final class OtaDexoptService extends IOtaDexopt.Stub {
     public long otaDexoptTimeStart;
     public int otherPackageCount;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OTADexoptPackageDexOptimizer extends PackageDexOptimizer {
         @Override // com.android.server.pm.PackageDexOptimizer
         public final int adjustDexoptFlags(int i) {

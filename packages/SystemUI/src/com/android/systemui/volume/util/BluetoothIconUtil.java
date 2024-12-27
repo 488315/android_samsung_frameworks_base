@@ -19,16 +19,13 @@ import kotlin.Result;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BluetoothIconUtil {
     public static final BluetoothIconUtil INSTANCE = new BluetoothIconUtil();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface SamsungStandard {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
             public static final short GALAXY_BUDS = 5379;

@@ -26,7 +26,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PACMService extends SystemService {
     public static final List mReceiverList = new ArrayList();
     public final LinkedHashMap mAtMap;
@@ -36,7 +35,6 @@ public final class PACMService extends SystemService {
     public final Object mLock;
     public final AnonymousClass2 mReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PACServiceSocketThread implements Runnable {
         public PACServiceSocketThread() {}
 

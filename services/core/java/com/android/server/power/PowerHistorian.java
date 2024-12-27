@@ -9,12 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerHistorian {
     public static final PowerHistorian INSTANCE = new PowerHistorian();
     public final SparseArray mRecordCache;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayGroupRecord extends Record {
         public final int mGroupId;
         public final boolean mIsAdded;
@@ -40,7 +38,6 @@ public final class PowerHistorian {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MessageRecord extends Record {
         public final String mMessage;
 
@@ -54,7 +51,6 @@ public final class PowerHistorian {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Record {
         public static final SimpleDateFormat sDumpDateFormat =
                 new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
@@ -65,7 +61,6 @@ public final class PowerHistorian {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecordBuffer {
         public final LinkedList mBuffer = new LinkedList();
         public final int mCapacity;
@@ -88,7 +83,6 @@ public final class PowerHistorian {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeLockReleaseRecord extends Record {
         public final long mElapsedTimeMillis;
         public final PowerManagerService.WakeLock mWakeLock;
@@ -106,7 +100,6 @@ public final class PowerHistorian {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeUpRecord extends Record {
         public final String mForegroundPackageName;
         public final int mGroupId;

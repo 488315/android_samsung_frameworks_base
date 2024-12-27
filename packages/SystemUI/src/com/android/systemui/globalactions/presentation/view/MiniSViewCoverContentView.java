@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MiniSViewCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
     public CoverViewAnimatorFSM mAnimatorFSM;
@@ -51,7 +50,6 @@ public final class MiniSViewCoverContentView implements ContentView, ViewStateCo
     public final ToastController mToastController;
     public Rect mVisibleRect;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.globalactions.presentation.view.MiniSViewCoverContentView$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public String toastMessage;
@@ -60,7 +58,6 @@ public final class MiniSViewCoverContentView implements ContentView, ViewStateCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentAdapter extends BaseAdapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
@@ -102,7 +99,6 @@ public final class MiniSViewCoverContentView implements ContentView, ViewStateCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentGridView extends GridView {
         public ContentGridView(Context context) {
             super(context);
@@ -119,7 +115,6 @@ public final class MiniSViewCoverContentView implements ContentView, ViewStateCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);

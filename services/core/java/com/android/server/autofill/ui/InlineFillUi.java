@@ -13,7 +13,6 @@ import com.android.server.autofill.RemoteInlineSuggestionRenderService;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InlineFillUi {
     public final AutofillId mAutofillId;
     public final ArrayList mDatasets;
@@ -22,7 +21,6 @@ public final class InlineFillUi {
     public final ArrayList mInlineSuggestions;
     public final int mMaxInputLengthForAutofill;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InlineFillUiInfo {
         public final String mFilterText;
         public final AutofillId mFocusedId;
@@ -47,7 +45,6 @@ public final class InlineFillUi {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface InlineSuggestionUiCallback {
         void authenticate();
 

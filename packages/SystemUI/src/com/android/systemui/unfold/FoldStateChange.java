@@ -3,7 +3,6 @@ package com.android.systemui.unfold;
 import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0;
 import androidx.compose.animation.core.KeyframesSpec$KeyframeEntity$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FoldStateChange {
     public final int current;
     public final long dtMillis;

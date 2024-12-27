@@ -19,7 +19,6 @@ import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCategoryHintHelper {
     public static final String FILE_PATH =
             ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(

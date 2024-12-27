@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HeadsUpAppearanceController extends ViewController implements OnHeadsUpChangedListener, DarkIconDispatcher.DarkReceiver, NotificationWakeUpCoordinator.WakeUpListener {
     public static final SourceType$Companion$from$1 HEADS_UP = SourceType.from("HeadsUp");
     public static final SourceType$Companion$from$1 PULSING = SourceType.from("Pulsing");

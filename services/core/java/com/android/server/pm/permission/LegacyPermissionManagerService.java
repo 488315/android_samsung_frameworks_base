@@ -28,14 +28,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LegacyPermissionManagerService extends ILegacyPermissionManager.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
     public final DefaultPermissionGrantPolicy mDefaultPermissionGrantPolicy;
     public final Injector mInjector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public final Context mContext;
         public final PackageManagerInternal mPackageManagerInternal =
@@ -46,7 +44,6 @@ public final class LegacyPermissionManagerService extends ILegacyPermissionManag
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Internal {
         public Internal() {}
 

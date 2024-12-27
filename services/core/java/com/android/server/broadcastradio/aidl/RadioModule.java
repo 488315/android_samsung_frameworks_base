@@ -34,7 +34,6 @@ import com.android.server.utils.Slogf;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RadioModule {
     public Boolean mAntennaConnected;
     public RadioManager.ProgramInfo mCurrentProgramInfo;
@@ -48,7 +47,6 @@ public final class RadioModule {
     public final ArraySet mAidlTunerSessions = new ArraySet();
     public final AnonymousClass1 mHalTunerCallback = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.broadcastradio.aidl.RadioModule$1, reason: invalid class name */
     public final class AnonymousClass1 extends Binder implements ITunerCallback {
         public AnonymousClass1() {
@@ -267,7 +265,6 @@ public final class RadioModule {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.broadcastradio.aidl.RadioModule$2, reason: invalid class name */
     public final class AnonymousClass2 extends Binder implements IAnnouncementListener {
         public final /* synthetic */ android.hardware.radio.IAnnouncementListener val$listener;
@@ -328,7 +325,6 @@ public final class RadioModule {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AidlCallbackRunnable {
         void run(android.hardware.radio.ITunerCallback iTunerCallback, int i);
     }

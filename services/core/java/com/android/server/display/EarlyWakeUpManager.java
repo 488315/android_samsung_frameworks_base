@@ -9,7 +9,6 @@ import android.view.Display;
 import com.android.server.power.PowerManagerUtil;
 import com.android.server.power.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EarlyWakeUpManager {
     public boolean mAppliedLocked;
     public final AutomaticBrightnessController mAutomaticBrightnessController;
@@ -39,7 +38,6 @@ public final class EarlyWakeUpManager {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarlyWakeUpHandler extends Handler {
         public EarlyWakeUpHandler(Looper looper) {
             super(looper, null, true);

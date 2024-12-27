@@ -3,7 +3,6 @@ package com.android.server.utils;
 import java.util.WeakHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SnapshotCache extends Watcher {
     public static final WeakHashMap sCaches = new WeakHashMap();
     public volatile boolean mSealed;
@@ -11,7 +10,6 @@ public abstract class SnapshotCache extends Watcher {
     public final Object mSource;
     public final Statistics mStatistics;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Auto extends SnapshotCache {
         public final /* synthetic */ int $r8$classId;
 
@@ -36,7 +34,6 @@ public abstract class SnapshotCache extends Watcher {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Statistics {
         public final AtomicInteger mReused = new AtomicInteger(0);
         public final AtomicInteger mRebuilt = new AtomicInteger(0);

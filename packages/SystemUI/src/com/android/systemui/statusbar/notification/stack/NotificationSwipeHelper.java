@@ -28,7 +28,6 @@ import com.android.systemui.util.NotificationSAUtil;
 import com.android.systemui.util.SystemUIAnalytics;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationSwipeHelper extends SwipeHelper implements NotificationSwipeActionHelper {
     protected static final long COVER_MENU_DELAY = 4000;
     public static final SourceType$Companion$from$1 SWIPE_DISMISS = SourceType.from("SwipeDismiss");
@@ -42,7 +41,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
     public boolean mPulsing;
     public View mTranslatingParentView;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public final DumpManager mDumpManager;
         public final FalsingManager mFalsingManager;
@@ -63,7 +61,6 @@ public final class NotificationSwipeHelper extends SwipeHelper implements Notifi
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NotificationCallback extends SwipeHelper.Callback {
     }
 

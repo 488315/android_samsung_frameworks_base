@@ -9,12 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class CollectionContract {
     public static final Uri CONTENT_URI =
             Uri.parse("content://com.samsung.android.rubin.collection/");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class API {
         public static void putLogs(Context context, List list) {
             if (context == null) {

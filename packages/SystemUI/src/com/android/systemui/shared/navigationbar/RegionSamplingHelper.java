@@ -22,7 +22,6 @@ import com.android.systemui.util.Utils;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RegionSamplingHelper implements View.OnAttachStateChangeListener, View.OnLayoutChangeListener {
     public final Executor mBackgroundExecutor;
     public SystemBarProxy mBarProxy;
@@ -48,11 +47,9 @@ public final class RegionSamplingHelper implements View.OnAttachStateChangeListe
     public boolean mWindowVisible;
     public SurfaceControl mWrappedStopLayer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SamplingCallback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class SysuiCompositionSamplingListener {
     }
 

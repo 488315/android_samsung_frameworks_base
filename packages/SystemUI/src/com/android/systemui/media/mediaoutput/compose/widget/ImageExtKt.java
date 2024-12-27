@@ -20,7 +20,6 @@ import com.samsung.android.knox.EnterpriseContainerCallback;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class ImageExtKt {
     public static final void ImageExt(final Painter painter, final String str, Modifier modifier, Composer composer, final int i, final int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;

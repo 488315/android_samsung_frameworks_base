@@ -63,7 +63,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MdnieScenarioControlService {
     public final String[] ACL_CONTROL_GALLERY_APP_LIST;
     public final int ACTION_BROWSER_BRIGHTNESS_DECREASE_FIRST_MILLIS;
@@ -183,7 +182,6 @@ public final class MdnieScenarioControlService {
     public int mVividnessIndex;
     public boolean mWorkingCondition;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.displaysolution.MdnieScenarioControlService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IProcessObserver.Stub {
         public AnonymousClass1() {}
@@ -252,7 +250,6 @@ public final class MdnieScenarioControlService {
         public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MSCSControlHandler extends Handler {
         public MSCSControlHandler(Looper looper) {
             super(looper, null);
@@ -1216,7 +1213,6 @@ public final class MdnieScenarioControlService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
         public ScreenWatchingReceiver() {}
 
@@ -1380,7 +1376,6 @@ public final class MdnieScenarioControlService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri BLUE_LIGHT_FILTER_ADAPTIVE_MODE_URI;
         public final Uri BLUE_LIGHT_FILTER_ANTI_GLARE_URI;

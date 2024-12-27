@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObserver<VolumePanelState> {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int mEarProtectLevel;
@@ -40,7 +39,6 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
     public int mStream;
     public int mTargetProgressLevel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType;
@@ -79,7 +77,6 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public /* synthetic */ VolumeSeekBarChangeListener(SubDisplayVolumeRowView subDisplayVolumeRowView, int i) {
             this();

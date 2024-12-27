@@ -72,7 +72,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LockscreenShadeTransitionController implements Dumpable {
     public static final Companion Companion = new Companion(null);
     public static final String TAG = "LockscreenShadeTransitionController";
@@ -137,7 +136,6 @@ public final class LockscreenShadeTransitionController implements Dumpable {
     });
     public final SecPanelSAStatusLogInteractor panelSAStatusLogInteractor = (SecPanelSAStatusLogInteractor) Dependency.sDependency.getDependencyInner(SecPanelSAStatusLogInteractor.class);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         default void setTransitionToFullShadeAmount(float f) {
         }
@@ -158,7 +156,6 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

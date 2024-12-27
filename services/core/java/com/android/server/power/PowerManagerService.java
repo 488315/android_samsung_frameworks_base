@@ -158,7 +158,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerManagerService extends SystemService implements Watchdog.Monitor {
     public static boolean sQuiescent;
     public AbuseWakeLockDetector mAbuseWakeLockDetector;
@@ -420,7 +419,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
     public static final boolean SEC_USE_FACTORY_BINARY = FactoryTest.isFactoryBinary();
     public static final Uri DEX_SETTINGS_URI = Uri.parse("content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.PowerManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public /* synthetic */ AnonymousClass1() {
@@ -440,7 +438,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BatteryReceiver extends BroadcastReceiver {
         public BatteryReceiver() {
         }
@@ -455,7 +452,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BinderService extends IPowerManager.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final PowerManagerShellCommand mShellCommand;
@@ -2126,11 +2122,9 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Constants extends ContentObserver {
         public boolean NO_CACHED_WAKE_LOCKS;
         public final KeyValueListParser mParser;
@@ -2168,7 +2162,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateListener implements DeviceStateManager.DeviceStateCallback {
         public int mDeviceState = -1;
 
@@ -2211,7 +2204,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayGroupPowerChangeListener implements DisplayManagerInternal.DisplayGroupListener {
         public DisplayGroupPowerChangeListener() {
         }
@@ -2279,7 +2271,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DockReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PowerManagerService this$0;
@@ -2314,7 +2305,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DreamManagerStateListener implements DreamManagerInternal.DreamManagerStateListener {
         public DreamManagerStateListener() {
         }
@@ -2326,7 +2316,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForegroundProfileObserver extends SynchronousUserSwitchObserver {
         public ForegroundProfileObserver() {
         }
@@ -2349,7 +2338,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HdrBrightnessLimitLock implements IBinder.DeathRecipient {
         public int mBrightnessLimitPeriod;
         public final IBinder mLock;
@@ -2423,10 +2411,8 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.power.PowerManagerService$Injector$1, reason: invalid class name */
         public final class AnonymousClass1 implements SystemPropertiesWrapper, Clock, PowerPropertiesWrapper {
             @Override // com.android.server.power.SystemPropertiesWrapper
@@ -2443,7 +2429,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LCDFlashModeLock implements IBinder.DeathRecipient {
         public final IBinder binder;
 
@@ -2469,7 +2454,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LocalService extends PowerManagerInternal {
         public LocalService() {
         }
@@ -3294,7 +3278,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NativeWrapper {
         public final void nativeAcquireSuspendBlocker(String str) {
             PowerManagerService.nativeAcquireSuspendBlocker(str);
@@ -3329,11 +3312,9 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface PermissionCheckerWrapper {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerManagerHandlerCallback implements Handler.Callback {
         public PowerManagerHandlerCallback() {
         }
@@ -3431,11 +3412,9 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface PowerPropertiesWrapper {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProfilePowerState {
         public long mLastUserActivityTime;
         public boolean mLockingNotified;
@@ -3460,7 +3439,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PowerManagerService this$0;
@@ -3510,7 +3488,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SuspendBlockerImpl {
         public final boolean mIsShowLog;
         public final String mName;
@@ -3645,7 +3622,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidState {
         public boolean mActive;
         public int mNumWakeLocks;
@@ -3657,7 +3633,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class UserSwitchedReceiver extends BroadcastReceiver {
         public UserSwitchedReceiver() {
         }
@@ -3683,7 +3658,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeLock implements IBinder.DeathRecipient {
         public long mAcquireTime;
         public IWakeLockCallback mCallback;
@@ -3877,7 +3851,6 @@ public final class PowerManagerService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakeUpPreventionLock implements IBinder.DeathRecipient {
         public final IBinder mBinder;
         public final long mLastRequestedTime;

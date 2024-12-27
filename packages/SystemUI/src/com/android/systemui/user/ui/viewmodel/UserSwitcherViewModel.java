@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserSwitcherViewModel {
     public final StateFlowImpl _isMenuVisible;
     public final GuestUserInteractor guestUserInteractor;
@@ -43,13 +42,11 @@ public final class UserSwitcherViewModel {
         final UserSwitcherInteractor$special$$inlined$map$3 userSwitcherInteractor$special$$inlined$map$3 = new UserSwitcherInteractor$special$$inlined$map$3(((UserRepositoryImpl) userSwitcherInteractor.repository).selectedUserInfo, userSwitcherInteractor);
         this.selectedUser = new Flow() { // from class: com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserSwitcherViewModel this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

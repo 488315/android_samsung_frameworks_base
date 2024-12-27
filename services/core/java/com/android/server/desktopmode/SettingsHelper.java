@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SettingsHelper {
     public static final Map DEFAULT_VALUES;
     public static final Map KEYS_TO_MIGRATE;
@@ -33,7 +32,6 @@ public final class SettingsHelper {
     public final ContentResolver mResolver;
     public final AnonymousClass1 mStateListener;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class OnSettingChangedListener {
         public final String mInterestedKey;
 
@@ -44,7 +42,6 @@ public final class SettingsHelper {
         public abstract void onSettingChanged(String str);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

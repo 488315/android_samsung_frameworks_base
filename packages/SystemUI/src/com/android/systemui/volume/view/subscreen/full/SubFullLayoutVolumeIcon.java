@@ -22,7 +22,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubFullLayoutVolumeIcon extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public int currentMediaIconState;
     public final ColorStateList iconActiveColor;
@@ -35,7 +34,6 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
     public int stream;
     public SubFullLayoutVolumePanelMotion volumePanelMotion;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -45,7 +43,6 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.SubscriptionCountStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PackageInstallerMonitor extends PackageInstaller.SessionCallback {
     public static final Companion Companion = new Companion(null);
     public final StateFlowImpl _installSessions;
@@ -39,7 +38,6 @@ public final class PackageInstallerMonitor extends PackageInstaller.SessionCallb
     public final PackageInstaller packageInstaller;
     public final Map sessions = new LinkedHashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -57,12 +55,10 @@ public final class PackageInstallerMonitor extends PackageInstaller.SessionCallb
         final SubscriptionCountStateFlow subscriptionCount = MutableStateFlow.getSubscriptionCount();
         FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__LimitKt$dropWhile$$inlined$unsafeFlow$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.common.data.repository.PackageInstallerMonitor$_installSessions$lambda$1$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.common.data.repository.PackageInstallerMonitor$_installSessions$lambda$1$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.common.data.repository.PackageInstallerMonitor$_installSessions$lambda$1$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

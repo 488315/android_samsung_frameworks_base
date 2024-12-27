@@ -66,7 +66,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CustomTile extends SQSTileImpl implements CustomTileInterface {
     public final BroadcastDispatcher mBroadcastDispatcher;
     public final ComponentName mComponent;
@@ -116,7 +115,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
     public final UserTracker mUserTracker;
     public final IWindowManager mWindowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomDetailAdapter implements DetailAdapter {
         public final AnonymousClass1 mInteractionHandler = new RemoteViews.InteractionHandler() { // from class: com.android.systemui.qs.external.CustomTile.CustomDetailAdapter.1
             public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
@@ -284,7 +282,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SubscreenCustomTileReceiver extends BroadcastReceiver {
         public SubscreenCustomTileReceiver() {
         }
@@ -304,7 +301,6 @@ public final class CustomTile extends SQSTileImpl implements CustomTileInterface
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum SubscreenSALog {
         /* JADX INFO: Fake field, exist only in values array */
         SUBSCREEN_SCREENRECORDER_TILE("com.samsung.android.app.smartcapture", SystemUIAnalytics.EID_QP_SCREENRECORDER_COVER),

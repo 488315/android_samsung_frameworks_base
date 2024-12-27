@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowInsetsListener {
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass3 mConfigurationListener;
@@ -39,7 +38,6 @@ public final class StrongAuthPopup extends AlertDialog implements View.OnApplyWi
     public final KeyguardSecurityModel.SecurityMode mSecurityMode;
     public final AnonymousClass2 mTextWatcher;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.StrongAuthPopup$1, reason: invalid class name */
     class AnonymousClass1 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass1() {
@@ -54,7 +52,6 @@ public final class StrongAuthPopup extends AlertDialog implements View.OnApplyWi
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.StrongAuthPopup$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -330,7 +327,6 @@ public final class StrongAuthPopup extends AlertDialog implements View.OnApplyWi
         window.setAttributes(attributes);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.StrongAuthPopup$2, reason: invalid class name */
     public final class AnonymousClass2 implements TextWatcher {
         public AnonymousClass2() {

@@ -26,13 +26,11 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSBlurPopUpMenu extends ListPopupWindow {
     public ListAdapter adapter;
     public PopupWindow.OnDismissListener dismissListener;
     public boolean onceShowed;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PopUpContent {
         public boolean checked;
         public final String text;
@@ -43,7 +41,6 @@ public final class QSBlurPopUpMenu extends ListPopupWindow {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PopupListAdapter extends ArrayAdapter {
         public final int FONT_WEIGHT_REGULAR;
         public final int FONT_WEIGHT_SEMIBOLD;

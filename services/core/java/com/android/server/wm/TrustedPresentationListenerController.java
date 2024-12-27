@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TrustedPresentationListenerController {
     public Handler mHandler;
     public HandlerThread mHandlerThread;
@@ -37,7 +36,6 @@ public final class TrustedPresentationListenerController {
     public final Object mHandlerThreadLock = new Object();
     public final Listeners mRegisteredListeners = new Listeners();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.TrustedPresentationListenerController$1, reason: invalid class name */
     public final class AnonymousClass1 extends WindowInfosListener {
         public AnonymousClass1() {}
@@ -59,12 +57,10 @@ public final class TrustedPresentationListenerController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Listeners {
         public final ArrayMap mUniqueListeners = new ArrayMap();
         public final ArrayMap mWindowToListeners = new ArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ListenerDeathRecipient implements IBinder.DeathRecipient {
             public int mInstances = 0;
             public final IBinder mListenerBinder;
@@ -108,7 +104,6 @@ public final class TrustedPresentationListenerController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrustedPresentationInfo {
         public final int mId;
         public final ITrustedPresentationListener mListener;

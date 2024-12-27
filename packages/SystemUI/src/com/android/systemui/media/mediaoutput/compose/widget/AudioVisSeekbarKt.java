@@ -1,6 +1,5 @@
 package com.android.systemui.media.mediaoutput.compose.widget;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class AudioVisSeekbarKt {
     /* JADX WARN: Removed duplicated region for block: B:101:0x0325  */
     /* JADX WARN: Removed duplicated region for block: B:104:0x032f A[ADDED_TO_REGION] */

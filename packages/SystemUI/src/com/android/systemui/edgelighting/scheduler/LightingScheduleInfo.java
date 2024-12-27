@@ -12,7 +12,6 @@ import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.sec.ims.settings.ImsProfile;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LightingScheduleInfo {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public final Drawable mIcon;
@@ -25,7 +24,6 @@ public final class LightingScheduleInfo {
     public int mDuration = ImsProfile.DEFAULT_DEREG_TIMEOUT;
     public boolean mIsDirty = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChainItemBodySubText extends NotiTextChain {
         public ChainItemBodySubText(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -37,7 +35,6 @@ public final class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChainItemBodyText extends NotiTextChain {
         public ChainItemBodyText(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -49,7 +46,6 @@ public final class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChainItemTicker extends NotiTextChain {
         public ChainItemTicker(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -61,7 +57,6 @@ public final class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChainItemTitle extends NotiTextChain {
         public ChainItemTitle(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -73,7 +68,6 @@ public final class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LightingLogicPolicy {
         public boolean isNeedToKeepWhenLcdOff = false;
         public boolean isNeedLightOnWhenTurnOveredLcdOn = false;
@@ -82,7 +76,6 @@ public final class LightingScheduleInfo {
         public boolean isNeedLightOnWhenTurnRightedLcdOff = false;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class NotiTextChain {
         public boolean mIsTextDirty;
         public NotiTextChain mNext;

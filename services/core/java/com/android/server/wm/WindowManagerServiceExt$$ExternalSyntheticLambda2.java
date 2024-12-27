@@ -9,7 +9,6 @@ import com.android.server.policy.PhoneWindowManager;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.server.util.SafetySystemService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class WindowManagerServiceExt$$ExternalSyntheticLambda2
         implements Runnable {
     public final /* synthetic */ int $r8$classId;

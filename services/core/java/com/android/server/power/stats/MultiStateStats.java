@@ -12,14 +12,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiStateStats {
     public int mCompositeState;
     public final LongArrayMultiStateCounter mCounter;
     public final Factory mFactory;
     public boolean mTracking;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Factory {
         public final int[] mCompositeToSerialState;
         public final int mDimensionCount;
@@ -131,7 +129,6 @@ public final class MultiStateStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class States {
         public final String[] mLabels;
         public final String mName;

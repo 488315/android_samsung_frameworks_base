@@ -13,7 +13,6 @@ import com.android.server.display.utils.DebugUtils;
 import java.io.PrintWriter;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayManagerFlags {
     public final FlagState mAdaptiveToneImprovements1;
     public final FlagState mAdaptiveToneImprovements2;
@@ -51,7 +50,6 @@ public final class DisplayManagerFlags {
     public static final String TAG = "DisplayManagerFlags";
     public static final boolean DEBUG = DebugUtils.isDebuggable(TAG);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlagState {
         public boolean mEnabled;
         public boolean mEnabledSet;

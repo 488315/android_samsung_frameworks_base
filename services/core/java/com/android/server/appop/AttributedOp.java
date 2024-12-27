@@ -14,7 +14,6 @@ import com.android.internal.util.function.pooled.PooledRunnable;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AttributedOp {
     public LongSparseArray mAccessEvents;
     public final AppOpsService mAppOpsService;
@@ -24,7 +23,6 @@ public final class AttributedOp {
     public final AppOpsService.Op parent;
     public final String tag;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InProgressStartOpEvent implements IBinder.DeathRecipient {
         public int mAttributionChainId;
         public int mAttributionFlags;
@@ -44,12 +42,10 @@ public final class AttributedOp {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InProgressStartOpEventPool extends Pools.SimplePool {
         public OpEventProxyInfoPool mOpEventProxyInfoPool;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OpEventProxyInfoPool extends Pools.SimplePool {}
 
     public AttributedOp(AppOpsService appOpsService, String str, AppOpsService.Op op) {

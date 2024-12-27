@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayDisplayAdapter extends DisplayAdapter {
     public static final Pattern DISPLAY_PATTERN = Pattern.compile("([^,]+)(,[,_a-z]+)*");
     public static final Pattern MODE_PATTERN = Pattern.compile("(\\d+)x(\\d+)/(\\d+)");
@@ -41,7 +40,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
     public final ArrayList mOverlays;
     public final Handler mUiHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.OverlayDisplayAdapter$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -163,7 +161,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverlayDisplayHandle {
         public int mActiveMode;
         public AnonymousClass1 mDevice;
@@ -177,7 +174,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         public final AnonymousClass1 mShowRunnable;
         public OverlayDisplayWindow mWindow;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.display.OverlayDisplayAdapter$OverlayDisplayHandle$1, reason: invalid class name */
         public final class AnonymousClass1 extends DisplayDevice {
             public int mActiveMode;
@@ -408,7 +404,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverlayFlags {
         public final boolean mOwnContentOnly;
         public final boolean mSecure;
@@ -431,7 +426,6 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverlayMode {
         public final int mDensityDpi;
         public final int mHeight;

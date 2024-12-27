@@ -5,7 +5,6 @@ import android.content.pm.overlay.OverlayPaths;
 
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayInfoExtPolicy implements OverlayPolicyManager.OverlayPackagePolicy {
     @Override // com.android.server.om.OverlayPolicyManager.OverlayPackagePolicy
     public final boolean retainOverlay(String str, OverlayPaths overlayPaths, String str2) {

@@ -29,7 +29,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AdaptiveDisplaySolutionService {
     public final int AUTO_CURRENT_LIMIT_VERSION;
     public final boolean AVAILABLE_ADAPTIVE_CONTROL;
@@ -41,7 +40,6 @@ public final class AdaptiveDisplaySolutionService {
     public boolean mDetailViewState;
     public SemDisplaySolutionManager mSemDisplaySolutionManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ADSControlHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -49,7 +47,6 @@ public final class AdaptiveDisplaySolutionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
         public ScreenWatchingReceiver() {}
 
@@ -82,7 +79,6 @@ public final class AdaptiveDisplaySolutionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri BRIGHTNESS_MODE_URI;
         public final Uri BRIGHTNESS_URI;

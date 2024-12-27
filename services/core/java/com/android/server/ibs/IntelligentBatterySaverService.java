@@ -73,7 +73,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IntelligentBatterySaverService extends IIntelligentBatterySaverService.Stub {
     public static boolean mIBSEnable;
     public final Context mContext;
@@ -88,7 +87,6 @@ public final class IntelligentBatterySaverService extends IIntelligentBatterySav
     public final SleepModeLogger mSleepModeLogger;
     public final SleepModePolicyController mSleepModePolicyController;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SCPMReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ IntelligentBatterySaverService this$0;
@@ -171,7 +169,6 @@ public final class IntelligentBatterySaverService extends IIntelligentBatterySav
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);

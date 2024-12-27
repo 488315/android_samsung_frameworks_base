@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiResolutionManager {
     public static final Resolution DUAL_MODE_DEFAULT;
     public static final Resolution HIGHEST_RESOLUTION;
@@ -338,7 +337,6 @@ public final class MultiResolutionManager {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayMetrics {
         public int density;
         public Resolution resolution;
@@ -379,7 +377,6 @@ public final class MultiResolutionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Resolution {
         public final int height;
         public final String name;
@@ -423,7 +420,6 @@ public final class MultiResolutionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandaloneModeDisplayMetrics {
         public final int[] mDisplayProperties;
         public final DisplayMetrics mSelectedDisplayMetrics;

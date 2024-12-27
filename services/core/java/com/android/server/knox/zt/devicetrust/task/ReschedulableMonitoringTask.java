@@ -7,7 +7,6 @@ import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ReschedulableMonitoringTask extends SchedulableMonitoringTask {
     public final String mFingerprint;
     public final AtomicBoolean mIsScheduled;

@@ -7,7 +7,6 @@ import android.provider.Settings;
 import android.util.Log;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AliveShotImageUtils {
     public static final Uri HANDLER_TRANSPARENCY_CONTENT_URI = Uri.parse("content://com.samsung.app.honeyspace.edge.settings.EdgeSettingProvider/handler_transparency");
 

@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BrightnessThrottler {
     public static final boolean DEBUG = DebugUtils.isDebuggable("BrightnessThrottler");
     public final DeviceConfigParameterProvider mConfigParameterProvider;
@@ -45,7 +44,6 @@ public final class BrightnessThrottler {
     public final BrightnessThrottler$$ExternalSyntheticLambda1 mDataSetMapper =
             new BrightnessThrottler$$ExternalSyntheticLambda1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public final Executor mExecutor;
 
@@ -59,10 +57,8 @@ public final class BrightnessThrottler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SkinThermalStatusObserver extends IThermalEventListener.Stub {
         public final Handler mHandler;
         public final Injector mInjector;

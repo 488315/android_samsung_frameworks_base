@@ -17,7 +17,6 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IntelligentBatterySaverGoogleAppPolicy {
     public final Context mContext;
     public final IBSGoogleAppPolicyHandler mHandler;
@@ -27,7 +26,6 @@ public final class IntelligentBatterySaverGoogleAppPolicy {
     public final Object mLockGoogleAppsList = new Object();
     public boolean mNetworkLimited = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IBSGoogleAppPolicyHandler extends Handler {
         public IBSGoogleAppPolicyHandler(Looper looper) {
             super(looper);
@@ -51,7 +49,6 @@ public final class IntelligentBatterySaverGoogleAppPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IBSGoogleAppPolicyReceiver extends BroadcastReceiver {
         public IBSGoogleAppPolicyReceiver() {
             IntelligentBatterySaverGoogleAppPolicy.this.mContext.registerReceiver(

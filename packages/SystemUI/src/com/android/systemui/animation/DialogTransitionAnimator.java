@@ -18,7 +18,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DialogTransitionAnimator {
     public static final TransitionAnimator.Interpolators INTERPOLATORS;
     public static final TransitionAnimator.Timings TIMINGS;
@@ -30,11 +29,9 @@ public final class DialogTransitionAnimator {
     public final HashSet openedDialogs;
     public final TransitionAnimator transitionAnimator;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -44,11 +41,9 @@ public final class DialogTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Controller {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 

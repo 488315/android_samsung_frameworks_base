@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VDCObserverService extends IVDCObserverService.Stub
         implements AbsSemSystemService {
     public static final Uri VDC_OBSERVER_URI =
@@ -93,7 +92,6 @@ public final class VDCObserverService extends IVDCObserverService.Stub
                     KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("VDCObserverService")
                             .getLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.sepunion.VDCObserverService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -133,7 +131,6 @@ public final class VDCObserverService extends IVDCObserverService.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -203,7 +200,6 @@ public final class VDCObserverService extends IVDCObserverService.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ObserverType {}
 
     /* renamed from: -$$Nest$mhandleUsageStatsChanged, reason: not valid java name */

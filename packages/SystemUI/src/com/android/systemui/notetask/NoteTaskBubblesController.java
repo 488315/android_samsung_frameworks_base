@@ -12,12 +12,10 @@ import java.util.Optional;
 import java.util.function.Function;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskBubblesController {
     public final CoroutineDispatcher bgDispatcher;
     public final ServiceConnector serviceConnector;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NoteTaskBubblesService extends Service {
         public final Optional mOptionalBubbles;
 

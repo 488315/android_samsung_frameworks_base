@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.systemui.R;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WalletCardViewHolder extends RecyclerView.ViewHolder {
     public final CardView mCardView;
     public WalletCardViewInfo mCardViewInfo;

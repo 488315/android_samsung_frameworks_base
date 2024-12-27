@@ -56,7 +56,6 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WindowMagnificationController implements View.OnTouchListener, SurfaceHolder.Callback, MagnificationGestureDetector.OnGestureListener, ComponentCallbacks {
     public static final Range A11Y_ACTION_SCALE_RANGE;
     public static final boolean DEBUG;
@@ -129,7 +128,6 @@ public final class WindowMagnificationController implements View.OnTouchListener
     public final WindowMagnifierCallback mWindowMagnifierCallback;
     public final WindowManager mWm;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.WindowMagnificationController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final Rect mPreviousBounds = new Rect();
@@ -163,7 +161,6 @@ public final class WindowMagnificationController implements View.OnTouchListener
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DragHandleA11yDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ DragHandleA11yDelegate(WindowMagnificationController windowMagnificationController, int i) {
             this(windowMagnificationController);
@@ -179,7 +176,6 @@ public final class WindowMagnificationController implements View.OnTouchListener
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MirrorWindowA11yDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ MirrorWindowA11yDelegate(WindowMagnificationController windowMagnificationController, int i) {
             this();

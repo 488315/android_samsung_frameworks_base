@@ -19,7 +19,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.concurrent.Executor;
 import kotlin.collections.ArraysKt___ArraysKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WindowManagerOcclusionManager$unoccludeAnimationRunner$1 extends IRemoteAnimationRunner.Stub {
     public final /* synthetic */ Executor $executor;
     public final /* synthetic */ WindowManagerOcclusionManager this$0;

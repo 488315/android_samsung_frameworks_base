@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class DisplayBrightnessMonitor {
     public final AnonymousClass1 mBioSysUiDisplayBrightnessCallback;
     public final String mBrightnessFilePath;
@@ -29,12 +28,10 @@ public final class DisplayBrightnessMonitor {
     public IFingerprintService mIFingerprintService;
     public final List mListenerList = new CopyOnWriteArrayList();
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public interface OnBrightnessListener {
         void onBrightnessChanged(int i);
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public abstract class sInstanceHolder {
         public static final DisplayBrightnessMonitor sInstance =
                 new DisplayBrightnessMonitor(

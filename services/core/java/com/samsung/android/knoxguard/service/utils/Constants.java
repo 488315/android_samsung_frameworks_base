@@ -6,7 +6,6 @@ import android.os.SystemProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Constants {
     public static final int ALARM_ACTION_RETRY_LOCK = 1;
     public static final String ALARM_TYPE = "alarm_type";
@@ -92,14 +91,12 @@ public final class Constants {
         "Error"
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockResult {
         public static final int DEFAULT = 0;
         public static final int FAILURE = 2;
         public static final int SUCCESS = 1;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Rot {
         public static final int ERROR_KG_SERVICE_CHECK_CALLER = 6000;
         public static final int ERROR_KG_SERVICE_CHECK_PACKAGE_STATE = 6001;

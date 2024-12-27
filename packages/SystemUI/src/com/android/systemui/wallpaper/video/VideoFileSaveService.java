@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class VideoFileSaveService extends Service {
     public String mVideoFileExt = "mp4";
     public int mUserId = 0;
@@ -29,7 +28,6 @@ public class VideoFileSaveService extends Service {
     };
     public final AnonymousClass2 mBinder = new AnonymousClass2();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.video.VideoFileSaveService$2, reason: invalid class name */
     public final class AnonymousClass2 extends IVideoFileSaveService$Stub {
         public AnonymousClass2() {

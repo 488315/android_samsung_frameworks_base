@@ -28,7 +28,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DcmMascotViewContainer extends LinearLayout {
     public static final String DCM_SCREEN_LOCK_SERVICE_ACTION;
     public static final boolean DEBUG;
@@ -59,7 +58,6 @@ public final class DcmMascotViewContainer extends LinearLayout {
     public final KeyguardUpdateMonitorCallback updateMonitorCallback;
     public final DcmMascotViewContainer$updateRunnable$1 updateRunnable;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

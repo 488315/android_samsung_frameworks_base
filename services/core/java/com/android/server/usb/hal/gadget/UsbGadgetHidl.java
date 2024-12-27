@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbGadgetHidl implements UsbGadgetHal {
     public final UsbDeviceManager mDeviceManager;
     public IUsbGadget mGadgetProxy;
@@ -26,7 +25,6 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
     public final IndentingPrintWriter mPw;
     public UsbGadgetCallback mUsbGadgetCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IHwBinder.DeathRecipient {
         public final IndentingPrintWriter mPw = null;
 
@@ -43,7 +41,6 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceNotification extends IServiceNotification.Stub {
         public ServiceNotification() {}
 
@@ -58,7 +55,6 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbGadgetCallback extends IUsbGadgetCallback.Stub {
         public final boolean mChargingFunctions;
         public final long mFunctions;

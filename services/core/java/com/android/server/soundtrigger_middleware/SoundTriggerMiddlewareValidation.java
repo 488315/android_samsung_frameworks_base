@@ -31,13 +31,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerMiddlewareValidation
         implements ISoundTriggerMiddlewareInternal, Dumpable {
     public final ISoundTriggerMiddlewareInternal mDelegate;
     public Map mModules;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelState {
         public final String description;
         public Activity activityState = Activity.LOADED;
@@ -45,7 +43,6 @@ public final class SoundTriggerMiddlewareValidation
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         final class Activity {
             public static final /* synthetic */ Activity[] $VALUES;
             public static final Activity ACTIVE;
@@ -105,7 +102,6 @@ public final class SoundTriggerMiddlewareValidation
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModuleState {
         public Properties properties;
         public Set sessions;
@@ -113,7 +109,6 @@ public final class SoundTriggerMiddlewareValidation
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ModuleStatus {
         public static final /* synthetic */ ModuleStatus[] $VALUES;
         public static final ModuleStatus ALIVE;
@@ -139,7 +134,6 @@ public final class SoundTriggerMiddlewareValidation
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Session extends ISoundTriggerModule.Stub {
         public final CallbackWrapper mCallbackWrapper;
         public ISoundTriggerModule mDelegate;
@@ -148,7 +142,6 @@ public final class SoundTriggerMiddlewareValidation
         public ModuleStatus mState = ModuleStatus.ALIVE;
         public final Identity mOriginatorIdentity = IdentityContext.get();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class CallbackWrapper
                 implements ISoundTriggerCallback, IBinder.DeathRecipient {
             public final ISoundTriggerCallback mCallback;

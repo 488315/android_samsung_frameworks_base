@@ -92,7 +92,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.function.IntFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BiometricService extends SystemService {
     AuthSession mAuthSession;
     public final BiometricCameraManagerImpl mBiometricCameraManager;
@@ -114,7 +113,6 @@ public final class BiometricService extends SystemService {
     ITrustManager mTrustManager;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.BiometricService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IBiometricSensorReceiver.Stub {
         public final /* synthetic */ long val$requestId;
@@ -359,7 +357,6 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.BiometricService$2, reason: invalid class name */
     public final class AnonymousClass2 implements IBiometricSysuiReceiver {
         public final SemBiometricSysUiReceiver$1 mSysUiListener = new SemBiometricSysUiManager.SysUiListener() { // from class: com.android.server.biometrics.SemBiometricSysUiReceiver$1
@@ -513,10 +510,8 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BiometricServiceWrapper extends IBiometricService.Stub {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.biometrics.BiometricService$BiometricServiceWrapper$1, reason: invalid class name */
         public final class AnonymousClass1 extends BiometricSensor {
             public AnonymousClass1(int i, int i2, int i3, IBiometricAuthenticator iBiometricAuthenticator) {
@@ -949,7 +944,6 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EnabledOnKeyguardCallback implements IBinder.DeathRecipient {
         public final IBiometricEnabledOnKeyguardCallback mCallback;
 
@@ -969,11 +963,9 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class InvalidationTracker {
         public final IInvalidationCallback mClientCallback;
         public final Set mSensorsPendingInvalidation = new ArraySet();
@@ -1034,7 +1026,6 @@ public final class BiometricService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SettingObserver extends ContentObserver {
         public final Uri BIOMETRIC_APP_ENABLED;
         public final Uri BIOMETRIC_FP_BIO_STAR_ENABLED;
@@ -1056,7 +1047,6 @@ public final class BiometricService extends SystemService {
         public final boolean mUseLegacyFaceOnlySettings;
         public final UserManager mUserManager;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.biometrics.BiometricService$SettingObserver$2, reason: invalid class name */
         public final class AnonymousClass2 extends IFaceAuthenticatorsRegisteredCallback.Stub {
             public final /* synthetic */ FaceManager val$faceManager;
@@ -1101,7 +1091,6 @@ public final class BiometricService extends SystemService {
             if (fingerprintManager != null) {
                 fingerprintManager.addAuthenticatorsRegisteredCallback(new IFingerprintAuthenticatorsRegisteredCallback.Stub() { // from class: com.android.server.biometrics.BiometricService.SettingObserver.1
 
-                    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
                     /* renamed from: com.android.server.biometrics.BiometricService$SettingObserver$1$1, reason: invalid class name and collision with other inner class name */
                     public final class C00101 extends BiometricStateListener {
                         public final /* synthetic */ int $r8$classId = 0;

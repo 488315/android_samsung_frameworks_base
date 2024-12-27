@@ -24,7 +24,6 @@ import com.android.systemui.util.time.SystemClock;
 import com.android.wm.shell.bubbles.Bubbles;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VisualInterruptionDecisionProviderImpl implements VisualInterruptionDecisionProvider {
     public final EventLog eventLog;
     public final GlobalSettings globalSettings;

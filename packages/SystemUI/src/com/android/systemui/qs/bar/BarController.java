@@ -28,7 +28,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BarController implements Dumpable, PanelScreenShotLogger.LogProvider, PanelTransitionStateListener {
     public final ArrayList mAllBarItems;
     public final ColoredBGHelper mBGColorHelper;
@@ -84,7 +83,6 @@ public final class BarController implements Dumpable, PanelScreenShotLogger.LogP
     public int mNavBarHeight = 0;
     public int mOrientation = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.bar.BarController$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public final /* synthetic */ Runnable val$animatorRunner;
@@ -96,14 +94,12 @@ public final class BarController implements Dumpable, PanelScreenShotLogger.LogP
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.bar.BarController$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener {
         public /* synthetic */ OnApplyWindowInsetsListener(BarController barController, int i) {
             this();

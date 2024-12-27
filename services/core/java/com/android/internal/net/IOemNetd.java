@@ -17,10 +17,8 @@ import com.android.internal.util.FrameworkStatsLog;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IOemNetd extends IInterface {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IOemNetd {
         @Override // com.android.internal.net.IOemNetd
         public void activateClo(String str) throws RemoteException {}
@@ -629,10 +627,8 @@ public interface IOemNetd extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IOemNetd {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         class Proxy implements IOemNetd {
             public final IBinder mRemote;
 

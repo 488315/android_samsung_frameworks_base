@@ -9,7 +9,6 @@ import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.samsung.android.audio.Rune;
 import com.samsung.android.os.SemDvfsManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DvfsHelper {
     public static DvfsHelper sInstance;
     public final DvfsManagerFactory mDvfsManagerFactory;
@@ -41,10 +40,8 @@ public final class DvfsHelper {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultDvfsManagerFactory implements DvfsManagerFactory {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DvfsManagerFactory {}
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.samsung.android.server.audio.DvfsHelper$$ExternalSyntheticLambda0] */

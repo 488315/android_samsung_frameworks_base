@@ -5,14 +5,12 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ZenData {
     private final String descriptionId;
     private final ZenMode zenMode;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ZenMode {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ZenMode[] $VALUES;
@@ -23,7 +21,6 @@ public final class ZenData {
         public static final ZenMode NO_INTERRUPTIONS = new ZenMode("NO_INTERRUPTIONS", 2, 2);
         public static final ZenMode ALARMS = new ZenMode("ALARMS", 3, 3);
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }

@@ -20,7 +20,6 @@ import com.android.server.pm.PackageManagerShellCommandDataLoader;
 
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EmbeddedWindowController {
     public final ActivityTaskManagerService mAtmService;
     public final WindowManagerGlobalLock mGlobalLock;
@@ -29,7 +28,6 @@ public final class EmbeddedWindowController {
     public final ArrayMap mWindowsByInputTransferToken = new ArrayMap();
     public final ArrayMap mWindowsByWindowToken = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EmbeddedWindow implements InputTarget {
         public final IBinder mClient;
         public final int mDisplayId;

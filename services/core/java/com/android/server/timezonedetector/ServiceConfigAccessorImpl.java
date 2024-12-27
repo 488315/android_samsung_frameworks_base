@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
     public static ServiceConfigAccessorImpl sInstance;
     public final List mConfigurationInternalListeners = new ArrayList();
@@ -73,7 +72,6 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
     public static final Duration DEFAULT_LTZP_EVENT_FILTER_AGE_THRESHOLD = Duration.ofMinutes(1);
     public static final Object SLOCK = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.timezonedetector.ServiceConfigAccessorImpl$3, reason: invalid class name */
     public final class AnonymousClass3 extends IUserRestrictionsListener.Stub {
         public final /* synthetic */ Handler val$mainThreadHandler;

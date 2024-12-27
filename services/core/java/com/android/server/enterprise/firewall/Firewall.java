@@ -61,7 +61,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Firewall extends IFirewall.Stub implements EnterpriseServiceCallback {
     public static boolean mHasIpv6FilterSupport;
     public boolean mAreRulesReloaded;
@@ -80,7 +79,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
     public final AnonymousClass1 mPackageFilterReceiver;
     public final AnonymousClass1 mUserReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.Firewall$4, reason: invalid class name */
     public final class AnonymousClass4 implements Runnable {
         public AnonymousClass4() {}
@@ -115,7 +113,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.Firewall$5, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass5 {
         public static final /* synthetic */ int[]
@@ -225,7 +222,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class DownloadBlockStatus {
         public static final /* synthetic */ DownloadBlockStatus[] $VALUES;
         public static final DownloadBlockStatus BLOCKED_BY_BLACKLIST_RULE;
@@ -256,7 +252,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Context mCtx;
         public DomainFilter mDomainFilter;
@@ -269,7 +264,6 @@ public final class Firewall extends IFirewall.Stub implements EnterpriseServiceC
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkCallback extends ConnectivityManager.NetworkCallback {
         public NetworkCallback() {}
 

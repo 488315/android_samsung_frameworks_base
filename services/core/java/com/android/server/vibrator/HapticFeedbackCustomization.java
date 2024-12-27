@@ -20,10 +20,8 @@ import com.android.modules.utils.TypedXmlPullParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class HapticFeedbackCustomization {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class CustomizationParserException extends Exception {
         private CustomizationParserException(String str) {
             super(str);

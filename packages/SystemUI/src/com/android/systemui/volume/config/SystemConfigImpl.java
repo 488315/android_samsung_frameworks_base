@@ -8,7 +8,6 @@ import kotlin.Result;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemConfigImpl {
     public final Context context;
     public final Lazy isTablet$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.config.SystemConfigImpl$isTablet$2

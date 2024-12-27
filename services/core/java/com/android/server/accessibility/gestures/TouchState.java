@@ -11,7 +11,6 @@ import com.android.server.accessibility.AccessibilityServiceConnection$$External
 import com.android.server.accessibility.AccessibilityUserState;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TouchState {
     public final AccessibilityManagerService mAms;
     public final int mDisplayId;
@@ -28,14 +27,12 @@ public final class TouchState {
     public boolean mServiceDetectsGesturesRequested = false;
     public final ReceivedPointerTracker mReceivedPointerTracker = new ReceivedPointerTracker(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PointerDownInfo {
         public long mTime;
         public float mX;
         public float mY;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReceivedPointerTracker {
         public int mLastReceivedDownEdgeFlags;
         public final PointerDownInfo[] mReceivedPointers = new PointerDownInfo[32];

@@ -10,7 +10,6 @@ import com.android.internal.org.bouncycastle.asn1.DERPrintableString;
 
 import java.security.cert.CertificateParsingException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class Asn1Utils {
     public static ASN1Sequence getAsn1SequenceFromStream(ASN1InputStream aSN1InputStream) {
         ASN1OctetString readObject = aSN1InputStream.readObject();

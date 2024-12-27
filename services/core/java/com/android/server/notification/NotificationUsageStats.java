@@ -26,7 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationUsageStats {
     public final Context mContext;
     public final AnonymousClass1 mHandler;
@@ -35,7 +34,6 @@ public final class NotificationUsageStats {
     public final ArraySet mStatExpiredkeys = new ArraySet();
     public long mLastEmitTime = SystemClock.elapsedRealtime();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AggregatedStats {
         public final AlertRateLimiter alertRate;
         public final RateEstimator enqueueRate;
@@ -379,7 +377,6 @@ public final class NotificationUsageStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImportanceHistogram {
         public static final String[] IMPORTANCE_NAMES = {"none", "min", "low", "default", "high", "max"};
         public final Context mContext;
@@ -431,7 +428,6 @@ public final class NotificationUsageStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SingleNotificationStats {
         public long airtimeCount;
         public long airtimeExpandedMs;

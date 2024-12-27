@@ -59,7 +59,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DefaultPermissionGrantPolicy {
     public static final Set ACTIVITY_RECOGNITION_PERMISSIONS;
     public static final Set ALWAYS_LOCATION_PERMISSIONS;
@@ -114,7 +113,6 @@ public final class DefaultPermissionGrantPolicy {
     public final PackageManagerInternal mServiceInternal =
             (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.permission.DefaultPermissionGrantPolicy$1, reason: invalid class name */
     public final class AnonymousClass1 extends PackageManagerWrapper {
         public AnonymousClass1() {
@@ -200,7 +198,6 @@ public final class DefaultPermissionGrantPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultPermissionGrant {
         public final boolean fixed;
         public final String name;
@@ -213,14 +210,12 @@ public final class DefaultPermissionGrantPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelayingPackageManagerCache extends PackageManagerWrapper {
         public final SparseArray mDelayedPermissionState;
         public final ArrayMap mPackageInfos;
         public final ArrayMap mPermissionInfos;
         public final SparseArray mUserContexts;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PermissionState {
             public Integer mOriginalFlags;
             public Boolean mOriginalGranted;
@@ -429,7 +424,6 @@ public final class DefaultPermissionGrantPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PackageManagerWrapper {
         public PackageManagerWrapper() {}
 

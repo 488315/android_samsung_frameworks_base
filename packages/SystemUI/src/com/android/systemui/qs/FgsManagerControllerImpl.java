@@ -92,7 +92,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FgsManagerControllerImpl implements Dumpable, FgsManagerController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final StateFlowImpl _showFooterDot;
@@ -129,7 +128,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
     public final FgsManagerControllerImpl$userTrackerCallback$1 userTrackerCallback;
     public final UserVisibleJobObserver userVisibleJobObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppItemViewHolder extends RecyclerView.ViewHolder {
         public final TextView appLabelView;
         public final TextView durationView;
@@ -145,7 +143,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppListAdapter extends RecyclerView.Adapter {
         public final Object lock = new Object();
         public List data = EmptyList.INSTANCE;
@@ -222,7 +219,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -232,7 +228,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ForegroundServiceObserver extends IForegroundServiceObserver.Stub {
         public ForegroundServiceObserver() {
         }
@@ -272,7 +267,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StartTimeAndIdentifiers {
         public final Set fgsTokens = new LinkedHashSet();
         public final Set jobSummaries = new LinkedHashSet();
@@ -331,7 +325,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class UIControl {
         public static final /* synthetic */ UIControl[] $VALUES;
         public static final UIControl HIDE_BUTTON;
@@ -362,7 +355,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UserPackage {
         public final String packageName;
         public boolean uiControlInitialized;
@@ -505,7 +497,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UserVisibleJobObserver extends IUserVisibleJobObserver.Stub {
         public UserVisibleJobObserver() {
         }
@@ -1132,7 +1123,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         return numVisibleButtonsLocked;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RunningApp {
         public CharSequence appLabel;
         public Drawable icon;

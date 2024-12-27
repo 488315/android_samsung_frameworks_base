@@ -7,7 +7,6 @@ import com.android.systemui.plugins.clocks.ZenData;
 import com.android.systemui.statusbar.policy.ZenModeController;
 import com.android.systemui.statusbar.policy.ZenModeControllerImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ClockEventController$zenModeCallback$1 implements ZenModeController.Callback {
     public final /* synthetic */ ClockEventController this$0;
 

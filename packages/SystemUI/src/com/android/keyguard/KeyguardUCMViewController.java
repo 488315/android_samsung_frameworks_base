@@ -33,7 +33,6 @@ import com.samsung.android.knox.ucm.plugin.agent.UcmAgentService;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewController {
     public static final Object syncObj = new Object();
     public String mAgentID;
@@ -60,7 +59,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
     public ProgressDialog mUnlockProgressDialog;
     public final String mVendorName;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardUCMViewController$1, reason: invalid class name */
     public final class AnonymousClass1 extends CheckUcmPin {
         public AnonymousClass1(String str) {
@@ -73,7 +71,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardUCMViewController$2, reason: invalid class name */
     public final class AnonymousClass2 extends CheckUcmPuk {
         public AnonymousClass2(String str, String str2) {
@@ -86,7 +83,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class CheckUcmPin extends Thread {
         public final String mPin;
 
@@ -123,7 +119,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class CheckUcmPuk extends Thread {
         public final String mPin;
         public final String mPuk;
@@ -161,7 +156,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateMachine {
         public int mRound;
         public int mState;
@@ -313,7 +307,6 @@ public final class KeyguardUCMViewController extends KeyguardSecPinBasedInputVie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UCMAsyncTask extends AsyncTask {
         public final int opCode = 1;
 

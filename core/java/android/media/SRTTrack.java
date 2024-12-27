@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-/* compiled from: SRTRenderer.java */
 class SRTTrack extends WebVttTrack {
     private static final int KEY_LOCAL_SETTING = 102;
     private static final int KEY_START_TIME = 7;

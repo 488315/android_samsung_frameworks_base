@@ -3,7 +3,6 @@ package com.android.systemui.popup.util;
 import com.android.systemui.BasicRune;
 import com.android.systemui.util.DeviceState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PopupUIUtil {
     public static final String ACTION_AIRPLANE_MODE_SETTINGS = "com.samsung.settings.AIRPLANE_MODE";
     public static final String ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";

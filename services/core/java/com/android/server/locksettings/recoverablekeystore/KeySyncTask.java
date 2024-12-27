@@ -31,7 +31,6 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeySyncTask implements Runnable {
     static final int SCRYPT_PARAM_N = 4096;
     static final int SCRYPT_PARAM_OUTLEN_BYTES = 32;

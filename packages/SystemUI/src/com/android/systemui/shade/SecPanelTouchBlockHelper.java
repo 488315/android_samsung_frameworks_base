@@ -23,7 +23,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecPanelTouchBlockHelper {
     public final Lazy centralSurfaces$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.SecPanelTouchBlockHelper$centralSurfaces$2
         @Override // kotlin.jvm.functions.Function0
@@ -47,7 +46,6 @@ public final class SecPanelTouchBlockHelper {
     public final AtomicInteger userChangeInProgress;
     public final SecPanelTouchBlockHelper$userTrackerCallback$1 userTrackerCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

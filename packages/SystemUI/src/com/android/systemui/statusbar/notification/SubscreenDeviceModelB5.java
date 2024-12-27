@@ -159,7 +159,6 @@ import notification.src.com.android.systemui.CloudPromptProcessor;
 import notification.src.com.android.systemui.PromptCallback;
 import notification.src.com.android.systemui.SrPromptProcessor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final String DISPLAY_LANG_CODE_DELIMITER;
@@ -219,7 +218,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
     public LinearLayout suggestResponsesBtn;
     public CharSequence titleText;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -229,7 +227,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyguardActionInfo {
         public boolean isShowBouncer;
         public int mAction;
@@ -238,7 +235,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         public NotificationEntry mEntry;
         public SubscreenParentItemViewHolder mSubscreenParentItemViewHolder;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -253,7 +249,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LlmLanguage {
         public String language;
         public String languageDisplayName;
@@ -314,7 +309,6 @@ public final class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartReplyData {
         public String prevPrompt;
         public String replyText;

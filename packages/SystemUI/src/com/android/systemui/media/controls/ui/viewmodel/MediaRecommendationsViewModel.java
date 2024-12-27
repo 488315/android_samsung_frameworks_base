@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaRecommendationsViewModel {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context applicationContext;
@@ -17,7 +16,6 @@ public final class MediaRecommendationsViewModel {
     public final MediaUiEventLogger logger;
     public final Flow mediaRecsCard;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

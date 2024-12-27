@@ -17,7 +17,6 @@ import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SideFpsEventHandler implements View.OnClickListener {
     public final AccessibilityManager mAccessibilityManager;
     public final Context mContext;
@@ -26,12 +25,10 @@ public final class SideFpsEventHandler implements View.OnClickListener {
     public final PowerManager mPowerManager;
     public final AtomicBoolean mSideFpsEventHandlerReady = new AtomicBoolean(false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.policy.SideFpsEventHandler$2, reason: invalid class name */
     public final class AnonymousClass2 extends IFingerprintAuthenticatorsRegisteredCallback.Stub {
         public final /* synthetic */ FingerprintManager val$fingerprintManager;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.policy.SideFpsEventHandler$2$1, reason: invalid class name */
         public final class AnonymousClass1 extends BiometricStateListener {
             public SideFpsEventHandler$2$1$$ExternalSyntheticLambda0 mStateRunnable = null;
@@ -87,7 +84,6 @@ public final class SideFpsEventHandler implements View.OnClickListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DialogProvider {
     }
 

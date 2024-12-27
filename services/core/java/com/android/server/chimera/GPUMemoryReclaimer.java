@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GPUMemoryReclaimer {
     public final Dump mDump;
     public final Utils mUtils;
@@ -49,7 +48,6 @@ public final class GPUMemoryReclaimer {
     public SwapInHandler mSwapInHandler = null;
     public SwapInHandler mSwapOutHandler = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Dump {
         public GPUMemoryReclaimer self;
 
@@ -174,7 +172,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KGSLPlugin extends VendorPlugin {
         public final String TAG;
         public final BoostFramework mPerf;
@@ -284,7 +281,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReclaimableTask {
         public final boolean mIsSuccess;
         public final long[] mMeminfoRaw;
@@ -346,7 +342,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SGPUPlugin extends VendorPlugin {
         public static final String[] mSkiplistPackages = {"com.sec.android.gallery3d"};
         public final String TAG = "GMR ".concat(SGPUPlugin.class.getSimpleName());
@@ -465,7 +460,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SwapInHandler extends Handler {
         public final /* synthetic */ int $r8$classId;
         public final GPUMemoryReclaimer self;
@@ -526,7 +520,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Utils {
         public static String readFileToString(String str) {
             FileReader fileReader = new FileReader(str);
@@ -538,7 +531,6 @@ public final class GPUMemoryReclaimer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class VendorPlugin {
         public boolean mIsInitialized = false;
         public GPUMemoryReclaimer self;

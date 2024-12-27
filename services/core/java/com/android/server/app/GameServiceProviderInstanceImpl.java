@@ -51,7 +51,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GameServiceProviderInstanceImpl {
     public final IActivityManager mActivityManager;
     public final ActivityManagerInternal mActivityManagerInternal;
@@ -125,7 +124,6 @@ public final class GameServiceProviderInstanceImpl {
     public final ConcurrentHashMap mPidToPackageMap = new ConcurrentHashMap();
     public final ConcurrentHashMap mPackageNameToProcessCountMap = new ConcurrentHashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameServiceProviderInstanceImpl$2, reason: invalid class name */
     public final class AnonymousClass2 implements ServiceConnector.ServiceLifecycleCallbacks {
         public AnonymousClass2() {}
@@ -158,7 +156,6 @@ public final class GameServiceProviderInstanceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameServiceProviderInstanceImpl$4, reason: invalid class name */
     public final class AnonymousClass4 extends TaskStackListener {
         public AnonymousClass4() {}
@@ -197,7 +194,6 @@ public final class GameServiceProviderInstanceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameServiceProviderInstanceImpl$5, reason: invalid class name */
     public final class AnonymousClass5 extends IProcessObserver.Stub {
         public AnonymousClass5() {}
@@ -217,7 +213,6 @@ public final class GameServiceProviderInstanceImpl {
         public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameServiceProviderInstanceImpl$6, reason: invalid class name */
     public final class AnonymousClass6 extends IGameServiceController.Stub {
         public AnonymousClass6() {}
@@ -229,7 +224,6 @@ public final class GameServiceProviderInstanceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameServiceProviderInstanceImpl$7, reason: invalid class name */
     public final class AnonymousClass7 extends IGameSessionController.Stub {
         public AnonymousClass7() {}

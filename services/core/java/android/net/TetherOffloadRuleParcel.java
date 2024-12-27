@@ -6,7 +6,6 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class TetherOffloadRuleParcel implements Parcelable {
     public static final Parcelable.Creator CREATOR = new AnonymousClass1();
     public byte[] destination;
@@ -17,7 +16,6 @@ public class TetherOffloadRuleParcel implements Parcelable {
     public int prefixLength = 0;
     public int pmtu = NetworkConstants.ETHER_MTU;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: android.net.TetherOffloadRuleParcel$1, reason: invalid class name */
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator

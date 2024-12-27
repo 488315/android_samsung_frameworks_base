@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CocktailBarSettings {
     public final Context mContext;
     public final int mCurrentUserId;
@@ -34,7 +33,6 @@ public final class CocktailBarSettings {
     public ArrayList mEnabledCocktailListCache = new ArrayList();
     public final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailInfo {
         public final int cocktailId;
         public final String packageName;

@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import com.android.systemui.res.R$styleable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DelayableMarqueeTextView extends SafeMarqueeTextView {
     public static final long DEFAULT_MARQUEE_DELAY = 2000;
     private final Runnable enableMarquee;
@@ -17,7 +16,6 @@ public final class DelayableMarqueeTextView extends SafeMarqueeTextView {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

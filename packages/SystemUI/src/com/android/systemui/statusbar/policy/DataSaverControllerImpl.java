@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import com.android.systemui.statusbar.policy.DataSaverController;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DataSaverControllerImpl implements DataSaverController {
     public final NetworkPolicyManager mPolicyManager;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -16,7 +15,6 @@ public final class DataSaverControllerImpl implements DataSaverController {
     public int mIsDataSavingOn = -1;
     public final AnonymousClass1 mPolicyListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.policy.DataSaverControllerImpl$1, reason: invalid class name */
     public final class AnonymousClass1 extends NetworkPolicyManager.Listener {
         public AnonymousClass1() {

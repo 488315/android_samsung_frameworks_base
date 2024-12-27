@@ -45,7 +45,6 @@ import java.util.function.IntFunction;
 import java.util.stream.IntStream;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecMediaHost implements StatusBarStateController.StateListener, ConfigurationController.ConfigurationListener {
     public int mBarState;
     public final ColoredBGHelper mBgColorHelper;
@@ -76,7 +75,6 @@ public final class SecMediaHost implements StatusBarStateController.StateListene
     public final WakefulnessLifecycle mWakefulnessLifeCycle;
     public CoverMusicWidgetController mWidgetController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.SecMediaHost$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public final /* synthetic */ SecMediaPlayerData val$playerData;
@@ -86,7 +84,6 @@ public final class SecMediaHost implements StatusBarStateController.StateListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface MediaPanelVisibilityListener {
         void onMediaVisibilityChanged(boolean z);
     }
@@ -499,7 +496,6 @@ public final class SecMediaHost implements StatusBarStateController.StateListene
         this.mPagerMargin = this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_media_side_padding);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.SecMediaHost$2, reason: invalid class name */
     public final class AnonymousClass2 implements MediaDataManager.Listener {
         public AnonymousClass2() {

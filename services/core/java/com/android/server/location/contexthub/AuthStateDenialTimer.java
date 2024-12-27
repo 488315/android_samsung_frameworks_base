@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AuthStateDenialTimer {
     public static final long TIMEOUT_MS = TimeUnit.SECONDS.toMillis(60);
     public boolean mCancelled = false;
@@ -18,7 +17,6 @@ public final class AuthStateDenialTimer {
     public final long mNanoAppId;
     public long mStopTimeInFuture;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CountDownHandler extends Handler {
         public CountDownHandler(Looper looper) {
             super(looper);

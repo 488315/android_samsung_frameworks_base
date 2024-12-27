@@ -29,7 +29,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Magnification implements CoreStartable, CommandQueue.Callbacks {
     static final int DELAY_SHOW_MAGNIFICATION_TIMEOUT_MS = 300;
     public final AccessibilityLogger mA11yLogger;
@@ -49,21 +48,18 @@ public final class Magnification implements CoreStartable, CommandQueue.Callback
     DisplayIdIndexSupplier mWindowMagnificationControllerSupplier;
     final WindowMagnifierCallback mWindowMagnifierCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.Magnification$3, reason: invalid class name */
     public final class AnonymousClass3 implements WindowMagnifierCallback {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.Magnification$4, reason: invalid class name */
     public final class AnonymousClass4 implements MagnificationSettingsController.Callback {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FullscreenMagnificationControllerSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final Executor mExecutor;
@@ -87,7 +83,6 @@ public final class Magnification implements CoreStartable, CommandQueue.Callback
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingsSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final SecureSettings mSecureSettings;
@@ -108,7 +103,6 @@ public final class Magnification implements CoreStartable, CommandQueue.Callback
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WindowMagnificationControllerSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final Handler mHandler;

@@ -2,7 +2,6 @@ package com.android.server.usb.descriptors;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbMidiBlockParser {
     public ArrayList mGroupTerminalBlocks;
     public int mHeaderDescriptorSubtype;
@@ -10,7 +9,6 @@ public final class UsbMidiBlockParser {
     public int mHeaderLength;
     public int mTotalLength;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GroupTerminalBlock {
         public int mBlockItem;
         public int mDescriptorSubtype;

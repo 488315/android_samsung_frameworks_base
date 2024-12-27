@@ -11,7 +11,6 @@ import android.util.Slog;
 
 import com.android.server.LocalServices;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentProtectionConsentManager {
     public volatile boolean mCachedContentProtectionUserConsent;
     public volatile boolean mCachedPackageVerifierConsent;
@@ -22,7 +21,6 @@ public final class ContentProtectionConsentManager {
             (DevicePolicyManagerInternal)
                     LocalServices.getService(DevicePolicyManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

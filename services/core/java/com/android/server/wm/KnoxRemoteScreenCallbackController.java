@@ -12,7 +12,6 @@ import com.samsung.android.knox.remotecontrol.IRemoteScreenWatcherCallback;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxRemoteScreenCallbackController {
     public DisplayContent mRecordedWC;
     public IRemoteInjection mRemoteService;
@@ -21,7 +20,6 @@ public final class KnoxRemoteScreenCallbackController {
     public final ArrayMap mLastInvokedStateByUid = new ArrayMap();
     public boolean mRemoteScreenWatcherCallbackRegistered = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Callback implements IBinder.DeathRecipient {
         public final IScreenRecordingCallback mCallback;
         public final int mUid;
@@ -37,7 +35,6 @@ public final class KnoxRemoteScreenCallbackController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteScreenWatcherCallback extends IRemoteScreenWatcherCallback.Stub {
         public RemoteScreenWatcherCallback() {}
 

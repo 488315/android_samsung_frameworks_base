@@ -92,7 +92,6 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class CardStackView extends FrameLayout {
     public static final PathInterpolator alphaInterpolator;
     public static final PathInterpolator collapseRootInterpolator;
@@ -150,7 +149,6 @@ public class CardStackView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class CardSwipeState {
         public static final /* synthetic */ CardSwipeState[] $VALUES;
         public static final CardSwipeState HORIZONTAL;
@@ -181,7 +179,6 @@ public class CardStackView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -193,7 +190,6 @@ public class CardStackView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class GutsControlState {
         public static final /* synthetic */ GutsControlState[] $VALUES;
         public static final GutsControlState INIT;
@@ -221,7 +217,6 @@ public class CardStackView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
         public final boolean onSingleTapUp(MotionEvent motionEvent) {
@@ -229,7 +224,6 @@ public class CardStackView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ViewStatus {
         public final float baseViewAlpha;
         public final Context context;

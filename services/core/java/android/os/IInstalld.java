@@ -5,7 +5,6 @@ import android.os.storage.CrateMetadata;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IInstalld extends IInterface {
     public static final int FLAG_CLEAR_APP_DATA_KEEP_ART_PROFILES = 131072;
     public static final int FLAG_CLEAR_CACHE_ONLY = 16;
@@ -21,7 +20,6 @@ public interface IInstalld extends IInterface {
     public static final int FLAG_STORAGE_SDK = 8;
     public static final int FLAG_USE_QUOTA = 4096;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IInstalld {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -377,11 +375,9 @@ public interface IInstalld extends IInterface {
         public void tryMountDataMirror(String str) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IFsveritySetupAuthToken extends IInterface {
         public static final String DESCRIPTOR = "android.os.IInstalld.IFsveritySetupAuthToken";
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public class Default implements IFsveritySetupAuthToken {
             @Override // android.os.IInterface
             public IBinder asBinder() {
@@ -389,10 +385,8 @@ public interface IInstalld extends IInterface {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public abstract class Stub extends Binder implements IFsveritySetupAuthToken {
 
-            /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             public final class Proxy implements IFsveritySetupAuthToken {
                 public IBinder mRemote;
 
@@ -438,7 +432,6 @@ public interface IInstalld extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IInstalld {
         public static final String DESCRIPTOR = "android.os.IInstalld";
         static final int TRANSACTION_cleanupInvalidPackageDirs = 49;
@@ -514,7 +507,6 @@ public interface IInstalld extends IInterface {
         static final int TRANSACTION_snapshotAppData = 42;
         static final int TRANSACTION_tryMountDataMirror = 46;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IInstalld {
             public IBinder mRemote;
 

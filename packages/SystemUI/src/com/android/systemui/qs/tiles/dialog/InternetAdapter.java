@@ -30,7 +30,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InternetAdapter extends RecyclerView.Adapter {
     public final CoroutineScope mCoroutineScope;
     public View mHolderView;
@@ -39,7 +38,6 @@ public final class InternetAdapter extends RecyclerView.Adapter {
     public List mWifiEntries;
     protected int mWifiEntriesCount;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class InternetViewHolder extends RecyclerView.ViewHolder {
         public final Context mContext;
         public final CoroutineScope mCoroutineScope;

@@ -27,7 +27,6 @@ import com.android.systemui.edgelighting.plus.NotificationELPlusEffect;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.util.SemLog;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgeLightingDialog extends Dialog implements IEdgeLightingController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public AODShowState mAODShowState;
@@ -43,7 +42,6 @@ public final class EdgeLightingDialog extends Dialog implements IEdgeLightingCon
     public IEdgeLightingWindowCallback mWindowCallback;
     public final int mWindowType;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.effect.container.EdgeLightingDialog$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {
@@ -61,7 +59,6 @@ public final class EdgeLightingDialog extends Dialog implements IEdgeLightingCon
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AODShowState extends ContentObserver {
         public AODShowState(Handler handler) {
             super(handler);

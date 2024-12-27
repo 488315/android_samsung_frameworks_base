@@ -7,7 +7,6 @@ import com.android.internal.util.ContrastColorUtil;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.collection.ListEntry;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationUtils {
     public static int getFontScaledHeight(int i, Context context) {
         return (int) (context.getResources().getDimensionPixelSize(i) * Math.max(1.0f, context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density));

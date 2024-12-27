@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DreamController {
     public final Intent mCloseNotificationShadeIntent;
     public final Bundle mCloseNotificationShadeOptions;
@@ -48,7 +47,6 @@ public final class DreamController {
     public final Intent mDreamingStoppedIntent =
             new Intent("android.intent.action.DREAMING_STOPPED").addFlags(1342177280);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DreamRecord implements IBinder.DeathRecipient, ServiceConnection {
         public IAppTask mAppTask;
         public boolean mBound;

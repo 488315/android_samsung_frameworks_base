@@ -14,14 +14,12 @@ import com.android.server.input.KeyboardMetricsCollector;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.knoxguard.service.utils.Constants;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DlnaController {
     public final Context mContext;
     public SemDlnaDevice mDevice = new SemDlnaDevice();
     public DlnaClientDeathMonitor mDlnaMonitor;
     public final Handler mHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DlnaController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -84,7 +82,6 @@ public final class DlnaController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DlnaClientDeathMonitor implements IBinder.DeathRecipient {
         public final IBinder mBinder;
 

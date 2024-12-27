@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundEffectsHelper {
     public final Context mContext;
     public final List mDefaultResources;
@@ -46,7 +45,6 @@ public final class SoundEffectsHelper {
     public final List mResources = new ArrayList();
     public boolean mUpdateSystemSound = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.SoundEffectsHelper$1, reason: invalid class name */
     public final class AnonymousClass1 implements OnEffectsLoadCompleteHandler {
         public final /* synthetic */ int $r8$classId;
@@ -76,7 +74,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.SoundEffectsHelper$3, reason: invalid class name */
     public final class AnonymousClass3 implements MediaPlayer.OnCompletionListener {
         @Override // android.media.MediaPlayer.OnCompletionListener
@@ -85,7 +82,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.SoundEffectsHelper$4, reason: invalid class name */
     public final class AnonymousClass4 implements MediaPlayer.OnErrorListener {
         @Override // android.media.MediaPlayer.OnErrorListener
@@ -95,12 +91,10 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnEffectsLoadCompleteHandler {
         void run(boolean z);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Resource {
         public final String mFileName;
         public boolean mHasSituationVolume;
@@ -112,7 +106,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SfxHandler extends Handler {
         public SfxHandler() {}
 
@@ -273,7 +266,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SfxWorker extends Thread {
         public SfxWorker() {
             super("AS.SfxWorker");
@@ -290,7 +282,6 @@ public final class SoundEffectsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundPoolLoader implements SoundPool.OnLoadCompleteListener {
         public final List mLoadCompleteHandlers = new ArrayList();
 

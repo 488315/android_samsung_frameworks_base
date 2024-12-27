@@ -2,10 +2,8 @@ package com.android.systemui.qs.tiles.impl.sensorprivacy.ui;
 
 import com.android.systemui.R;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface SensorPrivacyTileResources {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CameraPrivacyTileResources implements SensorPrivacyTileResources {
         public static final CameraPrivacyTileResources INSTANCE = new CameraPrivacyTileResources();
 
@@ -35,7 +33,6 @@ public interface SensorPrivacyTileResources {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MicrophonePrivacyTileResources implements SensorPrivacyTileResources {
         public static final MicrophonePrivacyTileResources INSTANCE = new MicrophonePrivacyTileResources();
 

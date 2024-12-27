@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaDeviceInfo implements MediaInfo {
     public static final Companion Companion = new Companion(null);
     public static final Lazy empty$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.entity.MediaDeviceInfo$Companion$empty$2
@@ -31,7 +30,6 @@ public final class MediaDeviceInfo implements MediaInfo {
     public final String packageName;
     public final CharSequence title;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

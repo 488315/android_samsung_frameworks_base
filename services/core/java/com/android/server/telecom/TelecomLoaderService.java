@@ -35,7 +35,6 @@ import com.samsung.android.telecom.SamsungTelecomServiceConnection;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TelecomLoaderService extends SystemService {
     public static final ComponentName SERVICE_COMPONENT =
             new ComponentName(
@@ -48,7 +47,6 @@ public final class TelecomLoaderService extends SystemService {
     public TelecomServiceConnection mServiceConnection;
     public InternalServiceRepository mServiceRepo;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TelecomServiceConnection implements ServiceConnection {
         public TelecomServiceConnection() {}
 

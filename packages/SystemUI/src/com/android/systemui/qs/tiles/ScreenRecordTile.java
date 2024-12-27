@@ -32,7 +32,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenRecordTile extends QSTileImpl implements RecordingController.RecordingStateChangeCallback {
     public final RecordingController mController;
     public final DialogTransitionAnimator mDialogTransitionAnimator;
@@ -44,7 +43,6 @@ public final class ScreenRecordTile extends QSTileImpl implements RecordingContr
     public final PanelInteractor mPanelInteractor;
     public final UserContextProvider mUserContextProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Callback implements RecordingController.RecordingStateChangeCallback {
         public /* synthetic */ Callback(ScreenRecordTile screenRecordTile, int i) {
             this();

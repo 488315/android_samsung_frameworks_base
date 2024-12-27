@@ -17,7 +17,6 @@ import com.android.settingslib.wifi.WifiStatusTracker;
 import com.android.systemui.R;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WifiSignalController extends SignalController {
     public final Handler mBgHandler;
     public final SignalIcon$MobileIconGroup mCarrierMergedWifiIconGroup;
@@ -26,7 +25,6 @@ public final class WifiSignalController extends SignalController {
     public final WifiManager mWifiManager;
     public final WifiStatusTracker mWifiTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WifiTrafficStateCallback implements WifiManager.TrafficStateCallback {
         public /* synthetic */ WifiTrafficStateCallback(WifiSignalController wifiSignalController, int i) {
             this();

@@ -89,7 +89,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UdfpsController implements DozeReceiver, Dumpable {
     public final AccessibilityManager mAccessibilityManager;
     public final ActivityTransitionAnimator mActivityTransitionAnimator;
@@ -151,7 +150,6 @@ public final class UdfpsController implements DozeReceiver, Dumpable {
     public boolean mPointerPilfered = false;
     public final Set mCallbacks = new HashSet();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.UdfpsController$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$biometrics$udfps$InteractionEvent;
@@ -178,7 +176,6 @@ public final class UdfpsController implements DozeReceiver, Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onFingerDown();
 
@@ -628,7 +625,6 @@ public final class UdfpsController implements DozeReceiver, Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UdfpsOverlayController extends IUdfpsOverlayController.Stub {
         public UdfpsOverlayController() {
         }

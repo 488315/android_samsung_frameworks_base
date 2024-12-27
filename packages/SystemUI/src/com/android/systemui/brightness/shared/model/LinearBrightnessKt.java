@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class LinearBrightnessKt {
     public static final String formatBrightness(float f) {
         return String.format("%.3f", Arrays.copyOf(new Object[]{Float.valueOf(f)}, 1));

@@ -11,7 +11,6 @@ import com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener;
 
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class UvdmSendExecutor {
     public boolean mIsEnabled;
     public IResponseListener mListener;
@@ -19,7 +18,6 @@ public abstract class UvdmSendExecutor {
     public ExecutorHandler mRequestProvider = new ExecutorHandler();
     public UvdmFileHelper mUvdmFileHelper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExecutorHandler {
         public final String REQUEST_THREAD_NAME =
                 UUID.randomUUID().toString() + "REQUEST_THREAD_NAME";

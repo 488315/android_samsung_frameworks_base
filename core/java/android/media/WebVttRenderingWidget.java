@@ -17,7 +17,6 @@ import com.android.internal.widget.SubtitleView;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/* compiled from: WebVttRenderer.java */
 class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.RenderingWidget {
     private static final boolean DEBUG = false;
     private static final int DEBUG_CUE_BACKGROUND = -2130771968;
@@ -349,7 +348,6 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
     }
 
-    /* compiled from: WebVttRenderer.java */
     private static class RegionLayout extends LinearLayout {
         private CaptioningManager.CaptionStyle mCaptionStyle;
         private float mFontSize;
@@ -441,7 +439,6 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
     }
 
-    /* compiled from: WebVttRenderer.java */
     private static class CueLayout extends LinearLayout {
         private boolean mActive;
         private CaptioningManager.CaptionStyle mCaptionStyle;
@@ -581,7 +578,6 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
     }
 
-    /* compiled from: WebVttRenderer.java */
     private static class SpanLayout extends SubtitleView {
         private final SpannableStringBuilder mBuilder;
         private final TextTrackCueSpan[] mSpans;

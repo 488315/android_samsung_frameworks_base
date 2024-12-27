@@ -6,12 +6,10 @@ import android.text.TextUtils;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GameServiceConfiguration {
     public final GameServiceComponentConfiguration mGameServiceComponentConfiguration;
     public final String mPackageName;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GameServiceComponentConfiguration {
         public final ComponentName mGameServiceComponentName;
         public final ComponentName mGameSessionServiceComponentName;

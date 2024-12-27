@@ -183,7 +183,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub implements EnterpriseServiceCallback {
     public static final String ACTION_AIR_COMMAND_STATUS_CHANGED = "com.samsung.android.knox.intent.action.AIR_COMMAND_STATUS_CHANGED";
     public static final String ACTION_CUSTOM_DEVICE_SPEAKER_ENABLED = "com.samsung.android.knox.intent.action.SET_DEVICE_SPEAKER_ENABLED";
@@ -375,7 +374,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
     public static final Uri CONTENT_URI = Uri.parse("content://com.sec.android.app.launcher.settings/favorites?Notify=true");
     public static final Uri CONTENT_URI_ZERO = Uri.parse("content://com.sec.android.app.launcher.providers.LauncherProvider/favorites?Notify=true");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetPPTask implements Callable {
         public GetPPTask() {
         }
@@ -386,7 +384,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public final Context mContext;
 
@@ -467,7 +464,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KioskHandler extends Handler {
         public KioskHandler(Looper looper) {
             super(looper);
@@ -498,7 +494,6 @@ public final class KnoxCustomManagerService extends IKnoxCustomManager.Stub impl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemUIAdapterCallbackDeathRecipient implements IBinder.DeathRecipient {
         public int key;
 

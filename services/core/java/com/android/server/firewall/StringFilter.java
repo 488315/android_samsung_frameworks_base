@@ -7,7 +7,6 @@ import android.os.PatternMatcher;
 
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class StringFilter implements Filter {
     public final AnonymousClass1 mValueProvider;
     public static final AnonymousClass1 COMPONENT = new AnonymousClass1("component", 0);
@@ -22,7 +21,6 @@ public abstract class StringFilter implements Filter {
     public static final AnonymousClass1 HOST = new AnonymousClass1("host", 9);
     public static final AnonymousClass1 PATH = new AnonymousClass1("path", 1);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.firewall.StringFilter$1, reason: invalid class name */
     public final class AnonymousClass1 extends FilterFactory {
         public final /* synthetic */ int $r8$classId;
@@ -153,7 +151,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContainsFilter extends StringFilter {
         public final String mFilterValue;
 
@@ -168,7 +165,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EqualsFilter extends StringFilter {
         public final String mFilterValue;
 
@@ -183,7 +179,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IsNullFilter extends StringFilter {
         public final boolean mIsNull;
 
@@ -203,7 +198,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PatternStringFilter extends StringFilter {
         public final PatternMatcher mPattern;
 
@@ -218,7 +212,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RegexFilter extends StringFilter {
         public final Pattern mPattern;
 
@@ -233,7 +226,6 @@ public abstract class StringFilter implements Filter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartsWithFilter extends StringFilter {
         public final String mFilterValue;
 

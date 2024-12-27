@@ -11,14 +11,12 @@ import android.view.View;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TurbulenceNoiseView extends View {
     public ValueAnimator currentAnimator;
     public TurbulenceNoiseAnimationConfig noiseConfig;
     public final Paint paint;
     public TurbulenceNoiseShader turbulenceNoiseShader;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

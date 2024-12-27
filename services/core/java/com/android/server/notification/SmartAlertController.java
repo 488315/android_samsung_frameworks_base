@@ -24,7 +24,6 @@ import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SmartAlertController {
     public final IntentFilter filter;
     public final Context mContext;
@@ -72,7 +71,6 @@ public final class SmartAlertController {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.SmartAlertController$1, reason: invalid class name */
     public final class AnonymousClass1 implements SemMotionEventListener {
         public AnonymousClass1() {}
@@ -88,7 +86,6 @@ public final class SmartAlertController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.SmartAlertController$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ ArrayList val$notiList;
@@ -150,7 +147,6 @@ public final class SmartAlertController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.SmartAlertController$3, reason: invalid class name */
     public final class AnonymousClass3 extends Thread {
         public AnonymousClass3() {}
@@ -177,7 +173,6 @@ public final class SmartAlertController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SmartAlertSettingObserver extends ContentObserver {
         public SmartAlertSettingObserver(Handler handler) {
             super(handler);

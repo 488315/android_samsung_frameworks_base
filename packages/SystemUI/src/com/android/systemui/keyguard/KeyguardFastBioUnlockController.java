@@ -39,7 +39,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler {
     public static final int BOOSTER_HINT;
     public static final int BOOSTER_TIMEOUT;
@@ -165,7 +164,6 @@ public final class KeyguardFastBioUnlockController implements MessageQueue.IdleH
     };
     public final KeyguardFastBioUnlockController$updateBrightnessRunnable$1 updateBrightnessRunnable = new KeyguardFastBioUnlockController$updateBrightnessRunnable$1(this);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -215,7 +213,6 @@ public final class KeyguardFastBioUnlockController implements MessageQueue.IdleH
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DelayedActionParams {
         public final Function0 action;
         public long atTime;
@@ -265,7 +262,6 @@ public final class KeyguardFastBioUnlockController implements MessageQueue.IdleH
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Task implements Runnable {
         public final Runnable runnable;
         public final long startTime = System.currentTimeMillis();

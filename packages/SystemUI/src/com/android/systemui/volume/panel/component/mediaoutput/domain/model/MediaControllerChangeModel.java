@@ -8,10 +8,8 @@ import android.os.Bundle;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface MediaControllerChangeModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AudioInfoChanged implements MediaControllerChangeModel {
         public final MediaController.PlaybackInfo info;
 
@@ -35,7 +33,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExtrasChanged implements MediaControllerChangeModel {
         public final Bundle extras;
 
@@ -63,7 +60,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MetadataChanged implements MediaControllerChangeModel {
         public final MediaMetadata metadata;
 
@@ -91,7 +87,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PlaybackStateChanged implements MediaControllerChangeModel {
         public final PlaybackState state;
 
@@ -119,7 +114,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class QueueChanged implements MediaControllerChangeModel {
         public final List queue;
 
@@ -147,7 +141,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class QueueTitleChanged implements MediaControllerChangeModel {
         public final CharSequence title;
 
@@ -175,7 +168,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SessionDestroyed implements MediaControllerChangeModel {
         public static final SessionDestroyed INSTANCE = new SessionDestroyed();
 
@@ -195,7 +187,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SessionEvent implements MediaControllerChangeModel {
         public final String event;
         public final Bundle extras;

@@ -21,14 +21,12 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class RemoteCredentialService extends ServiceConnector.Impl {
     public static final /* synthetic */ int $r8$clinit = 0;
     private ProviderCallbacks mCallback;
     private final ComponentName mComponentName;
     private AtomicBoolean mOngoingRequest;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProviderCallbacks {
         void onProviderCancellable(ICancellationSignal iCancellationSignal);
 

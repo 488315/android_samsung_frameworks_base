@@ -42,7 +42,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WirelessKeyboardMouseShare {
     public final Object innerLock;
     public BluetoothAdapter mAdapter;
@@ -85,7 +84,6 @@ public final class WirelessKeyboardMouseShare {
     public final SparseArray mInputReportCache = new SparseArray();
     public final SparseArray mOutputReportCache = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.WirelessKeyboardMouseShare$1, reason: invalid class name */
     public final class AnonymousClass1 implements Executor {
         @Override // java.util.concurrent.Executor
@@ -94,7 +92,6 @@ public final class WirelessKeyboardMouseShare {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Mouse {
         public final /* synthetic */ int $r8$classId;
         public final byte[] mBuffer;
@@ -177,12 +174,10 @@ public final class WirelessKeyboardMouseShare {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReportData {
         public byte[] data;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatusInfo {
         public int mConnectionState = 0;
         public String mPluggedDeviceToString = "null";
@@ -209,7 +204,6 @@ public final class WirelessKeyboardMouseShare {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WirelessKeyboardMouseShareHandler extends Handler {
         public WirelessKeyboardMouseShareHandler(Looper looper) {
             super(looper, null, true);

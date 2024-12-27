@@ -34,7 +34,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRepository {
     public final CoroutineDispatcher bgDispatcher;
     public final BroadcastDispatcher broadcastDispatcher;
@@ -55,7 +54,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
     });
     public final SecureSettings secureSettings;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -82,14 +80,12 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new FlowKt$emitOnStart$1(null), BroadcastDispatcher.broadcastFlow$default(this.broadcastDispatcher, new IntentFilter("android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED"), userInfo.getUserHandle(), 0, null, 12));
         return new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserInfo $user$inlined;
                 public final /* synthetic */ CommunalSettingsRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getAllowedByDevicePolicy$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -200,14 +196,12 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new CommunalSettingsRepositoryImpl$getEnabledByUser$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.secureSettings, userInfo.id, "glanceable_hub_enabled"));
         final Flow flow = new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledByUser$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledByUser$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserInfo $user$inlined;
                 public final /* synthetic */ CommunalSettingsRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledByUser$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -308,13 +302,11 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         final DisabledReason disabledReason = DisabledReason.DISABLED_REASON_USER_SETTING;
         Flow flow2 = new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ DisabledReason $reason$inlined;
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -409,13 +401,11 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         final DisabledReason disabledReason2 = DisabledReason.DISABLED_REASON_DEVICE_POLICY;
         final Flow[] flowArr = {flow2, new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ DisabledReason $reason$inlined;
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryKt$mapToReason$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -502,7 +492,6 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         }};
         final Flow flow3 = new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$combine$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -562,12 +551,10 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         };
         final Flow flow4 = new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -661,12 +648,10 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         };
         return FlowKt.flowOn(new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getEnabledState$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -757,14 +742,12 @@ public final class CommunalSettingsRepositoryImpl implements CommunalSettingsRep
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new CommunalSettingsRepositoryImpl$getWidgetCategories$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.secureSettings, userInfo.id, "glanceable_hub_content_setting"));
         return FlowKt.flowOn(new Flow() { // from class: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getWidgetCategories$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getWidgetCategories$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ UserInfo $user$inlined;
                 public final /* synthetic */ CommunalSettingsRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl$getWidgetCategories$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

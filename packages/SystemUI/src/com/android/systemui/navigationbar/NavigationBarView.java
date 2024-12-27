@@ -82,7 +82,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NavigationBarView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public AutoHideController mAutoHideController;
@@ -134,14 +133,12 @@ public class NavigationBarView extends FrameLayout {
     public boolean mWakeAndUnlocking;
     public final NavBarStateManager navBarStateManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.NavigationBarView$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NavTransitionListener implements LayoutTransition.TransitionListener {
         public boolean mBackTransitioning;
         public long mDuration;

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UidObserverController {
     public final Handler mHandler;
     public int mUidChangeDispatchCount;
@@ -38,7 +37,6 @@ public final class UidObserverController {
             };
     public final ActiveUids mValidateUids = new ActiveUids(null, false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChangeRecord {
         public int capability;
         public int change;
@@ -61,7 +59,6 @@ public final class UidObserverController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidObserverRegistration {
         public static final int[] ORIG_ENUMS = {4, 8, 2, 1, 32, 64};
         public static final int[] PROTO_ENUMS = {3, 4, 2, 1, 6, 7};

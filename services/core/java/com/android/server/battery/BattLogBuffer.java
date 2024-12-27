@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BattLogBuffer {
     public static final LogBuffer mEventLogBuffer = new LogBuffer("EventLogBuffer", 20);
     public static final LogBuffer mSleepChargingLogBuffer =
@@ -18,7 +17,6 @@ public abstract class BattLogBuffer {
     public static final LogBuffer mBattActionChangedLogBuffer =
             new LogBuffer("BattActionChangedLogBuffer", 20);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogBuffer {
         public static final DateTimeFormatter FORMATTER =
                 DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");

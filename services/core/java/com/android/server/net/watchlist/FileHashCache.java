@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FileHashCache {
     public static boolean sLoggedWtf = false;
     static String sPersistFileName = "/data/system/file_hash_cache";
@@ -33,7 +32,6 @@ public final class FileHashCache {
     public final FileHashCache$$ExternalSyntheticLambda0 mLoadTask;
     public final FileHashCache$$ExternalSyntheticLambda0 mSaveTask;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Entry {
         public final long mLastModified;
         public final byte[] mSha256Hash;

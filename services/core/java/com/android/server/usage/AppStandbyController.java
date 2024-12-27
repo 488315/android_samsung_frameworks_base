@@ -83,7 +83,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class AppStandbyController
         implements AppStandbyInternal, UsageStatsManagerInternal.UsageEventListener {
     public final SparseArray mActiveAdminApps;
@@ -166,7 +165,6 @@ public class AppStandbyController
     };
     public static final int[] THRESHOLD_BUCKETS = {10, 20, 30, 40, 45};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppStandbyHandler extends Handler {
         public AppStandbyHandler(Looper looper) {
             super(looper);
@@ -373,7 +371,6 @@ public class AppStandbyController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConstantsObserver extends ContentObserver
             implements DeviceConfig.OnPropertiesChangedListener {
         public final String[] KEYS_ELAPSED_TIME_THRESHOLDS;
@@ -863,7 +860,6 @@ public class AppStandbyController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContentProviderUsageRecord {
         public static final Pool sPool = new Pool(new ContentProviderUsageRecord[10]);
         public String name;
@@ -871,7 +867,6 @@ public class AppStandbyController
         public int userId;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public AlarmManagerService.LocalService mAlarmManagerInternal;
         public BatteryManager mBatteryManager;
@@ -916,10 +911,8 @@ public class AppStandbyController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AppStandbyController this$0;
@@ -1035,7 +1028,6 @@ public class AppStandbyController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Pool {
         public final Object[] mArray;
         public int mSize = 0;
@@ -1068,7 +1060,6 @@ public class AppStandbyController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandbyUpdateRecord {
         public static final Pool sPool = new Pool(new StandbyUpdateRecord[10]);
         public int bucket;

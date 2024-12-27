@@ -104,7 +104,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayPowerController
         implements AutomaticBrightnessController.Callbacks, DisplayPowerControllerInterface {
     public static final float[] BRIGHTNESS_RANGE_BOUNDARIES;
@@ -267,7 +266,6 @@ public final class DisplayPowerController
     public static final AccelerateDecelerateInterpolator COLOR_FADE_DEFAULT_INTERPOLATOR =
             new AccelerateDecelerateInterpolator();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DisplayPowerController$4, reason: invalid class name */
     public final class AnonymousClass4 implements WindowManagerPolicy.ScreenOffListener {
         public /* synthetic */ AnonymousClass4() {}
@@ -300,13 +298,11 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessDynamicRampRatePair {
         public float brightnessRampRateDynamic;
         public float brightnessRampRateDynamicAtHbm;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CachedBrightnessInfo {
         public MutableFloat adjustedBrightness;
         public MutableFloat brightness;
@@ -326,10 +322,8 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayControllerHandler extends Handler {
         public DisplayControllerHandler(Looper looper) {
             super(looper, null, true);
@@ -706,10 +700,8 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOnUnblocker {
         public ScreenOnUnblocker() {}
 
@@ -725,7 +717,6 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SeamlessAodReadyListener implements AODManager.AODChangeListener {
         public SeamlessAodReadyListener() {}
 
@@ -739,7 +730,6 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(DisplayControllerHandler displayControllerHandler) {
             super(displayControllerHandler);
@@ -785,7 +775,6 @@ public final class DisplayPowerController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShutdownReceiver extends BroadcastReceiver {
         public ShutdownReceiver() {}
 

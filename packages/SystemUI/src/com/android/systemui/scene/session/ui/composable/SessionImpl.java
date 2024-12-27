@@ -3,7 +3,6 @@ package com.android.systemui.scene.session.ui.composable;
 import com.android.systemui.scene.session.shared.SessionStorage;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SessionImpl {
     public final SessionStorage storage;
 

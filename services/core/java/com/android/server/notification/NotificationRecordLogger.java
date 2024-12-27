@@ -8,10 +8,8 @@ import com.android.internal.logging.UiEventLogger;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface NotificationRecordLogger {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum NotificationCancelledEvent implements UiEventLogger.UiEventEnum {
         INVALID("INVALID"),
         /* JADX INFO: Fake field, exist only in values array */
@@ -73,7 +71,6 @@ public interface NotificationRecordLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum NotificationEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_OPEN("NOTIFICATION_OPEN"),
         NOTIFICATION_CLOSE("NOTIFICATION_CLOSE"),
@@ -118,7 +115,6 @@ public interface NotificationRecordLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum NotificationPanelEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_PANEL_OPEN("NOTIFICATION_PANEL_OPEN"),
         NOTIFICATION_PANEL_CLOSE("NOTIFICATION_PANEL_CLOSE");
@@ -134,7 +130,6 @@ public interface NotificationRecordLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationRecordPair {
         public final NotificationRecord r;
 
@@ -144,7 +139,6 @@ public interface NotificationRecordLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationReported {
         public final int age_in_minutes;
         public final int alerting;
@@ -200,7 +194,6 @@ public interface NotificationRecordLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum NotificationReportedEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_POSTED("NOTIFICATION_POSTED"),
         NOTIFICATION_UPDATED("NOTIFICATION_UPDATED"),

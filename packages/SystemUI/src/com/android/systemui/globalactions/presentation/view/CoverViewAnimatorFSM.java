@@ -5,14 +5,12 @@ import com.samsung.android.globalactions.presentation.view.ViewAnimationState;
 import com.samsung.android.globalactions.presentation.view.ViewStateController;
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CoverViewAnimatorFSM {
     public final GlobalActionsAnimator mAnimator;
     public final LogWrapper mLogWrapper;
     public State mState;
     public final ViewStateController mViewStateController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum Event {
         SHOW,
         HIDE,
@@ -24,7 +22,6 @@ public final class CoverViewAnimatorFSM {
         COVER_TOAST
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum State {
         IDLE,
         MAIN,

@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RotationChangeProvider implements CallbackController {
     public final Handler bgHandler;
     public final Handler callbackHandler;
@@ -20,7 +19,6 @@ public final class RotationChangeProvider implements CallbackController {
     public final RotationDisplayListener displayListener = new RotationDisplayListener();
     public final AtomicInteger lastRotation = new AtomicInteger(-1);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface RotationListener {
         void onRotationChanged(int i);
     }
@@ -32,7 +30,6 @@ public final class RotationChangeProvider implements CallbackController {
         this.callbackHandler = handler2;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RotationDisplayListener implements DisplayManager.DisplayListener {
         public RotationDisplayListener() {
         }

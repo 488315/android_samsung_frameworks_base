@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AccessibilityWindowsPopulator extends WindowInfosListener {
     public static final float[] sTempFloats = new float[9];
     public final AccessibilityController mAccessibilityController;
@@ -52,7 +51,6 @@ public final class AccessibilityWindowsPopulator extends WindowInfosListener {
     public final float[] mTempFloat2 = new float[9];
     public final float[] mTempFloat3 = new float[9];
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccessibilityWindow {
         public int mDisplayId;
         public boolean mIgnoreDuetoRecentsAnimation;
@@ -105,7 +103,6 @@ public final class AccessibilityWindowsPopulator extends WindowInfosListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper, null, false);

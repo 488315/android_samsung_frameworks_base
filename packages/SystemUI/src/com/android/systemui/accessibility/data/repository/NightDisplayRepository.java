@@ -34,7 +34,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$runningFold$$inlined$unsafeFl
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NightDisplayRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CoroutineContext bgCoroutineContext;
@@ -47,7 +46,6 @@ public final class NightDisplayRepository {
     public final SecureSettings secureSettings;
     public final Map stateFlowUserMap = new LinkedHashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -72,13 +70,11 @@ public final class NightDisplayRepository {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$isForceAutoModeAvailable$1(null), SettingsProxyExt.INSTANCE.observerFlow(globalSettings, "night_display_forced_auto_mode_available"));
         this.isForceAutoModeAvailable = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ NightDisplayRepository this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -201,14 +197,12 @@ public final class NightDisplayRepository {
             final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$isDisplayAutoModeRawNotSet$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.secureSettings, userHandle.getIdentifier(), "night_display_auto_mode"));
             flow = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
                     public final /* synthetic */ UserHandle $userHandle$inlined;
                     public final /* synthetic */ NightDisplayRepository this$0;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2$1, reason: invalid class name */
                     public final class AnonymousClass1 extends ContinuationImpl {
                         Object L$0;
@@ -312,12 +306,10 @@ public final class NightDisplayRepository {
         final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.isForceAutoModeAvailable, FlowKt.distinctUntilChanged(flow), new NightDisplayRepository$shouldForceAutoMode$1(null));
         Flow flow2 = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -406,12 +398,10 @@ public final class NightDisplayRepository {
         final Flow isLocationEnabledFlow = LocationControllerExtKt.isLocationEnabledFlow(this.locationController);
         return FlowKt.stateIn(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$nightDisplayState$1$4(this, userHandle, null), FlowKt.buffer$default(new FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1(initialState(userHandle), FlowKt.merge(callbackFlow, flow2, new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

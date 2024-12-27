@@ -26,10 +26,8 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ISoundTriggerHw extends IBase {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Phrase {
         public int id;
         public String locale;
@@ -91,7 +89,6 @@ public interface ISoundTriggerHw extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhraseSoundModel {
         public SoundModel common;
         public ArrayList phrases;
@@ -133,7 +130,6 @@ public interface ISoundTriggerHw extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Properties {
         public String implementor = new String();
         public String description = new String();
@@ -243,7 +239,6 @@ public interface ISoundTriggerHw extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements ISoundTriggerHw {
         public IHwBinder mRemote;
 
@@ -536,7 +531,6 @@ public interface ISoundTriggerHw extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecognitionConfig {
         public int captureDevice;
         public int captureHandle;
@@ -828,7 +822,6 @@ public interface ISoundTriggerHw extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundModel {
         public int type = 0;
         public Uuid uuid = new Uuid();

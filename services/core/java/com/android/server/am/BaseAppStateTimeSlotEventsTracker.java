@@ -19,12 +19,10 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseAppStateTimeSlotEventsTracker extends BaseAppStateEventsTracker {
     public final H mHandler;
     public final ArrayMap mTmpPkgs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BaseAppStateTimeSlotEventsPolicy
             extends BaseAppStateEventsTracker.BaseAppStateEventsPolicy {
         public final int mDefaultNumOfEventsThreshold;
@@ -266,7 +264,6 @@ public abstract class BaseAppStateTimeSlotEventsTracker extends BaseAppStateEven
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public final BaseAppStateTimeSlotEventsTracker mTracker;
 
@@ -347,7 +344,6 @@ public abstract class BaseAppStateTimeSlotEventsTracker extends BaseAppStateEven
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SimpleAppStateTimeslotEvents extends BaseAppStateTimeSlotEvents {
         @Override // com.android.server.am.BaseAppStateEvents
         public final String formatEventSummary(int i, long j) {

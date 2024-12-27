@@ -15,7 +15,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityEvent;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SamsungTouchBlocker extends BaseEventStreamTransformation {
     public final Context mContext;
     public final AnonymousClass1 mHandler;
@@ -28,7 +27,6 @@ public final class SamsungTouchBlocker extends BaseEventStreamTransformation {
     public float mTouchBlockingPeriod;
     public long mTouchBlockingPeriodMilli;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TouchBlockingObserver extends ContentObserver {
         public ContentResolver mContentResolver;
         public final Uri mTapDurationSettingsUri;

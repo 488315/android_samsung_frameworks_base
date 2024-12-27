@@ -6,12 +6,10 @@ import android.os.ServiceManager;
 
 import com.samsung.android.server.pm.PmServerUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Utils {
     public static final String EMPTY_STRING = "";
     public IPackageManager mPm = getPackageManager();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstanceHolder {
         public static final Utils INSTANCE = new Utils();
     }

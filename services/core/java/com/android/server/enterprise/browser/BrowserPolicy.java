@@ -43,7 +43,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BrowserPolicy extends IBrowserPolicy.Stub implements EnterpriseServiceCallback {
     public final Context mContext;
     public final EdmStorageProvider mEdmStorageProvider;
@@ -56,13 +55,11 @@ public final class BrowserPolicy extends IBrowserPolicy.Stub implements Enterpri
     public final HashMap mUserCache = new HashMap();
     public EnterpriseDeviceManager mEDM = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrowserProxyCache {
         public int mAdminUid = -1;
         public String mProxySetting = null;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WebFilteringCache {
         public boolean mIsUrlBlacklistUpdated;
         public boolean mIsUrlFilterReportUpdated;

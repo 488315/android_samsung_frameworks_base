@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbPortHidl implements UsbPortHal {
     public static int sUsbDataStatus;
     public final HALCallback mHALCallback;
@@ -44,7 +43,6 @@ public final class UsbPortHidl implements UsbPortHal {
     public final IndentingPrintWriter mPw;
     public boolean mSystemReady;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IHwBinder.DeathRecipient {
         public final IndentingPrintWriter pw = null;
 
@@ -60,7 +58,6 @@ public final class UsbPortHidl implements UsbPortHal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HALCallback extends HwBinder implements IUsbCallback {
         public UsbPortManager mPortManager;
         public IndentingPrintWriter mPw;
@@ -587,7 +584,6 @@ public final class UsbPortHidl implements UsbPortHal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceNotification extends IServiceNotification.Stub {
         public ServiceNotification() {}
 

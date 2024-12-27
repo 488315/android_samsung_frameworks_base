@@ -4,7 +4,6 @@ import com.android.systemui.util.wakelock.DelayedWakeLock;
 import dagger.internal.InstanceFactory;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DelayedWakeLock_Factory_Impl implements DelayedWakeLock.Factory {
     private final C0296DelayedWakeLock_Factory delegateFactory;
 

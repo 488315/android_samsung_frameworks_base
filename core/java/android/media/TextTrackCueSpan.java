@@ -1,6 +1,5 @@
 package android.media;
 
-/* compiled from: WebVttRenderer.java */
 class TextTrackCueSpan {
     boolean mEnabled;
     String mText;

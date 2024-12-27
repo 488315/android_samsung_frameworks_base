@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.android.internal.R;
 
-/* compiled from: ClosedCaptionRenderer.java */
 class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.DisplayListener {
     private static final String mDummyText = "1234567890123456789012345678901234";
     private static final Rect mTextBounds = new Rect();
@@ -58,7 +57,6 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
         return this.mCaptionStyle;
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class CCLineBox extends TextView {
         private static final float EDGE_OUTLINE_RATIO = 0.1f;
         private static final float EDGE_SHADOW_RATIO = 0.05f;
@@ -202,7 +200,6 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class CCLayout extends LinearLayout
             implements ClosedCaptionWidget.ClosedCaptionLayout {
         private static final int MAX_ROWS = 15;

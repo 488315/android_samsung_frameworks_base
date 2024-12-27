@@ -40,13 +40,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public abstract class Utils {
     public static final boolean IS_DEBUG_LEVEL_MID_OR_HIGH;
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static String mDeviceType = null;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public abstract class Config {
         public static final boolean FACE_FEATURE_POSE_ENROLL;
         public static final String FEATURE_CONFIG_CONTROL_AUTO_BRIGHTNESS;

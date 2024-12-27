@@ -40,7 +40,6 @@ import java.util.Iterator;
 import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PluginLockStarManager implements SPluginListener, PluginLockStar.PluginLockStarCallback, Dumpable, DisplayLifecycle.Observer, WakefulnessLifecycle.Observer, StatusBarStateController.StateListener {
     public final Context mContext;
     public final DisplayLifecycle mDisplayLifecycle;
@@ -97,14 +96,12 @@ public final class PluginLockStarManager implements SPluginListener, PluginLockS
     public final AnonymousClass2 mObserver = new AnonymousClass2();
     public final LockStarPresenter mLockStarPresenter = new LockStarPresenter();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.lockstar.PluginLockStarManager$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface LockStarCallback {
         void onChangedLockStarData(boolean z);
 

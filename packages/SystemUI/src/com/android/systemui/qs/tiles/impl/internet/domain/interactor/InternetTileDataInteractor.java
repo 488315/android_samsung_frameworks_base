@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InternetTileDataInteractor implements QSTileDataInteractor {
     public static final Companion Companion = new Companion(null);
     public static final InternetTileModel.Inactive NOT_CONNECTED_NETWORKS_UNAVAILABLE = new InternetTileModel.Inactive(null, new Text.Resource(R.string.quick_settings_networks_unavailable), Integer.valueOf(R.drawable.ic_qs_no_internet_unavailable), null, null, new ContentDescription.Resource(R.string.quick_settings_networks_unavailable), 9, null);
@@ -42,7 +41,6 @@ public final class InternetTileDataInteractor implements QSTileDataInteractor {
     public final ReadonlyStateFlow notConnectedFlow;
     public final ChannelFlowTransformLatest wifiIconFlow;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

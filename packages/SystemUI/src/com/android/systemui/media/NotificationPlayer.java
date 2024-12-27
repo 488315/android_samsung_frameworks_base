@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationPlayer implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
     public AudioManager mAudioManagerWithAudioFocus;
     public CreationAndCompletionThread mCompletionThread;
@@ -37,7 +36,6 @@ public final class NotificationPlayer implements MediaPlayer.OnCompletionListene
     public final IBinder mBinder = new Binder();
     public final Vector mOnCompletionListener = new Vector();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CmdThread extends Thread {
         public CmdThread() {
             super("NotificationPlayer-" + NotificationPlayer.this.mTag);
@@ -92,7 +90,6 @@ public final class NotificationPlayer implements MediaPlayer.OnCompletionListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Command {
         public AudioAttributes attributes;
         public int code;
@@ -114,7 +111,6 @@ public final class NotificationPlayer implements MediaPlayer.OnCompletionListene
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CreationAndCompletionThread extends Thread {
         public final Command mCmd;
 

@@ -31,11 +31,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SyncLogger {
     public static SyncLogger sInstance;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RotatingFileLogger extends SyncLogger {
         public long mCurrentLogFileDayTimestamp;
         public boolean mErrorShown;
@@ -53,7 +51,6 @@ public class SyncLogger {
                 new File(Environment.getDataSystemDirectory(), "syncmanager-log");
         public final MyHandler mHandler = new MyHandler(IoThread.get().getLooper());
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class MyHandler extends Handler {
             public MyHandler(Looper looper) {
                 super(looper);

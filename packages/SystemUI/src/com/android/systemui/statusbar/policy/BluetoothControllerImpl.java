@@ -32,7 +32,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BluetoothControllerImpl implements BluetoothController, BluetoothCallback, CachedBluetoothDevice.Callback, LocalBluetoothProfileManager.ServiceListener {
     public boolean mAudioProfileOnly;
     public final Executor mBackgroundExecutor;
@@ -47,7 +46,6 @@ public final class BluetoothControllerImpl implements BluetoothController, Bluet
     public final BluetoothLogger mLogger;
     public int mState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public final ArrayList mCallbacks;
 

@@ -23,7 +23,6 @@ import com.android.internal.app.AlertController;
 import com.android.internal.logging.MetricsLogger;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ForegroundServicesDialog extends AlertActivity implements AdapterView.OnItemSelectedListener, DialogInterface.OnClickListener, AlertController.AlertParams.OnPrepareListViewListener {
     public PackageItemAdapter mAdapter;
     public final AnonymousClass1 mAppClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.ForegroundServicesDialog.1
@@ -40,7 +39,6 @@ public final class ForegroundServicesDialog extends AlertActivity implements Ada
     public final MetricsLogger mMetricsLogger;
     public String[] mPackages;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PackageItemAdapter extends ArrayAdapter {
         public final IconDrawableFactory mIconDrawableFactory;
         public final LayoutInflater mInflater;

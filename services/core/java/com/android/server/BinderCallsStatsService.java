@@ -40,12 +40,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BinderCallsStatsService extends Binder {
     public final BinderCallsStats mBinderCallsStats;
     public final AuthorizedWorkSourceProvider mWorkSourceProvider;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthorizedWorkSourceProvider implements BinderInternal.WorkSourceProvider {
         public ArraySet mAppIdTrustlist;
 
@@ -58,7 +56,6 @@ public final class BinderCallsStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderCallsStatsShellCommand extends ShellCommand {
         public final PrintWriter mPrintWriter;
 
@@ -274,7 +271,6 @@ public final class BinderCallsStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Internal {
         public final BinderCallsStats mBinderCallsStats;
         public final CustomizedBinderCallsStatsInternal mCustomizedBinderCallsStatsInternal;
@@ -477,7 +473,6 @@ public final class BinderCallsStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LifeCycle extends SystemService {
         public BinderCallsStats mBinderCallsStats;
         public BinderCallsStatsService mService;
@@ -581,7 +576,6 @@ public final class BinderCallsStatsService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final BinderCallsStats mBinderCallsStats;
         public final Context mContext;

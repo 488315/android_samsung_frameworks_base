@@ -19,7 +19,6 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: ClosedCaptionRenderer.java */
 class Cea608CCParser {
     private static final int AOF = 34;
     private static final int AON = 35;
@@ -56,7 +55,6 @@ class Cea608CCParser {
     private CCMemory mNonDisplay = new CCMemory();
     private CCMemory mTextMem = new CCMemory();
 
-    /* compiled from: ClosedCaptionRenderer.java */
     interface DisplayListener {
         CaptioningManager.CaptionStyle getCaptionStyle();
 
@@ -226,7 +224,6 @@ class Cea608CCParser {
         this.mNonDisplay = temp;
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class StyleCode {
         static final int COLOR_BLUE = 2;
         static final int COLOR_CYAN = 3;
@@ -289,7 +286,6 @@ class Cea608CCParser {
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class PAC extends StyleCode {
         final int mCol;
         final int mRow;
@@ -340,7 +336,6 @@ class Cea608CCParser {
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     public static class MutableBackgroundColorSpan extends CharacterStyle
             implements UpdateAppearance {
         private int mColor;
@@ -363,7 +358,6 @@ class Cea608CCParser {
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class CCLineBuilder {
         private final StringBuilder mDisplayChars;
         private final StyleCode[] mMidRowStyles;
@@ -448,7 +442,6 @@ class Cea608CCParser {
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class CCMemory {
         private final String mBlankLine;
         private int mCol;
@@ -602,7 +595,6 @@ class Cea608CCParser {
         }
     }
 
-    /* compiled from: ClosedCaptionRenderer.java */
     private static class CCData {
         private final byte mData1;
         private final byte mData2;

@@ -15,7 +15,6 @@ import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvide
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemFpScreenStatusNotifier implements SemFpAuthenticationListener {
     static final int SCREEN_OFF = 1;
     static final int SCREEN_ON = 2;
@@ -25,7 +24,6 @@ public final class SemFpScreenStatusNotifier implements SemFpAuthenticationListe
     public int mScreenStatus = 0;
     public final ServiceProvider mServiceProvider;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {}
 
     public SemFpScreenStatusNotifier(

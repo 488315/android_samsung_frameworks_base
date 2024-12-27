@@ -19,7 +19,6 @@ import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Feature implements MediaOutputState, TransitionInfo, DismissCallback {
     public static final Companion Companion = new Companion(null);
     public final ParcelableSnapshotMutableState _state;
@@ -36,7 +35,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
     public boolean showMediaController;
     public final ParcelableSnapshotMutableState state;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public final Lazy feature$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.common.Feature$Builder$feature$2
             @Override // kotlin.jvm.functions.Function0
@@ -50,7 +48,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -60,7 +57,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

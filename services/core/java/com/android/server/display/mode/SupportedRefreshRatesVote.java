@@ -5,11 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SupportedRefreshRatesVote implements Vote {
     public final List mRefreshRates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RefreshRates {
         public final float mPeakRefreshRate;
         public final float mVsyncRate;

@@ -109,7 +109,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayManagerService extends SystemService {
     public final OverlayActorEnforcer mActorEnforcer;
     public final OverlayManagerServiceImpl mImpl;
@@ -124,7 +123,6 @@ public final class OverlayManagerService extends SystemService {
     public final UserManagerService mUserManager;
     public final SemWallpaperThemeManagerWrapper mWallpaperThemeManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.om.OverlayManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IOverlayManager.Stub {
         public static void $r8$lambda$brKP91vTER4zoSOxWJ1OnJjU4jQ(OverlayManagerService overlayManagerService, UserPackage userPackage) {
@@ -955,7 +953,6 @@ public final class OverlayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverlayManagerPackageMonitor extends PackageMonitor {
         public OverlayManagerPackageMonitor() {
         }
@@ -1058,7 +1055,6 @@ public final class OverlayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageManagerHelperImpl {
         public final Context mContext;
         public final ArrayMap mCache = new ArrayMap();
@@ -1066,7 +1062,6 @@ public final class OverlayManagerService extends SystemService {
         public final IPackageManager mPackageManager = AppGlobals.getPackageManager();
         public final PackageManagerInternal mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PackageStateUsers {
             public final Set mInstalledUsers = new ArraySet();
             public PackageState mPackageState;
@@ -1220,13 +1215,11 @@ public final class OverlayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageUpdateHelper {
         public PackageUpdateHelper() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserLifecycleListener implements UserManagerInternal.UserLifecycleListener {
         public UserLifecycleListener() {
         }
@@ -1250,7 +1243,6 @@ public final class OverlayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserReceiver extends BroadcastReceiver {
         public UserReceiver() {
         }

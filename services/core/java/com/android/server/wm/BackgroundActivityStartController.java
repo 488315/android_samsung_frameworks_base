@@ -38,7 +38,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackgroundActivityStartController {
     public static final ActivityOptions ACTIVITY_OPTIONS_SYSTEM_DEFINED = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(0).setPendingIntentCreatorBackgroundActivityStartMode(0);
     public final ActivityTaskManagerService mService;
@@ -46,7 +45,6 @@ public final class BackgroundActivityStartController {
     public final HashMap mTaskIdToFinishedActivity = new HashMap();
     public FinishedActivityEntry mTopFinishedActivity = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class BalState {
         public final int mAppSwitchState;
         public final boolean mAutoOptInCaller;
@@ -209,7 +207,6 @@ public final class BackgroundActivityStartController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BalVerdict {
         public boolean mBasedOnRealCaller;
         public final int mCode;
@@ -236,7 +233,6 @@ public final class BackgroundActivityStartController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlockActivityStart {
         public ActivityRecord mActivityOptedIn;
         public boolean mTopActivityMatchesSource;
@@ -250,7 +246,6 @@ public final class BackgroundActivityStartController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FinishedActivityEntry {
         public final String mDebugInfo;
         public final int mLaunchCount;

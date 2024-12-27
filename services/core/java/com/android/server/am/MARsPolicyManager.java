@@ -98,7 +98,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class MARsPolicyManager {
     public static boolean MARs_ENABLE;
     public ActivityManagerService mAm;
@@ -154,11 +153,9 @@ public class MARsPolicyManager {
     public Policy disablePolicy = null;
     public Policy gamePolicy = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lock {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MARsAppIdleStateChangeListener extends AppStandbyInternal.AppIdleStateChangeListener {
         public MARsAppIdleStateChangeListener() {
         }
@@ -178,12 +175,10 @@ public class MARsPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsPolicyManagerHolder {
         public static final MARsPolicyManager INSTANCE = new MARsPolicyManager();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PkgStatusInfo {
         public final String name;
         public final int uid;
@@ -206,7 +201,6 @@ public class MARsPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Policy {
         public final int action;
         public boolean enabled;

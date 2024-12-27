@@ -20,12 +20,10 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceStateRepositoryImpl implements DeviceStateRepository {
     public final List deviceStateMap;
     public final ReadonlyStateFlow state;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IdsPerDeviceState {
         public final DeviceStateRepository.DeviceState deviceState;
         public final Set ids;

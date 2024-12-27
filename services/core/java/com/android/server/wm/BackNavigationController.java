@@ -29,7 +29,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BackNavigationController {
     public static int sDefaultAnimationResId;
     public static final boolean sPredictBackEnable =
@@ -49,7 +48,6 @@ public final class BackNavigationController {
     public final ArrayList mTmpOpenApps = new ArrayList();
     public final ArrayList mTmpCloseApps = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimationHandler {
         public BackWindowAnimationAdaptor mCloseAdaptor;
         public boolean mComposed;
@@ -61,7 +59,6 @@ public final class BackNavigationController {
         public boolean mWaitTransition;
         public final WindowManagerService mWindowManagerService;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class BackWindowAnimationAdaptor implements AnimationAdapter {
             public RemoteAnimationTarget mAnimationTarget;
             public boolean mAppWindowDrawn;
@@ -202,7 +199,6 @@ public final class BackNavigationController {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class BackWindowAnimationAdaptorWrapper {
             public final BackWindowAnimationAdaptor[] mAdaptors;
             public SurfaceControl.Transaction mCloseTransaction;
@@ -330,7 +326,6 @@ public final class BackNavigationController {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ScheduleAnimationBuilder {
             public final BackAnimationAdapter mBackAnimationAdapter;
             public WindowContainer mCloseTarget;
@@ -614,7 +609,6 @@ public final class BackNavigationController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NavigationMonitor {
         public WindowState mNavigatingWindow;
         public RemoteCallback mObserver;

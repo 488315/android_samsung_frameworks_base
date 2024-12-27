@@ -64,7 +64,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocaleManagerService extends SystemService {
     public final ActivityManagerInternal mActivityManagerInternal;
     public final ActivityTaskManagerInternal mActivityTaskManagerInternal;
@@ -74,7 +73,6 @@ public final class LocaleManagerService extends SystemService {
     public final PackageManager mPackageManager;
     public final Object mWriteLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocaleManagerBinderService extends ILocaleManager.Stub {
         public LocaleManagerBinderService() {}
 
@@ -189,7 +187,6 @@ public final class LocaleManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocaleManagerInternalImpl {
         public LocaleManagerInternalImpl() {}
 

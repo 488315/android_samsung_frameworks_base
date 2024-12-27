@@ -21,10 +21,8 @@ import java.util.Date;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class DDLog {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CountingOutputStream extends FilterOutputStream {
         public long count;
 
@@ -47,7 +45,6 @@ public abstract class DDLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Logger {
         public static Logger mInstance;
         public final BlockingQueue storeQ = new LinkedBlockingQueue();
@@ -85,7 +82,6 @@ public abstract class DDLog {
                     }
                 };
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.knox.dar.ddar.DDLog$Logger$1, reason: invalid class name */
         public final class AnonymousClass1 implements FilenameFilter {
             @Override // java.io.FilenameFilter
@@ -255,7 +251,6 @@ public abstract class DDLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoggerProxy extends IProxyAgentService {
         public static LoggerProxy mInstance;
 

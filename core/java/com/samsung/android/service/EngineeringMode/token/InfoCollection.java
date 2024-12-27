@@ -1,6 +1,5 @@
 package com.samsung.android.service.EngineeringMode.token;
 
-/* compiled from: Infocollection.java */
 class InfoCollection {
     private String mMagicString;
 

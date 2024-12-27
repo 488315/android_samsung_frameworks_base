@@ -54,7 +54,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocalDisplayAdapter extends DisplayAdapter {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ColorDisplayService.ColorDisplayServiceInternal mCdsi;
@@ -66,7 +65,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
     public Context mOverlayContext;
     public final SurfaceControlProxy mSurfaceControlProxy;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BacklightAdapter {
         public final LightsService.LightImpl mBacklight;
         public final IBinder mDisplayToken;
@@ -162,7 +160,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayModeRecord {
         public final Display.Mode mMode;
 
@@ -199,12 +196,10 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public ProxyDisplayEventReceiver mReceiver;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalDisplayDevice extends DisplayDevice {
         public int mActiveColorMode;
         public int mActiveModeId;
@@ -247,7 +242,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
         public Display.Mode mUserPreferredMode;
         public int mUserPreferredModeId;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.display.LocalDisplayAdapter$LocalDisplayDevice$1, reason: invalid class name */
         public final class AnonymousClass1 implements Runnable {
             public final /* synthetic */ boolean val$brightnessChanged;
@@ -1565,12 +1559,10 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalDisplayEventListener {
         public LocalDisplayEventListener() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProxyDisplayEventReceiver extends DisplayEventReceiver {
         public final LocalDisplayEventListener mListener;
 
@@ -1669,7 +1661,6 @@ public final class LocalDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SurfaceControlProxy {}
 
     public LocalDisplayAdapter(

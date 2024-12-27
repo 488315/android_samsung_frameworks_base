@@ -9,10 +9,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class FunctionalUtils {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface RemoteExceptionIgnoringConsumer extends Consumer {
         @Override // java.util.function.Consumer
@@ -26,7 +24,6 @@ public class FunctionalUtils {
         void acceptOrThrow(Object obj) throws RemoteException;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingBiConsumer extends BiConsumer {
         @Override // java.util.function.BiConsumer
@@ -41,7 +38,6 @@ public class FunctionalUtils {
         void acceptOrThrow(Object obj, Object obj2) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingBiFunction extends BiFunction {
         @Override // java.util.function.BiFunction
@@ -56,31 +52,26 @@ public class FunctionalUtils {
         Object applyOrThrow(Object obj, Object obj2) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingChecked2Consumer {
         void accept(Object obj) throws Exception, Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingCheckedConsumer {
         void accept(Object obj) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingCheckedFunction {
         Object apply(Object obj) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingCheckedSupplier {
         Object get() throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingConsumer extends Consumer {
         @Override // java.util.function.Consumer
@@ -95,7 +86,6 @@ public class FunctionalUtils {
         void acceptOrThrow(Object obj) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingFunction extends Function {
         @Override // java.util.function.Function
@@ -110,7 +100,6 @@ public class FunctionalUtils {
         Object applyOrThrow(Object obj) throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingRunnable extends Runnable {
         @Override // java.lang.Runnable
@@ -125,7 +114,6 @@ public class FunctionalUtils {
         void runOrThrow() throws Exception;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     public interface ThrowingSupplier extends Supplier {
         @Override // java.util.function.Supplier

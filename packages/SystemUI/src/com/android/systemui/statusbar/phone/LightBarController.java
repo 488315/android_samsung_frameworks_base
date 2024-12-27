@@ -33,7 +33,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LightBarController implements BatteryController.BatteryStateChangeCallback, Dumpable, CoreStartable {
     public static final float NAV_BAR_INVERSION_SCRIM_ALPHA_THRESHOLD;
     public int mAppearance;
@@ -67,7 +66,6 @@ public final class LightBarController implements BatteryController.BatteryStateC
     public AppearanceRegion[] mAppearanceRegions = new AppearanceRegion[0];
     public BoundsPair mStatusBarBounds = new BoundsPair(new Rect(), new Rect());
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final BatteryController mBatteryController;
         public final DarkIconDispatcher mDarkIconDispatcher;
@@ -92,7 +90,6 @@ public final class LightBarController implements BatteryController.BatteryStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LightBarTransientObserver extends SystemBarObserver {
         public final ArrayList mList;
 

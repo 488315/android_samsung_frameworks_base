@@ -36,13 +36,11 @@ import com.samsung.android.knox.dex.DexManager;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.os.SemDvfsManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Injector {
     public final Context mContext;
     public final ArrayMap mDependencies = new ArrayMap();
     public final ArrayMap mProviders;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LazyDependencyCreator {
         Object createDependency();
     }

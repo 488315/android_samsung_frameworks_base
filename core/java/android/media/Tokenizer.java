@@ -2,7 +2,6 @@ package android.media;
 
 import android.util.Log;
 
-/* compiled from: WebVttRenderer.java */
 class Tokenizer {
     private static final String TAG = "Tokenizer";
     private int mHandledLen;
@@ -12,7 +11,6 @@ class Tokenizer {
     private TokenizerPhase mDataTokenizer = new DataTokenizer();
     private TokenizerPhase mTagTokenizer = new TagTokenizer();
 
-    /* compiled from: WebVttRenderer.java */
     interface OnTokenListener {
         void onData(String str);
 
@@ -25,14 +23,12 @@ class Tokenizer {
         void onTimeStamp(long j);
     }
 
-    /* compiled from: WebVttRenderer.java */
     interface TokenizerPhase {
         TokenizerPhase start();
 
         void tokenize();
     }
 
-    /* compiled from: WebVttRenderer.java */
     class DataTokenizer implements TokenizerPhase {
         private StringBuilder mData;
 
@@ -85,7 +81,6 @@ class Tokenizer {
         }
     }
 
-    /* compiled from: WebVttRenderer.java */
     class TagTokenizer implements TokenizerPhase {
         private String mAnnotation;
         private boolean mAtAnnotation;

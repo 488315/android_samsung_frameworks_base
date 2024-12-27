@@ -14,11 +14,9 @@ import com.samsung.android.cover.CoverState;
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SideKeyDoublePress {
     public static Behavior mBehavior;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Behavior {
         public int mAction = 0;
         public PhoneWindowManagerExt mPolicyExt;

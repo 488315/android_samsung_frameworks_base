@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CpuInfoReader {
     public File mCpuFreqDir;
     public final File mCpusetDir;
@@ -39,7 +38,6 @@ public final class CpuInfoReader {
     public final SparseArray mTimeInStateByPolicyId = new SparseArray();
     public SparseArray mCumulativeCpuUsageStats = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpuInfo {
         public final long avgTimeInStateCpuFreqKHz;
         public final int cpuCore;
@@ -171,7 +169,6 @@ public final class CpuInfoReader {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpuUsageStats {
         public final long guestNiceTimeMillis;
         public final long guestTimeMillis;
@@ -272,7 +269,6 @@ public final class CpuInfoReader {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DynamicPolicyInfo {
         public final IntArray affectedCpuCores;
         public final long avgTimeInStateCpuFreqKHz;
@@ -299,7 +295,6 @@ public final class CpuInfoReader {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StaticPolicyInfo {
         public final IntArray relatedCpuCores;
 

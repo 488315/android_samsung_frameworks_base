@@ -29,7 +29,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.util.Observable;
 import java.util.Observer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ScreenCurtainController implements Observer {
     public final CallStateCallback mCallStateCallback;
     public final Context mContext;
@@ -139,7 +138,6 @@ public final class ScreenCurtainController implements Observer {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallStateCallback extends TelephonyCallback
             implements TelephonyCallback.CallStateListener {
         public CallStateCallback() {}
@@ -177,7 +175,6 @@ public final class ScreenCurtainController implements Observer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayAssistantHandler extends Handler {
         public DisplayAssistantHandler(Looper looper) {
             super(looper);
@@ -306,7 +303,6 @@ public final class ScreenCurtainController implements Observer {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationListener extends NotificationListenerService {
         public NotificationListener() {}
 

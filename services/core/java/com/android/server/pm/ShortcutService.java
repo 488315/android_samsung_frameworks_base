@@ -145,7 +145,6 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShortcutService extends IShortcutService.Stub {
     public static final AnonymousClass1 ACTIVITY_NOT_EXPORTED;
     static final int DEFAULT_ICON_PERSIST_QUALITY = 100;
@@ -217,7 +216,6 @@ public final class ShortcutService extends IShortcutService.Stub {
     public static final ShortcutService$$ExternalSyntheticLambda12 ACTIVITY_NOT_INSTALLED =
             new ShortcutService$$ExternalSyntheticLambda12(2);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.ShortcutService$3, reason: invalid class name */
     public final class AnonymousClass3 implements OnRoleHoldersChangedListener {
         public AnonymousClass3() {}
@@ -253,7 +251,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.ShortcutService$4, reason: invalid class name */
     public final class AnonymousClass4 extends UidObserver {
         public AnonymousClass4() {}
@@ -285,17 +282,14 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class CommandException extends Exception {
         public CommandException(String str) {
             super(str);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface ConfigConstants {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpFilter {
         public boolean mDumpCheckIn = false;
         public boolean mCheckInClear = false;
@@ -331,7 +325,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FileOutputStreamWithPath extends FileOutputStream {
         public final File mFile;
 
@@ -341,10 +334,8 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class InvalidFileFormatException extends Exception {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final ShortcutService mService;
 
@@ -418,7 +409,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends ShortcutServiceInternal {
         public LocalService() {}
 
@@ -1428,7 +1418,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyShellCommand extends ShellCommand {
         public int mUserId = 0;
         public int mShortcutMatchFlags = 15;
@@ -1795,7 +1784,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingChangeObserver extends ContentObserver {
         public Context mContext;
 
@@ -1814,7 +1802,6 @@ public final class ShortcutService extends IShortcutService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Stats {}
 
     /* renamed from: -$$Nest$mhandlePackageAdded, reason: not valid java name */

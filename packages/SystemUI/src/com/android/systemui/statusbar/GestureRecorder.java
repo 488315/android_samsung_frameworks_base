@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class GestureRecorder {
     public final String mLogfile;
     public int mLastSaveLen = -1;
@@ -42,12 +41,10 @@ public final class GestureRecorder {
     public final LinkedList mGestures = new LinkedList();
     public Gesture mCurrentGesture = null;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Gesture {
         public final LinkedList mRecords = new LinkedList();
         public final HashSet mTags = new HashSet();
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract class Record {
             public long time;
 
@@ -55,7 +52,6 @@ public final class GestureRecorder {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TagRecord extends Record {
             public final String info;
             public final String tag;

@@ -26,7 +26,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelState;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public static final /* synthetic */ int $r8$clinit = 0;
     public HandlerWrapper mHandlerWrapper;
@@ -51,7 +50,6 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
     public VibratorWrapper mVibratorWrapper;
     public VolumePanelMotion mVolumePanelMotion;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType;

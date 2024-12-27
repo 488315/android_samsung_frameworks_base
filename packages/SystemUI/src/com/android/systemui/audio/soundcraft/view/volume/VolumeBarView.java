@@ -25,7 +25,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeBarView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
     public SoundCraftVolumeMotion soundCraftVolumeMotion;
@@ -35,7 +34,6 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
     public final Lazy viewModel$delegate;
     public final VolumeBarView$volumeKeyHandler$1 volumeKeyHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

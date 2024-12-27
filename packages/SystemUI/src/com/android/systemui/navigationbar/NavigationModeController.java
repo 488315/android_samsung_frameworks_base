@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavigationModeController implements Dumpable {
     public final Context mContext;
     public Context mCurrentUserContext;
@@ -53,12 +52,10 @@ public final class NavigationModeController implements Dumpable {
     public final ArrayList mListeners = new ArrayList();
     public final ArrayList mOverlayHistoryList = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ModeChangedListener {
         void onNavigationModeChanged(int i);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum ModeOverlayReason {
         UPDATE_INTERACTION_MODE_AS_OWNER_USER,
         UPDATE_INTERACTION_MODE_DEVICE_PROVISIONED_COMPLETE,

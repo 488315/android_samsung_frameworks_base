@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalWidgetRepositoryImpl implements CommunalWidgetRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CommunalAppWidgetHost appWidgetHost;
@@ -40,7 +39,6 @@ public final class CommunalWidgetRepositoryImpl implements CommunalWidgetReposit
     public final Logger logger;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 widgetEntries;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -86,7 +84,6 @@ public final class CommunalWidgetRepositoryImpl implements CommunalWidgetReposit
         BuildersKt.launch$default(this.bgScope, null, null, new CommunalWidgetRepositoryImpl$updateWidgetOrder$1(this, map, null), 3);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CommunalWidgetEntry {
         public final int appWidgetId;
         public final String componentName;

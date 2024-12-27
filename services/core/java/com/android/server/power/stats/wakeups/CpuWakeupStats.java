@@ -27,7 +27,6 @@ import java.util.function.LongSupplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CpuWakeupStats {
     public static final /* synthetic */ int $r8$clinit = 0;
     public static final long WAKEUP_WRITE_DELAY_MS = TimeUnit.SECONDS.toMillis(30);
@@ -40,7 +39,6 @@ public final class CpuWakeupStats {
     final LongSparseArray mWakeupAttribution;
     final LongSparseArray mWakeupEvents;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Config implements DeviceConfig.OnPropertiesChangedListener {
         public volatile long WAKEUP_MATCHING_WINDOW_MS;
         public volatile long WAKEUP_STATS_RETENTION_MS;
@@ -99,7 +97,6 @@ public final class CpuWakeupStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Wakeup {
         public static final Pattern sIrqPattern = Pattern.compile("^(\\-?\\d+)\\s+(\\S+)");
         public IrqDevice[] mDevices;
@@ -108,7 +105,6 @@ public final class CpuWakeupStats {
         public int mType;
         public long mUptimeMillis;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class IrqDevice {
             public String mDevice;
             public int mLine;
@@ -276,7 +272,6 @@ public final class CpuWakeupStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class WakingActivityHistory {
         public final LongSupplier mRetentionSupplier;
         final SparseArray mWakingActivity = new SparseArray();

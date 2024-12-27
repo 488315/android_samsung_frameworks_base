@@ -179,7 +179,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayManagerService extends SystemService {
     public static boolean DEBUG = DebugUtils.isDebuggable("DisplayManagerService");
     public static final int[] EMPTY_ARRAY = new int[0];
@@ -277,14 +276,12 @@ public final class DisplayManagerService extends SystemService {
     public int mWifiDisplayScanRequestCount;
     public WindowManagerInternal mWindowManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DisplayManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 implements DisplayBlanker {
         public /* synthetic */ AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DisplayManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -401,7 +398,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DisplayManagerService$5, reason: invalid class name */
     public final class AnonymousClass5 implements Runnable {
         @Override // java.lang.Runnable
@@ -419,7 +415,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.DisplayManagerService$6, reason: invalid class name */
     public final class AnonymousClass6 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
@@ -433,7 +428,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BinderService extends IDisplayManager.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -2113,13 +2107,11 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessPair {
         public float brightness;
         public float sdrBrightness;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackRecord implements IBinder.DeathRecipient {
         public final IDisplayManagerCallback mCallback;
         public final AtomicLong mEventsMask;
@@ -2316,11 +2308,9 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Clock {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DesiredDisplayModeSpecsObserver {
         public final DisplayManagerService$DesiredDisplayModeSpecsObserver$$ExternalSyntheticLambda0 mSpecsChangedConsumer = new DisplayManagerService$DesiredDisplayModeSpecsObserver$$ExternalSyntheticLambda0(this, 0);
         public boolean mChanged = false;
@@ -2347,7 +2337,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateListener implements DeviceStateManager.DeviceStateCallback {
         public DeviceStateListener() {
         }
@@ -2381,7 +2370,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayManagerHandler extends Handler {
         public DisplayManagerHandler(Looper looper) {
             super(looper, null, true);
@@ -2557,7 +2545,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayStateOverrideLock implements IBinder.DeathRecipient {
         public final int mDisplayId;
         public int mLastRequestedState;
@@ -2601,7 +2588,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum DisplayStatePriority {
         /* JADX INFO: Fake field, exist only in values array */
         EF6("ON"),
@@ -2627,7 +2613,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HbmBrightnessCallbackRecord implements IBinder.DeathRecipient {
         public final IHbmBrightnessCallback mCallback;
         public final int mPid;
@@ -2651,11 +2636,9 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LocalService extends DisplayManagerInternal {
         public LocalService() {
         }
@@ -3572,7 +3555,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingCallback {
         public final CallbackRecord mCallbackRecord;
         public final ArrayList mDisplayEvents;
@@ -3621,7 +3603,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PresentationDisplay {
         public int displayId;
         public String packageName;
@@ -3642,7 +3623,6 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver() {
             super(DisplayManagerService.this.mHandler);
@@ -3663,11 +3643,9 @@ public final class DisplayManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncRoot {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidImportanceListener implements ActivityManager.OnUidImportanceListener {
         public UidImportanceListener() {
         }

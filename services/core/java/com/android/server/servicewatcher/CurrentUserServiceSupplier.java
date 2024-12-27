@@ -18,7 +18,6 @@ import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CurrentUserServiceSupplier extends BroadcastReceiver
         implements ServiceWatcher$ServiceSupplier {
     public static final CurrentUserServiceSupplier$$ExternalSyntheticLambda0
@@ -32,7 +31,6 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver
     public final boolean mMatchSystemAppsOnly;
     public final String mServicePermission;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BoundServiceInfo {
         public final String mAction;
         public final ComponentName mComponentName;

@@ -352,7 +352,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationPanelViewController implements ShadeSurface, Dumpable, PluginLockListener.State, KeyguardTouchViewInjector, PanelScreenShotLogger.LogProvider {
     public View.OnTouchListener mAODDoubleTouchListener;
     public final ShadeAccessibilityDelegate mAccessibilityDelegate;
@@ -705,7 +704,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final ShadeFoldAnimatorImpl mShadeFoldAnimator = new ShadeFoldAnimatorImpl();
     public final ArrayList mTrackingHeadsUpListeners = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.shade.NotificationPanelViewController$10, reason: invalid class name */
     public final class AnonymousClass10 {
         public AnonymousClass10() {
@@ -765,14 +763,12 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.shade.NotificationPanelViewController$9, reason: invalid class name */
     public final class AnonymousClass9 {
         public AnonymousClass9() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConfigurationListener implements ConfigurationController.ConfigurationListener {
         public /* synthetic */ ConfigurationListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -841,7 +837,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HeadsUpNotificationViewControllerImpl implements HeadsUpTouchHelper.HeadsUpNotificationViewController {
         public /* synthetic */ HeadsUpNotificationViewControllerImpl(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -851,7 +846,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyguardAffordanceHelperCallback implements KeyguardSecAffordanceHelper.Callback {
         public /* synthetic */ KeyguardAffordanceHelperCallback(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -861,12 +855,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NewNotifReadListener {
         void onNewNotificationRead();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NsslHeightChangedListener implements ExpandableView.OnHeightChangedListener {
         public /* synthetic */ NsslHeightChangedListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -901,7 +893,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingsChangeObserver extends ContentObserver {
         public SettingsChangeObserver(Handler handler) {
             super(handler);
@@ -916,7 +907,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeAccessibilityDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ ShadeAccessibilityDelegate(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -942,7 +932,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeAttachStateChangeListener implements View.OnAttachStateChangeListener {
         public /* synthetic */ ShadeAttachStateChangeListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1099,7 +1088,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeFoldAnimatorImpl implements ShadeFoldAnimator {
         public ShadeFoldAnimatorImpl() {
         }
@@ -1159,7 +1147,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeHeadsUpChangedListener implements OnHeadsUpChangedListener {
         public /* synthetic */ ShadeHeadsUpChangedListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1229,7 +1216,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeHeadsUpTrackerImpl implements ShadeHeadsUpTracker {
         public /* synthetic */ ShadeHeadsUpTrackerImpl(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1259,7 +1245,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShadeLayoutChangeListener implements View.OnLayoutChangeListener {
         public /* synthetic */ ShadeLayoutChangeListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1364,7 +1349,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StatusBarStateListener implements StatusBarStateController.StateListener {
         public /* synthetic */ StatusBarStateListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1538,7 +1522,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TouchHandler implements View.OnTouchListener, Gefingerpoken {
         public long mLastTouchDownTime = -1;
 

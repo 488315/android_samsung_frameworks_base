@@ -58,7 +58,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MidiService extends IMidiManager.Stub {
     public int mBluetoothServiceUid;
     public final Context mContext;
@@ -79,7 +78,6 @@ public final class MidiService extends IMidiManager.Stub {
     public final HashMap mUsbMidiLegacyDeviceOpenCount = new HashMap();
     public final HashSet mUsbMidiUniversalDeviceInUse = new HashSet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Client implements IBinder.DeathRecipient {
         public final IBinder mToken;
         public final HashMap mListeners = new HashMap();
@@ -252,7 +250,6 @@ public final class MidiService extends IMidiManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Device implements IBinder.DeathRecipient {
         public final BluetoothDevice mBluetoothDevice;
         public final ArrayList mDeviceConnections;
@@ -458,7 +455,6 @@ public final class MidiService extends IMidiManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConnection {
         public IMidiDeviceOpenCallback mCallback;
         public final Client mClient;
@@ -498,7 +494,6 @@ public final class MidiService extends IMidiManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public MidiService mMidiService;
 

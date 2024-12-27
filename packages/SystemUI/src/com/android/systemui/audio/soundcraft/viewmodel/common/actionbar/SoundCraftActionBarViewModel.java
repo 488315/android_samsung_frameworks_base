@@ -10,7 +10,6 @@ import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SoundCraftActionBarViewModel extends BaseViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
     public final Lazy qsDetailControllerLazy;
@@ -18,7 +17,6 @@ public final class SoundCraftActionBarViewModel extends BaseViewModel {
     public final SoundCraftQpDetailAdapter soundCraftQpDetailAdapter;
     public final MutableLiveData title = new MutableLiveData("");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

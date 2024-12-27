@@ -10,13 +10,11 @@ import com.android.systemui.edgelighting.Feature;
 import com.android.systemui.edgelighting.utils.EdgeLightingSettingUtils;
 import com.samsung.android.util.SemLog;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ContextStatusLoggingManager {
     public static ContextStatusLoggingManager mInstance;
     public final String TAG = "ContextStatusLoggingManager";
     public long mLastUpdateTime = -1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StatusLoggingTask extends AsyncTask {
         public final Context mTaskContext;
 

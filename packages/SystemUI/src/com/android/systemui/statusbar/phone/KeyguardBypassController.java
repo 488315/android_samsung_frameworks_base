@@ -33,7 +33,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.PropertyReference0Impl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardBypassController implements Dumpable, StackScrollAlgorithm.BypassController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CoroutineScope applicationScope;
@@ -64,7 +63,6 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
     public final boolean lockStayEnabled = true;
     public final boolean fpLockStayEnabled = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -74,12 +72,10 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnBypassStateChangedListener {
         void onBypassStateChanged(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PendingUnlock {
         public final boolean isStrongBiometric;
         public final BiometricSourceType pendingUnlockType;

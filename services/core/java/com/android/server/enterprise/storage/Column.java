@@ -3,7 +3,6 @@ package com.android.server.enterprise.storage;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Column {
     public String mColumnName;
     public DATA_TYPE mColumnType;
@@ -13,7 +12,6 @@ public final class Column {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DATA_TYPE {
         public static final /* synthetic */ DATA_TYPE[] $VALUES;
         public static final DATA_TYPE BLOB;

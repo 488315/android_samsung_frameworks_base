@@ -23,7 +23,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.sepunion.Log;
 import com.samsung.android.sepunion.SemCustomDumpManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TspStateController {
     public final TspStateController$$ExternalSyntheticLambda1 clearDeadzoneHole;
     public final TspGripCommand m3rdPartyGameTspCommand;
@@ -59,7 +58,6 @@ public final class TspStateController {
             Settings.Secure.getUriFor("setting_tsp_threshold");
     public static final Uri URI_SETTING_TSP_DEBUG = Settings.Secure.getUriFor("setting_tsp_debug");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceSize {
         public int height;
         public int initHeight;
@@ -67,7 +65,6 @@ public final class TspStateController {
         public int width;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H() {}
 
@@ -228,14 +225,12 @@ public final class TspStateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HoleInfo {
         public int direction;
         public int endY;
         public int startY;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(H h) {
             super(h);
@@ -277,7 +272,6 @@ public final class TspStateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TspDebug {
         public boolean mEnabled;
         public String mHoleCommand;

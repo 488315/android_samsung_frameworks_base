@@ -5,7 +5,6 @@ import com.android.systemui.statusbar.notification.collection.NotifLiveDataStore
 import com.android.systemui.statusbar.notification.collection.render.NodeController;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FavoriteNotifCoordnator_Factory implements Provider {
     private final javax.inject.Provider contextProvider;
     private final javax.inject.Provider favoriteHeaderControllerProvider;

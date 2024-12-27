@@ -20,7 +20,6 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemFpLocalHbmOpticalController
         implements SemBiometricDisplayStateMonitor.DisplayStateCallback {
     static final String LOCAL_HBM_PATH_OF_IN_HOUSE = "/sys/class/lcd/panel/local_hbm";
@@ -34,11 +33,9 @@ public final class SemFpLocalHbmOpticalController
     public int mStartPhysicalDisplayState = 2;
     public LocalHbmStatus mCurrentLocalHbmStatus = LocalHbmStatus.LOCAL_HBM_MODE_OFF;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemFpLocalHbmOpticalController$1, reason: invalid class name */
     public final class AnonymousClass1 implements SemBioSysFsProvider {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum LocalHbmStatus {
         LOCAL_HBM_MODE_OFF("0"),
         LOCAL_HBM_MODE_ON_SOURCE_OFF("1"),

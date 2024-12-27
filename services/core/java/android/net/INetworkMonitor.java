@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface INetworkMonitor extends IInterface {
     public static final String DESCRIPTOR = "android$net$INetworkMonitor".replace('$', '.');
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
@@ -24,7 +23,6 @@ public interface INetworkMonitor extends IInterface {
     public static final int NETWORK_VALIDATION_RESULT_VALID = 1;
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetworkMonitor {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -84,7 +82,6 @@ public interface INetworkMonitor extends IInterface {
         public void start() throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements INetworkMonitor {
         static final int TRANSACTION_forceReevaluation = 5;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -101,7 +98,6 @@ public interface INetworkMonitor extends IInterface {
         static final int TRANSACTION_setAcceptPartialConnectivity = 4;
         static final int TRANSACTION_start = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements INetworkMonitor {
             public String mCachedHash;
             public int mCachedVersion;

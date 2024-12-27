@@ -11,7 +11,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PreviewLifecycleObserver implements Handler.Callback, IBinder.DeathRecipient {
     public boolean isDestroyedOrDestroying;
     public final CoroutineDispatcher mainDispatcher;
@@ -19,7 +18,6 @@ public final class PreviewLifecycleObserver implements Handler.Callback, IBinder
     public KeyguardPreviewRenderer renderer;
     public final CoroutineScope scope;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

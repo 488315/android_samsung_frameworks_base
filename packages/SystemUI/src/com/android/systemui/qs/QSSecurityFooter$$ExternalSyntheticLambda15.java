@@ -3,7 +3,6 @@ package com.android.systemui.qs;
 import com.android.systemui.R;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class QSSecurityFooter$$ExternalSyntheticLambda15 implements Supplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ QSSecurityFooter f$0;

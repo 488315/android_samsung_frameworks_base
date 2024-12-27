@@ -8,12 +8,10 @@ import com.android.server.location.LocationManagerService;
 
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NSPermissionHelper {
     public final NSConnectionHelper mNSConnectionHelper;
     public final UidObserver mUidObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidObserver extends IUidObserver.Stub {
         public HashMap mUidState;
 
@@ -43,7 +41,6 @@ public final class NSPermissionHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidState {
         public int capability;
         public int state;

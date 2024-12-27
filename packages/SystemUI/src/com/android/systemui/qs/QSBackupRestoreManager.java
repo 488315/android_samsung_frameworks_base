@@ -27,7 +27,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSBackupRestoreManager {
     public static Cipher mCipher;
     public static byte[] mSalt;
@@ -35,7 +34,6 @@ public final class QSBackupRestoreManager {
     public static String mSecurityPassword;
     public final LinkedHashMap mQSBnRMap = new LinkedHashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         boolean isValidDB();
 
@@ -44,7 +42,6 @@ public final class QSBackupRestoreManager {
         void onRestore(String str);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum ERR_CODE {
         SUCCESS(0),
         UNKNOWN_ERROR(1),
@@ -65,7 +62,6 @@ public final class QSBackupRestoreManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class QSBnRReceiver extends BroadcastReceiver {
         public Thread mBackupThread;
 

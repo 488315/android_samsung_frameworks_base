@@ -15,7 +15,6 @@ import com.android.systemui.edgelighting.effect.utils.vc.SinVerificationCodePars
 import com.android.systemui.edgelighting.effect.utils.vc.ThlVerificationCodeParser;
 import com.android.systemui.edgelighting.effect.utils.vc.VnVerificationCodeParser;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VerificationCodeUtils {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static String Verify_Code = null;

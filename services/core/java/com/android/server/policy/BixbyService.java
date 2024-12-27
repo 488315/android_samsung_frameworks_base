@@ -14,7 +14,6 @@ import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 
 import com.samsung.android.rune.InputRune;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BixbyService {
     public final Context mContext;
     public final ComponentName mDefaultComponentName;
@@ -22,7 +21,6 @@ public final class BixbyService {
     public final PhoneWindowManagerExt mPolicyExt;
     public final PowerManager.WakeLock mWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Params {
         public boolean doublePress;
         public final KeyEvent event;

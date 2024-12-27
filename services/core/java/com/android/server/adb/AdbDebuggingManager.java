@@ -89,7 +89,6 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AdbDebuggingManager {
     public AdbConnectionInfo mAdbConnectionInfo;
     public final String mConfirmComponent;
@@ -113,19 +112,16 @@ public final class AdbDebuggingManager {
     public PairingThread mPairingThread = null;
     public final Set mWifiConnectedKeys = new HashSet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbConnectionInfo {
         public String mBssid;
         public int mPort;
         public String mSsid;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AdbConnectionPortListener {
         void onPortReceived(int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbConnectionPortPoller extends Thread {
         public final AtomicBoolean mCanceled = new AtomicBoolean(false);
         public final AdbConnectionPortListener mListener;
@@ -169,7 +165,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbDebuggingHandler extends Handler {
         public int mAdbEnabledRefCount;
         AdbKeyStore mAdbKeyStore;
@@ -1267,7 +1262,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class AdbDebuggingThread extends Thread {
         public Handler mHandler;
         public InputStream mInputStream;
@@ -1530,7 +1524,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbKeyStore {
         public AtomicFile mAtomicKeyFile;
         public final Set mSystemKeys;
@@ -1800,7 +1793,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class PairingThread extends Thread implements NsdManager.RegistrationListener {
         static final String SERVICE_PROTOCOL = "adb-tls-pairing";
         public final String mGuid;
@@ -1920,7 +1912,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PortListenerImpl implements AdbConnectionPortListener {
         public PortListenerImpl() {}
 
@@ -1937,7 +1928,6 @@ public final class AdbDebuggingManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Ticker {
         long currentTimeMillis();
     }

@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageConfigPersister {
     public final ActivityTaskManagerService mAtm;
     public final PersisterQueue mPersisterQueue;
@@ -26,7 +25,6 @@ public final class PackageConfigPersister {
     public final SparseArray mPendingWrite = new SparseArray();
     public final SparseArray mModified = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeletePackageItem implements PersisterQueue.WriteQueueItem {
         public final String mPackageName;
         public final int mUserId;
@@ -56,7 +54,6 @@ public final class PackageConfigPersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageConfigRecord {
         public Integer mGrammaticalGender;
         public LocaleList mLocales;
@@ -81,7 +78,6 @@ public final class PackageConfigPersister {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WriteProcessItem implements PersisterQueue.WriteQueueItem {
         public final PackageConfigRecord mRecord;
 

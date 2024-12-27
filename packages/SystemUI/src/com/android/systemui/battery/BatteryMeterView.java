@@ -30,7 +30,6 @@ import com.android.systemui.res.R$styleable;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher.DarkReceiver {
     public static final /* synthetic */ int $r8$clinit = 0;
     public BatteryMeterViewController$$ExternalSyntheticLambda1 mBatteryEstimateFetcher;

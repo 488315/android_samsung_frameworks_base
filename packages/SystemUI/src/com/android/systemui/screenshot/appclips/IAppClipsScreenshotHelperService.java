@@ -6,15 +6,12 @@ import android.os.IInterface;
 import android.os.Parcel;
 import com.android.systemui.screenshot.appclips.AppClipsScreenshotHelperService;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface IAppClipsScreenshotHelperService extends IInterface {
     ScreenshotHardwareBufferInternal takeScreenshot(int i);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Stub extends Binder implements IAppClipsScreenshotHelperService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Proxy implements IAppClipsScreenshotHelperService {
             public final IBinder mRemote;
 

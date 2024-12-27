@@ -27,7 +27,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaShellCommand extends ShellCommand {
     public static MediaSessionManager sMediaSessionManager;
     public static ActivityThread sThread;
@@ -37,7 +36,6 @@ public final class MediaShellCommand extends ShellCommand {
     public ISessionManager mSessionService;
     public PrintWriter mWriter;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ControllerCallback extends MediaController.Callback {
         public ControllerCallback() {}
 
@@ -98,7 +96,6 @@ public final class MediaShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ControllerMonitor {
         public final MediaController mController;
         public final ControllerCallback mControllerCallback;

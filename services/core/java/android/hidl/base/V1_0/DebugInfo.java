@@ -10,13 +10,11 @@ import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DebugInfo {
     public int pid = 0;
     public long ptr = 0;
     public int arch = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Architecture {
         public static final int IS_32BIT = 2;
         public static final int IS_64BIT = 1;

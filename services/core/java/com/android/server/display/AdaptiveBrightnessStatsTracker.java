@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AdaptiveBrightnessStatsTracker {
     static final int MAX_DAYS_TO_TRACK = 7;
     public final AdaptiveBrightnessStats mAdaptiveBrightnessStats;
@@ -38,7 +37,6 @@ public final class AdaptiveBrightnessStatsTracker {
                     });
     public float mCurrentAmbientLux = -1.0f;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdaptiveBrightnessStats {
         public final BrightnessMappingStrategy mBrightnessMapper;
         public Map mStats = new HashMap();
@@ -316,15 +314,12 @@ public final class AdaptiveBrightnessStatsTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
         long elapsedTimeMillis();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Timer {
         public final Clock clock;
         public boolean paused;

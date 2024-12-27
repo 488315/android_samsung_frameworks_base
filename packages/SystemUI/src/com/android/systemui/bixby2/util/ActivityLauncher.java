@@ -19,7 +19,6 @@ import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.util.DesktopManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ActivityLauncher {
     private static final String BIXBYCLIENT_TISKID = "bixbyClient_taskId";
     private static final String PACKAGENAME_CAMERA = "com.sec.android.app.camera";

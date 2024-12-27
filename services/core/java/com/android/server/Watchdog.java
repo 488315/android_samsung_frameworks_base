@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Watchdog implements Dumpable {
     public static final String[] AIDL_INTERFACE_PREFIXES_OF_INTEREST;
     public static final List HAL_INTERFACES_OF_INTEREST;
@@ -85,7 +84,6 @@ public final class Watchdog implements Dumpable {
     public volatile long mWatchdogTimeoutMillis;
     public final WatchdogSoftdog softdog;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderThreadMonitor implements Monitor {
         @Override // com.android.server.Watchdog.Monitor
         public final void monitor() {
@@ -93,7 +91,6 @@ public final class Watchdog implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HandlerChecker implements Runnable {
         public final Clock mClock;
         public boolean mCompleted;
@@ -198,7 +195,6 @@ public final class Watchdog implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HandlerCheckerAndTimeout {
         public final Optional mCustomTimeoutMillis;
         public final HandlerChecker mHandler;
@@ -213,12 +209,10 @@ public final class Watchdog implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Monitor {
         void monitor();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RebootRequestReceiver extends BroadcastReceiver {
         public RebootRequestReceiver() {}
 
@@ -238,7 +232,6 @@ public final class Watchdog implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Context mContext;
         public final Uri mUri;

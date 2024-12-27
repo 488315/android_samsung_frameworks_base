@@ -7,18 +7,15 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider {
     public final Map listenerMap = Collections.synchronizedMap(new LinkedHashMap());
     public final Handler mainHandler;
     public final UnfoldTransitionProgressProvider rootProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         MainThreadUnfoldTransitionProgressProvider create(UnfoldTransitionProgressProvider unfoldTransitionProgressProvider);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionProgressListerProxy implements UnfoldTransitionProgressProvider.TransitionProgressListener {
         public final UnfoldTransitionProgressProvider.TransitionProgressListener listener;
 

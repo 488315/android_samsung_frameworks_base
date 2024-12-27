@@ -44,7 +44,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ActivityTransitionAnimator {
     public static final long ANIMATION_DELAY_NAV_FADE_IN;
     public static final Companion Companion = new Companion(null);
@@ -62,7 +61,6 @@ public final class ActivityTransitionAnimator {
     public final Executor mainExecutor;
     public final TransitionAnimator transitionAnimator;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationDelegate {
         public TransitionAnimator$startAnimation$1 animation;
         public final Callback callback;
@@ -149,11 +147,9 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -168,7 +164,6 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DelegatingAnimationCompletionListener implements Listener {
         public boolean cancelled;
         public final Listener delegate;
@@ -218,12 +213,10 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface PendingIntentStarter {
         int startPendingIntent(RemoteAnimationAdapter remoteAnimationAdapter);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionCookie extends Binder {
         public final String cookie;
 
@@ -247,13 +240,11 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionRegister {
         public static final Companion Companion = new Companion(null);
         public final IShellTransitions iShellTransitions;
         public final ShellTransitions shellTransitions;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -368,11 +359,9 @@ public final class ActivityTransitionAnimator {
         this(executor, iShellTransitions, transitionAnimator, transitionAnimator2, false, 16, (DefaultConstructorMarker) null);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Runner extends IRemoteAnimationRunner.Stub {
         public AnimationDelegate delegate;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.animation.ActivityTransitionAnimator$Runner$1, reason: invalid class name */
         final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function0 {
             public AnonymousClass1(Object obj) {
@@ -671,7 +660,6 @@ public final class ActivityTransitionAnimator {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.systemui.animation.ActivityTransitionAnimator$TransitionRegister, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Listener {
         void onTransitionAnimationEnd();
 
@@ -684,11 +672,9 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Controller extends TransitionAnimator.Controller {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 

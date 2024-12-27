@@ -58,7 +58,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class VrManagerService extends SystemService
         implements ActivityTaskManagerInternal.ScreenObserver {
     public static final AnonymousClass3 sBinderChecker = new AnonymousClass3();
@@ -92,7 +91,6 @@ public class VrManagerService extends SystemService
     public boolean mVrModeEnabled;
     public final RemoteCallbackList mVrStateRemoteCallbacks;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {}
@@ -130,11 +128,9 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$6, reason: invalid class name */
     public final class AnonymousClass6 {
         public final /* synthetic */ boolean val$b;
@@ -148,12 +144,10 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationAccessManager {
         public final SparseArray mAllowedPackages = new SparseArray();
         public final ArrayMap mNotificationAccessPackageToUserId = new ArrayMap();
@@ -276,7 +270,6 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingEvent implements ManagedApplicationService.LogFormattable {
         public final long timestamp = System.currentTimeMillis();
         public final String what;
@@ -291,7 +284,6 @@ public class VrManagerService extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VrState implements ManagedApplicationService.LogFormattable {
         public final ComponentName callingPackage;
         public final boolean enabled;

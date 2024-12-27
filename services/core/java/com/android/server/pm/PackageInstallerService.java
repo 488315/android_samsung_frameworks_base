@@ -121,7 +121,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.IntPredicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageInstallerService extends IPackageInstaller.Stub
         implements PackageSessionProvider {
     public final ApexManager mApexManager;
@@ -162,7 +161,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
                     IoThread.getHandler(),
                     new PackageInstallerService$$ExternalSyntheticLambda7(0, this));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.PackageInstallerService$1, reason: invalid class name */
     public final class AnonymousClass1 implements FilenameFilter {
         @Override // java.io.FilenameFilter
@@ -171,7 +169,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastCookie {
         public final int callingUid;
         public final IntPredicate userCheck;
@@ -182,7 +179,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Callbacks extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final RemoteCallbackList mCallbacks;
@@ -249,7 +245,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class InternalCallback {
         public InternalCallback() {}
 
@@ -288,7 +283,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final PackageInstallerService mPackageInstallerService;
 
@@ -308,7 +302,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         public final void onStart() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageDeleteObserverAdapter extends PackageDeleteObserver {
         public final Context mContext;
         public final int mFlags;
@@ -422,7 +415,6 @@ public final class PackageInstallerService extends IPackageInstaller.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ParentChildSessionMap {
         public final Comparator mSessionCreationComparator;
         public final TreeMap mSessionMap;

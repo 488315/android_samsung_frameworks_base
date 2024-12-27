@@ -13,7 +13,6 @@ import com.android.server.UiThread;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PointerIconCache {
     public final Context mContext;
     public final NativeInputManagerService mNative;
@@ -28,7 +27,6 @@ public final class PointerIconCache {
     public float mPointerIconScale = 1.0f;
     public final AnonymousClass1 mDisplayListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.PointerIconCache$1, reason: invalid class name */
     public final class AnonymousClass1 implements DisplayManager.DisplayListener {
         public AnonymousClass1() {}

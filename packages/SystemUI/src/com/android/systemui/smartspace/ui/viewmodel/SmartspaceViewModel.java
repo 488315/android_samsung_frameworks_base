@@ -10,12 +10,10 @@ import kotlinx.coroutines.flow.DistinctFlowImpl;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SmartspaceViewModel {
     public final SmartspaceViewModel$special$$inlined$filter$1 isAwake;
     public final String surfaceName;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -25,7 +23,6 @@ public final class SmartspaceViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
     }
 
@@ -38,13 +35,11 @@ public final class SmartspaceViewModel {
         final DistinctFlowImpl distinctFlowImpl = powerInteractor.isAwake;
         new Flow() { // from class: com.android.systemui.smartspace.ui.viewmodel.SmartspaceViewModel$special$$inlined$filter$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.smartspace.ui.viewmodel.SmartspaceViewModel$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ SmartspaceViewModel this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.smartspace.ui.viewmodel.SmartspaceViewModel$special$$inlined$filter$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

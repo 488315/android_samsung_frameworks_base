@@ -4,7 +4,6 @@ import com.android.internal.infra.AndroidFuture;
 
 import java.util.function.IntConsumer;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class PermissionControllerService$1$$ExternalSyntheticLambda4
         implements IntConsumer {
     public final /* synthetic */ AndroidFuture f$0;

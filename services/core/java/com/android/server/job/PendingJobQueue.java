@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PendingJobQueue {
     public final Pools.Pool mAppJobQueuePool = new Pools.SimplePool(8);
     public final SparseArray mCurrentQueues = new SparseArray();
@@ -22,7 +21,6 @@ public final class PendingJobQueue {
     public int mPullCount = 0;
     public boolean mNeedToResetIterators = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppJobQueue {
         public static final PendingJobQueue$$ExternalSyntheticLambda0 sJobComparator =
                 new PendingJobQueue$$ExternalSyntheticLambda0(1);
@@ -30,7 +28,6 @@ public final class PendingJobQueue {
         public final List mJobs = new ArrayList();
         public int mCurIndex = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class AdjustedJobStatus {
             public long adjustedEnqueueTime;
             public JobStatus job;

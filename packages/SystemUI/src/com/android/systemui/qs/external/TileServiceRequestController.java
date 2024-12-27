@@ -37,7 +37,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TileServiceRequestController {
     public final CommandQueue commandQueue;
     public final TileServiceRequestController$commandQueueCallback$1 commandQueueCallback;
@@ -48,7 +47,6 @@ public final class TileServiceRequestController {
     public final IUriGrantsManager iUriGrantsManager;
     public final QSHost qsHost;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public final CommandQueue commandQueue;
         public final CommandRegistry commandRegistry;
@@ -61,7 +59,6 @@ public final class TileServiceRequestController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -71,7 +68,6 @@ public final class TileServiceRequestController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SingleShotConsumer implements Consumer {
         public final Consumer consumer;
         public final AtomicBoolean dispatched = new AtomicBoolean(false);
@@ -88,7 +84,6 @@ public final class TileServiceRequestController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TileServiceRequestCommand implements Command {
         public TileServiceRequestCommand() {
         }

@@ -16,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
     public static final List TABLE_HEADERS;
     public boolean allowOnCurrentOccludingActivity;
@@ -46,7 +45,6 @@ public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
     public boolean userDoesNotHaveTrust;
     public int userId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Buffer {
         public final RingBuffer buffer = new RingBuffer(20, new Function0() { // from class: com.android.keyguard.KeyguardFingerprintListenModel$Buffer$buffer$1
             @Override // kotlin.jvm.functions.Function0
@@ -65,7 +63,6 @@ public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

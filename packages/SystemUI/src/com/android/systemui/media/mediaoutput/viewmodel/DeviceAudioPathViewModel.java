@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceAudioPathViewModel extends ViewModel implements AudioPathInteraction {
     public static final Companion Companion = new Companion(null);
     public final MutableLiveData _audioDevices;
@@ -32,7 +31,6 @@ public final class DeviceAudioPathViewModel extends ViewModel implements AudioPa
     public final String deviceId;
     public final SmartThingsMediaSdkManager mediaSdkManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.DeviceAudioPathViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
@@ -94,7 +92,6 @@ public final class DeviceAudioPathViewModel extends ViewModel implements AudioPa
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

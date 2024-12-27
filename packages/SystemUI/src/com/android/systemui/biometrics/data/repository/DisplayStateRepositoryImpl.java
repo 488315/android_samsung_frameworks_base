@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DisplayStateRepositoryImpl implements DisplayStateRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context context;
@@ -38,7 +37,6 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
     public final ReadonlyStateFlow isLargeScreen;
     public final boolean isReverseDefaultRotation;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -58,12 +56,10 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
         final ReadonlyStateFlow readonlyStateFlow = ((DeviceStateRepositoryImpl) deviceStateRepository).state;
         Flow flow = new Flow() { // from class: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -162,13 +158,11 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
         final DisplayRepositoryImpl$special$$inlined$map$1 displayRepositoryImpl$special$$inlined$map$1 = ((DisplayRepositoryImpl) displayRepository).displayChangeEvent;
         Flow flow2 = new Flow() { // from class: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ DisplayStateRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -271,13 +265,11 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
         final ReadonlyStateFlow stateIn = FlowKt.stateIn(flow2, coroutineScope, startedEagerly, displayInfo);
         Flow flow3 = new Flow() { // from class: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$3
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ DisplayStateRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$3$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -370,12 +362,10 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
         this.currentRotation = FlowKt.stateIn(flow3, coroutineScope, WhileSubscribed$default, rotationToDisplayRotation(((DisplayInfo) stateFlow.getValue()).rotation));
         this.currentDisplaySize = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$4
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$4$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -464,13 +454,11 @@ public final class DisplayStateRepositoryImpl implements DisplayStateRepository 
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new Size(((DisplayInfo) stateFlow.getValue()).getNaturalWidth(), ((DisplayInfo) stateFlow.getValue()).getNaturalHeight()));
         this.isLargeScreen = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$5
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ DisplayStateRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$special$$inlined$map$5$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

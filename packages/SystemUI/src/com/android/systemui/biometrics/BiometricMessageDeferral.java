@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BiometricMessageDeferral implements Dumpable {
     public final Map acquiredInfoToFrequency = new HashMap();
     public final Map acquiredInfoToHelpString = new HashMap();

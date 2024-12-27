@@ -53,7 +53,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IntelligentBatterySaverFastDrainPolicy {
     public final ArrayList mActionsLevel;
     public AlarmManager mAlarmManager;
@@ -93,7 +92,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
     public long mEnterIBSTime = 0;
     public int mEnterIBSBatteryLevel = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActionEntry {
         public IIntelligentBatterySaverFastDrainCallBack callBack;
         public String tag;
@@ -107,14 +105,12 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IIntelligentBatterySaverFastDrainCallBack {
         void cancelFastDrainRestriction();
 
         void doFastDrainRestriction();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverBatteryBigData {
         public boolean actionEnabled;
         public float drainHightCurrent;
@@ -122,7 +118,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         public float restrictedCurrent;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverFastDrainAction {
         public final AnonymousClass1 btCallBack;
         public final AnonymousClass1 gpsCallBack;
@@ -987,14 +982,12 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverFastDrainBatteryInfo {
         public boolean initialized;
         public int level;
         public long startTime;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverFastDrainHandler extends Handler {
         public IntelligentBatterySaverFastDrainHandler(Looper looper) {
             super(looper);
@@ -1377,7 +1370,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverFastDrainReceiver extends BroadcastReceiver {
         public IntelligentBatterySaverFastDrainReceiver() {}
 
@@ -1421,7 +1413,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntelligentBatterySaverFastDrainTrafficStat {
         public boolean initialized;
         public long rxBytes;
@@ -1429,7 +1420,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         public long txBytes;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalTime {
         public final int hourOfDay;
         public final int minute;
@@ -1477,7 +1467,6 @@ public final class IntelligentBatterySaverFastDrainPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MotionListener extends TriggerEventListener implements SensorEventListener {
         public boolean active = false;
 

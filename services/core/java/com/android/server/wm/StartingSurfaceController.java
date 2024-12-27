@@ -6,7 +6,6 @@ import android.window.ITaskOrganizer;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StartingSurfaceController {
     public final ArrayList mDeferringAddStartActivities = new ArrayList();
     public boolean mDeferringAddStartingWindow;
@@ -16,7 +15,6 @@ public final class StartingSurfaceController {
     public final WindowManagerService mService;
     public final SplashScreenExceptionList mSplashScreenExceptionsList;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeferringStartingWindowRecord {
         public final ActivityRecord mDeferring;
         public final ActivityRecord mPrev;
@@ -32,7 +30,6 @@ public final class StartingSurfaceController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartingSurface {
         public final Task mTask;
         public final ITaskOrganizer mTaskOrganizer;

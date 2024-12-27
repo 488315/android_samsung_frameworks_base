@@ -3,10 +3,8 @@ package com.android.systemui.volume.panel.component.anc.domain.model;
 import androidx.slice.Slice;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface AncSlices {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Ready implements AncSlices {
         public final Slice buttonSlice;
         public final Slice popupSlice;
@@ -36,7 +34,6 @@ public interface AncSlices {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Unavailable implements AncSlices {
         public static final Unavailable INSTANCE = new Unavailable();
 

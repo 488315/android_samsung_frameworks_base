@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class DisplayAdapter {
     public static final AtomicInteger NEXT_DISPLAY_MODE_ID = new AtomicInteger(1);
     public final Context mContext;
@@ -19,7 +18,6 @@ public abstract class DisplayAdapter {
     public final String mName;
     public final DisplayManagerService.SyncRoot mSyncRoot;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {}
 
     public DisplayAdapter(

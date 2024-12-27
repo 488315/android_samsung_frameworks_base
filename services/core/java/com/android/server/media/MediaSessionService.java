@@ -102,7 +102,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaSessionService extends SystemService implements Watchdog.Monitor {
     public static final int LONG_PRESS_TIMEOUT = ViewConfiguration.getLongPressTimeout() + 50;
     public static final int MULTI_TAP_TIMEOUT = 0;
@@ -147,7 +146,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
     public final SparseArray mUserRecords;
     public ComponentName mVolumeKeyLongPressReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FullUserRecord {
         public final ContentResolver mContentResolver;
         public final int mFullUserId;
@@ -161,7 +159,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         public final HashMap mOnMediaKeyEventSessionChangedListeners = new HashMap();
         public final SparseIntArray mUidToSessionCount = new SparseIntArray();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class OnMediaKeyEventDispatchedListenerRecord
                 implements IBinder.DeathRecipient {
             public final IOnMediaKeyEventDispatchedListener callback;
@@ -182,7 +179,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class OnMediaKeyEventSessionChangedListenerRecord
                 implements IBinder.DeathRecipient {
             public final IOnMediaKeyEventSessionChangedListener callback;
@@ -444,7 +440,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaSessionServiceInternal {
         public MediaSessionServiceInternal() {}
 
@@ -516,7 +511,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MessageHandler extends Handler {
         public final SparseArray mIntegerCache = new SparseArray();
 
@@ -557,7 +551,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationListener extends NotificationListenerService {
         public NotificationListener() {}
 
@@ -647,7 +640,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Session2TokensListenerRecord implements IBinder.DeathRecipient {
         public final ISession2TokensListener listener;
         public final int userId;
@@ -666,7 +658,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionManagerImpl extends ISessionManager.Stub {
         public final KeyEventWakeLockReceiver mKeyEventReceiver;
         public boolean mSkippedFirstKeyFromKeyCustomizer;
@@ -679,7 +670,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
                         new MediaSessionService$SessionManagerImpl$$ExternalSyntheticLambda0(
                                 0, this);
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.media.MediaSessionService$SessionManagerImpl$1, reason: invalid class name */
         public final class AnonymousClass1 implements IBinder.DeathRecipient {
             public final /* synthetic */ int $r8$classId;
@@ -710,7 +700,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class KeyEventHandler {
             public boolean mIsLongPressing;
             public final int mKeyType;
@@ -766,7 +755,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class KeyEventWakeLockReceiver extends ResultReceiver
                 implements Runnable, PendingIntent.OnFinished {
             public final Handler mHandler;
@@ -834,7 +822,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class MediaKeyListenerResultReceiver extends ResultReceiver
                 implements Runnable {
             public final boolean mAsSystemService;
@@ -910,7 +897,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class VolumeKeyLongPressControlThread extends Thread {
             public int mDirection;
             public int mFlags;
@@ -2582,7 +2568,6 @@ public final class MediaSessionService extends SystemService implements Watchdog
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionsListenerRecord implements IBinder.DeathRecipient {
         public final ComponentName componentName;
         public final IActiveSessionsListener listener;

@@ -40,7 +40,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: FragmentManager.java */
 final class FragmentManagerImpl extends FragmentManager implements LayoutInflater.Factory2 {
     static boolean DEBUG = false;
     static final String TAG = "FragmentManager";
@@ -85,14 +84,12 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
                 }
             };
 
-    /* compiled from: FragmentManager.java */
     interface OpGenerator {
         boolean generateOps(ArrayList<BackStackRecord> arrayList, ArrayList<Boolean> arrayList2);
     }
 
     FragmentManagerImpl() {}
 
-    /* compiled from: FragmentManager.java */
     static class AnimateOnHWLayerIfNeededListener implements Animator.AnimatorListener {
         private boolean mShouldRunOnHWLayer = false;
         private View mView;
@@ -2585,7 +2582,6 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
         return this;
     }
 
-    /* compiled from: FragmentManager.java */
     private class PopBackStackState implements OpGenerator {
         final int mFlags;
         final int mId;
@@ -2614,7 +2610,6 @@ final class FragmentManagerImpl extends FragmentManager implements LayoutInflate
         }
     }
 
-    /* compiled from: FragmentManager.java */
     static class StartEnterTransitionListener implements Fragment.OnStartEnterTransitionListener {
         private final boolean mIsBack;
         private int mNumPostponed;

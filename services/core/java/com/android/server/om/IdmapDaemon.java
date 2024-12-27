@@ -14,14 +14,12 @@ import java.io.File;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IdmapDaemon {
     public static IdmapDaemon sInstance;
     public volatile IIdmap2 mService;
     public final AtomicInteger mOpenedCount = new AtomicInteger();
     public final Object mIdmapToken = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements AutoCloseable {
         public final IIdmap2 mIdmap2;
         public boolean mOpened = true;

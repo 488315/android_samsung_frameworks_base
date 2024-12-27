@@ -7,7 +7,6 @@ import com.android.server.accessibility.magnification.WindowMagnificationGesture
 
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContextHubEventLogger {
     public static ContextHubEventLogger sInstance;
     public final ConcurrentLinkedEvictingDeque mNanoappLoadEventQueue =
@@ -21,7 +20,6 @@ public final class ContextHubEventLogger {
     public final ConcurrentLinkedEvictingDeque mContextHubRestartEventQueue =
             new ConcurrentLinkedEvictingDeque();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ContextHubEventBase {
         public final int contextHubId;
         public final long timeStampInMs;
@@ -32,7 +30,6 @@ public final class ContextHubEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContextHubRestartEvent extends ContextHubEventBase {
         public final String toString() {
             StringBuilder sb = new StringBuilder();
@@ -43,7 +40,6 @@ public final class ContextHubEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class NanoappEventBase extends ContextHubEventBase {
         public final long nanoappId;
         public final boolean success;
@@ -55,7 +51,6 @@ public final class ContextHubEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NanoappLoadEvent extends NanoappEventBase {
         public final long nanoappSize;
         public final int nanoappVersion;
@@ -84,7 +79,6 @@ public final class ContextHubEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NanoappMessageEvent extends NanoappEventBase {
         public final NanoAppMessage message;
 
@@ -107,7 +101,6 @@ public final class ContextHubEventLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NanoappUnloadEvent extends NanoappEventBase {
         public final String toString() {
             StringBuilder sb = new StringBuilder();

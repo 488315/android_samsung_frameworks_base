@@ -9,7 +9,6 @@ import android.util.Slog;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BrightnessSetting {
     public float mBrightness;
     public final AnonymousClass1 mHandler =
@@ -47,7 +46,6 @@ public final class BrightnessSetting {
     public final DisplayManagerService.SyncRoot mSyncRoot;
     public int mUserSerial;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface BrightnessSettingListener {}
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.BrightnessSetting$1] */

@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.function.IntSupplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQSPanelController extends SecQSPanelControllerBase {
     public final BarOrderInteractor mBarOrderInteractor;
     public boolean mGridContentVisible;
@@ -43,7 +42,6 @@ public final class SecQSPanelController extends SecQSPanelControllerBase {
     public final QSCMainViewController mQSCMainViewController;
     public SecQSImplAnimatorManager mSecAnimatorManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HideRemovableTileHelper implements TunerService.Tunable {
         public /* synthetic */ HideRemovableTileHelper(SecQSPanelController secQSPanelController, int i) {
             this();

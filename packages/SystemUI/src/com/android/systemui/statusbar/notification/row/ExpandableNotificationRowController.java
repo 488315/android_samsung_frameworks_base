@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ExpandableNotificationRowController implements NotifViewController {
     public static final Uri BUBBLES_SETTING_URI = Settings.Secure.getUriFor("notification_bubbles");
     public final ActivatableNotificationViewController mActivatableNotificationViewController;
@@ -83,7 +82,6 @@ public final class ExpandableNotificationRowController implements NotifViewContr
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowController$1, reason: invalid class name */
     public final class AnonymousClass1 implements NotificationSettingsController.Listener {
         public AnonymousClass1() {
@@ -103,7 +101,6 @@ public final class ExpandableNotificationRowController implements NotifViewContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowController$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {

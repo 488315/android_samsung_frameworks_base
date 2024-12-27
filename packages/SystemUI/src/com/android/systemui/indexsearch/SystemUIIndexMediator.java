@@ -14,13 +14,11 @@ import com.samsung.android.lib.galaxyfinder.search.api.search.item.SimpleSearchR
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemUIIndexMediator {
     public final Context mContext;
     public final ArrayList mTileSearchables = new ArrayList();
     public final ArrayList mTileSearchResults = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BroadcastReceiverHelper extends BroadcastReceiver {
         public BroadcastReceiverHelper(Context context) {
             context.registerReceiver(this, new IntentFilter("com.samsung.systemui.statusbar.COLLAPSED"), null, null, 2);

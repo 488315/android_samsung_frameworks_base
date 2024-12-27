@@ -73,7 +73,6 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaSessionRecord extends MediaSessionRecordImpl implements IBinder.DeathRecipient {
     public AudioAttributes mAudioAttrs;
     public final AudioManager mAudioManager;
@@ -123,12 +122,10 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
     public long mDuration = -1;
     public int mUserEngagementState = 2;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ControllerCallbackCall {
         void performOn(ISessionControllerCallbackHolder iSessionControllerCallbackHolder);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ControllerStub extends ISessionController.Stub {
         public ControllerStub() {
         }
@@ -595,7 +592,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ISessionControllerCallbackHolder {
         public final ISessionControllerCallback mCallback;
         public final IBinder.DeathRecipient mDeathMonitor;
@@ -608,7 +604,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MessageHandler extends Handler {
         public MessageHandler(Looper looper) {
             super(looper);
@@ -686,7 +681,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionCb {
         public final ISessionCallback mCb;
 
@@ -695,7 +689,6 @@ public final class MediaSessionRecord extends MediaSessionRecordImpl implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionStub extends ISession.Stub {
         public SessionStub() {
         }

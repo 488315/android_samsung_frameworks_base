@@ -3,7 +3,6 @@ package android.media;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: TtmlRenderer.java */
 class TtmlNode {
     public final String mAttributes;
     public final List<TtmlNode> mChildren = new ArrayList();

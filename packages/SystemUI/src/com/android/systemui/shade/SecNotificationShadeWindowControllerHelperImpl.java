@@ -63,7 +63,6 @@ import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecNotificationShadeWindowControllerHelperImpl implements SecNotificationShadeWindowControllerHelper {
     public static final int AWAKE_INTERVAL_DEFAULT_MS_LIVE_DEMO;
     public static final long AWAKE_INTERVAL_DEFAULT_MS_WITH_ACCESSIBILITY;
@@ -212,7 +211,6 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -222,7 +220,6 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Provider {
         public final Consumer applyConsumer;
         public final Supplier currentWindowStateSupplier;

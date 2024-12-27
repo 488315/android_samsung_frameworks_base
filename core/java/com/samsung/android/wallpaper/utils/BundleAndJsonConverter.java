@@ -13,7 +13,6 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
-/* compiled from: WallpaperExtraBundleHelper.java */
 class BundleAndJsonConverter {
     private static final String CHARSET_UTF_8 = "UTF-8";
     private static final String JSON_INDENT = "  ";

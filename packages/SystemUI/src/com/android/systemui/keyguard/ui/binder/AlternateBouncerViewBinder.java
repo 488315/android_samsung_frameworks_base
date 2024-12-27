@@ -9,7 +9,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AlternateBouncerViewBinder implements CoreStartable {
     public final Lazy alternateBouncerDependencies;
     public ConstraintLayout alternateBouncerView;
@@ -19,7 +18,6 @@ public final class AlternateBouncerViewBinder implements CoreStartable {
     public final AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1 onAttachAddBackGestureHandler = new AlternateBouncerViewBinder$onAttachAddBackGestureHandler$1(this);
     public final Lazy windowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

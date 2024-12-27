@@ -12,7 +12,6 @@ import com.samsung.android.biometrics.app.setting.FocusableWindow$$ExternalSynth
 
 import java.util.function.BooleanSupplier;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class HbmLockStateMonitor {
     static final String ACTION_FINGERPRINT_TUI =
             "com.samsung.android.intent.action.FINGERPRINT_TUI";
@@ -27,10 +26,8 @@ public final class HbmLockStateMonitor {
     final int INVISIBLE_LOCK_TOP_TASK_CAMERA = 4;
     public int mHbmLockState = 0;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public interface Callback {}
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public class Injector {
         public final String[] mPackageListWithNoMask = {
             "com.sec.android.app.camera", "com.sec.android.gallery3d"

@@ -34,7 +34,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActiveAdmin {
     public static final int DEF_ORGANIZATION_COLOR = Color.parseColor("#00796B");
     public final Set accountTypesWithManagementDisabled;
@@ -123,7 +122,6 @@ public final class ActiveAdmin {
     public final int userId;
     public Bundle userRestrictions;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrustAgentInfo {
         public PersistableBundle options;
 

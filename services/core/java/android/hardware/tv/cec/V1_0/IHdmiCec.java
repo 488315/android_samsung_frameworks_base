@@ -18,10 +18,8 @@ import com.android.server.hdmi.HdmiCecController;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IHdmiCec extends IBase {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements IHdmiCec {
         public IHwBinder mRemote;
 
@@ -368,7 +366,6 @@ public interface IHdmiCec extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface getPhysicalAddressCallback {
         void onValues(int i, short s);
     }

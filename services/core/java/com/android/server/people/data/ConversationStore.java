@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ConversationStore {
     public ConversationInfosProtoDiskReadWriter mConversationInfosProtoDiskReadWriter;
     public final File mPackageDir;
@@ -23,7 +22,6 @@ public final class ConversationStore {
     public final Map mPhoneNumberToShortcutIdMap = new ArrayMap();
     public final Map mNotifChannelIdToShortcutIdMap = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConversationInfosProtoDiskReadWriter extends AbstractProtoDiskReadWriter {
         public final String mConversationInfoFileName;
 

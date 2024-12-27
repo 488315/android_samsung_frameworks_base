@@ -23,7 +23,6 @@ import com.android.systemui.util.PluralMessageFormaterKt;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewController {
     public CheckSimPin mCheckSimPinThread;
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -34,7 +33,6 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
     public int mSubId;
     public final TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSimPinViewController$2, reason: invalid class name */
     public final class AnonymousClass2 extends CheckSimPin {
         public AnonymousClass2(String str, int i) {
@@ -47,7 +45,6 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class CheckSimPin extends Thread {
         public final String mPin;
         public final int mSubId;

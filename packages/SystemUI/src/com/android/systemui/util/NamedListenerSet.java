@@ -16,13 +16,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NamedListenerSet<E> implements IListenerSet<E> {
     public static final int $stable = 8;
     private final Function1 getName;
     private final CopyOnWriteArrayList<NamedListener> listeners;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NamedListener {
         private final Object listener;
         private final String name;

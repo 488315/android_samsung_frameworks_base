@@ -20,7 +20,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class Vibration {
     public final CallerInfo callerInfo;
     public final IBinder callerToken;
@@ -32,7 +31,6 @@ public abstract class Vibration {
             DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     public static final AtomicInteger sNextVibrationId = new AtomicInteger(1);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallerInfo {
         public final VibrationAttributes attrs;
         public final int deviceId;
@@ -89,7 +87,6 @@ public abstract class Vibration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DebugInfo {
         public final float mAdaptiveScale;
         public final CallerInfo mCallerInfo;
@@ -281,7 +278,6 @@ public abstract class Vibration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EndInfo {
         public final CallerInfo endedBy;
         public final Status status;
@@ -311,7 +307,6 @@ public abstract class Vibration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum Status {
         /* JADX INFO: Fake field, exist only in values array */
         EF0("UNKNOWN"),

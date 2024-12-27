@@ -16,7 +16,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SearcleTipAnimHelper {
     public static final AnimProperty HIDE_ANIM_BUBBLE_ALPHA_PROPERTY;
     public static final AnimProperty HIDE_ANIM_BUBBLE_SCALE_PROPERTY;
@@ -37,7 +36,6 @@ public final class SearcleTipAnimHelper {
     public final ArrayList showAnimList = new ArrayList();
     public final ArrayList hideAnimList = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimPairSet {
         public final AnimProperty property;
         public final View view;
@@ -68,7 +66,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimProperty {
         public AnimationType animType;
         public final int duration;
@@ -108,7 +105,6 @@ public final class SearcleTipAnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationType {
         public static final /* synthetic */ AnimationType[] $VALUES;
         public static final AnimationType Alpha;
@@ -151,7 +147,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -161,7 +156,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HideAnimatorListener extends BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super(SearcleTipAnimHelper.this, str);
@@ -173,7 +167,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShowAnimatorListener extends BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super(SearcleTipAnimHelper.this, str);
@@ -185,7 +178,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -325,7 +317,6 @@ public final class SearcleTipAnimHelper {
         return animatorSet;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BaseAnimatorListener implements Animator.AnimatorListener {
         public BaseAnimatorListener(SearcleTipAnimHelper searcleTipAnimHelper, String str) {
         }

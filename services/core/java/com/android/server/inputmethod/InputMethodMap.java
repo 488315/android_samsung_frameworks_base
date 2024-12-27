@@ -5,7 +5,6 @@ import android.view.inputmethod.InputMethodInfo;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InputMethodMap {
     public static final ArrayMap EMPTY_MAP = new ArrayMap();
     public final ArrayMap mMap;

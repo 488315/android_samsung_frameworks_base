@@ -35,7 +35,6 @@ import java.util.Objects;
 import java.util.OptionalInt;
 import java.util.TreeSet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyboardBacklightController
         implements InputManagerService.KeyboardBacklightControllerInterface,
                 InputManager.InputDeviceListener {
@@ -59,14 +58,12 @@ public final class KeyboardBacklightController
     public final SparseArray mKeyboardBacklightListenerRecords = new SparseArray();
     public int mAmbientBacklightValue = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface AnimatorFactory {
         ValueAnimator makeIntAnimator(int i, int i2);
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction DIRECTION_DOWN;
@@ -89,7 +86,6 @@ public final class KeyboardBacklightController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardBacklightListenerRecord implements IBinder.DeathRecipient {
         public final IKeyboardBacklightListener mListener;
         public final int mPid;
@@ -118,7 +114,6 @@ public final class KeyboardBacklightController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardBacklightState {
         public ValueAnimator mAnimator;
         public int mBrightnessLevel;

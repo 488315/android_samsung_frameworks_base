@@ -50,7 +50,6 @@ import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManager.Stub
         implements AbsSemSystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +61,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
     public final HashMap mUserStatus;
     public final AnonymousClass1 mUserSwitchedReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExclusiveTask {
         public final ArrayList manipulatedList = new ArrayList();
         public String name;
@@ -70,7 +68,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
         public ExclusiveTask() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Task {
         public int actionType;
         public String componentName;
@@ -123,7 +120,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskSettings {
         public String key;
         public int previousValue = 1;
@@ -196,7 +192,6 @@ public final class SemExclusiveTaskManagerService extends ISemExclusiveTaskManag
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserStatus {
         public HashMap mExclusiveTaskMap;
         public HashSet mIgnoreSettingsList;

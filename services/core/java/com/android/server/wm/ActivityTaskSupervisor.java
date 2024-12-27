@@ -74,7 +74,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityTaskSupervisor implements RecentTasks.Callbacks {
     public static final ArrayMap ACTION_TO_RUNTIME_PERMISSION;
     public static final int IDLE_TIMEOUT;
@@ -122,7 +121,6 @@ public final class ActivityTaskSupervisor implements RecentTasks.Callbacks {
     public boolean mUserLeaving = false;
     public ActivityManagerPerformance mTaskBooster = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActivityTaskSupervisorHandler extends Handler {
         public ActivityTaskSupervisorHandler(Looper looper) {
             super(looper);
@@ -275,7 +273,6 @@ public final class ActivityTaskSupervisor implements RecentTasks.Callbacks {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OpaqueActivityHelper implements Predicate {
         public boolean mIgnoreFloatingWindow;
         public boolean mIgnoringKeyguard;
@@ -301,7 +298,6 @@ public final class ActivityTaskSupervisor implements RecentTasks.Callbacks {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskInfoHelper implements Consumer {
         public TaskInfo mInfo;
         public ActivityRecord mTopRunning;
@@ -325,7 +321,6 @@ public final class ActivityTaskSupervisor implements RecentTasks.Callbacks {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WaitInfo {
         public final ActivityMetricsLogger.LaunchingState mLaunchingState;
         public final WaitResult mResult;

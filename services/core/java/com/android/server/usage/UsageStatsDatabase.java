@@ -49,7 +49,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsageStatsDatabase {
     public static final int BACKUP_VERSION = 4;
     static final int[] MAX_FILES_PER_INTERVAL_TYPE = {100, 50, 12, 10};
@@ -67,7 +66,6 @@ public final class UsageStatsDatabase {
     final LongSparseArray[] mSortedStatFiles = new LongSparseArray[4];
     public final UnixCalendar mCal = new UnixCalendar();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.usage.UsageStatsDatabase$1, reason: invalid class name */
     public final class AnonymousClass1 implements FilenameFilter {
         @Override // java.io.FilenameFilter
@@ -76,7 +74,6 @@ public final class UsageStatsDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StatCombiner {
         boolean combine(IntervalStats intervalStats, boolean z, List list);
     }

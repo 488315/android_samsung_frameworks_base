@@ -37,7 +37,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatteryController {
     public static final boolean DEBUG = Log.isLoggable("BatteryController", 3);
     static final long POLLING_PERIOD_MILLIS = 10000;
@@ -55,7 +54,6 @@ public final class BatteryController {
     public boolean mIsInteractive = true;
     public final AnonymousClass1 mInputDeviceListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.BatteryController$1, reason: invalid class name */
     public final class AnonymousClass1 implements InputManager.InputDeviceListener {
         public AnonymousClass1() {
@@ -96,10 +94,8 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface BluetoothBatteryManager {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public interface BluetoothBatteryListener {
             void onBluetoothBatteryChanged(int i, String str, long j);
         }
@@ -117,7 +113,6 @@ public final class BatteryController {
         void removeMetadataListener(String str, BluetoothAdapter.OnMetadataChangedListener onMetadataChangedListener);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class DeviceMonitor {
         public BluetoothDevice mBluetoothDevice;
         public BatteryController$DeviceMonitor$$ExternalSyntheticLambda2 mBluetoothMetadataListener;
@@ -383,7 +378,6 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerRecord {
         public final BatteryController$ListenerRecord$$ExternalSyntheticLambda0 mDeathRecipient;
         public final IInputDeviceBatteryListener mListener;
@@ -425,7 +419,6 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalBluetoothBatteryManager implements BluetoothBatteryManager {
         public final AnonymousClass1 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.input.BatteryController.LocalBluetoothBatteryManager.1
             @Override // android.content.BroadcastReceiver
@@ -510,7 +503,6 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class State extends IInputDeviceBatteryState {
         public State(int i) {
             ((IInputDeviceBatteryState) this).deviceId = i;
@@ -549,7 +541,6 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     abstract class UEventBatteryListener extends UEventManager.UEventListener {
         public abstract void onBatteryUEvent(long j);
 
@@ -565,7 +556,6 @@ public final class BatteryController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsiDeviceMonitor extends DeviceMonitor {
         public BatteryController$UsiDeviceMonitor$$ExternalSyntheticLambda2 mValidityTimeoutCallback;
 

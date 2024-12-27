@@ -60,7 +60,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbService extends IUsbManager.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final UsbAlsaManager mAlsaManager;
@@ -79,7 +78,6 @@ public final class UsbService extends IUsbManager.Stub {
     public final Object mLock = new Object();
     public final ArrayMap mUsbDisableRequesters = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.usb.UsbService$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public AnonymousClass2() {}
@@ -95,7 +93,6 @@ public final class UsbService extends IUsbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final CompletableFuture mOnActivityManagerPhaseFinished;
         public final CompletableFuture mOnStartFinished;
@@ -345,7 +342,6 @@ public final class UsbService extends IUsbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageUninstallMonitor extends PackageMonitor {
         public PackageUninstallMonitor() {}
 
@@ -370,7 +366,6 @@ public final class UsbService extends IUsbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker {
         public boolean mLockdownModeStatus;
 

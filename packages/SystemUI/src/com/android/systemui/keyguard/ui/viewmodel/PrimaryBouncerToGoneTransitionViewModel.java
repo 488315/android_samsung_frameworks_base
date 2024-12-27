@@ -22,7 +22,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PrimaryBouncerToGoneTransitionViewModel {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 bouncerAlpha;
     public boolean leaveShadeOpen;

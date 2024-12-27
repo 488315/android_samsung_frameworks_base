@@ -113,7 +113,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Task extends TaskFragment {
     public static final ResetTargetTaskHelper sResetTargetTaskHelper;
     public static final Rect sTmpBounds = new Rect();
@@ -252,7 +251,6 @@ public final class Task extends TaskFragment {
     public IVoiceInteractor voiceInteractor;
     public IVoiceInteractionSession voiceSession;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActivityTaskHandler extends Handler {
         public ActivityTaskHandler(Looper looper) {
             super(looper);
@@ -277,7 +275,6 @@ public final class Task extends TaskFragment {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public ActivityInfo mActivityInfo;
         public ActivityOptions mActivityOptions;
@@ -420,7 +417,6 @@ public final class Task extends TaskFragment {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class DecorSurfaceContainer {
         final SurfaceControl mContainerSurface;
         final SurfaceControl mDecorSurface;
@@ -443,7 +439,6 @@ public final class Task extends TaskFragment {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FindRootHelper implements Predicate {
         public boolean mIgnoreRelinquishIdentity;
         public ActivityRecord mRoot;

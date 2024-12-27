@@ -8,12 +8,10 @@ import android.view.View;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnnotationLinkSpan extends ClickableSpan {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Optional mClickListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LinkInfo {
         public final Optional mAnnotation;
         public final Optional mListener;

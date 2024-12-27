@@ -10,14 +10,12 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class IonMemoryUtil {
     public static final Pattern ION_HEAP_SIZE_IN_BYTES =
             Pattern.compile("\n\\s*total\\s*(\\d+)\\s*\n");
     public static final Pattern PROCESS_ION_HEAP_SIZE_IN_BYTES =
             Pattern.compile("\n\\s+\\S+\\s+(\\d+)\\s+(\\d+)");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IonAllocations {
         public int count;
         public long maxSizeInBytes;

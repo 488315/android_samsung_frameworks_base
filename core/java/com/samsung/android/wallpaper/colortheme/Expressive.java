@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaper.colortheme;
 
-/* compiled from: ColorPaletteCreator5.java */
 final class Expressive {
     static final int ACCENT1_HUE_DELTA = -5;
     static final float ACCENT1_SAT_DELTA = 0.0f;

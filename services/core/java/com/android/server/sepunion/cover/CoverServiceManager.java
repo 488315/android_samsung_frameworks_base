@@ -39,7 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverServiceManager {
     public static final boolean IS_B6_DEVICE;
     public static final boolean SUPPORT_FLIP_SUITCASE;
@@ -76,7 +75,6 @@ public final class CoverServiceManager {
         }
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class CoverServiceInfo implements IBinder.DeathRecipient {
         public final IBinder binder;
         public final ComponentName component;
@@ -116,7 +114,6 @@ public final class CoverServiceManager {
         public abstract void updateCoverState(CoverState coverState);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper, null, true);
@@ -169,12 +166,10 @@ public final class CoverServiceManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnCoverStateProvider {
         CoverState getCoverStateFromCoverServiceManager();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SViewCoverBaseServiceInfo extends CoverServiceInfo {
         @Override // com.android.server.sepunion.cover.CoverServiceManager.CoverServiceInfo
         public final IInterface asInterface(IBinder iBinder) {
@@ -220,7 +215,6 @@ public final class CoverServiceManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SemCoverServiceInfo extends CoverServiceInfo {
         @Override // com.android.server.sepunion.cover.CoverServiceManager.CoverServiceInfo
         public final IInterface asInterface(IBinder iBinder) {

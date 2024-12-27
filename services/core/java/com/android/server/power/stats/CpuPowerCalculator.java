@@ -7,7 +7,6 @@ import com.android.internal.os.CpuScalingPolicies;
 import com.android.internal.os.PowerProfile;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CpuPowerCalculator extends PowerCalculator {
     public static final BatteryConsumer.Key[] UNINITIALIZED_KEYS = new BatteryConsumer.Key[0];
     public final UsageBasedPowerEstimator mCpuActivePowerEstimator;

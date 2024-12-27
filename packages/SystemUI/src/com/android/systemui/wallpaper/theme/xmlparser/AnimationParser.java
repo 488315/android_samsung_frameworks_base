@@ -18,7 +18,6 @@ import com.android.systemui.wallpaper.theme.builder.ComplexAnimationBuilder;
 import com.android.systemui.wallpaper.theme.view.FrameImageView;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnimationParser extends BaseParser {
     public final String mAttribute;
 
@@ -259,7 +258,6 @@ public final class AnimationParser extends BaseParser {
                 ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.2
                     public final /* synthetic */ FrameImageView val$view;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.wallpaper.theme.builder.AnimationBuilder$2$1 */
                     public final class AnonymousClass1 extends AsyncTask {
                         public Bitmap bitmap = null;

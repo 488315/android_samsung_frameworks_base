@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PeopleViewModel extends ViewModel {
     public final Function0 clearResult;
     public final Function1 onTileClicked;
@@ -25,7 +24,6 @@ public final class PeopleViewModel extends ViewModel {
     public final StateFlow recentTiles;
     public final StateFlow result;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory implements ViewModelProvider.Factory {
         public final Context context;
         public final PeopleTileRepository tileRepository;
@@ -52,10 +50,8 @@ public final class PeopleViewModel extends ViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Result {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Cancelled extends Result {
             public static final Cancelled INSTANCE = new Cancelled();
 
@@ -64,7 +60,6 @@ public final class PeopleViewModel extends ViewModel {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Success extends Result {
             public final Intent data;
 

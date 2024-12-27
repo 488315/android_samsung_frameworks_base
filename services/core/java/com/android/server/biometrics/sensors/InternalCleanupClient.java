@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class InternalCleanupClient extends HalClientMonitor
         implements EnumerateConsumer, RemovalConsumer, EnrollmentModifier {
     public final Map mAuthenticatorIds;
@@ -28,7 +27,6 @@ public abstract class InternalCleanupClient extends HalClientMonitor
     public final AnonymousClass1 mRemoveCallback;
     public final ArrayList mUnknownHALTemplates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserTemplate {
         public final BiometricAuthenticator.Identifier mIdentifier;
         public final int mUserId;

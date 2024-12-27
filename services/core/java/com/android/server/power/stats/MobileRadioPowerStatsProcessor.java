@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MobileRadioPowerStatsProcessor extends PowerStatsProcessor {
     public static final int NUM_SIGNAL_STRENGTH_LEVELS =
             CellSignalStrength.getNumSignalStrengthLevels();
@@ -29,7 +28,6 @@ public final class MobileRadioPowerStatsProcessor extends PowerStatsProcessor {
     public long[] mTmpStateStatsArray;
     public long[] mTmpUidStatsArray;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Intermediates {
         public double callPower;
         public long consumedEnergy;
@@ -40,7 +38,6 @@ public final class MobileRadioPowerStatsProcessor extends PowerStatsProcessor {
         public double txPower;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RxTxPowerEstimators {
         public UsageBasedPowerEstimator mRxPowerEstimator;
         public UsageBasedPowerEstimator[] mTxPowerEstimators;

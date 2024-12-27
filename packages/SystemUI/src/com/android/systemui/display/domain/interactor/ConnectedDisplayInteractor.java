@@ -2,12 +2,10 @@ package com.android.systemui.display.domain.interactor;
 
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ConnectedDisplayInteractor {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class State {
         public static final /* synthetic */ State[] $VALUES;
         public static final State CONNECTED;

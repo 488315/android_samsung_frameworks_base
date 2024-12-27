@@ -9,7 +9,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MobileSignalTransitionManager {
     public int currentSignalStrength;
     public TransitionSignalState currentState;
@@ -21,7 +20,6 @@ public final class MobileSignalTransitionManager {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionSignalState {
         public static final /* synthetic */ TransitionSignalState[] $VALUES;
         public static final TransitionSignalState IN_SERVICE;
@@ -49,7 +47,6 @@ public final class MobileSignalTransitionManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

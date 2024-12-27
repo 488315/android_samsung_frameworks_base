@@ -22,13 +22,11 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AttestationVerificationManagerService extends SystemService {
     public final DumpLogger mDumpLogger;
     public final AttestationVerificationPeerDeviceVerifier mPeerDeviceVerifier;
     public final AnonymousClass1 mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpLogger {
         public final ArrayDeque mData = new ArrayDeque(10);
         public int mEventsLogged = 0;

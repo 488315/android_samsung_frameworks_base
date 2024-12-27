@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.android.systemui.edgelighting.effect.data.EdgeEffectInfo;
 import com.android.systemui.edgelighting.effect.view.EdgeLightNotiEffectView;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationNormalEffect extends NotificationEffect {
     public EdgeLightNotiEffectView mLightEffectView;
     public long mLightingDuration;

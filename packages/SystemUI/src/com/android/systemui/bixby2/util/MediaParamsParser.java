@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class MediaParamsParser {
     private static final String FOCUSED_APP = "focusedApp";
     private static final String MEDIA_ACTIVE = "media_control";

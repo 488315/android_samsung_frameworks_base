@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class ConvenienceExtensionsKt$takeUntil$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ Function1 $pred;
     final /* synthetic */ Sequence $this_takeUntil;

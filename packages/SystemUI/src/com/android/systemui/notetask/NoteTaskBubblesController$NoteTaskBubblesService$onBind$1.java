@@ -17,7 +17,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 extends INoteTaskBubblesService.Stub {
     public final /* synthetic */ NoteTaskBubblesController.NoteTaskBubblesService this$0;
 

@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class OomAdjuster {
     public final String VENDING_PKG;
     public final ActiveUids mActiveUids;
@@ -85,7 +84,6 @@ public class OomAdjuster {
     public final int[] mTmpSchedGroup;
     public final ActiveUids mTmpUidRecords;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComputeOomAdjWindowCallback {
         public int adj;
         public ProcessRecord app;
@@ -102,7 +100,6 @@ public class OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
     }
 

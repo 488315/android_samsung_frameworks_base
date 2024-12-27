@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexFanControlManager {
     public FAN_LEVEL mCurrentFanLevel;
     public IFanMode mCurrentFanMode;
@@ -27,7 +26,6 @@ public final class DexFanControlManager {
     public SIOP_LEVEL mSiopLevel;
     public Timer mTimer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum FAN_LEVEL {
         STOP("STOP"),
         WEAK("WEAK"),
@@ -47,7 +45,6 @@ public final class DexFanControlManager {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FanModeEnum {
         public static final /* synthetic */ FanModeEnum[] $VALUES;
         public static final FanModeEnum FanHoldingMode;
@@ -76,7 +73,6 @@ public final class DexFanControlManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum SIOP_LEVEL {
         MINUS_3("MINUS_3"),
         MINUS_2("MINUS_2"),

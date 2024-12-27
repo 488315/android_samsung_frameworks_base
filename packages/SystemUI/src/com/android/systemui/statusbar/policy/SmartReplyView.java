@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.LogProvider {
     public final BreakIterator mBreakIterator;
     public PriorityQueue mCandidateButtonQueueForSqueezing;
@@ -57,7 +56,6 @@ public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.L
     public static final int MEASURE_SPEC_ANY_LENGTH = View.MeasureSpec.makeMeasureSpec(0, 0);
     public static final SmartReplyView$$ExternalSyntheticLambda0 DECREASING_MEASURED_WIDTH_WITHOUT_PADDING_COMPARATOR = new SmartReplyView$$ExternalSyntheticLambda0();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class LayoutParams extends ViewGroup.LayoutParams {
         public SmartButtonType mButtonType;
         public String mNoShowReason;
@@ -93,7 +91,6 @@ public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.L
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartActions {
         public final List actions;
         public final boolean fromAssistant;
@@ -104,13 +101,11 @@ public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.L
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum SmartButtonType {
         REPLY,
         ACTION
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartReplies {
         public final List choices;
         public final boolean fromAssistant;
@@ -125,7 +120,6 @@ public class SmartReplyView extends ViewGroup implements PanelScreenShotLogger.L
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartSuggestionMeasures {
         public int mMaxChildHeight;
         public int mMeasuredWidth;

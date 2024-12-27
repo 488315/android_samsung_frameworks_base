@@ -5,13 +5,11 @@ import com.android.systemui.screenshot.data.repository.ProfileTypeRepository;
 import com.android.systemui.screenshot.resources.Messages;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnnouncementResolver {
     public final CoroutineScope mainScope;
     public final Messages messages;
     public final ProfileTypeRepository profileTypes;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

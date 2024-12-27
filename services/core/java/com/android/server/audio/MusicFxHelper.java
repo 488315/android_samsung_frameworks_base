@@ -22,7 +22,6 @@ import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MusicFxHelper {
     public final AudioService.AudioHandler mAudioHandler;
     public final Context mContext;
@@ -42,7 +41,6 @@ public final class MusicFxHelper {
             };
     public final AnonymousClass2 mMusicFxBindConnection = new AnonymousClass2();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.MusicFxHelper$2, reason: invalid class name */
     public final class AnonymousClass2 implements ServiceConnection {
         @Override // android.content.ServiceConnection
@@ -56,7 +54,6 @@ public final class MusicFxHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MySparseArray extends SparseArray {
         public MySparseArray() {}
 
@@ -155,7 +152,6 @@ public final class MusicFxHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageSessions {
         public String mPackageName;
         public List mSessions;

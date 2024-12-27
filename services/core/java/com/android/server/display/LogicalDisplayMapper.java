@@ -45,7 +45,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LogicalDisplayMapper implements DisplayDeviceRepository.Listener {
     public static final boolean DEBUG = DebugUtils.isDebuggable("LogicalDisplayMapper");
     public static int sNextNonDefaultDisplayId = 5;
@@ -85,7 +84,6 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
     public final ArrayMap mVirtualDeviceDisplayMapping;
     public WindowManagerPolicy mWindowManagerPolicy;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogicalDisplayMapperHandler extends Handler {
         public LogicalDisplayMapperHandler(Looper looper) {
             super(looper, null, true);

@@ -17,7 +17,6 @@ import java.util.List;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class MicModeType {
     public static final /* synthetic */ MicModeType[] $VALUES;
     public static final List AVAILABLE_DEVICE_TYPES;
@@ -33,7 +32,6 @@ public abstract class MicModeType {
     private int mVoipCallMicMode = 0;
     private final int type;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$1, reason: invalid class name */
     enum AnonymousClass1 extends MicModeType {
         @Override // com.samsung.android.server.audio.MicModeType
@@ -59,7 +57,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$2, reason: invalid class name */
     enum AnonymousClass2 extends MicModeType {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -96,7 +93,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$3, reason: invalid class name */
     enum AnonymousClass3 extends MicModeType {
         @Override // com.samsung.android.server.audio.MicModeType
@@ -124,7 +120,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$4, reason: invalid class name */
     enum AnonymousClass4 extends MicModeType {
         @Override // com.samsung.android.server.audio.MicModeType
@@ -157,7 +152,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$5, reason: invalid class name */
     enum AnonymousClass5 extends MicModeType {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -203,7 +197,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$6, reason: invalid class name */
     enum AnonymousClass6 extends MicModeType {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -233,7 +226,6 @@ public abstract class MicModeType {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.audio.MicModeType$7, reason: invalid class name */
     enum AnonymousClass7 extends MicModeType {
         @Override // com.samsung.android.server.audio.MicModeType

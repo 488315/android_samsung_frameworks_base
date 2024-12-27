@@ -39,7 +39,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CoverWallpaperController extends IWallpaperManagerCallback.Stub implements CoverWallpaper, PluginWallpaperCallback {
     public static CoverWallpaperController sInstance;
     public final Context mContext;

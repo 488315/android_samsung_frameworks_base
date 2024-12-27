@@ -11,7 +11,6 @@ import kotlin.jvm.internal.Intrinsics;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class ChipStateSender {
     public static final /* synthetic */ ChipStateSender[] $VALUES;
     public static final Companion Companion;
@@ -29,7 +28,6 @@ public abstract class ChipStateSender {
     private final TransferStatus transferStatus;
     private final UiEventLogger.UiEventEnum uiEvent;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -44,7 +42,6 @@ public abstract class ChipStateSender {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class FAR_FROM_RECEIVER extends ChipStateSender {
         public FAR_FROM_RECEIVER(String str, int i) {
             super(str, i, 8, MediaTttSenderUiEvents.MEDIA_TTT_SENDER_FAR_FROM_RECEIVER, null, TransferStatus.TOO_FAR, null, null, 32, null);

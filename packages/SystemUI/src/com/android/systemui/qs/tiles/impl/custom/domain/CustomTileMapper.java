@@ -5,12 +5,10 @@ import android.content.Context;
 import com.android.systemui.qs.tiles.base.interactor.QSTileDataToStateMapper;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CustomTileMapper implements QSTileDataToStateMapper {
     public final Context context;
     public final IUriGrantsManager uriGrantsManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IconResult {
         public final boolean failedToLoad;
         public final Function0 iconProvider;

@@ -3,10 +3,8 @@ package com.android.systemui.biometrics.ui.viewmodel;
 import androidx.activity.ComponentActivity$1$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PromptMessage {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Empty implements PromptMessage {
         public static final Empty INSTANCE = new Empty();
 
@@ -14,7 +12,6 @@ public interface PromptMessage {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Error implements PromptMessage {
         public final String errorMessage;
 
@@ -38,7 +35,6 @@ public interface PromptMessage {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Help implements PromptMessage {
         public final String helpMessage;
 

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class MultiWindowShellCommand extends ShellCommand {
     private static final String CMD_ADD_SPLIT_ACTIVITY_INFO = "add-split-activity";
     private static final String CMD_ALLOW_MULTIWINDOW = "allow-multiwindow";

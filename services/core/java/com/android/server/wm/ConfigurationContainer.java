@@ -20,7 +20,6 @@ import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ConfigurationContainer {
     static final int BOUNDS_CHANGE_NONE = 0;
     static final int BOUNDS_CHANGE_POSITION = 1;

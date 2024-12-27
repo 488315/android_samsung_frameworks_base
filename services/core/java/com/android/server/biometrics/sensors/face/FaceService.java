@@ -80,7 +80,6 @@ import java.util.function.Supplier;
 import vendor.samsung.hardware.biometrics.face.ISehSession;
 import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class FaceService extends SystemService {
     public final Supplier mAidlInstanceNameSupplier;
     public final AuthenticationStateListeners mAuthenticationStateListeners;
@@ -92,11 +91,9 @@ public class FaceService extends SystemService {
     public final FaceServiceRegistry mRegistry;
     final FaceServiceWrapper mServiceWrapper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface FaceProviderFunction {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class FaceServiceWrapper extends IFaceService.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
 

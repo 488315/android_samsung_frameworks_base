@@ -2,7 +2,6 @@ package android.os;
 
 import java.io.FileDescriptor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDumpstate extends IInterface {
     public static final int BUGREPORT_FLAG_DEFER_CONSENT = 2;
     public static final int BUGREPORT_FLAG_KEEP_BUGREPORT_ON_RETRIEVAL = 4;
@@ -31,7 +30,6 @@ public interface IDumpstate extends IInterface {
     public static final int BUGREPORT_MODE_WIFI = 5;
     public static final String DESCRIPTOR = "android.os.IDumpstate";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDumpstate {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -70,14 +68,12 @@ public interface IDumpstate extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDumpstate {
         static final int TRANSACTION_cancelBugreport = 3;
         static final int TRANSACTION_preDumpUiData = 1;
         static final int TRANSACTION_retrieveBugreport = 4;
         static final int TRANSACTION_startBugreport = 2;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDumpstate {
             public IBinder mRemote;
 

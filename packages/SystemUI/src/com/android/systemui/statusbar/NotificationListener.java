@@ -44,7 +44,6 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationListener extends NotificationListenerWithPlugins implements PipelineDumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
@@ -60,7 +59,6 @@ public final class NotificationListener extends NotificationListenerWithPlugins 
     public long mSkippingRankingUpdatesSince;
     public final SystemClock mSystemClock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NotificationSettingsListener {
     }
 
@@ -319,7 +317,6 @@ public final class NotificationListener extends NotificationListenerWithPlugins 
         onNotificationRemoved(statusBarNotification, rankingMap, 0);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface NotificationHandler {
         void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap);
 

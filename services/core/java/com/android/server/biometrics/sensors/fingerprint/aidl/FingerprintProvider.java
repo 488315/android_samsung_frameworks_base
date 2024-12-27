@@ -113,7 +113,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FingerprintProvider implements IBinder.DeathRecipient, ServiceProvider {
     public final AuthSessionCoordinator mAuthSessionCoordinator;
     public final AuthenticationStateListeners mAuthenticationStateListeners;
@@ -142,7 +141,6 @@ public final class FingerprintProvider implements IBinder.DeathRecipient, Servic
     public final AnonymousClass1 mInternalCleanupClientCallback = new AnonymousClass1(this, 0);
     final SensorList mFingerprintSensors = new SensorList(ActivityManager.getService());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider$1, reason: invalid class name */
     public final class AnonymousClass1 implements ClientMonitorCallback {
         public final /* synthetic */ int $r8$classId;
@@ -204,7 +202,6 @@ public final class FingerprintProvider implements IBinder.DeathRecipient, Servic
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider$6, reason: invalid class name */
     public final class AnonymousClass6 implements ClientMonitorCallback {
         public final /* synthetic */ long val$requestId;
@@ -273,7 +270,6 @@ public final class FingerprintProvider implements IBinder.DeathRecipient, Servic
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BiometricTaskStackListener extends TaskStackListener
             implements ActivityManager.SemProcessListener {
         public BiometricTaskStackListener() {}

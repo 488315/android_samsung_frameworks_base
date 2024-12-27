@@ -3,7 +3,6 @@ package com.android.systemui.popup.util;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DisplayManagerWrapper {
     private final Context mContext;
     private final DisplayManager mDisplayManager;

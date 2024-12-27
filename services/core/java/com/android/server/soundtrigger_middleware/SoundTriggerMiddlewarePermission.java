@@ -25,20 +25,17 @@ import com.android.server.pm.permission.LegacyPermissionManagerService;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerMiddlewarePermission
         implements ISoundTriggerMiddlewareInternal, Dumpable {
     public final Context mContext;
     public final ISoundTriggerMiddlewareInternal mDelegate;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModuleWrapper extends ISoundTriggerModule.Stub {
         public final CallbackWrapper mCallbackWrapper;
         public ISoundTriggerModule mDelegate;
         public final boolean mIsTrusted;
         public final Identity mOriginatorIdentity;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class CallbackWrapper implements ISoundTriggerCallback {
             public final ISoundTriggerCallback mDelegate;
 

@@ -11,7 +11,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ComposePwleVibratorStep extends AbstractVibratorStep {
     public static List unrollRampSegments(VibrationEffect.Composed composed, int i, int i2) {
         ArrayList arrayList = new ArrayList(i2);

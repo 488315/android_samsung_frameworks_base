@@ -21,7 +21,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class GuestResumeSessionReceiver {
     public static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
     public final GuestSessionNotification mGuestSessionNotification;
@@ -79,7 +78,6 @@ public final class GuestResumeSessionReceiver {
     };
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class ResetSessionDialog extends SystemUIDialog implements DialogInterface.OnClickListener {
         public static final int BUTTON_DONTWIPE = -1;
         public static final int BUTTON_WIPE = -2;

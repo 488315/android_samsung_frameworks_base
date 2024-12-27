@@ -31,7 +31,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 import kotlin.sequences.TransformingSequence$iterator$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
     public final Cell cell;
     public final CellMargin cellMargin;
@@ -45,7 +44,6 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
     public int rows;
     public int sidePadding;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Cell {
         public int height;
         public int heightCollapsed;
@@ -88,7 +86,6 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CellMargin {
         public int horizontal;
         public int verticalCollapsed;

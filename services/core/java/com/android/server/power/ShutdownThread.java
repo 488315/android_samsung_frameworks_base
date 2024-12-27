@@ -54,7 +54,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShutdownThread extends Thread {
     static final int DEFAULT_SHUTDOWN_VIBRATE_MS = 500;
     public static long currentTimeMillisStart;
@@ -90,24 +89,20 @@ public final class ShutdownThread extends Thread {
     public static final boolean BIN_TYPE_PRODUCTSHIP = !Debug.semIsProductDev();
     public static boolean systemRequest = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.ShutdownThread$1, reason: invalid class name */
     public final class AnonymousClass1 extends Handler {
         public static ShutdownThread$getDelayDumpstate$1 delayDumpRaunnable;
         public static AnonymousClass1 delayhandler;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogFileWriter {
         public FileOutputStream latestShutdownProfile;
         public FileOutputStream shutdownProfile;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MYLOG {
         public static void i(String str, String str2) {
             try {

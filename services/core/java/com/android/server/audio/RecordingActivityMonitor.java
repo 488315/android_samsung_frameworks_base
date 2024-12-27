@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RecordingActivityMonitor implements AudioSystem.AudioRecordingCallback {
     public static final EventLogger sEventLogger = new EventLogger(50, "recording activity received by AudioService");
     public final AudioSettingsHelper mAudioSettingsHelper;
@@ -48,7 +47,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
     public final List mRecordStates = new ArrayList();
     public Handler mAudioHandler = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecMonitorClient implements IBinder.DeathRecipient {
         public static RecordingActivityMonitor sMonitor;
         public final IRecordingConfigDispatcher mDispatcherCb;
@@ -66,7 +64,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecorderDeathHandler implements IBinder.DeathRecipient {
         public static RecordingActivityMonitor sMonitor;
         public final IBinder mRecorderToken;
@@ -84,7 +81,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecordingEvent extends EventLogger.Event {
         public final int mClientUid;
         public final String mPackName;
@@ -132,7 +128,6 @@ public final class RecordingActivityMonitor implements AudioSystem.AudioRecordin
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecordingState {
         public AudioRecordingConfiguration mConfig;
         public final RecorderDeathHandler mDeathHandler;

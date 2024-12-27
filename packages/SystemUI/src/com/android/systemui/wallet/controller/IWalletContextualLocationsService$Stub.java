@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class IWalletContextualLocationsService$Stub extends Binder implements IInterface {
     public IWalletContextualLocationsService$Stub() {
         attachInterface(this, "com.android.systemui.wallet.controller.IWalletContextualLocationsService");

@@ -32,7 +32,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProjectionPermissionDialogDelegate implements SystemUIDialog.Delegate {
     public static final Companion Companion = new Companion(null);
     public static final List MODES = CollectionsKt__CollectionsKt.listOf(ScreenRecordingAudioSource.INTERNAL, ScreenRecordingAudioSource.MIC, ScreenRecordingAudioSource.MIC_AND_INTERNAL);
@@ -50,7 +49,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
     public final int theme;
     public final UserContextProvider userContextProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CaptureTargetResultReceiver extends ResultReceiver {
         public CaptureTargetResultReceiver() {
             super(new Handler(Looper.getMainLooper()));
@@ -64,7 +62,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -74,7 +71,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         ScreenRecordPermissionDialogDelegate create(RecordingController recordingController, UserHandle userHandle, int i, Runnable runnable);
     }

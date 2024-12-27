@@ -38,7 +38,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SamsungScreenPinningRequest implements DialogInterface.OnClickListener, NavigationModeController.ModeChangedListener {
     private static final int PIN_WINDOWS_DEX = 0;
     private static final int PIN_WINDOWS_EXCLUDED = 1;

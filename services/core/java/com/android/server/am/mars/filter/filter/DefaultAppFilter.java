@@ -26,7 +26,6 @@ import com.samsung.android.knox.SemPersonaManager;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DefaultAppFilter implements IFilter {
     public int mSecureFolderUserId;
     public final ArrayMap mDefaultIMEList = new ArrayMap();
@@ -40,7 +39,6 @@ public final class DefaultAppFilter implements IFilter {
     public DefaultAppChangedReceiver mDefaultAppChangedReceiver = null;
     public boolean mDefaultAppChangedReceiverRegistered = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultAppChangedReceiver extends BroadcastReceiver {
         public DefaultAppChangedReceiver() {}
 
@@ -77,7 +75,6 @@ public final class DefaultAppFilter implements IFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DefaultAppFilterHolder {
         public static final DefaultAppFilter INSTANCE = new DefaultAppFilter();
     }

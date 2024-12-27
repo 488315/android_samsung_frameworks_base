@@ -53,7 +53,6 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutomaticBrightnessController {
     public final IActivityTaskManager mActivityTaskManager;
     public float mAmbientBrighteningThreshold;
@@ -150,7 +149,6 @@ public final class AutomaticBrightnessController {
     public boolean mShouldApplyEarlyWakeUp = false;
     public Runnable mPendingEarlyLightSensorReadyListener = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.AutomaticBrightnessController$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -210,7 +208,6 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AmbientLightRingBuffer {
         public int mCapacity;
         public Clock mClock;
@@ -314,7 +311,6 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AutomaticBrightnessHandler extends Handler {
         public AutomaticBrightnessHandler(Looper looper) {
             super(looper, null, true);
@@ -424,18 +420,14 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callbacks {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
         long getSensorEventScaleTime();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealClock implements Clock {
         public final boolean mOffloadControlsDozeBrightness;
 
@@ -451,7 +443,6 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShortTermModel {
         public float mAnchor = -1.0f;
         public float mBrightness = Float.NaN;
@@ -545,7 +536,6 @@ public final class AutomaticBrightnessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskStackListenerImpl extends TaskStackListener {
         public TaskStackListenerImpl() {}
 

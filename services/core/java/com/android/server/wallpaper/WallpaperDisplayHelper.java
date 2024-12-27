@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WallpaperDisplayHelper {
     public final DisplayManager mDisplayManager;
     public final boolean mIsFoldable;
@@ -33,7 +32,6 @@ public final class WallpaperDisplayHelper {
     public final List mFoldableOrientationPairs = new ArrayList();
     public final boolean mIsLargeScreen = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayData {
         public final int mDisplayId;
         public int mWidth = -1;

@@ -8,11 +8,9 @@ import com.google.protobuf.nano.MessageNano;
 import com.google.protobuf.nano.WireFormatNano;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalHubState extends MessageNano {
     public CommunalWidgetItem[] widgets;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CommunalWidgetItem extends MessageNano {
         private static volatile CommunalWidgetItem[] _emptyArray;
         public String componentName;

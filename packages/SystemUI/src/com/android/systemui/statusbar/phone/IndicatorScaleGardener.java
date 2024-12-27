@@ -13,13 +13,11 @@ import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class IndicatorScaleGardener implements Dumpable {
     public final float baseSmallestWidth;
     public ScaleModel latestScaleModel;
     public final boolean logEnabled = DeviceType.isEngOrUTBinary();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ScaleModel {
         public final int currentSmallestWidth;
         public final int displayDeviceType;

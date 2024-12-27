@@ -68,7 +68,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverAuthenticator extends LocalAuthenticator
         implements SAccessoryManager.AuthenticationResultCallback,
                 RestrictionPolicyOberver.NfcRestrictionPolicyListener,
@@ -166,7 +165,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -220,7 +218,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -349,7 +346,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$5, reason: invalid class name */
     public final class AnonymousClass5 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -460,7 +456,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverAuthHandler extends Handler {
         public final /* synthetic */ int $r8$classId = 1;
 
@@ -489,7 +484,6 @@ public final class CoverAuthenticator extends LocalAuthenticator
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverAuthStateFile {
         public final String TAG = CoverAuthStateFile.class.getSimpleName();
         public byte[] mExtraData;

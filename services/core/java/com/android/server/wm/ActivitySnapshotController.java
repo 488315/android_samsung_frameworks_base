@@ -23,7 +23,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivitySnapshotController extends AbsAppSnapshotController {
     public final ArraySet mOnBackPressedActivities;
     final ArraySet mPendingDeleteActivity;
@@ -38,7 +37,6 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
     public final ArrayList mTmpTransitionParticipants;
     public final SparseArray mUserSavedFiles;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.ActivitySnapshotController$1, reason: invalid class name */
     public final class AnonymousClass1 extends SnapshotPersistQueue.WriteQueueItem {
         @Override // com.android.server.wm.SnapshotPersistQueue.WriteQueueItem
@@ -55,7 +53,6 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoadActivitySnapshotItem extends SnapshotPersistQueue.WriteQueueItem {
         public final ActivityRecord[] mActivities;
         public final int mCode;
@@ -112,7 +109,6 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSavedFile {
         public final IntArray mActivityIds = new IntArray();
         public final int mFileId;

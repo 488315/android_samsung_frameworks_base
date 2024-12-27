@@ -94,7 +94,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class EdgeLightingService extends Service {
     public static boolean sConfigured;
     public static int sFlipFont;
@@ -122,7 +121,6 @@ public class EdgeLightingService extends Service {
     public boolean mIsStarted = false;
     public int mCondition = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
@@ -137,7 +135,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$3, reason: invalid class name */
     public final class AnonymousClass3 implements OnEdgeLightingCallback {
         public AnonymousClass3() {
@@ -182,7 +179,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {
@@ -581,14 +577,12 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$7, reason: invalid class name */
     public final class AnonymousClass7 {
         public AnonymousClass7() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$9, reason: invalid class name */
     public final class AnonymousClass9 extends ContentObserver {
         public AnonymousClass9(Handler handler) {
@@ -611,7 +605,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MainHandler extends Handler {
         public /* synthetic */ MainHandler(EdgeLightingService edgeLightingService, int i) {
             this();
@@ -641,7 +634,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StatusbarStateReceiver extends BroadcastReceiver {
         public /* synthetic */ StatusbarStateReceiver(EdgeLightingService edgeLightingService, int i) {
             this();

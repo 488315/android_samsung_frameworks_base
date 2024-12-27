@@ -5,14 +5,12 @@ import android.util.SparseArray;
 
 import com.android.server.location.gnss.hal.GnssNative;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssGeofenceProxy extends IGpsGeofenceHardware.Stub
         implements GnssNative.BaseCallbacks {
     public final GnssNative mGnssNative;
     public final Object mLock = new Object();
     public final SparseArray mGeofenceEntries = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GeofenceEntry {
         public int geofenceId;
         public int lastTransition;

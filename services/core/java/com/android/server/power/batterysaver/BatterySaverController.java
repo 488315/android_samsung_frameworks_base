@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatterySaverController implements BatterySaverPolicy.BatterySaverPolicyListener {
     public boolean mAdaptiveEnabledRaw;
     public boolean mAdaptivePreviouslyEnabled;
@@ -72,7 +71,6 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);

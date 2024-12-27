@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RotaryInputGraphView extends View {
     public static final long MAX_GESTURE_TIME;
     public static final long MAX_SHOWN_TIME_INTERVAL;
@@ -29,7 +28,6 @@ public final class RotaryInputGraphView extends View {
     public final CyclicBuffer mGraphValues;
     public final float mScaledVerticalScrollFactor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CyclicBuffer {
         public int mIteratorCount;
         public int mIteratorIndex;
@@ -38,7 +36,6 @@ public final class RotaryInputGraphView extends View {
         public final AnonymousClass1 mReverseIterator = new AnonymousClass1();
         public final GraphValue[] mValues = new GraphValue[400];
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.input.debug.RotaryInputGraphView$CyclicBuffer$1, reason: invalid class name */
         public final class AnonymousClass1 implements Iterator {
             public AnonymousClass1() {}
@@ -61,7 +58,6 @@ public final class RotaryInputGraphView extends View {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GraphValue {
         public float mPos;
         public long mTime;

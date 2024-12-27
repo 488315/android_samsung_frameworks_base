@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepository;
 import kotlin.coroutines.EmptyCoroutineContext;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BTTetherUiAdapter {
     public final ConnectivityRepository connectivityRepository;
     public final StatusBarIconController iconController;

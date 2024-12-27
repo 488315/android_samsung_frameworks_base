@@ -44,7 +44,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public static final String KEY_INTEGRITY_RESULT = "integrity_result";
     public static final String KEY_IS_MAINTENANCE_MODE_SUPPORTED = "is_maintenance_mode_supported";
@@ -80,7 +79,6 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public static AppOpsManager.OnOpChangedInternalListener opListener = new AnonymousClass1();
     public static IRemoteLockMonitorCallback mRemoteLockMonitorCallback = new AnonymousClass2();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.knoxguard.service.KnoxGuardSeService$1, reason: invalid class name */
     public final class AnonymousClass1 extends AppOpsManager.OnOpChangedInternalListener {
         public final void onOpChanged(int i, String str) {
@@ -100,7 +98,6 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.knoxguard.service.KnoxGuardSeService$2, reason: invalid class name */
     public final class AnonymousClass2 extends IRemoteLockMonitorCallback.Stub {
         public final void changeRemoteLockState(RemoteLockInfo remoteLockInfo)
@@ -142,7 +139,6 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class KGLockscreenInfo implements Serializable {
         private String mClientName;
         private String mCustomAppName;

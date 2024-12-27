@@ -54,7 +54,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PermissionManagerService extends IPermissionManager.Stub {
     public static final ConcurrentHashMap sRunningAttributionSources = new ConcurrentHashMap();
     public final AppOpsManager mAppOpsManager;
@@ -68,7 +67,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
     public final PermissionManagerServiceInterface mPermissionManagerServiceImpl;
     public VirtualDeviceManagerInternal mVirtualDeviceManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttributionSourceRegistry {
         public final Context mContext;
         public final Object mLock = new Object();
@@ -122,7 +120,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PermissionCheckerService extends IPermissionChecker.Stub {
         public final Context mContext;
         public final PermissionManagerServiceInternalImpl mPermissionManagerServiceInternal = (PermissionManagerServiceInternalImpl) LocalServices.getService(PermissionManagerServiceInternalImpl.class);
@@ -624,7 +621,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PermissionManagerServiceInternalImpl implements PermissionManagerInternal {
         public PermissionManagerServiceInternalImpl() {
         }
@@ -699,7 +695,6 @@ public final class PermissionManagerService extends IPermissionManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RegisteredAttribution {
         public final PermissionManagerService$RegisteredAttribution$$ExternalSyntheticLambda0 mDeathRecipient;
         public final AtomicBoolean mFinished = new AtomicBoolean(false);

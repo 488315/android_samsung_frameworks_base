@@ -29,7 +29,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WebViewUpdateService extends SystemService {
     public final WebViewUpdateServiceInterface mImpl;
     public AnonymousClass1 mWebViewUpdatedReceiver;
@@ -42,7 +41,6 @@ public final class WebViewUpdateService extends SystemService {
                     "webview.value_app_waiting_for_relro_completion_delay",
                     new Histogram.ScaledRangeOptions(20, 0, 1.0f, 1.4f));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IWebViewUpdateService.Stub {
         public BinderService() {}
 

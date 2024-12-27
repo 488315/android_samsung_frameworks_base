@@ -2,7 +2,6 @@ package android.companion.virtualcamera;
 
 import android.os.Parcel;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract /* synthetic */ class SupportedStreamConfiguration$$ExternalSyntheticOutline0 {
     public static int m(Parcel parcel, int i, int i2) {
         parcel.writeInt(i);

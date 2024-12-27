@@ -6,7 +6,6 @@ import com.android.systemui.plugins.annotations.DependsOn;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = QS.ACTION, version = 15)
 @DependsOn(target = HeightListener.class)
 public interface QS extends FragmentBase {
@@ -14,7 +13,6 @@ public interface QS extends FragmentBase {
     public static final String TAG = "QS";
     public static final int VERSION = 15;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public interface HeightListener {
         public static final int VERSION = 1;
@@ -22,7 +20,6 @@ public interface QS extends FragmentBase {
         void onQsHeightChanged();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public interface ScrollListener {
         public static final int VERSION = 1;

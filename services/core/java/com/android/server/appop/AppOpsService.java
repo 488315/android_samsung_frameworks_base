@@ -137,7 +137,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppOpsService extends IAppOpsService.Stub {
     public static final boolean DEBUG;
     public static final boolean DEBUG_MID;
@@ -194,7 +193,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
     public final AnonymousClass1 mWriteRunner;
     public boolean mWriteScheduled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.appop.AppOpsService$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -266,7 +264,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.appop.AppOpsService$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
@@ -278,7 +275,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.appop.AppOpsService$3, reason: invalid class name */
     public final class AnonymousClass3 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -365,7 +361,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.appop.AppOpsService$6, reason: invalid class name */
     public final class AnonymousClass6 implements AppOpsManagerLocal {
         public /* synthetic */ AnonymousClass6() {
@@ -381,7 +376,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveCallback implements IBinder.DeathRecipient {
         public final IAppOpsActiveCallback mCallback;
         public final int mCallingPid;
@@ -416,7 +410,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppOpsManagerInternalImpl extends AppOpsManagerInternal {
         public AppOpsManagerInternalImpl() {
         }
@@ -509,7 +502,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChangeRec {
         public final int op;
         public final String pkg;
@@ -524,7 +516,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CheckOpsDelegateDispatcher {
         public final AppOpsManagerInternal.CheckOpsDelegate mCheckOpsDelegate;
         public final AppOpsManagerInternal.CheckOpsDelegate mPolicy;
@@ -625,7 +616,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientGlobalRestrictionState implements IBinder.DeathRecipient {
         public final IBinder mToken;
 
@@ -669,7 +659,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientUserRestrictionState implements IBinder.DeathRecipient {
         public int callingRestriction;
         public final IBinder token;
@@ -814,7 +803,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Constants extends ContentObserver {
         public long BG_STATE_SETTLE_TIME;
         public long FG_SERVICE_STATE_SETTLE_TIME;
@@ -862,7 +850,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeCallback implements IBinder.DeathRecipient {
         public final IAppOpsCallback mCallback;
         public final int mCallingPid;
@@ -908,7 +895,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotedCallback implements IBinder.DeathRecipient {
         public final IAppOpsNotedCallback mCallback;
         public final int mCallingPid;
@@ -943,7 +929,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Op {
         public final ArrayMap mDeviceAttributedOps;
         public final int op;
@@ -1006,7 +991,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Ops extends SparseArray {
         public AppOpsManager.RestrictionBypass bypass;
         public final String packageName;
@@ -1020,7 +1004,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageVerificationResult {
         public final AppOpsManager.RestrictionBypass bypass;
         public final boolean isAttributionTagValid;
@@ -1031,7 +1014,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Shell extends ShellCommand {
         public String attributionTag;
         public final IAppOpsService mInterface;
@@ -1541,7 +1523,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartedCallback implements IBinder.DeathRecipient {
         public final IAppOpsStartedCallback mCallback;
         public final int mCallingPid;
@@ -1576,7 +1557,6 @@ public final class AppOpsService extends IAppOpsService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class UidState {
         public final ArrayMap pkgOps = new ArrayMap();
         public final int uid;

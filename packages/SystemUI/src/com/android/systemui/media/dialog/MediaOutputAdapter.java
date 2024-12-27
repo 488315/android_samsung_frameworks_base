@@ -31,12 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaOutputAdapter extends MediaOutputBaseAdapter {
     public static final boolean DEBUG = Log.isLoggable("MediaOutputAdapter", 3);
     public final List mMediaItemList;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaDeviceViewHolder extends MediaOutputBaseAdapter.MediaDeviceBaseViewHolder {
         public MediaDeviceViewHolder(View view) {
             super(view);
@@ -211,7 +209,6 @@ public final class MediaOutputAdapter extends MediaOutputBaseAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaGroupDividerViewHolder extends RecyclerView.ViewHolder {
         public final TextView mTitleText;
 

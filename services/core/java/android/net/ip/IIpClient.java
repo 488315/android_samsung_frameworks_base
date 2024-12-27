@@ -12,7 +12,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IIpClient extends IInterface {
     public static final String DESCRIPTOR = "android$net$ip$IIpClient".replace('$', '.');
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
@@ -27,7 +26,6 @@ public interface IIpClient extends IInterface {
     public static final int PROV_IPV6_SLAAC = 1;
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IIpClient {
         @Override // android.net.ip.IIpClient
         public void addKeepalivePacketFilter(
@@ -100,7 +98,6 @@ public interface IIpClient extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IIpClient {
         static final int TRANSACTION_addKeepalivePacketFilter = 10;
         static final int TRANSACTION_addNattKeepalivePacketFilter = 13;
@@ -121,7 +118,6 @@ public interface IIpClient extends IInterface {
         static final int TRANSACTION_updateApfCapabilities = 16;
         static final int TRANSACTION_updateLayer2Information = 15;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IIpClient {
             public String mCachedHash;
             public int mCachedVersion;

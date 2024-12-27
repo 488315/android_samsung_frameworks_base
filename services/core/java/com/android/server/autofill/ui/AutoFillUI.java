@@ -34,7 +34,6 @@ import com.android.server.autofill.Session$$ExternalSyntheticLambda9;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutoFillUI {
     public AutoFillUiCallback mCallback;
     public final Context mContext;
@@ -51,7 +50,6 @@ public final class AutoFillUI {
             (UiModeManagerService.LocalService)
                     LocalServices.getService(UiModeManagerService.LocalService.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.ui.AutoFillUI$1, reason: invalid class name */
     public final class AnonymousClass1 implements SaveUi.OnSaveListener {
         public final /* synthetic */ int $r8$classId = 1;
@@ -194,7 +192,6 @@ public final class AutoFillUI {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.ui.AutoFillUI$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public final /* synthetic */ AutoFillUiCallback val$callback;
@@ -256,7 +253,6 @@ public final class AutoFillUI {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AutoFillUiCallback {}
 
     public AutoFillUI(Context context) {

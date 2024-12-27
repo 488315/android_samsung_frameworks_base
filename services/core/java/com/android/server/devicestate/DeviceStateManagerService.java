@@ -53,7 +53,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceStateManagerService extends SystemService {
     public static final DeviceState INVALID_DEVICE_STATE =
             new DeviceState(new DeviceState.Configuration.Builder(-1, "INVALID").build());
@@ -83,7 +82,6 @@ public final class DeviceStateManagerService extends SystemService {
     public DeviceState mRearDisplayState;
     public final SystemPropertySetter mSystemPropertySetter;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IDeviceStateManager.Stub {
         public BinderService() {}
 
@@ -262,14 +260,12 @@ public final class DeviceStateManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateProviderListener {
         public int mCurrentBaseState;
 
         public DeviceStateProviderListener() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends DeviceStateManagerInternal {
         public LocalService() {}
 
@@ -320,7 +316,6 @@ public final class DeviceStateManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverrideRequestScreenObserver
             implements ActivityTaskManagerInternal.ScreenObserver {
         public OverrideRequestScreenObserver() {}
@@ -371,7 +366,6 @@ public final class DeviceStateManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessRecord implements IBinder.DeathRecipient {
         public final IDeviceStateManagerCallback mCallback;
         public final DeviceStateManagerService$$ExternalSyntheticLambda1 mDeathListener;
@@ -446,7 +440,6 @@ public final class DeviceStateManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface SystemPropertySetter {
         void setDebugTracingDeviceStateProperty(String str);
     }

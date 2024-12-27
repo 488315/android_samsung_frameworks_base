@@ -20,7 +20,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.wakelock.WakeLock;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DozeUi implements DozeMachine.Part {
     public final DelayableExecutor mBgExecutor;
     public final boolean mCanAnimateTransition;
@@ -34,7 +33,6 @@ public class DozeUi implements DozeMachine.Part {
     public final AlarmTimeout mTimeTicker;
     public final WakeLock mWakeLock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.DozeUi$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;

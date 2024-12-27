@@ -32,7 +32,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SettingViewModel extends ViewModel {
     public final Context context;
     public final DataStore dataStore;
@@ -40,7 +39,6 @@ public final class SettingViewModel extends ViewModel {
     public final CoroutineLiveData isShowMusicShareEnabled;
     public final Lazy router2Manager$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -69,7 +67,6 @@ public final class SettingViewModel extends ViewModel {
                 final SettingViewModel settingViewModel = SettingViewModel.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel.1.1
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$1$1$1, reason: invalid class name and collision with other inner class name */
                     final class C01551 extends SuspendLambda implements Function2 {
                         /* synthetic */ Object L$0;
@@ -130,7 +127,6 @@ public final class SettingViewModel extends ViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

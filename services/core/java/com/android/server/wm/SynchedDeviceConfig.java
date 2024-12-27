@@ -6,13 +6,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SynchedDeviceConfig implements DeviceConfig.OnPropertiesChangedListener {
     public final Map mDeviceConfigEntries;
     public final Executor mExecutor;
     public final String mNamespace;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SynchedDeviceConfigBuilder {
         public final Executor mExecutor;
         public final Map mDeviceConfigEntries = new ConcurrentHashMap();
@@ -31,7 +29,6 @@ public final class SynchedDeviceConfig implements DeviceConfig.OnPropertiesChang
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SynchedDeviceConfigEntry {
         public final boolean mBuildTimeFlagEnabled;
         public final boolean mDefaultValue;

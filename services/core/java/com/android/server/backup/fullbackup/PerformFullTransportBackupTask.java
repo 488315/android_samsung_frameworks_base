@@ -43,7 +43,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PerformFullTransportBackupTask extends FullBackupTask
         implements BackupRestoreTask {
     public final BackupAgentTimeoutParameters mAgentTimeoutParameters;
@@ -69,7 +68,6 @@ public final class PerformFullTransportBackupTask extends FullBackupTask
     public final int mUserId;
     public final boolean mUserInitiated;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SinglePackageBackupPreflight implements BackupRestoreTask {
         public final int mCurrentOpToken;
         public final long mQuota;
@@ -106,7 +104,6 @@ public final class PerformFullTransportBackupTask extends FullBackupTask
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SinglePackageBackupRunner implements Runnable, BackupRestoreTask {
         public final CountDownLatch mBackupLatch;
         public volatile int mBackupResult;

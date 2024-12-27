@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import com.samsung.android.biometrics.app.setting.R;
 import com.samsung.android.biometrics.app.setting.prompt.PromptConfig;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class AuthCredentialPatternCoverView extends AuthCredentialPatternView {
     public AuthCredentialPatternCoverView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);

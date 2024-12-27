@@ -19,12 +19,10 @@ import com.android.internal.util.FrameworkStatsLog;
 
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class RemoteRotationResolverService extends ServiceConnector.Impl {
     public static final /* synthetic */ int $r8$clinit = 0;
     private final long mIdleUnbindTimeoutMs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class RotationRequest {
         public final RotationResolverInternal.RotationResolverCallbackInternal mCallbackInternal;
         public ICancellationSignal mCancellation;
@@ -37,7 +35,6 @@ class RemoteRotationResolverService extends ServiceConnector.Impl {
                 new RotationResolverCallback(this);
         public final long mRequestStartTimeMillis = SystemClock.elapsedRealtime();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RotationResolverCallback extends IRotationResolverCallback.Stub {
             public final WeakReference mRequestWeakReference;
 

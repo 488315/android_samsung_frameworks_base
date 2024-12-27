@@ -5,7 +5,6 @@ import com.android.systemui.media.controls.shared.model.MediaData;
 import com.android.systemui.media.controls.shared.model.SmartspaceMediaData;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class LegacyMediaDataManagerImplKt {
     public static final String[] ART_URIS = {"android.media.metadata.ALBUM_ART_URI", "android.media.metadata.ART_URI", "android.media.metadata.DISPLAY_ICON_URI"};
     public static final SmartspaceMediaData EMPTY_SMARTSPACE_MEDIA_DATA;

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SmartspaceMediaDataProvider implements BcSmartspaceDataPlugin {
     public final List smartspaceMediaTargetListeners = new ArrayList();
 

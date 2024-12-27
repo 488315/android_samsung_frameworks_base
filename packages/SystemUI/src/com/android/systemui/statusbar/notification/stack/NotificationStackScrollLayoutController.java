@@ -132,7 +132,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationStackScrollLayoutController implements Dumpable, NotificationRoundnessManager.SectionStateProvider {
     public static final AnonymousClass4 HIDE_ALPHA_PROPERTY = new AnonymousClass4(Float.class, "HideNotificationsAlpha");
     public final ActivityStarter mActivityStarter;
@@ -389,7 +388,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
@@ -406,7 +404,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$11, reason: invalid class name */
     public final class AnonymousClass11 implements NotificationSwipeHelper.NotificationCallback {
         public AnonymousClass11() {
@@ -539,21 +536,18 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$18, reason: invalid class name */
     public final class AnonymousClass18 implements RemoteInputController.Delegate {
         public AnonymousClass18() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$4, reason: invalid class name */
     public final class AnonymousClass4 extends Property {
         public AnonymousClass4(Class cls, String str) {
@@ -573,7 +567,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$8, reason: invalid class name */
     public final class AnonymousClass8 implements StatusBarStateController.StateListener {
         public AnonymousClass8() {
@@ -661,7 +654,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotifStackControllerImpl implements NotifStackController {
         public /* synthetic */ NotifStackControllerImpl(NotificationStackScrollLayoutController notificationStackScrollLayoutController, int i) {
             this();
@@ -687,7 +679,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationListContainerImpl implements NotificationListContainer, PipelineDumpable {
         public /* synthetic */ NotificationListContainerImpl(NotificationStackScrollLayoutController notificationStackScrollLayoutController, int i) {
             this();
@@ -751,7 +742,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum NotificationPanelEvent implements UiEventLogger.UiEventEnum {
         INVALID(0),
         DISMISS_ALL_NOTIFICATIONS_PANEL(312),
@@ -768,7 +758,6 @@ public final class NotificationStackScrollLayoutController implements Dumpable, 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TouchHandler implements Gefingerpoken {
         public final QuickPanelLogger mQuickPanelLogger = new QuickPanelLogger("NSSLC");
         public final StringBuilder mQuickPanelLogBuilder = new StringBuilder();

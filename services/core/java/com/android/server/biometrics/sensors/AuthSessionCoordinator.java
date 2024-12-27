@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AuthSessionCoordinator {
     public boolean mIsAuthenticating;
     public final MultiBiometricLockoutState mMultiBiometricLockoutState;
@@ -23,7 +22,6 @@ public final class AuthSessionCoordinator {
     public AuthResultCoordinator mAuthResultCoordinator = new AuthResultCoordinator();
     public final RingBuffer mRingBuffer = new RingBuffer();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RingBuffer {
         public final String[] mApiCalls = new String[100];
         public int mCurr = 0;

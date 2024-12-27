@@ -11,7 +11,6 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorModel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SlimIndicatorIconBlacklistReceiver extends SlimIndicatorReceiver {
     public final String TAG;
 

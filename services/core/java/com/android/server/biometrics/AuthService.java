@@ -43,13 +43,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AuthService extends SystemService {
     public IBiometricService mBiometricService;
     final IAuthService.Stub mImpl;
     public final Injector mInjector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthServiceImpl extends IAuthService.Stub {
         public AuthServiceImpl() {}
 
@@ -522,7 +520,6 @@ public final class AuthService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public AppOpsManager getAppOps(Context context) {
             return (AppOpsManager) context.getSystemService(AppOpsManager.class);

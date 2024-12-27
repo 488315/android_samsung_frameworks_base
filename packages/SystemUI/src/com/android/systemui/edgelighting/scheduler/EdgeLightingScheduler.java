@@ -42,7 +42,6 @@ import com.samsung.systemui.splugins.edgelightingplus.PluginEdgeLightingPlus;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgeLightingScheduler {
     public ApplicationLightingScheduler mApplicationLightingScheduler;
     public Context mContext;
@@ -96,14 +95,12 @@ public final class EdgeLightingScheduler {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {
@@ -193,7 +190,6 @@ public final class EdgeLightingScheduler {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$5, reason: invalid class name */
     public final class AnonymousClass5 {
         public AnonymousClass5() {
@@ -290,7 +286,6 @@ public final class EdgeLightingScheduler {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$6, reason: invalid class name */
     public final class AnonymousClass6 {
         public AnonymousClass6() {

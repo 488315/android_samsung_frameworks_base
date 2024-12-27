@@ -18,14 +18,12 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UrspService extends Binder {
     public final Context mContext;
     public final UrspHandler mHandler;
     public final AnonymousClass1 mUidRemovedReceiver;
     public final AnonymousClass1 mUserRemovedReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UrspHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {

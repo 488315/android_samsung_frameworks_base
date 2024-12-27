@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppStartInfoTracker {
     static final String APP_START_INFO_FILE = "procstartinfo";
     static final int APP_START_INFO_HISTORY_LIST_SIZE = 16;
@@ -55,7 +54,6 @@ public final class AppStartInfoTracker {
     public final SparseArray mCallbacks = new SparseArray();
     public final ProcessMap mData = new ProcessMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppStartInfoContainer {
         public final int mMaxCapacity;
         public int mUid;
@@ -108,7 +106,6 @@ public final class AppStartInfoTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApplicationStartInfoCompleteCallback implements IBinder.DeathRecipient {
         public final IApplicationStartInfoCompleteListener mCallback;
         public final int mUid;

@@ -15,12 +15,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CertBlacklister extends Binder {
     public static final String PUBKEY_PATH;
     public static final String SERIAL_PATH;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlacklistObserver extends ContentObserver {
         public final ContentResolver mContentResolver;
         public final String mKey;

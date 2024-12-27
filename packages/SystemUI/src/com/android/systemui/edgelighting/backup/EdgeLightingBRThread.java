@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgeLightingBRThread extends Thread {
     public static final String[] PERMISSIONS = {"android.permission.READ_EXTERNAL_STORAGE"};
     public final Context mContext;
@@ -27,7 +26,6 @@ public final class EdgeLightingBRThread extends Thread {
     public int mSecuritylevel = 0;
     public boolean mLoopEnable = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class InnerHandler extends Handler {
         public final WeakReference mThread;
 

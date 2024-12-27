@@ -20,14 +20,12 @@ import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerStatsDataStorage {
     public final File mDataStorageDir;
     public final String mDataStorageFilename;
     public final FileRotator mFileRotator;
     public final ReentrantLock mLock = new ReentrantLock();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataElement {
         public byte[] mData;
 
@@ -42,7 +40,6 @@ public final class PowerStatsDataStorage {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataReader implements FileRotator.Reader {
         public PowerStatsLogger.AnonymousClass1 mCallback;
 
@@ -121,7 +118,6 @@ public final class PowerStatsDataStorage {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataRewriter implements FileRotator.Rewriter {
         public byte[] mActiveFileData;
         public byte[] mNewData;

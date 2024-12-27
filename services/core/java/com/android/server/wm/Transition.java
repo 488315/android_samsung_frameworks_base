@@ -47,7 +47,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Transition implements BLASTSyncEngine.TransactionReadyListener {
     public int mAdditionalFlags;
     public int mAnimationTrack;
@@ -92,7 +91,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     public IContainerFreezer mContainerFreezer = null;
     public boolean mPriorVisibilityMightBeDirty = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ChangeInfo {
         public final Rect mAbsoluteBounds;
         public boolean mAffordanceTargetFreeformTask;
@@ -225,10 +223,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IContainerFreezer {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadyCondition {
         public String mAlternate;
         public final Object mDebugTarget;
@@ -319,7 +315,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadyTracker {
         public static final ReadyTracker NULL_TRACKER = new ReadyTracker(null);
         public final ArrayList mConditions = new ArrayList();
@@ -350,7 +345,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadyTrackerOld {
         public final ArrayMap mReadyGroups = new ArrayMap();
         public boolean mUsed = false;
@@ -399,14 +393,12 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ScreenshotFreezer implements IContainerFreezer {
         public final ArraySet mFrozen = new ArraySet();
 
         public ScreenshotFreezer() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Targets {
         public final SparseArray mArray = new SparseArray();
         public int mDepthFactor;
@@ -428,7 +420,6 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Token extends Binder {
         public final WeakReference mTransition;
 

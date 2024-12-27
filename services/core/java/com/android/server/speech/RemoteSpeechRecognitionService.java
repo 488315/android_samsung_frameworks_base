@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 final class RemoteSpeechRecognitionService extends ServiceConnector.Impl {
     public static final /* synthetic */ int $r8$clinit = 0;
     private final int mCallingUid;
@@ -35,13 +34,11 @@ final class RemoteSpeechRecognitionService extends ServiceConnector.Impl {
     private boolean mConnected;
     private final Object mLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientState {
         public DelegatingListener mDelegatingListener;
         public boolean mRecordingInProgress;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelegatingListener extends IRecognitionListener.Stub {
         public final Runnable mOnSessionFailure;
         public final Runnable mOnSessionSuccess;

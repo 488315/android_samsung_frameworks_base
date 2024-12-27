@@ -35,13 +35,11 @@ import java.com.android.server.am.mars.database.MARsListManager;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsDBHandler {
     public DBThread mDBThread;
     public MARsDBHandler$$ExternalSyntheticLambda0 mFASDBupdateRunnable;
     public MainHandler mMainHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DBThread extends Thread {
         public final /* synthetic */ MARsDBHandler this$0 = MARsDBHandlerHolder.INSTANCE;
 
@@ -58,7 +56,6 @@ public final class MARsDBHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsDBHandlerHolder {
         public static final MARsDBHandler INSTANCE;
 
@@ -69,7 +66,6 @@ public final class MARsDBHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public final /* synthetic */ MARsDBHandler this$0 = MARsDBHandlerHolder.INSTANCE;
         public final MARsDBManager m = MARsDBManager.MARsDBManagerHolder.INSTANCE;

@@ -10,11 +10,9 @@ import com.android.internal.util.FrameworkStatsLog;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BlobStoreConfig {
     public static final boolean LOGV = Log.isLoggable("BlobStore", 2);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DeviceConfigProperties {
         public static long COMMIT_COOL_OFF_DURATION_MS;
         public static final long DEFAULT_COMMIT_COOL_OFF_DURATION_MS;

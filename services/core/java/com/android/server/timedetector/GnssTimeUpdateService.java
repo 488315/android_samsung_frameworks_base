@@ -26,7 +26,6 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssTimeUpdateService extends Binder {
     public static final boolean D = Log.isLoggable("GnssTimeUpdateService", 3);
     public static final Duration GNSS_TIME_UPDATE_ALARM_INTERVAL = Duration.ofHours(4);
@@ -43,7 +42,6 @@ public final class GnssTimeUpdateService extends Binder {
     public final Handler mHandler = FgThread.getHandler();
     public final Object mLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public GnssTimeUpdateService mService;
 

@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.view.SurfaceControl;
 import android.window.ScreenCapture;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SurfaceFreezer {
     public final WindowContainer mAnimatable;
     SurfaceControl mLeash;
@@ -13,7 +12,6 @@ public final class SurfaceFreezer {
     public Snapshot mSnapshot = null;
     public final Rect mFreezeBounds = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Snapshot {
         public AnimationAdapter mAnimation;
         public SurfaceControl mSurfaceControl;

@@ -185,7 +185,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class StatsPullAtomService extends SystemService {
     public static final boolean ENABLE_MOBILE_DATA_STATS_AGGREGATED_PULLER;
     public AggregatedMobileDataStatsPuller mAggregatedMobileDataStatsPuller;
@@ -283,7 +282,6 @@ public class StatsPullAtomService extends SystemService {
     public static final int RANDOM_SEED = new Random().nextInt();
     public static final long NETSTATS_UID_DEFAULT_BUCKET_DURATION_MS = TimeUnit.HOURS.toMillis(2);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.stats.pull.StatsPullAtomService$2, reason: invalid class name */
     public final class AnonymousClass2 implements Executor {
         @Override // java.util.concurrent.Executor
@@ -292,7 +290,6 @@ public class StatsPullAtomService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppOpEntry {
         public final String mAttributionTag;
         public final int mHash;
@@ -310,7 +307,6 @@ public class StatsPullAtomService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConnectivityStatsCallback extends ConnectivityManager.NetworkCallback {
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onAvailable(Network network) {
@@ -323,7 +319,6 @@ public class StatsPullAtomService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
         public StatsPullAtomCallbackImpl() {}
 
@@ -345,12 +340,10 @@ public class StatsPullAtomService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomServiceInternalImpl {
         public StatsPullAtomServiceInternalImpl() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsSubscriptionsListener
             extends SubscriptionManager.OnSubscriptionsChangedListener {
         public final SubscriptionManager mSm;
@@ -411,7 +404,6 @@ public class StatsPullAtomService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalEventListener extends IThermalEventListener.Stub {
         public final void notifyThrottling(Temperature temperature) {
             FrameworkStatsLog.write(

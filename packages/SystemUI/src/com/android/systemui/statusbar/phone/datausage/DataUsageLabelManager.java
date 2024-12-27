@@ -26,7 +26,6 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import java.util.function.DoubleSupplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DataUsageLabelManager {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
     public final Context mContext;
@@ -44,7 +43,6 @@ public final class DataUsageLabelManager {
     public boolean mLabelAlphaAnimStarted = true;
     public int mInsetNavigationBarBottomHeight = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NavSettingsHelper implements SettingsHelper.OnChangedCallback {
         public boolean IsNavigationBarGestureHintEnabled;
         public boolean IsNavigationBarGestureProtectionEnabled;
@@ -100,7 +98,6 @@ public final class DataUsageLabelManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class QuickStarHelper implements SlimIndicatorViewSubscriber {
         public final SlimIndicatorViewMediator mSlimIndicatorViewMediator;
 

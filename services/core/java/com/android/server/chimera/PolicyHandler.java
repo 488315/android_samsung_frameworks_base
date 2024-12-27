@@ -54,7 +54,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PolicyHandler
         implements SystemEventListener.LmkdEventListener,
                 SystemEventListener.HomeLaunchListener,
@@ -118,7 +117,6 @@ public abstract class PolicyHandler
     public final ThreadPoolExecutor mThreadPoolExecutor =
             (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyEventHandler extends Handler {
         public PolicyEventHandler(Looper looper) {
             super(looper);
@@ -143,7 +141,6 @@ public abstract class PolicyHandler
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProtectLevel {
         public static final /* synthetic */ ProtectLevel[] $VALUES;
         public static final ProtectLevel HEAVY;
@@ -168,7 +165,6 @@ public abstract class PolicyHandler
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProtectedReason {
         public static final /* synthetic */ ProtectedReason[] $VALUES;
         public static final ProtectedReason ACTIVITY_TIME;

@@ -25,14 +25,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentObserverController extends StateController {
     public static final boolean DEBUG;
     public final Handler mHandler;
     public final SparseArray mObservers;
     public final ArraySet mTrackedTasks;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobInstance {
         public ArraySet mChangedAuthorities;
         public ArraySet mChangedUris;
@@ -150,7 +148,6 @@ public final class ContentObserverController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ObserverInstance extends ContentObserver {
         public final ArraySet mJobs;
         public final JobInfo.TriggerContentUri mUri;
@@ -201,7 +198,6 @@ public final class ContentObserverController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TriggerRunnable implements Runnable {
         public final JobInstance mInstance;
 

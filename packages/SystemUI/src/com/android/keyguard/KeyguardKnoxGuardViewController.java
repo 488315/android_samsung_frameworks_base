@@ -79,7 +79,6 @@ import com.android.systemui.widget.SystemUIImageView;
 import com.android.systemui.widget.SystemUITextView;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewController {
     public int mAttemptCount;
     public final AnonymousClass2 mCheckPasswordCallback;
@@ -119,7 +118,6 @@ public final class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInpu
     public final SystemUIImageView mWifiButton;
     public final WifiManager mWifiManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardKnoxGuardViewController$3, reason: invalid class name */
     class AnonymousClass3 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass3() {

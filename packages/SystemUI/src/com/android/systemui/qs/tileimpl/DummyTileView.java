@@ -14,13 +14,11 @@ import com.android.systemui.plugins.qs.QSTileView;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DummyTileView extends QSTileView {
     public final SecQSCommonTileView commonTileView;
     public final FrameLayout iconFrame;
     public final QSIconViewImpl iconView;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -12,7 +12,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.TransformingIndexedSequence;
 import kotlin.sequences.TransformingIndexedSequence$iterator$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ViewPagerHelper$createPageAdapter$1 extends PagerAdapter {
     public final /* synthetic */ MediaType $type;
     public final /* synthetic */ ViewPagerHelper this$0;

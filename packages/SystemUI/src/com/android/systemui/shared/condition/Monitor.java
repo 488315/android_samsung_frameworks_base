@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Monitor {
     public final AnonymousClass1 mConditionCallback;
     public final HashMap mConditions;
@@ -19,25 +18,21 @@ public final class Monitor {
     public final HashMap mSubscriptions;
     public final String mTag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.shared.condition.Monitor$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onConditionsChanged(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Subscription {
         public final Callback mCallback;
         public final Set mConditions;
         public final Subscription mNestedSubscription;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Builder {
             public final Callback mCallback;
             public final ArraySet mConditions;
@@ -62,7 +57,6 @@ public final class Monitor {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Token {
         }
 
@@ -77,7 +71,6 @@ public final class Monitor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SubscriptionState {
         public boolean mActive;
         public Boolean mAllConditionsMet;

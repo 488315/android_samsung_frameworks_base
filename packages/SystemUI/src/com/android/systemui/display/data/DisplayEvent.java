@@ -2,10 +2,8 @@ package com.android.systemui.display.data;
 
 import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface DisplayEvent {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Added implements DisplayEvent {
         public final int displayId;
 
@@ -29,7 +27,6 @@ public interface DisplayEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Changed implements DisplayEvent {
         public final int displayId;
 
@@ -53,7 +50,6 @@ public interface DisplayEvent {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Removed implements DisplayEvent {
         public final int displayId;
 

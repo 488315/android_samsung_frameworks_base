@@ -13,14 +13,12 @@ import com.android.internal.inputmethod.InlineSuggestionsRequestCallback;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
 import com.android.server.autofill.AutofillInlineSuggestionsRequestSession;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AutofillSuggestionsController {
     public final InputMethodBindingController mBindingController;
     public IBinder mCurHostInputToken;
     public InlineSuggestionsRequestCallback mInlineSuggestionsRequestCallback;
     public CreateInlineSuggestionsRequest mPendingInlineSuggestionsRequest;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CreateInlineSuggestionsRequest {
         public final InlineSuggestionsRequestCallback mCallback;
         public final String mPackageName;
@@ -37,7 +35,6 @@ public final class AutofillSuggestionsController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InlineSuggestionsRequestCallbackDecorator
             extends IInlineSuggestionsRequestCallback.Stub {
         public final InlineSuggestionsRequestCallback mCallback;

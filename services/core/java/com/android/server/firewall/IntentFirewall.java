@@ -40,7 +40,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IntentFirewall {
     public static final File RULES_DIR = new File(Environment.getDataSystemDirectory(), "ifw");
     public static final HashMap factoryMap;
@@ -51,7 +50,6 @@ public final class IntentFirewall {
     public FirewallIntentResolver mBroadcastResolver = new FirewallIntentResolver();
     public FirewallIntentResolver mServiceResolver = new FirewallIntentResolver();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FirewallHandler extends Handler {
         public FirewallHandler(Looper looper) {
             super(looper, null, true);
@@ -63,7 +61,6 @@ public final class IntentFirewall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FirewallIntentFilter extends IntentFilter {
         public final Rule rule;
 
@@ -72,7 +69,6 @@ public final class IntentFirewall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FirewallIntentResolver extends IntentResolver {
         public final ArrayMap mRulesByComponent = new ArrayMap(0);
 
@@ -106,7 +102,6 @@ public final class IntentFirewall {
         public final void sortResults(List list) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Rule extends AndFilter {
         public boolean block;
         public boolean log;
@@ -155,7 +150,6 @@ public final class IntentFirewall {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RuleObserver extends FileObserver {
         public RuleObserver(File file) {
             super(file.getAbsolutePath(), 968);

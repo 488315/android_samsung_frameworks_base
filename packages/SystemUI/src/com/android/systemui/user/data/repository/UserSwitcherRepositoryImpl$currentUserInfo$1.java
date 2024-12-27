@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
@@ -52,7 +51,6 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
             final UserSwitcherRepositoryImpl userSwitcherRepositoryImpl = this.this$0;
             final UserInfoController.OnUserInfoChangedListener onUserInfoChangedListener = new UserInfoController.OnUserInfoChangedListener() { // from class: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$listener$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$listener$1$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ ProducerScope $$this$conflatedCallbackFlow;

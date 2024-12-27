@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class PeopleScreenKt$PeopleScreen$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $onResult;
     final /* synthetic */ PeopleViewModel $viewModel;

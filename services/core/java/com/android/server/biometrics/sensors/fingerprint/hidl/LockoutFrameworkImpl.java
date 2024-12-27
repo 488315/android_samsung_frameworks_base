@@ -20,7 +20,6 @@ import com.android.server.biometrics.sensors.LockoutTracker;
 
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LockoutFrameworkImpl implements LockoutTracker {
     public final AlarmManager mAlarmManager;
     public final Handler mHandler;
@@ -30,7 +29,6 @@ public final class LockoutFrameworkImpl implements LockoutTracker {
     public final SparseBooleanArray mTimedLockoutCleared = new SparseBooleanArray();
     public final SparseIntArray mFailedAttempts = new SparseIntArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockoutReceiver extends BroadcastReceiver {
         public LockoutReceiver() {}
 
@@ -47,7 +45,6 @@ public final class LockoutFrameworkImpl implements LockoutTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LockoutResetCallback {}
 
     public LockoutFrameworkImpl(

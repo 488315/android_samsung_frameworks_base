@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicModeBarBase {
     public static final Uri URI_VSET_APP_STATUS_DATA;
     public final VideoCallEffect$contentObserver$1 contentObserver;
@@ -39,7 +38,6 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
     public TextView videoCallEffectsNum;
     public TextView videoCallEffectsText;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

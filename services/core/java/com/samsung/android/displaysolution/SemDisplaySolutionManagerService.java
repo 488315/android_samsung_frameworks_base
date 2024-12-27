@@ -29,7 +29,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final String BURN_IN_APPLY_COUNT;
@@ -98,7 +97,6 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
     public String temp_BROWSER_APP_BRIGHTNESS_ON;
     public String temp_BURNIN_PREVENTION_ON;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Uri HIGH_BRIGHTNESS_MODE_PMS_ENTER_URI;
         public final Uri SCREEN_BRIGHTNESS_MODE_URI;

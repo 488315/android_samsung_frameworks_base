@@ -6,7 +6,6 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.net.Uri;
 import android.util.proto.ProtoOutputStream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GrantUri {
     public final boolean prefix;
     public final int sourceUserId;

@@ -13,7 +13,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Collections;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MockableLocationProvider extends AbstractLocationProvider {
     public MockLocationProvider mMockProvider;
     public final Object mOwnerLock;
@@ -22,7 +21,6 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
     public ProviderRequest mRequest;
     public boolean mStarted;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerWrapper implements AbstractLocationProvider.Listener {
         public final AbstractLocationProvider mListenerProvider;
 

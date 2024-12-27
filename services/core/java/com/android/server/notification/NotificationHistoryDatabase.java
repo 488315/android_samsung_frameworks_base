@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationHistoryDatabase {
     public static final boolean DEBUG = NotificationManagerService.DBG;
     public final Handler mFileWriteHandler;
@@ -39,7 +38,6 @@ public final class NotificationHistoryDatabase {
     NotificationHistory mBuffer = new NotificationHistory();
     public final WriteBufferRunnable mWriteBufferRunnable = new WriteBufferRunnable();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoveChannelRunnable implements Runnable {
         public final String mChannelId;
         public NotificationHistory mNotificationHistory;
@@ -93,7 +91,6 @@ public final class NotificationHistoryDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoveConversationRunnable implements Runnable {
         public final Set mConversationIds;
         public NotificationHistory mNotificationHistory;
@@ -149,7 +146,6 @@ public final class NotificationHistoryDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoveImageRunnable implements Runnable {
         public final String mSbnKey;
         public final String mText;
@@ -200,7 +196,6 @@ public final class NotificationHistoryDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoveNotificationRunnable implements Runnable {
         public NotificationHistory mNotificationHistory;
         public final String mPkg;
@@ -254,7 +249,6 @@ public final class NotificationHistoryDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemovePackageRunnable implements Runnable {
         public final String mPkg;
 
@@ -298,7 +292,6 @@ public final class NotificationHistoryDatabase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WriteBufferRunnable implements Runnable {
         public WriteBufferRunnable() {}
 

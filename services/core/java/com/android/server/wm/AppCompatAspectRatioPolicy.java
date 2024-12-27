@@ -3,7 +3,6 @@ package com.android.server.wm;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCompatAspectRatioPolicy {
     public final ActivityRecord mActivityRecord;
     public final AppCompatAspectRatioState mAppCompatAspectRatioState;
@@ -11,7 +10,6 @@ public final class AppCompatAspectRatioPolicy {
     public final TransparentPolicy mTransparentPolicy;
     public float mUserOrSystemMinAspectRatio;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppCompatAspectRatioState {
         public boolean mIsAspectRatioApplied;
         public Rect mLetterboxBoundsForAspectRatio;

@@ -41,7 +41,6 @@ import com.samsung.android.multiwindow.MultiWindowManager;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DualModeChanger extends ModeChanger {
     public final CoverStateManager mCoverStateManager;
     public Context mDesktopDisplayContext;
@@ -65,7 +64,6 @@ public final class DualModeChanger extends ModeChanger {
     public final AnonymousClass1 mTouchpadSettingChangedListener;
     public boolean mWallpaperShown;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.DualModeChanger$3, reason: invalid class name */
     public final class AnonymousClass3 extends UiManager.InternalUiCallback {
         public final /* synthetic */ int $r8$classId;
@@ -107,7 +105,6 @@ public final class DualModeChanger extends ModeChanger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeChangeHandler extends Handler {
         public ModeChangeHandler(Looper looper) {
             super(looper);
@@ -228,7 +225,6 @@ public final class DualModeChanger extends ModeChanger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeChangeReceiver extends BroadcastReceiver {
         public ModeChangeReceiver() {}
 
@@ -370,7 +366,6 @@ public final class DualModeChanger extends ModeChanger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeChangeStateListener extends StateManager.StateListener {
         public ModeChangeStateListener() {}
 

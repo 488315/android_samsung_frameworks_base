@@ -22,7 +22,6 @@ import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SpatialAudioViewModel extends BaseSingleChoiceViewModel {
     public final Context context;
     public MenuItem currentPosition = MenuItem.OFF;
@@ -30,7 +29,6 @@ public final class SpatialAudioViewModel extends BaseSingleChoiceViewModel {
     public final RoutineManager routineManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -42,7 +40,6 @@ public final class SpatialAudioViewModel extends BaseSingleChoiceViewModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MenuItem {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ MenuItem[] $VALUES;

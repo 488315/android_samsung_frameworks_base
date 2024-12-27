@@ -30,7 +30,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TextInterpolator {
     public final TextPaint basePaint;
     public final FontInterpolator fontInterpolator;
@@ -45,7 +44,6 @@ public final class TextInterpolator {
     public float[] tmpPositionArray;
     public final TypefaceVariantCache typefaceCache;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FontRun {
         public Font baseFont;
         public final int end;
@@ -79,7 +77,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Line {
         public final List runs;
 
@@ -88,7 +85,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MutablePositionedGlyph extends TextAnimator.PositionedGlyph {
         public int glyphIndex;
 
@@ -102,7 +98,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Run {
         public final float[] baseX;
         public final float[] baseY;

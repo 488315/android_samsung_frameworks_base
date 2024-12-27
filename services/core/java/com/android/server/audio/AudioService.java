@@ -299,7 +299,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AudioService extends IAudioService.Stub implements AccessibilityManager.TouchExplorationStateChangeListener, AccessibilityManager.AccessibilityServicesStateChangeListener, AudioSystemAdapter.OnRoutingUpdatedListener, AudioSystemAdapter.OnVolRangeInitRequestListener {
     public static final int BECOMING_NOISY_DELAY_MS = 500;
     public static final Set DEVICE_MEDIA_UNMUTED_ON_PLUG_SET;
@@ -538,7 +537,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
     public static final VibrationAttributes TOUCH_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(18);
     public static final byte[] DEFAULT_ARC_AUDIO_DESCRIPTOR = {9, Byte.MAX_VALUE, 7};
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.AudioService$11, reason: invalid class name */
     public final class AnonymousClass11 implements UserManagerInternal.UserRestrictionsListener {
         public /* synthetic */ AnonymousClass11() {
@@ -570,7 +568,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.AudioService$13, reason: invalid class name */
     public final class AnonymousClass13 extends FrequentWorker {
         @Override // com.samsung.android.server.audio.FrequentWorker
@@ -579,7 +576,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.AudioService$9, reason: invalid class name */
     public final class AnonymousClass9 implements IBinder.DeathRecipient {
         public final /* synthetic */ int $r8$classId = 0;
@@ -631,7 +627,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AbsoluteVolumeDeviceInfo {
         public final IAudioDeviceVolumeDispatcher mCallback;
         public final AudioDeviceAttributes mDevice;
@@ -668,7 +663,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AsdProxy implements IBinder.DeathRecipient {
         public final IAudioServerStateDispatcher mAsd;
 
@@ -684,7 +678,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioDeviceArray {
         public final String[] mDeviceAddresses;
         public final int[] mDeviceTypes;
@@ -695,7 +688,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioHandler extends Handler {
         public AudioHandler() {
         }
@@ -1388,7 +1380,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioPolicyProxy extends AudioPolicyConfig implements IBinder.DeathRecipient {
         public final AttributionSource mAttributionSource;
         public int mFocusDuckBehavior;
@@ -1402,7 +1393,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         public final HashMap mUidDeviceAffinities;
         public final HashMap mUserIdDeviceAffinities;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UnregisterOnStopCallback extends IMediaProjectionCallback.Stub {
             public UnregisterOnStopCallback() {
             }
@@ -1989,7 +1979,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioServiceInternal extends AudioManagerInternal {
         public AudioServiceInternal() {
         }
@@ -2246,7 +2235,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioSystemThread extends Thread {
         public AudioSystemThread() {
             super("AudioService");
@@ -2263,7 +2251,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioVolumeGroupHelper extends AudioVolumeGroupHelperBase {
         @Override // com.android.server.audio.AudioVolumeGroupHelperBase
         public final List getAudioVolumeGroups() {
@@ -2273,7 +2260,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BypassReason {
         public static final /* synthetic */ BypassReason[] $VALUES;
         public static final BypassReason ALL_SOUND_MUTE;
@@ -2324,7 +2310,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceVolumeUpdate {
         public final String mCaller;
         public final int mDevice;
@@ -2346,7 +2331,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final AudioService mService;
 
@@ -2517,7 +2501,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoadSoundEffectReply implements SoundEffectsHelper.OnEffectsLoadCompleteHandler {
         public int mStatus;
 
@@ -2528,7 +2511,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaVolumeStreamState extends VolumeStreamState {
         public final /* synthetic */ AudioService this$0;
 
@@ -2674,7 +2656,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MultiVolumeController extends VolumeController {
         public ArrayList mVolumeControllerList;
         public boolean mVolumeStarEnable;
@@ -2801,7 +2782,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHdmiCecVolumeControlFeatureListener implements HdmiControlManager.HdmiCecVolumeControlFeatureListener {
         public MyHdmiCecVolumeControlFeatureListener() {
         }
@@ -2825,7 +2805,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHdmiControlStatusChangeListenerCallback implements HdmiControlManager.HdmiControlStatusChangeListener {
         public MyHdmiControlStatusChangeListenerCallback() {
         }
@@ -2852,7 +2831,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RestorableParameters {
         public Map mMap;
 
@@ -2863,7 +2841,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RmtSbmxFullVolDeathHandler implements IBinder.DeathRecipient {
         public final IBinder mICallback;
 
@@ -2883,7 +2860,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RoleObserver implements OnRoleHoldersChangedListener {
         public final Executor mExecutor;
         public RoleManager mRm;
@@ -2912,7 +2888,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SamsungBroadcastReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AudioService this$0;
@@ -3679,7 +3654,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SetModeDeathHandler implements IBinder.DeathRecipient {
         public final IBinder mCb;
         public final boolean mIsPrivileged;
@@ -3745,7 +3719,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AudioService this$0;
@@ -3900,7 +3873,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundEventReceiver {
         public ComponentName mEventReceiver;
         public int mEventType;
@@ -3928,7 +3900,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VolumeController {
         public IVolumeController mController;
         public boolean mSafetyDialogVisible;
@@ -4061,7 +4032,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VolumeGroupState {
         public final AudioAttributes mAudioAttributes;
         public final AudioVolumeGroup mAudioVolumeGroup;
@@ -4380,7 +4350,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VolumeMap {
         public final short lowerStep;
         public final short raiseStep;
@@ -4391,7 +4360,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VolumeStreamState {
         public final CurrentDeviceManager mCurrentDeviceManager;
         public final int mIndexMax;
@@ -4408,7 +4376,6 @@ public final class AudioService extends IAudioService.Stub implements Accessibil
         public Set mObservedDeviceSet = new TreeSet();
         public final AnonymousClass1 mIndexMap = new AnonymousClass1();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.audio.AudioService$VolumeStreamState$1, reason: invalid class name */
         public final class AnonymousClass1 extends SparseIntArray {
             public AnonymousClass1() {

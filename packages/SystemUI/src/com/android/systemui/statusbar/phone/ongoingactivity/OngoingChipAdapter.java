@@ -29,7 +29,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final int availableSpace;
     public final float bgRadius;
@@ -46,7 +45,6 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final String TAG = "{OngoingChipAdapter}";
     public final int mMaxItemCount = 2;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChipViewHolder extends RecyclerView.ViewHolder {
         public final int boldFifthUnitWidth;
         public final int boldFourthUnitWidth;

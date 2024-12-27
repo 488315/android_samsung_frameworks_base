@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GracefulNfcLedCoverController extends BaseNfcLedCoverController {
     public static int TEST;
     public static final byte[] VERSION_CHECK_COMMAND = {0, -94, 0, 0, 7, 7, 113, 0, 0, 0, -1, -1};
@@ -44,7 +43,6 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
     public final PowerManager.WakeLock mTouchResponseWakeLock;
     public int testCount;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfcLedCoverControllerHandler extends Handler {
         public NfcLedCoverControllerHandler(Looper looper) {
             super(looper, null, true);
@@ -347,7 +345,6 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfcLedTouchListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;

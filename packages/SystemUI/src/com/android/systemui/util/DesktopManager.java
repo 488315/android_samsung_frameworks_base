@@ -5,7 +5,6 @@ import com.android.systemui.statusbar.phone.StatusBarSignalPolicy;
 import com.android.systemui.statusbar.policy.SBluetoothControllerImpl;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface DesktopManager {
     void destroy();
 
@@ -61,7 +60,6 @@ public interface DesktopManager {
 
     void unregisterCallback(Callback callback);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         default void onPrivacyItemStateRequested() {
         }

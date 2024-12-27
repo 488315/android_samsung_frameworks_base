@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HdmiEarcLocalDeviceTx extends HdmiEarcLocalDevice {
     public static final String[] earcStatusNames = {
         "HDMI_EARC_STATUS_IDLE",
@@ -22,7 +21,6 @@ public final class HdmiEarcLocalDeviceTx extends HdmiEarcLocalDevice {
     public Handler mReportCapsHandler;
     public ReportCapsRunnable mReportCapsRunnable;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReportCapsRunnable implements Runnable {
         public ReportCapsRunnable() {}
 

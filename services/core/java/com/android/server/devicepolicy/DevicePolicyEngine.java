@@ -48,7 +48,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DevicePolicyEngine {
     public static final String CELLULAR_2G_USER_RESTRICTION_ID =
             DevicePolicyIdentifiers.getIdentifierForUserRestriction("no_cellular_2g");
@@ -62,7 +61,6 @@ public final class DevicePolicyEngine {
     public int mPolicySizeLimit = -1;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DevicePoliciesReaderWriter {
         public final File mFile =
                 new File(Environment.getDataSystemDirectory(), "device_policy_state.xml");

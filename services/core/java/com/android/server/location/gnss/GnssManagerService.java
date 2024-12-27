@@ -25,7 +25,6 @@ import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 import java.io.FileDescriptor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssManagerService {
     public final Context mContext;
     public final GnssAntennaInfoProvider mGnssAntennaInfoProvider;
@@ -39,7 +38,6 @@ public final class GnssManagerService {
     public final GnssStatusProvider mGnssStatusProvider;
     public final SLocationProxy mSLocationProxy;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssCapabilitiesHalModule implements GnssNative.BaseCallbacks {
         public GnssCapabilitiesHalModule(GnssNative gnssNative) {
             gnssNative.addBaseCallbacks(this);
@@ -66,7 +64,6 @@ public final class GnssManagerService {
         public final void onHalRestarted() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssGeofenceHalModule implements GnssNative.GeofenceCallbacks {
         public GeofenceHardwareImpl mGeofenceHardwareImpl;
 

@@ -14,11 +14,9 @@ import com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkMode
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface WifiIcon extends Diffable {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Hidden implements WifiIcon {
         public static final Hidden INSTANCE = new Hidden();
 
@@ -30,7 +28,6 @@ public interface WifiIcon extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Visible implements WifiIcon {
         public final ContentDescription.Loaded contentDescription;
         public final Icon.Resource icon;
@@ -58,12 +55,10 @@ public interface WifiIcon extends Diffable {
         tableRowLoggerImpl.logChange("icon", toString());
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final int NO_INTERNET = R.string.data_connection_no_internet;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

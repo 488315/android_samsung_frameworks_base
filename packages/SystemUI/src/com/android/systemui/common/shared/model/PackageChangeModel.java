@@ -5,10 +5,8 @@ import androidx.compose.animation.core.KeyframesSpec$KeyframeEntity$$ExternalSyn
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PackageChangeModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Empty implements PackageChangeModel {
         public static final Empty INSTANCE = new Empty();
 
@@ -42,7 +40,6 @@ public interface PackageChangeModel {
 
     int getPackageUid();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Changed implements PackageChangeModel {
         public final String packageName;
         public final int packageUid;
@@ -93,7 +90,6 @@ public interface PackageChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Installed implements PackageChangeModel {
         public final String packageName;
         public final int packageUid;
@@ -144,7 +140,6 @@ public interface PackageChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Uninstalled implements PackageChangeModel {
         public final String packageName;
         public final int packageUid;
@@ -195,7 +190,6 @@ public interface PackageChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateFinished implements PackageChangeModel {
         public final String packageName;
         public final int packageUid;
@@ -246,7 +240,6 @@ public interface PackageChangeModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UpdateStarted implements PackageChangeModel {
         public final String packageName;
         public final int packageUid;

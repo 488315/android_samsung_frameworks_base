@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StructureControlReorderHolder extends SecStructureViewHolder {
     public final Consumer actionCallback;
     public final String alternativeDescription;

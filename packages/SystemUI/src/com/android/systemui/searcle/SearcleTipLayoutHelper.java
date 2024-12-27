@@ -7,7 +7,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SearcleTipLayoutHelper {
     public final int bubbleLayoutWidth;
     public final Context context;
@@ -21,7 +20,6 @@ public final class SearcleTipLayoutHelper {
     public final int naviBarHeight;
     public final int rotation;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -33,7 +31,6 @@ public final class SearcleTipLayoutHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DirectionType {
         public static final /* synthetic */ DirectionType[] $VALUES;
         public static final DirectionType XOnLTR;
@@ -72,7 +69,6 @@ public final class SearcleTipLayoutHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TipsNaviAlign {
         public static final /* synthetic */ TipsNaviAlign[] $VALUES;
         public static final TipsNaviAlign Center;
@@ -106,7 +102,6 @@ public final class SearcleTipLayoutHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;

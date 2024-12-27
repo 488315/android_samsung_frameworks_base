@@ -5,7 +5,6 @@ import android.os.SystemProperties;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class KeyCustomizationConstants {
     public static final String VOLD_DECRYPT = SystemProperties.get("vold.decrypt");
     public static final int[] SUPPORT_PRESS_TYPE_ALL = {3, 4, 8, 16, 32, 64};
@@ -32,7 +31,6 @@ public abstract class KeyCustomizationConstants {
         "com.verizon.pushtotalkplus", "com.att.eptt", "com.sprint.sdcplus", "com.bell.ptt"
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class UriTags {
         public static final Uri DICTATION =
                 Uri.parse("content://com.samsung.android.honeyboard.DictationProvider");

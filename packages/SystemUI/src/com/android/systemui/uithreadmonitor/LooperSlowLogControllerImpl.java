@@ -34,7 +34,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLogController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final CoroutineDispatcher bgDispatcher;
@@ -83,7 +82,6 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         }
     });
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -96,7 +94,6 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LogType {
         public boolean choreographerOnly;
         public long deliveryTime;

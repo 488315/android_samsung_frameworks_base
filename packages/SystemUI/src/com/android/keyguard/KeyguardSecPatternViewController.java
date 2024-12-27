@@ -69,7 +69,6 @@ import com.samsung.android.knox.zt.internal.IKnoxZtInternalService;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecPatternViewController extends KeyguardPatternViewController {
     public final LinearLayout mBottomView;
     public boolean mBouncerShowing;
@@ -99,7 +98,6 @@ public final class KeyguardSecPatternViewController extends KeyguardPatternViewC
     public final KeyguardSecPatternViewController$$ExternalSyntheticLambda1 mUpdateLayoutRunnable;
     public final VibrationUtil mVibrationUtil;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecPatternViewController$6, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass6 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -118,7 +116,6 @@ public final class KeyguardSecPatternViewController extends KeyguardPatternViewC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SecUnlockPatternListener extends KeyguardPatternViewController.UnlockPatternListener {
         public SecUnlockPatternListener() {
             super();

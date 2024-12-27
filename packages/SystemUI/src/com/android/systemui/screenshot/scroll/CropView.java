@@ -29,7 +29,6 @@ import com.android.systemui.res.R$styleable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class CropView extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
     public int mActivePointerId;
@@ -50,7 +49,6 @@ public class CropView extends View {
     public float mStartingX;
     public float mStartingY;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AccessibilityHelper extends ExploreByTouchHelper {
         public AccessibilityHelper() {
             super(CropView.this);
@@ -167,7 +165,6 @@ public class CropView extends View {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum CropBoundary {
         NONE,
         TOP,
@@ -176,11 +173,9 @@ public class CropView extends View {
         RIGHT
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface CropInteractionListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: com.android.systemui.screenshot.scroll.CropView.SavedState.1
             @Override // android.os.Parcelable.Creator

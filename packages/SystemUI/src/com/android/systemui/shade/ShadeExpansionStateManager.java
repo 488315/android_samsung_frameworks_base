@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShadeExpansionStateManager {
     public boolean expanded;
     public float fraction;
@@ -15,7 +14,6 @@ public final class ShadeExpansionStateManager {
     public final CopyOnWriteArrayList expansionListeners = new CopyOnWriteArrayList();
     public final CopyOnWriteArrayList stateListeners = new CopyOnWriteArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

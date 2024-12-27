@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PendingIntentRecord extends IIntentSender.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final PendingIntentController controller;
@@ -46,7 +45,6 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
     public final ArraySet mAllowBgActivityStartsForServiceSender = new ArraySet();
     public final WeakReference ref = new WeakReference(this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Key {
         public final IBinder activity;
         public Intent[] allIntents;
@@ -178,7 +176,6 @@ public final class PendingIntentRecord extends IIntentSender.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TempAllowListDuration {
         public long duration;
         public String reason;

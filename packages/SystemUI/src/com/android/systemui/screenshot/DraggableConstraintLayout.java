@@ -18,7 +18,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 import com.android.systemui.screenshot.DraggableConstraintLayout;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DraggableConstraintLayout extends ConstraintLayout implements ViewTreeObserver.OnComputeInternalInsetsListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public View mActionsContainer;
@@ -27,7 +26,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
     public final GestureDetector mSwipeDetector;
     public final SwipeDismissHandler mSwipeDismissHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SwipeDismissHandler implements View.OnTouchListener {
         public int mDirectionX;
         public ValueAnimator mDismissAnimation;
@@ -37,7 +35,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
         public float mStartX;
         public final DraggableConstraintLayout mView;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$1, reason: invalid class name */
         public final class AnonymousClass1 extends AnimatorListenerAdapter {
             public boolean mCancelled;
@@ -61,7 +58,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SwipeDismissGestureListener extends GestureDetector.SimpleOnGestureListener {
             public SwipeDismissGestureListener() {
             }
@@ -259,7 +255,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
         };
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SwipeDismissCallbacks {
         default void onDismissComplete() {
         }

@@ -4,7 +4,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ClockSettings {
     private final String clockId;
     private JSONObject metadata;
@@ -14,7 +13,6 @@ public final class ClockSettings {
     private static final String KEY_SEED_COLOR = "seedColor";
     private static final String KEY_METADATA = "metadata";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

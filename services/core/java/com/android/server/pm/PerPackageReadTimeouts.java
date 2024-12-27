@@ -1,13 +1,11 @@
 package com.android.server.pm;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PerPackageReadTimeouts {
     public final String packageName;
     public final byte[] sha256certificate;
     public final Timeouts timeouts;
     public final VersionCodes versionCodes;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Timeouts {
         public static final Timeouts DEFAULT = new Timeouts(3600000000L, 3600000000L, 3600000000L);
         public final long maxPendingTimeUs;
@@ -49,7 +47,6 @@ public final class PerPackageReadTimeouts {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VersionCodes {
         public static final VersionCodes ALL_VERSION_CODES =
                 new VersionCodes(Long.MIN_VALUE, Long.MAX_VALUE);

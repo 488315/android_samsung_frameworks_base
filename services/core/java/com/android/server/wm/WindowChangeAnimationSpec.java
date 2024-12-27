@@ -18,7 +18,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.AnimationSpec {
     public final Animation mAnimation;
     public final boolean mIsThumbnail;
@@ -26,7 +25,6 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
             ThreadLocal.withInitial(new WindowChangeAnimationSpec$$ExternalSyntheticLambda0());
     public final Rect mTmpRect = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TmpValues {
         public final Transformation mTransformation = new Transformation();
         public final float[] mFloats = new float[9];

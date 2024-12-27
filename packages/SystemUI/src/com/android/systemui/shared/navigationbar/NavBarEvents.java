@@ -10,7 +10,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavBarEvents implements Parcelable {
     public static final CREATOR CREATOR = new CREATOR(null);
     public int appearance;
@@ -26,7 +25,6 @@ public final class NavBarEvents implements Parcelable {
     public boolean rotationLocked;
     public boolean transientShowing;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CREATOR implements Parcelable.Creator {
         private CREATOR() {
         }
@@ -48,7 +46,6 @@ public final class NavBarEvents implements Parcelable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EventType {
         public static final /* synthetic */ EventType[] $VALUES;
         public static final EventType ON_APPEARANCE_CHANGED;
@@ -96,7 +93,6 @@ public final class NavBarEvents implements Parcelable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
 

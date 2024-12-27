@@ -6,10 +6,8 @@ import com.android.systemui.dreams.DreamOverlayContainerViewController;
 import com.android.systemui.dreams.touch.CommunalTouchHandler;
 import com.android.systemui.touch.TouchInsetManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface DreamOverlayComponent {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         DreamOverlayComponent create(LifecycleOwner lifecycleOwner, ComplicationHostViewController complicationHostViewController, TouchInsetManager touchInsetManager);
     }

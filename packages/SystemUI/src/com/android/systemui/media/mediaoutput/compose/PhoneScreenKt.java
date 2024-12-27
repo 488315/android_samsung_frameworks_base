@@ -41,7 +41,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class PhoneScreenKt {
     /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1, kotlin.jvm.internal.Lambda] */
     public static final void PhoneScreen(final Function1 function1, final MediaSessionViewModel mediaSessionViewModel, final SessionAudioPathViewModel sessionAudioPathViewModel, Composer composer, final int i, final int i2) {
@@ -134,7 +133,6 @@ public abstract class PhoneScreenKt {
             OpaqueKey opaqueKey = ComposerKt.invocation;
             SnackbarScaffoldKt.SnackbarScaffold(ComposableLambdaKt.rememberComposableLambda(-1473404381, composerImpl, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.media.mediaoutput.compose.PhoneScreenKt$PhoneScreen$1$2, reason: invalid class name */
                 final class AnonymousClass2 extends SuspendLambda implements Function2 {
                     final /* synthetic */ MediaOutputState $mediaOutputState;

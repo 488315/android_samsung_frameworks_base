@@ -69,7 +69,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityManagerServiceExt {
     public static final int MAX_LONG_LIVE_APP;
     public ActivityTaskManagerService mAtmService;
@@ -100,7 +99,6 @@ public final class ActivityManagerServiceExt {
     public final ArrayList mExceptionList = new ArrayList(List.of("android"));
     public final ArrayList mDiscardList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerServiceExt$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -190,7 +188,6 @@ public final class ActivityManagerServiceExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -198,14 +195,12 @@ public final class ActivityManagerServiceExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrCountInfo {
         public int mCnt;
         public int mMaxCnt;
         public long mTotalCnt;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LongLiveCallback {
         public final String packageName;
         public final WeakReference ref;
@@ -227,7 +222,6 @@ public final class ActivityManagerServiceExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MetaDataCollector {
         public final Map mBooleanMetaDataMap = new HashMap();
         public final String[] mBooleanMetaDataKeys = {

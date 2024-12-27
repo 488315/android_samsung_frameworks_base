@@ -16,10 +16,8 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class WifiNetworkModel implements Diffable {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -34,7 +32,6 @@ public abstract class WifiNetworkModel implements Diffable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HotspotDeviceType {
         public static final /* synthetic */ HotspotDeviceType[] $VALUES;
         public static final HotspotDeviceType AUTO;
@@ -80,7 +77,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Inactive extends WifiNetworkModel {
         public static final Inactive INSTANCE = new Inactive();
 
@@ -116,7 +112,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Invalid extends WifiNetworkModel {
         public final String invalidReason;
 
@@ -171,7 +166,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Unavailable extends WifiNetworkModel {
         public static final Unavailable INSTANCE = new Unavailable();
 
@@ -209,7 +203,6 @@ public abstract class WifiNetworkModel implements Diffable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WifiNetworkType {
         public static final /* synthetic */ WifiNetworkType[] $VALUES;
         public static final WifiNetworkType FIVEG;
@@ -257,7 +250,6 @@ public abstract class WifiNetworkModel implements Diffable {
         this();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Active extends WifiNetworkModel {
         public final HotspotDeviceType hotspotDeviceType;
         public final boolean isOnlineSignUpForPasspointAccessPoint;
@@ -270,7 +262,6 @@ public abstract class WifiNetworkModel implements Diffable {
         public final String ssid;
         public final WifiNetworkType wifiNetworkType;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -428,7 +419,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CarrierMerged extends WifiNetworkModel {
         public final int level;
         public final int networkId;

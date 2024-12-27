@@ -12,7 +12,6 @@ import java.util.Set;
 import kotlin.collections.EmptySet;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ActiveUnlockConfig$settingsObserver$1 extends ContentObserver {
     public final Uri bioFailUri;
     public final Uri faceAcquireInfoUri;

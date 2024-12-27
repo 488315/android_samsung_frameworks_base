@@ -43,7 +43,6 @@ import java.util.OptionalInt;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     public static final long DEFAULT_BUGREPORT_CONSENTLESS_GRACE_PERIOD_MILLIS =
             TimeUnit.MINUTES.toMillis(2);
@@ -60,7 +59,6 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     public OptionalInt mPreDumpedDataUid = OptionalInt.empty();
     public final LocalLog mFinishedBugreports = new LocalLog(20);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class BugreportFileManager {
         public final AtomicFile mMappingFile;
         public final Object mLock = new Object();
@@ -365,7 +363,6 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpstateListener extends IDumpstateListener.Stub
             implements IBinder.DeathRecipient {
         public static int sNextId;
@@ -576,14 +573,12 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public ArraySet mAllowlistedPackages;
         public Context mContext;
         public AtomicFile mMappingFile;
         public RoleManagerWrapper mRoleManagerWrapper;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RoleManagerWrapper {
             public RoleManagerWrapper() {}
         }

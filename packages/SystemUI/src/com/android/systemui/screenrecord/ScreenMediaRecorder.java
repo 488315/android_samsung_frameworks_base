@@ -36,7 +36,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenMediaRecorder extends MediaProjection.Callback {
     public ScreenInternalAudioRecorder mAudio;
     public final ScreenRecordingAudioSource mAudioSource;
@@ -52,7 +51,6 @@ public final class ScreenMediaRecorder extends MediaProjection.Callback {
     public final int mUid;
     public VirtualDisplay mVirtualDisplay;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Closer implements Closeable {
         public final List mCloseables;
 
@@ -94,7 +92,6 @@ public final class ScreenMediaRecorder extends MediaProjection.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SavedRecording {
         public final Icon mThumbnailIcon;
         public final Uri mUri;
@@ -109,7 +106,6 @@ public final class ScreenMediaRecorder extends MediaProjection.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ScreenMediaRecorderListener {
     }
 

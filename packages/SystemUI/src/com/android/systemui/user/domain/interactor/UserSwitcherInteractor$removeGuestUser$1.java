@@ -12,14 +12,12 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class UserSwitcherInteractor$removeGuestUser$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $guestUserId;
     final /* synthetic */ int $targetUserId;
     int label;
     final /* synthetic */ UserSwitcherInteractor this$0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$removeGuestUser$1$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass1(Object obj) {
@@ -35,7 +33,6 @@ final class UserSwitcherInteractor$removeGuestUser$1 extends SuspendLambda imple
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$removeGuestUser$1$2, reason: invalid class name */
     final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass2(Object obj) {
@@ -51,7 +48,6 @@ final class UserSwitcherInteractor$removeGuestUser$1 extends SuspendLambda imple
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$removeGuestUser$1$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass3(Object obj) {

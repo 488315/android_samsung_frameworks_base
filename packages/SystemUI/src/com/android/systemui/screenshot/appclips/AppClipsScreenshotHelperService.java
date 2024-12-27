@@ -11,11 +11,9 @@ import com.android.wm.shell.bubbles.Bubbles;
 import com.android.wm.shell.common.HandlerExecutor;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class AppClipsScreenshotHelperService extends Service {
     public final Optional mOptionalBubbles;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.appclips.AppClipsScreenshotHelperService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IAppClipsScreenshotHelperService.Stub {
         public AnonymousClass1() {

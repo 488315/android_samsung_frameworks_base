@@ -101,7 +101,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeDialogControllerImpl implements VolumeDialogController, Dumpable {
     public static final boolean DEBUG;
     public static final int DEFAULT_MAX_LEVEL;
@@ -164,7 +163,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final W mWorker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaSessionsCallbacks implements MediaSessions.Callbacks {
         public final boolean mVolumeAdjustmentForRemoteGroupSessions;
         public final HashMap mRemoteStreams = new HashMap();
@@ -247,7 +245,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Receiver extends BroadcastReceiver {
         public /* synthetic */ Receiver(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
             this();
@@ -331,14 +328,12 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RingerModeObservers {
         public final RingerModeLiveData mRingerMode;
         public final RingerModeLiveData mRingerModeInternal;
         public final AnonymousClass1 mRingerModeObserver = new AnonymousClass1();
         public final AnonymousClass2 mRingerModeInternalObserver = new AnonymousClass2();
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.volume.VolumeDialogControllerImpl$RingerModeObservers$1, reason: invalid class name */
         public final class AnonymousClass1 implements Observer {
             public AnonymousClass1() {
@@ -350,7 +345,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.volume.VolumeDialogControllerImpl$RingerModeObservers$2, reason: invalid class name */
         public final class AnonymousClass2 implements Observer {
             public AnonymousClass2() {
@@ -368,7 +362,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingObserver extends ContentObserver {
         public final Uri ALL_SOUND_MUTE_URI;
         public final Uri ZEN_MODE_CONFIG_URI;
@@ -414,11 +407,9 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface UserActivityListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VC extends IVolumeController.Stub {
         public final String TAG;
 
@@ -511,7 +502,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class W extends Handler {
         public W(Looper looper) {
             super(looper);
@@ -1720,7 +1710,6 @@ public final class VolumeDialogControllerImpl implements VolumeDialogController,
         this.mVibrator.vibrate(vibrationEffect, SONIFICIATION_VIBRATION_ATTRIBUTES);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class C implements VolumeDialogController.Callbacks {
         public final Map mCallbackMap = new ConcurrentHashMap();
 

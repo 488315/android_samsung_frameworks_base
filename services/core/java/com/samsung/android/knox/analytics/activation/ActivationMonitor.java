@@ -23,7 +23,6 @@ import java.util.BitSet;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivationMonitor implements IActivationKlmElmObserver {
     public static final boolean BLOCK_KNOX_ANALYTICS = false;
     public static final String CHINA_COUNTRY_CODE = "China";
@@ -47,7 +46,6 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
     public boolean mIsChinaDevice = false;
     public List mObservers = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.knox.analytics.activation.ActivationMonitor$2, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[]
@@ -76,7 +74,6 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum TRIGGERS {
         ELM(1, "ELM", 0),
         KLM(2, "KLM", 1),

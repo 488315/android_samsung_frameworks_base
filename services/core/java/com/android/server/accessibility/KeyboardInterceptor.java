@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.WindowManagerPolicy;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyboardInterceptor extends BaseEventStreamTransformation
         implements Handler.Callback {
     public final AccessibilityManagerService mAms;
@@ -19,7 +18,6 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation
     public final Handler mHandler = new Handler(this);
     public final WindowManagerPolicy mPolicy;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyEventHolder {
         public static final Pools.SimplePool sPool = new Pools.SimplePool(32);
         public long dispatchTime;

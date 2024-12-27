@@ -40,7 +40,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PowerUI implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public static final boolean DEBUG = Log.isLoggable("PowerUI", 3);
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -97,7 +96,6 @@ public final class PowerUI implements CoreStartable, ConfigurationController.Con
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class Receiver extends BroadcastReceiver {
         public boolean mHasReceivedBattery = false;
 
@@ -156,7 +154,6 @@ public final class PowerUI implements CoreStartable, ConfigurationController.Con
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class SkinThermalEventListener extends IThermalEventListener.Stub {
         public SkinThermalEventListener() {
         }
@@ -177,7 +174,6 @@ public final class PowerUI implements CoreStartable, ConfigurationController.Con
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class UsbThermalEventListener extends IThermalEventListener.Stub {
         public UsbThermalEventListener() {
         }
@@ -193,7 +189,6 @@ public final class PowerUI implements CoreStartable, ConfigurationController.Con
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface WarningsUI {
     }
 

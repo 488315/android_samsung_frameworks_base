@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UcmAgentWrapper {
     public static final boolean DEBUG = "eng".equals(SystemProperties.get("ro.build.type"));
     public final ComponentName componentName;
@@ -92,7 +91,6 @@ public final class UcmAgentWrapper {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AgentInfo {
         public byte[] AID;
         public String agentId;
@@ -174,7 +172,6 @@ public final class UcmAgentWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventBox {
         public Bundle eventData;
         public int eventId;

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DynamicHiddenApp {
     public static boolean DEBUG;
     public static final boolean IS_HIGH_CAPACITY_RAM;
@@ -76,7 +75,6 @@ public final class DynamicHiddenApp {
     public static final Base64.Decoder sPkgDecoder = Base64.getDecoder();
     public static final ArrayList alliedProtectedProcList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DhaClassLazyHolder {
         public static final DynamicHiddenApp INSTANCE = new DynamicHiddenApp();
         public static boolean isinitClass = false;

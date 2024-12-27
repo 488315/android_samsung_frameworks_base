@@ -5,7 +5,6 @@ import kotlin.Unit;
 import kotlinx.coroutines.CompletableDeferred;
 import kotlinx.coroutines.CompletableDeferredImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemUiProxyClient$dismissKeyguard$onDoneBinder$1 extends IOnDoneCallback.Stub {
     public final /* synthetic */ CompletableDeferred $completion;
 

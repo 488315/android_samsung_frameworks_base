@@ -53,7 +53,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkScoreService extends INetworkScoreService.Stub {
     public static final boolean DBG;
     public static final boolean VERBOSE;
@@ -71,7 +70,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     public final Object mPackageMonitorLock = new Object();
     public final Object mServiceConnectionLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.NetworkScoreService$4, reason: invalid class name */
     public final class AnonymousClass4 implements BiConsumer {
         @Override // java.util.function.BiConsumer
@@ -86,7 +84,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class CurrentNetworkScoreCacheFilter implements UnaryOperator {
         public final NetworkKey mCurrentNetwork;
 
@@ -110,7 +107,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class DispatchingContentObserver extends ContentObserver {
         public final Context mContext;
         public final Handler mHandler;
@@ -144,7 +140,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FilteringCacheUpdatingConsumer implements BiConsumer {
         public final Context mContext;
         public UnaryOperator mCurrentNetworkFilter;
@@ -212,7 +207,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final NetworkScoreService mService;
 
@@ -270,7 +264,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkScorerPackageMonitor extends PackageMonitor {
         public final String mPackageToWatch;
 
@@ -335,7 +328,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ScanResultsScoreCacheFilter implements UnaryOperator {
         public final Set mScanResultKeys;
 
@@ -369,7 +361,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ScoringServiceConnection implements ServiceConnection {
         public final NetworkScorerAppData mAppData;
         public volatile boolean mBound = false;
@@ -453,7 +444,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -472,7 +462,6 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WifiInfoSupplier implements Supplier {
         public final /* synthetic */ int $r8$classId;
         public final Context mContext;

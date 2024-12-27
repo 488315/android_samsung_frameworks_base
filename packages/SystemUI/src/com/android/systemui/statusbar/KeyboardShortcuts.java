@@ -34,7 +34,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyboardShortcuts {
     public static long mShowTime;
     public static KeyboardShortcuts sInstance;

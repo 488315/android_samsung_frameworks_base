@@ -36,7 +36,6 @@ import kotlin.sequences.TakeWhileSequence;
 import kotlin.sequences.TakeWhileSequence$iterator$1;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationStackSizeCalculator {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final NotNullVar dividerHeight$delegate;
@@ -49,7 +48,6 @@ public final class NotificationStackSizeCalculator {
     public final SplitShadeStateController splitShadeStateController;
     public final SysuiStatusBarStateController statusBarStateController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BucketTypeCounter {
         public int important;
         public int ongoing;
@@ -91,7 +89,6 @@ public final class NotificationStackSizeCalculator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class FitResult {
         public static final /* synthetic */ FitResult[] $VALUES;
         public static final FitResult FIT;
@@ -122,7 +119,6 @@ public final class NotificationStackSizeCalculator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SpaceNeeded {
         public final float whenEnoughSpace;
         public final float whenSavingSpace;
@@ -152,7 +148,6 @@ public final class NotificationStackSizeCalculator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StackHeight {
         public final float notifsHeight;
         public final float notifsHeightSavingSpace;

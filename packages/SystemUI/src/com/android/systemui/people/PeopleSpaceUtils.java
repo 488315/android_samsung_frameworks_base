@@ -29,17 +29,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PeopleSpaceUtils {
     public static final PeopleTileKey EMPTY_KEY = new PeopleTileKey("", -1, "");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum NotificationAction {
         POSTED,
         REMOVED
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum PeopleSpaceWidgetEvent implements UiEventLogger.UiEventEnum {
         PEOPLE_SPACE_WIDGET_DELETED(666),
         PEOPLE_SPACE_WIDGET_ADDED(667),

@@ -9,7 +9,6 @@ import androidx.cardview.widget.CardViewApi21Impl;
 import androidx.cardview.widget.RoundRectDrawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class WalletCardView extends CardView {
     public final Paint mBorderPaint;
 

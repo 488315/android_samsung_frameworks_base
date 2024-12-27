@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LongPressHandlingViewInteractionHandler {
     public final Function0 isAttachedToWindow;
     public boolean isLongPressHandlingEnabled;
@@ -16,10 +15,8 @@ public final class LongPressHandlingViewInteractionHandler {
     public final Function2 postDelayed;
     public DisposableHandle scheduledLongPressHandle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class MotionEventModel {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Cancel extends MotionEventModel {
             public static final Cancel INSTANCE = new Cancel();
 
@@ -28,7 +25,6 @@ public final class LongPressHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Down extends MotionEventModel {
             public final int x;
             public final int y;
@@ -62,7 +58,6 @@ public final class LongPressHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Move extends MotionEventModel {
             public final float distanceMoved;
 
@@ -87,7 +82,6 @@ public final class LongPressHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Other extends MotionEventModel {
             public static final Other INSTANCE = new Other();
 
@@ -96,7 +90,6 @@ public final class LongPressHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Up extends MotionEventModel {
             public final float distanceMoved;
             public final long gestureDuration;

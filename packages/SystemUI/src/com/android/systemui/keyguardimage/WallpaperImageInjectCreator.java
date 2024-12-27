@@ -15,7 +15,6 @@ import com.android.systemui.wallpaper.KeyguardWallpaper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WallpaperImageInjectCreator extends WallpaperImageCreator {
     public final SelectedUserInteractor mSelectedUserInteractor;
 

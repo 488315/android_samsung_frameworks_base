@@ -44,7 +44,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class IQIServiceBroker extends SystemService implements IIQIServiceBrokerPub {
     private static final String CAN_CHANGE_UNLOCK_KEYCODE_PERMISSION =
             "com.att.iqi.permission.CAN_CHANGE_UNLOCK_KEYCODE";
@@ -99,7 +98,6 @@ public class IQIServiceBroker extends SystemService implements IIQIServiceBroker
                 public void postMessage(int i, Bundle bundle) {}
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BinderService extends IIQIBroker.Stub {
         public BinderService() {}
 

@@ -29,10 +29,8 @@ import com.android.systemui.user.data.source.UserRecord;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class UserDetailView extends PseudoGridView {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Adapter extends BaseUserSwitcherAdapter implements View.OnClickListener {
         public final Context mContext;
         public final UserSwitcherController mController;

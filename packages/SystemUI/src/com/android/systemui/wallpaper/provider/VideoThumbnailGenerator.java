@@ -3,7 +3,6 @@ package com.android.systemui.wallpaper.provider;
 import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VideoThumbnailGenerator {
     public static long getVideoFrameTime(MediaMetadataRetriever mediaMetadataRetriever, int i) {
         if (i == 0) {

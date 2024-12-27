@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PreconditionObserver {
     public final AbstractPreconditionObserver$3 mAccountChangeReceiver;
     public boolean mCameraShareInstalled;
@@ -48,7 +47,6 @@ public final class PreconditionObserver {
     public final Uri URI_STORAGESHARE = Settings.System.getUriFor("hwrs_storageshare_setting");
     public int mUserId = -10000;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.hwrs.PreconditionObserver$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {}

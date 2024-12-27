@@ -1,6 +1,5 @@
 package com.android.systemui.appops;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class AppOpsControllerImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ AppOpsControllerImpl f$0;
     public final /* synthetic */ int f$1;

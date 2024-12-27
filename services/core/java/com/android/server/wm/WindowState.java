@@ -95,7 +95,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowState extends WindowContainer
         implements WindowManagerPolicy.WindowState, InputTarget {
     public static final int MINIMUM_VISIBLE_WIDTH_IN_DP;
@@ -259,7 +258,6 @@ public final class WindowState extends WindowContainer
     public int mXOffset;
     public int mYOffset;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.WindowState$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -270,7 +268,6 @@ public final class WindowState extends WindowContainer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DrawHandler {
         public Consumer mConsumer;
         public boolean mIsEnteringPipFromSplit;
@@ -278,7 +275,6 @@ public final class WindowState extends WindowContainer
         public int mType;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MoveAnimationSpec implements LocalAnimationAdapter.AnimationSpec {
         public final long mDuration;
         public final Point mFrom;
@@ -345,7 +341,6 @@ public final class WindowState extends WindowContainer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateReportedVisibilityResults {
         public boolean nowGone;
         public int numDrawn;
@@ -353,7 +348,6 @@ public final class WindowState extends WindowContainer
         public int numVisible;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WindowId extends IWindowId.Stub {
         public final WeakReference mOuter;
 

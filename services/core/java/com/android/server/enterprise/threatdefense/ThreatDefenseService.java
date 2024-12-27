@@ -43,7 +43,6 @@ import java.util.Timer;
 import java.util.stream.Collectors;
 import org.json.JSONException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ThreatDefenseService extends IThreatDefenseService.Stub implements EnterpriseServiceCallback {
     static final String BRAKET_END_STRING = "\\)";
     static final String BRAKET_START_STRING = "\\(";
@@ -63,7 +62,6 @@ public final class ThreatDefenseService extends IThreatDefenseService.Stub imple
     public static final SparseArray sProcessIds = new SparseArray();
     public static final Object sLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.threatdefense.ThreatDefenseService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver

@@ -2,7 +2,6 @@ package com.android.internal.app;
 
 import com.android.internal.app.chooser.SemSelectTaskListAdapter;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class ResolverActivity$$ExternalSyntheticLambda0
         implements SemSelectTaskListAdapter.ActivityCallback {
     public final /* synthetic */ ResolverActivity f$0;

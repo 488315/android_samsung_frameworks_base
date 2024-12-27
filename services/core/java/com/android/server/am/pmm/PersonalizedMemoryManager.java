@@ -7,16 +7,13 @@ import android.util.Slog;
 
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersonalizedMemoryManager {
     public DmaBufLeakDetector mDmaBufLeakDetector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final PersonalizedMemoryManager INSTANCE = new PersonalizedMemoryManager();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum MemoryEventType {
         LMKD_KILL("LMKD_KILL"),
         /* JADX INFO: Fake field, exist only in values array */

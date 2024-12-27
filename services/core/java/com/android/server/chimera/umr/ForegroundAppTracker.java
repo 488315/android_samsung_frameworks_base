@@ -8,7 +8,6 @@ import android.util.Slog;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.Watchdog$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ForegroundAppTracker {
     public static final int DELAYED_RESET_APP_LAUNCH_MS =
             SystemProperties.getInt("sys.config.amp_to_app_switch", 4000);
@@ -18,7 +17,6 @@ public abstract class ForegroundAppTracker {
             SystemProperties.getBoolean("debug.chimera.fgtracker", false);
     public static ForegroundMonitor mForegroundMonitor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForegroundAppMsgHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -41,7 +39,6 @@ public abstract class ForegroundAppTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ForegroundMonitor {
         public static ForegroundAppMsgHandler mMsgHandler;
         public boolean mAppLaunch;

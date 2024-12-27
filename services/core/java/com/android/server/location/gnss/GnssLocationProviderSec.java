@@ -76,7 +76,6 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssLocationProviderSec extends GnssLocationProvider {
     public static final Uri PREFERAPN_NO_UPDATE_URI_USING_SUBID = Uri.parse("content://telephony/carriers/preferapn_no_update/subId/");
     public static boolean isWlanApConnected = false;
@@ -106,7 +105,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
     public int prevLppMask;
     public int prevNrLppMask;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CtsRestrictModeFileObserver extends FileObserver {
         public CtsRestrictModeFileObserver(File file) {
             super(file, 2);
@@ -162,7 +160,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputLidStateChangedListener implements InputManager.SemOnLidStateChangedListener {
         public InputLidStateChangedListener() {
         }
@@ -177,7 +174,6 @@ public final class GnssLocationProviderSec extends GnssLocationProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SimInformationForDsds {
         public TelephonyManager mPhone;
         public String mSimOperator;

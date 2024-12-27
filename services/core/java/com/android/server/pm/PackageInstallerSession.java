@@ -142,7 +142,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageInstallerSession extends IPackageInstallerSession.Stub {
     public static final int[] EMPTY_CHILD_SESSION_ARRAY = EmptyArray.INT;
     public static final InstallationFile[] EMPTY_INSTALLATION_FILE_ARRAY = new InstallationFile[0];
@@ -231,7 +230,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
     public int mValidatedTargetSdk = Integer.MAX_VALUE;
     public int mUnarchivalStatus = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.PackageInstallerSession$1, reason: invalid class name */
     public final class AnonymousClass1 implements FileFilter {
         public final /* synthetic */ int $r8$classId;
@@ -270,7 +268,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileEntry {
         public final InstallationFile mFile;
         public final int mIndex;
@@ -294,7 +291,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileSystemConnector
             extends IPackageInstallerSessionFileSystemConnector.Stub {
         public final Set mAddedFiles = new ArraySet();
@@ -325,7 +321,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstallResult {
         public final Bundle extras;
         public final PackageInstallerSession session;
@@ -336,7 +331,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PerFileChecksum {
         public final Checksum[] mChecksums;
         public final byte[] mSignature;
@@ -347,7 +341,6 @@ public final class PackageInstallerSession extends IPackageInstallerSession.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class StagedSession implements StagingManager.StagedSession {
         public StagedSession() {}
 

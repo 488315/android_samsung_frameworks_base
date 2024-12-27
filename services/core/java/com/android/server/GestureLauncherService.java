@@ -33,7 +33,6 @@ import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.wm.WindowManagerInternal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GestureLauncherService extends SystemService {
     static final long CAMERA_POWER_DOUBLE_TAP_MAX_TIME_MS = 300;
     static final int EMERGENCY_GESTURE_POWER_BUTTON_COOLDOWN_PERIOD_MS_MAX = 5000;
@@ -59,7 +58,6 @@ public final class GestureLauncherService extends SystemService {
     public PowerManager.WakeLock mWakeLock;
     public WindowManagerInternal mWindowManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraLiftTriggerEventListener extends TriggerEventListener {
         public CameraLiftTriggerEventListener() {}
 
@@ -91,7 +89,6 @@ public final class GestureLauncherService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GestureEventListener implements SensorEventListener {
         public GestureEventListener() {}
 
@@ -136,7 +133,6 @@ public final class GestureLauncherService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum GestureLauncherEvent implements UiEventLogger.UiEventEnum {
         GESTURE_CAMERA_LIFT("GESTURE_CAMERA_LIFT"),
         GESTURE_CAMERA_WIGGLE("GESTURE_CAMERA_WIGGLE"),

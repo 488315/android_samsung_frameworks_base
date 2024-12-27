@@ -11,13 +11,11 @@ import com.android.systemui.plugins.annotations.Dependencies;
 import com.android.systemui.plugins.annotations.DependsOn;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = StreamState.class), @DependsOn(target = State.class), @DependsOn(target = Callbacks.class)})
 @ProvidesInterface(version = 1)
 public interface VolumeDialogController {
     public static final int VERSION = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 2)
     public interface Callbacks {
         public static final int VERSION = 2;
@@ -63,7 +61,6 @@ public interface VolumeDialogController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public final class State {
         public static int NO_ACTIVE_STREAM = -1;
@@ -192,7 +189,6 @@ public interface VolumeDialogController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public final class StreamState {
         public static final int VERSION = 1;

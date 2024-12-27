@@ -3,7 +3,6 @@ package com.android.systemui.qs.external;
 import android.service.quicksettings.Tile;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class CustomTileStatePersisterKt {
     public static final Tile readTileFromString(String str) {
         JSONObject jSONObject = new JSONObject(str);

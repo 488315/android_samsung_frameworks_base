@@ -26,7 +26,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequ
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationSectionsManager implements StackScrollAlgorithm.SectionProvider {
     public static final SourceType$Companion$from$1 SECTION;
     public final SectionHeaderController alertingHeaderController;
@@ -48,7 +47,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
     public final NotificationSectionsFeatureManager sectionsFeatureManager;
     public final SectionHeaderController silentHeaderController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -58,10 +56,8 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class SectionBounds {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Many extends SectionBounds {
             public final ExpandableView first;
             public final ExpandableView last;
@@ -92,7 +88,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class None extends SectionBounds {
             public static final None INSTANCE = new None();
 
@@ -101,7 +96,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class One extends SectionBounds {
             public final ExpandableView lone;
 

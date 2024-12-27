@@ -38,7 +38,6 @@ import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubscreenBrightnessDetailActivity extends Activity implements WakefulnessLifecycle.Observer {
     public static final Uri BRIGHTNESS_MODE_URI = Settings.System.getUriFor(SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS_MODE);
     public LinearLayout mAutoBrightnessContainer;
@@ -80,7 +79,6 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BrightnessModeObserver extends ContentObserver {
         public final ContentResolver mCr;
 
@@ -98,7 +96,6 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SwitchDelegate extends AccessibilityDelegateCompat {
         public final SwitchCompat mSwitch;
 

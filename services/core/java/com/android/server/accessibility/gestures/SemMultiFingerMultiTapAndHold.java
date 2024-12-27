@@ -2,7 +2,6 @@ package com.android.server.accessibility.gestures;
 
 import android.view.MotionEvent;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemMultiFingerMultiTapAndHold extends MultiFingerMultiTapAndHold {
     @Override // com.android.server.accessibility.gestures.MultiFingerMultiTapAndHold,
               // com.android.server.accessibility.gestures.MultiFingerMultiTap,

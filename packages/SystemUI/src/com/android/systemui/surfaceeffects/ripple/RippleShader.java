@@ -18,7 +18,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RippleShader extends RuntimeShader {
     public final FadeParams baseRingFadeParams;
     public final FadeParams centerFillFadeParams;
@@ -29,10 +28,8 @@ public final class RippleShader extends RuntimeShader {
     public static final String TAG = Reflection.getOrCreateKotlinClass(RippleShader.class).getSimpleName();
     public static final Interpolator STANDARD = new PathInterpolator(0.2f, 0.0f, 0.0f, 1.0f);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -76,7 +73,6 @@ public final class RippleShader extends RuntimeShader {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RippleShape {
         public static final /* synthetic */ RippleShape[] $VALUES;
         public static final RippleShape CIRCLE;
@@ -107,7 +103,6 @@ public final class RippleShader extends RuntimeShader {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SizeAtProgress {
         public float height;
         public float t;
@@ -255,7 +250,6 @@ public final class RippleShader extends RuntimeShader {
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.surfaceeffects.ripple.RippleShader.<init>(com.android.systemui.surfaceeffects.ripple.RippleShader$RippleShape):void");
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FadeParams {
         public float fadeInEnd;
         public float fadeInStart;
@@ -302,7 +296,6 @@ public final class RippleShader extends RuntimeShader {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RippleSize {
         public float currentHeight;
         public int currentSizeIndex;

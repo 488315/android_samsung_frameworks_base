@@ -5,7 +5,6 @@ import android.app.TaskStackListener;
 import android.os.RemoteException;
 import android.util.Log;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class TaskStackObserver extends TaskStackListener {
     public boolean mIsWatching;
     public SysUiManager$$ExternalSyntheticLambda3 mListener;

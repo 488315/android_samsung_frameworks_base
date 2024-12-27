@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SaveImageInBackgroundTask extends AsyncTask {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final String mBixbyCaptureSharedActivityName;
@@ -58,7 +57,6 @@ public final class SaveImageInBackgroundTask extends AsyncTask {
     public final ScreenshotController.SavedImageData mImageData = new ScreenshotController.SavedImageData();
     public final ScreenshotController.QuickShareData mQuickShareData = new ScreenshotController.QuickShareData();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.SaveImageInBackgroundTask$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public final /* synthetic */ ScreenCaptureHelper val$captureHelper;

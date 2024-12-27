@@ -15,7 +15,6 @@ import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorModel;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator, SlimIndicatorManager {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final SlimIndicatorPluginMediator mPluginMediator;
@@ -25,7 +24,6 @@ public final class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMed
     public final SlimIndicatorCarrierCrew mCarrierCrew = new SlimIndicatorCarrierCrew();
     public final HashMap mSubscriberList = new HashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingsListener implements SettingsHelper.OnChangedCallback {
         public SettingsListener() {
             Uri[] uriArr = {Settings.Secure.getUriFor("icon_blacklist")};
@@ -43,7 +41,6 @@ public final class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMed
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class UserSwitchListener extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ UserSwitchListener(SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl, int i) {
             this();

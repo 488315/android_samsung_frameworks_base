@@ -20,7 +20,6 @@ import com.android.server.vr.VrManagerService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ManagedApplicationService {
     public IInterface mBoundInterface;
     public final VrManagerService.AnonymousClass3 mChecker;
@@ -72,7 +71,6 @@ public final class ManagedApplicationService {
     public long mNextRetryDurationMs = 2000;
     public final boolean mIsImportant = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.utils.ManagedApplicationService$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
         public AnonymousClass1() {}
@@ -202,7 +200,6 @@ public final class ManagedApplicationService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogEvent implements LogFormattable {
         public final ComponentName component;
         public final int event;
@@ -240,7 +237,6 @@ public final class ManagedApplicationService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LogFormattable {
         String toLogString(SimpleDateFormat simpleDateFormat);
     }

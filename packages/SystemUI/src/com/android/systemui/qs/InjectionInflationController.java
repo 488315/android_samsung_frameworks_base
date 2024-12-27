@@ -10,13 +10,11 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InjectionInflationController {
     public final InjectionFactory mFactory;
     public final ArrayMap mInjectionMap = new ArrayMap();
     public final ViewInstanceCreator.Factory mViewInstanceCreatorFactory;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class InjectionFactory implements LayoutInflater.Factory2 {
         public /* synthetic */ InjectionFactory(InjectionInflationController injectionInflationController, int i) {
             this();
@@ -46,10 +44,8 @@ public final class InjectionInflationController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ViewInstanceCreator {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Factory {
             ViewInstanceCreator build(Context context, AttributeSet attributeSet);
         }

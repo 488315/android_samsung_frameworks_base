@@ -55,7 +55,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AccessibilityFloatingMenuView extends FrameLayout implements RecyclerView.OnItemTouchListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass4 mAccessibilityDelegate;
@@ -111,7 +110,6 @@ public final class AccessibilityFloatingMenuView extends FrameLayout implements 
     public final VibratorHelper mVibratorHelper;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$1, reason: invalid class name */
     public final class AnonymousClass1 extends AnimatorListenerAdapter {
         public AnonymousClass1() {

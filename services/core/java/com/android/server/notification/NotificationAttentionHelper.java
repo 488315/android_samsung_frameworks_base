@@ -46,7 +46,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationAttentionHelper {
     static final Map NOTIFICATION_AVALANCHE_TRIGGER_EXTRAS;
     public static SemGoodCatchManager mSemAudioGoodCatchManager;
@@ -104,10 +103,8 @@ public final class NotificationAttentionHelper {
     public boolean mGoodCatchSoundPlayedOn = false;
     public boolean mGoodCatchNotiMutedOn = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     abstract class PolitenessStrategy {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public static final Uri NOTIFICATION_LIGHT_PULSE_URI =
                 Settings.System.getUriFor("led_indicator_missed_event");
@@ -144,7 +141,6 @@ public final class NotificationAttentionHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Signals {
         public final boolean isCurrentProfile;
         public final int listenerHints;

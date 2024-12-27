@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import com.android.systemui.Dependency;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class TunerService {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class ClearReceiver extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -18,7 +16,6 @@ public abstract class TunerService {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Tunable {
         void onTuningChanged(String str, String str2);
     }

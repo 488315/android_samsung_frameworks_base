@@ -9,7 +9,6 @@ import com.android.systemui.shortcut.ShortcutKeyServiceProxy;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShortcutKeyDispatcher implements CoreStartable, ShortcutKeyServiceProxy.Callbacks {
     public final Context mContext;
     public final Optional mSplitScreenOptional;

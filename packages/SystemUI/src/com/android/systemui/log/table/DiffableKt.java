@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class DiffableKt {
     public static final Flow logDiffsForTable(Flow flow, final TableLogBuffer tableLogBuffer, final String str, final Diffable diffable) {
         return FlowKt.pairwiseBy(flow, (Function1) new DiffableKt$logDiffsForTable$1(new Function0() { // from class: com.android.systemui.log.table.DiffableKt$logDiffsForTable$getInitialValue$1

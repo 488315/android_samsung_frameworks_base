@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FirewallRulesApplier {
     public Context mContext;
     public DomainFilterApplicationChainsManager mDomainFilterAppChainsMngr;
@@ -49,7 +48,6 @@ public final class FirewallRulesApplier {
     public IOemNetd mOemNetdService;
     public boolean mShouldAddAcceptRuleToInput;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.FirewallRulesApplier$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[]
@@ -95,7 +93,6 @@ public final class FirewallRulesApplier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DomainFilterApplicationChainsManager {
         public final Map mDomainFilterChainsCache = new HashMap();
         public final Object mDomainFilterChainsCacheLock = new Object();

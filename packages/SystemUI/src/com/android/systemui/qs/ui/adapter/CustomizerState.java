@@ -1,14 +1,11 @@
 package com.android.systemui.qs.ui.adapter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface CustomizerState {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Animating extends CustomizerState {
         long getAnimationDuration();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimatingIntoCustomizer implements Animating {
         public final long animationDuration;
         public final boolean isCustomizing = true;
@@ -43,7 +40,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimatingOutOfCustomizer implements Animating {
         public final long animationDuration;
 
@@ -72,7 +68,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Hidden implements CustomizerState {
         public static final Hidden INSTANCE = new Hidden();
 
@@ -97,7 +92,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Showing implements CustomizerState {
         public static final Showing INSTANCE = new Showing();
         public static final boolean isCustomizing = true;

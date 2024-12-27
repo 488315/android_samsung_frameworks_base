@@ -22,7 +22,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FullscreenLightRevealAnimationController {
     public static final Companion Companion = null;
     public final Handler bgHandler;
@@ -34,7 +33,6 @@ public final class FullscreenLightRevealAnimationController {
     public final Function1 lightRevealEffectFactory;
     public final ThreadFactory threadFactory;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -44,11 +42,9 @@ public final class FullscreenLightRevealAnimationController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RotationWatcher implements RotationChangeProvider.RotationListener {
         public RotationWatcher() {
         }

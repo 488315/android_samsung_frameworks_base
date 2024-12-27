@@ -15,7 +15,6 @@ import com.android.server.location.injector.SystemAppOpsHelper;
 import java.util.Collection;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssNmeaProvider extends GnssListenerMultiplexer
         implements GnssNative.BaseCallbacks, GnssNative.NmeaCallbacks {
     public final SystemAppOpsHelper mAppOpsHelper;
@@ -23,7 +22,6 @@ public final class GnssNmeaProvider extends GnssListenerMultiplexer
     public int mNmeaAllowed;
     public final byte[] mNmeaBuffer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.gnss.GnssNmeaProvider$1, reason: invalid class name */
     public final class AnonymousClass1 implements Function {
         public String mNmea;

@@ -13,7 +13,6 @@ import com.android.server.CustomizedBinderCallsStatsInternal$$ExternalSyntheticO
 import java.util.Arrays;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CpuPowerStatsCollector extends PowerStatsCollector {
     public PowerStatsCollector.ConsumedEnergyRetrieverImpl mConsumedEnergyRetriever;
     public int[] mCpuEnergyConsumerIds;
@@ -38,12 +37,10 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
     public final SparseArray mUidStats;
     public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0 mVoltageSupplier;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface KernelCpuStatsCallback {
         void processUidStats(int i, long[] jArr);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class KernelCpuStatsReader {
         public native boolean nativeIsSupportedFeature();
 
@@ -55,7 +52,6 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                 long[] jArr2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStats {
         public long[] stats;
         public long[] timeByPowerBracket;

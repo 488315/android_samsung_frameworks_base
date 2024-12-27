@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SurfaceAnimationRunner {
     public final AnimationHandler mAnimationHandler;
     public boolean mAnimationStartDeferred;
@@ -55,12 +54,10 @@ public final class SurfaceAnimationRunner {
     public final Object mEdgeExtensionLock = new Object();
     public final Handler mAnimationThreadHandler = AnimationThread.getHandler();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface AnimatorFactory {
         SfValueAnimator makeAnimator();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RunningAnimation {
         public ValueAnimator mAnim;
         public final LocalAnimationAdapter.AnimationSpec mAnimSpec;
@@ -79,7 +76,6 @@ public final class SurfaceAnimationRunner {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SfValueAnimator extends ValueAnimator {
         public SfValueAnimator() {
             setFloatValues(FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);

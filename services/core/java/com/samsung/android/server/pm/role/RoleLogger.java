@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RoleLogger {
     public static final long LOGGING_PERIOD = TimeUnit.DAYS.toMillis(7);
     public static final ComponentName sRoleLoggingServiceName =
@@ -35,7 +34,6 @@ public final class RoleLogger {
         "android.app.role.SYSTEM_DOCUMENT_MANAGER"
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class RoleLoggingService extends JobService {
         public static final /* synthetic */ int $r8$clinit = 0;
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserTypeDetails {
     public final int mAccessibilityString;
     public final int[] mBadgeColors;
@@ -27,7 +26,6 @@ public final class UserTypeDetails {
     public final String mName;
     public final int mStatusBarIcon;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public int mBaseType;
         public String mName;

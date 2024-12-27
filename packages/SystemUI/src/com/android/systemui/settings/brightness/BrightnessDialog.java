@@ -26,7 +26,6 @@ import com.android.systemui.util.kotlin.JavaAdapterKt;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BrightnessDialog extends Activity {
     static final int DIALOG_TIMEOUT_MILLIS = 3000;
     public BrightnessController mBrightnessController;

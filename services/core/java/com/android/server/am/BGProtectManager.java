@@ -19,7 +19,6 @@ import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BGProtectManager {
     public static final String[] BOOTING_EMPTY_KILL_SKIP_ARRAY;
     public static final String[] CAMERA_GUARD_ARRAY;
@@ -84,7 +83,6 @@ public final class BGProtectManager {
         DynamicHiddenApp.decodeToStr("UmVzZXJ2ZWQ=")
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageValidationInfo {
         public final String packageName;
         public final int privateFlagsMask;
@@ -95,7 +93,6 @@ public final class BGProtectManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum exceptFlag {
         NORMALANDKNOXPWHL("NORMALANDKNOXPWHL"),
         /* JADX INFO: Fake field, exist only in values array */

@@ -14,7 +14,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TaskBarButtonDispatcherProxy implements ButtonDispatcherProxyBase {
     public final Context context;
     public final Bundle pluginBundle;
@@ -22,7 +21,6 @@ public final class TaskBarButtonDispatcherProxy implements ButtonDispatcherProxy
     public final int pinID = R.id.navbar_pin;
     public final List extraKeyIDList = CollectionsKt__CollectionsKt.listOf(Integer.valueOf(R.id.nav_custom_key_1), Integer.valueOf(R.id.nav_custom_key_2), Integer.valueOf(R.id.nav_custom_key_3), Integer.valueOf(R.id.nav_custom_key_4), Integer.valueOf(R.id.nav_custom_key_5));
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TaskbarButtonDispatcher {
         public int id;
         public final View view;

@@ -29,13 +29,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DevicePermissionPolicy extends SchemePolicy {
     public final DevicePermissionPersistence persistence = new DevicePermissionPersistence();
     public volatile MutableIndexedListSet listeners = new MutableIndexedListSet();
     public final Object listenersLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnDevicePermissionFlagsChangedListener {
         void onDevicePermissionFlagsChanged(int i, int i2, int i3, String str, String str2, int i4);
 

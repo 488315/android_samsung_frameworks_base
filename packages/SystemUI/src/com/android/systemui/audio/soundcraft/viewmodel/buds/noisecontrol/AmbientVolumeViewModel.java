@@ -8,13 +8,11 @@ import com.android.systemui.audio.soundcraft.interfaces.wearable.WearableManager
 import com.android.systemui.audio.soundcraft.model.ModelProvider;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AmbientVolumeViewModel extends NoiseControlLevelViewModel {
     public final Context context;
     public final ModelProvider modelProvider;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

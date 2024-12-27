@@ -81,7 +81,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StorageStatsService extends IStorageStatsManager.Stub {
     public static final long DEFAULT_QUOTA = DataUnit.MEBIBYTES.toBytes(64);
     public final AppOpsManager mAppOps;
@@ -96,7 +95,6 @@ public final class StorageStatsService extends IStorageStatsManager.Stub {
     public int mStorageThresholdPercentHigh = 20;
     public final Object mLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public long mPreviousBytes;
         public final StatFs mStats;
@@ -117,7 +115,6 @@ public final class StorageStatsService extends IStorageStatsManager.Stub {
                         new ServiceConnection() { // from class:
                             // com.android.server.storage.CacheQuotaStrategy.1
 
-                            /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
                             /* renamed from: com.android.server.storage.CacheQuotaStrategy$1$1 */
                             public final class RunnableC00241 implements Runnable {
                                 public final /* synthetic */ IBinder val$service;
@@ -325,7 +322,6 @@ public final class StorageStatsService extends IStorageStatsManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public Lifecycle(Context context) {
             super(context);
@@ -337,7 +333,6 @@ public final class StorageStatsService extends IStorageStatsManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService implements StorageStatsManagerLocal {
         public LocalService() {}
 

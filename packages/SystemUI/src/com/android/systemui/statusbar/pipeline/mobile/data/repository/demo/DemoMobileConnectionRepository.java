@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DemoMobileConnectionRepository implements MobileConnectionRepository {
     public final StateFlowImpl _carrierId;
     public final StateFlowImpl _carrierNetworkChangeActive;
@@ -81,7 +80,6 @@ public final class DemoMobileConnectionRepository implements MobileConnectionRep
     public final StateFlowImpl swRoaming;
     public final TableLogBuffer tableLogBuffer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -135,12 +133,10 @@ public final class DemoMobileConnectionRepository implements MobileConnectionRep
         this.resolvedNetworkType = FlowKt.stateIn(DiffableKt.logDiffsForTable(MutableStateFlow15, tableLogBuffer, "", (Diffable) MutableStateFlow15.getValue()), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), MutableStateFlow15.getValue());
         Flow flow = new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepository$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepository$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepository$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

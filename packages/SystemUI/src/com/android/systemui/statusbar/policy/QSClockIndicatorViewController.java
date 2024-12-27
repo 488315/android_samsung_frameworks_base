@@ -21,7 +21,6 @@ import com.android.systemui.util.ViewController;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSClockIndicatorViewController extends ViewController implements Dumpable, ConfigurationController.ConfigurationListener, TunerService.Tunable {
     public final ConfigurationController configurationController;
     public final DarkIconDispatcher darkIconDispatcher;
@@ -33,7 +32,6 @@ public final class QSClockIndicatorViewController extends ViewController impleme
     public final TunerService tunerService;
     public final QSClockIndicatorView view;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

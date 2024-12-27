@@ -12,7 +12,6 @@ import com.android.modules.utils.TypedXmlSerializer;
 import java.io.OutputStream;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class KeyChainSnapshotSerializer {
     public static void serialize(KeyChainSnapshot keyChainSnapshot, OutputStream outputStream) {
         TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(outputStream);

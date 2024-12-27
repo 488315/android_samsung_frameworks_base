@@ -16,7 +16,6 @@ import com.android.systemui.util.LifecycleFragment;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSFragmentLegacy extends LifecycleFragment implements QS {
     public final QSFragmentComponent.Factory mQsComponentFactory;
     public QSImpl mQsImpl;

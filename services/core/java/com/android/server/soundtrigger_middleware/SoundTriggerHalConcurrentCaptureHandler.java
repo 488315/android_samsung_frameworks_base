@@ -18,7 +18,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerHalConcurrentCaptureHandler
         implements ISoundTriggerHal, ICaptureStateNotifier.Listener {
     public boolean mCaptureState;
@@ -31,7 +30,6 @@ public final class SoundTriggerHalConcurrentCaptureHandler
     public final Map mDeathRecipientMap = new ConcurrentHashMap();
     public final CallbackThread mCallbackThread = new CallbackThread();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackThread implements Runnable {
         public final Queue mList = new LinkedList();
         public int mPushCount = 0;
@@ -93,7 +91,6 @@ public final class SoundTriggerHalConcurrentCaptureHandler
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackWrapper implements ISoundTriggerHal.ModelCallback {
         public final ISoundTriggerHal.ModelCallback mDelegateCallback;
 
@@ -152,7 +149,6 @@ public final class SoundTriggerHalConcurrentCaptureHandler
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoadedModel {
         public final ISoundTriggerHal.ModelCallback callback;
         public final int type;

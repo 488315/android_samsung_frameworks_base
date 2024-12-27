@@ -31,7 +31,6 @@ import com.android.systemui.qs.tileimpl.QSTileViewImpl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayout {
     public static final PagedTileLayout$$ExternalSyntheticLambda0 SCROLL_CUBIC = new PagedTileLayout$$ExternalSyntheticLambda0();
     public final AnonymousClass3 mAdapter;
@@ -52,7 +51,6 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
     public final ArrayList mTiles;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.PagedTileLayout$3, reason: invalid class name */
     public final class AnonymousClass3 extends PagerAdapter {
         public AnonymousClass3() {

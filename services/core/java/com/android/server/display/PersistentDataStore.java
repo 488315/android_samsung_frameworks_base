@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersistentDataStore {
     public float mBrightnessNitsForDefaultDisplay;
     public boolean mDirty;
@@ -56,7 +55,6 @@ public final class PersistentDataStore {
     public final ArrayList mRememberedWifiDisplays;
     public final StableDeviceValues mStableDeviceValues;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessConfigurations {
         public final SparseArray mConfigurations = new SparseArray();
         public final SparseLongArray mTimeStamps = new SparseLongArray();
@@ -281,7 +279,6 @@ public final class PersistentDataStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayState {
         public int mColorMode;
         public int mHeight;
@@ -301,7 +298,6 @@ public final class PersistentDataStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final AtomicFile mAtomicFile =
                 new AtomicFile(new File("/data/system/display-manager-state.xml"), "display-state");
@@ -311,7 +307,6 @@ public final class PersistentDataStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StableDeviceValues {
         public int mHeight;
         public int mWidth;

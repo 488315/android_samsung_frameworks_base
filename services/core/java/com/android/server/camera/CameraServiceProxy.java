@@ -65,7 +65,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CameraServiceProxy extends SystemService
         implements Handler.Callback, IBinder.DeathRecipient {
     public static final String[] NFC_SERVICE_ALLOW_IN_LOCK_SCREEN_LIST;
@@ -90,12 +89,10 @@ public final class CameraServiceProxy extends SystemService
     public final boolean mNotifyNfc;
     public UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface CameraEvent {
         void logSelf();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraFeatureCombinationQueryEvent implements CameraEvent {
         public CameraFeatureCombinationStats mFeatureCombinationStats;
 
@@ -150,7 +147,6 @@ public final class CameraServiceProxy extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraUsageEvent implements CameraEvent {
         public final int mAPILevel;
         public final int mAction;
@@ -347,7 +343,6 @@ public final class CameraServiceProxy extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayWindowListener extends IDisplayWindowListener.Stub {
         public DisplayWindowListener() {}
 
@@ -378,7 +373,6 @@ public final class CameraServiceProxy extends SystemService
         public final void onKeepClearAreasChanged(int i, List list, List list2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventWriterTask implements Runnable {
         public List mEventList;
 
@@ -399,7 +393,6 @@ public final class CameraServiceProxy extends SystemService
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskInfo {
         public int displayId;
         public boolean isFixedOrientationLandscape;
@@ -518,7 +511,6 @@ public final class CameraServiceProxy extends SystemService
                 new ICameraServiceProxy
                         .Stub() { // from class: com.android.server.camera.CameraServiceProxy.2
 
-                    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
                     /* renamed from: com.android.server.camera.CameraServiceProxy$2$CSPShellCmd */
                     public final class CSPShellCmd extends ShellCommand {
                         public final CameraServiceProxy mCameraServiceProxy;

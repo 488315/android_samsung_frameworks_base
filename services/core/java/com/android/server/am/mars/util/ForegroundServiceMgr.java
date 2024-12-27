@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ForegroundServiceMgr
         implements ActivityManagerInternal.ForegroundServiceStateListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -110,17 +109,14 @@ public final class ForegroundServiceMgr
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ForegroundServiceMgrHolder {
         public static final ForegroundServiceMgr INSTANCE = new ForegroundServiceMgr();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetAccesesTimeHelper {
         public IAppOpsService mAppOpsService;
         public final CustomVisitor visitor;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class CustomVisitor implements AppOpsManager.HistoricalOpsVisitor {
             public ArrayMap accessTimePerOp;
             public String curPackageName;

@@ -70,7 +70,6 @@ import java.util.List;
 import java.util.ListIterator;
 import kotlin.collections.builders.ListBuilder;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSTileCustomizerController extends ViewControllerBase {
     public final LinearLayout mActiveParent;
     public final ScrollView mActiveScrollView;
@@ -1021,7 +1020,6 @@ public final class QSTileCustomizerController extends ViewControllerBase {
         this.mDoneCallBack = runnable;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$6, reason: invalid class name */
     public final class AnonymousClass6 implements Animator.AnimatorListener {
         public final /* synthetic */ View val$view;

@@ -40,7 +40,6 @@ import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersonaActivityHelper {
     public final Context mContext;
     public KeyguardManager mKeyguardManager;
@@ -56,7 +55,6 @@ public final class PersonaActivityHelper {
     public ActivityRecord mLastResumedSFActivity = null;
     public List mLockSecureFolderExceptionalList = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PersonaActivityHandler extends Handler {
         public PersonaActivityHandler(Looper looper) {
             super(looper);

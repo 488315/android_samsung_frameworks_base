@@ -6,7 +6,6 @@ import android.util.Slog;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract /* synthetic */ class UiModeManagerService$13$$ExternalSyntheticOutline0 {
     public static void m(String str, RemoteException remoteException, PrintWriter printWriter) {
         printWriter.println(str + remoteException);

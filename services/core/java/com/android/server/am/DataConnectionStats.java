@@ -18,7 +18,6 @@ import com.samsung.android.knoxguard.service.utils.Constants;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DataConnectionStats extends BroadcastReceiver {
     public final Context mContext;
     public final Handler mListenerHandler;
@@ -30,7 +29,6 @@ public final class DataConnectionStats extends BroadcastReceiver {
     public int mNrState = 0;
     public final IBatteryStats mBatteryStats = BatteryStatsService.getService();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneStateListenerExecutor implements Executor {
         public final Handler mHandler;
 
@@ -47,7 +45,6 @@ public final class DataConnectionStats extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneStateListenerImpl extends PhoneStateListener {
         public PhoneStateListenerImpl(PhoneStateListenerExecutor phoneStateListenerExecutor) {
             super(phoneStateListenerExecutor);

@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 @SystemApi
 public final class AdaptiveBrightnessWeightStats implements Parcelable {
     public static final Parcelable.Creator CREATOR = new AnonymousClass1();
@@ -28,7 +27,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
     public final BrightnessWeights[] mStats;
     public final TimeStatsCollector mTimeStatsCollector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.AdaptiveBrightnessWeightStats$1, reason: invalid class name */
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
@@ -42,7 +40,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BrightnessWeights {
         public float mBrightness;
         public long mLastUserBrightnessTime;
@@ -126,7 +123,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContinuityStatsCollector {
         public final BrightnessMappingStrategy mBrightnessMapper;
         public final float[] mBucketBoundaries;
@@ -136,7 +132,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         public final TimeStatsCollector mTimeStatsCollector;
         public final BrightnessWeights[] mTotalStats;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UserBrightnessStat {
             public final float mAdjustment;
             public final float mBrightness;
@@ -233,7 +228,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeStatsCollector {
         public final BrightnessMappingStrategy mBrightnessMapper;
         public final float[] mBucketBoundaries;
@@ -314,7 +308,6 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class WeightStat {
         public float mBrightness;
         public float mWeight;

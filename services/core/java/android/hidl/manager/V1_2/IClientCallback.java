@@ -17,11 +17,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IClientCallback extends IBase {
     public static final String kInterfaceName = "android.hidl.manager@1.2::IClientCallback";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements IClientCallback {
         private IHwBinder mRemote;
 
@@ -200,7 +198,6 @@ public interface IClientCallback extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements IClientCallback {
         @Override // android.hidl.manager.V1_2.IClientCallback, android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {

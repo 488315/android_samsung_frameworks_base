@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SimBouncerInteractor {
     public final SharedFlowImpl _bouncerMessageChanged;
     public final Context applicationContext;
@@ -35,7 +34,6 @@ public final class SimBouncerInteractor {
     public final ReadonlyStateFlow subId;
     public final TelephonyManager telephonyManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

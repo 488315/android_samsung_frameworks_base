@@ -33,7 +33,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
     public static final Companion Companion = new Companion(null);
     public Callback callback;
@@ -44,14 +43,12 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
     public MediaOutputView mediaOutputView;
     public final Provider mediaOutputViewProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onDismissRequested();
 
         void showAdapter();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

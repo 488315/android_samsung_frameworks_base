@@ -65,7 +65,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PhoneRestrictionPolicy extends IPhoneRestrictionPolicy.Stub
         implements EnterpriseServiceCallback {
     public final AnonymousClass1 mBroadcastReceiver;
@@ -99,7 +98,6 @@ public final class PhoneRestrictionPolicy extends IPhoneRestrictionPolicy.Stub
     public final SmsMmsDeliveryHandler mSmsMmsDeliveryHandler = new SmsMmsDeliveryHandler();
     public volatile boolean mIsPhoneShuttingDown = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.restriction.PhoneRestrictionPolicy$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -131,10 +129,8 @@ public final class PhoneRestrictionPolicy extends IPhoneRestrictionPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SmsMmsDeliveryHandler extends Handler {
         public SmsMmsDeliveryHandler() {}
 

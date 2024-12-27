@@ -47,7 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ConnectivityController extends RestrictingController
         implements ConnectivityManager.OnNetworkActiveListener {
     public static final boolean DEBUG;
@@ -79,7 +78,6 @@ public final class ConnectivityController extends RestrictingController
     public final SparseArray mUidStats;
     public final AnonymousClass1 mUidStatsComparator;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.controllers.ConnectivityController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         public static int prioritizeExistenceOver(int i, int i2, int i3) {
@@ -165,7 +163,6 @@ public final class ConnectivityController extends RestrictingController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CachedNetworkMetadata {
         public long capabilitiesFirstAcquiredTimeElapsed;
         public long defaultNetworkActivationLastCheckTimeElapsed;
@@ -188,7 +185,6 @@ public final class ConnectivityController extends RestrictingController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class CcConfig {
         static final String KEY_AVOID_UNDEFINED_TRANSPORT_AFFINITY =
                 "conn_avoid_undefined_transport_affinity";
@@ -199,7 +195,6 @@ public final class ConnectivityController extends RestrictingController
         public boolean mShouldReprocessNetworkCapabilities;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CcHandler extends Handler {
         public CcHandler(Looper looper) {
             super(looper);
@@ -336,7 +331,6 @@ public final class ConnectivityController extends RestrictingController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CellSignalStrengthCallback extends TelephonyCallback
             implements TelephonyCallback.SignalStrengthsListener {
         public int signalStrength = 4;
@@ -377,7 +371,6 @@ public final class ConnectivityController extends RestrictingController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidDefaultNetworkCallback extends ConnectivityManager.NetworkCallback {
         public static final /* synthetic */ int $r8$clinit = 0;
         public int mBlockedReasons;
@@ -438,7 +431,6 @@ public final class ConnectivityController extends RestrictingController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStats {
         public int baseBias;
         public long earliestEJEnqueueTime;

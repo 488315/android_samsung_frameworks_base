@@ -17,7 +17,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ConfigurationState {
     public static final int DEFAULT_VALUE = -100;
     private final EnumMap<ConfigurationField, Integer> fieldMap;
@@ -25,7 +24,6 @@ public final class ConfigurationState {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -37,7 +35,6 @@ public final class ConfigurationState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class ConfigurationField {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ConfigurationField[] $VALUES;
@@ -51,7 +48,6 @@ public final class ConfigurationState {
         public static final ConfigurationField UI_MODE = new UI_MODE("UI_MODE", 7);
         public static final ConfigurationField DENSITY_DPI = new DENSITY_DPI("DENSITY_DPI", 8);
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class ASSET_SEQ extends ConfigurationField {
             public ASSET_SEQ(String str, int i) {
                 super(str, i, null);
@@ -79,7 +75,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class DENSITY_DPI extends ConfigurationField {
             public DENSITY_DPI(String str, int i) {
                 super(str, i, null);
@@ -113,7 +108,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class DISPLAY_DEVICE_TYPE extends ConfigurationField {
             public DISPLAY_DEVICE_TYPE(String str, int i) {
                 super(str, i, null);
@@ -141,7 +135,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class LOCALE extends ConfigurationField {
             public LOCALE(String str, int i) {
                 super(str, i, null);
@@ -169,7 +162,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class ORIENTATION extends ConfigurationField {
             public ORIENTATION(String str, int i) {
                 super(str, i, null);
@@ -197,7 +189,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class SCREEN_HEIGHT_DP extends ConfigurationField {
             public SCREEN_HEIGHT_DP(String str, int i) {
                 super(str, i, null);
@@ -231,7 +222,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class SCREEN_LAYOUT extends ConfigurationField {
             public SCREEN_LAYOUT(String str, int i) {
                 super(str, i, null);
@@ -263,7 +253,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class THEME_SEQ extends ConfigurationField {
             public THEME_SEQ(String str, int i) {
                 super(str, i, null);
@@ -291,7 +280,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class UI_MODE extends ConfigurationField {
             public UI_MODE(String str, int i) {
                 super(str, i, null);

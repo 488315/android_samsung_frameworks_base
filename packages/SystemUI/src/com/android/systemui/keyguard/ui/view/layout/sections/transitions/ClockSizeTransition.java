@@ -27,17 +27,14 @@ import kotlin.jvm.internal.Ref$FloatRef;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ClockSizeTransition extends TransitionSet {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClockFaceInTransition extends ClockFaceTransition {
         public static final Interpolator CLOCK_IN_INTERPOLATOR;
         public final boolean isLargeClock;
         public final float smallClockMoveScale;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -73,13 +70,11 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClockFaceOutTransition extends ClockFaceTransition {
         public static final Interpolator CLOCK_OUT_INTERPOLATOR;
         public final boolean isLargeClock;
         public final float smallClockMoveScale;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -114,7 +109,6 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class ClockFaceTransition extends VisibilityBoundsTransition {
         public final KeyguardClockViewModel viewModel;
 
@@ -169,7 +163,6 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -179,10 +172,8 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartspaceMoveTransition extends VisibilityBoundsTransition {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -229,12 +220,10 @@ public final class ClockSizeTransition extends TransitionSet {
         addTransition(new SmartspaceMoveTransition(config, keyguardClockViewModel));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class VisibilityBoundsTransition extends Transition {
         public static final String[] TRANSITION_PROPERTIES;
         public final String TAG;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }

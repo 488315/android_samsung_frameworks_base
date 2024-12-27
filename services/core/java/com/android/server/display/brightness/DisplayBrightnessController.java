@@ -14,7 +14,6 @@ import com.android.server.display.brightness.strategy.DisplayBrightnessStrategy;
 import com.android.server.display.brightness.strategy.FollowerBrightnessStrategy;
 import com.android.server.power.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayBrightnessController {
     AutomaticBrightnessController mAutomaticBrightnessController;
     public final HandlerExecutor mBrightnessChangeExecutor;
@@ -33,7 +32,6 @@ public final class DisplayBrightnessController {
     public final Object mLock = new Object();
     public float mLastUserSetScreenBrightness = Float.NaN;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0078, code lost:

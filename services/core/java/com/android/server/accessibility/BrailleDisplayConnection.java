@@ -31,7 +31,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
     public static final Set sConnectedNodes = new ArraySet();
     public IBrailleDisplayController mController;
@@ -43,7 +42,6 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
     public BrailleDisplayScanner mScanner;
     public final AccessibilityServiceConnection mServiceConnection;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.accessibility.BrailleDisplayConnection$1, reason: invalid class name */
     public final class AnonymousClass1 implements BrailleDisplayScanner {
         public final /* synthetic */ int $r8$classId;
@@ -174,7 +172,6 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface BrailleDisplayScanner {
         int getDeviceBusType(Path path);
 
@@ -187,7 +184,6 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         String getUniqueId(Path path);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultNativeInterface implements NativeInterface {
         @Override // com.android.server.accessibility.BrailleDisplayConnection.NativeInterface
         public final int getHidrawBusType(int i) {
@@ -215,7 +211,6 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface NativeInterface {
         int getHidrawBusType(int i);
 

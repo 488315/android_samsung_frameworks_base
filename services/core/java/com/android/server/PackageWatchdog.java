@@ -53,7 +53,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageWatchdog {
     static final int DEFAULT_BOOT_LOOP_TRIGGER_COUNT = 5;
     public static final long DEFAULT_BOOT_LOOP_TRIGGER_WINDOW_MS;
@@ -87,7 +86,6 @@ public final class PackageWatchdog {
     public int mTriggerFailureDurationMs;
     public long mUptimeAtLastStateSync;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BootThreshold {
         public final long mTriggerWindow;
 
@@ -245,7 +243,6 @@ public final class PackageWatchdog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MonitoredPackage {
         public long mDurationMs;
         public boolean mHasPassedHealthCheck;
@@ -370,7 +367,6 @@ public final class PackageWatchdog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ObserverInternal {
         public int mMitigationCount;
         public final ArrayMap mPackages = new ArrayMap();
@@ -566,7 +562,6 @@ public final class PackageWatchdog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PackageHealthObserver {
         boolean execute(VersionedPackage versionedPackage, int i, int i2);
 
@@ -581,7 +576,6 @@ public final class PackageWatchdog {
         int onHealthCheckFailed(VersionedPackage versionedPackage, int i, int i2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @FunctionalInterface
     interface SystemClock {
         long uptimeMillis();

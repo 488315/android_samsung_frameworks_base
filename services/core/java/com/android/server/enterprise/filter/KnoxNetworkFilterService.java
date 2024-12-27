@@ -76,7 +76,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.Stub
         implements EnterpriseServiceCallback {
     public static final boolean DBG = Debug.semIsProductDev();
@@ -104,7 +103,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
     public IOemNetd mOemNetdService;
     public NwFilterReceiver mReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultDnsConnection implements ServiceConnection {
         public final /* synthetic */ int $r8$classId;
         public CountDownLatch countDownLatch = null;
@@ -665,7 +663,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KnoxNwFilterHandler extends Handler {
         public KnoxNwFilterHandler(Looper looper) {
             super(looper);
@@ -697,7 +694,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkCallback extends ConnectivityManager.NetworkCallback {
         public final int userId;
 
@@ -938,7 +934,6 @@ public final class KnoxNetworkFilterService extends IKnoxNetworkFilterService.St
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NwFilterReceiver extends BroadcastReceiver {
         public NwFilterReceiver() {}
 

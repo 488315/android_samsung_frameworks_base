@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
 import android.view.WindowManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DisplayHelper {
     private final Context mContext;
     private final DisplayManager mDisplayManager;

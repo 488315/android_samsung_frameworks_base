@@ -12,14 +12,12 @@ import com.android.server.wm.SnapshotPersistQueue.StoreWriteQueueItem;
 import java.io.File;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TaskSnapshotPersister {
     public final Object mLock;
     public final BaseAppSnapshotPersister$PersistInfoProvider mPersistInfoProvider;
     public final ArraySet mPersistedTaskIdsSinceLastRemoveObsolete = new ArraySet();
     public final SnapshotPersistQueue mSnapshotPersistQueue;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class RemoveObsoleteFilesQueueItem extends SnapshotPersistQueue.WriteQueueItem {
         public final ArraySet mPersistentTaskIds;
         public final int[] mRunningUserIds;

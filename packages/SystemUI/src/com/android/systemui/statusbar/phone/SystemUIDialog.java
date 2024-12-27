@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigChangedCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
@@ -51,12 +50,10 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
     public final List mOnCreateRunnables;
     public final SysUiState mSysUiState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Delegate extends DialogDelegate {
         SystemUIDialog createDialog();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DismissReceiver extends BroadcastReceiver {
         public static final IntentFilter INTENT_FILTER;
         public final BroadcastDispatcher mBroadcastDispatcher;
@@ -84,7 +81,6 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final BroadcastDispatcher mBroadcastDispatcher;
         public final Context mContext;

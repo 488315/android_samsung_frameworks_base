@@ -6,12 +6,10 @@ import android.os.Message;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ExecutorImpl implements DelayableExecutor {
     private static final int MSG_EXECUTE_RUNNABLE = 0;
     private final Handler mHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class ExecutionToken implements Runnable {
         public final Runnable runnable;
 

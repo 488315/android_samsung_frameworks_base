@@ -3,14 +3,12 @@ package com.android.systemui.navigationbar.util;
 import com.android.systemui.basic.util.LogWrapper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StoreLogUtil {
     public boolean allowLogging;
     public int lastDepth;
     public final LogWrapper logWrapper;
     public final boolean loggingStarted = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

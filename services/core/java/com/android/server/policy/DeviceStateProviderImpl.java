@@ -49,7 +49,6 @@ import java.util.function.BooleanSupplier;
 import javax.xml.datatype.DatatypeConfigurationException;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceStateProviderImpl implements Dumpable, InputManagerInternal$LidSwitchCallback, SensorEventListener, PowerManager.OnThermalStatusChangedListener {
     static final DeviceState DEFAULT_DEVICE_STATE = new DeviceState(new DeviceState.Configuration.Builder(0, "DEFAULT").build());
     public static final DeviceStateProviderImpl$$ExternalSyntheticLambda0 FALSE_BOOLEAN_SUPPLIER;
@@ -65,7 +64,6 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
     public final Map mLatestSensorEvent = new ArrayMap();
     public int mThermalStatus = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AndBooleanSupplier implements BooleanSupplier {
         public List mBooleanSuppliers;
 
@@ -80,7 +78,6 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LidSwitchBooleanSupplier implements BooleanSupplier {
         public final boolean mExpectedOpen;
 
@@ -105,11 +102,9 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ReadableConfig {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadableFileConfig implements ReadableConfig {
         public final File mFile;
 
@@ -118,7 +113,6 @@ public final class DeviceStateProviderImpl implements Dumpable, InputManagerInte
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SensorBooleanSupplier implements BooleanSupplier {
         public final List mExpectedValues;
         public final Sensor mSensor;

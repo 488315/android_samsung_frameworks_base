@@ -58,7 +58,6 @@ import java.util.TreeSet;
 import java.util.zip.GZIPOutputStream;
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DropBoxManagerService extends SystemService {
     public static final int DEFAULT_QUOTA_KB;
     public static final List DISABLED_BY_DEFAULT_TAGS;
@@ -79,7 +78,6 @@ public final class DropBoxManagerService extends SystemService {
     public StatFs mStatFs;
     public final AnonymousClass2 mStub;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.DropBoxManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {
@@ -104,7 +102,6 @@ public final class DropBoxManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DropBoxManagerBroadcastHandler extends Handler {
         public final ArrayMap mDeferredMap;
         public final Object mLock;
@@ -187,13 +184,11 @@ public final class DropBoxManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DropBoxManagerInternalImpl {
         public DropBoxManagerInternalImpl() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class EntryFile implements Comparable {
         public final int blocks;
         public final int flags;
@@ -376,7 +371,6 @@ public final class DropBoxManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileList implements Comparable {
         public int blocks = 0;
         public final TreeSet contents = new TreeSet();
@@ -399,7 +393,6 @@ public final class DropBoxManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShellCmd extends ShellCommand {
         public ShellCmd() {
         }
@@ -498,7 +491,6 @@ public final class DropBoxManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SimpleEntrySource implements DropBoxManagerInternal$EntrySource {
         public final boolean forceCompress;
         public final InputStream in;

@@ -3,7 +3,6 @@ package com.android.systemui.navigationbar.interactor;
 import android.content.IntentFilter;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SettingsSoftResetInteractor {
     public final BroadcastDispatcher broadcastDispatcher;
     public SettingsSoftResetInteractor$addCallback$2 broadcastReceiver;

@@ -22,7 +22,6 @@ import com.android.systemui.qs.SecPageIndicator;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTileLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass4 mAdapter;
@@ -39,7 +38,6 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
     public final ArrayList mPages;
     public final ArrayList mTiles;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qp.SubscreenPagedTileLayout$4, reason: invalid class name */
     public final class AnonymousClass4 extends PagerAdapter {
         public AnonymousClass4() {

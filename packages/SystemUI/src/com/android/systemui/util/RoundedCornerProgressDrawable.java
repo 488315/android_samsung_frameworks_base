@@ -8,13 +8,11 @@ import android.graphics.drawable.InsetDrawable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RoundedCornerProgressDrawable extends InsetDrawable {
     public static final int $stable = 0;
     public static final Companion Companion = new Companion(null);
     private static final int MAX_LEVEL = 10000;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -24,7 +22,6 @@ public final class RoundedCornerProgressDrawable extends InsetDrawable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class RoundedCornerState extends Drawable.ConstantState {
         private final Drawable.ConstantState wrappedState;
 

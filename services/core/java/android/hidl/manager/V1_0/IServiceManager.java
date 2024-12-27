@@ -20,11 +20,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IServiceManager extends IBase {
     public static final String kInterfaceName = "android.hidl.manager@1.0::IServiceManager";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstanceDebugInfo {
         public String interfaceName = new String();
         public String instanceName = new String();
@@ -142,7 +140,6 @@ public interface IServiceManager extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PidConstant {
         public static final int NO_PID = -1;
 
@@ -167,7 +164,6 @@ public interface IServiceManager extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements IServiceManager {
         private IHwBinder mRemote;
 
@@ -465,7 +461,6 @@ public interface IServiceManager extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements IServiceManager {
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
@@ -713,7 +708,6 @@ public interface IServiceManager extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Transport {
         public static final byte EMPTY = 0;
         public static final byte HWBINDER = 1;

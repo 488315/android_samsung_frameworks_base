@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class LocationBasedMobileViewModel implements MobileIconViewModelCommon {
     public static final Companion Companion = new Companion(null);
     public final MobileIconViewModelCommon commonImpl;
@@ -16,10 +15,8 @@ public abstract class LocationBasedMobileViewModel implements MobileIconViewMode
     public final StatusBarLocation location;
     public final VerboseMobileViewLogger verboseLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

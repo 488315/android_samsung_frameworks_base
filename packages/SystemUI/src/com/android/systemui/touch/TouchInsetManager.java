@@ -9,13 +9,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TouchInsetManager {
     public final Executor mExecutor;
     public final HashMap mSessionRegions = new HashMap();
     public final HashMap mLastAffectedSurfaces = new HashMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TouchInsetSession {
         public final Executor mExecutor;
         public final TouchInsetManager mManager;

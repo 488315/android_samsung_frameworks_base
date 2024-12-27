@@ -45,7 +45,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EdgeLightingPolicyManager {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static final Uri DESKTOP_SETTINGS_URI;
@@ -76,7 +75,6 @@ public final class EdgeLightingPolicyManager {
     public final ArrayList mDisableRecords = new ArrayList();
     public final SparseArray mDisabledPackages = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.edgelighting.EdgeLightingPolicyManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
@@ -148,7 +146,6 @@ public final class EdgeLightingPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisableRecord implements IBinder.DeathRecipient {
         public String packageName;
         public IBinder token;
@@ -173,7 +170,6 @@ public final class EdgeLightingPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GroupNotificationData {
         public final HashMap mChildMap = new LinkedHashMap();
         public NotificationData mSumaaryNotification;
@@ -232,7 +228,6 @@ public final class EdgeLightingPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationData {
         public Bundle mNotificationInfo;
         public long mTime;
@@ -244,7 +239,6 @@ public final class EdgeLightingPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationGroup {
         public final HashMap mGroupMap = new HashMap();
 

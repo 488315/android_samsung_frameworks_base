@@ -70,7 +70,6 @@ import java.util.function.IntConsumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements KeyguardStateController.Callback, LaunchableView {
     public final LaunchableViewDelegate delegate;
     public int mAffordancePivotY;
@@ -187,7 +186,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     public static boolean mWaitForReset = false;
     public static boolean mIsLaunchPanelRunning = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GeneralTouchHandler implements TouchHandlePolicy {
         public /* synthetic */ GeneralTouchHandler(KeyguardSecAffordanceView keyguardSecAffordanceView, int i) {
             this();
@@ -197,7 +195,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface TouchHandlePolicy {
     }
 

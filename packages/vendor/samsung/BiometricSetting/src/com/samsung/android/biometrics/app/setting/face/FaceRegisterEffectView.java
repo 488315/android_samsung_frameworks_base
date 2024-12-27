@@ -17,7 +17,6 @@ import com.samsung.android.biometrics.app.setting.Utils;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class FaceRegisterEffectView extends View {
     public final int COLOR_BACKGROUND;
     public final int COLOR_BLUR_MASK;
@@ -78,7 +77,6 @@ public class FaceRegisterEffectView extends View {
     public static final PathInterpolator INTP_ERROR_MOVING =
             new PathInterpolator(0.33f, RecyclerView.DECELERATION_RATE, 0.3f, 0.1f);
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public final class FaceScanEffectItem {
         public final float angle;
         public final int ex;

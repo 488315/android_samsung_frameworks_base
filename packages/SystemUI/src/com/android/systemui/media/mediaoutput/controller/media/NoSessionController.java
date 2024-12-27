@@ -27,7 +27,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoSessionController extends SessionController {
     public final AudioManager audioManager;
     public final Lazy colorSchemeLoader$delegate;
@@ -35,7 +34,6 @@ public final class NoSessionController extends SessionController {
     public final Lazy packageName$delegate;
     public final Lazy semSoundAssistantManager$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

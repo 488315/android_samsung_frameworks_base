@@ -69,7 +69,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GameManagerService extends IGameManagerService.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ArrayMap mConfigs;
@@ -95,7 +94,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
     public final Object mUidObserverLock;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 implements IBinder.DeathRecipient {
         public final /* synthetic */ int $r8$classId = 0;
@@ -137,7 +135,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.app.GameManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -167,7 +164,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public DeviceConfigListener() {
             DeviceConfig.addOnPropertiesChangedListener(
@@ -188,7 +184,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GamePackageConfiguration {
         public boolean mAllowAngle;
         public boolean mAllowDownscale;
@@ -199,7 +194,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         public final String mPackageName;
         public boolean mPerfModeOverridden;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class GameModeConfiguration {
             public String mFps;
             public final int mGameMode;
@@ -576,15 +570,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.app.GameManagerService$Injector$1, reason: invalid class name */
         public final class AnonymousClass1 {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final GameManagerService mService;
 
@@ -774,7 +765,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends GameManagerInternal implements CompatScaleProvider {
         public LocalService() {}
 
@@ -819,7 +809,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyUidObserver extends UidObserver {
         public MyUidObserver() {}
 
@@ -929,7 +918,6 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsHandler extends Handler {
         public SettingsHandler(Looper looper) {
             super(looper);

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 
-/* compiled from: SemWallpaperProperties.java */
 class DlsStateShot {
     private static final int STATE_DATA_CLEAR = 32768;
     private static final int STATE_DRESS_ROOM = 1;

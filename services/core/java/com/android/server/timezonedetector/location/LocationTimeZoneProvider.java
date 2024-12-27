@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class LocationTimeZoneProvider implements Dumpable {
     public final ThreadingDomain$SingleRunnableQueue mInitializationTimeoutQueue;
     public LocationTimeZoneProviderController$$ExternalSyntheticLambda0 mProviderListener;
@@ -28,7 +27,6 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
     public final ArrayList mRecordedStates = new ArrayList(0);
     public final ReferenceWithHistory mCurrentState = new ReferenceWithHistory(10);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderState {
         public final ConfigurationInternal currentUserConfiguration;
         public final TimeZoneProviderEvent event;

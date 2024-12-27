@@ -35,7 +35,6 @@ import com.samsung.android.multicontrol.MultiControlManagerInternal;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiControlManagerService extends IMultiControlManager.Stub {
     public static final boolean DEBUG;
     public MultiControlAppDeathChecker mAppDeathChecker;
@@ -49,7 +48,6 @@ public final class MultiControlManagerService extends IMultiControlManager.Stub 
     public boolean mIsBootComplete = false;
     public int mCurrentUserId = -10000;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public MultiControlManagerService mService;
 
@@ -140,7 +138,6 @@ public final class MultiControlManagerService extends IMultiControlManager.Stub 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends MultiControlManagerInternal {
         public LocalService() {
         }
@@ -150,7 +147,6 @@ public final class MultiControlManagerService extends IMultiControlManager.Stub 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MultiControlAppDeathChecker implements IBinder.DeathRecipient {
         public final IBinder mBinder;
 
@@ -187,7 +183,6 @@ public final class MultiControlManagerService extends IMultiControlManager.Stub 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
         public Receiver() {
         }

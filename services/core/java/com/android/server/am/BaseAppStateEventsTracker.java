@@ -12,12 +12,10 @@ import android.util.SparseArray;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
     public final UidProcessMap mPkgEvents;
     public final ArraySet mTopUids;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BaseAppStateEventsPolicy extends BaseAppStatePolicy {
         public final long mDefaultMaxTrackingDuration;
         public final String mKeyMaxTrackingDuration;

@@ -54,7 +54,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ThermalManagerService extends SystemService {
     public final Context mContext;
     public final AtomicBoolean mHalReady;
@@ -68,7 +67,6 @@ public final class ThermalManagerService extends SystemService {
     public final RemoteCallbackList mThermalEventListeners;
     public final RemoteCallbackList mThermalStatusListeners;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class TemperatureWatcher {
         public final Handler mHandler = BackgroundThread.getHandler();
         final ArrayMap mSamples = new ArrayMap();
@@ -77,7 +75,6 @@ public final class ThermalManagerService extends SystemService {
         public long mLastForecastCallTimeMillis = 0;
         long mInactivityThresholdMillis = 10000;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         class Sample {
             public final float temperature;
             public final long time;
@@ -306,7 +303,6 @@ public final class ThermalManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalHal10Wrapper extends ThermalHalWrapper {
         public IThermal mThermalHal10;
 
@@ -402,7 +398,6 @@ public final class ThermalManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalHal11Wrapper extends ThermalHalWrapper {
         public final /* synthetic */ int $r8$classId;
         public final Object mThermalCallback11;
@@ -844,7 +839,6 @@ public final class ThermalManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ThermalHalAidlWrapper extends ThermalHalWrapper implements IBinder.DeathRecipient {
         public android.hardware.thermal.IThermal mInstance = null;
         public final AnonymousClass1 mThermalChangedCallback =
@@ -1121,12 +1115,10 @@ public final class ThermalManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ThermalHalWrapper {
         public TemperatureChangedCallback mCallback;
         public final Object mHalLock = new Object();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class DeathRecipient implements IHwBinder.DeathRecipient {
             public DeathRecipient() {}
 
@@ -1157,7 +1149,6 @@ public final class ThermalManagerService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public interface TemperatureChangedCallback {
             void onValues(Temperature temperature);
         }
@@ -1177,7 +1168,6 @@ public final class ThermalManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalShellCommand extends ShellCommand {
         public ThermalShellCommand() {}
 

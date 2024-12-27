@@ -85,7 +85,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DomainFilter {
     public static final int MAX_LIST_SIZE_IN_BYTES = IBinder.getSuggestedMaxIpcSizeBytes();
     public static ConnectivityManager mConnectivityService;
@@ -120,7 +119,6 @@ public final class DomainFilter {
     public final Map mUserIdMap;
     public final Object mUserIdMapLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.DomainFilter$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -372,7 +370,6 @@ public final class DomainFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.DomainFilter$4, reason: invalid class name */
     public final class AnonymousClass4 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -596,14 +593,12 @@ public final class DomainFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlockReport {
         public String mTimeStamp;
         public String mUid;
         public String mUrl;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DomainFilterEventListener extends Binder
             implements IDomainFilterEventListener {
         public DomainFilterEventListener() {
@@ -813,10 +808,8 @@ public final class DomainFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkIdInfo {
         public final String mDns1;
         public final String mDns2;
@@ -841,7 +834,6 @@ public final class DomainFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkManagementHandler extends Handler {
         public NetworkManagementHandler(Looper looper) {
             super(looper);

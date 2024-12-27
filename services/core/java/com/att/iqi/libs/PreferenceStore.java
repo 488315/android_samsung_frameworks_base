@@ -25,7 +25,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class PreferenceStore {
     private static final String IQI_PREF_FILE = "att_prefs.xml";
     public static final String PREF_BRIDGE_LIBRARY_PATH = "bridge_path";
@@ -41,7 +40,6 @@ public class PreferenceStore {
     private final File mPreferenceFile =
             new File(new File(Environment.getDataDirectory(), "system"), IQI_PREF_FILE);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PreferenceChangeListener {
         void onPreferenceChanged(String str);
     }

@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ServiceRecord extends Binder implements ComponentName.WithComponentName {
     public boolean allowlistManager;
     public final ActivityManagerService ams;
@@ -150,7 +149,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     public final ArrayList pendingStarts = new ArrayList();
     public final ArrayList pendingRemoveConnections = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BindItem {
         public final IApplicationThread caller;
         public final String callingPackage;
@@ -196,7 +194,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ShortFgsInfo {
         public int mStartForegroundCount;
         public int mStartId;
@@ -225,7 +222,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartItem {
         public final int callingId;
         public long deliveredTime;
@@ -337,7 +333,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeLimitedFgsInfo {
         public long mFirstFgsStartRealtime;
         public long mFirstFgsStartUptime;
@@ -365,7 +360,6 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class removeConnectionItem {
         public final ConnectionRecord c;
         public final boolean enqueueOomAdj;

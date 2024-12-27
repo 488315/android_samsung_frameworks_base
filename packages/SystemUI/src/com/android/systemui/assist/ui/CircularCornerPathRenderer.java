@@ -6,7 +6,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import com.android.systemui.assist.ui.CornerPathRenderer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CircularCornerPathRenderer extends CornerPathRenderer {
     public final int mCornerRadiusBottom;
     public final int mCornerRadiusTop;
@@ -14,7 +13,6 @@ public final class CircularCornerPathRenderer extends CornerPathRenderer {
     public final Path mPath = new Path();
     public final int mWidth;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.assist.ui.CircularCornerPathRenderer$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$assist$ui$CornerPathRenderer$Corner;

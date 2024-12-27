@@ -62,7 +62,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobSupport;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends KeyguardUnlockAnimationController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public long animStartDelay;
@@ -105,7 +104,6 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
     public String traceTag;
     public final Executor unlockAnimationExecutor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class JankMonitorContext extends ContextWrapper {
         public final Handler handler;
 

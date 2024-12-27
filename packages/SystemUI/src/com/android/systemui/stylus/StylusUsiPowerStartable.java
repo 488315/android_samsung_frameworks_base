@@ -22,14 +22,12 @@ import kotlin.sequences.EmptySequence;
 import kotlin.sequences.FilteringSequence$iterator$1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StylusUsiPowerStartable implements CoreStartable, StylusManager.StylusCallback {
     public final FeatureFlags featureFlags;
     public final InputManager inputManager;
     public final StylusManager stylusManager;
     public final StylusUsiPowerUI stylusUsiPowerUi;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

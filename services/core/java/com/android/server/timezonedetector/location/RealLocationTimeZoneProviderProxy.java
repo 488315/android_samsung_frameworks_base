@@ -14,7 +14,6 @@ import com.android.server.timezonedetector.Dumpable;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RealLocationTimeZoneProviderProxy
         implements ServiceWatcher$ServiceListener, Dumpable {
     public BinderLocationTimeZoneProvider.AnonymousClass1 mListener;
@@ -24,7 +23,6 @@ public final class RealLocationTimeZoneProviderProxy
     public final Object mSharedLock;
     public final HandlerThreadingDomain mThreadingDomain;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ManagerProxy extends ITimeZoneProviderManager.Stub {
         public ManagerProxy() {}
 

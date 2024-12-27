@@ -25,7 +25,6 @@ import kotlin.collections.builders.ListBuilder;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ViewHierarchyAnimator {
     public static final Interpolator DEFAULT_FADE_IN_INTERPOLATOR;
     public static final Map PROPERTIES;
@@ -34,7 +33,6 @@ public final class ViewHierarchyAnimator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     abstract class Bound {
         public static final /* synthetic */ Bound[] $VALUES;
         public static final BOTTOM BOTTOM;
@@ -44,7 +42,6 @@ public final class ViewHierarchyAnimator {
         private final String label;
         private final int overrideTag;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class BOTTOM extends Bound {
             public BOTTOM(String str, int i) {
                 super(str, i, "bottom", R.id.tag_override_bottom, null);
@@ -61,7 +58,6 @@ public final class ViewHierarchyAnimator {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class LEFT extends Bound {
             public LEFT(String str, int i) {
                 super(str, i, "left", R.id.tag_override_left, null);
@@ -78,7 +74,6 @@ public final class ViewHierarchyAnimator {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class RIGHT extends Bound {
             public RIGHT(String str, int i) {
                 super(str, i, "right", R.id.tag_override_right, null);
@@ -95,7 +90,6 @@ public final class ViewHierarchyAnimator {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         final class TOP extends Bound {
             public TOP(String str, int i) {
                 super(str, i, "top", R.id.tag_override_top, null);
@@ -156,10 +150,8 @@ public final class ViewHierarchyAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -374,7 +366,6 @@ public final class ViewHierarchyAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DimenHolder {
         public final int bottom;
         public final int left;
@@ -417,7 +408,6 @@ public final class ViewHierarchyAnimator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Hotspot {
         public static final /* synthetic */ Hotspot[] $VALUES;
         public static final Hotspot BOTTOM;

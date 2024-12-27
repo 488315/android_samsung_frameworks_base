@@ -24,7 +24,6 @@ import com.ibm.icu.impl.CalendarAstronomer;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TwilightService extends SystemService
         implements AlarmManager.OnAlarmListener, Handler.Callback, LocationListener {
     public AlarmManager mAlarmManager;
@@ -37,7 +36,6 @@ public final class TwilightService extends SystemService
     public LocationManager mLocationManager;
     public AnonymousClass2 mTimeChangedReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.twilight.TwilightService$1, reason: invalid class name */
     public final class AnonymousClass1 implements TwilightManager {
         public AnonymousClass1() {}

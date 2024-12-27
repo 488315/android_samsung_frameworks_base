@@ -7,12 +7,10 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 import com.android.systemui.plugins.annotations.Requirements;
 import com.android.systemui.plugins.annotations.Requires;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VersionInfo {
     public Class mDefault;
     public final ArrayMap mVersions = new ArrayMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Version {
         public final boolean mRequired;
         public final int mVersion;
@@ -53,7 +51,6 @@ public final class VersionInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class InvalidVersionException extends RuntimeException {
         private int mActual;
         private int mExpected;

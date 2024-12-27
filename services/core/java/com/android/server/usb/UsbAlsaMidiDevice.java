@@ -25,7 +25,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbAlsaMidiDevice implements Closeable {
     public static final int BUFFER_SIZE = 512;
     public static final String TAG = "UsbAlsaMidiDevice";
@@ -96,7 +95,6 @@ public final class UsbAlsaMidiDevice implements Closeable {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputReceiverProxy extends MidiReceiver {
         public MidiReceiver mReceiver;
 

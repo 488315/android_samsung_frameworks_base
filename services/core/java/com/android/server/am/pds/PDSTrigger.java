@@ -13,7 +13,6 @@ import com.android.server.am.PDSController;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PDSTrigger {
     public long firstTrigger;
     public boolean isInDuration;
@@ -30,7 +29,6 @@ public final class PDSTrigger {
     public boolean mReceiverRegistered;
     public UserHandle user;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PDSTriggerHolder {
         public static final PDSTrigger INSTANCE;
 

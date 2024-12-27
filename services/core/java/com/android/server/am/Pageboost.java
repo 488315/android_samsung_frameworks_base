@@ -66,7 +66,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class Pageboost {
     public static final boolean BOOTFILE_ENABLED;
     public static final boolean PAGEBOOST_ACTIVE_LAUNCH_ENABLED;
@@ -96,7 +95,6 @@ public abstract class Pageboost {
     public static final ServiceThread sHandlerThread;
     public static boolean user_unlock_done;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DaemonConnector {
         public OutputStream sOutputStream;
         public LocalSocket sSocket;
@@ -143,7 +141,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileMapList {
         public final boolean mCorrectness;
         public final Hashtable mFiles = new Hashtable();
@@ -187,7 +184,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IoRecord {
         public boolean is64bit;
         public PageboostAppInfo mApp;
@@ -305,7 +301,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LRUPolicy {
         public Object mLock;
         public Object mRecentPrefetchList;
@@ -376,7 +371,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PageboostAppCapture {
         public static final int PAGEBOOST_IO_PREFETCH_LEVEL =
                 SystemProperties.getInt("ro.config.pageboost.io_prefetch.level", 3);
@@ -477,12 +471,10 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PageboostAppDBHelper extends SQLiteOpenHelper {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final /* synthetic */ int $r8$classId;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class AppDBErrorHandler implements DatabaseErrorHandler {
             public final /* synthetic */ int $r8$classId;
 
@@ -741,7 +733,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PageboostAppInfo {
         public long mAccExecTime;
         public int mAnon;
@@ -1159,7 +1150,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PageboostAppList implements Iterable {
         public final LinkedList mPageboostApps = new LinkedList();
 
@@ -1222,7 +1212,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PageboostHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -1555,7 +1544,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PageboostPredictor {
         public static LRUPolicy mAppSelection;
 
@@ -1637,7 +1625,6 @@ public abstract class Pageboost {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Vramdisk {
         public static boolean ENABLED;
         public static DaemonConnector conn;

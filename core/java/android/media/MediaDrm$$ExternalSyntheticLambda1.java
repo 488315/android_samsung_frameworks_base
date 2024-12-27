@@ -3,7 +3,6 @@ package android.media;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class MediaDrm$$ExternalSyntheticLambda1 implements Function {
     public final /* synthetic */ MediaDrm f$0;
 

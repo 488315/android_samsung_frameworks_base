@@ -65,7 +65,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyboardLayoutManager implements InputManager.InputDeviceListener {
     public static final boolean DEBUG = Log.isLoggable("KeyboardLayoutManager", 3);
     public final Context mContext;
@@ -78,7 +77,6 @@ public final class KeyboardLayoutManager implements InputManager.InputDeviceList
     public HashSet mAvailableLayouts = new HashSet();
     public final Object mImeInfoLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ImeInfo {
         public final InputMethodSubtype mImeSubtype;
         public final InputMethodSubtypeHandle mImeSubtypeHandle;
@@ -102,7 +100,6 @@ public final class KeyboardLayoutManager implements InputManager.InputDeviceList
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardConfiguration {
         public Set mConfiguredLayouts;
         public final int mDeviceId;
@@ -112,7 +109,6 @@ public final class KeyboardLayoutManager implements InputManager.InputDeviceList
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyboardIdentifier {
         public final /* synthetic */ int $r8$classId = 1;
         public Object mIdentifier;
@@ -193,7 +189,6 @@ public final class KeyboardLayoutManager implements InputManager.InputDeviceList
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface KeyboardLayoutVisitor {
         void visitKeyboardLayout(Resources resources, int i, KeyboardLayout keyboardLayout);
     }

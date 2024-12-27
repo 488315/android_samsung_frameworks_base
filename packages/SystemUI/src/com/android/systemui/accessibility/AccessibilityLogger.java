@@ -4,7 +4,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.util.time.SystemClock;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AccessibilityLogger {
     public final SystemClock clock;
     public UiEventLogger.UiEventEnum lastEventThrottled;
@@ -13,7 +12,6 @@ public final class AccessibilityLogger {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MagnificationSettingsEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ MagnificationSettingsEvent[] $VALUES;
         public static final MagnificationSettingsEvent MAGNIFICATION_SETTINGS_PANEL_CLOSED;

@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DesktopManagerImpl implements DesktopManager {
     private static final int DESKTOP_DUALVIEW = 712;
     private static final int DESKTOP_NONE = 710;
@@ -242,7 +241,6 @@ public class DesktopManagerImpl implements DesktopManager {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.util.DesktopManagerImpl$8, reason: invalid class name */
     /* synthetic */ class AnonymousClass8 {
         static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;

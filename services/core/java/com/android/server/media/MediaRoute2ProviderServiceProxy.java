@@ -34,7 +34,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaRoute2ProviderServiceProxy extends MediaRoute2Provider {
     public static final boolean DEBUG = Log.isLoggable("MR2ProviderSvcProxy", 3);
     public Connection mActiveConnection;
@@ -53,7 +52,6 @@ public final class MediaRoute2ProviderServiceProxy extends MediaRoute2Provider {
     public final Map mSessionOriginalIdToTransferRequest;
     public final int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements IBinder.DeathRecipient {
         public final ServiceCallbackStub mCallbackStub = new ServiceCallbackStub(this);
         public final IMediaRoute2ProviderService mService;
@@ -70,7 +68,6 @@ public final class MediaRoute2ProviderServiceProxy extends MediaRoute2Provider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceCallbackStub extends IMediaRoute2ProviderServiceCallback.Stub {
         public final WeakReference mConnectionRef;
 
@@ -279,7 +276,6 @@ public final class MediaRoute2ProviderServiceProxy extends MediaRoute2Provider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceConnectionImpl implements ServiceConnection {
         public ServiceConnectionImpl() {}
 

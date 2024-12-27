@@ -14,12 +14,10 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class IntraBlueprintTransition extends TransitionSet {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type ClockSize = null;
@@ -67,7 +65,6 @@ public final class IntraBlueprintTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -98,7 +95,6 @@ public final class IntraBlueprintTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Config {
         public static final Companion Companion = new Companion(null);
         public static final Config DEFAULT = new Config(Type.NoTransition, false, false, null, 14, null);
@@ -107,7 +103,6 @@ public final class IntraBlueprintTransition extends TransitionSet {
         public final boolean terminatePrevious;
         public final Type type;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }

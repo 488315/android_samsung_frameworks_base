@@ -4,7 +4,6 @@ import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UsbMidiPacketConverter {
     public final ByteArrayOutputStream mEncoderOutputStream = new ByteArrayOutputStream();
     public UsbMidiDecoder mUsbMidiDecoder;
@@ -14,13 +13,11 @@ public final class UsbMidiPacketConverter {
         -1, 2, 3, 2, -1, -1, 5, -1, 5, -1, 5, 5, 5, -1, 5, 5
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbMidiDecoder {
         public ByteArrayOutputStream[] mDecodedByteArrays;
         public int mNumJacks;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbMidiEncoder {
         public byte[] mEmptyBytes;
         public boolean mHasSystemExclusiveStarted;

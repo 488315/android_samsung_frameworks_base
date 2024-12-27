@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.policy.ZenModeController;
 import com.android.systemui.statusbar.policy.ZenModeControllerImpl;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockShortcutDnd extends PluginLockShortcutTask implements ZenModeController.Callback {
     private static final String TAG = "PluginLockShortcutDnd";
     private final PluginLockMediator mMediator;

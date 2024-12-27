@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SmartReplyController implements Dumpable {
     public final IStatusBarService mBarService;
     public Callback mCallback;
@@ -25,7 +24,6 @@ public final class SmartReplyController implements Dumpable {
     public final Set mSendingKeys = new ArraySet();
     public final NotificationVisibilityProvider mVisibilityProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onSmartReplySent(NotificationEntry notificationEntry, CharSequence charSequence);
     }

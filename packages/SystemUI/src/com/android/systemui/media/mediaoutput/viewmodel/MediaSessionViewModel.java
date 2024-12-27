@@ -69,7 +69,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaSessionViewModel extends ViewModel implements MediaInteraction {
     public static final Companion Companion = new Companion(null);
     public final MediatorLiveData _mediaInfo;
@@ -89,7 +88,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
     public final CoroutineLiveData sessionControllers;
     public final StateFlowImpl updateMediaInfo;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         Object L$0;
@@ -170,13 +168,11 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$4$1, reason: invalid class name */
         public final class AnonymousClass1 implements FlowCollector {
             public final /* synthetic */ CoroutineScope $$this$launch;
@@ -336,7 +332,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                     final CoroutineScope coroutineScope = this.$$this$launch;
                     mediatorLiveData.addSource(mutableLiveData, new Observer() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$4$1$emit$5$1
 
-                        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                         /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$4$1$emit$5$1$1, reason: invalid class name */
                         final class AnonymousClass1 extends SuspendLambda implements Function2 {
                             int label;
@@ -380,7 +375,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                             }
                         }
 
-                        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                         /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$4$1$emit$5$1$2, reason: invalid class name */
                         final class AnonymousClass2 extends SuspendLambda implements Function2 {
                             int label;
@@ -497,7 +491,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

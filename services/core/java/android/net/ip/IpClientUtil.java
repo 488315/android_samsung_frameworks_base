@@ -11,11 +11,9 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class IpClientUtil {
     public static final String DUMP_ARG = "ipclient";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IpClientCallbacksProxy extends IIpClientCallbacks.Stub {
         public final IpClientCallbacks mCb;
 
@@ -115,7 +113,6 @@ public class IpClientUtil {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class WaitForProvisioningCallbacks extends IpClientCallbacks {
         private final ConditionVariable mCV = new ConditionVariable();
         private LinkProperties mCallbackLinkProperties;

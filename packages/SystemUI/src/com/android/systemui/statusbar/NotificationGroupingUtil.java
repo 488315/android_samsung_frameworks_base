@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationGroupingUtil {
     public static final AppNameApplicator APP_NAME_APPLICATOR;
     public static final AppNameComparator APP_NAME_COMPARATOR;
@@ -29,7 +28,6 @@ public final class NotificationGroupingUtil {
     public final ArrayList mProcessors;
     public final ExpandableNotificationRow mRow;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppNameApplicator extends VisibilityApplicator {
         public /* synthetic */ AppNameApplicator(int i) {
             this();
@@ -48,7 +46,6 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AppNameComparator extends TextViewComparator {
         public /* synthetic */ AppNameComparator(int i) {
             this();
@@ -67,7 +64,6 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BadgeComparator implements ViewComparator {
         private BadgeComparator() {
         }
@@ -89,11 +85,9 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DataExtractor {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class IconComparator implements ViewComparator {
         private IconComparator() {
         }
@@ -113,7 +107,6 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LeftIconApplicator implements ResultApplicator {
         public static final int[] MARGIN_ADJUSTED_VIEWS = {16909869, R.id.button5, R.id.title, R.id.popup_submenu_presenter, R.id.placeholder};
 
@@ -252,7 +245,6 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Processor {
         public final ResultApplicator mApplicator;
         public boolean mApply;
@@ -304,12 +296,10 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ResultApplicator {
         void apply(View view, View view2, boolean z, boolean z2);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class TextViewComparator implements ViewComparator {
         private TextViewComparator() {
         }
@@ -330,14 +320,12 @@ public final class NotificationGroupingUtil {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ViewComparator {
         boolean compare(View view, View view2, Object obj, Object obj2);
 
         boolean isEmpty(View view);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class VisibilityApplicator implements ResultApplicator {
         private VisibilityApplicator() {
         }

@@ -90,7 +90,6 @@ import java.util.function.Predicate;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BlobStoreManagerService extends SystemService {
     public final ArraySet mActiveBlobIds;
     public final Handler mBackgroundHandler;
@@ -109,7 +108,6 @@ public final class BlobStoreManagerService extends SystemService {
     public final StatsPullAtomCallbackImpl mStatsCallbackImpl;
     public StatsManager mStatsManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlobStorageStatsAugmenter implements StorageStatsManagerLocal.StorageStatsAugmenter {
         public BlobStorageStatsAugmenter() {
         }
@@ -180,7 +178,6 @@ public final class BlobStoreManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpArgs {
         public boolean mDumpAll;
         public boolean mDumpHelp;
@@ -226,23 +223,19 @@ public final class BlobStoreManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionStateChangeListener {
         public SessionStateChangeListener() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
         public StatsPullAtomCallbackImpl() {
         }
@@ -258,7 +251,6 @@ public final class BlobStoreManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Stub extends IBlobStoreManager.Stub {
         public Stub() {
         }
@@ -619,7 +611,6 @@ public final class BlobStoreManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserActionReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ BlobStoreManagerService this$0;

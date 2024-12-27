@@ -2,7 +2,6 @@ package com.android.systemui.flags;
 
 import com.android.systemui.R;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Flags {
     public static final ReleasedFlag ALWAYS_SHOW_HOME_CONTROLS_ON_DREAMS;
     public static final SysPropBooleanFlag BUILDER_EXTRAS_OVERRIDE;

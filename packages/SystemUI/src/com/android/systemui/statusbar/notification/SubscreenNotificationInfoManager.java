@@ -24,7 +24,6 @@ import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenNotificationInfoManager implements ConfigurationController.ConfigurationListener {
     public static final ArrayList mSubscreenNotificationInfoList = new ArrayList();
     public Context mContext;
@@ -40,7 +39,6 @@ public final class SubscreenNotificationInfoManager implements ConfigurationCont
     public final Handler mUiHandler = new Handler(Looper.getMainLooper());
     public final ArrayList mReplyWordList = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DisplayLifecycleObserver implements DisplayLifecycle.Observer {
         public /* synthetic */ DisplayLifecycleObserver(SubscreenNotificationInfoManager subscreenNotificationInfoManager, int i) {
             this();

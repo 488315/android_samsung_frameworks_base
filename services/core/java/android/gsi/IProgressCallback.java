@@ -6,11 +6,9 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IProgressCallback extends IInterface {
     public static final String DESCRIPTOR = "android.gsi.IProgressCallback";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IProgressCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,11 +19,9 @@ public interface IProgressCallback extends IInterface {
         public void onProgress(long j, long j2) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IProgressCallback {
         static final int TRANSACTION_onProgress = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IProgressCallback {
             public IBinder mRemote;
 

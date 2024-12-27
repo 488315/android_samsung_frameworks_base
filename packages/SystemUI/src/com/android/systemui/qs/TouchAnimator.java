@@ -9,7 +9,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TouchAnimator {
     public static final AnonymousClass1 POSITION = new FloatProperty(SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION) { // from class: com.android.systemui.qs.TouchAnimator.1
         @Override // android.util.Property
@@ -30,7 +29,6 @@ public final class TouchAnimator {
     public final float mStartDelay;
     public final Object[] mTargets;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public float mEndDelay;
         public Interpolator mInterpolator;
@@ -90,7 +88,6 @@ public final class TouchAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FloatKeyframeSet extends KeyframeSet {
         public final Property mProperty;
         public final float[] mValues;
@@ -109,7 +106,6 @@ public final class TouchAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class KeyframeSet {
         public final float mFrameWidth;
         public final int mSize;
@@ -122,7 +118,6 @@ public final class TouchAnimator {
         public abstract void interpolate(int i, float f, Object obj);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Listener {
         void onAnimationAtEnd();
 

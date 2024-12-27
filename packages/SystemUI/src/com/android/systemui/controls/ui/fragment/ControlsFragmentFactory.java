@@ -12,7 +12,6 @@ import com.android.systemui.controls.util.SALogger;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ControlsFragmentFactory extends FragmentFactory {
     public final BadgeSubject badgeSubject;
     public final ControlsActivityStarter controlsActivityStarter;
@@ -21,7 +20,6 @@ public final class ControlsFragmentFactory extends FragmentFactory {
     public final ControlsListingController listingController;
     public final SALogger saLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

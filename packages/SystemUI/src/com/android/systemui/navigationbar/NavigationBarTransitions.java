@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavigationBarTransitions extends BarTransitions implements LightBarTransitionsController.DarkIntensityApplier {
     public final boolean mAllowAutoDimWallpaperNotVisible;
     public boolean mAutoDim;
@@ -40,12 +39,10 @@ public final class NavigationBarTransitions extends BarTransitions implements Li
     public final NavigationBarView mView;
     public boolean mWallpaperVisible;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DarkIntensityListener {
         void onDarkIntensity(float f);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NavigationBarBackgroundDrawable extends BarTransitions.BarBackgroundDrawable {
         public final NavBarStateManager mNavBarStateManager;
 

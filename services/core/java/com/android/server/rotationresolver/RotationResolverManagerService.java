@@ -24,13 +24,11 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RotationResolverManagerService extends AbstractMasterSystemService {
     public final Context mContext;
     public boolean mIsServiceEnabled;
     public final SensorPrivacyManager mPrivacyManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends Binder {
         public BinderService() {}
 
@@ -69,7 +67,6 @@ public final class RotationResolverManagerService extends AbstractMasterSystemSe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends RotationResolverInternal {
         public LocalService() {}
 

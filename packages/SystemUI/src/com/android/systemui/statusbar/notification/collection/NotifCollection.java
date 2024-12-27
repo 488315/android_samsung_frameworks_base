@@ -77,7 +77,6 @@ import kotlin.Unit;
 import kotlin.collections.EmptySet;
 import kotlin.collections.MapsKt__MapsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotifCollection implements Dumpable, PipelineDumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public boolean mAmDispatchingToOtherCode;
@@ -102,7 +101,6 @@ public final class NotifCollection implements Dumpable, PipelineDumpable {
     public final NotifCollection$$ExternalSyntheticLambda1 mRebuildListRunnable;
     public final IStatusBarService mStatusBarService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.collection.NotifCollection$1, reason: invalid class name */
     public final class AnonymousClass1 implements NotificationListener.NotificationHandler {
         public AnonymousClass1() {
@@ -188,11 +186,9 @@ public final class NotifCollection implements Dumpable, PipelineDumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DismissedByUserStatsCreator {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FutureDismissal implements Runnable {
         public boolean mDidRun;
         public boolean mDidSystemServerCancel;

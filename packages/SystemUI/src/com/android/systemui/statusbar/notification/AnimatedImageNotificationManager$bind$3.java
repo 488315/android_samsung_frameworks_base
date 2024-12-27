@@ -6,7 +6,6 @@ import kotlin.Function;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 import kotlin.jvm.internal.FunctionAdapter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class AnimatedImageNotificationManager$bind$3 implements BindEventManager.Listener, FunctionAdapter {
     public final /* synthetic */ AnimatedImageNotificationManager $tmp0;
 

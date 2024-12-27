@@ -21,7 +21,6 @@ import com.android.systemui.util.DeviceType;
 import com.samsung.android.knox.license.KnoxEnterpriseLicenseManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SamsungBatteryMeterDrawable extends Drawable {
     public static final float BATTERY_BACKGROUND_ALPHA;
     public static final int BLINKING_INTERVAL;
@@ -65,7 +64,6 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
     public final Paint textPaint = new Paint();
     public int iconTint = -1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

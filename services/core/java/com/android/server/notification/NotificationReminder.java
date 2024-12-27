@@ -47,7 +47,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NotificationReminder {
     public final AlarmManager mAlarmManager;
     public String mAppSettingList;
@@ -67,7 +66,6 @@ public final class NotificationReminder {
     public final ArrayList mActiveNotiList = new ArrayList();
     public int mReminderType = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.NotificationReminder$3, reason: invalid class name */
     public final class AnonymousClass3 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -117,7 +115,6 @@ public final class NotificationReminder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.NotificationReminder$5, reason: invalid class name */
     public final class AnonymousClass5 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -141,7 +138,6 @@ public final class NotificationReminder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationReminderObserver extends ContentObserver {
         public final Uri NOTIFICATION_REMINDER_APP_LIST;
         public final Uri NOTIFICATION_REMINDER_SELECTABLE;
@@ -198,7 +194,6 @@ public final class NotificationReminder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateEnablePackageTask extends AsyncTask {
         public UpdateEnablePackageTask() {
         }
@@ -454,7 +449,6 @@ public final class NotificationReminder {
     public NotificationReminder(Context context, Looper looper, PreferencesHelper preferencesHelper, AlarmManager alarmManager) {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.notification.NotificationReminder.1
 
-            /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             /* renamed from: com.android.server.notification.NotificationReminder$1$1, reason: invalid class name and collision with other inner class name */
             public final class RunnableC00191 implements Runnable {
                 public final /* synthetic */ int $r8$classId;

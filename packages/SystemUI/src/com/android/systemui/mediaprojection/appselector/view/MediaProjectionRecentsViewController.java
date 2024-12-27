@@ -12,7 +12,6 @@ import com.android.wm.shell.splitscreen.SplitScreen;
 import java.util.List;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaProjectionRecentsViewController implements RecentTasksAdapter.RecentTaskClickListener, TaskPreviewSizeProvider.TaskPreviewSizeListener {
     public final IActivityTaskManager activityTaskManager;
     public List lastBoundData;
@@ -22,7 +21,6 @@ public final class MediaProjectionRecentsViewController implements RecentTasksAd
     public final TaskPreviewSizeProvider taskViewSizeProvider;
     public Views views;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Views {
         public final View progress;
         public final View recentsContainer;

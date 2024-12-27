@@ -8,13 +8,11 @@ import android.provider.Settings;
 import android.util.Log;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SamsungStatusBarGrayIconHelper {
     public final Context context;
     public PhoneStatusBarViewController$onViewAttached$3 grayIconChangedCallback;
     public int homeIndicatorIconColor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -24,7 +22,6 @@ public final class SamsungStatusBarGrayIconHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingsObserver extends ContentObserver {
         public final Context context;
         public final Uri customStatusUri;

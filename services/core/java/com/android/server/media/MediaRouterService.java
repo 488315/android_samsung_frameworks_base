@@ -69,7 +69,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaRouterService extends IMediaRouterService.Stub implements Watchdog.Monitor {
     public static final /* synthetic */ int $r8$clinit = 0;
     public BluetoothDevice mActiveBluetoothDevice;
@@ -94,7 +93,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     public boolean mGlobalBluetoothA2dpOn = false;
     public boolean mForceBluetoothA2dpOn = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioPlayerActiveStateChangedListenerImpl
             implements AudioPlayerStateMonitor.OnAudioPlayerActiveStateChangedListener {
         public final
@@ -196,7 +194,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioRoutesObserverImpl extends IAudioRoutesObserver.Stub {
         public AudioRoutesObserverImpl() {}
 
@@ -243,13 +240,11 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientGroup {
         public final List mClientRecords = new ArrayList();
         public String mSelectedRouteId;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClientRecord implements IBinder.DeathRecipient {
         public boolean mActiveScan;
         public final IMediaRouterClient mClient;
@@ -293,7 +288,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaRouterServiceBroadcastReceiver extends BroadcastReceiver {
         public MediaRouterServiceBroadcastReceiver() {}
 
@@ -315,7 +309,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserHandler extends Handler
             implements RemoteDisplayProviderWatcher.Callback, RemoteDisplayProviderProxy.Callback {
         public boolean mClientStateUpdateScheduled;
@@ -332,7 +325,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         public final UserRecord mUserRecord;
         public final RemoteDisplayProviderWatcher mWatcher;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ProviderRecord {
             public RemoteDisplayState mDescriptor;
             public final RemoteDisplayProviderProxy mProvider;
@@ -468,7 +460,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RouteRecord {
             public RemoteDisplayState.RemoteDisplayInfo mDescriptor;
             public final String mDescriptorId;
@@ -1075,7 +1066,6 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserRecord {
         public final UserHandler mHandler;
         public MediaRouterClientState mRouterState;

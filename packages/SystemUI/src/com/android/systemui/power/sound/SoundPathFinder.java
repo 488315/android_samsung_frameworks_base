@@ -13,7 +13,6 @@ import com.android.settingslib.SecNotificationBlockManager$$ExternalSyntheticOut
 import com.android.systemui.PowerUiRune;
 import com.android.systemui.bixby2.controller.MWBixbyController$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SoundPathFinder {
     public static boolean checkDefaultCondition(String str) {
         return str == null || TextUtils.isEmpty(str) || "Galaxy".equals(str);

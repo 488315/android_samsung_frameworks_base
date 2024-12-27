@@ -111,7 +111,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaCarouselController implements Dumpable {
     public static final Companion Companion = new Companion(null);
     public static final PathInterpolator TRANSFORM_BEZIER = new PathInterpolator(0.68f, 0.0f, 0.0f, 1.0f);
@@ -165,7 +164,6 @@ public final class MediaCarouselController implements Dumpable {
     public final Set keysNeedRemoval = new LinkedHashSet();
     public boolean currentlyExpanded = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass1(Object obj) {
@@ -179,7 +177,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$2, reason: invalid class name */
     final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass2(Object obj) {
@@ -195,7 +192,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass3(Object obj) {
@@ -212,7 +208,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$4, reason: invalid class name */
     final /* synthetic */ class AnonymousClass4 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass4(Object obj) {
@@ -226,7 +221,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$5, reason: invalid class name */
     final /* synthetic */ class AnonymousClass5 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass5(Object obj) {
@@ -240,13 +234,11 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$8, reason: invalid class name */
     final class AnonymousClass8 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$8$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             private /* synthetic */ Object L$0;
@@ -322,7 +314,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

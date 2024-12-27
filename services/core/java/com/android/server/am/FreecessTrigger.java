@@ -12,7 +12,6 @@ import android.os.PowerManager;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.database.MARsDBHandler;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FreecessTrigger {
     public Context mContext;
     public final AnonymousClass2 mIntentReceiverForBird;
@@ -128,7 +127,6 @@ public final class FreecessTrigger {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class FreecessTriggerHolder {
         public static final FreecessTrigger INSTANCE = new FreecessTrigger();
     }

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemDesktopModeStateNotifier {
     static final int REGISTER_LIMIT = 20;
     public final Context mContext;
@@ -27,7 +26,6 @@ public final class SemDesktopModeStateNotifier {
     public final Object mInnerLock = new Object();
     public final Map mListeners = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerInfo implements IBinder.DeathRecipient {
         public final IDesktopModeListener listener;
         public final String name;

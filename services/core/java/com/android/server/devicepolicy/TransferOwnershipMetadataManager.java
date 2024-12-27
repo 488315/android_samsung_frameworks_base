@@ -8,7 +8,6 @@ import com.android.modules.utils.TypedXmlPullParser;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TransferOwnershipMetadataManager {
     static final String TAG_ADMIN_TYPE = "admin-type";
     static final String TAG_SOURCE_COMPONENT = "source-component";
@@ -16,10 +15,8 @@ public final class TransferOwnershipMetadataManager {
     static final String TAG_USER_ID = "user-id";
     public final Injector mInjector;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Metadata {
         public final String adminType;
         public final ComponentName sourceComponent;

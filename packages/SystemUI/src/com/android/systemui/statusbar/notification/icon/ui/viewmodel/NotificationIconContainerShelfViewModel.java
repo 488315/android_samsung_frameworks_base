@@ -12,19 +12,16 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationIconContainerShelfViewModel {
     public NotificationIconContainerShelfViewModel(CoroutineContext coroutineContext, NotificationIconsInteractor notificationIconsInteractor) {
         final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 combine;
         combine = FlowKt.combine(notificationIconsInteractor.activeNotificationsInteractor.topLevelRepresentativeNotifications, notificationIconsInteractor.headsUpNotificationIconInteractor.isolatedNotification, notificationIconsInteractor.keyguardViewStateRepository.areNotificationsFullyHidden, new NotificationIconsInteractor$filteredNotifSet$1(notificationIconsInteractor, (r15 & 1) != 0 ? false : false, (r15 & 2) != 0, (r15 & 4) != 0, (r15 & 8) != 0, (r15 & 16) != 0, (r15 & 32) != 0, null));
         FlowKt.distinctUntilChanged(FlowKt.buffer$default(FlowKt.flowOn(new Flow() { // from class: com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconContainerShelfViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconContainerShelfViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconContainerShelfViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

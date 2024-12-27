@@ -43,7 +43,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class Sensor {
     public final BiometricContext mBiometricContext;
     public final Context mContext;
@@ -59,7 +58,6 @@ public class Sensor {
     public final Map mAuthenticatorIds = new HashMap();
     public AidlSession mCurrentSession = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.Sensor$1, reason: invalid class name */
     public final class AnonymousClass1 implements UserSwitchProvider {
         public final /* synthetic */ LockoutResetDispatcher val$lockoutResetDispatcher;

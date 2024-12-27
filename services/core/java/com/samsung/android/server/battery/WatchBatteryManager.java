@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WatchBatteryManager {
     public ScreenOffAlarmListener mAlarmListener;
     public AlarmManager mAlarmManager;
@@ -33,7 +32,6 @@ public final class WatchBatteryManager {
     public int mSyncState;
     public HashMap mWatchPackageMap;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOffAlarmListener implements AlarmManager.OnAlarmListener {
         public ScreenOffAlarmListener() {}
 

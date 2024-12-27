@@ -8,7 +8,6 @@ import com.samsung.android.server.packagefeature.PackageFeatureUserChange;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChangePersister;
 import com.samsung.android.server.packagefeature.util.PackageSpecialManagementList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiTaskingAppCompatOrientationOverrides {
     public static final boolean SUPPORTS_DEFAULT_ENABLED = CoreRune.IS_TABLET_DEVICE;
     public PackageSpecialManagementList mDefaultDisabledList;

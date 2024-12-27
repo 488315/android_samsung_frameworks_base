@@ -23,7 +23,6 @@ import com.android.wm.shell.common.HandlerExecutor;
 import java.util.Optional;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationClicker implements View.OnClickListener {
     public final Optional mBubblesOptional;
     public final NotificationClickerLogger mLogger;
@@ -31,14 +30,12 @@ public final class NotificationClicker implements View.OnClickListener {
     public final AnonymousClass1 mOnDragSuccessListener;
     public final PowerInteractor mPowerInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.NotificationClicker$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Builder {
         public final NotificationClickerLogger mLogger;
         public final PowerInteractor mPowerInteractor;

@@ -57,7 +57,6 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class BootReceiver extends BroadcastReceiver {
     public static final int LASTK_LOG_SIZE;
     public static final String[] LAST_KMSG_FILES;
@@ -85,7 +84,6 @@ public class BootReceiver extends BroadcastReceiver {
     public SaveLastkmsg saveLastkmsg = null;
     public SemHqmManager mSemHqmManager = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BootReceiver$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -95,7 +93,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BootReceiver$2, reason: invalid class name */
     public final class AnonymousClass2 implements FileFilter {
         @Override // java.io.FileFilter
@@ -104,7 +101,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.BootReceiver$4, reason: invalid class name */
     public final class AnonymousClass4 implements MessageQueue.OnFileDescriptorEventListener {
         public byte[] mTraceBuffer;
@@ -126,7 +122,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Dump {
         public final String dumpInFix;
         public final List fileList;
@@ -139,7 +134,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResetReasonFactory {
         public static ResetReasonFactory instance;
 
@@ -166,7 +160,6 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveLastkmsg extends Thread {
         public FileInputStream fin = null;
         public FileOutputStream fout = null;

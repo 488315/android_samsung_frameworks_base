@@ -2,11 +2,9 @@ package com.android.server.hdmi;
 
 import com.android.internal.util.FrameworkStatsLog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class HdmiCecAtomWriter {
     protected static final int FEATURE_ABORT_OPCODE_UNKNOWN = 256;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MessageReportedSpecialArgs {
         public int mUserControlPressedCommand = 0;
         public int mFeatureAbortOpcode = 256;

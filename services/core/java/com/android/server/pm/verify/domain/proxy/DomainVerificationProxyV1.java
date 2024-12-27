@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DomainVerificationProxyV1 implements DomainVerificationProxy {
     public final DomainVerificationCollector mCollector;
     public final DomainVerificationConnection mConnection;
@@ -40,7 +39,6 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
     public final ArrayMap mRequests = new ArrayMap();
     public int mVerificationToken = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Response {
         public final int callingUid;
         public final List failedDomains;

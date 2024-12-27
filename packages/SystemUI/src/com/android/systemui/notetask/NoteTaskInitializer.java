@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskInitializer {
     public static final /* synthetic */ int $r8$clinit = 0;
     public static final long LONG_PRESS_TIMEOUT;
@@ -26,7 +25,6 @@ public final class NoteTaskInitializer {
     public final NoteTaskInitializer$callbacks$1 callbacks = new NoteTaskInitializer$callbacks$1(this);
     public long lastStylusButtonTailUpEventTime = -MULTI_PRESS_TIMEOUT;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

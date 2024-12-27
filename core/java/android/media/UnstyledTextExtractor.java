@@ -2,7 +2,6 @@ package android.media;
 
 import java.util.Vector;
 
-/* compiled from: WebVttRenderer.java */
 class UnstyledTextExtractor implements Tokenizer.OnTokenListener {
     long mLastTimestamp;
     StringBuilder mLine = new StringBuilder();

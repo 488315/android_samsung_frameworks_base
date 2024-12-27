@@ -10,7 +10,6 @@ import android.view.InputMonitor;
 import android.view.MotionEvent;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TestInputMonitor {
     public static final String tag;
     public final Context mContext;
@@ -19,7 +18,6 @@ public final class TestInputMonitor {
     public InputMonitor mInputMonitor;
     public TestInputEventReceiver mTestInputEventReceiver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -29,11 +27,9 @@ public final class TestInputMonitor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface EventHandler {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TestInputEventReceiver extends InputEventReceiver {
         public final EventHandler eventHandler;
 

@@ -137,7 +137,6 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NavigationBar extends ViewController implements CommandQueue.Callbacks {
     public final AccessibilityManager mAccessibilityManager;
     public int mAppearance;
@@ -240,14 +239,12 @@ public final class NavigationBar extends ViewController implements CommandQueue.
     public final AnonymousClass7 mWakefulnessObserver;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.NavigationBar$10, reason: invalid class name */
     public final class AnonymousClass10 implements RegionSamplingHelper.SamplingCallback {
         public AnonymousClass10() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.NavigationBar$6, reason: invalid class name */
     public final class AnonymousClass6 {
         public boolean mHasBlurs;
@@ -256,7 +253,6 @@ public final class NavigationBar extends ViewController implements CommandQueue.
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum NavBarActionEvent implements UiEventLogger.UiEventEnum {
         NAVBAR_ASSIST_LONGPRESS(550);
 

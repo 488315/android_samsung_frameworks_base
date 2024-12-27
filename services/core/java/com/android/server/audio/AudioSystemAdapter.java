@@ -21,7 +21,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AudioSystemAdapter
         implements AudioSystem.RoutingUpdateCallback, AudioSystem.VolumeRangeInitRequestCallback {
     public static OnRoutingUpdatedListener sRoutingListener;
@@ -37,12 +36,10 @@ public final class AudioSystemAdapter
     public final ArrayMap mRegisteredAttributesMap = new ArrayMap();
     public final RemoteCallbackList mDevicesForAttributesCallbacks = new RemoteCallbackList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnRoutingUpdatedListener {
         void onRoutingUpdatedFromNative();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnVolRangeInitRequestListener {
         void onVolumeRangeInitRequestFromNative();
     }

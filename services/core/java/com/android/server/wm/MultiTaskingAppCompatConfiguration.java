@@ -10,12 +10,10 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.android.server.wm.WindowManagerService;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class MultiTaskingAppCompatConfiguration {
     public static final boolean BLUR_SUPPORTED = CoreRune.FW_WINDOW_BLUR_SUPPORTED;
     public final AppCompatConfiguration mAppCompatConfiguration;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BlackLetterboxConfig extends MultiTaskingAppCompatConfiguration {
         public static final Color BLACK_COLOR = Color.valueOf(-16777216);
         public final DisplayContent mDisplay;
@@ -69,7 +67,6 @@ public class MultiTaskingAppCompatConfiguration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlurWallpaperLetterboxConfig extends BlackLetterboxConfig {
         public SemBlurInfo.ColorCurve mBlurColorCurve;
         public int mBlurRadiusPx;
@@ -168,7 +165,6 @@ public class MultiTaskingAppCompatConfiguration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public @interface Preset {
         public static final int DEFAULT;
 
@@ -177,7 +173,6 @@ public class MultiTaskingAppCompatConfiguration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PresetManager {
         public final MultiTaskingAppCompatConfiguration mDeviceConfig;
         public int mPreset = Preset.DEFAULT;

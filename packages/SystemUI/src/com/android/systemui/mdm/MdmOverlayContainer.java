@@ -13,7 +13,6 @@ import com.samsung.android.knox.lockscreen.LockscreenOverlay;
 import com.samsung.android.knox.lockscreen.LockscreenOverlayView;
 import dagger.Lazy;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MdmOverlayContainer {
     public final Context mContext;
     public LockscreenOverlay mLockscreenOverlay;

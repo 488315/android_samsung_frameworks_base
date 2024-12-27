@@ -17,7 +17,6 @@ import com.android.server.am.mars.filter.filter.AllowListFilter;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsDBManager {
     public Context mContext;
     public Context mCurrentContext;
@@ -36,12 +35,10 @@ public final class MARsDBManager {
     public int mMaxFailCountForSCPM = 3;
     public boolean mIsBigDataRestrictionColumnExist = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsDBManagerHolder {
         public static final MARsDBManager INSTANCE = new MARsDBManager();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SmartManagerFASObserver extends ContentObserver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ MARsDBManager this$0;

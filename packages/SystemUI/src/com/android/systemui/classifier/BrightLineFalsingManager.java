@@ -29,7 +29,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BrightLineFalsingManager implements FalsingManager {
     public static final boolean DEBUG = Log.isLoggable("FalsingManager", 3);
     public static final Queue RECENT_INFO_LOG = new ArrayDeque(41);
@@ -55,28 +54,24 @@ public final class BrightLineFalsingManager implements FalsingManager {
     public final SingleTapClassifier mSingleTapClassifier;
     public final boolean mTestHarness;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DebugSwipeRecord {
         public final int mInteractionType;
         public final boolean mIsFalse;
@@ -89,7 +84,6 @@ public final class BrightLineFalsingManager implements FalsingManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class XYDt {
         public final int mDT;
         public final int mX;

@@ -77,7 +77,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentService extends IContentService.Stub {
     public static final BinderDeathDispatcher sObserverDeathDispatcher = new BinderDeathDispatcher();
     public static final ArraySet sObserverLeakDetectedUid = new ArraySet(0);
@@ -90,7 +89,6 @@ public final class ContentService extends IContentService.Stub {
     public final Object mSyncManagerLock = new Object();
     public final SparseArray mCache = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public ContentService mService;
 
@@ -173,11 +171,9 @@ public final class ContentService extends IContentService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ObserverCollector {
         public final ArrayMap collected = new ArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Key {
             public final int flags;
             public final IContentObserver observer;
@@ -231,13 +227,11 @@ public final class ContentService extends IContentService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ObserverNode {
         public final String mName;
         public final ArrayList mChildren = new ArrayList();
         public final ArrayList mObservers = new ArrayList();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ObserverEntry implements IBinder.DeathRecipient {
             public final boolean noDelay;
             public final boolean notifyForDescendants;

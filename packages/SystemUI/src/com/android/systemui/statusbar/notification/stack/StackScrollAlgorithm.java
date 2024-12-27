@@ -17,7 +17,6 @@ import com.android.systemui.statusbar.notification.row.NotificationBackgroundVie
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StackScrollAlgorithm {
     public boolean mClipNotificationScrollToTop;
     public int mCollapsedSize;
@@ -43,15 +42,12 @@ public final class StackScrollAlgorithm {
     public float mOverExpansionAmount = 0.0f;
     public boolean mOngoingGap = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface BypassController {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SectionProvider {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StackScrollAlgorithmState {
         public ExpandableView firstViewInShelf;
         public float mCurrentExpandedYPosition;

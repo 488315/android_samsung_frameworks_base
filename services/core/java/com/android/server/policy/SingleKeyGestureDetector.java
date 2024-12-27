@@ -20,7 +20,6 @@ import java.lang.runtime.ObjectMethods;
 import java.util.ArrayList;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SingleKeyGestureDetector {
     public static final Set KEYCODE_KEY_DISPATCHING_ALLOWLIST;
     public static final long MULTI_PRESS_TIMEOUT;
@@ -43,7 +42,6 @@ public final class SingleKeyGestureDetector {
     public boolean mBeganFromNonInteractive = false;
     public boolean mBeganFromDefaultDisplayOn = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HandleLongPressInfo {
         public int mKeyCode = 0;
         public final ArrayList mTypeList = new ArrayList(2);
@@ -62,7 +60,6 @@ public final class SingleKeyGestureDetector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyHandler extends Handler {
         public KeyHandler(Looper looper) {
             super(looper);
@@ -161,7 +158,6 @@ public final class SingleKeyGestureDetector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MessageObject extends Record {
         public final SingleKeyRule activeRule;
         public final int displayId;
@@ -250,7 +246,6 @@ public final class SingleKeyGestureDetector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class SingleKeyRule {
         public final int mKeyCode;
         public boolean mIsKeyLongPressed = false;

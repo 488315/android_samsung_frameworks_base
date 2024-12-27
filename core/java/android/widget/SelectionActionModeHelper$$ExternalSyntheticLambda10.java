@@ -2,7 +2,6 @@ package android.widget;
 
 import java.util.function.Supplier;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class SelectionActionModeHelper$$ExternalSyntheticLambda10
         implements Supplier {
     public final /* synthetic */ TextView f$0;

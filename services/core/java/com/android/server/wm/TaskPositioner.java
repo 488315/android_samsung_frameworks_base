@@ -10,7 +10,6 @@ import android.view.InputWindowHandle;
 
 import com.android.internal.policy.TaskResizingAlgorithm;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TaskPositioner implements IBinder.DeathRecipient {
     public static AnonymousClass1 sFactory;
     public IBinder mClientCallback;
@@ -35,7 +34,6 @@ public final class TaskPositioner implements IBinder.DeathRecipient {
     public final Point mMaxVisibleSize = new Point();
     public int mCtrlType = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.TaskPositioner$1, reason: invalid class name */
     public final class AnonymousClass1 {}
 

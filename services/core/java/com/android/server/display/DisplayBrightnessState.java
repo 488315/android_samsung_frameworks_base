@@ -7,7 +7,6 @@ import com.android.server.display.brightness.BrightnessReason;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayBrightnessState {
     public final float mBrightness;
     public final int mBrightnessAdjustmentFlag;
@@ -23,7 +22,6 @@ public final class DisplayBrightnessState {
     public final boolean mShouldUpdateScreenBrightnessSetting;
     public final boolean mShouldUseAutoBrightness;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public float mBrightness;
         public BrightnessEvent mBrightnessEvent;

@@ -15,7 +15,6 @@ import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarDemoMode extends ViewController implements DemoMode {
     public final QSClockIndicatorView mClockView;
     public final DemoModeController mDemoModeController;

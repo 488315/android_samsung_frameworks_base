@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowMagnificationGestureHandler extends MagnificationGestureHandler {
     public static final boolean DEBUG_DETECTING;
     public static final boolean DEBUG_STATE_TRANSITIONS;
@@ -44,7 +43,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
     public long mTripleTapAndHoldStartedTime;
     final ViewportDraggingState mViewportDraggingState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelegatingState implements State {
         public final MotionEventDispatcherDelegate mMotionEventDispatcherDelegate;
 
@@ -65,7 +63,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DetectingState implements State {
         public final MagnificationGesturesObserver mGesturesObserver;
 
@@ -159,7 +156,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PanningScalingGestureState implements State {
         public final PanningScalingHandler mPanningScalingHandler;
 
@@ -212,7 +208,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface State {
         default void onEnter() {}
 
@@ -221,7 +216,6 @@ public final class WindowMagnificationGestureHandler extends MagnificationGestur
         void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ViewportDraggingState implements State {
         public boolean mEnabledBeforeDrag;
         public float mLastX = Float.NaN;

@@ -57,7 +57,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SliceManagerService extends ISliceManager.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AppOpsManager mAppOps;
@@ -74,7 +73,6 @@ public final class SliceManagerService extends ISliceManager.Stub {
     public final SparseArray mHomeLookup = new SparseArray();
     public String mCachedDefaultHome = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public SliceManagerService mService;
 
@@ -126,7 +124,6 @@ public final class SliceManagerService extends ISliceManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageMatchingCache {
         public String mCurrentPkg;
         public final Supplier mPkgSource;
@@ -136,7 +133,6 @@ public final class SliceManagerService extends ISliceManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RoleObserver implements OnRoleHoldersChangedListener {
         public final Executor mExecutor;
 

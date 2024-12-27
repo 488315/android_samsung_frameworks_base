@@ -24,7 +24,6 @@ import com.android.server.location.gnss.hal.GnssNative;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallbacks {
     public final ConnectivityManager mConnectivityManager;
     public final Context mContext;
@@ -114,7 +113,6 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
                 public final void onProviderEnabled(String str) {}
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LppeWlanScanListener implements WifiScanner.ScanListener {
         public LppeWlanScanListener() {}
 
@@ -230,7 +228,6 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
         public final void onSuccess() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UBPSensorEventListener implements SensorEventListener {
         public UBPSensorEventListener() {}
 

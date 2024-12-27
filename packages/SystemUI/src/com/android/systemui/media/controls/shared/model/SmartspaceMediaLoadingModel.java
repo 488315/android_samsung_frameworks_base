@@ -3,10 +3,8 @@ package com.android.systemui.media.controls.shared.model;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SmartspaceMediaLoadingModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Loaded extends SmartspaceMediaLoadingModel {
         public final boolean isPrioritized;
         public final String key;
@@ -46,7 +44,6 @@ public abstract class SmartspaceMediaLoadingModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Removed extends SmartspaceMediaLoadingModel {
         public final boolean immediatelyUpdateUi;
         public final String key;

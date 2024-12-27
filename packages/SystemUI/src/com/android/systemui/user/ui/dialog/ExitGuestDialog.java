@@ -8,7 +8,6 @@ import com.android.systemui.animation.DialogTransitionAnimator;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ExitGuestDialog extends SystemUIDialog {
     public final DialogTransitionAnimator dialogTransitionAnimator;
     public final FalsingManager falsingManager;
@@ -17,7 +16,6 @@ public final class ExitGuestDialog extends SystemUIDialog {
     public final OnExitGuestUserListener onExitGuestUserListener;
     public final int targetUserId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnExitGuestUserListener {
     }
 

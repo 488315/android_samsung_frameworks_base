@@ -36,7 +36,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenCustomizerController extends ViewController implements SubscreenQSControllerContract$BaseViewController {
     public final Context mContext;
     public boolean mDragStart;
@@ -250,7 +249,6 @@ public final class SubscreenCustomizerController extends ViewController implemen
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qp.customize.SubscreenCustomizerController$2, reason: invalid class name */
     public final class AnonymousClass2 implements Animator.AnimatorListener {
         public final /* synthetic */ View val$view;

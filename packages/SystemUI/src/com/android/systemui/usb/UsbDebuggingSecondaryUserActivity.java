@@ -17,12 +17,10 @@ import com.android.internal.app.AlertController;
 import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class UsbDebuggingSecondaryUserActivity extends AlertActivity implements DialogInterface.OnClickListener {
     public final BroadcastDispatcher mBroadcastDispatcher;
     public UsbDisconnectedReceiver mDisconnectedReceiver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UsbDisconnectedReceiver extends BroadcastReceiver {
         public final Activity mActivity;
 

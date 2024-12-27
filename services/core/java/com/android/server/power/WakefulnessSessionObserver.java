@@ -10,7 +10,6 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.SparseArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WakefulnessSessionObserver {
     protected static final int OFF_REASON_POWER_BUTTON = 2;
     protected static final int OVERRIDE_OUTCOME_CANCEL_POWER_BUTTON = 5;
@@ -25,13 +24,10 @@ public final class WakefulnessSessionObserver {
     protected final SparseArray mPowerGroups = new SparseArray();
     public final Object mLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchObserver extends SynchronousUserSwitchObserver {
         public UserSwitchObserver() {}
 
@@ -42,10 +38,8 @@ public final class WakefulnessSessionObserver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WakefulnessSessionFrameworkStatsLogger {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class WakefulnessSessionPowerGroup {
         public int mCurrentWakefulness;
         public long mInteractiveStateOnStartTimestamp;

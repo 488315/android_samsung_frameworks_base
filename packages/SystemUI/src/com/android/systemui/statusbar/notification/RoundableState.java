@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RoundableState {
     public static final Companion Companion = new Companion(null);
     public static final AnimationProperties DURATION;
@@ -24,7 +23,6 @@ public final class RoundableState {
     public float topRoundness;
     public final Map topRoundnessMap;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

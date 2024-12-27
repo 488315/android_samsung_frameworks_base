@@ -15,7 +15,6 @@ import com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SeekBarObserver implements Observer {
     public static final int RESET_ANIMATION_DURATION_MS;
     public static final int RESET_ANIMATION_THRESHOLD_MS;
@@ -29,7 +28,6 @@ public final class SeekBarObserver implements Observer {
     public final TraceStateLogger listeningStateLogger = new TraceStateLogger("SeekBarObserver#listening", false, false, false, 14, null);
     public boolean animationEnabled = true;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

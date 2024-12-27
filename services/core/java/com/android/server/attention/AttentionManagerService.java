@@ -43,7 +43,6 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AttentionManagerService extends SystemService {
     protected static final int ATTENTION_CACHE_BUFFER_SIZE = 5;
     static final long DEFAULT_STALE_AFTER_MILLIS = 1000;
@@ -67,7 +66,6 @@ public final class AttentionManagerService extends SystemService {
     public CountDownLatch mServiceBindingLatch;
     long mStaleAfterMillis;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class AttentionCheck {
         public final AttentionManagerInternal.AttentionCallbackInternal mCallbackInternal;
         public final AnonymousClass1 mIAttentionCallback;
@@ -132,7 +130,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttentionCheckCache {
         public final long mLastComputed;
         public final int mResult;
@@ -145,7 +142,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttentionCheckCacheBuffer {
         public final AttentionCheckCache[] mQueue = new AttentionCheckCache[5];
         public int mStartIndex = 0;
@@ -182,7 +178,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class AttentionHandler extends Handler {
         public AttentionHandler() {
             super(Looper.myLooper());
@@ -207,12 +202,10 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttentionManagerServiceShellCommand extends ShellCommand {
         public final TestableAttentionCallbackInternal mTestableAttentionCallback;
         public final TestableProximityUpdateCallbackInternal mTestableProximityUpdateCallback;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class TestableAttentionCallbackInternal
                 extends AttentionManagerInternal.AttentionCallbackInternal {
             public int mLastCallbackCode;
@@ -226,7 +219,6 @@ public final class AttentionManagerService extends SystemService {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class TestableProximityUpdateCallbackInternal
                 implements AttentionManagerInternal.ProximityUpdateCallbackInternal {
             public double mLastCallbackCode;
@@ -488,7 +480,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttentionServiceConnection implements ServiceConnection {
         public AttentionServiceConnection() {}
 
@@ -529,7 +520,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends Binder {
         public final AttentionManagerServiceShellCommand mAttentionManagerServiceShellCommand;
 
@@ -637,7 +627,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends AttentionManagerInternal {
         public LocalService() {}
 
@@ -674,7 +663,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ProximityUpdate {
         public final AttentionManagerInternal.ProximityUpdateCallbackInternal mCallbackInternal;
         public final AnonymousClass1 mIProximityUpdateCallback =
@@ -752,7 +740,6 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenStateReceiver extends BroadcastReceiver {
         public ScreenStateReceiver() {}
 

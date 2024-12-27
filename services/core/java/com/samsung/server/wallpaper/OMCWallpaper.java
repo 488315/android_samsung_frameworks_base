@@ -14,7 +14,6 @@ import com.android.server.wallpaper.WallpaperManagerService;
 
 import com.samsung.android.wallpaper.Rune;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OMCWallpaper {
     public final WallpaperManagerService.SemCallback mCallback;
     public final Context mContext;
@@ -40,7 +39,6 @@ public final class OMCWallpaper {
             };
     public final SemWallpaperManagerService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OMCWallpaperUpdatedReceiver extends BroadcastReceiver {
         public OMCWallpaperUpdatedReceiver() {}
 

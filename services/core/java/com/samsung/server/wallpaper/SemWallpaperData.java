@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemWallpaperData implements Cloneable {
     public SemWallpaperColors mDlsSemColors;
     public SemWallpaperColors[] mLandscapeColors;
@@ -51,11 +50,9 @@ public final class SemWallpaperData implements Cloneable {
     public boolean mIsDesktopWallpaper = false;
     public boolean mWaitingForUnlockUser = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WallpaperHistroy implements Cloneable {
         public final ArrayList wallpaperHistoryDataList = new ArrayList();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class WallpaperHistoryData {
             public String callingPackageName;
             public String pkgName;

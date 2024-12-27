@@ -60,7 +60,6 @@ import java.util.function.Supplier;
 import vendor.samsung.hardware.light.ISehLights;
 import vendor.samsung.hardware.light.SehHwLight;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class LightsService extends SystemService {
     public static int mPrevSvcLedState;
     public static int mSvcLedColor;
@@ -105,7 +104,6 @@ public class LightsService extends SystemService {
     public String mWakeLockPath;
     public String mWakeUnlockPath;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LightImpl extends LogicalLight {
         public int mBrightnessMode;
         public int mColor;
@@ -296,11 +294,9 @@ public class LightsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LightsManagerBinderService extends ILightsManager.Stub {
         public final List mSessions;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Session implements Comparable {
             public final int mPriority;
             public final SparseArray mRequests = new SparseArray();
@@ -503,7 +499,6 @@ public class LightsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SvcLEDHandler extends Handler {
         public SvcLEDHandler(Looper looper) {
             super(looper, null, false);
@@ -522,7 +517,6 @@ public class LightsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SvcLEDReceiver extends BroadcastReceiver {
         public SvcLEDReceiver() {
         }
@@ -541,7 +535,6 @@ public class LightsService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VintfHalCache implements Supplier, IBinder.DeathRecipient {
         public final /* synthetic */ int $r8$classId;
         public Object mInstance;

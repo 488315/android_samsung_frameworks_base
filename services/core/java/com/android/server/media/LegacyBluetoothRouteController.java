@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LegacyBluetoothRouteController implements BluetoothRouteController {
     public BluetoothA2dp mA2dpProfile;
     public final AudioManager mAudioManager;
@@ -48,7 +47,6 @@ public final class LegacyBluetoothRouteController implements BluetoothRouteContr
     public final DeviceStateChangedReceiver mDeviceStateChangedReceiver =
             new DeviceStateChangedReceiver(this, 0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothProfileListener implements BluetoothProfile.ServiceListener {
         public BluetoothProfileListener() {}
 
@@ -113,14 +111,12 @@ public final class LegacyBluetoothRouteController implements BluetoothRouteContr
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothRouteInfo {
         public BluetoothDevice mBtDevice;
         public SparseBooleanArray mConnectedProfiles;
         public MediaRoute2Info mRoute;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateChangedReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ LegacyBluetoothRouteController this$0;

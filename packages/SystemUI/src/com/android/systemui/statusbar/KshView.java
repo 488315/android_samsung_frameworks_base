@@ -27,7 +27,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.model.KshData;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KshView {
     public final AccessibilityManager mA11yManager;
     public Context mContext;
@@ -54,7 +53,6 @@ public final class KshView {
     public final KshView$$ExternalSyntheticLambda0 mForceScroll = new KshView$$ExternalSyntheticLambda0(this, 0);
     public final AnonymousClass1 mHorizontalScrollListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.KshView$1, reason: invalid class name */
     public final class AnonymousClass1 extends RecyclerView.OnScrollListener {
         public AnonymousClass1() {

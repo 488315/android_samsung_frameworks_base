@@ -16,7 +16,6 @@ import com.android.systemui.coverlauncher.utils.badge.NotificationListener;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CoverLauncherRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     public ArrayList mAppList;
     public final int mAppWidgetId;
@@ -27,7 +26,6 @@ public final class CoverLauncherRemoteViewsFactory implements RemoteViewsService
     public final CoverLauncherPackageUtils mPackageUtil;
     public final CoverLauncherWidgetUtils mWidgetUtil;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

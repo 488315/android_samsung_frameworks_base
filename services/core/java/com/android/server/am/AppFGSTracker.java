@@ -40,7 +40,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppFGSTracker extends BaseAppStateDurationsTracker
         implements ActivityManagerInternal.ForegroundServiceStateListener {
     public final UidProcessMap mFGSNotificationIDs;
@@ -49,7 +48,6 @@ public final class AppFGSTracker extends BaseAppStateDurationsTracker
     public final AnonymousClass1 mProcessObserver;
     public final ArrayMap mTmpPkgDurations;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppFGSPolicy extends BaseAppStateEventsTracker.BaseAppStateEventsPolicy {
         public volatile long mBgFgsLocationThresholdMs;
         public volatile long mBgFgsLongRunningThresholdMs;
@@ -225,7 +223,6 @@ public final class AppFGSTracker extends BaseAppStateDurationsTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public final AppFGSTracker mTracker;
 
@@ -413,7 +410,6 @@ public final class AppFGSTracker extends BaseAppStateDurationsTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NotificationListener extends NotificationListenerService {
         public NotificationListener() {}
 
@@ -447,7 +443,6 @@ public final class AppFGSTracker extends BaseAppStateDurationsTracker
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageDurations extends BaseAppStateDurations {
         public static final int DEFAULT_INDEX = AppFGSTracker.foregroundServiceTypeToIndex(0);
         public int mForegroundServiceTypes;

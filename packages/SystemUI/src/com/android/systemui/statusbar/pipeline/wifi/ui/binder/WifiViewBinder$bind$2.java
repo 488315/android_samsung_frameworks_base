@@ -20,14 +20,12 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Ref$BooleanRef $isCollecting;
     final /* synthetic */ LocationBasedWifiViewModel $viewModel;
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.pipeline.wifi.ui.binder.WifiViewBinder$bind$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Ref$BooleanRef $isCollecting;
@@ -35,7 +33,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.pipeline.wifi.ui.binder.WifiViewBinder$bind$2$1$1, reason: invalid class name and collision with other inner class name */
         final class C02591 extends SuspendLambda implements Function2 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;
@@ -78,7 +75,6 @@ final class WifiViewBinder$bind$2 extends SuspendLambda implements Function3 {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.pipeline.wifi.ui.binder.WifiViewBinder$bind$2$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ LocationBasedWifiViewModel $viewModel;

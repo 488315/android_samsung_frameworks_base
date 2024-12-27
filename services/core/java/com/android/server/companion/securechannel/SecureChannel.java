@@ -36,7 +36,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SecureChannel {
     public static final boolean DEBUG = Build.IS_DEBUGGABLE;
     public String mAlias;
@@ -54,10 +53,8 @@ public final class SecureChannel {
     public int mVerificationResult;
     public final AttestationVerifier mVerifier;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum MessageType {
         HANDSHAKE_INIT("HANDSHAKE_INIT"),
         HANDSHAKE_FINISH("HANDSHAKE_FINISH"),

@@ -70,7 +70,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CompletableDeferred;
 import kotlinx.coroutines.CompletableDeferredImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EditWidgetsActivity extends ComponentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ActivityResultRegistry.AnonymousClass2 addWidgetActivityLauncher;
@@ -82,7 +81,6 @@ public final class EditWidgetsActivity extends ComponentActivity {
     public final WidgetConfigurationController.Factory widgetConfiguratorFactory;
     public final IWindowManager windowManagerService;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

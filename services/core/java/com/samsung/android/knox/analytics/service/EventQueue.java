@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EventQueue {
     public static final String API_USAGE_FEATURE_NAME = "API_USAGE";
     public static final String API_USAGE_GET_KEY = "isGetterApi";
@@ -59,7 +58,6 @@ public final class EventQueue {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventHandler extends Handler {
         public EventHandler(Looper looper) {
             super(looper);

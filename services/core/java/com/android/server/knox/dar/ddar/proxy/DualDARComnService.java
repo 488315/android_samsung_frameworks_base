@@ -43,7 +43,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DualDARComnService extends IProxyService.Stub implements EnterpriseServiceCallback {
     public final Handler mBackgroundHandler;
     public final ProxyAgentBindingChecker mBindingChecker;
@@ -58,7 +57,6 @@ public final class DualDARComnService extends IProxyService.Stub implements Ente
     public final HashMap mProxyAgentWrapperMap = new HashMap();
     public IDualDARPolicy mDualDARPolicyService = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends KnoxProxyManagerInternal {
         public LocalService() {
         }
@@ -90,7 +88,6 @@ public final class DualDARComnService extends IProxyService.Stub implements Ente
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProxyAgentBindingChecker {
         public final Object mCheckerLock = new Object();
         public final Handler mHandler;

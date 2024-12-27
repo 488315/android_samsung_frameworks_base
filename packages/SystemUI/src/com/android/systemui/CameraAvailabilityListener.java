@@ -25,7 +25,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CameraAvailabilityListener {
     public static final Factory Factory = new Factory(null);
     public CameraProtectionInfo activeProtectionInfo;
@@ -40,7 +39,6 @@ public final class CameraAvailabilityListener {
     public final Set unavailablePhysicalCameras = new LinkedHashSet();
     public final List listeners = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         private Factory() {
         }
@@ -50,7 +48,6 @@ public final class CameraAvailabilityListener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OpenCameraInfo {
         public final String logicalCameraId;
         public final String packageId;

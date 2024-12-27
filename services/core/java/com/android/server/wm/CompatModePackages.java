@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CompatModePackages {
     public final AtomicFile mFile;
     public final CompatHandler mHandler;
@@ -41,7 +40,6 @@ public final class CompatModePackages {
     public final SparseBooleanArray mLegacyScreenCompatPackages = new SparseBooleanArray();
     public final SparseArray mProviders = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CompatHandler extends Handler {
         public CompatHandler(Looper looper) {
             super(looper, null, true);

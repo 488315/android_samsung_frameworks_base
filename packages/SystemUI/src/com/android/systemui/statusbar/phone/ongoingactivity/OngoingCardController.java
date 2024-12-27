@@ -63,7 +63,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OngoingCardController implements View.OnTouchListener, IOngoingObserver, ConfigurationController.ConfigurationListener {
     public final ActivityStarter activityStarter;
     public final BroadcastDispatcher broadcastDispatcher;
@@ -86,14 +85,12 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     public final StatusBarWindowStateController statusBarWindowStateController;
     public final OngoingCardController$statusBarWindowStateListener$1 statusBarWindowStateListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BackKeyConsumerViewGroup extends FrameLayout {
         public BackKeyConsumerViewGroup(Context context) {
             super(context);
@@ -120,7 +117,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnStateEventListener {
     }
 

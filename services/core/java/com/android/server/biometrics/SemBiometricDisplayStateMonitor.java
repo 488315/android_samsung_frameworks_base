@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemBiometricDisplayStateMonitor
         implements DisplayManagerInternal.DisplayStateListener,
                 DisplayManagerInternal.DisplayBrightnessListener {
@@ -29,7 +28,6 @@ public final class SemBiometricDisplayStateMonitor
     public int mLogicalDisplayState;
     public int mPhysicalDisplayState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DisplayStateCallback {
         default void onDisplayOff() {}
 
@@ -40,7 +38,6 @@ public final class SemBiometricDisplayStateMonitor
         default void onStartDisplayState(int i, int i2, int i3) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class InstanceHolder {
         public static final SemBiometricDisplayStateMonitor INSTANCE =
                 new SemBiometricDisplayStateMonitor();

@@ -8,14 +8,12 @@ import com.android.systemui.R;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SamsungAppShortcutsEnum {
     public static final /* synthetic */ SamsungAppShortcutsEnum[] $VALUES = {new AnonymousClass1(), new AnonymousClass2(), new AnonymousClass3(), new AnonymousClass4(), new AnonymousClass5(), new AnonymousClass6(), new AnonymousClass7(), new AnonymousClass8(), new AnonymousClass9(), new AnonymousClass10(), new AnonymousClass11(), new AnonymousClass12(), new AnonymousClass13(), new AnonymousClass14(), new AnonymousClass15(), new AnonymousClass16()};
 
     /* JADX INFO: Fake field, exist only in values array */
     SamsungAppShortcutsEnum EF2;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$1, reason: invalid class name */
     enum AnonymousClass1 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass1() {
@@ -33,7 +31,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$10, reason: invalid class name */
     enum AnonymousClass10 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass10() {
@@ -51,7 +48,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$11, reason: invalid class name */
     enum AnonymousClass11 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass11() {
@@ -69,7 +65,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$12, reason: invalid class name */
     enum AnonymousClass12 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass12() {
@@ -87,7 +82,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$13, reason: invalid class name */
     enum AnonymousClass13 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass13() {
@@ -105,7 +99,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$14, reason: invalid class name */
     enum AnonymousClass14 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass14() {
@@ -123,7 +116,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$15, reason: invalid class name */
     enum AnonymousClass15 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass15() {
@@ -140,7 +132,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$16, reason: invalid class name */
     enum AnonymousClass16 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass16() {
@@ -158,7 +149,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$2, reason: invalid class name */
     enum AnonymousClass2 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass2() {
@@ -176,7 +166,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$3, reason: invalid class name */
     enum AnonymousClass3 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass3() {
@@ -194,7 +183,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$4, reason: invalid class name */
     enum AnonymousClass4 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass4() {
@@ -212,7 +200,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$5, reason: invalid class name */
     enum AnonymousClass5 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass5() {
@@ -230,7 +217,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$6, reason: invalid class name */
     enum AnonymousClass6 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass6() {
@@ -248,7 +234,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$7, reason: invalid class name */
     enum AnonymousClass7 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass7() {
@@ -266,7 +251,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$8, reason: invalid class name */
     enum AnonymousClass8 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass8() {
@@ -284,7 +268,6 @@ public abstract class SamsungAppShortcutsEnum {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.model.SamsungAppShortcutsEnum$9, reason: invalid class name */
     enum AnonymousClass9 extends SamsungAppShortcutsEnum {
         public /* synthetic */ AnonymousClass9() {

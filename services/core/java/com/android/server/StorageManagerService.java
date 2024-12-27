@@ -155,7 +155,6 @@ import libcore.io.IoUtils;
 import libcore.util.EmptyArray;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StorageManagerService extends IStorageManager.Stub implements Watchdog.Monitor, ActivityTaskManagerInternal.ScreenObserver {
     public static String sMediaStoreAuthorityProcessName;
     public static StorageManagerService sSelf;
@@ -227,7 +226,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
     public volatile boolean mNeedGC = true;
     public final Object mLock = LockGuard.installNewLock(4, false);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.StorageManagerService$11, reason: invalid class name */
     public final class AnonymousClass11 extends IVoldTaskListener.Stub {
         public final /* synthetic */ int $r8$classId;
@@ -280,7 +278,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.StorageManagerService$15, reason: invalid class name */
     public final class AnonymousClass15 extends IVoldTaskListener.Stub {
         public final /* synthetic */ int $r8$classId;
@@ -327,7 +324,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.StorageManagerService$5, reason: invalid class name */
     public final class AnonymousClass5 implements IBinder.DeathRecipient {
         public final /* synthetic */ int $r8$classId;
@@ -355,7 +351,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.StorageManagerService$9, reason: invalid class name */
     public final class AnonymousClass9 extends IVoldTaskListener.Stub {
         public final /* synthetic */ int $r8$classId;
@@ -437,7 +432,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppFuseMountScope extends AppFuseBridge.MountScope {
         public boolean mMounted;
 
@@ -470,7 +464,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Callbacks extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final /* synthetic */ int $r8$classId;
@@ -572,7 +565,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalStorageServiceAnrController implements AnrController {
         public ExternalStorageServiceAnrController() {
         }
@@ -607,7 +599,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public StorageManagerService mStorageManagerService;
 
@@ -791,7 +782,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MountObbAction extends ObbAction {
         public final int mCallingUid;
         public final ObbInfo mObbInfo;
@@ -845,7 +835,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ObbAction {
         public final ObbState mObbState;
 
@@ -869,7 +858,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ObbException extends Exception {
         public final int status;
 
@@ -884,7 +872,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ObbState implements IBinder.DeathRecipient {
         public final String canonicalPath;
         public final int nonce;
@@ -915,7 +902,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageInstalledMap {
         public final boolean external;
         public final String id;
@@ -942,7 +928,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class StorageBadRemovalReceiver extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -954,7 +939,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StorageManagerInternalImpl extends StorageManagerInternal {
         public final List mResetListeners = new ArrayList();
         public final CopyOnWriteArraySet mCloudProviderChangeListeners = new CopyOnWriteArraySet();
@@ -1253,7 +1237,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UnmountObbAction extends ObbAction {
         public final boolean mForceUnmount;
 
@@ -1301,7 +1284,6 @@ public final class StorageManagerService extends IStorageManager.Stub implements
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WatchedUnlockedUsers {
         public int[] users;
 

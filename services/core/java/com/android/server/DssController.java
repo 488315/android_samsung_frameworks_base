@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class DssController {
     static final String TAG = "DssController";
     private static DssController sDssController;
@@ -27,7 +26,6 @@ public class DssController {
     private final HashMap mRunningPackages = new HashMap();
     private GameManagerInternal mGameManager = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DssAppDate {
         public float mScale = 1.0f;
         public int mGameSiopLevel = 0;
@@ -35,7 +33,6 @@ public class DssController {
         public int mGpuLevel = 0;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PairConfiguration {
         public final Rect mAppGlobal;
         public final Rect mAppOverride;
@@ -48,7 +45,6 @@ public class DssController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Tools {
         public static void applyDssToConfiguration(Configuration configuration, float f) {
             int i = configuration.densityDpi;

@@ -20,7 +20,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecColorSchemeTransition {
     public final SecAnimatingColorTransition bgGradientEnd;
     public final SecAnimatingColorTransition bgGradientStart;
@@ -29,7 +28,6 @@ public final class SecColorSchemeTransition {
     public boolean isGradientEnabled;
     public final SecPlayerViewHolder mediaViewHolder;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.controls.ui.SecColorSchemeTransition$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();

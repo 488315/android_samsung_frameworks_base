@@ -18,7 +18,6 @@ import com.android.systemui.plugins.clocks.ClockFaceController;
 import com.android.systemui.shared.clocks.ClockRegistry;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public View clock;
     public final ClockEventController clockEventController;
@@ -27,7 +26,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public final KeyguardStatusViewComponent.Factory keyguardStatusViewComponentFactory;
     public final ConnectedDisplayKeyguardPresentation$layoutChangeListener$1 layoutChangeListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         ConnectedDisplayKeyguardPresentation create(Display display);
     }

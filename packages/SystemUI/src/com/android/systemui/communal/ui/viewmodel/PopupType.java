@@ -2,10 +2,8 @@ package com.android.systemui.communal.ui.viewmodel;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class PopupType {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CtaTile extends PopupType {
         public static final CtaTile INSTANCE = new CtaTile();
 
@@ -14,7 +12,6 @@ public abstract class PopupType {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomizeWidgetButton extends PopupType {
         public static final CustomizeWidgetButton INSTANCE = new CustomizeWidgetButton();
 

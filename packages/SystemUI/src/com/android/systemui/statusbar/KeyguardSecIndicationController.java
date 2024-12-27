@@ -126,7 +126,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecIndicationController extends KeyguardIndicationController implements SystemUIWidgetCallback, PluginLockListener.State {
     public final AccessibilityManager mAccessibilityManager;
     public final Drawable mBatteryLightingBoltDrawable;
@@ -158,7 +157,6 @@ public final class KeyguardSecIndicationController extends KeyguardIndicationCon
     public KeyguardIndicationTextView mUpperTextView;
     public final AnonymousClass5 mWakefulnessObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.KeyguardSecIndicationController$9, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass9 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -188,7 +186,6 @@ public final class KeyguardSecIndicationController extends KeyguardIndicationCon
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class SecKeyguardCallback extends KeyguardIndicationController.BaseKeyguardCallback {
         public int mLastSuccessiveErrorMessage;
 

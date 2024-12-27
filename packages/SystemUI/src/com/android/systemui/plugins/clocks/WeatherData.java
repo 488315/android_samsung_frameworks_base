@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WeatherData {
     public static final Companion Companion = new Companion(null);
     public static final boolean DEBUG = true;
@@ -28,7 +27,6 @@ public final class WeatherData {
     private final Function1 touchAction;
     private final boolean useCelsius;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -84,7 +82,6 @@ public final class WeatherData {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WeatherStateIcon {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ WeatherStateIcon[] $VALUES;
@@ -123,7 +120,6 @@ public final class WeatherData {
         public static final WeatherStateIcon WINDY_BREEZY = new WeatherStateIcon("WINDY_BREEZY", 30, 30);
         public static final WeatherStateIcon WINTRY_MIX_RAIN_SNOW = new WeatherStateIcon("WINTRY_MIX_RAIN_SNOW", 31, 31);
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }

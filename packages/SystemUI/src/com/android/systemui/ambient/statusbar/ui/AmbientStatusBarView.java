@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class AmbientStatusBarView extends ConstraintLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public DoubleShadowTextHelper.ShadowInfo mAmbientShadowInfo;

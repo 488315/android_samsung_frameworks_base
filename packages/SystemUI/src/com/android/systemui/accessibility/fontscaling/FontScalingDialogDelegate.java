@@ -27,7 +27,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate {
     public static boolean fontSizeHasBeenChangedFromTile;
     public final DelayableExecutor backgroundDelayableExecutor;
@@ -51,7 +50,6 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
     public final long CHANGE_BY_BUTTON_DELAY_MS = 300;
     public final AtomicInteger lastProgress = new AtomicInteger(-1);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

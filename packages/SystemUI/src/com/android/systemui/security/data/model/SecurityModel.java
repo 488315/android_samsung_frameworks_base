@@ -12,7 +12,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecurityModel {
     public static final Companion Companion = new Companion(null);
     public final Drawable deviceAdminIcon;
@@ -30,7 +29,6 @@ public final class SecurityModel {
     public final String workProfileOrganizationName;
     public final String workProfileVpnName;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

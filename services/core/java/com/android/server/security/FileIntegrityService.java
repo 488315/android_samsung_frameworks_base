@@ -43,13 +43,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FileIntegrityService extends SystemService {
     public static CertificateFactory sCertFactory;
     public final BinderService mService;
     public final ArrayList mTrustedCertificates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IFileIntegrityService.Stub {
         public BinderService(Context context) {
             super(PermissionEnforcer.fromContext(context));
@@ -175,7 +173,6 @@ public final class FileIntegrityService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FileIntegrityServiceShellCommand extends ShellCommand {
         public FileIntegrityServiceShellCommand() {}
 

@@ -39,7 +39,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AdbService extends IAdbManager.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
     public AdbDebuggingManager.AdbConnectionPortPoller mConnectionPortPoller;
@@ -54,7 +53,6 @@ public final class AdbService extends IAdbManager.Stub {
     public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
     public final ArrayMap mTransports = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbConnectionPortListener implements AdbDebuggingManager.AdbConnectionPortListener {
         public AdbConnectionPortListener() {
         }
@@ -81,7 +79,6 @@ public final class AdbService extends IAdbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbManagerInternalImpl extends AdbManagerInternal {
         public AdbManagerInternalImpl() {
         }
@@ -137,7 +134,6 @@ public final class AdbService extends IAdbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdbSettingsObserver extends ContentObserver {
         public final Uri mAdbUsbUri;
         public final Uri mAdbWifiUri;
@@ -233,7 +229,6 @@ public final class AdbService extends IAdbManager.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public AdbService mAdbService;
 

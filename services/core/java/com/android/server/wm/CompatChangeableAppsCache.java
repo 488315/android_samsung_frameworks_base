@@ -6,11 +6,9 @@ import com.android.internal.util.ToBooleanFunction;
 
 import com.samsung.android.core.CompatChangeableApps;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CompatChangeableAppsCache {
     public SparseArray mAppsArray;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final CompatChangeableAppsCache sCache = new CompatChangeableAppsCache();
     }

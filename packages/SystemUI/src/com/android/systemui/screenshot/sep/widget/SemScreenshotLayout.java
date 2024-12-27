@@ -27,7 +27,6 @@ import com.android.systemui.screenshot.sep.ScreenCaptureHelper;
 import com.android.systemui.screenshot.sep.ScreenshotUtils;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SemScreenshotLayout extends FrameLayout {
     public static final PathInterpolator CUSTOM_INTERPOLATOR = new PathInterpolator(0.7f, 0.0f, 0.7f, 1.0f);
     public static final PathInterpolator SINEINOUT70 = new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f);
@@ -194,7 +193,6 @@ public class SemScreenshotLayout extends FrameLayout {
         this.TAG = "Screenshot";
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$1, reason: invalid class name */
     public final class AnonymousClass1 implements Animator.AnimatorListener {
         public AnonymousClass1() {
@@ -221,7 +219,6 @@ public class SemScreenshotLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$3, reason: invalid class name */
     public final class AnonymousClass3 implements Animation.AnimationListener {
         public AnonymousClass3() {

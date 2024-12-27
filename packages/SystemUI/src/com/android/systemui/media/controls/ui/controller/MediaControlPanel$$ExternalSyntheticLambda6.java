@@ -5,7 +5,6 @@ import com.android.systemui.media.controls.shared.model.MediaData;
 import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseController;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class MediaControlPanel$$ExternalSyntheticLambda6 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;

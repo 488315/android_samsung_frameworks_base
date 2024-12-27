@@ -13,7 +13,6 @@ import com.android.server.LocalServices;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatterySavingStats {
     public final Object mLock;
     public int mCurrentState = -1;
@@ -27,7 +26,6 @@ public final class BatterySavingStats {
     public BatteryManagerInternal mBatteryManagerInternal =
             (BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Stat {
         public int startBatteryLevel;
         public int startBatteryPercent;

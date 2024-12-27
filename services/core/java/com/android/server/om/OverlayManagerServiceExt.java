@@ -49,7 +49,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayManagerServiceExt {
     public final Context mContext;
     public final IdmapManagerWrapper mIdmapManager;
@@ -59,7 +58,6 @@ public final class OverlayManagerServiceExt {
     public final OverlayManagerSettings mSettings;
     public final UserManagerService mUserManager = UserManagerService.getInstance();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PMSHelperImpl {
         public final OverlayManagerService.PackageManagerHelperImpl packageManagerHelper;
 

@@ -20,7 +20,6 @@ import com.android.systemui.controls.controller.util.BadgeProviderImpl;
 import com.android.systemui.controls.ui.view.ControlsSpinner.SelectionItem;
 import com.android.systemui.controls.util.ControlsUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout {
     public BadgeProvider badgeProvider;
     public View.OnClickListener buttonClickCallback;
@@ -32,7 +31,6 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
     public SpinnerItemSelectionChangedCallback spinnerItemSelectedChangedCallback;
     public SpinnerTouchCallback spinnerTouchCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ItemAdapter extends ArrayAdapter {
         public final BadgeProvider badgeProvider;
         public final int dropDownLayout;
@@ -95,7 +93,6 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class SelectionItem {
         public final CharSequence appName;
         public final ComponentName componentName;
@@ -120,11 +117,9 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SpinnerItemSelectionChangedCallback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SpinnerTouchCallback {
     }
 

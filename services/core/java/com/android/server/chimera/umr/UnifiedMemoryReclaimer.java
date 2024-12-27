@@ -6,12 +6,10 @@ import android.os.SystemProperties;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class UnifiedMemoryReclaimer {
     public static final boolean MODEL_UMR_ENABLED =
             "true".equals(SystemProperties.get("ro.sys.kernelmemory.umr.enabled", "false"));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Reclaimer {
         public static final String[] CONTROL_STRINGS = {"disabled", "enabled"};
         public static final String[] MODE_STRINGS = {"default", "suppressed", "proactive"};

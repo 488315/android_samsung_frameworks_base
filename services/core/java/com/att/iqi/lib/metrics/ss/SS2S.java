@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SS2S extends Metric {
     private static final byte SERVICE_RUNNING_MASK = 1;
     public static final byte SERVICE_SHOULD_NOT_RUN = 1;
@@ -34,7 +33,6 @@ public class SS2S extends Metric {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
     public @interface IQISettings {}
 

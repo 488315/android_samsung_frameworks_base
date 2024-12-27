@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ProviderSession implements RemoteCredentialService.ProviderCallbacks {
     public final ProviderInternalCallback mCallbacks;
     public final ComponentName mComponentName;
@@ -36,7 +35,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class CredentialsSource {
         public static final /* synthetic */ CredentialsSource[] $VALUES;
         public static final CredentialsSource AUTH_ENTRY;
@@ -65,7 +63,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProviderInternalCallback {
         void onFinalErrorReceived(String str, String str2);
 
@@ -77,7 +74,6 @@ public abstract class ProviderSession implements RemoteCredentialService.Provide
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class Status {
         public static final /* synthetic */ Status[] $VALUES;
         public static final Status CANCELED;

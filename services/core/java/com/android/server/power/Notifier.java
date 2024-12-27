@@ -63,7 +63,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class Notifier {
     public static final VibrationEffect CHARGING_VIBRATION_EFFECT =
             VibrationEffect.createWaveform(
@@ -119,7 +118,6 @@ public class Notifier {
     public final DisplayManagerInternal mDisplayManagerInternal =
             (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Interactivity {
         public int changeOffReason;
         public int changeOnReason;
@@ -128,7 +126,6 @@ public class Notifier {
         public boolean isInteractive = true;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotifierHandler extends Handler {
         public NotifierHandler(Looper looper) {
             super(looper, null, true);
@@ -238,7 +235,6 @@ public class Notifier {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealInjector {}
 
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.Notifier$3] */

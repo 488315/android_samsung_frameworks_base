@@ -31,7 +31,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GenieMemoryManager {
     public static final SimpleDateFormat DATE_FORMAT;
     public static final int DEFAULT_GOOGLE_MODEL_SIZE;
@@ -49,7 +48,6 @@ public final class GenieMemoryManager {
     public SystemRepository mSystemRepository;
     public ServiceThread mTimeOutThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelEventReceiver extends BroadcastReceiver {
         public ModelEventReceiver() {}
 
@@ -89,7 +87,6 @@ public final class GenieMemoryManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReclaimerHandler extends Handler {
         public ReclaimerHandler() {
             super(GenieMemoryManager.this.mTimeOutThread.getLooper());

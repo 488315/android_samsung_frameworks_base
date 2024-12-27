@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AmbientKeyboardBacklightController
         implements DisplayManager.DisplayListener, SensorEventListener {
     public static final int HYSTERESIS_THRESHOLD = 2;
@@ -49,7 +48,6 @@ public final class AmbientKeyboardBacklightController
     public final List mAmbientKeyboardBacklightListeners = new ArrayList();
     public int mHysteresisCount = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessStep {
         public final int mBrightnessValue;
         public final int mDecreaseLuxThreshold;
@@ -74,7 +72,6 @@ public final class AmbientKeyboardBacklightController
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class HysteresisState {
         public static final /* synthetic */ HysteresisState[] $VALUES;
         public static final HysteresisState DECREASING;

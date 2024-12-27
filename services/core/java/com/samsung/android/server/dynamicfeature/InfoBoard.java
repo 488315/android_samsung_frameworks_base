@@ -6,7 +6,6 @@ import android.util.Slog;
 
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class InfoBoard {
     public static long TERM_HANDLING_FEATURE = 0;
     public static int TERM_HANDLING_TEST_FEATURE = 0;
@@ -16,7 +15,6 @@ public abstract class InfoBoard {
     public static String sExecutableBinaryType = "B";
     public static boolean sParamDirty;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BasicInfos {
         public int flexMill;
         public boolean isUT;
@@ -25,7 +23,6 @@ public abstract class InfoBoard {
         public String vid;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ParamInfos {
         public String binaryType;
         public String csc;

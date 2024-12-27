@@ -3,7 +3,6 @@ package com.android.keyguard;
 import com.android.keyguard.KeyguardSecurityContainer;
 import com.android.keyguard.KeyguardSecurityViewFlipperController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class KeyguardSecurityContainerController$$ExternalSyntheticLambda3 implements KeyguardSecurityViewFlipperController.OnViewInflatedCallback, KeyguardSecurityContainer.UserSwitcherViewMode.UserSwitcherCallback {
     public final /* synthetic */ Object f$0;
 

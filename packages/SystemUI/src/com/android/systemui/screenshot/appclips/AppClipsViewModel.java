@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.android.systemui.screenshot.ImageExporter;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AppClipsViewModel extends ViewModel {
     public final AppClipsCrossProcessHelper mAppClipsCrossProcessHelper;
     public final Executor mBgExecutor;
@@ -16,7 +15,6 @@ public final class AppClipsViewModel extends ViewModel {
     public final MutableLiveData mResultLiveData = new MutableLiveData();
     public final MutableLiveData mErrorLiveData = new MutableLiveData();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory implements ViewModelProvider.Factory {
         public final AppClipsCrossProcessHelper mAppClipsCrossProcessHelper;
         public final Executor mBgExecutor;

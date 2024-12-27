@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import javax.inject.Provider;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UserSwitchDialogController {
     public static final Intent USER_SETTINGS_INTENT;
     public final ActivityStarter activityStarter;
@@ -20,7 +19,6 @@ public final class UserSwitchDialogController {
     public final UiEventLogger uiEventLogger;
     public final Provider userDetailViewAdapterProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -30,7 +28,6 @@ public final class UserSwitchDialogController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DialogShower extends DialogInterface {
     }
 

@@ -13,17 +13,14 @@ import com.android.wm.shell.splitscreen.SplitScreenController;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShortcutKeyServiceProxy extends IShortcutService.Stub {
     public final Callbacks mCallbacks;
     public final Object mLock = new Object();
     public final H mHandler = new H(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callbacks {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public /* synthetic */ H(ShortcutKeyServiceProxy shortcutKeyServiceProxy, int i) {
             this();

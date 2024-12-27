@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardIndicationRotateTextViewController extends ViewController implements Dumpable {
     public int mCurrIndicationType;
     public CharSequence mCurrMessage;
@@ -40,7 +39,6 @@ public final class KeyguardIndicationRotateTextViewController extends ViewContro
     public final StatusBarStateController mStatusBarStateController;
     public final AnonymousClass1 mStatusBarStateListener;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShowNextIndication {
         public Runnable mCancelDelayedRunnable;
         public final KeyguardIndicationRotateTextViewController$ShowNextIndication$$ExternalSyntheticLambda0 mShowIndicationRunnable;

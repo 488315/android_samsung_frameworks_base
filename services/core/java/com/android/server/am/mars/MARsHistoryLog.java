@@ -14,18 +14,15 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsHistoryLog {
     public int mLogFileIndex;
     public MARsHistoryBuffer mMARsHistoryBuffer;
     public SaveLogThread mSaveLogThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsHistoryLogHolder {
         public static final MARsHistoryLog INSTANCE = new MARsHistoryLog();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveLogThread {
         public final /* synthetic */ MARsHistoryLog this$0 = MARsHistoryLogHolder.INSTANCE;
     }

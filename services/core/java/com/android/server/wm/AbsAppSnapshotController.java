@@ -31,7 +31,6 @@ import com.android.server.wm.utils.InsetUtils;
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AbsAppSnapshotController {
     static final int SNAPSHOT_MODE_APP_THEME = 1;
     static final int SNAPSHOT_MODE_NONE = 2;

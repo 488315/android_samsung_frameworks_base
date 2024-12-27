@@ -11,14 +11,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VirtualDeviceLog {
     public static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
     public final Context mContext;
     public final ArrayDeque mLogEntries = new ArrayDeque();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogEntry {
         public final int mDeviceId;
         public final int mOwnerUid;
@@ -70,7 +68,6 @@ public final class VirtualDeviceLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidToPackageNameCache {
         public final PackageManager mPackageManager;
         public final SparseArray mUidToPackagesCache = new SparseArray();

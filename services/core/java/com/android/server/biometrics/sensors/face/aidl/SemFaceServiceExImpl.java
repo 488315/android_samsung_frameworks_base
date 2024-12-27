@@ -63,7 +63,6 @@ import vendor.samsung.hardware.biometrics.face.ISehSession;
 
 import java.io.IOException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemFaceServiceExImpl {
     public static SemFaceServiceExImpl mSemFaceServiceExImpl;
     public AppOpsManager mAppOpsManager;
@@ -191,7 +190,6 @@ public final class SemFaceServiceExImpl {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl$2, reason: invalid class name */
     public final class AnonymousClass2 extends OrientationEventListener {
         public AnonymousClass2(Context context) {
@@ -220,7 +218,6 @@ public final class SemFaceServiceExImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl$3, reason: invalid class name */
     public final class AnonymousClass3 implements SensorEventListener {
         public boolean mIsRegisterListener = false;
@@ -253,7 +250,6 @@ public final class SemFaceServiceExImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl$4, reason: invalid class name */
     public final class AnonymousClass4 extends BroadcastReceiver {
         public AnonymousClass4() {}

@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeNavigator {
     public final ActivityStarter activityStarter;
     public final SystemUIDialogFactory dialogFactory;
@@ -30,7 +29,6 @@ public final class VolumeNavigator {
     public final VolumePanelFactory volumePanelFactory;
     public final VolumePanelGlobalStateInteractor volumePanelGlobalStateInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -63,12 +61,10 @@ public final class VolumeNavigator {
         final ReadonlyStateFlow readonlyStateFlow = volumePanelGlobalStateInteractor.repository.globalState;
         FlowKt.launchIn(FlowKt.transformLatest(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.volume.ui.navigation.VolumeNavigator$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.volume.ui.navigation.VolumeNavigator$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

@@ -16,7 +16,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AsyncRotationController extends FadeAnimationController implements Consumer {
     public final boolean mHasScreenRotationAnimation;
     public boolean mHideImmediately;
@@ -33,7 +32,6 @@ public final class AsyncRotationController extends FadeAnimationController imple
     public AsyncRotationController$$ExternalSyntheticLambda1 mTimeoutRunnable;
     public final int mTransitionOp;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Operation {
         public final int mAction;
         public SurfaceControl.Transaction mDrawTransaction;

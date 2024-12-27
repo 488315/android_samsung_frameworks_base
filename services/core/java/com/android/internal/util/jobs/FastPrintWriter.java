@@ -15,7 +15,6 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class FastPrintWriter extends PrintWriter {
     private final boolean mAutoFlush;
     private final int mBufferLen;
@@ -29,7 +28,6 @@ public class FastPrintWriter extends PrintWriter {
     private final char[] mText;
     private final Writer mWriter;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DummyWriter extends Writer {
         @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
         public final void close() {

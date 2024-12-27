@@ -20,13 +20,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ResourceMapParser {
     public static final boolean DEBUG = "eng".equals(Build.TYPE);
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ResourceType {
         public static final /* synthetic */ ResourceType[] $VALUES;
         public static final ResourceType COLOR;

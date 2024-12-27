@@ -41,7 +41,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class TaskbarDelegate implements CommandQueue.Callbacks, OverviewProxyService.OverviewProxyListener, NavigationModeController.ModeChangedListener, Dumpable {
     public int mAppearance;
     public AutoHideController mAutoHideController;
@@ -118,7 +117,6 @@ public abstract class TaskbarDelegate implements CommandQueue.Callbacks, Overvie
     };
     public final TaskbarDelegate$$ExternalSyntheticLambda0 mPipListener = new TaskbarDelegate$$ExternalSyntheticLambda0(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.TaskbarDelegate$4, reason: invalid class name */
     public final class AnonymousClass4 implements LightBarTransitionsController.DarkIntensityApplier {
         public AnonymousClass4() {

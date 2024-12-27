@@ -21,7 +21,6 @@ import com.android.server.ProfileService$1$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentProviderRecord implements ComponentName.WithComponentName {
     public final ApplicationInfo appInfo;
     public final ArrayList connections = new ArrayList();
@@ -40,7 +39,6 @@ public final class ContentProviderRecord implements ComponentName.WithComponentN
     public String stringName;
     public final int uid;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalProcessHandle implements IBinder.DeathRecipient {
         public int mAcquisitionCount;
         public AssociationState.SourceState mAssociation;

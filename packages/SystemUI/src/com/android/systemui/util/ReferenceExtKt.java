@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import kotlin.properties.ReadWriteProperty;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ReferenceExtKt {
     public static final <T> ReadWriteProperty nullableAtomicReference(final T t) {
         return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt$nullableAtomicReference$1

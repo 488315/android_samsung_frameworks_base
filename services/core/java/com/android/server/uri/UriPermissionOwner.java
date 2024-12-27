@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UriPermissionOwner {
     public ExternalToken externalToken;
     public final Object mOwner;
@@ -15,7 +14,6 @@ public final class UriPermissionOwner {
     public final UriGrantsManagerInternal mService;
     public ArraySet mWritePerms;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalToken extends Binder {
         public ExternalToken() {}
     }

@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BurnInInteractor {
     public final BurnInHelperWrapper burnInHelperWrapper;
     public final ConfigurationInteractor configurationInteractor;
@@ -46,14 +45,12 @@ public final class BurnInInteractor {
         final ChannelFlowTransformLatest transformLatest2 = FlowKt.transformLatest(configurationInteractor.onAnyConfigurationChange, new BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(null, this, i, false));
         return FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(transformLatest, new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ int $yDimenResourceId$inlined;
                 public final /* synthetic */ BurnInInteractor this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

@@ -8,13 +8,11 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceStateManagerFoldProvider implements FoldProvider {
     public final ConcurrentHashMap callbacks = new ConcurrentHashMap();
     public final Context context;
     public final DeviceStateManager deviceStateManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldStateListener extends DeviceStateManager.FoldStateListener {
         public FoldStateListener(DeviceStateManagerFoldProvider deviceStateManagerFoldProvider, Context context, final FoldProvider.FoldCallback foldCallback) {
             super(context, new Consumer() { // from class: com.android.systemui.unfold.system.DeviceStateManagerFoldProvider.FoldStateListener.1

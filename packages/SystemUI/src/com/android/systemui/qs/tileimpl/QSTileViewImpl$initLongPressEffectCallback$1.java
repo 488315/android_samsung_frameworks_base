@@ -7,7 +7,6 @@ import com.android.systemui.haptics.qs.LongPressHapticBuilder;
 import com.android.systemui.haptics.qs.QSLongPressEffect;
 import com.android.systemui.statusbar.VibratorHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSTileViewImpl$initLongPressEffectCallback$1 {
     public final /* synthetic */ QSTileViewImpl this$0;
 

@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.function.BooleanSupplier;
 import java.util.function.LongSupplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCompatOrientationOverrides {
     public final ActivityRecord mActivityRecord;
     public final OptPropFactory.OptProp mAllowDisplayOrientationOverrideOptProp;
@@ -15,7 +14,6 @@ public final class AppCompatOrientationOverrides {
     public final OptPropFactory.OptProp mIgnoreRequestedOrientationOptProp;
     public final OrientationOverridesState mOrientationOverridesState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OrientationOverridesState {
         static final int MIN_COUNT_TO_IGNORE_REQUEST_IN_LOOP = 2;
         static final int SET_ORIENTATION_REQUEST_COUNTER_TIMEOUT_MS = 1000;

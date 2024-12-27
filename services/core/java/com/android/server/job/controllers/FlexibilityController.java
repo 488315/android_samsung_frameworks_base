@@ -45,7 +45,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FlexibilityController extends StateController {
     public static final boolean DEBUG;
     static final int FLEXIBLE_CONSTRAINTS = 268435463;
@@ -77,7 +76,6 @@ public final class FlexibilityController extends StateController {
     public final int mSupportedFlexConstraints;
     public long mUnseenConstraintGracePeriodMs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.controllers.FlexibilityController$1, reason: invalid class name */
     public final class AnonymousClass1 implements PrefetchController.PrefetchChangedListener {
         public AnonymousClass1() {}
@@ -122,7 +120,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FcConfig {
         static final long DEFAULT_DEADLINE_PROXIMITY_LIMIT_MS = 900000;
         public static final SparseLongArray DEFAULT_FALLBACK_FLEXIBILITY_DEADLINES;
@@ -286,7 +283,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FcHandler extends Handler {
         public FcHandler(Looper looper) {
             super(looper);
@@ -436,7 +432,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FlexibilityAlarmQueue extends AlarmQueue {
         public FlexibilityAlarmQueue(Context context, Looper looper) {
             super(
@@ -623,7 +618,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FlexibilityTracker {
         public final ArrayList mTrackedJobs = new ArrayList();
 
@@ -692,14 +686,12 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobScoreTracker {
         public int mCachedScore;
         public long mCachedScoreExpirationTimeElapsed;
         public final JobScoreBucket[] mScoreBuckets = new JobScoreBucket[24];
         public int mScoreBucketIndex = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class JobScoreBucket {
             public int score;
             public long startTimeElapsed;
@@ -736,7 +728,6 @@ public final class FlexibilityController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpecialAppTracker {
         public DeviceIdleInternal mDeviceIdleInternal;
         public final boolean mHasFeatureTelephonySubscription;
@@ -765,7 +756,6 @@ public final class FlexibilityController extends StateController {
                     }
                 };
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LogicalIndexCarrierPrivilegesCallback
                 implements TelephonyManager.CarrierPrivilegesCallback {
             public final int logicalIndex;

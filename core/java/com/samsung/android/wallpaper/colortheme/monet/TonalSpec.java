@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: ColorScheme.java */
 final class TonalSpec {
     private final Chroma chroma;
     private final Hue hue;

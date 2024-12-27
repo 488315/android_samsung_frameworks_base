@@ -7,7 +7,6 @@ import com.samsung.android.knox.analytics.database.Contract;
 
 import java.util.Vector;
 
-/* compiled from: WebVttRenderer.java */
 class WebVttParser {
     private static final String TAG = "WebVttParser";
     private TextTrackCue mCue;
@@ -355,7 +354,6 @@ class WebVttParser {
     private String mBuffer = "";
     private Vector<String> mCueTexts = new Vector<>();
 
-    /* compiled from: WebVttRenderer.java */
     interface Phase {
         void parse(String str);
     }

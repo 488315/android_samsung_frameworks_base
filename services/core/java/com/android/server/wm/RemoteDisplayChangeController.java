@@ -13,7 +13,6 @@ import com.android.internal.protolog.ProtoLogImpl_54989576;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteDisplayChangeController {
     public final DisplayContent mDisplayContent;
     public final WindowManagerService mService;
@@ -73,7 +72,6 @@ public final class RemoteDisplayChangeController {
             };
     public final List mCallbacks = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.RemoteDisplayChangeController$1, reason: invalid class name */
     public final class AnonymousClass1 extends IDisplayChangeWindowCallback.Stub {
         public final /* synthetic */ ContinueRemoteDisplayChangeCallback val$callback;
@@ -119,7 +117,6 @@ public final class RemoteDisplayChangeController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ContinueRemoteDisplayChangeCallback {
         void onContinueRemoteDisplayChange(WindowContainerTransaction windowContainerTransaction);
     }

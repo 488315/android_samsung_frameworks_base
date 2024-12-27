@@ -138,7 +138,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PhoneWindowManagerExt {
     public static final Set KEYCODE_DEBUG_LOG_ALLOWLIST;
     public static final Set KEYCODE_KEY_COMBINATION_ALLOWLIST;
@@ -245,7 +244,6 @@ public final class PhoneWindowManagerExt {
     public final PhoneWindowManagerExt$$ExternalSyntheticLambda2 mTvModeStateDoublePressConsumer = new PhoneWindowManagerExt$$ExternalSyntheticLambda2(1, this);
     public final PhoneWindowManagerExt$$ExternalSyntheticLambda2 mDoublePressLaunchComponentConsumer = new PhoneWindowManagerExt$$ExternalSyntheticLambda2(2, this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.policy.PhoneWindowManagerExt$15, reason: invalid class name */
     public final class AnonymousClass15 extends BootProgressDialog {
         public final boolean dispatchGenericMotionEvent(MotionEvent motionEvent) {
@@ -273,7 +271,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.policy.PhoneWindowManagerExt$16, reason: invalid class name */
     public final class AnonymousClass16 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
@@ -282,7 +279,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.policy.PhoneWindowManagerExt$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -316,7 +312,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HomeKeyRule extends SingleKeyGestureDetector.SingleKeyRule {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PhoneWindowManagerExt this$0;
@@ -648,14 +643,12 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HotKey {
         public boolean isTriggered = false;
         public int keyCode = 0;
         public AlertDialog guideDialog = null;
         public final registerAppRunnable registerAppRunnable = new registerAppRunnable();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class registerAppRunnable implements Runnable {
             public registerAppRunnable() {
             }
@@ -763,7 +756,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final Context mContext;
         public final PhoneWindowManager mPhoneWindowManager;
@@ -774,7 +766,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OpeningApps extends SideKeyDoublePress.Behavior {
         /* JADX WARN: Removed duplicated region for block: B:24:0x00ac  */
         @Override // com.android.server.policy.SideKeyDoublePress.Behavior
@@ -929,7 +920,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OpeningBixby extends SideKeyDoublePress.Behavior {
         public final /* synthetic */ int $r8$classId;
 
@@ -1120,7 +1110,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PenSoundInfo {
         public String mAttachPenSoundPath;
         public String mDetachPenSoundPath;
@@ -1186,7 +1175,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyExtHandler extends Handler {
         public PolicyExtHandler() {
         }
@@ -1222,7 +1210,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RoleObserver implements OnRoleHoldersChangedListener {
         public final Executor mExecutor;
 
@@ -1243,7 +1230,6 @@ public final class PhoneWindowManagerExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public final Map mSettingsUriToCallback;
 

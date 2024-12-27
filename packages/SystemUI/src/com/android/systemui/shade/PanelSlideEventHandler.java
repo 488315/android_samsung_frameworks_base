@@ -31,7 +31,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCallback, ShadeExpansionListener, ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener {
     public static final Uri RATIO_URI;
     public boolean canScrollDownOnDown;
@@ -78,7 +77,6 @@ public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCal
     public boolean tracking;
     public final VelocityTracker velocityTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -90,7 +88,6 @@ public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCal
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction DOWN;
@@ -127,7 +124,6 @@ public final class PanelSlideEventHandler implements SettingsHelper.OnChangedCal
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

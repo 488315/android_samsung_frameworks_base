@@ -10,11 +10,9 @@ import com.android.systemui.audio.soundcraft.model.buds.BudsModel;
 import com.google.gson.Gson;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UpdateInfoRequester extends BudsPluginServiceRequester {
     public final BudsModel budsModel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

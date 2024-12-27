@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DockObserver extends SystemService {
     public int mActualDockState;
     public String mActualUsbpdIds;
@@ -55,7 +54,6 @@ public final class DockObserver extends SystemService {
     public String mUsbpdIds;
     public final PowerManager.WakeLock mWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends Binder {
         public BinderService() {
         }
@@ -123,7 +121,6 @@ public final class DockObserver extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceProvisionedObserver extends ContentObserver {
         public boolean mRegistered;
 
@@ -168,7 +165,6 @@ public final class DockObserver extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExtconStateConfig {
         public final int extraStateValue;
         public final List keyValuePairs = new ArrayList();
@@ -178,7 +174,6 @@ public final class DockObserver extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExtconStateProvider {
         public final Map mState;
 
@@ -200,7 +195,6 @@ public final class DockObserver extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogRecent {
         public int mCurrentReportLogIndex;
         public int mCurrentUeventLogIndex;

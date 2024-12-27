@@ -18,7 +18,6 @@ import com.android.systemui.wallpaper.log.WallpaperLogger;
 import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MultiPackDispatcher {
     public static int mRetryCount;
     public static int mRetryCountSub;
@@ -29,7 +28,6 @@ public final class MultiPackDispatcher {
     public final PluginLockUtils mPluginLockUtils;
     public final int mSelectedUserId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);

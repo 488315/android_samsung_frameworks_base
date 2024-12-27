@@ -58,7 +58,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LockSettingsStorage {
     public LockSettingsService.Injector.AnonymousClass1 mCallback;
     public final Context mContext;
@@ -98,13 +97,11 @@ public final class LockSettingsStorage {
     public final Object mFileWriteLock = new Object();
     public int mSKTLockState = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Cache {
         public final ArrayMap mCache = new ArrayMap();
         public final CacheKey mCacheKey = new CacheKey();
         public int mVersion = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class CacheKey {
             public String key;
             public int type;
@@ -174,7 +171,6 @@ public final class LockSettingsStorage {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DatabaseHelper extends SQLiteOpenHelper {
         public LockSettingsService.Injector.AnonymousClass1 mCallback;
 
@@ -210,7 +206,6 @@ public final class LockSettingsStorage {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PersistentData {
         public static final PersistentData NONE = new PersistentData(0, -10000, 0, null);
         public final byte[] payload;

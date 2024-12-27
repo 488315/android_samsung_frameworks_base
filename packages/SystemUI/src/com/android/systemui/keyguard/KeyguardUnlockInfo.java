@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardUnlockInfo {
     public static final boolean DEBUG;
     public static final int HISTORY_MAX;
@@ -23,7 +22,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class AuthType {
         public static final /* synthetic */ AuthType[] $VALUES;
         public static final AuthType AUTH_BIOMETRICS;
@@ -60,7 +58,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SkipBouncerReason {
         public static final /* synthetic */ SkipBouncerReason[] $VALUES;
         public static final SkipBouncerReason BIOMETRICS_UNLOCK_LOCK_STAY;
@@ -91,7 +88,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UnlockTrigger {
         public static final /* synthetic */ UnlockTrigger[] $VALUES;
         public static final UnlockTrigger TRIGGER_BIO_UNLOCK;
@@ -187,7 +183,6 @@ public final class KeyguardUnlockInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

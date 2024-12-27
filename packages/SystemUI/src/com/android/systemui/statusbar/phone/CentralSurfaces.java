@@ -17,12 +17,10 @@ import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable {
     public static final long[] CAMERA_LAUNCH_GESTURE_VIBRATION_TIMINGS = {20, 20, 20, 20, 100, 20};
     public static final int[] CAMERA_LAUNCH_GESTURE_VIBRATION_AMPLITUDES = {39, 82, 139, IKnoxCustomManager.Stub.TRANSACTION_addAutoCallNumber, 0, 127};
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyboardShortcutsMessage {
         public final int mDeviceId;
 

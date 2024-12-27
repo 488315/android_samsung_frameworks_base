@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AggregatedMobileDataStatsPuller {
     public final Handler mMobileDataStatsHandler;
     public final NetworkStatsManager mNetworkStatsManager;
@@ -26,7 +25,6 @@ public final class AggregatedMobileDataStatsPuller {
     public final Map mUidStats = new ArrayMap();
     public final SparseIntArray mUidPreviousState = new SparseIntArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MobileDataStats {
         public long mRxBytes;
         public long mRxPackets;
@@ -34,7 +32,6 @@ public final class AggregatedMobileDataStatsPuller {
         public long mTxPackets;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidProcState {
         public final int mState;
         public final int mUid;

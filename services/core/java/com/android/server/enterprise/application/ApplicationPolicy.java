@@ -165,7 +165,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ApplicationPolicy extends IApplicationPolicy.Stub implements EnterpriseServiceCallback {
     public static final List APPROVED_INSTALLERS;
     public static final HashMap AUTHORIZATION_SCOPES_MAP;
@@ -216,7 +215,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
     public final IPersonaManagerAdapter mPersonaManagerAdapter = (IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
     public final IPackageManager mIPackageManager = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.application.ApplicationPolicy$15, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass15 {
         public static final /* synthetic */ int[] $SwitchMap$android$net$NetworkInfo$State;
@@ -235,7 +233,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.application.ApplicationPolicy$4, reason: invalid class name */
     public final class AnonymousClass4 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -469,7 +466,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.application.ApplicationPolicy$6, reason: invalid class name */
     public final class AnonymousClass6 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -497,7 +493,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum AppControlStateEnum {
         /* JADX INFO: Fake field, exist only in values array */
         EF11("PKGNAME_DISABLED_LIST", "PackageNameDisabledList", "APPLICATION"),
@@ -597,7 +592,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppInfoTask implements Comparable {
         public final String mCmd;
         public final long mUsage;
@@ -616,7 +610,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApplicationNetworkStatsTracker {
         public final AnonymousClass4 connectionChangeIntentReceiver;
         public String previousNetwork = "";
@@ -625,7 +618,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         public final Hashtable networkDataUsageMapTemp = new Hashtable();
         public final NetworkDatausageHandler datausageHandler = new NetworkDatausageHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("NetworkDatausageHandlerThread").getLooper());
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class NetworkDatausageHandler extends Handler {
             public NetworkDatausageHandler(Looper looper) {
                 super(looper);
@@ -644,7 +636,6 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class TxRxData {
             public long rxByte;
             public long txByte;
@@ -870,14 +861,12 @@ public final class ApplicationPolicy extends IApplicationPolicy.Stub implements 
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstallData {
         public String mPackageName;
         public int mSessionId;
         public int mStatusCode;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LocalService extends ApplicationPolicyInternal {
         public LocalService() {
         }

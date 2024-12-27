@@ -9,7 +9,6 @@ import com.android.systemui.keyguard.shared.model.KeyguardSection;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardIndicationAreaViewModel;
 import com.android.systemui.statusbar.KeyguardIndicationController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DefaultIndicationAreaSection extends KeyguardSection {
     public final Context context;
     public final int indicationAreaViewId = R.id.keyguard_indication_area;

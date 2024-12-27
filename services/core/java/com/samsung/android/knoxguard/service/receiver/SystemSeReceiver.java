@@ -13,7 +13,6 @@ import com.samsung.android.knoxguard.service.KGEventQueue;
 import com.samsung.android.knoxguard.service.SystemIntentProcessor;
 import com.samsung.android.knoxguard.service.utils.Constants;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemSeReceiver extends BroadcastReceiver {
     public static final String INTENT_PERMISSION = "com.samsung.android.permission.RMM_INIT";
     public static final String RMM_BLINK_STOP = "com.samsung.android.rmm.blink_stop";

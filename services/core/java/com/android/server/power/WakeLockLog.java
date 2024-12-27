@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WakeLockLog {
     public final Context mContext;
     public final SimpleDateFormat mDumpsysDateFormat;
@@ -35,10 +34,8 @@ public final class WakeLockLog {
     public static final String[] REDUCED_TAG_PREFIXES = {"*job*/", "*gms_scheduler*/", "IntentOp:"};
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogEntry {
         public int flags;
         public String packageName;
@@ -119,7 +116,6 @@ public final class WakeLockLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TagData {
         public int index;
         public long lastUsedTime;
@@ -145,7 +141,6 @@ public final class WakeLockLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TagDatabase {
         public final TagData[] mArray;
         public TheLog.AnonymousClass1 mCallback;
@@ -269,7 +264,6 @@ public final class WakeLockLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TheLog {
         public final byte[] mBuffer;
         public final List mSavedAcquisitions;
@@ -282,7 +276,6 @@ public final class WakeLockLog {
         public long mLatestTime = 0;
         public long mChangeCount = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.power.WakeLockLog$TheLog$1, reason: invalid class name */
         public final class AnonymousClass1 {
             public final Object this$0;

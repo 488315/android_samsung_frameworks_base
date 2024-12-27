@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
     public static final boolean DEBUG = DebugUtils.isDebuggable("DisplayDeviceRepository");
     public final PersistentDataStore mPersistentDataStore;
@@ -24,7 +23,6 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
     public PowerManager.WakeLock mHDMIWakeLock = null;
     public boolean mNeedWakeLock = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {}
 
     public DisplayDeviceRepository(

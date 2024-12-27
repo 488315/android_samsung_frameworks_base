@@ -26,7 +26,6 @@ import java.util.Set;
 import libcore.io.IoUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersistentDataStore {
     public boolean mDirty;
     public boolean mDirtyEtc;
@@ -40,7 +39,6 @@ public final class PersistentDataStore {
     public final Map mKeyRemapping = new HashMap();
     public final Map mGamePadProfiles = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GamePadProfile {
         public int mId;
         public String mName;
@@ -66,7 +64,6 @@ public final class PersistentDataStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GamePadStick {
         public final boolean mInverseH;
         public final boolean mInverseRot;
@@ -85,14 +82,12 @@ public final class PersistentDataStore {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public final AtomicFile mAtomicFile = new AtomicFile(new File("/data/system/input-manager-state.xml"), "input-state");
         public final AtomicFile mAtomicFileEtc = new AtomicFile(new File("/data/system/input-manager-state-etc.xml"), "input-state-etc");
         public final AtomicFile mAtomicFileGamePadProfiles = new AtomicFile(new File("/data/system/input-manager-state-gamepad-profiles.xml"), "input-state-gamepad-profiles");
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputDeviceState {
         public static final String[] CALIBRATION_NAME = {"x_scale", "x_ymix", "x_offset", "y_xmix", "y_scale", "y_offset"};
         public Set mSelectedKeyboardLayouts;

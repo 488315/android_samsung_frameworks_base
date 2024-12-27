@@ -7,12 +7,10 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class TileSpec {
     public static final Companion Companion = new Companion(null);
     public final String spec;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -42,7 +40,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomTileSpec extends TileSpec {
         public final ComponentName componentName;
         public final String spec;
@@ -78,7 +75,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Invalid extends TileSpec {
         public static final Invalid INSTANCE = new Invalid();
 
@@ -99,7 +95,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PlatformTileSpec extends TileSpec {
         public final String spec;
 

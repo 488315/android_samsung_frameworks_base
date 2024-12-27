@@ -12,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class UserSwitcherInteractor$notifyCallbacks$1 extends SuspendLambda implements Function2 {
     Object L$0;
     Object L$1;

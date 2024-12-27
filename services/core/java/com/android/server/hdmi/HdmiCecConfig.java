@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HdmiCecConfig {
     public final Context mContext;
     public final Object mLock;
@@ -28,7 +27,6 @@ public final class HdmiCecConfig {
     public final LinkedHashMap mSettings;
     public final StorageAdapter mStorageAdapter;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Setting {
         public final Context mContext;
         public final String mName;
@@ -89,7 +87,6 @@ public final class HdmiCecConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StorageAdapter {
         public final SharedPreferences mSharedPrefs;
 
@@ -106,7 +103,6 @@ public final class HdmiCecConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Value {
         public final Integer mIntValue;
         public final String mStringValue;
@@ -122,7 +118,6 @@ public final class HdmiCecConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VerificationException extends RuntimeException {
         public VerificationException(String str) {
             super(str);

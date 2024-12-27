@@ -63,7 +63,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LowPowerStandbyController {
     static final PowerManager.LowPowerStandbyPolicy DEFAULT_POLICY =
             new PowerManager.LowPowerStandbyPolicy(
@@ -117,22 +116,18 @@ public final class LowPowerStandbyController {
             new TempAllowlistChangeListener();
     public final PhoneCallServiceTracker mPhoneCallServiceTracker = new PhoneCallServiceTracker();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
         long elapsedRealtime();
 
         long uptimeMillis();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class DeviceConfigWrapper {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
         public LocalService() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LowPowerStandbyHandler extends Handler {
         public LowPowerStandbyHandler(Looper looper) {
             super(looper);
@@ -292,7 +287,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PhoneCallServiceTracker extends IForegroundServiceObserver.Stub {
         public boolean mRegistered = false;
         public final SparseBooleanArray mUidsWithPhoneCallService = new SparseBooleanArray();
@@ -318,7 +312,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealClock implements Clock {
         @Override // com.android.server.power.LowPowerStandbyController.Clock
         public final long elapsedRealtime() {
@@ -331,7 +324,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(LowPowerStandbyHandler lowPowerStandbyHandler) {
             super(lowPowerStandbyHandler);
@@ -343,7 +335,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandbyPortsLock implements IBinder.DeathRecipient {
         public final List mPorts;
         public final IBinder mToken;
@@ -361,7 +352,6 @@ public final class LowPowerStandbyController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TempAllowlistChangeListener
             implements PowerAllowlistInternal.TempAllowlistChangeListener {
         public TempAllowlistChangeListener() {}

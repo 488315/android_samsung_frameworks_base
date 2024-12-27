@@ -13,7 +13,6 @@ import com.samsung.systemui.splugins.SPluginManager;
 import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorBox;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SlimIndicatorPluginMediator implements SPluginListener {
     public boolean mIsSPluginConnected = false;
     public final SlimIndicatorManager mManager;

@@ -5,7 +5,6 @@ import android.util.Pair;
 import android.view.DisplayCutout;
 import android.view.WindowInsets;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationInsetsImpl extends NotificationInsetsController {
     @Override // com.android.systemui.statusbar.NotificationInsetsController
     public final Pair getinsets(WindowInsets windowInsets, DisplayCutout displayCutout) {

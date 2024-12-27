@@ -61,7 +61,6 @@ import com.samsung.android.aod.AODManager;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationEffect extends AbsEdgeLightingView {
     public static final boolean mBlockNotiTouch_for_NA = "US".equals(SystemProperties.get("ro.csc.countryiso_code", ""));
     public float FREEFORM_HEIGHT_RATIO;
@@ -91,14 +90,12 @@ public class NotificationEffect extends AbsEdgeLightingView {
     public final Rect mTouchableRec;
     public boolean mUsingBlackBG;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.effect.container.NotificationEffect$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AODBroadcastReceiver extends BroadcastReceiver {
         public /* synthetic */ AODBroadcastReceiver(NotificationEffect notificationEffect, int i) {
             this();
@@ -133,7 +130,6 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GestureListener extends GestureDetector.SimpleOnGestureListener {
         public /* synthetic */ GestureListener(NotificationEffect notificationEffect, int i) {
             this();

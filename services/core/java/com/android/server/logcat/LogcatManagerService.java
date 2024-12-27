@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LogcatManagerService extends SystemService {
     static final int PENDING_CONFIRMATION_TIMEOUT_MILLIS;
     static final int STATUS_EXPIRATION_TIMEOUT_MILLIS = 60000;
@@ -52,7 +51,6 @@ public final class LogcatManagerService extends SystemService {
     public ILogd mLogdService;
     public final KnoxSecurityLogHandler mSecurityLogHandlerCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends ILogcatManagerService.Stub {
         public BinderService() {}
 
@@ -81,10 +79,8 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KnoxSecurityLogHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -103,7 +99,6 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogAccessClient {
         public final String mPackageName;
         public final int mUid;
@@ -138,7 +133,6 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogAccessDialogCallback extends ILogAccessDialogCallback.Stub {
         public LogAccessDialogCallback() {}
 
@@ -161,7 +155,6 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogAccessRequest {
         public final int mFd;
         public final int mGid;
@@ -210,7 +203,6 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogAccessRequestHandler extends Handler {
         public final LogcatManagerService mService;
 
@@ -355,13 +347,11 @@ public final class LogcatManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogAccessStatus {
         public int mStatus = 0;
         public final List mPendingRequests = new ArrayList();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SecurityLogEvent extends Record {
         public final List payloads;
         public final int tag;

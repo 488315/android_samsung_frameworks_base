@@ -66,7 +66,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenshotController implements ScreenshotHandler {
     public static boolean mIsAnimationRunning;
     public static boolean mIsSnackBarShowing;
@@ -115,7 +114,6 @@ public final class ScreenshotController implements ScreenshotHandler {
     public final WindowManager.LayoutParams mWindowLayoutParams;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.ScreenshotController$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public final /* synthetic */ ScreenshotData val$screenshot;
@@ -137,7 +135,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.ScreenshotController$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {
@@ -175,17 +172,14 @@ public final class ScreenshotController implements ScreenshotHandler {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         ScreenshotController create(Display display, boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class QuickShareData {
         public Notification.Action quickShareAction;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SaveImageInBackgroundData {
         public ScreenCaptureHelper captureHelper;
         public int displayId;
@@ -198,7 +192,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         public SmartClipDataExtractor.WebData webData;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SavedImageData {
         public UserHandle owner;
         public Notification.Action quickShareAction;
@@ -489,7 +482,6 @@ public final class ScreenshotController implements ScreenshotHandler {
         });
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenshot.ScreenshotController$5, reason: invalid class name */
     public final class AnonymousClass5 implements ViewTreeObserver.OnWindowAttachListener {
         public final /* synthetic */ Runnable val$action;

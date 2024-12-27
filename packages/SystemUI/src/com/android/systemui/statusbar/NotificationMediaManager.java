@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationMediaManager implements Dumpable {
     public static final HashSet CONNECTING_MEDIA_STATES;
     public static final HashSet PAUSED_MEDIA_STATES;
@@ -86,7 +85,6 @@ public final class NotificationMediaManager implements Dumpable {
     public final NotifPipeline mNotifPipeline;
     public final NotificationVisibilityProvider mVisibilityProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface MediaListener {
     }
 
@@ -279,7 +277,6 @@ public final class NotificationMediaManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.NotificationMediaManager$3, reason: invalid class name */
     public final class AnonymousClass3 implements MediaDataManager.Listener {
         public AnonymousClass3() {

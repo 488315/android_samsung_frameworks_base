@@ -26,7 +26,6 @@ import com.samsung.android.sepunion.IOneHandService;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OneHandService extends IOneHandService.Stub implements AbsSemSystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
@@ -45,7 +44,6 @@ public final class OneHandService extends IOneHandService.Stub implements AbsSem
     public final AnonymousClass2 mServiceConnection = new AnonymousClass2();
     public final Handler mHandler = new Handler();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.sepunion.OneHandService$2, reason: invalid class name */
     public final class AnonymousClass2 implements ServiceConnection {
         @Override // android.content.ServiceConnection
@@ -63,7 +61,6 @@ public final class OneHandService extends IOneHandService.Stub implements AbsSem
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OneHandServiceMonitor implements IBinder.DeathRecipient {
         public final OneHandService$$ExternalSyntheticLambda0 mRestartRunnable =
                 new OneHandService$$ExternalSyntheticLambda0(1, this);

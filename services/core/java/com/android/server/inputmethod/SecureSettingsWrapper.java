@@ -12,14 +12,12 @@ import android.util.SparseArray;
 import com.android.server.LocalServices;
 import com.android.server.pm.UserManagerInternal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class SecureSettingsWrapper {
     public static final ArraySet CLONE_TO_MANAGED_PROFILE;
     public static final AnonymousClass1 NOOP;
     public static volatile ContentResolver sContentResolver;
     public static final SparseArray sUserMap;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.inputmethod.SecureSettingsWrapper$1, reason: invalid class name */
     public final class AnonymousClass1 implements ReaderWriter {
         @Override // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
@@ -39,7 +37,6 @@ public abstract class SecureSettingsWrapper {
         public final void putString(String str, String str2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockedUserImpl extends UnlockedUserImpl {
         public final ArrayMap mNonPersistentKeyValues;
 
@@ -103,7 +100,6 @@ public abstract class SecureSettingsWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ReaderWriter {
         int getInt(int i, String str);
 
@@ -114,7 +110,6 @@ public abstract class SecureSettingsWrapper {
         void putString(String str, String str2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class UnlockedUserImpl implements ReaderWriter {
         public final ContentResolver mContentResolver;
         public final int mUserId;

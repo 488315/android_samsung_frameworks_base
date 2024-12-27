@@ -14,7 +14,6 @@ import com.android.systemui.accessibility.Magnification;
 import com.android.systemui.util.settings.SecureSettings;
 import kotlin.Unit;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MagnificationSettingsController implements ComponentCallbacks {
     public static final Range A11Y_ACTION_SCALE_RANGE = new Range(Float.valueOf(1.0f), Float.valueOf(8.0f));
     public final Configuration mConfiguration;
@@ -24,7 +23,6 @@ public final class MagnificationSettingsController implements ComponentCallbacks
     public final WindowMagnificationSettings mWindowMagnificationSettings;
     final WindowMagnificationSettingsCallback mWindowMagnificationSettingsCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.MagnificationSettingsController$1, reason: invalid class name */
     public final class AnonymousClass1 implements WindowMagnificationSettingsCallback {
         public AnonymousClass1() {
@@ -65,7 +63,6 @@ public final class MagnificationSettingsController implements ComponentCallbacks
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 

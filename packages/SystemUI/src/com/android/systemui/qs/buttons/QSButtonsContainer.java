@@ -15,7 +15,6 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.util.RecoilEffectUtil;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class QSButtonsContainer extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -28,7 +27,6 @@ public class QSButtonsContainer extends LinearLayout {
     public QSPowerButton mPowerButton;
     public QSSettingsButton mSettingsButton;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface CloseTooltipWindow {
         void closeTooltip();
     }

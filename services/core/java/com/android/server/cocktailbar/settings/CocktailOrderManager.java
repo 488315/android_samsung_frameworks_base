@@ -17,13 +17,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CocktailOrderManager {
     public ArrayList mCocktailOrderedList;
     public Context mContext;
     public Object mLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailOrderComparator implements Comparator {
         public SparseArray mEnabledPanelInfoArray;
         public HashMap mOrderInfoMap;
@@ -50,7 +48,6 @@ public final class CocktailOrderManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailOrderInfo {
         public int mCocktailId;
         public ComponentName mComponentName;

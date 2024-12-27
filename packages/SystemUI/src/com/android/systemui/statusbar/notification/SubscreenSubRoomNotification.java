@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenSubRoomNotification implements SubRoom {
     public static Context mContext;
     public static SubscreenSubRoomNotification sInstance;
@@ -121,7 +120,6 @@ public final class SubscreenSubRoomNotification implements SubRoom {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.SubscreenSubRoomNotification$1, reason: invalid class name */
     public final class AnonymousClass1 extends RecyclerView.OnScrollListener {
         public AnonymousClass1() {

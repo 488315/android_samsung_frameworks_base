@@ -84,7 +84,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class SyntheticPasswordManager {
     public static final boolean DEBUG;
     public final Context mContext;
@@ -122,13 +121,11 @@ class SyntheticPasswordManager {
     public final SdpSyntheticPasswordManager mSdpSyntheticPasswordManager =
             new SdpSyntheticPasswordManager(this, this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthenticationResult {
         public VerifyCredentialResponse gkResponse;
         public SyntheticPassword syntheticPassword;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConflictInfo {
         public final long handle;
         public final int userId;
@@ -139,7 +136,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PasswordData {
         public int credentialType;
         public byte[] passwordHandle;
@@ -211,7 +207,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SdpSyntheticPasswordManager {
         public final SyntheticPasswordManager spManager;
 
@@ -279,7 +274,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyntheticPassword {
         public byte[] mEncryptedEscrowSplit0;
         public byte[] mEscrowSplit1;
@@ -299,7 +293,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyntheticPasswordBlob {
         public byte[] mContent;
         public byte mProtectorType;
@@ -314,7 +307,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TokenData {
         public byte[] aggregatedSecret;
         public LockPatternUtils.EscrowTokenStateChangeCallback mCallback;
@@ -323,7 +315,6 @@ class SyntheticPasswordManager {
         public byte[] weaverSecret;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WeaverDiedRecipient implements IBinder.DeathRecipient {
         public WeaverDiedRecipient() {}
 
@@ -335,7 +326,6 @@ class SyntheticPasswordManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WeaverResult {
         public static final SparseArray mWeaverResults = new SparseArray();
         public int mOp;

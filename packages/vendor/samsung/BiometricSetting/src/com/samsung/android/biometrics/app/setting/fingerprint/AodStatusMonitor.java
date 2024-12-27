@@ -10,7 +10,6 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Set;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public final class AodStatusMonitor {
     static final String KEY_AOD_SHOW_STATUS = "aod_show_state";
     public int mAodEndTime;
@@ -24,7 +23,6 @@ public final class AodStatusMonitor {
     Set mCallbacks = new ArraySet();
     public final Uri mAodShowStatusUri = Settings.System.getUriFor(KEY_AOD_SHOW_STATUS);
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public interface Callback {
         void onAodStart();
 

@@ -25,7 +25,6 @@ import com.samsung.android.knox.SemRemoteContentManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BridgeProxy {
     public Context mContext;
     public final UserHandle mDelegateUserHandle;
@@ -33,7 +32,6 @@ public final class BridgeProxy {
     public final IRCPInterfaceCallBack mIRCPInterfaceCallBack = new IRCPInterfaceCallBack();
     public SemRemoteContentManager mSemRemoteContentManager = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IRCPInterfaceCallBack extends IRCPInterface.Stub {
         public IRCPInterfaceCallBack() {}
 

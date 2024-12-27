@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalTransitionViewModel {
     public final ReadonlyStateFlow isUmoOnCommunal;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 recentsBackgroundColor;
@@ -44,12 +43,10 @@ public final class CommunalTransitionViewModel {
         final Flow transition = keyguardTransitionInteractor.transition((Edge) new Edge.StateToState(keyguardState, keyguardState2));
         final Flow flow = new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -142,12 +139,10 @@ public final class CommunalTransitionViewModel {
         };
         Flow flow2 = new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -243,12 +238,10 @@ public final class CommunalTransitionViewModel {
         final Flow transition2 = keyguardTransitionInteractor.transition(Edge.Companion.create$default(companion, keyguardState2, null, 2));
         final Flow flow3 = new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -344,12 +337,10 @@ public final class CommunalTransitionViewModel {
         };
         Flow flow4 = new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -448,12 +439,10 @@ public final class CommunalTransitionViewModel {
         final Flow transition3 = keyguardTransitionInteractor.transition((Edge) Edge.Companion.create$default(companion, keyguardState, null, 2));
         this.transitionFromOccludedEnded = new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$3
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel$special$$inlined$filter$3$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

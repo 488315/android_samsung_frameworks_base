@@ -8,14 +8,12 @@ import androidx.compose.foundation.lazy.LazyListMeasuredItem$$ExternalSyntheticO
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RotationUtils {
     public static final int ROTATION_LANDSCAPE = 1;
     public static final int ROTATION_NONE = 0;
     public static final int ROTATION_SEASCAPE = 3;
     public static final int ROTATION_UPSIDE_DOWN = 2;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @Retention(RetentionPolicy.SOURCE)
     public @interface Rotation {
     }

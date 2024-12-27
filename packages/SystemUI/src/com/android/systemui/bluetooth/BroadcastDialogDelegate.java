@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
     public static final boolean DEBUG = Log.isLoggable("BroadcastDialog", 3);
     public final Executor mBgExecutor;
@@ -44,7 +43,6 @@ public final class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
     public final Set mDialogs = new HashSet();
     public final AnonymousClass1 mBroadcastCallback = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum BroadcastDialogEvent implements UiEventLogger.UiEventEnum {
         BROADCAST_DIALOG_SHOW(1062);
 
@@ -59,7 +57,6 @@ public final class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         BroadcastDialogDelegate create(String str, String str2);
     }
@@ -254,7 +251,6 @@ public final class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
         this.mSwitchBroadcast.setEnabled(true);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.bluetooth.BroadcastDialogDelegate$1, reason: invalid class name */
     public final class AnonymousClass1 implements BluetoothLeBroadcast.Callback {
         public AnonymousClass1() {

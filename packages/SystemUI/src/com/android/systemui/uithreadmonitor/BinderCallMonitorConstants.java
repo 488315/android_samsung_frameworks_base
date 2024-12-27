@@ -3,7 +3,6 @@ package com.android.systemui.uithreadmonitor;
 import android.os.Build;
 import android.os.SystemProperties;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BinderCallMonitorConstants {
     public static final int MAX_BUF_COUNT;
     public static final long MAX_DURATION;

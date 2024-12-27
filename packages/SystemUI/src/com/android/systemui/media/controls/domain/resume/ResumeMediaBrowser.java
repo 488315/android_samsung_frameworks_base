@@ -18,7 +18,6 @@ import com.android.systemui.log.core.LogMessage;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ResumeMediaBrowser {
     public final MediaBrowserFactory mBrowserFactory;
     public final Callback mCallback;
@@ -128,7 +127,6 @@ public final class ResumeMediaBrowser {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SessionDestroyCallback extends MediaController.Callback {
         public /* synthetic */ SessionDestroyCallback(ResumeMediaBrowser resumeMediaBrowser, int i) {
             this();
@@ -251,7 +249,6 @@ public final class ResumeMediaBrowser {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Callback {
         public void onConnected() {
         }

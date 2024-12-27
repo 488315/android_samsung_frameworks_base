@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SysUiState implements Dumpable {
     public final DisplayTracker mDisplayTracker;
     public long mFlags;
@@ -25,7 +24,6 @@ public final class SysUiState implements Dumpable {
     public long mFlagsToSet = 0;
     public long mFlagsToClear = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SysUiStateCallback {
         void onSystemUiStateChanged(long j);
     }

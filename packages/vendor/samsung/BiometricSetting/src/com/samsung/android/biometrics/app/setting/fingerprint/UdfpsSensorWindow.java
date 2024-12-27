@@ -30,7 +30,6 @@ import com.samsung.android.biometrics.app.setting.R;
 import com.samsung.android.biometrics.app.setting.SysUiWindow;
 import com.samsung.android.biometrics.app.setting.Utils;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class UdfpsSensorWindow extends SysUiWindow {
     static final String FINGERPRINT_BG_WINDOW_CONTAINER_COLOR = "#252525";
     public LottieAnimationView mAnimationView;
@@ -47,7 +46,6 @@ public class UdfpsSensorWindow extends SysUiWindow {
     public final FingerprintSensorInfo mSensorInfo;
     boolean mUseBaseWindow;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.fingerprint.UdfpsSensorWindow$1, reason: invalid class name */
     public final class AnonymousClass1 implements LottieOnCompositionLoadedListener {
         public AnonymousClass1() {}

@@ -14,7 +14,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.samsung.android.server.packagefeature.PackageFeature;
 import com.samsung.android.server.packagefeature.util.PackageSpecialManagementList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FullScreenAppsSupportUtils {
     public boolean mCached;
     public int mCachedFullScreenAppsSupportMode;
@@ -23,7 +22,6 @@ public final class FullScreenAppsSupportUtils {
     public IDisplayManager mDisplayManager;
     public DisplayManagerInternal mDisplayManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final FullScreenAppsSupportUtils sUtils = new FullScreenAppsSupportUtils();
     }

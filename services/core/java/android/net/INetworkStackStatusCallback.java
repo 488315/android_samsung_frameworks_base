@@ -6,14 +6,12 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface INetworkStackStatusCallback extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$INetworkStackStatusCallback".replace('$', '.');
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetworkStackStatusCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,13 +32,11 @@ public interface INetworkStackStatusCallback extends IInterface {
         public void onStatusAvailable(int i) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements INetworkStackStatusCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onStatusAvailable = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements INetworkStackStatusCallback {
             public String mCachedHash;
             public int mCachedVersion;

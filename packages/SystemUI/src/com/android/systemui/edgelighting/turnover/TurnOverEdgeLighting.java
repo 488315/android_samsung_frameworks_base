@@ -7,7 +7,6 @@ import com.android.systemui.edgelighting.device.EdgeLightingCoverManager;
 import com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler;
 import com.android.systemui.edgelighting.utils.Utils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TurnOverEdgeLighting {
     public final AnonymousClass1 mCallStateListener;
     public CallStateObserver mCallStateObserver;
@@ -20,14 +19,12 @@ public final class TurnOverEdgeLighting {
     public boolean mIsEnabled = false;
     public ITurnModeState mCurrentTurnMode = new StateIdle(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.turnover.TurnOverEdgeLighting$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.edgelighting.turnover.TurnOverEdgeLighting$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
@@ -48,7 +45,6 @@ public final class TurnOverEdgeLighting {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ITurnModeState {
         int getMode();
 
@@ -63,7 +59,6 @@ public final class TurnOverEdgeLighting {
         ITurnModeState onRingingEnd();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateCall implements ITurnModeState {
         public final String TAG = StateCall.class.getSimpleName();
         public int currentIsUpSide;
@@ -122,7 +117,6 @@ public final class TurnOverEdgeLighting {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateIdle implements ITurnModeState {
         public final String TAG;
 
@@ -206,7 +200,6 @@ public final class TurnOverEdgeLighting {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StateNoti implements ITurnModeState {
         public final String TAG = StateNoti.class.getSimpleName();
         public int currentIsUpSide = 0;

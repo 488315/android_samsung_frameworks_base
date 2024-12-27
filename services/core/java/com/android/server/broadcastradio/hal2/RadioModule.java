@@ -45,7 +45,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RadioModule {
     public final RadioEventLogger mEventLogger;
     public ITunerSession$Proxy mHalTunerSession;
@@ -60,7 +59,6 @@ public final class RadioModule {
     public final AnonymousClass1 mHalTunerCallback = new AnonymousClass1(0, this);
     public final Set mAidlTunerSessions = new ArraySet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.broadcastradio.hal2.RadioModule$1, reason: invalid class name */
     public final class AnonymousClass1 extends HwBinder implements IBase {
         public final /* synthetic */ int $r8$classId;
@@ -672,7 +670,6 @@ public final class RadioModule {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AidlCallbackRunnable {
         void run(ITunerCallback iTunerCallback);
     }

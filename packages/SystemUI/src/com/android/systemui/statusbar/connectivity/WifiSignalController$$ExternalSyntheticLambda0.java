@@ -5,7 +5,6 @@ import android.net.NetworkKey;
 import android.net.wifi.WifiInfo;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class WifiSignalController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ WifiSignalController f$0;

@@ -14,7 +14,6 @@ import com.android.systemui.util.LogUtil;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import com.samsung.systemui.splugins.pluginlock.PluginLockBasicManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockProvider extends ContentProvider {
     public static final String AUTHORITY = "com.android.systemui.pluginlock.provider";
     private static final String FILL_WALLPAPER_DATA = "fill_wallpaper_data";

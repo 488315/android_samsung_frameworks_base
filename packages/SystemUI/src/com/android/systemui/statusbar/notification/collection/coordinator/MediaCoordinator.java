@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.No
 import com.android.systemui.statusbar.notification.icon.IconManager;
 import com.android.systemui.util.Utils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
 public class MediaCoordinator implements Coordinator {
     private static final int STATE_ICONS_ERROR = 2;

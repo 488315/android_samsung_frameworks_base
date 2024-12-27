@@ -14,13 +14,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import com.samsung.android.multiwindow.MultiWindowManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SnackbarController {
     public final DismissedCallback cb;
     public final Context context;
     public final int displayId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DismissedCallback {
     }
 

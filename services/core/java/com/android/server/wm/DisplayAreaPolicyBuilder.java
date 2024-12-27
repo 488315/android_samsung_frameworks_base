@@ -25,14 +25,12 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class DisplayAreaPolicyBuilder {
     private final ArrayList mDisplayAreaGroupHierarchyBuilders = new ArrayList();
     private HierarchyBuilder mRootHierarchyBuilder;
     private BiFunction mSelectRootForWindowFunc;
     private Function mSelectTaskDisplayAreaFunc;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultSelectRootForWindowFunction implements BiFunction {
         public final List mDisplayAreaGroupRoots;
         public final RootDisplayArea mDisplayRoot;
@@ -64,7 +62,6 @@ class DisplayAreaPolicyBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultSelectTaskDisplayAreaFunction implements Function {
         public final TaskDisplayArea mDefaultTaskDisplayArea;
         public final int mDisplayId;
@@ -109,14 +106,12 @@ class DisplayAreaPolicyBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Feature {
         public final int mId;
         public final String mName;
         public final NewDisplayAreaSupplier mNewDisplayAreaSupplier;
         public final boolean[] mWindowLayers;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Builder {
             public final int mId;
             public final boolean[] mLayers;
@@ -189,7 +184,6 @@ class DisplayAreaPolicyBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HierarchyBuilder {
         public DisplayArea.Tokens mImeContainer;
         public final RootDisplayArea mRoot;
@@ -290,7 +284,6 @@ class DisplayAreaPolicyBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface NewDisplayAreaSupplier {
         DisplayArea create(
                 WindowManagerService windowManagerService,
@@ -299,7 +292,6 @@ class DisplayAreaPolicyBuilder {
                 int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingArea {
         public DisplayArea mExisting;
         public final Feature mFeature;
@@ -388,7 +380,6 @@ class DisplayAreaPolicyBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Result extends DisplayAreaPolicy {
         public final TaskDisplayArea mDefaultTaskDisplayArea;
         public final List mDisplayAreaGroupRoots;

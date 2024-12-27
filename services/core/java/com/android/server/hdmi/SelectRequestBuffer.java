@@ -6,19 +6,16 @@ import android.util.Slog;
 
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class SelectRequestBuffer {
     public static final AnonymousClass1 EMPTY_BUFFER = new AnonymousClass1();
     public PortSelectRequest mRequest;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.SelectRequestBuffer$1, reason: invalid class name */
     public final class AnonymousClass1 extends SelectRequestBuffer {
         @Override // com.android.server.hdmi.SelectRequestBuffer
         public final void process() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PortSelectRequest {
         public final /* synthetic */ int $r8$classId;
         public final IHdmiControlCallback mCallback;

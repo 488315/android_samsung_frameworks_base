@@ -151,7 +151,6 @@ import kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequenc
 import kotlin.sequences.SequencesKt___SequencesKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationStackScrollLayout extends ViewGroup implements Dumpable, NotificationScrollView, PanelScreenShotLogger.LogProvider {
     public static final boolean DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY = SystemProperties.getBoolean("debug.noti.disable_new_notif_only", false);
     static final float RUBBER_BAND_FACTOR_NORMAL = 0.1f;
@@ -374,14 +373,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public boolean mWillExpand;
     public int mYDiff;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$13, reason: invalid class name */
     public final class AnonymousClass13 implements HeadsUpTouchHelper.Callback {
         public AnonymousClass13() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$15, reason: invalid class name */
     public final class AnonymousClass15 implements ExpandHelper.Callback {
         public AnonymousClass15() {
@@ -437,14 +434,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$9, reason: invalid class name */
     public final class AnonymousClass9 {
         public AnonymousClass9() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationEvent {
         public static final AnimationFilter[] FILTERS;
         public static final int[] LENGTHS;

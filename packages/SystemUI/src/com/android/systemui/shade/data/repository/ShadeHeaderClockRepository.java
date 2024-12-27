@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.NextAlarmControllerImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShadeHeaderClockRepository {
     public final ShadeHeaderClockRepository$nextAlarmCallback$1 nextAlarmCallback;
     public PendingIntent nextAlarmIntent;

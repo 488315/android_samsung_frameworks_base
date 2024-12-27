@@ -7,7 +7,6 @@ import com.android.systemui.plugins.annotations.VersionCheck;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.TimeZone;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PluginKeyguardUpdateMonitorCallback {
     void dismissFaceWidgetFullScreen();
 

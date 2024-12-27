@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.row.StackScrollerDecorView;
 import com.android.systemui.statusbar.notification.stack.ExpandableViewState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class EmptyShadeView extends StackScrollerDecorView {
     public TextView mEmptyFooterText;
     public TextView mEmptyText;
@@ -21,7 +20,6 @@ public class EmptyShadeView extends StackScrollerDecorView {
     public int mSize;
     public int mText;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EmptyShadeViewState extends ExpandableViewState {
         public EmptyShadeViewState() {
         }

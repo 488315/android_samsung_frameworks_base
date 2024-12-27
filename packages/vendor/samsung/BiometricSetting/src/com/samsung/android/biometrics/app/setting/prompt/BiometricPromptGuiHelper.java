@@ -59,7 +59,6 @@ import com.samsung.android.biometrics.app.setting.prompt.BiometricPromptGuiHelpe
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public abstract class BiometricPromptGuiHelper {
     public final View mBaseView;
     public CharSequence mBottomBtnText;
@@ -99,7 +98,6 @@ public abstract class BiometricPromptGuiHelper {
     public final int mNavigationBarHeight = getNavigationBarHeight();
     public int mScreenLandWidth = getScreenLandscapeWidthWithoutNavigationBar();
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.prompt.BiometricPromptGuiHelper$3, reason: invalid class name */
     public final class AnonymousClass3 implements ViewTreeObserver.OnGlobalLayoutListener {
         public final /* synthetic */ int $r8$classId;
@@ -144,7 +142,6 @@ public abstract class BiometricPromptGuiHelper {
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public interface OnModalityChangeListener {
     }
 

@@ -4,10 +4,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class CornerPathRenderer {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum Corner {
         BOTTOM_LEFT,
         BOTTOM_RIGHT,

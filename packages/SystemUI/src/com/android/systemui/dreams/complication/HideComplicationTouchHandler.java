@@ -13,7 +13,6 @@ import com.android.systemui.touch.TouchInsetManager;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HideComplicationTouchHandler implements TouchHandler {
     public static final boolean DEBUG = Log.isLoggable("HideComplicationHandler", 3);
     public final DelayableExecutor mExecutor;

@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks, KeyguardStateController.Callback {
     public final CommandQueue mCommandQueue;
     public final Context mContext;
@@ -46,7 +45,6 @@ public final class InstantAppNotifier implements CoreStartable, CommandQueue.Cal
     public final ArraySet mCurrentNotifs = new ArraySet();
     public final UserTracker.Callback mUserSwitchListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.InstantAppNotifier$1, reason: invalid class name */
     class AnonymousClass1 implements UserTracker.Callback {
         public AnonymousClass1() {

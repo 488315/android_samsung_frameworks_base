@@ -4,7 +4,6 @@ import android.view.inspector.IntFlagMapping;
 
 import java.util.function.IntFunction;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class View$InspectionCompanion$$ExternalSyntheticLambda1
         implements IntFunction {
     public final /* synthetic */ IntFlagMapping f$0;

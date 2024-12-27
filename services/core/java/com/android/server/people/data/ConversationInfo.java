@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ConversationInfo {
     public String mContactPhoneNumber;
     public Uri mContactUri;
@@ -32,7 +31,6 @@ public final class ConversationInfo {
     public int mShortcutFlags;
     public String mShortcutId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public String mContactPhoneNumber;
         public Uri mContactUri;

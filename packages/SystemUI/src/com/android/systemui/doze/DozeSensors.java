@@ -41,7 +41,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeSensors {
     public static final UiEventLogger UI_EVENT_LOGGER = new UiEventLoggerImpl();
     public final AuthController mAuthController;
@@ -71,11 +70,9 @@ public final class DozeSensors {
     public boolean mUdfpsEnrolled;
     public final WakeLock mWakeLock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum DozeSensorsUiEvent implements UiEventLogger.UiEventEnum {
         ACTION_AMBIENT_GESTURE_PICKUP(459);
 
@@ -90,7 +87,6 @@ public final class DozeSensors {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class PluginSensor extends TriggerSensor implements SensorManagerPlugin.SensorEventListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final long mDebounce;
@@ -165,7 +161,6 @@ public final class DozeSensors {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class TriggerSensor extends TriggerEventListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public boolean mConfigured;

@@ -24,7 +24,6 @@ import java.util.List;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WiredChargingRippleController {
     public final Context context;
     public final float normalizedPortPosX;
@@ -35,7 +34,6 @@ public final class WiredChargingRippleController {
     public final WindowManager.LayoutParams windowLayoutParams;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ChargingRippleCommand implements Command {
         public ChargingRippleCommand() {
         }
@@ -100,7 +98,6 @@ public final class WiredChargingRippleController {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WiredChargingRippleEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ WiredChargingRippleEvent[] $VALUES;
         public static final WiredChargingRippleEvent CHARGING_RIPPLE_PLAYED;

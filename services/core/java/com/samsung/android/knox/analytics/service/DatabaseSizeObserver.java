@@ -15,7 +15,6 @@ import com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver;
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.analytics.util.UploaderBroadcaster;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DatabaseSizeObserver {
     public static final String COMPRESSED_RESULT_KEY = "performCompressedEventsTransaction";
     public static final String DB_CLEAN_EVENT_COUNT = "rev";
@@ -38,7 +37,6 @@ public final class DatabaseSizeObserver {
     public int mFailure = 0;
     public boolean mHasAlertedUploader = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DatabaseSizeContentObserver extends ContentObserver {
         public DatabaseSizeContentObserver(Handler handler) {
             super(handler);

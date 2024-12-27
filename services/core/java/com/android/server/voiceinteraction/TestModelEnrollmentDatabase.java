@@ -12,11 +12,9 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TestModelEnrollmentDatabase implements IEnrolledModelDb {
     public final Map mModelMap = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EnrollmentKey {
         public final int mKeyphraseId;
         public final String mLocale;

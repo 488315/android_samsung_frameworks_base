@@ -26,12 +26,10 @@ import com.samsung.android.sdhms.SemAppRestrictionManager;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PDSHandler {
     public Context mContext;
     public MainHandler mMainHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public final PDSController mPDSController;
         public final /* synthetic */ PDSHandler this$0 = PDSHandlerHolder.INSTANCE;
@@ -348,7 +346,6 @@ public final class PDSHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainThread extends Thread {
         public final int mPriority;
         public final /* synthetic */ PDSHandler this$0 = PDSHandlerHolder.INSTANCE;
@@ -367,7 +364,6 @@ public final class PDSHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PDSHandlerHolder {
         public static final PDSHandler INSTANCE = new PDSHandler();
     }

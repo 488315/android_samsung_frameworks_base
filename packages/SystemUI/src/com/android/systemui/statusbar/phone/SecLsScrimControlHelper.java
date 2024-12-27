@@ -29,7 +29,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 import dagger.Lazy;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecLsScrimControlHelper implements KeyguardStateController.Callback, SystemUIWidgetCallback {
     public static final boolean DEBUG = Log.isLoggable("ScrimController", 3);
     public final AODAmbientWallpaperHelper mAodAmbientWallpaperHelper;
@@ -60,7 +59,6 @@ public final class SecLsScrimControlHelper implements KeyguardStateController.Ca
     public ScrimState mState;
     public final WakefulnessLifecycle mWakefulnessLifecycle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.SecLsScrimControlHelper$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$statusbar$phone$ScrimState;

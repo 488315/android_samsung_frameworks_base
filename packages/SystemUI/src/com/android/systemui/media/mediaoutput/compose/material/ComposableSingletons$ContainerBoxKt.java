@@ -16,7 +16,6 @@ import com.android.systemui.media.mediaoutput.icons.action.SettingsKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ComposableSingletons$ContainerBoxKt {
     public static final ComposableSingletons$ContainerBoxKt INSTANCE = new ComposableSingletons$ContainerBoxKt();
 

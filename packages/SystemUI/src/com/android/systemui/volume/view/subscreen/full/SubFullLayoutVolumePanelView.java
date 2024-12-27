@@ -57,7 +57,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubFullLayoutVolumePanelView extends FrameLayout implements VolumeObserver<VolumePanelState>, ViewContext {
     public int activeStream;
     public BlurEffect blurEffect;
@@ -99,7 +98,6 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
     public ViewGroup volumePanelView;
     public final Lazy warningDialogController$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -109,7 +107,6 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

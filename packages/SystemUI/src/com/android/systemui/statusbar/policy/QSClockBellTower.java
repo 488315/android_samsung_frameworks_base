@@ -38,7 +38,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
     public static final String NNBSP_UNICODE = String.valueOf((char) 8239);
@@ -66,14 +65,12 @@ public final class QSClockBellTower implements DemoModeCommandReceiver, Dumpable
     public final Date mCurrentDate = new Date();
     public final Date mCurrentShortenDate = new Date();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface TimeAudience {
         String getTicket();
 
         void notifyTimeChanged(QSClockBellSound qSClockBellSound);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TimeBroadcastReceiver extends BroadcastReceiver {
         public String mTimeZoneString;
 

@@ -41,7 +41,6 @@ import kotlinx.coroutines.SupervisorJobImpl;
 import kotlinx.coroutines.SupervisorKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HomeControlsDreamService extends DreamService {
     public static final long ACTIVITY_RESTART_DELAY;
     public static final long CANCELLATION_DELAY_AFTER_DETACHED;
@@ -57,7 +56,6 @@ public final class HomeControlsDreamService extends DreamService {
     public final Lazy wakeLock$delegate;
     public final WakeLock.Builder wakeLockBuilder;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

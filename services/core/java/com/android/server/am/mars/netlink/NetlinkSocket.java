@@ -8,7 +8,6 @@ import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class NetlinkSocket {
     public static ByteBuffer recvMessage(FileDescriptor fileDescriptor, int i, long j) {
         if (j < 0) {

@@ -69,7 +69,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DreamManagerService extends SystemService {
     public final AnonymousClass1 mActivityInterceptorCallback;
     public final ComponentName mAmbientDisplayComponent;
@@ -109,7 +108,6 @@ public final class DreamManagerService extends SystemService {
     public final UserManager mUserManager;
     public int mWhenToDream;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.dreams.DreamManagerService$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public AnonymousClass4() {}
@@ -135,7 +133,6 @@ public final class DreamManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.dreams.DreamManagerService$5, reason: invalid class name */
     public final class AnonymousClass5 extends ContentObserver {
         public final /* synthetic */ int $r8$classId = 0;
@@ -173,7 +170,6 @@ public final class DreamManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IDreamManager.Stub {
         public BinderService() {}
 
@@ -649,10 +645,8 @@ public final class DreamManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DreamHandler extends Handler {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DreamRecord {
         public final boolean canDoze;
         public final boolean isPreview;
@@ -694,7 +688,6 @@ public final class DreamManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends DreamManagerInternal {
         public LocalService() {}
 

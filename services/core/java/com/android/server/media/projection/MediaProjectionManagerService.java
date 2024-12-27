@@ -62,7 +62,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaProjectionManagerService extends SystemService implements Watchdog.Monitor {
     static final long MEDIA_PROJECTION_PREVENTS_REUSING_CONSENT = 266201607;
     public final ActivityManagerInternal mActivityManagerInternal;
@@ -83,7 +82,6 @@ public final class MediaProjectionManagerService extends SystemService implement
     public IBinder mProjectionToken;
     public final WindowManagerInternal mWmInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.media.projection.MediaProjectionManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 implements Runnable {
         public final /* synthetic */ int $r8$classId = 1;
@@ -121,7 +119,6 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IMediaProjectionManager.Stub {
         public BinderService(Context context) {
             super(PermissionEnforcer.fromContext(context));
@@ -400,7 +397,6 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackDelegate {
         public final Handler mHandler;
         public final Object mLock = new Object();
@@ -473,15 +469,12 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class MediaProjection extends IMediaProjection.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public IMediaProjectionCallback mCallback;
@@ -746,7 +739,6 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaRouterCallback extends MediaRouter.SimpleCallback {
         public MediaRouterCallback() {
         }
@@ -778,7 +770,6 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WatcherSessionCallback implements Runnable {
         public final IMediaProjectionWatcherCallback mCallback;
         public final MediaProjectionInfo mProjectionInfo;
@@ -800,7 +791,6 @@ public final class MediaProjectionManagerService extends SystemService implement
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WatcherStopCallback implements Runnable {
         public final /* synthetic */ int $r8$classId;
         public IMediaProjectionWatcherCallback mCallback;

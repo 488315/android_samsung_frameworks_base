@@ -7,7 +7,6 @@ import android.graphics.Point;
 import android.view.View;
 import com.android.systemui.keyguardimage.ImageOptionCreator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ImageCreator {
     static Bitmap getViewImage(View view, ImageOptionCreator.ImageOption imageOption, boolean z) {
         view.measure(View.MeasureSpec.makeMeasureSpec(imageOption.realWidth, Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(imageOption.realHeight, Integer.MIN_VALUE));

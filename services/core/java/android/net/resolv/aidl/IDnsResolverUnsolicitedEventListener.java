@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDnsResolverUnsolicitedEventListener extends IInterface {
     public static final String DESCRIPTOR =
             "android$net$resolv$aidl$IDnsResolverUnsolicitedEventListener".replace('$', '.');
@@ -19,7 +18,6 @@ public interface IDnsResolverUnsolicitedEventListener extends IInterface {
     public static final int VALIDATION_RESULT_SUCCESS = 1;
     public static final int VERSION = 9;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDnsResolverUnsolicitedEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +48,6 @@ public interface IDnsResolverUnsolicitedEventListener extends IInterface {
                 throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDnsResolverUnsolicitedEventListener {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -58,7 +55,6 @@ public interface IDnsResolverUnsolicitedEventListener extends IInterface {
         static final int TRANSACTION_onNat64PrefixEvent = 2;
         static final int TRANSACTION_onPrivateDnsValidationEvent = 3;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDnsResolverUnsolicitedEventListener {
             public String mCachedHash;
             public int mCachedVersion;

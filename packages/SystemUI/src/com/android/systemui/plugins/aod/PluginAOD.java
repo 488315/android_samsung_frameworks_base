@@ -11,7 +11,6 @@ import com.android.systemui.plugins.Plugin;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = PluginAOD.ACTION, version = 1)
 public interface PluginAOD extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_AOD";
@@ -35,7 +34,6 @@ public interface PluginAOD extends Plugin {
     public static final int STATE_UNINITIALIZED = 0;
     public static final int VERSION = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onRequestState(int i);
 
@@ -124,7 +122,6 @@ public interface PluginAOD extends Plugin {
 
     void setTouchModeWhileClockTransition(boolean z);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface UICallback {
         int getKeyguardOrientation();
 

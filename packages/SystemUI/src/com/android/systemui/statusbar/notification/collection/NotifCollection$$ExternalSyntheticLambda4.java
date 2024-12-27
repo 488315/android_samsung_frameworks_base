@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.No
 import com.android.systemui.util.Assert;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class NotifCollection$$ExternalSyntheticLambda4 implements NotifDismissInterceptor.OnEndDismissInterception, NotifLifetimeExtender.OnEndLifetimeExtensionCallback {
     public final /* synthetic */ NotifCollection f$0;
 

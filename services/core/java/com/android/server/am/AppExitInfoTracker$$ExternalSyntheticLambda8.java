@@ -8,7 +8,6 @@ import android.util.proto.ProtoOutputStream;
 import java.io.File;
 import java.util.function.BiFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class AppExitInfoTracker$$ExternalSyntheticLambda8
         implements BiFunction {
     public final /* synthetic */ int $r8$classId;

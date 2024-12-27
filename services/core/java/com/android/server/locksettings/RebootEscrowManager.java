@@ -25,7 +25,6 @@ import java.security.KeyStore;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RebootEscrowManager {
     public static final String REBOOT_ESCROW_ARMED_KEY = "reboot_escrow_armed_count";
     public final Callbacks mCallbacks;
@@ -46,10 +45,8 @@ public final class RebootEscrowManager {
     public final Object mKeyGenerationLock = new Object();
     public final RebootEscrowEventLog mEventLog = new RebootEscrowEventLog();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callbacks {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public final Context mContext;
         public final RebootEscrowKeyStoreManager mKeyStoreManager =
@@ -161,7 +158,6 @@ public final class RebootEscrowManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class RebootEscrowEvent {
         public final int mEventId;
         public final Integer mUserId;
@@ -174,7 +170,6 @@ public final class RebootEscrowManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class RebootEscrowEventLog {
         public final RebootEscrowEvent[] mEntries = new RebootEscrowEvent[16];
         public int mNextIndex = 0;

@@ -3,7 +3,6 @@ package com.android.systemui.volume.panel.component.spatialaudio.ui.composable;
 import com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel;
 import com.android.systemui.volume.panel.ui.composable.ComposeVolumePanelUiComponent;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SpatialAudioComponent implements ComposeVolumePanelUiComponent {
     public final SpatialAudioPopup popup;
     public final SpatialAudioViewModel viewModel;

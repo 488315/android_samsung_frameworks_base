@@ -24,7 +24,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.RepeatableExecutor;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecSeekBarViewModel {
     public Progress _data = new Progress(false, false, false, false, null, 0, false);
     public final MutableLiveData _progress;
@@ -41,7 +40,6 @@ public final class SecSeekBarViewModel {
     public PlaybackState playbackState;
     public boolean scrubbing;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Progress {
         public final int duration;
         public final Integer elapsedTime;
@@ -116,7 +114,6 @@ public final class SecSeekBarViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public final SecSeekBarViewModel viewModel;
 
@@ -355,7 +352,6 @@ public final class SecSeekBarViewModel {
         this._progress.postValue(progress);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarTouchListener implements View.OnTouchListener, GestureDetector.OnGestureListener {
         public final SeekBar bar;
         public final GestureDetectorCompat detector;

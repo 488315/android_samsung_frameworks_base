@@ -21,7 +21,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenDecorCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final Callback callback;
@@ -32,11 +31,9 @@ public final class ScreenDecorCommand extends ParseableCommand {
     public final OptionalSubCommand roundedBottom$delegate;
     public final OptionalSubCommand roundedTop$delegate;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

@@ -12,7 +12,6 @@ import com.samsung.android.knox.analytics.util.Log;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FeatureBlacklistObserver {
     public static final String HT_NAME = "FeatureBlacklistObserver";
     public static final String TAG =
@@ -22,7 +21,6 @@ public final class FeatureBlacklistObserver {
     public List mFeaturesBlacklistCache;
     public HandlerThread mHandlerThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureBlacklistContentObserver extends ContentObserver {
         public FeatureBlacklistContentObserver(Handler handler) {
             super(handler);

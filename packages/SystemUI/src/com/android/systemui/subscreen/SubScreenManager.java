@@ -74,7 +74,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubScreenManager implements PluginListener, ScreenLifecycle.Observer, DisplayLifecycle.Observer, Dumpable, WakefulnessLifecycle.Observer {
     public SubHomeActivity mActivity;
     public final ActivityManager mActivityManager;
@@ -363,7 +362,6 @@ public final class SubScreenManager implements PluginListener, ScreenLifecycle.O
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.subscreen.SubScreenManager$4, reason: invalid class name */
     public final class AnonymousClass4 implements DeviceStateManager.DeviceStateCallback {
         public AnonymousClass4() {
@@ -414,7 +412,6 @@ public final class SubScreenManager implements PluginListener, ScreenLifecycle.O
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.subscreen.SubScreenManager$9, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass9 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;

@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RestrictionPolicyCache {
     public static final Map MASK_AND_COLUMN_NAME =
             new HashMap() { // from class:
@@ -98,7 +97,6 @@ public final class RestrictionPolicyCache {
     public final ApplyingAdmins mApplyingAdmins = new ApplyingAdmins();
     public final HashMap mCache = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApplyingAdmins {
         public final Map admins = new HashMap();
         public final Map adminInfoMap = new HashMap();

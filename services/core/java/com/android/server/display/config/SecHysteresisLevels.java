@@ -6,7 +6,6 @@ import android.util.Spline;
 
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SecHysteresisLevels extends HysteresisLevels {
     public static final float[] DEFAULT_AMBIENT_BRIGHTENING_THRESHOLDS = {100.0f};
     public static final float[] DEFAULT_AMBIENT_DARKENING_THRESHOLDS = {200.0f};

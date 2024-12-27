@@ -14,7 +14,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ChimeraStrategy {
     public final int mAlwaysRunningProcessQuota;
     public final int mDeviceIdleAppThreshold;
@@ -27,7 +26,6 @@ public final class ChimeraStrategy {
     public final SettingRepository mSettingRepository;
     public final SystemRepository mSystemRepository;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DefaultParameters {
         public static final int[][] sParameters = {
             new int[] {2, 485, 5, 3, 885, 100, 400, 500, 600},

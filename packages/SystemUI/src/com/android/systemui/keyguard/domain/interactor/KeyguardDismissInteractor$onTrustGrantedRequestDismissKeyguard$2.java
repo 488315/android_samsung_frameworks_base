@@ -4,7 +4,6 @@ import kotlin.Triple;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final /* synthetic */ class KeyguardDismissInteractor$onTrustGrantedRequestDismissKeyguard$2 extends AdaptedFunctionReference implements Function4 {
     public static final KeyguardDismissInteractor$onTrustGrantedRequestDismissKeyguard$2 INSTANCE = new KeyguardDismissInteractor$onTrustGrantedRequestDismissKeyguard$2();
 

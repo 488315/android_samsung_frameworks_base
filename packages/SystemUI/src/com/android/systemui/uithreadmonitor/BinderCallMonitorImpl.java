@@ -4,14 +4,12 @@ import android.util.Log;
 import android.util.SparseArray;
 import com.android.systemui.log.SamsungServiceLogger;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BinderCallMonitorImpl implements BinderCallMonitor {
     public static int sSkipCallCount = -1;
     public SamsungServiceLogger mLogger;
     public final SparseArray mMonitorInfo = new SparseArray();
     public long mDuration = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Item {
         public final long compareDuration;
         public String stackTrace;
@@ -27,7 +25,6 @@ public final class BinderCallMonitorImpl implements BinderCallMonitor {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MonitorInfo {
         public long duration;
         public boolean enabled;

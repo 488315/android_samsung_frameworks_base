@@ -140,7 +140,6 @@ import libcore.io.IoUtils;
 import libcore.io.Streams;
 import libcore.util.HexEncoding;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageManagerShellCommand extends ShellCommand {
     public static final Set ART_SERVICE_COMMANDS;
     public static final SecureRandom RANDOM;
@@ -161,7 +160,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
     public final PackageManagerInternal mPm = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
     public final LegacyPermissionManagerService.Internal mLegacyPermissionManager = (LegacyPermissionManagerService.Internal) LocalServices.getService(LegacyPermissionManagerService.Internal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClearDataObserver extends IPackageDataObserver.Stub {
         public boolean finished;
         public boolean result;
@@ -175,7 +173,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstallParams {
         public String installerPackageName;
         public PackageInstaller.SessionParams sessionParams;
@@ -183,7 +180,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         public int userId;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalIntentReceiver {
         public final LinkedBlockingQueue mResult = new LinkedBlockingQueue();
         public final AnonymousClass1 mLocalSender = new IIntentSender.Stub() { // from class: com.android.server.pm.PackageManagerShellCommand.LocalIntentReceiver.1
@@ -209,7 +205,6 @@ public final class PackageManagerShellCommand extends ShellCommand {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionDump {
         public boolean onlyParent;
         public boolean onlyReady;

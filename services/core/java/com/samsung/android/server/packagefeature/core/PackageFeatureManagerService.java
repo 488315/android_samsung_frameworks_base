@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageFeatureManagerService {
     public final CoreLogger mLogger =
             new CoreLogger("PackageFeature", 200, "*** Logs ***", true, true);
@@ -22,13 +21,11 @@ public final class PackageFeatureManagerService {
     public final ScpmController mScpmController;
     public Map mTmpPackageFeatureCallbacks;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final PackageFeatureManagerService sInstance =
                 new PackageFeatureManagerService();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScpmConsumerInfo extends ScpmController.ConsumerInfo {
         public static final String VERSION = String.valueOf(Build.VERSION.SEM_PLATFORM_INT);
     }

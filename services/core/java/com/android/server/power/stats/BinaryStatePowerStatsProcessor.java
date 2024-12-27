@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor {
     public PowerStats.Descriptor mDescriptor;
     public boolean mEnergyConsumerSupported;
@@ -27,7 +26,6 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
     public final PowerStatsUidResolver mUidResolver;
     public final UsageBasedPowerEstimator mUsageBasedPowerEstimator;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Intermediates {
         public long duration;
         public double power;

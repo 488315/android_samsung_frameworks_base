@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OverlayReferenceMapper {
     public final Provider mProvider;
     public final Object mLock = new Object();
@@ -25,7 +24,6 @@ public final class OverlayReferenceMapper {
     public final ArrayMap mActorPkgToPkgs = new ArrayMap();
     public boolean mDeferRebuild = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.om.OverlayReferenceMapper$1, reason: invalid class name */
     public final class AnonymousClass1 implements Provider {
         public final String getActorPkg(String str) {
@@ -50,7 +48,6 @@ public final class OverlayReferenceMapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Provider {}
 
     public OverlayReferenceMapper(Provider provider) {

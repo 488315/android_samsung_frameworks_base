@@ -58,7 +58,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PreferencesHelper implements RankingConfig {
     static final int DEFAULT_BUBBLE_PREFERENCE = 0;
     static final boolean DEFAULT_HIDE_SILENT_STATUS_BAR_ICONS = false;
@@ -98,7 +97,6 @@ public final class PreferencesHelper implements RankingConfig {
     public final List mCscConfigNoneBlockableList = new ArrayList();
     public final int XML_VERSION = 4;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Delegate {
         public boolean mEnabled;
         public final String mPkg;
@@ -111,7 +109,6 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackagePreferences {
         public boolean allowEdgeLighting;
         public int allowOngoingActivity;

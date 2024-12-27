@@ -15,7 +15,6 @@ import com.samsung.android.desktopmode.IBleAdvertiserService;
 
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BleAdvertiserServiceManager {
     public final BleAdvertiserServiceManager$$ExternalSyntheticLambda0 mBindServiceRunnable;
     public boolean mBound;
@@ -29,7 +28,6 @@ public final class BleAdvertiserServiceManager {
     public final AnonymousClass1 mServiceConnection = new AnonymousClass1();
     public final AnonymousClass2 mStateListener;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.BleAdvertiserServiceManager$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
         public AnonymousClass1() {}

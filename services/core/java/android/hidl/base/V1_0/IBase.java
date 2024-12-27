@@ -16,11 +16,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IBase extends IHwInterface {
     public static final String kInterfaceName = "android.hidl.base@1.0::IBase";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements IBase {
         private IHwBinder mRemote;
 
@@ -184,7 +182,6 @@ public interface IBase extends IHwInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements IBase {
         @Override // android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {

@@ -95,7 +95,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SyncManager {
     public static SyncManager sInstance;
     public static final SyncManager$$ExternalSyntheticLambda0 sOpDumpComparator;
@@ -137,7 +136,6 @@ public final class SyncManager {
     public volatile int mNextJobId = 0;
     public final ArrayList mActiveSyncContexts = Lists.newArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.content.SyncManager$12, reason: invalid class name */
     public final class AnonymousClass12 implements Comparator {
         public final /* synthetic */ int $r8$classId;
@@ -177,7 +175,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.content.SyncManager$7, reason: invalid class name */
     public final class AnonymousClass7 {
         public /* synthetic */ AnonymousClass7() {}
@@ -198,14 +195,12 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccountSyncStats {
         public long elapsedTime;
         public String name;
         public int times;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveSyncContext extends ISyncContext.Stub
             implements ServiceConnection, IBinder.DeathRecipient {
         public boolean mBound;
@@ -311,7 +306,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthoritySyncStats {
         public Map accountMap;
         public long elapsedTime;
@@ -319,7 +313,6 @@ public final class SyncManager {
         public int times;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnUnsyncableAccountCheck implements ServiceConnection {
         public final SyncManager$$ExternalSyntheticLambda5 mOnReadyCallback;
         public final RegisteredServicesCache.ServiceInfo mSyncAdapterInfo;
@@ -367,7 +360,6 @@ public final class SyncManager {
         public final void onServiceDisconnected(ComponentName componentName) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageMonitorImpl extends PackageMonitor {
         public final boolean onHandleForceStop(
                 Intent intent, String[] strArr, int i, boolean z, Bundle bundle) {
@@ -388,7 +380,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PrintTable {
         public final ArrayList mTable = Lists.newArrayList();
         public final int mCols = 16;
@@ -438,7 +429,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScheduleSyncMessagePayload {
         public final long minDelayMillis;
         public final SyncOperation syncOperation;
@@ -449,7 +439,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceConnectionData {
         public final ActiveSyncContext activeSyncContext;
         public final IBinder adapter;
@@ -460,7 +449,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncFinishedOrCancelledMessagePayload {
         public final ActiveSyncContext activeSyncContext;
         public final SyncResult syncResult;
@@ -472,7 +460,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncHandler extends Handler {
         public final SyncTimeTracker mSyncTimeTracker;
         public final HashMap mWakeLocks;
@@ -1184,7 +1171,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncTimeTracker {
         public long mTimeSpentSyncing;
         public boolean mLastWasSyncing = false;
@@ -1212,7 +1198,6 @@ public final class SyncManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdatePeriodicSyncMessagePayload {
         public final Bundle extras;
         public final long flex;

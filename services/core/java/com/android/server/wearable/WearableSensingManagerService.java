@@ -43,7 +43,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WearableSensingManagerService extends AbstractMasterSystemService {
     public final Context mContext;
     public final Set mDataRequestObserverContexts;
@@ -51,7 +50,6 @@ public final class WearableSensingManagerService extends AbstractMasterSystemSer
     public volatile boolean mIsServiceEnabled;
     public final AtomicInteger mNextDataRequestObserverId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataRequestObserverContext {
         public final int mDataRequestObserverId;
         public final PendingIntent mDataRequestPendingIntent;
@@ -69,7 +67,6 @@ public final class WearableSensingManagerService extends AbstractMasterSystemSer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WearableSensingManagerInternal extends IWearableSensingManager.Stub {
         public WearableSensingManagerInternal() {}
 

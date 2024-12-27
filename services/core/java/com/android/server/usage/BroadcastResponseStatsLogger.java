@@ -10,14 +10,12 @@ import com.android.internal.util.RingBuffer;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BroadcastResponseStatsLogger {
     public static final int MAX_LOG_SIZE;
     public final LogBuffer mBroadcastEventsBuffer;
     public final Object mLock = new Object();
     public final LogBuffer mNotificationEventsBuffer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastEvent implements Data {
         public long idForResponseEvent;
         public int sourceUid;
@@ -49,15 +47,12 @@ public final class BroadcastResponseStatsLogger {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Data {
         void reset();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogBuffer extends RingBuffer {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationEvent implements Data {
         public String packageName;
         public long timestampMs;

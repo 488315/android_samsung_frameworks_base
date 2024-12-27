@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.SplitShadeStateController;
 import kotlin.jvm.functions.Function0;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LockscreenShadeQsTransitionController extends AbstractLockscreenShadeTransitionController {
     public boolean isTransitioningToFullShade;
     public float qsDragDownAmount;
@@ -22,7 +21,6 @@ public final class LockscreenShadeQsTransitionController extends AbstractLockscr
     public float qsTransitionFraction;
     public int qsTransitionStartDelay;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         LockscreenShadeQsTransitionController create(Function0 function0);
     }

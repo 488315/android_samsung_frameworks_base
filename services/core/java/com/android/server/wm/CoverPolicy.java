@@ -12,7 +12,6 @@ import com.samsung.android.cover.ICoverManager;
 
 import java.util.HashSet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CoverPolicy {
     public HashSet mAppsToBeHiddenBySViewCover;
     public ICoverManager mCoverManager;
@@ -28,7 +27,6 @@ public final class CoverPolicy {
     public WindowManagerPolicy mWindowPolicy;
     public WindowManagerService mWmService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverDisplayPolicy implements ExtraDisplayPolicy {
         public CoverDisplayPolicy() {}
 
@@ -80,7 +78,6 @@ public final class CoverPolicy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverPolicyHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {}

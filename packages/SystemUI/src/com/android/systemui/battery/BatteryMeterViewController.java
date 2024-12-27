@@ -34,7 +34,6 @@ import com.android.systemui.util.ViewController;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BatteryMeterViewController extends ViewController {
     public float mAdditionalScaleFactorForSpecificBatteryView;
     public float mAodScaleFactor;
@@ -60,7 +59,6 @@ public final class BatteryMeterViewController extends ViewController {
     public final UserTracker.Callback mUserChangedCallback;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.battery.BatteryMeterViewController$1, reason: invalid class name */
     public final class AnonymousClass1 implements ConfigurationController.ConfigurationListener {
         public AnonymousClass1() {
@@ -86,7 +84,6 @@ public final class BatteryMeterViewController extends ViewController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.battery.BatteryMeterViewController$4, reason: invalid class name */
     class AnonymousClass4 implements UserTracker.Callback {
         public AnonymousClass4() {
@@ -114,7 +111,6 @@ public final class BatteryMeterViewController extends ViewController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final BatteryController mBatteryController;
         public final ConfigurationController mConfigurationController;
@@ -145,7 +141,6 @@ public final class BatteryMeterViewController extends ViewController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SettingObserver extends ContentObserver {
         public SettingObserver(Handler handler) {
             super(handler);
@@ -161,7 +156,6 @@ public final class BatteryMeterViewController extends ViewController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SlimIndicatorVisibilityHelper implements SlimIndicatorViewSubscriber {
         public String mTicketName;
 

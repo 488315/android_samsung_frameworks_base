@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import com.android.systemui.basic.util.LogWrapper;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DataConnectionDataLimitDialog implements PopupUIAlertDialog {
     private static final String TAG = "DataConnectionDataLimitDialog";
     private Context mContext;

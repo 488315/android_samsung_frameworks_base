@@ -44,17 +44,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.IntPredicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsHandler {
     public Context mContext;
     public MainHandler mMainHandler;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsHandlerHolder {
         public static final MARsHandler INSTANCE = new MARsHandler();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public final MARsPolicyManager mMARsPolicyManager;
         public final /* synthetic */ MARsHandler this$0 = MARsHandlerHolder.INSTANCE;
@@ -883,7 +880,6 @@ public final class MARsHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainThread extends Thread {
         public final int mPriority;
         public final /* synthetic */ MARsHandler this$0 = MARsHandlerHolder.INSTANCE;

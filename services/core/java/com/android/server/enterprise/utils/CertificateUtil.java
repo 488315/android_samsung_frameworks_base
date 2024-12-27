@@ -40,7 +40,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CertificateUtil {
     public final Context mContext;
     public final UserManager mUserManager;
@@ -49,7 +48,6 @@ public final class CertificateUtil {
     public List mCaCerts = new ArrayList();
     public final Random mRandom = new Random();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyChainCRUD {
         public final Context mContext;
         public final UserHandle mUser;

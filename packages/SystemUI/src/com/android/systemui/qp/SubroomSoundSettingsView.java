@@ -21,7 +21,6 @@ import com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubroomSoundSettingsView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;

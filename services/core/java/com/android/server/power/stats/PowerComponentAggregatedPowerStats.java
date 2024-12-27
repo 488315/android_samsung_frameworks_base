@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerComponentAggregatedPowerStats {
     public final AggregatedPowerStats mAggregatedPowerStats;
     public final AggregatedPowerStatsConfig.PowerComponent mConfig;
@@ -32,7 +31,6 @@ public final class PowerComponentAggregatedPowerStats {
     public final int[] mDeviceStates = new int[2];
     public long mPowerStatsTimestamp = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStats {
         public int[] states;
         public MultiStateStats stats;

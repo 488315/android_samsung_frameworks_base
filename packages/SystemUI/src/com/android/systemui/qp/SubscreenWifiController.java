@@ -17,7 +17,6 @@ import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.connectivity.WifiIndicators;
 import com.sec.ims.settings.ImsProfile;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenWifiController implements SubscreenQSControllerContract$Presenter {
     public static Context mContext;
     public static SubscreenWifiController sInstance;
@@ -29,7 +28,6 @@ public final class SubscreenWifiController implements SubscreenQSControllerContr
     public final NetworkController mNetworkController = (NetworkController) Dependency.sDependency.getDependencyInner(NetworkController.class);
     public final WifiSignalCallback mSignalCallback = new WifiSignalCallback(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TileReceiver extends BroadcastReceiver {
         public TileReceiver() {
         }
@@ -48,7 +46,6 @@ public final class SubscreenWifiController implements SubscreenQSControllerContr
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WifiSignalCallback implements SignalCallback {
         public /* synthetic */ WifiSignalCallback(SubscreenWifiController subscreenWifiController, int i) {
             this();

@@ -4,7 +4,6 @@ import android.os.PersistableBundle;
 
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class ChildSaProposalUtils$$ExternalSyntheticLambda0
         implements PersistableBundleUtils.Deserializer {
     @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer

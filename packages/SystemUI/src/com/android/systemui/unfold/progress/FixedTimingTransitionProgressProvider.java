@@ -11,13 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FixedTimingTransitionProgressProvider implements UnfoldTransitionProgressProvider, FoldStateProvider.FoldUpdatesListener {
     public final ObjectAnimator animator;
     public final List listeners;
     public float transitionProgress;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationProgressProperty extends FloatProperty {
         public static final AnimationProgressProperty INSTANCE = new AnimationProgressProperty();
 
@@ -41,7 +39,6 @@ public final class FixedTimingTransitionProgressProvider implements UnfoldTransi
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -89,7 +86,6 @@ public final class FixedTimingTransitionProgressProvider implements UnfoldTransi
         ((ArrayList) this.listeners).remove((UnfoldTransitionProgressProvider.TransitionProgressListener) obj);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimatorListener implements Animator.AnimatorListener {
         public AnimatorListener() {
         }

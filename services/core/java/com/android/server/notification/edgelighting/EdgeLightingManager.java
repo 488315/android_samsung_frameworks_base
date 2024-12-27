@@ -38,7 +38,6 @@ import com.samsung.android.edge.SemEdgeLightingInfo;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EdgeLightingManager {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static final String TAG = "EdgeLightingManager";
@@ -58,7 +57,6 @@ public final class EdgeLightingManager {
     public final Object mLock = new Object();
     public final SparseArray mCurrentProfiles = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SecurityPolicy {
         public final AppOpsManager mAppOpsManager;
         public final Context mContext;

@@ -5,7 +5,6 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DefaultConnectionModel {
     public final BTTether btTether;
     public final CarrierMerged carrierMerged;
@@ -14,7 +13,6 @@ public final class DefaultConnectionModel {
     public final Mobile mobile;
     public final Wifi wifi;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BTTether {
         public final boolean isDefault;
 
@@ -38,7 +36,6 @@ public final class DefaultConnectionModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CarrierMerged {
         public final boolean isDefault;
 
@@ -62,7 +59,6 @@ public final class DefaultConnectionModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Ethernet {
         public final boolean isDefault;
 
@@ -86,7 +82,6 @@ public final class DefaultConnectionModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Mobile {
         public final boolean isDefault;
 
@@ -110,7 +105,6 @@ public final class DefaultConnectionModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Wifi {
         public final boolean isDefault;
 

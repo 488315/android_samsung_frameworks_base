@@ -30,7 +30,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUITextView;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback {
     public KeyguardSecurityCallback mCallback;
     public SystemUITextView mESimText;
@@ -43,7 +42,6 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
     public SelectedUserInteractor mSelectedUserInteractor;
     public int mSubscriptionId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecESimArea$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {

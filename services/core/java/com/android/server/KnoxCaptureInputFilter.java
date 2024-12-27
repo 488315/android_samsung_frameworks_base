@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxCaptureInputFilter extends InputFilter {
     public static final boolean DEBUG = !"user".equals(SystemProperties.get("ro.build.type"));
     public int activeScanDeviceId;
@@ -26,7 +25,6 @@ public final class KnoxCaptureInputFilter extends InputFilter {
     public final ScanEventHandler scanEventHandler;
     public final Set scannerDevices;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScanEventHandler extends Handler {
         public final List activeScanInput;
         public final StringBuilder unicodeCodepoint;

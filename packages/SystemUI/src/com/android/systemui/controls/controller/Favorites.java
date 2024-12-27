@@ -19,7 +19,6 @@ import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class Favorites {
     public static final Favorites INSTANCE = new Favorites();
     public static Map favMap = MapsKt__MapsKt.emptyMap();

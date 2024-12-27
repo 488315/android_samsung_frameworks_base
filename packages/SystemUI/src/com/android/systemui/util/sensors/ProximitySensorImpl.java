@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ProximitySensorImpl implements ProximitySensor {
     private static final boolean DEBUG;
     private static final long SECONDARY_PING_INTERVAL_MS = 5000;
@@ -42,7 +41,6 @@ public class ProximitySensorImpl implements ProximitySensor {
     };
     final ThresholdSensor.Listener mSecondaryEventListener = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.util.sensors.ProximitySensorImpl$1, reason: invalid class name */
     class AnonymousClass1 implements ThresholdSensor.Listener {
         public AnonymousClass1() {

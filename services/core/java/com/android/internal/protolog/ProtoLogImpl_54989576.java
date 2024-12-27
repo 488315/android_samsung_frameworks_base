@@ -8,7 +8,6 @@ import com.android.internal.protolog.common.LogLevel;
 
 import java.util.TreeMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ProtoLogImpl_54989576 {
     public static IProtoLog sServiceInstance;
     public static final TreeMap sLogGroups =
@@ -102,7 +101,6 @@ public abstract class ProtoLogImpl_54989576 {
     public static final ProtoLogImpl_54989576$$ExternalSyntheticLambda0 sCacheUpdater =
             new ProtoLogImpl_54989576$$ExternalSyntheticLambda0();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Cache {
         public static final boolean[] WM_ERROR_enabled = {true, true, true, true, true, true};
         public static final boolean[] WM_DEBUG_ORIENTATION_enabled = {

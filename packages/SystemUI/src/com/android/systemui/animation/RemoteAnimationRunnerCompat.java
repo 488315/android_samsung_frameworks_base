@@ -12,11 +12,9 @@ import android.window.RemoteAnimationRunnerHelper;
 import android.window.RemoteTransitionStub;
 import android.window.TransitionInfo;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class RemoteAnimationRunnerCompat extends IRemoteAnimationRunner.Stub {
     public static final boolean FW_SHELL_TRANSITION_MERGE;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.animation.RemoteAnimationRunnerCompat$1, reason: invalid class name */
     public final class AnonymousClass1 extends RemoteTransitionStub {
         public final ArrayMap mFinishRunnables = new ArrayMap();

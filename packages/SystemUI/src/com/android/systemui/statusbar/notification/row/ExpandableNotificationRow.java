@@ -156,7 +156,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ExpandableNotificationRow extends ActivatableNotificationView implements PluginListener<NotificationMenuRowPlugin>, SwipeableView, NotificationFadeAware.FadeOptimizedNotification, PanelScreenShotLogger.LogProvider {
     public static final AnonymousClass2 TRANSLATE_CONTENT;
     public boolean mAboveShelf;
@@ -270,7 +269,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
     public static final SourceType$Companion$from$1 BASE_VALUE = SourceType.from("BaseValue");
     public static final SourceType$Companion$from$1 FROM_PARENT = SourceType.from("FromParent(ENR)");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$1, reason: invalid class name */
     public final class AnonymousClass1 implements View.OnClickListener {
         public AnonymousClass1() {
@@ -333,7 +331,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationViewState extends ExpandableViewState {
         public /* synthetic */ NotificationViewState(int i) {
             this();
@@ -463,7 +460,6 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnExpandClickListener {
     }
 

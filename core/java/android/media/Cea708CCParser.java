@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-/* compiled from: Cea708CaptionRenderer.java */
 class Cea708CCParser {
     public static final int CAPTION_EMIT_TYPE_BUFFER = 1;
     public static final int CAPTION_EMIT_TYPE_COMMAND_CLW = 4;
@@ -38,7 +37,6 @@ class Cea708CCParser {
     private int mCommand = 0;
     private DisplayListener mListener;
 
-    /* compiled from: Cea708CaptionRenderer.java */
     interface DisplayListener {
         void emitEvent(CaptionEvent captionEvent);
     }
@@ -388,7 +386,6 @@ class Cea708CCParser {
         return pos;
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     private static class Const {
         public static final int CODE_C0_BS = 8;
         public static final int CODE_C0_CR = 13;
@@ -467,7 +464,6 @@ class Cea708CCParser {
         private Const() {}
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionColor {
         public static final int OPACITY_FLASH = 1;
         public static final int OPACITY_SOLID = 0;
@@ -496,7 +492,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionEvent {
         public final Object obj;
         public final int type;
@@ -507,7 +502,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionPenAttr {
         public static final int OFFSET_NORMAL = 1;
         public static final int OFFSET_SUBSCRIPT = 0;
@@ -541,7 +535,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionPenColor {
         public final CaptionColor backgroundColor;
         public final CaptionColor edgeColor;
@@ -557,7 +550,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionPenLocation {
         public final int column;
         public final int row;
@@ -568,7 +560,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionWindowAttr {
         public final CaptionColor borderColor;
         public final int borderType;
@@ -605,7 +596,6 @@ class Cea708CCParser {
         }
     }
 
-    /* compiled from: Cea708CaptionRenderer.java */
     public static class CaptionWindow {
         public final int anchorHorizontal;
         public final int anchorId;

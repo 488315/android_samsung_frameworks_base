@@ -8,7 +8,6 @@ import com.android.systemui.biometrics.shared.model.BiometricModalities;
 import com.android.systemui.biometrics.shared.model.BiometricUserInfo;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class BiometricPromptRequest {
     public final PromptContentView contentView;
     public final String description;
@@ -18,7 +17,6 @@ public abstract class BiometricPromptRequest {
     public final String title;
     public final BiometricUserInfo userInfo;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Biometric extends BiometricPromptRequest {
         public final boolean allowBackgroundAuthentication;
         public final ComponentName componentNameForConfirmDeviceCredentialActivity;
@@ -105,17 +103,14 @@ public abstract class BiometricPromptRequest {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Credential extends BiometricPromptRequest {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Password extends Credential {
             public Password(PromptInfo promptInfo, BiometricUserInfo biometricUserInfo, BiometricOperationInfo biometricOperationInfo) {
                 super(promptInfo, biometricUserInfo, biometricOperationInfo, null);
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Pattern extends Credential {
             public final boolean stealthMode;
 
@@ -125,7 +120,6 @@ public abstract class BiometricPromptRequest {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Pin extends Credential {
             public Pin(PromptInfo promptInfo, BiometricUserInfo biometricUserInfo, BiometricOperationInfo biometricOperationInfo) {
                 super(promptInfo, biometricUserInfo, biometricOperationInfo, null);

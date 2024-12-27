@@ -26,7 +26,6 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HealthServiceWrapperHidl extends HealthServiceWrapper {
     public final Callback mCallback;
     public final IHealthSupplier mHealthSupplier;
@@ -35,10 +34,8 @@ public final class HealthServiceWrapperHidl extends HealthServiceWrapper {
     public final HandlerThread mHandlerThread = new HandlerThread("HealthServiceHwbinder");
     public final AtomicReference mLastService = new AtomicReference();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IHealthSupplier {
         static IHealth get(String str) {
             IHwBinder service =
@@ -67,15 +64,12 @@ public final class HealthServiceWrapperHidl extends HealthServiceWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IServiceManagerSupplier {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Mutable {
         public HealthInfo value;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Notification extends IServiceNotification.Stub {
         public Notification() {}
 

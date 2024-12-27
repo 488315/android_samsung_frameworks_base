@@ -15,7 +15,6 @@ import com.android.systemui.util.time.SystemClock;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QuickAccessWalletController {
     public static final long RECREATION_TIME_WINDOW = TimeUnit.MINUTES.toMillis(10);
     public final Executor mBgExecutor;
@@ -33,7 +32,6 @@ public final class QuickAccessWalletController {
     public int mDefaultPaymentAppChangeEvents = 0;
     public int mDefaultWalletAppChangeEvents = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallet.controller.QuickAccessWalletController$1, reason: invalid class name */
     public final class AnonymousClass1 extends ContentObserver {
         public final /* synthetic */ QuickAccessWalletClient.OnWalletCardsRetrievedCallback val$cardsRetriever;
@@ -50,7 +48,6 @@ public final class QuickAccessWalletController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallet.controller.QuickAccessWalletController$2, reason: invalid class name */
     public final class AnonymousClass2 extends ContentObserver {
         public AnonymousClass2(Handler handler) {
@@ -68,7 +65,6 @@ public final class QuickAccessWalletController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum WalletChangeEvent {
         DEFAULT_PAYMENT_APP_CHANGE,
         DEFAULT_WALLET_APP_CHANGE,

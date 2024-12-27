@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQuickSettingsAffordance implements ConfigurationController.ConfigurationListener {
     public static final AnimHelper.AnimProperty BOUNCING1_ANIM_ARROW_ALPHA_PROPERTY;
     public static final AnimHelper.AnimProperty BOUNCING2_ANIM_ARROW_ALPHA_PROPERTY;
@@ -68,7 +67,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
     private final SettingsHelper settingsHelper = (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
     public final Handler handler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -78,7 +76,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HideAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super("SecQuickSettingsAffordance", str, true);
@@ -118,7 +115,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShowAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super("SecQuickSettingsAffordance", str, true);
@@ -308,7 +304,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         Log.d("SecQuickSettingsAffordance", "displayEffect animationState = " + animationState);
         this.handler.post(new Runnable() { // from class: com.android.systemui.shade.SecQuickSettingsAffordance$displayEffect$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -516,7 +511,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         view.setVisibility(this.isVisibleView ? 0 : 8);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BouncingAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public final AnimatorSet nextAnimSet;
         public final int startDelay;

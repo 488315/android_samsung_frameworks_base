@@ -23,7 +23,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShortcutBitmapSaver {
     public final Executor mExecutor =
             new ThreadPoolExecutor(0, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue());
@@ -32,7 +31,6 @@ public final class ShortcutBitmapSaver {
             new ShortcutBitmapSaver$$ExternalSyntheticLambda0(0, this);
     public final ShortcutService mService;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingItem {
         public final byte[] bytes;
         public final long mInstantiatedUptimeMillis = SystemClock.uptimeMillis();

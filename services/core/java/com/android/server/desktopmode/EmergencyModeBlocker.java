@@ -14,7 +14,6 @@ import android.provider.Settings;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EmergencyModeBlocker implements SemDesktopModeManager.DesktopModeBlocker {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
@@ -55,7 +54,6 @@ public final class EmergencyModeBlocker implements SemDesktopModeManager.Desktop
     public boolean mBlockerRegistered = false;
     public final Handler mHandler = new Handler();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastListener extends BroadcastReceiver {
         public BroadcastListener() {}
 
@@ -82,7 +80,6 @@ public final class EmergencyModeBlocker implements SemDesktopModeManager.Desktop
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsListener extends ContentObserver {
         public SettingsListener() {
             super(null);

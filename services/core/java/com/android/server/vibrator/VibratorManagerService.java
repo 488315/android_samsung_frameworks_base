@@ -110,7 +110,6 @@ import libcore.util.NativeAllocationRegistry;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class VibratorManagerService extends IVibratorManagerService.Stub {
     public static final VibrationAttributes DEFAULT_ATTRIBUTES = new VibrationAttributes.Builder().build();
     public final SparseArray mAlwaysOnEffects;
@@ -149,7 +148,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
     public final SparseArray mVibrators;
     public VirtualVibSoundHelper mVirtualVibSoundHelper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vibrator.VibratorManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -362,7 +360,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vibrator.VibratorManagerService$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$android$os$VibrationEffect$SemMagnitudeType;
@@ -420,7 +417,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AlwaysOnVibration {
         public final int alwaysOnId;
         public final Vibration.CallerInfo callerInfo;
@@ -433,7 +429,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalVibrationHolder extends Vibration implements IBinder.DeathRecipient {
         public final ExternalVibration externalVibration;
         public Vibration.Status mStatus;
@@ -473,7 +468,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ExternalVibratorService extends IExternalVibratorService.Stub {
         public ExternalVibratorService() {
         }
@@ -663,11 +657,9 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public VibratorManagerService mService;
 
@@ -720,7 +712,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NativeWrapper {
         public long mNativeServicePtr = 0;
 
@@ -753,12 +744,10 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface OnSyncedVibrationCompleteListener {
         void onComplete(long j);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationRecord implements GroupedAggregatedLogRecords.SingleLogRecord {
         public final Vibration.DebugInfo mInfo;
 
@@ -829,7 +818,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationRecords extends GroupedAggregatedLogRecords {
         @Override // com.android.server.vibrator.GroupedAggregatedLogRecords
         public final void dumpGroupHeader(IndentingPrintWriter indentingPrintWriter, int i) {
@@ -848,7 +836,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationThreadCallbacks implements VibratorController.OnVibrationCompleteListener, OnSyncedVibrationCompleteListener {
         public Object this$0;
 
@@ -910,7 +897,6 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibratorManagerRecords {
         public final VibrationRecords mAggregatedVibrationHistory;
         public final VibrationRecords mRecentVibrations;
@@ -921,11 +907,9 @@ public class VibratorManagerService extends IVibratorManagerService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibratorManagerShellCommand extends ShellCommand {
         public final IBinder mShellCallbacksToken;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class CommonOptions {
             public final boolean background;
             public final String description;

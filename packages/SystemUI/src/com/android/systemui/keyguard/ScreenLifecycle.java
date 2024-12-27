@@ -5,7 +5,6 @@ import com.android.systemui.Dumpable;
 import com.android.systemui.dump.DumpManager;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenLifecycle extends SecLifecycle implements Dumpable {
     public int mScreenState = 0;
 
@@ -25,7 +24,6 @@ public final class ScreenLifecycle extends SecLifecycle implements Dumpable {
         return this.mScreenState;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Observer {
         default void onScreenInternalTurningOff() {
         }

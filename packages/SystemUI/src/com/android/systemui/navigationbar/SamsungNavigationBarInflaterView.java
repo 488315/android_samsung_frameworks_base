@@ -20,7 +20,6 @@ import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SamsungNavigationBarInflaterView extends NavigationBarInflaterView {
     public final int displayId;
     public final NavBarStateManager navBarStateManager;
@@ -40,7 +39,6 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
     public static final String taskStack = "task_stack";
     public static final String buttonSpace = "button_space";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

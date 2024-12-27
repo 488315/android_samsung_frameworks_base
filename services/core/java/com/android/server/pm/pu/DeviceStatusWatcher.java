@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceStatusWatcher {
     public Handler mHandler;
     public ServiceThread mHandlerThread;
@@ -188,7 +187,6 @@ public final class DeviceStatusWatcher {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReceiverController {
         public final IntentFilter mShutdownFilter =
                 new IntentFilter("android.intent.action.ACTION_SHUTDOWN");

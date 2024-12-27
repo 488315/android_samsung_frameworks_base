@@ -20,7 +20,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DualDarDaemonConnector implements Runnable, Handler.Callback {
     public final INativeDaemonConnectorCallbacks mCallback;
     public InputStream mInputStream;
@@ -31,12 +30,10 @@ public final class DualDarDaemonConnector implements Runnable, Handler.Callback 
     public final ResponseQueue mResponseQueue = new ResponseQueue();
     public final AtomicInteger mSequenceNumber = new AtomicInteger(0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResponseQueue {
         public final LinkedList mPendingCmds = new LinkedList();
         public final int mMaxCount = 10;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PendingCmd {
             public int availableResponseCount;
             public final String cmd;

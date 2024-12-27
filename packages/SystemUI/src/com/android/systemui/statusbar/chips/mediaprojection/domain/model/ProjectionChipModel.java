@@ -5,10 +5,8 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class ProjectionChipModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotProjecting extends ProjectionChipModel {
         public static final NotProjecting INSTANCE = new NotProjecting();
 
@@ -29,7 +27,6 @@ public abstract class ProjectionChipModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Projecting extends ProjectionChipModel {
         public final MediaProjectionState.Projecting projectionState;
         public final Type type;
@@ -62,7 +59,6 @@ public abstract class ProjectionChipModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Type {
         public static final /* synthetic */ Type[] $VALUES;
         public static final Type CAST_TO_OTHER_DEVICE;

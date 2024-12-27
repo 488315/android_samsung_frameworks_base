@@ -11,7 +11,6 @@ import com.android.server.crashrecovery.proto.CrashRecoveryStatsLog;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class WatchdogRollbackLogger {
     /* JADX WARN: Removed duplicated region for block: B:7:0x0036 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:9:0x0037 A[EXC_TOP_SPLITTER, SYNTHETIC] */

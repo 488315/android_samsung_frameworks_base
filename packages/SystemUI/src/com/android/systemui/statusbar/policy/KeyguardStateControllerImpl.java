@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardStateControllerImpl implements KeyguardStateController {
     public final ConcurrentHashMap.KeySetView mCallbacks = ConcurrentHashMap.newKeySet();
     public boolean mCanDismissLockScreen;
@@ -50,7 +49,6 @@ public final class KeyguardStateControllerImpl implements KeyguardStateControlle
     public final Lazy mUnlockAnimationControllerLazy;
     public final SelectedUserInteractor mUserInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class UpdateMonitorCallback extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ UpdateMonitorCallback(KeyguardStateControllerImpl keyguardStateControllerImpl, int i) {
             this();

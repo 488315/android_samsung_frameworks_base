@@ -56,7 +56,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PrePackageInstallerBase {
     public final Context mContext;
     public int mFailCount;
@@ -76,7 +75,6 @@ public abstract class PrePackageInstallerBase {
     public String mHistoryForSettingProvider = "";
     public final Collection mInstallHistory = new HashSet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ApkFile {
         public File mDecompressedFile;
         public final File mFile;
@@ -169,7 +167,6 @@ public abstract class PrePackageInstallerBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalIntentReceiver {
         public Object mLocalSender;
         public Object mResult;
@@ -209,7 +206,6 @@ public abstract class PrePackageInstallerBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsProviderProxy {
         public static Context mContext;
     }

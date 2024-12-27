@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BrightnessThermalClamper extends BrightnessClamper {
     public final DeviceConfigParameterProvider mConfigParameterProvider;
     public String mDataId;
@@ -37,13 +36,10 @@ public final class BrightnessThermalClamper extends BrightnessClamper {
     public int mThrottlingStatus;
     public String mUniqueDisplayId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ThermalData {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalStatusObserver extends IThermalEventListener.Stub {
         public final Handler mHandler;
         public final Injector mInjector;

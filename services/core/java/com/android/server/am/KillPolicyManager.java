@@ -58,7 +58,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KillPolicyManager {
     public ActivityManagerService mAm;
     public long mAppLaunchCount;
@@ -138,7 +137,6 @@ public final class KillPolicyManager {
     public static int sSyspersFloodRatio = 30;
     public static boolean mIsChimeraPmmKillTriggered = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class AutoRestartParameterReceiver extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -183,7 +181,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChimeraTriggerManager {
         public static final float PMM_CRITICAL_SCORE_THRESHOLD =
                 Float.parseFloat(
@@ -222,13 +219,11 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DeviceInfoHelper {
         public static final Uri URI_ISSUE_TRACKER =
                 Uri.parse("content://issuetracker_provider/user_list");
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpHeavyProcessInfo {
         public ActivityManagerService.MemDumpInfo memoryInfo;
         public String packageName;
@@ -237,7 +232,6 @@ public final class KillPolicyManager {
         public ArrayList pssUssRssInfo;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DumpPssUssRssInfo {
         public int avgPss;
         public int avgRss;
@@ -254,13 +248,11 @@ public final class KillPolicyManager {
         public int stateIndex;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class KpmClassLazy {
         public static final KillPolicyManager INSTANCE = new KillPolicyManager();
         public static boolean isinitKpmClass = false;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KpmRaw {
         public int appCnt;
         public int cachedClientKillCount;
@@ -1067,7 +1059,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum KpmState {
         NONE(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG),
         LIGHT("Light"),
@@ -1086,7 +1077,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum LmkdCount {
         /* JADX INFO: Fake field, exist only in values array */
         EF7("CACHED_APP_MAX_ADJ"),
@@ -1134,7 +1124,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LmkdCountReader {
         public long bServiceCountOfLmkd;
         public long cachedMinCountOfLmkd;
@@ -1173,7 +1162,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LmkdCounter {
         public int bServiceKillOccurredCount;
         public final KpmRaw kpmRaw;
@@ -1283,7 +1271,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum LmkdState {
         LEVEL_0("LEVEL_0"),
         LEVEL_1("LEVEL_1"),
@@ -1319,7 +1306,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemoryDumpItem {
         public final long mDumpSize;
         public final MemoryLoggingType mMemoryType;
@@ -1330,7 +1316,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemoryFloodDetector {
         public Pair mLastCalculatedNative;
         public Pair mLastCalculatedSysPers;
@@ -1430,7 +1415,6 @@ public final class KillPolicyManager {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class MemoryLoggingType {
         public static final /* synthetic */ MemoryLoggingType[] $VALUES;
         public static final MemoryLoggingType IdleDump;
@@ -1453,17 +1437,14 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemoryStabilityEventManager {
         public final Reporter mReporter = new Reporter();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Counter {
             public static final int[] FORMAT_ZRAM_ERROR = {8202, 8224, 8224};
             public final long[] countOfEvents = new long[2];
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Reporter {
             public boolean mHasReportedAtLeastOnce;
             public int mLastRealtimeMinutes;
@@ -1591,7 +1572,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcMemInfo {
         public int activeFile;
         public int cached;
@@ -1613,7 +1593,6 @@ public final class KillPolicyManager {
         public int zram;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessMemoryHeavyInfo {
         public AnonymousClass1 mProcessMemoryDumpThread;
         public boolean isThreadRunning = false;
@@ -1625,7 +1604,6 @@ public final class KillPolicyManager {
         public HashMap memoryUsageByAdj = new HashMap();
         public HashMap dumpHeavyProcessByAdj = new HashMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class PssComparator implements Comparator {
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
@@ -2010,13 +1988,11 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessMemoryUsageInfo {
         public AnonymousClass1 mProcDumpMemThread;
         public final ProcessSamplingManager mProcessSamplingManager;
         public HashMap procsMemoryPssKbByADJ;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.am.KillPolicyManager$ProcessMemoryUsageInfo$1, reason: invalid class name */
         public final class AnonymousClass1 extends Thread {
             public final /* synthetic */ KpmRaw val$lastCycle;
@@ -2272,7 +2248,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessSampler {
         public static final int[] ADJ_PRIORITY_BY_LABEL_INDEX = {
             3, 3, 3, 3, 4, 0, 1, 1, 1, 5, 5, 2, 5, 4, 2, 6, 6
@@ -2372,7 +2347,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessSamplingManager {
         public int mCurrentState;
         public boolean mIsSampleDevice;
@@ -2554,7 +2528,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum PsiDataType {
         AVG10("avg10"),
         TOTAL("total");
@@ -2566,7 +2539,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PsiFile {
         public boolean mIsEmptyFile;
         public double mSomeAvg10;
@@ -2580,7 +2552,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum PsiFileType {
         IO("/proc/pressure/io"),
         MEMORY("/proc/pressure/memory"),
@@ -2597,7 +2568,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SampleProcessInfo {
         public int adjLabelIndex;
         public int procState;
@@ -2618,7 +2588,6 @@ public final class KillPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SwappinessController {
         public int mCurrentValue;
         public final int mDefaultValue;

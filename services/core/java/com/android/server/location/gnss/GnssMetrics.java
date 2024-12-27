@@ -15,7 +15,6 @@ import com.android.server.location.gnss.hal.GnssNative;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GnssMetrics {
     public boolean[] mConstellationTypes;
     public final GnssNative mGnssNative;
@@ -40,7 +39,6 @@ public final class GnssMetrics {
     public final Statistics mTopFourAverageCn0Statistics = new Statistics();
     public final Statistics mTopFourAverageCn0StatisticsL5 = new Statistics();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GnssPowerMetrics {
         public final IBatteryStats mBatteryStats;
         public double mLastAverageCn0 = -100.0d;
@@ -75,7 +73,6 @@ public final class GnssMetrics {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Statistics {
         public int mCount;
         public long mLongSum;
@@ -117,7 +114,6 @@ public final class GnssMetrics {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
         public StatsPullAtomCallbackImpl() {}
 

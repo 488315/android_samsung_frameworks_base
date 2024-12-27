@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class CallMetadataSyncConnectionService extends ConnectionService {
     AudioManager mAudioManager;
     public CompanionDeviceManagerService.LocalService mCdmsi;
@@ -161,7 +160,6 @@ public class CallMetadataSyncConnectionService extends ConnectionService {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.companion.datatransfer.contextsync.CallMetadataSyncConnectionService$2, reason: invalid class name */
     public final class AnonymousClass2 extends CallMetadataSyncConnectionCallback {
         public final /* synthetic */ int $r8$classId;
@@ -202,7 +200,6 @@ public class CallMetadataSyncConnectionService extends ConnectionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class CallMetadataSyncConnection extends Connection {
         public final int mAssociationId;
         public final AudioManager mAudioManager;
@@ -354,12 +351,10 @@ public class CallMetadataSyncConnectionService extends ConnectionService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     abstract class CallMetadataSyncConnectionCallback {
         public abstract void sendCallAction(int i, int i2, String str);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class CallMetadataSyncConnectionIdentifier {
         public final int mAssociationId;
         public final String mCallId;

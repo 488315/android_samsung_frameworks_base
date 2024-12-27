@@ -26,11 +26,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ISehBiometricsFace
         extends vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements ISehBiometricsFace {
         public IHwBinder mRemote;
 
@@ -596,7 +594,6 @@ public interface ISehBiometricsFace
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements ISehBiometricsFace {
         @Override // android.hidl.base.V1_0.IBase
         public final IHwBinder asBinder() {

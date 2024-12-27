@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class DeviceController {
     public final SharedFlowImpl audioDevicesFlow;
     public final Lazy controllerJob$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.DeviceController$controllerJob$2

@@ -34,11 +34,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ApexManager {
     public static final AnonymousClass1 sApexManagerSingleton = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.ApexManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends Singleton {
         public final Object create() {
@@ -46,7 +44,6 @@ public abstract class ApexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveApexInfo {
         public final boolean activeApexChanged;
         public final File apexDirectory;
@@ -72,7 +69,6 @@ public abstract class ApexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ApexManagerImpl extends ApexManager {
         public Set mActiveApexInfosCache;
         public ArrayMap mApexModuleNameToActivePackageName;
@@ -362,7 +358,6 @@ public abstract class ApexManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScanResult {
         public final ApexInfo apexInfo;
         public final String packageName;

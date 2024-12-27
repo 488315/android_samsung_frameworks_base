@@ -7,14 +7,12 @@ import com.android.systemui.mediaprojection.taskswitcher.ui.viewmodel.TaskSwitch
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TaskSwitcherNotificationCoordinator {
     public final BroadcastDispatcher broadcastDispatcher;
     public final Context context;
     public final NotificationManager notificationManager;
     public final TaskSwitcherNotificationViewModel viewModel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

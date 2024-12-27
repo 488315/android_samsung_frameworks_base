@@ -23,14 +23,12 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AncViewModel {
     public final AncAvailabilityCriteria availabilityCriteria;
     public final ReadonlyStateFlow buttonSlice;
     public final AncSliceInteractor interactor;
     public final ReadonlyStateFlow popupSlice;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -50,12 +48,10 @@ public final class AncViewModel {
         final ReadonlyStateFlow readonlyStateFlow = ancSliceInteractor.ancSlices;
         final Flow flow = new Flow() { // from class: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -142,12 +138,10 @@ public final class AncViewModel {
         };
         Flow flow2 = new Flow() { // from class: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -236,12 +230,10 @@ public final class AncViewModel {
         this.popupSlice = FlowKt.stateIn(flow2, coroutineScope, startedEagerly, null);
         final Flow flow3 = new Flow() { // from class: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$filterIsInstance$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -328,12 +320,10 @@ public final class AncViewModel {
         };
         this.buttonSlice = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.volume.panel.component.anc.ui.viewmodel.AncViewModel$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

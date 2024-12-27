@@ -9,14 +9,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ParallelPackageParser {
     public final ExecutorService mExecutorService;
     public volatile String mInterruptedInThread;
     public final PackageParser2 mPackageParser;
     public final BlockingQueue mQueue = new ArrayBlockingQueue(30);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ParseResult {
         public ParsedPackage parsedPackage;
         public File scanFile;

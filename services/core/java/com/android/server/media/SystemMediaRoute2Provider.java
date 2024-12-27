@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SystemMediaRoute2Provider extends MediaRoute2Provider {
     public static final ComponentName COMPONENT_NAME =
             new ComponentName(
@@ -59,7 +58,6 @@ public final class SystemMediaRoute2Provider extends MediaRoute2Provider {
     public final Object mTransferLock;
     public final UserHandle mUser;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioManagerBroadcastReceiver extends BroadcastReceiver {
         public AudioManagerBroadcastReceiver() {}
 

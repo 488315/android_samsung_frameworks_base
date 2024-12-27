@@ -4,7 +4,6 @@ import android.util.Log;
 import com.airbnb.lottie.LottieListener;
 import com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PromptIconViewBinderKt$setIconFailureListener$1 implements LottieListener {
     public final /* synthetic */ PromptIconViewModel.AuthType $activeAuthType;
     public final /* synthetic */ int $iconAsset;

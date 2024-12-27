@@ -19,7 +19,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySolutionManager.Stub {
     public final boolean DEBUG;
     public boolean mAtcAlreadyEnable;
@@ -34,7 +33,6 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
     public final Object mLock;
     public boolean mTuneEnableSetting;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenBroadcastReceiver extends BroadcastReceiver {
         public ScreenBroadcastReceiver() {}
 
@@ -81,7 +79,6 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);

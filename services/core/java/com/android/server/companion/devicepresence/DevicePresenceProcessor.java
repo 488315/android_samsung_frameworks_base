@@ -42,7 +42,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DevicePresenceProcessor implements AssociationStore.OnChangeListener {
     public final AssociationStore mAssociationStore;
     public final BleDeviceProcessor mBleDeviceProcessor;
@@ -65,7 +64,6 @@ public final class DevicePresenceProcessor implements AssociationStore.OnChangeL
             new BleDeviceDisappearedScheduler(this, 0);
     public final SparseArray mPendingDevicePresenceEvents = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BleDeviceDisappearedScheduler extends Handler {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DevicePresenceProcessor this$0;

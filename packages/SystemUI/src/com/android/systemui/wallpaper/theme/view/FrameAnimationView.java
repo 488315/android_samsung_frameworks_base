@@ -9,7 +9,6 @@ import com.android.systemui.wallpaper.theme.OpenThemeSpriteView;
 import com.android.systemui.wallpaper.theme.particle.Sprite;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FrameAnimationView extends OpenThemeSpriteView {
     public FrameAnimationView(Context context, Resources resources, int i, ArrayList<Integer> arrayList, ArrayList<Integer> arrayList2, ArrayList<Float> arrayList3, ArrayList<Float> arrayList4, ArrayList<Float> arrayList5, ArrayList<Integer> arrayList6) {
         super(context, resources, i);

@@ -4,10 +4,8 @@ import android.graphics.drawable.Drawable;
 import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface MediaTttIcon {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Loaded implements MediaTttIcon {
         public final Drawable drawable;
 
@@ -31,7 +29,6 @@ public interface MediaTttIcon {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Resource implements MediaTttIcon {
         public final int res;
 

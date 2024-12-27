@@ -6,7 +6,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final /* synthetic */ class WallpaperRepositoryImpl$wallpaperInfo$2 extends AdaptedFunctionReference implements Function3 {
     public static final WallpaperRepositoryImpl$wallpaperInfo$2 INSTANCE = new WallpaperRepositoryImpl$wallpaperInfo$2();
 

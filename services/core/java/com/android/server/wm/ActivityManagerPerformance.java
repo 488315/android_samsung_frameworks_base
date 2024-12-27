@@ -64,7 +64,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityManagerPerformance {
     public static final boolean AMP_ENABLE;
     public static final boolean AMP_PERF_ENABLE;
@@ -191,7 +190,6 @@ public final class ActivityManagerPerformance {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppLaunchTimeDBHelper extends SQLiteOpenHelper {
         public static final Object dbLock = new Object();
         public String mBuildVersion;
@@ -200,7 +198,6 @@ public final class ActivityManagerPerformance {
         public long mLastModifiedTime;
         public long mStartTimeGathered;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class AppLaunchTimeDBErrorHandler implements DatabaseErrorHandler {
             @Override // android.database.DatabaseErrorHandler
             public final void onCorruption(SQLiteDatabase sQLiteDatabase) {
@@ -467,7 +464,6 @@ public final class ActivityManagerPerformance {
         public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum LaunchTimeRange {
         /* JADX INFO: Fake field, exist only in values array */
         EF7("UNDER_500"),
@@ -501,7 +497,6 @@ public final class ActivityManagerPerformance {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MainHandler extends Handler {
         public MainHandler(Looper looper) {
             super(looper, null, true);
@@ -531,7 +526,6 @@ public final class ActivityManagerPerformance {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SlugBigDataInfo {
         public final String activityName;
         public final long launchTime;
@@ -546,7 +540,6 @@ public final class ActivityManagerPerformance {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public enum TransitionLaunchType {
         /* JADX INFO: Fake field, exist only in values array */
         EF0("COLD", "cold"),

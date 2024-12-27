@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.Vector;
 
-/* compiled from: TtmlRenderer.java */
 class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
     private static final String TAG = "TtmlTrack";
     private Long mCurrentRunID;

@@ -83,7 +83,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CocktailBarManagerServiceImpl {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static final boolean EMERGENCY_MODE_ENABLED;
@@ -115,7 +114,6 @@ public final class CocktailBarManagerServiceImpl {
     public final int mUserId;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.cocktailbar.CocktailBarManagerServiceImpl$4, reason: invalid class name */
     public final class AnonymousClass4 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -144,7 +142,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailBarSettingsObserver extends ContentObserver {
         public String mLastEnabled;
 
@@ -193,7 +190,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CocktailHostInfo implements IBinder.DeathRecipient {
         public final ICocktailHost callbackHost;
         public int category;
@@ -269,7 +265,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EdgeStartHandler extends Handler {
         public EdgeStartHandler(Looper looper) {
             super(looper);
@@ -302,7 +297,6 @@ public final class CocktailBarManagerServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EnabledPackageMap {
         public ArrayMap mEnabledPackage;
 

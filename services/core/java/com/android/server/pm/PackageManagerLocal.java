@@ -12,13 +12,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 public interface PackageManagerLocal {
     public static final int FLAG_STORAGE_CE = 2;
     public static final int FLAG_STORAGE_DE = 1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
     public interface FilteredSnapshot extends AutoCloseable {
         @Override // java.lang.AutoCloseable
@@ -29,11 +27,9 @@ public interface PackageManagerLocal {
         Map getPackageStates();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
     public @interface StorageFlags {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
     public interface UnfilteredSnapshot extends AutoCloseable {
         @Override // java.lang.AutoCloseable

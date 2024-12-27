@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.wm.shell.flexpanel.FlexPanelStartController;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FlexModePanel implements ConfigurationController.ConfigurationListener, CoreStartable {
     public final FlexPanelInteractor mFlexPanelInteractor;
 

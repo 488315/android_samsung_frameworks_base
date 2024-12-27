@@ -13,12 +13,10 @@ import com.android.systemui.util.sensors.AsyncSensorManager;
 import com.android.systemui.util.settings.SystemSettings;
 import java.util.Optional;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AODScreenBrightness extends DozeScreenBrightness {
     public int[] mBrightnessValues;
     public int mDozeMode;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.doze.AODScreenBrightness$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;

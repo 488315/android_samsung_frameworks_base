@@ -29,7 +29,6 @@ import java.util.Random;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SensitiveNotificationProtectionControllerImpl implements SensitiveNotificationProtectionController {
     public SensitiveNotificatioMediaProjectionSession mActiveMediaProjectionSession;
     public final SensitiveNotificationProtectionControllerLogger mLogger;
@@ -41,7 +40,6 @@ public final class SensitiveNotificationProtectionControllerImpl implements Sens
     public final ListenerSet mListeners = new ListenerSet();
     public boolean mDisableScreenShareProtections = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$2, reason: invalid class name */
     public final class AnonymousClass2 extends ExecutorContentObserver {
         public final /* synthetic */ Handler val$mainHandler;
@@ -66,7 +64,6 @@ public final class SensitiveNotificationProtectionControllerImpl implements Sens
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SensitiveNotificatioMediaProjectionSession {
         public final boolean mExempt;
         public final int mProjectionAppUid;

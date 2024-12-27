@@ -11,12 +11,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActiveSensorFilter implements IFilter {
     public final List mFilterTypeList = new ArrayList(Arrays.asList(1));
     public List mSensorList;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ActiveSensorFilterHolder {
         public static final ActiveSensorFilter INSTANCE = new ActiveSensorFilter();
     }

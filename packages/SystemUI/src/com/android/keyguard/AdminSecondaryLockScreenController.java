@@ -20,7 +20,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AdminSecondaryLockScreenController {
     public final AnonymousClass2 mCallback;
     public IKeyguardClient mClient;
@@ -36,7 +35,6 @@ public final class AdminSecondaryLockScreenController {
     public final KeyguardUpdateMonitor mUpdateMonitor;
     public final AdminSecurityView mView;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.AdminSecondaryLockScreenController$2, reason: invalid class name */
     public final class AnonymousClass2 extends IKeyguardCallback.Stub {
         public AnonymousClass2() {
@@ -59,7 +57,6 @@ public final class AdminSecondaryLockScreenController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AdminSecurityView extends SurfaceView {
         public final SurfaceHolder.Callback mSurfaceHolderCallback;
 
@@ -82,7 +79,6 @@ public final class AdminSecondaryLockScreenController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final Context mContext;
         public final Handler mHandler;
@@ -203,7 +199,6 @@ public final class AdminSecondaryLockScreenController {
         this.mSelectedUserInteractor = selectedUserInteractor;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.AdminSecondaryLockScreenController$4, reason: invalid class name */
     public final class AnonymousClass4 implements SurfaceHolder.Callback {
         public AnonymousClass4() {

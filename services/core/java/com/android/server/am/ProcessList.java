@@ -133,7 +133,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ProcessList {
     static final int NETWORK_STATE_BLOCK = 1;
     static final int NETWORK_STATE_NO_CHANGE = 0;
@@ -211,7 +210,6 @@ public final class ProcessList {
     public final Object mProcessChangeLock = new Object();
     public final MyProcessMap mProcessNames = new MyProcessMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ProcessList$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public /* synthetic */ AnonymousClass1() {}
@@ -305,7 +303,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ProcessList$3, reason: invalid class name */
     public final class AnonymousClass3 implements Comparator {
         @Override // java.util.Comparator
@@ -331,7 +328,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ImperceptibleKillRunner extends UidObserver {
         public final ProcStartHandler mHandler;
         public volatile boolean mIdle;
@@ -340,7 +336,6 @@ public final class ProcessList {
         public final SparseArray mWorkItems = new SparseArray();
         public final ProcessMap mLastProcessKillTimes = new ProcessMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class IdlenessReceiver extends BroadcastReceiver {
             public IdlenessReceiver() {}
 
@@ -495,7 +490,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IsolatedUidRange {
         public final int mFirstUid;
         public final int mLastUid;
@@ -509,7 +503,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IsolatedUidRangeAllocator {
         public final BitSet mAvailableUidRanges;
         public final /* synthetic */ ProcessList this$0;
@@ -524,7 +517,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KillHandler extends Handler {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -744,7 +736,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyProcessMap extends ProcessMap {
         public MyProcessMap() {}
 
@@ -811,7 +802,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcStartHandler extends Handler {
         public final /* synthetic */ int $r8$classId = 0;
         public final Object mService;
@@ -985,7 +975,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcStateMemTracker {
         public int mPendingHighestMemState;
         public int mPendingMemState;
@@ -1036,7 +1025,6 @@ public final class ProcessList {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessListSettingsListener
             implements DeviceConfig.OnPropertiesChangedListener {
         public final Context mContext;

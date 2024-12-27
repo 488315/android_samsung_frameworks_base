@@ -57,7 +57,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetworkAnalyticsService extends INetworkAnalytics.Stub
         implements EnterpriseServiceCallback {
     public static final boolean DBG = Debug.semIsProductDev();
@@ -72,7 +71,6 @@ public final class NetworkAnalyticsService extends INetworkAnalytics.Stub
     public final NapHandler mHandler;
     public final HandlerThread mHandlerThread;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AsyncHandlerObject {
         public String packageName;
         public String profileName;
@@ -88,7 +86,6 @@ public final class NetworkAnalyticsService extends INetworkAnalytics.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NapHandler extends Handler {
         public NapHandler(Looper looper) {
             super(looper);
@@ -112,7 +109,6 @@ public final class NetworkAnalyticsService extends INetworkAnalytics.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NapReceiver extends BroadcastReceiver {
         public NapReceiver() {}
 
@@ -276,7 +272,6 @@ public final class NetworkAnalyticsService extends INetworkAnalytics.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkAnalyticsServiceConnection implements ServiceConnection {
         public final AsyncHandlerObject handleObj;
         public CountDownLatch countDownLatch = null;

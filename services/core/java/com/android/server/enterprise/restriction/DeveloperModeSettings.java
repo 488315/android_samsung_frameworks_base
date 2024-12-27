@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeveloperModeSettings {
     public final Context mContext;
     public static final Map SYSTEM_SETTINGS_DEFAULT =
@@ -81,7 +80,6 @@ public final class DeveloperModeSettings {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemPropPoker extends AsyncTask {
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {

@@ -11,7 +11,6 @@ import com.android.server.LocalServices;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InputContentUriTokenHandler extends IInputContentUriToken.Stub {
     public final Object mLock = new Object();
     public IBinder mPermissionOwnerToken = null;

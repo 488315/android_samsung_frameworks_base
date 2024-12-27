@@ -3,7 +3,6 @@ package com.android.server.wm;
 import android.os.Debug;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WindowSurfacePlacer {
     public int mDeferredRequests;
     public int mLayoutRepeatCount;
@@ -14,7 +13,6 @@ public final class WindowSurfacePlacer {
     public int mDeferDepth = 0;
     public final Traverser mPerformSurfacePlacement = new Traverser();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Traverser implements Runnable {
         public Traverser() {}
 

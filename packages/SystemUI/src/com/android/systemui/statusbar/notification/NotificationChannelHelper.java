@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.util.Slog;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationChannelHelper {
     public static NotificationChannel createConversationChannelIfNeeded(Context context, INotificationManager iNotificationManager, NotificationEntry notificationEntry, NotificationChannel notificationChannel) {
         if (!TextUtils.isEmpty(notificationChannel.getConversationId())) {

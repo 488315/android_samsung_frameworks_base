@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserUsageStatsService {
     public static final AnonymousClass1 sConfigStatsCombiner;
     public static final AnonymousClass1 sEventStatsCombiner;
@@ -74,14 +73,12 @@ public final class UserUsageStatsService {
     public long mRealTimeSnapshot = SystemClock.elapsedRealtime();
     public long mSystemTimeSnapshot = System.currentTimeMillis();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CachedEarlyEvents {
         public long eventTime;
         public List events;
         public long searchBeginTime;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StatsUpdatedListener {}
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.usage.UserUsageStatsService$1] */

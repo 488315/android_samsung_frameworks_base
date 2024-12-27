@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommunalWidgetHost implements CommunalAppWidgetHost.Observer {
     public static final Companion Companion = new Companion(null);
     public final StateFlowImpl _appWidgetProviders;
@@ -33,7 +32,6 @@ public final class CommunalWidgetHost implements CommunalAppWidgetHost.Observer 
     public final Logger logger;
     public final SelectedUserInteractor selectedUserInteractor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -82,7 +80,6 @@ public final class CommunalWidgetHost implements CommunalAppWidgetHost.Observer 
         BuildersKt.launch$default(this.bgScope, null, null, new CommunalWidgetHost$refreshProviders$1(this, null), 3);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CommunalAppWidgetHostListener implements AppWidgetHost.AppWidgetHostListener {
         public final int appWidgetId;
         public final Function2 onUpdateProviderInfo;

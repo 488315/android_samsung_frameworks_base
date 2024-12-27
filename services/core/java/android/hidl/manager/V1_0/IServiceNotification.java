@@ -17,11 +17,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IServiceNotification extends IBase {
     public static final String kInterfaceName = "android.hidl.manager@1.0::IServiceNotification";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements IServiceNotification {
         private IHwBinder mRemote;
 
@@ -202,7 +200,6 @@ public interface IServiceNotification extends IBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements IServiceNotification {
         @Override // android.hidl.manager.V1_0.IServiceNotification, android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {

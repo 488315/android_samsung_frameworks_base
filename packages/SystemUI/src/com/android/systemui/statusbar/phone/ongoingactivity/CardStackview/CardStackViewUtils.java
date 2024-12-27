@@ -9,15 +9,12 @@ import com.android.systemui.volume.util.ContextUtils;
 import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CardStackViewUtils {
     public static final CardStackViewUtils INSTANCE = new CardStackViewUtils();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Alpha {
         public static final Alpha INSTANCE = new Alpha();
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public abstract class CommonAlpha {
             public abstract List getBaseColors();
 
@@ -31,7 +28,6 @@ public final class CardStackViewUtils {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MonochromeAlpha extends CommonAlpha {
             public static final MonochromeAlpha INSTANCE = new MonochromeAlpha();
 

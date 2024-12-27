@@ -66,7 +66,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         implements EnterpriseServiceCallback, IDeviceProfileObserver {
     public static final int MY_PID = Process.myPid();
@@ -85,7 +84,6 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
                             "com.sec.knox.kccagent",
                             "com.sec.knox.klat.agent"));
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.license.EnterpriseLicenseService$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {}
@@ -113,10 +111,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LicenseResultRecord implements IBinder.DeathRecipient {
         public final ILicenseResultCallback callback;
         public final String key;

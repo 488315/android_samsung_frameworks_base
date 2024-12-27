@@ -21,7 +21,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     public int currentMediaIconState;
     public final float defaultAlpha;
@@ -38,7 +37,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     public int stream;
     public VolumeIconMotion volumeIconMotion;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -48,7 +46,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

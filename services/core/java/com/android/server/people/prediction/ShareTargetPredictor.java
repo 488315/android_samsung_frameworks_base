@@ -51,14 +51,12 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ShareTargetPredictor extends AppTargetPredictor {
     public static final boolean DEBUG = Log.isLoggable("ShareTargetPredictor", 3);
     public final String mChooserActivity;
     public final IntentFilter mIntentFilter;
     public final AppPredictor mRemoteAppPredictor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ShareTarget {
         public final AppTarget mAppTarget;
         public final ConversationInfo mConversationInfo;

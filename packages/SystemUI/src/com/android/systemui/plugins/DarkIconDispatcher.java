@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(version = 2)
 @DependsOn(target = DarkReceiver.class)
 public interface DarkIconDispatcher {
@@ -89,7 +88,6 @@ public interface DarkIconDispatcher {
         return Math.max(0, Math.min(view.getWidth() + i, rect.right) - Math.max(i, rect.left)) * 2 > view.getWidth() && (rect.top <= 0);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 3)
     public interface DarkReceiver {
         public static final int VERSION = 3;

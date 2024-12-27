@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface SubRoom {
     public static final String EXTRA_FOCUS_REQUIRED = "focusRequired";
     public static final String EXTRA_HAS_UNREAD = "hasUnread";
@@ -25,7 +24,6 @@ public interface SubRoom {
     public static final String STATE_POPUP_DISMISSED = "STATE_POPUP_DISMISSED";
     public static final String STATE_UNREAD_NOTIFICATION = "STATE_UNREAD_NOTIFICATION";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface StateChangeListener {
         void onStateChanged(Bundle bundle);
 

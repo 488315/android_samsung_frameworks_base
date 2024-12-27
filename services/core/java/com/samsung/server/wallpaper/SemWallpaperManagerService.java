@@ -71,7 +71,6 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemWallpaperManagerService {
     public static final boolean SHIPPED = !Debug.semIsProductDev();
     public static final ArrayList sLogList = new ArrayList();
@@ -102,13 +101,11 @@ public final class SemWallpaperManagerService {
     public int mCurrentUserId = -10000;
     public int mOldUserId = -10000;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.server.wallpaper.SemWallpaperManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.server.wallpaper.SemWallpaperManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 extends HomeVisibilityListener {
         public AnonymousClass3() {}
@@ -193,7 +190,6 @@ public final class SemWallpaperManagerService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SemWallpaperObserver {
         public final WallpaperManagerService.SemCallback mCallback;
         public final File mDesktopWallpaperFile;

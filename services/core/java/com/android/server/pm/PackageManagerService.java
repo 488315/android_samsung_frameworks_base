@@ -313,7 +313,6 @@ import libcore.io.IoUtils;
 import libcore.util.EmptyArray;
 import libcore.util.HexEncoding;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageManagerService implements PackageSender, TestUtilityService {
     public static final AnonymousClass2 BACKGROUND_HANDLER_CALLBACK;
     public static final boolean DEBUG_COMPRESSION;
@@ -480,7 +479,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
     public final String mWearableSensingPackage;
     public final WatchedSparseBooleanArray mWebInstantAppsDisabled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.PackageManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 implements Handler.Callback {
         @Override // android.os.Handler.Callback
@@ -516,7 +514,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultSystemWrapper {
         public static void disablePackageCaches() {
             PackageManager.disableApplicationInfoCache();
@@ -532,13 +529,11 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FindPreferredActivityBodyResult {
         public boolean mChanged;
         public ResolveInfo mPreferredResolveInfo;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IPackageManagerImpl extends IPackageManager.Stub {
         public final Context mContext;
         public final DexOptHelper mDexOptHelper;
@@ -4411,7 +4406,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class InstallLocaleOverlaysType {
         public static final /* synthetic */ InstallLocaleOverlaysType[] $VALUES;
         public static final InstallLocaleOverlaysType PACKAGE_ENABLE;
@@ -4440,7 +4434,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageManagerInternalImpl extends PackageManagerInternal {
         public final PackageManagerService mService;
 
@@ -5132,7 +5125,6 @@ public final class PackageManagerService implements PackageSender, TestUtilitySe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Snapshot {
         public final ApplicationInfo androidApplication;
         public final String appPredictionServicePackage;

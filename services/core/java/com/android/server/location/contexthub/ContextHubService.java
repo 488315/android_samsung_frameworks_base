@@ -79,7 +79,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContextHubService extends IContextHubService.Stub {
     public final ContextHubClientManager mClientManager;
     public final Context mContext;
@@ -106,7 +105,6 @@ public final class ContextHubService extends IContextHubService.Stub {
     public final Object mSendWifiSettingUpdateLock = new Object();
     public final Map mLastRestartTimestampMap = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.contexthub.ContextHubService$9, reason: invalid class name */
     public final class AnonymousClass9 extends IContextHubTransactionCallback.Stub {
         public final /* synthetic */ int $r8$classId;
@@ -144,7 +142,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContextHubServiceCallback {
         public final int mContextHubId;
 
@@ -288,7 +285,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReliableMessageRecord {
         public int mContextHubId;
         public byte mErrorCode;
@@ -296,7 +292,6 @@ public final class ContextHubService extends IContextHubService.Stub {
         public long mTimestamp;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TestModeManager {
         public final Random mRandom = new Random();
 

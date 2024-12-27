@@ -90,7 +90,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FreecessController {
     public static boolean CACHED_RESTRICTED_BINDER;
     public static int DEFAULT_RECV_BUFSIZE;
@@ -177,12 +176,10 @@ public final class FreecessController {
     public final AtomicBoolean mOLAFOn = new AtomicBoolean(false);
     public Long olafUnfreezeEstimatedTime = 0L;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class FreecessControllerHolder {
         public static final FreecessController INSTANCE = new FreecessController();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidPidMap {
         public ArrayMap mUidPidMap;
 
@@ -197,7 +194,6 @@ public final class FreecessController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface checkResultCallback {
         void freezeSkipFrozen(String str);
     }

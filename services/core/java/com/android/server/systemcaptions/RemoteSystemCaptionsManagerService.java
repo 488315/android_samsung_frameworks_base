@@ -9,7 +9,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RemoteSystemCaptionsManagerService {
     public final Context mContext;
     public final Intent mIntent;
@@ -22,7 +21,6 @@ public final class RemoteSystemCaptionsManagerService {
     public boolean mDestroyed = false;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteServiceConnection implements ServiceConnection {
         public RemoteServiceConnection() {}
 

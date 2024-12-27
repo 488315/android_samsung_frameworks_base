@@ -31,7 +31,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StorageUserConnection {
     public final Context mContext;
     public final HandlerThread mHandlerThread;
@@ -43,7 +42,6 @@ public final class StorageUserConnection {
     public final Map mSessions = new HashMap();
     public final SparseArray mUidsBlockedOnIo = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ActiveConnection implements AutoCloseable {
         public final Object mLock = new Object();
         public final ArrayList mOutstandingOps = new ArrayList();
@@ -305,12 +303,10 @@ public final class StorageUserConnection {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface AsyncStorageServiceCall {
         void run(IExternalStorageService iExternalStorageService, RemoteCallback remoteCallback);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Session {
         public final String lowerPath;
         public final String sessionId;

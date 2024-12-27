@@ -22,13 +22,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FadeOutManager {
     public final Object mLock = new Object();
     public final SparseArray mUidToFadedAppsMap = new SparseArray();
     public final FadeConfigurations mFadeConfigurations = new FadeConfigurations();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FadedOutApp {
         public static final VolumeShaper.Operation PLAY_CREATE_IF_NEEDED;
         public static final VolumeShaper.Operation PLAY_SKIP_RAMP;

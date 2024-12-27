@@ -53,7 +53,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.zip.GZIPOutputStream;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppExitInfoTracker {
     static final String APP_EXIT_INFO_FILE = "procexitinfo";
     public static final long APP_EXIT_INFO_PERSIST_INTERVAL = TimeUnit.MINUTES.toMillis(30);
@@ -81,7 +80,6 @@ public final class AppExitInfoTracker {
     public final ProcessMap mData = new ProcessMap();
     public final Pools.SynchronizedPool mRawRecordsPool = new Pools.SynchronizedPool(8);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppExitInfoContainer {
         public final int mMaxCapacity;
         public int mUid;
@@ -199,7 +197,6 @@ public final class AppExitInfoTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppExitInfoExternalSource {
         public final SparseArray mData = new SparseArray();
         public final Integer mPresetReason;
@@ -341,7 +338,6 @@ public final class AppExitInfoTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class AppTraceRetriever extends IAppTraceRetriever.Stub {
         public AppTraceRetriever() {}
 
@@ -389,7 +385,6 @@ public final class AppExitInfoTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IsolatedUidRecords {
         public final SparseArray mUidToIsolatedUidMap = new SparseArray();
         public final SparseArray mIsolatedUidToUidMap = new SparseArray();
@@ -459,7 +454,6 @@ public final class AppExitInfoTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KillHandler extends Handler {
         public KillHandler(Looper looper) {
             super(looper, null, true);

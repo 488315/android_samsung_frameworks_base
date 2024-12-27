@@ -16,12 +16,10 @@ import com.android.systemui.shared.recents.model.ThumbnailData;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TaskStackChangeListeners {
     public static final TaskStackChangeListeners INSTANCE = new TaskStackChangeListeners();
     public final Impl mImpl;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Impl extends TaskStackListener implements Handler.Callback {
         public final Handler mHandler;
         public boolean mRegistered;
@@ -366,7 +364,6 @@ public final class TaskStackChangeListeners {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PinnedActivityInfo {
         public final String mPackageName;
 
@@ -375,7 +372,6 @@ public final class TaskStackChangeListeners {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TestSyncHandler extends Handler {
         public Handler.Callback mCb;
 

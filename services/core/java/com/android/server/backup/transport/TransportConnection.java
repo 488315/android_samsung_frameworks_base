@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TransportConnection {
     static final String TAG = "TransportConnection";
     public final Intent mBindIntent;
@@ -52,7 +51,6 @@ public final class TransportConnection {
     public final Object mStateLock = new Object();
     public final Object mLogBufferLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class TransportConnectionMonitor implements ServiceConnection {
         public final Context mContext;
         public final WeakReference mTransportClientRef;

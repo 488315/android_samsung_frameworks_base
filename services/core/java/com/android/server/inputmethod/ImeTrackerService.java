@@ -23,19 +23,16 @@ import java.util.Locale;
 import java.util.WeakHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ImeTrackerService extends IImeTracker.Stub {
     public final Handler mHandler;
     public final History mHistory = new History();
     public final Object mLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class History {
         public static final AtomicInteger sSequenceNumber = new AtomicInteger(0);
         public final ArrayDeque mEntries = new ArrayDeque(100);
         public final WeakHashMap mLiveEntries = new WeakHashMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Entry {
             public final boolean mFromUser;
             public final int mOrigin;

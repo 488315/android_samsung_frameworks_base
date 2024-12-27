@@ -3,7 +3,6 @@ package com.android.systemui.keyguard.shared.model;
 import com.android.systemui.biometrics.shared.model.AuthenticationReason;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AcquiredFingerprintAuthenticationStatus extends FingerprintAuthenticationStatus {
     public final int acquiredInfo;
     public final AuthenticationReason authenticationReason;

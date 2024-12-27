@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SharedLibrariesImpl implements Watchable, Snappable {
     public DeletePackageHelper mDeletePackageHelper;
     public final PackageManagerServiceInjector mInjector;
@@ -57,7 +56,6 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
     public final SnapshotCache mStaticLibsByDeclaringPackageSnapshot;
     public final WatchableImpl mWatchable = new WatchableImpl();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.SharedLibrariesImpl$2, reason: invalid class name */
     public final class AnonymousClass2 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache

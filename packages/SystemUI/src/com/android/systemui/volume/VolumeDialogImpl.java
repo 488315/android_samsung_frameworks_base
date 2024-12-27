@@ -117,7 +117,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeDialogImpl implements VolumeDialog, Dumpable, ConfigurationController.ConfigurationListener, ViewTreeObserver.OnComputeInternalInsetsListener {
     public static final String TAG = Util.logTag(VolumeDialogImpl.class);
     public final AccessibilityManagerWrapper mAccessibilityMgr;
@@ -365,7 +364,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Accessibility extends View.AccessibilityDelegate {
         public /* synthetic */ Accessibility(VolumeDialogImpl volumeDialogImpl, int i) {
             this();
@@ -389,7 +387,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomDialog extends Dialog implements DialogInterface {
         public CustomDialog(Context context) {
             super(context, R.style.volume_dialog_theme);
@@ -429,7 +426,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -494,7 +490,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RingerDrawerItemClickListener implements View.OnClickListener {
         public final int mClickedRingerMode;
 
@@ -524,7 +519,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VolumeRow {
         public static final SliderHapticFeedbackConfig sSliderHapticFeedbackConfig = new SliderHapticFeedbackConfig(1.0f, 1.0f, 0.0f, 0.2f, 0.25f, 0.0f, 0.05f, 4, 200.0f, 1, 1.0f, 0.05f, 1.1235955f);
         public static final SeekableSliderTrackerConfig sSliderTrackerConfig = new SeekableSliderTrackerConfig(100, 0.02f, 0.01f, 0.99f);
@@ -587,7 +581,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public final VolumeRow mRow;
 
@@ -2117,7 +2110,6 @@ public final class VolumeDialogImpl implements VolumeDialog, Dumpable, Configura
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.volume.VolumeDialogImpl$3, reason: invalid class name */
     public final class AnonymousClass3 implements Animator.AnimatorListener {
         public final /* synthetic */ long val$timeout;

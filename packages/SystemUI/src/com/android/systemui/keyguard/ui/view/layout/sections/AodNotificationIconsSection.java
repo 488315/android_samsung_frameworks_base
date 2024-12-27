@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.icon.ui.viewmodel.Notificatio
 import com.android.systemui.statusbar.phone.NotificationIconAreaController;
 import com.android.systemui.statusbar.ui.SystemBarUtilsState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AodNotificationIconsSection extends KeyguardSection {
     public final int nicId = R.id.aod_notification_icon_container;
 

@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecLifecycle {
     public LooperSlowLogController mLooperSlowLogController;
     public final ArrayList mObservers = new ArrayList();
@@ -23,7 +22,6 @@ public class SecLifecycle {
     public final int QUEUE_MAX = 8;
     public final Queue mMsgForLifecycle = new LinkedList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Msg {
         public final int msg;
         public final int reason;

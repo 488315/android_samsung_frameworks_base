@@ -47,7 +47,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TileServices extends IQSService.Stub {
     public static final boolean DEBUG = !DeviceType.isShipBuild();
     public static final TileServices$$ExternalSyntheticLambda2 SERVICE_SORT = new TileServices$$ExternalSyntheticLambda2();
@@ -74,7 +73,6 @@ public final class TileServices extends IQSService.Stub {
     public final ArrayMap mTokenMap = new ArrayMap();
     public final int mMaxBound = 5;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.external.TileServices$2, reason: invalid class name */
     public final class AnonymousClass2 implements CommandQueue.Callbacks {
         public AnonymousClass2() {

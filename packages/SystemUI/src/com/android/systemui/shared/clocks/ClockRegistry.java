@@ -46,7 +46,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ClockRegistry {
     public final String TAG;
 
@@ -75,12 +74,10 @@ public final class ClockRegistry {
     public ClockSettings settings;
     public final ClockRegistry$userSwitchObserver$1 userSwitchObserver;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ClockChangeListener {
         void onCurrentClockChanged();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ClockInfo {
         public final PluginLifecycleManager manager;
         public final ClockMetadata metadata;

@@ -4,7 +4,6 @@ import android.net.ipmemorystore.NetworkAttributes;
 import android.net.ipmemorystore.OnL2KeyResponseListener;
 import android.net.ipmemorystore.OnNetworkAttributesRetrievedListener;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda6
         implements IpMemoryStoreClient.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;

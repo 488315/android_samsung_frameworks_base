@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AttentionDetector {
     protected AttentionManagerInternal mAttentionManager;
     AttentionCallbackInternalImpl mCallback;
@@ -47,7 +46,6 @@ public final class AttentionDetector {
     protected int mRequestId = 0;
     public int mWakefulness = 1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class AttentionCallbackInternalImpl
             extends AttentionManagerInternal.AttentionCallbackInternal {
         public final int mId;
@@ -92,7 +90,6 @@ public final class AttentionDetector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchObserver extends SynchronousUserSwitchObserver {
         public UserSwitchObserver() {}
 

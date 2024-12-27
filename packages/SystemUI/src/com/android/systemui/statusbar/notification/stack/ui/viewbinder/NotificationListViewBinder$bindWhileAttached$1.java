@@ -32,7 +32,6 @@ import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ NotificationShelf $shelf;
     final /* synthetic */ NotificationStackScrollLayout $view;
@@ -41,7 +40,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
     int label;
     final /* synthetic */ NotificationListViewBinder this$0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ NotificationShelf $shelf;
@@ -51,7 +49,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
         int label;
         final /* synthetic */ NotificationListViewBinder this$0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ NotificationShelf $shelf;
@@ -105,7 +102,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ StateFlow $hasNonClearableSilentNotifications;
@@ -209,7 +205,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ NotificationStackScrollLayout $view;
@@ -267,7 +262,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$5, reason: invalid class name */
         final class AnonymousClass5 extends SuspendLambda implements Function2 {
             final /* synthetic */ StateFlow $hasNonClearableSilentNotifications;
@@ -321,7 +315,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$6, reason: invalid class name */
         final class AnonymousClass6 extends SuspendLambda implements Function2 {
             final /* synthetic */ NotificationStackScrollLayout $view;
@@ -374,7 +367,6 @@ final class NotificationListViewBinder$bindWhileAttached$1 extends SuspendLambda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationListViewBinder$bindWhileAttached$1$1$7, reason: invalid class name */
         final class AnonymousClass7 extends SuspendLambda implements Function2 {
             final /* synthetic */ NotificationStackScrollLayout $view;

@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WallpaperLocalColorExtractor {
     public static final RectF LOCAL_COLOR_BOUNDS = new RectF(0.0f, 0.0f, 1.0f, 1.0f);
     static final int MINI_BITMAP_MAX_AREA = 12544;
@@ -31,7 +30,6 @@ public final class WallpaperLocalColorExtractor {
     public final List mPendingRegions = new ArrayList();
     public final Set mProcessedRegions = new ArraySet();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface WallpaperLocalColorExtractorCallback {
         void onActivated();
 

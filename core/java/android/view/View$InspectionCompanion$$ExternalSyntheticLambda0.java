@@ -4,7 +4,6 @@ import android.util.SparseArray;
 
 import java.util.function.IntFunction;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class View$InspectionCompanion$$ExternalSyntheticLambda0
         implements IntFunction {
     public final /* synthetic */ SparseArray f$0;

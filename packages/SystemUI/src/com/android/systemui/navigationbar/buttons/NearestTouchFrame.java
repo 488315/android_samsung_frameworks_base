@@ -21,7 +21,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NearestTouchFrame extends FrameLayout {
     public final List mAttachedChildren;
     public final NearestTouchFrame$$ExternalSyntheticLambda0 mChildRegionComparator;

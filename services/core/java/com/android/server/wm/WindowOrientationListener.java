@@ -30,7 +30,6 @@ import com.android.server.wm.WindowOrientationListener;
 import java.io.PrintWriter;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class WindowOrientationListener {
     public static final boolean LOG = SystemProperties.getBoolean("debug.orientation.log", false);
     public final Context mContext;
@@ -49,7 +48,6 @@ public abstract class WindowOrientationListener {
     public int mProposedTableMode = -1;
     public int mLastSensorRotation = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccelSensorJudge extends OrientationJudge {
         public boolean mAccelerating;
         public long mAccelerationTimestampNanos;
@@ -217,7 +215,6 @@ public abstract class WindowOrientationListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class OrientationJudge extends SensorEventCallback {
         public abstract void dumpLocked(PrintWriter printWriter, String str);
 
@@ -234,7 +231,6 @@ public abstract class WindowOrientationListener {
         public abstract void resetLocked();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OrientationSensorJudge extends OrientationJudge {
         public final ActivityTaskManagerInternal mActivityTaskManagerInternal;
         public WindowOrientationListener$OrientationSensorJudge$$ExternalSyntheticLambda0 mCancelRotationResolverRequest;

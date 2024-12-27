@@ -30,7 +30,6 @@ import com.samsung.android.biometrics.app.setting.prompt.BiometricPromptCallback
 import com.samsung.android.biometrics.app.setting.prompt.BiometricPromptClient;
 import com.samsung.android.biometrics.app.setting.prompt.PromptConfig;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public abstract class KnoxAuthCredentialView extends LinearLayout {
     public final AccessibilityManager mAccessibilityManager;
     public final AnonymousClass2 mClearErrorRunnable;
@@ -49,7 +48,6 @@ public abstract class KnoxAuthCredentialView extends LinearLayout {
     public TextView mTitleView;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.prompt.knox.KnoxAuthCredentialView$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public AnonymousClass2() {}

@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.ViewTransformationHelper;
 import com.android.systemui.statusbar.notification.NotificationFadeAware;
 import com.android.systemui.statusbar.notification.TransformState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class HybridNotificationView extends AlphaOptimizedLinearLayout implements TransformableView, NotificationFadeAware {
     public int mPrimaryTextColor;
     public int mSecondaryTextColor;
@@ -23,7 +22,6 @@ public class HybridNotificationView extends AlphaOptimizedLinearLayout implement
     public TextView mTitleView;
     public final ViewTransformationHelper mTransformationHelper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FadeOutAndDownWithTitleTransformation extends ViewTransformationHelper.CustomTransformation {
         public final View mView;
 

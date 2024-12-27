@@ -16,7 +16,6 @@ import android.util.Slog;
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DefaultDeviceEffectsApplier implements DeviceEffectsApplier {
     public static final IntentFilter SCREEN_OFF_INTENT_FILTER =
             new IntentFilter("android.intent.action.SCREEN_OFF");

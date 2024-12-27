@@ -8,14 +8,12 @@ import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BadgedAppIconLoader {
     public final CoroutineDispatcher backgroundDispatcher;
     public final BasicAppIconLoader basicAppIconLoader;
     public final Context context;
     public final Provider iconFactoryProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

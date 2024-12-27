@@ -425,7 +425,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityManagerService extends IActivityManager.Stub
         implements Watchdog.Monitor, BatteryStatsImpl.BatteryCallback, ActivityManagerGlobalLock {
     public static final int BIND_APPLICATION_TIMEOUT;
@@ -604,7 +603,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
     public WindowManagerService mWindowManager;
     public WindowManagerInternal mWmInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$11, reason: invalid class name */
     public final class AnonymousClass11 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -663,7 +661,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$12, reason: invalid class name */
     public final class AnonymousClass12 extends IIntentReceiver.Stub {
         public AnonymousClass12() {}
@@ -678,7 +675,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$14, reason: invalid class name */
     public final class AnonymousClass14 implements IBinder.DeathRecipient {
         public final int pid;
@@ -740,7 +736,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$16, reason: invalid class name */
     public final class AnonymousClass16 implements IBinder.DeathRecipient {
         @Override // android.os.IBinder.DeathRecipient
@@ -751,7 +746,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$18, reason: invalid class name */
     public final class AnonymousClass18 extends ContentObserver {
         public final /* synthetic */ int $r8$classId = 1;
@@ -811,7 +805,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$21, reason: invalid class name */
     public final class AnonymousClass21 implements Comparator {
         public final /* synthetic */ boolean val$pss;
@@ -834,7 +827,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$22, reason: invalid class name */
     public final class AnonymousClass22 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -870,7 +862,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$3, reason: invalid class name */
     public final class AnonymousClass3 extends IntentResolver {
         @Override // com.android.server.IntentResolver
@@ -912,7 +903,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.ActivityManagerService$7, reason: invalid class name */
     public final class AnonymousClass7 implements Runnable {
         public final /* synthetic */ int $r8$classId = 0;
@@ -978,7 +968,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppDeathRecipient implements IBinder.DeathRecipient {
         public final ProcessRecord mApp;
         public final IApplicationThread mAppThread;
@@ -1008,7 +997,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Association {
         public int mCount;
         public long mLastStateUptime;
@@ -1032,7 +1020,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DbBinder extends Binder {
         public final /* synthetic */ int $r8$classId;
         public ActivityManagerService mActivityManagerService;
@@ -1091,7 +1078,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FgsTempAllowListItem {
         public final int mCallingUid;
         public final long mDuration;
@@ -1106,7 +1092,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetBackgroundStartPrivilegesFunctor implements Consumer {
         public BackgroundStartPrivileges mBackgroundStartPrivileges =
                 BackgroundStartPrivileges.NONE;
@@ -1123,7 +1108,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HiddenApiSettings extends ContentObserver
             implements DeviceConfig.OnPropertiesChangedListener {
         public boolean mBlacklistDisabled;
@@ -1196,7 +1180,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public final Context mContext;
         public NetworkManagementService.LocalService mNmi;
@@ -1207,7 +1190,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ItemMatcher {
         public boolean all = true;
         public ArrayList components;
@@ -1271,7 +1253,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public static ActivityTaskManagerService sAtm;
         public final ActivityManagerService mService;
@@ -1922,7 +1903,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends ActivityManagerInternal
             implements ActivityManagerLocal {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -5610,7 +5590,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemBinder extends Binder {
         public final ActivityManagerService mActivityManagerService;
         public final AnonymousClass1 mPriorityDumper =
@@ -5677,7 +5656,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemDumpInfo {
         public String label;
         public String procName;
@@ -5686,7 +5664,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         public long swap_out;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemItem {
         public final boolean hasActivities;
         public final int id;
@@ -5736,7 +5713,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MemoryUsageDumpOptions {
         public boolean dumpDalvik;
         public boolean dumpDetails;
@@ -5754,7 +5730,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         public boolean packages;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyBinderProxyCountEventListener
             implements BinderInternal.BinderProxyCountEventListener {
         public MyBinderProxyCountEventListener() {}
@@ -5811,10 +5786,8 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OomAdjObserver {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageAssociationInfo {
         public final ArraySet mAllowedPackageAssociations;
         public boolean mIsDebuggable;
@@ -5825,7 +5798,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingTempAllowlist {
         public final int callingUid;
         public final long duration;
@@ -5844,7 +5816,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PermissionController extends IPermissionController.Stub {
         public ActivityManagerService mActivityManagerService;
 
@@ -5890,7 +5861,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PidMap {
         public final Object mPidMap;
 
@@ -5911,7 +5881,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessChangeItem {
         public int changes;
         public boolean foregroundActivities;
@@ -5921,7 +5890,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         public int uid;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessInfoService extends IProcessInfoService.Stub {
         public final ActivityManagerService mActivityManagerService;
 
@@ -5939,7 +5907,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class StickyBroadcast {
         public boolean deferUntilActive;
         public Intent intent;
@@ -5961,7 +5928,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UiHandler extends Handler {
         public final /* synthetic */ int $r8$classId = 0;
 
@@ -7264,7 +7230,6 @@ public final class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VolatileDropboxEntryStates {
         public final Boolean mIsProcessFrozen;
         public final ZonedDateTime mTimestamp;

@@ -23,7 +23,6 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$FloatRef;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TransitionAnimator {
     public static final Companion Companion = new Companion(null);
     public static final PorterDuffXfermode SRC_MODE = new PorterDuffXfermode(PorterDuff.Mode.SRC);
@@ -33,7 +32,6 @@ public final class TransitionAnimator {
     public final int[] transitionContainerLocation = new int[2];
     public final float[] cornerRadii = new float[8];
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -47,7 +45,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class State {
         public int bottom;
         public float bottomCornerRadius;
@@ -84,7 +81,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Timings {
         public final long contentAfterFadeInDelay;
         public final long contentAfterFadeInDuration;
@@ -256,7 +252,6 @@ public final class TransitionAnimator {
         return new TransitionAnimator$startAnimation$1(createAnimator);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Interpolators {
         public final Interpolator contentAfterFadeInInterpolator;
         public final Interpolator contentBeforeFadeOutInterpolator;
@@ -294,7 +289,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Controller {
         State createAnimatorState();
 

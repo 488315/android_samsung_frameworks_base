@@ -25,7 +25,6 @@ import java.util.Objects;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaHost implements MediaHostState {
     public UniqueObjectHostView hostView;
     public boolean inited;
@@ -66,7 +65,6 @@ public final class MediaHost implements MediaHostState {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaHostStateHolder implements MediaHostState {
         public Function0 changedListener;
         public DisappearParameters disappearParameters;

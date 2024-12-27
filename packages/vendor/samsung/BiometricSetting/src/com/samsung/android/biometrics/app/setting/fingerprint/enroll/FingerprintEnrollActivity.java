@@ -75,7 +75,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class FingerprintEnrollActivity extends Activity implements View.OnClickListener, View.OnTouchListener, TextureView.SurfaceTextureListener {
     public static final int TIME_ENROLL_DELAY;
     public LinearLayout mAddButtonArea;
@@ -561,7 +560,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         }
     };
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$15, reason: invalid class name */
     public final class AnonymousClass15 extends SemFingerprintManager.AuthenticationCallback {
         public AnonymousClass15() {
@@ -610,7 +608,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.fingerprint.enroll.FingerprintEnrollActivity$5, reason: invalid class name */
     public final class AnonymousClass5 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -802,7 +799,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public static final class EnrollState {
         public static final /* synthetic */ EnrollState[] $VALUES;
         public static final EnrollState ENROLL;
@@ -828,7 +824,6 @@ public class FingerprintEnrollActivity extends Activity implements View.OnClickL
         }
     }
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public final class LiftFingerMessage extends Thread {
         public LiftFingerMessage() {
         }

@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardQuickAffordancesCombinedViewModel {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Flow areQuickAffordancesFullyOpaque;
@@ -37,7 +36,6 @@ public final class KeyguardQuickAffordancesCombinedViewModel {
     public final ChannelFlowTransformLatest startButton;
     public final ChannelLimitedFlowMerge transitionAlpha;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -50,7 +48,6 @@ public final class KeyguardQuickAffordancesCombinedViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PreviewMode {
         public final boolean isInPreviewMode;
         public final boolean shouldHighlightSelectedAffordance;
@@ -113,12 +110,10 @@ public final class KeyguardQuickAffordancesCombinedViewModel {
         final ReadonlySharedFlow readonlySharedFlow = keyguardTransitionInteractor.finishedKeyguardState;
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -213,12 +208,10 @@ public final class KeyguardQuickAffordancesCombinedViewModel {
         final ChannelLimitedFlowMerge merge = FlowKt.merge(FlowKt.merge(aodToLockscreenTransitionViewModel.shortcutsAlpha, dozingToLockscreenTransitionViewModel.shortcutsAlpha, dreamingHostedToLockscreenTransitionViewModel.shortcutsAlpha, dreamingToLockscreenTransitionViewModel.shortcutsAlpha, goneToLockscreenTransitionViewModel.shortcutsAlpha, occludedToLockscreenTransitionViewModel.shortcutsAlpha, offToLockscreenTransitionViewModel.shortcutsAlpha, primaryBouncerToLockscreenTransitionViewModel.shortcutsAlpha, glanceableHubToLockscreenTransitionViewModel.shortcutsAlpha), FlowKt.merge(lockscreenToAodTransitionViewModel.shortcutsAlpha, lockscreenToDozingTransitionViewModel.shortcutsAlpha, lockscreenToDreamingHostedTransitionViewModel.shortcutsAlpha, lockscreenToDreamingTransitionViewModel.shortcutsAlpha, lockscreenToGoneTransitionViewModel.shortcutsAlpha, lockscreenToOccludedTransitionViewModel.shortcutsAlpha, lockscreenToPrimaryBouncerTransitionViewModel.shortcutsAlpha, lockscreenToGlanceableHubTransitionViewModel.shortcutsAlpha, flowKt__ZipKt$combine$$inlined$unsafeFlow$1));
         this.areQuickAffordancesFullyOpaque = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

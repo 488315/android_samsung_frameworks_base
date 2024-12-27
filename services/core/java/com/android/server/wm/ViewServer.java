@@ -14,7 +14,6 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ViewServer implements Runnable {
     public final int mPort;
     public ServerSocket mServer;
@@ -22,7 +21,6 @@ public final class ViewServer implements Runnable {
     public ExecutorService mThreadPool;
     public final WindowManagerService mWindowManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ViewServerWorker implements Runnable, WindowManagerService.WindowChangeListener {
         public final Socket mClient;
         public boolean mNeedWindowListUpdate = false;

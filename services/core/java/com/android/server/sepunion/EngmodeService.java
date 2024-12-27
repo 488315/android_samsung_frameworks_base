@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class EngmodeService extends IEngmodeService.Stub implements AbsSemSystemService {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context mContext;
@@ -56,7 +55,6 @@ public final class EngmodeService extends IEngmodeService.Stub implements AbsSem
     };
     public boolean mNeedUpdate = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EMSConnectionTask {
         public static String SERVER_URI = "https://kwb.secmobilesvc.com:7788/requestEmrToken.kwb";
 
@@ -103,7 +101,6 @@ public final class EngmodeService extends IEngmodeService.Stub implements AbsSem
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EngmodeTimeThread implements Runnable {
         public static final int MAINLINE_API_LEVEL = Integer.parseInt("34");
 
@@ -126,7 +123,6 @@ public final class EngmodeService extends IEngmodeService.Stub implements AbsSem
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MultipartUtility {
         public final String boundary;
         public final HttpURLConnection httpConn;

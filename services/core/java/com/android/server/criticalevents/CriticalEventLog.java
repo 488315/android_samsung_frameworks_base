@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CriticalEventLog {
     static final String FILENAME = "critical_event_log.pb";
     public static CriticalEventLog sInstance;
@@ -37,13 +36,10 @@ public final class CriticalEventLog {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ILogLoader {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogLoader implements ILogLoader {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogSanitizer {
         public int mTraceProcessClassEnum;
         public String mTraceProcessName;
@@ -56,7 +52,6 @@ public final class CriticalEventLog {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ThreadSafeRingBuffer {
         public final RingBuffer mBuffer;
         public final int mCapacity;

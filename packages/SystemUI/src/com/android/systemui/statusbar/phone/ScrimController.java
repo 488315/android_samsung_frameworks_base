@@ -60,7 +60,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dumpable, CoreStartable {
     public AODAmbientWallpaperHelper mAODAmbientWallpaperHelper;
     public final AlternateBouncerToGoneTransitionViewModel mAlternateBouncerToGoneTransitionViewModel;
@@ -141,14 +140,12 @@ public final class ScrimController implements ViewTreeObserver.OnPreDrawListener
     public final ScrimController$$ExternalSyntheticLambda3 mScrimAlphaConsumer = new ScrimController$$ExternalSyntheticLambda3(this, 4);
     public final ScrimController$$ExternalSyntheticLambda3 mGlanceableHubConsumer = new ScrimController$$ExternalSyntheticLambda3(this, 0);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimController$3, reason: invalid class name */
     public final class AnonymousClass3 implements ScrimStateLogger.Callback {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class KeyguardVisibilityCallback extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ KeyguardVisibilityCallback(ScrimController scrimController, int i) {
             this();
@@ -954,7 +951,6 @@ public final class ScrimController implements ViewTreeObserver.OnPreDrawListener
         this.mNeedsDrawableColorUpdate = true;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onFinished();
 

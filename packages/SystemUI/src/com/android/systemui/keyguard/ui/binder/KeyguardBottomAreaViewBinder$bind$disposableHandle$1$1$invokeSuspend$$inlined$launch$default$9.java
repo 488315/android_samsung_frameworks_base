@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.MutableStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardBottomAreaViewBinder$bind$disposableHandle$1$1$invokeSuspend$$inlined$launch$default$9 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableStateFlow $configurationBasedDimensions$inlined;
     final /* synthetic */ ImageView $endButton$inlined;

@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.notification.stack.ui.view.SharedNotificat
 import com.android.systemui.statusbar.notification.stack.ui.viewbinder.SharedNotificationContainerBinder;
 import com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class NotificationStackScrollLayoutSection extends KeyguardSection {
     public final int placeHolderId = R.id.nssl_placeholder;
 

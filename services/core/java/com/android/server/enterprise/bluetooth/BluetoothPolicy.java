@@ -53,7 +53,6 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BluetoothPolicy extends IBluetoothPolicy.Stub
         implements EnterpriseServiceCallback {
     public final Context mContext;
@@ -69,7 +68,6 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub
     public boolean mCacheIsBluetoothLogEnabled = false;
     public boolean isCacheUpdated = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.bluetooth.BluetoothPolicy$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -153,7 +151,6 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.bluetooth.BluetoothPolicy$2, reason: invalid class name */
     public final class AnonymousClass2 extends Thread {
         public final /* synthetic */ int $r8$classId;
@@ -212,7 +209,6 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothDevicePolicy {
         public final /* synthetic */ int $r8$classId;
         public boolean bUpdateToDB;

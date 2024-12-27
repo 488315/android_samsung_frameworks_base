@@ -17,7 +17,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DisplayTrackerImpl implements DisplayTracker {
     public final Handler backgroundHandler;
     public final DisplayManager displayManager;
@@ -144,7 +143,6 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DisplayTrackerDataItem {
         public final WeakReference callback;
         public final Executor executor;

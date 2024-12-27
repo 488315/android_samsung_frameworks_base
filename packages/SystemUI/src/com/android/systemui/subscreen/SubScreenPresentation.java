@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.WindowManager;
 import com.android.systemui.R;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubScreenPresentation extends Presentation {
     public SubScreenPresentation(Context context, Display display) {
         super(context, display, R.style.Theme_SystemUI_KeyguardPresentation, 2620);

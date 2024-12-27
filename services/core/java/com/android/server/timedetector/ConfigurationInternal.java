@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ConfigurationInternal {
     public final boolean mAutoDetectionEnabledSetting;
     public final boolean mAutoDetectionSupported;
@@ -23,7 +22,6 @@ public final class ConfigurationInternal {
     public final boolean mUserConfigAllowed;
     public final int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public boolean mAutoDetectionEnabledSetting;
         public boolean mAutoDetectionSupported;

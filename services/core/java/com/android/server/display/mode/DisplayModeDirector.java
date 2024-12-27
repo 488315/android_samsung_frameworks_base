@@ -90,7 +90,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DisplayModeDirector {
     public boolean mAlwaysRespectAppRequest;
     public final AppRequestObserver mAppRequestObserver;
@@ -127,7 +126,6 @@ public final class DisplayModeDirector {
     public final VotesStatsReporter mVotesStatsReporter;
     public final VotesStorage mVotesStorage;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppRequestObserver {
         public final boolean mIgnorePreferredRefreshRate;
 
@@ -297,7 +295,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BrightnessObserver implements DisplayManager.DisplayListener {
         public AmbientFilter$WeightedMovingAverageAmbientFilter mAmbientFilter;
         public final Context mContext;
@@ -347,7 +344,6 @@ public final class DisplayModeDirector {
         public boolean mLowPowerModeEnabled = false;
         public int mThermalStatus = 0;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LightSensorEventListener implements SensorEventListener {
             public final AnonymousClass1 mInjectSensorEventRunnable =
                     new Runnable() { // from class:
@@ -1257,7 +1253,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DesiredDisplayModeSpecs {
         public boolean allowGroupSwitching;
         public final SurfaceControl.RefreshRateRanges appRequest;
@@ -1321,7 +1316,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigDisplaySettings
             implements DeviceConfig.OnPropertiesChangedListener {
         public DeviceConfigDisplaySettings() {}
@@ -1427,7 +1421,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayModeDirectorHandler extends Handler {
         public DisplayModeDirectorHandler(Looper looper) {
             super(looper, null, true);
@@ -1582,7 +1575,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayObserver implements DisplayManager.DisplayListener {
         public final int mExternalDisplayPeakHeight;
         public final int mExternalDisplayPeakRefreshRate;
@@ -1839,7 +1831,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HbmObserver implements DisplayManager.DisplayListener {
         public final DeviceConfigDisplaySettings mDeviceConfigDisplaySettings;
         public DisplayManagerInternal mDisplayManagerInternal;
@@ -2027,7 +2018,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Injector {
         public static final Uri PEAK_REFRESH_RATE_URI =
                 Settings.System.getUriFor("peak_refresh_rate");
@@ -2035,7 +2025,6 @@ public final class DisplayModeDirector {
                 Settings.System.getUriFor("min_refresh_rate");
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class RealInjector implements Injector {
         public final Context mContext;
         public DisplayManager mDisplayManager;
@@ -2053,7 +2042,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SettingsObserver extends ContentObserver {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Context mContext;
@@ -2374,7 +2362,6 @@ public final class DisplayModeDirector {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UdfpsObserver extends IUdfpsRefreshRateRequestCallback.Stub {
         public final SparseBooleanArray mUdfpsRefreshRateEnabled = new SparseBooleanArray();
         public final SparseBooleanArray mAuthenticationPossible = new SparseBooleanArray();

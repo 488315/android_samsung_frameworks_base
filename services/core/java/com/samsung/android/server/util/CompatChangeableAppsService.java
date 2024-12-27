@@ -16,11 +16,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CompatChangeableAppsService {
     public PackageManager mPackageManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BuilderWrapper extends CompatChangeablePackageInfo.Builder {
         public final ApplicationInfo mApplicationInfo;
         public final String mPackageName;
@@ -73,7 +71,6 @@ public final class CompatChangeableAppsService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final CompatChangeableAppsService sService =
                 new CompatChangeableAppsService();

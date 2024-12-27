@@ -52,7 +52,6 @@ import com.samsung.android.biometrics.app.setting.prompt.credential.LockoutTimer
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public abstract class AuthCredentialView extends LinearLayout implements View.OnKeyListener, View.OnClickListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AccessibilityManager mAccessibilityManager;
@@ -80,7 +79,6 @@ public abstract class AuthCredentialView extends LinearLayout implements View.On
     public TextView mTxtViewTitle;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.prompt.credential.AuthCredentialView$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {

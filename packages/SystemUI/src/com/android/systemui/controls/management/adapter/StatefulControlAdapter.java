@@ -35,7 +35,6 @@ import java.util.Map;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatefulControlAdapter extends RecyclerView.Adapter {
     public static final Map controlViewHolders;
     public final AUIFacade auiFacade;
@@ -61,7 +60,6 @@ public final class StatefulControlAdapter extends RecyclerView.Adapter {
     public final DelayableExecutor uiExecutor;
     public int uid;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -71,7 +69,6 @@ public final class StatefulControlAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ControlsItemDecoration extends RecyclerView.ItemDecoration {
         public final int basicTextViewFocusedStrokeWidth;
         public final int controlTopDownMargin;
@@ -121,7 +118,6 @@ public final class StatefulControlAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

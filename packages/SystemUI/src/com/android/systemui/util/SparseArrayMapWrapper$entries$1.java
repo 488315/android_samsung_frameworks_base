@@ -9,7 +9,6 @@ import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.sequences.Sequence;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SparseArrayMapWrapper$entries$1 implements Set<Map.Entry<? extends Integer, Object>>, KMappedMarker {
     final /* synthetic */ SparseArrayMapWrapper<Object> this$0;
 

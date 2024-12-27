@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DisplayStateInteractorImpl implements DisplayStateInteractor {
     public final ReadonlyStateFlow currentRotation;
     public final DisplayRepositoryImpl$special$$inlined$map$1 displayChanges;
@@ -28,7 +27,6 @@ public final class DisplayStateInteractorImpl implements DisplayStateInteractor 
     public final ReadonlyStateFlow isLargeScreen;
     public final ScreenSizeFoldProvider screenSizeFoldProvider;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

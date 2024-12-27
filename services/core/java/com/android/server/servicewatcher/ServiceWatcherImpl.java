@@ -29,7 +29,6 @@ import com.android.server.location.nsflp.NSConnectionRecord;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ServiceWatcherImpl implements ServiceWatcher$ServiceChangedListener {
     public static final boolean D = Log.isLoggable("ServiceWatcher", 3);
     public final NSConnectionRecord mConnectionRecord;
@@ -78,7 +77,6 @@ public final class ServiceWatcherImpl implements ServiceWatcher$ServiceChangedLi
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyServiceConnection implements ServiceConnection {
         public volatile IBinder mBinder;
         public final CurrentUserServiceSupplier.BoundServiceInfo mBoundServiceInfo;

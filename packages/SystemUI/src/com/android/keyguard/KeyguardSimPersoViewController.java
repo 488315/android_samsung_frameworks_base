@@ -28,7 +28,6 @@ import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSimPersoViewController extends KeyguardSecPinBasedInputViewController {
     public final CarrierText mCarrierLabel;
     public CheckSimPerso mCheckSimPersoThread;
@@ -43,7 +42,6 @@ public final class KeyguardSimPersoViewController extends KeyguardSecPinBasedInp
     public static final String SIM_TYPE = SystemProperties.get("ril.simtype");
     public static final String DOMESTIC_OTA_START = SystemProperties.get("ril.domesticOtaStart");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSimPersoViewController$3, reason: invalid class name */
     public final class AnonymousClass3 extends CheckSimPerso {
         public final /* synthetic */ KeyguardSecurityCallback val$keyguardSecurityCallback;
@@ -157,7 +155,6 @@ public final class KeyguardSimPersoViewController extends KeyguardSecPinBasedInp
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class CheckSimPerso extends Thread {
         public final String mPin;
 

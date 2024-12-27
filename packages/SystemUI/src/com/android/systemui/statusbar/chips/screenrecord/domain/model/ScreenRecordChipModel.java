@@ -3,10 +3,8 @@ package com.android.systemui.statusbar.chips.screenrecord.domain.model;
 import android.app.ActivityManager;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ScreenRecordChipModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DoingNothing implements ScreenRecordChipModel {
         public static final DoingNothing INSTANCE = new DoingNothing();
 
@@ -26,7 +24,6 @@ public interface ScreenRecordChipModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Recording implements ScreenRecordChipModel {
         public final ActivityManager.RunningTaskInfo recordedTask;
 
@@ -54,7 +51,6 @@ public interface ScreenRecordChipModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Starting implements ScreenRecordChipModel {
         public final long millisUntilStarted;
 

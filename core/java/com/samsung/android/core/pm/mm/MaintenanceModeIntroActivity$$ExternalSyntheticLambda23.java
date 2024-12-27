@@ -1,6 +1,5 @@
 package com.samsung.android.core.pm.mm;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class MaintenanceModeIntroActivity$$ExternalSyntheticLambda23
         implements Runnable {
     public final /* synthetic */ MaintenanceModeIntroActivity f$0;

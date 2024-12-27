@@ -4,11 +4,9 @@ import android.content.ComponentName;
 import android.os.UserHandle;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WidgetPickerIntentUtils {
     public static final WidgetPickerIntentUtils INSTANCE = new WidgetPickerIntentUtils();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WidgetExtra {
         public final ComponentName componentName;
         public final UserHandle user;

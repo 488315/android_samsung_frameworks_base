@@ -26,7 +26,6 @@ import com.samsung.android.sepunion.ITipsManager;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TipsManagerService extends ITipsManager.Stub implements AbsSemSystemService {
     public static final Long mLastDeviceConnectMsgTime = new Long(0);
     public boolean mBootupCompleted;
@@ -42,7 +41,6 @@ public final class TipsManagerService extends ITipsManager.Stub implements AbsSe
     public boolean mTipsPackageExist;
     public boolean mWaitingCallEnd;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TipsHandler extends Handler {
         public TipsHandler() {}
 
@@ -106,7 +104,6 @@ public final class TipsManagerService extends ITipsManager.Stub implements AbsSe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TipsManagerServiceThread extends Thread {
         public TipsManagerServiceThread() {
             super("TipsManagerService");
@@ -123,7 +120,6 @@ public final class TipsManagerService extends ITipsManager.Stub implements AbsSe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TipsPackageReceiver extends BroadcastReceiver {
         public TipsPackageReceiver() {}
 
@@ -171,7 +167,6 @@ public final class TipsManagerService extends ITipsManager.Stub implements AbsSe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TipsReceiver extends BroadcastReceiver {
         public TipsReceiver() {}
 

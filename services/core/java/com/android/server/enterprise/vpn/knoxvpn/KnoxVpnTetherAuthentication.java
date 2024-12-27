@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KnoxVpnTetherAuthentication {
     public static Context mContext;
     public static KnoxVpnTetherAuthentication mKnoxVpnTetherAuthentication;
@@ -45,7 +44,6 @@ public final class KnoxVpnTetherAuthentication {
     public volatile boolean isTetherAuthSuccessful = false;
     public final VpnProfileConfig vpnConfig = VpnProfileConfig.getInstance();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthStatusCallback extends IAuthenticationStatus.Stub {
         public AuthStatusCallback() {}
 
@@ -68,7 +66,6 @@ public final class KnoxVpnTetherAuthentication {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TetherAuthConnection implements ServiceConnection {
         public TetherAuthConnection() {}
 

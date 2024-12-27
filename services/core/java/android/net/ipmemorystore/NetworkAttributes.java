@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class NetworkAttributes {
     private static final boolean DBG = true;
     private static final float NULL_MATCH_WEIGHT = 0.25f;
@@ -31,7 +30,6 @@ public class NetworkAttributes {
     public final IPv6ProvisioningLossQuirk ipv6ProvisioningLossQuirk;
     public final Integer mtu;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Builder {
         private Inet4Address mAssignedAddress;
         private Long mAssignedAddressExpiry;

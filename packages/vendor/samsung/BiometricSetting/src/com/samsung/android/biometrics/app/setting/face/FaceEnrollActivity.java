@@ -53,7 +53,6 @@ import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.view.SemWindowManager;
 import java.io.ByteArrayOutputStream;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class FaceEnrollActivity extends FragmentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
     public AnonymousClass2 mAttachStateChangeListener;
@@ -116,7 +115,6 @@ public class FaceEnrollActivity extends FragmentActivity {
     public int mPercent = 0;
     public final AnonymousClass6 mEnrollmentCallback = new AnonymousClass6();
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     /* renamed from: com.samsung.android.biometrics.app.setting.face.FaceEnrollActivity$6, reason: invalid class name */
     public final class AnonymousClass6 extends FaceManager.EnrollmentCallback {
         public AnonymousClass6() {
@@ -508,7 +506,6 @@ public class FaceEnrollActivity extends FragmentActivity {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public static final class Pose {
         public static final /* synthetic */ Pose[] $VALUES;
         public static final Pose CENTER;

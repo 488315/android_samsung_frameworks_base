@@ -48,7 +48,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StagingManager {
     public final ApexManager mApexManager;
     public final CompletableFuture mBootCompleted;
@@ -62,7 +61,6 @@ public final class StagingManager {
     public final SparseArray mStagedSessions;
     public final List mSuccessfulStagedSessionIds;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public static StagingManager sStagingManager;
 
@@ -110,7 +108,6 @@ public final class StagingManager {
         public final void onStart() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StagedSession {}
 
     public StagingManager(Context context, ApexManager apexManager) {

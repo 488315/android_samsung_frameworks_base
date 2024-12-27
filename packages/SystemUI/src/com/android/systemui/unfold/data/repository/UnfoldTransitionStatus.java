@@ -2,10 +2,8 @@ package com.android.systemui.unfold.data.repository;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class UnfoldTransitionStatus {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionFinished extends UnfoldTransitionStatus {
         public static final TransitionFinished INSTANCE = new TransitionFinished();
 
@@ -26,7 +24,6 @@ public abstract class UnfoldTransitionStatus {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionInProgress extends UnfoldTransitionStatus {
         public final float progress;
 
@@ -51,7 +48,6 @@ public abstract class UnfoldTransitionStatus {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TransitionStarted extends UnfoldTransitionStatus {
         public static final TransitionStarted INSTANCE = new TransitionStarted();
 

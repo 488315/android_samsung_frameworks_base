@@ -29,7 +29,6 @@ import com.samsung.android.net.IExtendedEthernetManager;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ExtendedEthernetServiceImpl extends IExtendedEthernetManager.Stub {
     public ExtendedEthernetConfigStore mConfigStore;
     public final Context mContext;
@@ -47,7 +46,6 @@ public final class ExtendedEthernetServiceImpl extends IExtendedEthernetManager.
                     .TetheredInterfaceCallback() { // from class:
                                                    // com.android.server.ExtendedEthernetServiceImpl.1
 
-                /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
                 /* renamed from: com.android.server.ExtendedEthernetServiceImpl$1$1, reason: invalid class name and collision with other inner class name */
                 public final class C00041 implements TetheringManager.StartTetheringCallback {
                     public final void onTetheringFailed(int i) {
@@ -132,7 +130,6 @@ public final class ExtendedEthernetServiceImpl extends IExtendedEthernetManager.
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InterfaceObserver extends BaseNetworkObserver {
         public InterfaceObserver() {}
 

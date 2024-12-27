@@ -80,7 +80,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HotspotTile extends SQSTileImpl {
     public final WifiManager mAOSPWifiManager;
     public final ActivityStarter mActivityStarter;
@@ -102,7 +101,6 @@ public final class HotspotTile extends SQSTileImpl {
     public final QSTile.BooleanState mStateBeforeClick;
     public final WifiManager mWifiManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CallbackInfo {
         public boolean isDataSaverEnabled;
         public boolean isHotspotEnabled;
@@ -118,7 +116,6 @@ public final class HotspotTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HotspotAndDataSaverCallbacks implements HotspotController.Callback, DataSaverController.Listener {
         public final CallbackInfo mCallbackInfo;
 
@@ -543,7 +540,6 @@ public final class HotspotTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HotSpotDetailAdapter implements DetailAdapter, QSDetailItems.Callback {
         public int deviceCount = 0;
         public LinearLayout mApLayout;

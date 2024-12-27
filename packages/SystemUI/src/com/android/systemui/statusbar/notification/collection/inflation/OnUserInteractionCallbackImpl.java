@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.notification.collection.render.Notificatio
 import com.android.systemui.statusbar.notification.row.OnUserInteractionCallback;
 import com.android.systemui.statusbar.policy.HeadsUpManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OnUserInteractionCallbackImpl implements OnUserInteractionCallback {
     public final HeadsUpManager mHeadsUpManager;
     public final NotifCollection mNotifCollection;

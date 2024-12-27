@@ -39,7 +39,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public final Executor backgroundExecutor;
     public final Context context;
@@ -56,7 +55,6 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
     public final int pickerIconResourceId = R.drawable.ic_note_task_shortcut_keyguard;
     public final kotlin.Lazy lockScreenState$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfig$lockScreenState$2
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfig$lockScreenState$2$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function5 {
             /* synthetic */ boolean Z$0;
@@ -121,7 +119,6 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfig$lockScreenState$2$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             /* synthetic */ Object L$0;
@@ -174,13 +171,11 @@ public final class NoteTaskQuickAffordanceConfig implements KeyguardQuickAfforda
             final ReadonlyStateFlow readonlyStateFlow = keyguardQuickAffordanceRepository.selections;
             Flow flow = new Flow() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createConfigSelectedFlow$$inlined$map$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createConfigSelectedFlow$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ String $key$inlined;
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createConfigSelectedFlow$$inlined$map$1$2$1, reason: invalid class name */
                     public final class AnonymousClass1 extends ContinuationImpl {
                         Object L$0;

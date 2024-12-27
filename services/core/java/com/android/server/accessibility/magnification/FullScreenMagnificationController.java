@@ -37,7 +37,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FullScreenMagnificationController
         implements WindowManagerInternal.AccessibilityControllerInternal
                 .UiChangesForAccessibilityCallbacks {
@@ -59,7 +58,6 @@ public final class FullScreenMagnificationController
     public final Supplier mThumbnailSupplier;
     public final Supplier mTimeAnimatorSupplier;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ControllerContext {
         public final Long mAnimationDuration;
         public final Context mContext;
@@ -81,7 +79,6 @@ public final class FullScreenMagnificationController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayMagnification
             implements WindowManagerInternal.MagnificationCallbacks {
         public boolean mDeleteAfterUnregister;
@@ -575,7 +572,6 @@ public final class FullScreenMagnificationController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface MagnificationInfoChangedCallback {
         void onFullScreenMagnificationActivationState(int i, boolean z);
 
@@ -587,7 +583,6 @@ public final class FullScreenMagnificationController
         void onRequestMagnificationSpec(int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenStateObserver extends BroadcastReceiver {
         public final Context mContext;
         public final FullScreenMagnificationController mController;
@@ -612,7 +607,6 @@ public final class FullScreenMagnificationController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpecAnimationBridge
             implements ValueAnimator.AnimatorUpdateListener, Animator.AnimatorListener {
         public MagnificationAnimationCallback mAnimationCallback;

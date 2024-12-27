@@ -3,13 +3,10 @@ package com.android.systemui.controls.util;
 import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemUIAnalyticsWrapper {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class EventId {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class AddDevices extends EventId {
             public static final AddDevices INSTANCE = new AddDevices();
 
@@ -35,7 +32,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseAppsOnOff extends EventId {
             public static final ChooseAppsOnOff INSTANCE = new ChooseAppsOnOff();
 
@@ -61,7 +57,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseAppsOnOffOnManageApps extends EventId {
             public static final ChooseAppsOnOffOnManageApps INSTANCE = new ChooseAppsOnOffOnManageApps();
 
@@ -87,7 +82,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class IntroStart extends EventId {
             public static final IntroStart INSTANCE = new IntroStart();
 
@@ -113,7 +107,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchDevices extends EventId {
             public static final LaunchDevices INSTANCE = new LaunchDevices();
 
@@ -139,7 +132,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchFullController extends EventId {
             public static final LaunchFullController INSTANCE = new LaunchFullController();
 
@@ -165,7 +157,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LaunchSmartThings extends EventId {
             public static final LaunchSmartThings INSTANCE = new LaunchSmartThings();
 
@@ -191,7 +182,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class LeftChooseDevices extends EventId {
             public static final LeftChooseDevices INSTANCE = new LeftChooseDevices();
 
@@ -217,7 +207,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoreDevicesToShow extends EventId {
             public static final MoreDevicesToShow INSTANCE = new MoreDevicesToShow();
 
@@ -243,7 +232,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoreManageApps extends EventId {
             public static final MoreManageApps INSTANCE = new MoreManageApps();
 
@@ -269,7 +257,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoreSettings extends EventId {
             public static final MoreSettings INSTANCE = new MoreSettings();
 
@@ -295,7 +282,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MoveCard extends EventId {
             public static final MoveCard INSTANCE = new MoveCard();
 
@@ -321,7 +307,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class OpenSpinner extends EventId {
             public static final OpenSpinner INSTANCE = new OpenSpinner();
 
@@ -347,7 +332,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class QuitDevices extends EventId {
             public static final QuitDevices INSTANCE = new QuitDevices();
 
@@ -373,7 +357,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Reorder extends EventId {
             public static final Reorder INSTANCE = new Reorder();
 
@@ -399,7 +382,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SettingsControlDevicesOnOff extends EventId {
             public static final SettingsControlDevicesOnOff INSTANCE = new SettingsControlDevicesOnOff();
 
@@ -425,7 +407,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SettingsShowDevicesOnOff extends EventId {
             public static final SettingsShowDevicesOnOff INSTANCE = new SettingsShowDevicesOnOff();
 
@@ -451,7 +432,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapAppList extends EventId {
             public static final TapAppList INSTANCE = new TapAppList();
 
@@ -477,7 +457,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapAppListOnManageApps extends EventId {
             public static final TapAppListOnManageApps INSTANCE = new TapAppListOnManageApps();
 
@@ -503,7 +482,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapCardWithButton extends EventId {
             public static final TapCardWithButton INSTANCE = new TapCardWithButton();
 
@@ -529,7 +507,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapCardWithoutButton extends EventId {
             public static final TapCardWithoutButton INSTANCE = new TapCardWithoutButton();
 
@@ -555,7 +532,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapMainActionButton extends EventId {
             public static final TapMainActionButton INSTANCE = new TapMainActionButton();
 
@@ -581,7 +557,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapSmallTypeCard extends EventId {
             public static final TapSmallTypeCard INSTANCE = new TapSmallTypeCard();
 
@@ -607,7 +582,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class TapSpinnerApp extends EventId {
             public static final TapSpinnerApp INSTANCE = new TapSpinnerApp();
 
@@ -643,10 +617,8 @@ public final class SystemUIAnalyticsWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class KeyId {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class AllControls extends KeyId {
             public static final AllControls INSTANCE = new AllControls();
 
@@ -672,7 +644,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class AppName extends KeyId {
             public static final AppName INSTANCE = new AppName();
 
@@ -698,7 +669,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DeviceName extends KeyId {
             public static final DeviceName INSTANCE = new DeviceName();
 
@@ -724,7 +694,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DeviceType extends KeyId {
             public static final DeviceType INSTANCE = new DeviceType();
 
@@ -750,7 +719,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NumberOfSelectedApps extends KeyId {
             public static final NumberOfSelectedApps INSTANCE = new NumberOfSelectedApps();
 
@@ -776,7 +744,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NumberOfTotalApps extends KeyId {
             public static final NumberOfTotalApps INSTANCE = new NumberOfTotalApps();
 
@@ -802,7 +769,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class SelectedControl extends KeyId {
             public static final SelectedControl INSTANCE = new SelectedControl();
 
@@ -828,7 +794,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Structure extends KeyId {
             public static final Structure INSTANCE = new Structure();
 
@@ -854,7 +819,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Template extends KeyId {
             public static final Template INSTANCE = new Template();
 
@@ -880,7 +844,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Zone extends KeyId {
             public static final Zone INSTANCE = new Zone();
 
@@ -916,10 +879,8 @@ public final class SystemUIAnalyticsWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class ScreenId {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ChooseDevices extends ScreenId {
             public static final ChooseDevices INSTANCE = new ChooseDevices();
 
@@ -945,7 +906,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class CustomPanel extends ScreenId {
             public static final CustomPanel INSTANCE = new CustomPanel();
 
@@ -971,7 +931,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Intro extends ScreenId {
             public static final Intro INSTANCE = new Intro();
 
@@ -997,7 +956,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class IntroNoAppsToShow extends ScreenId {
             public static final IntroNoAppsToShow INSTANCE = new IntroNoAppsToShow();
 
@@ -1023,7 +981,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class MainScreen extends ScreenId {
             public static final MainScreen INSTANCE = new MainScreen();
 
@@ -1049,7 +1006,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ManageApps extends ScreenId {
             public static final ManageApps INSTANCE = new ManageApps();
 
@@ -1075,7 +1031,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NoDeviceSelected extends ScreenId {
             public static final NoDeviceSelected INSTANCE = new NoDeviceSelected();
 
@@ -1101,7 +1056,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Settings extends ScreenId {
             public static final Settings INSTANCE = new Settings();
 
@@ -1137,10 +1091,8 @@ public final class SystemUIAnalyticsWrapper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class StatusEventId {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DevicesAppsStatus extends StatusEventId {
             public static final DevicesAppsStatus INSTANCE = new DevicesAppsStatus();
 
@@ -1166,7 +1118,6 @@ public final class SystemUIAnalyticsWrapper {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class NumberOfAppsInDevices extends StatusEventId {
             public static final NumberOfAppsInDevices INSTANCE = new NumberOfAppsInDevices();
 

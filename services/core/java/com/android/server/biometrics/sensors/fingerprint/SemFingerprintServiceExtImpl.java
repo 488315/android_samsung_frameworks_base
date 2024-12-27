@@ -33,7 +33,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemFingerprintServiceExtImpl
         implements SemFpHalLifecycleListener, SemFpAuthenticationListener {
     public static final boolean DEBUG = Utils.DEBUG;
@@ -60,7 +59,6 @@ public final class SemFingerprintServiceExtImpl
     public boolean mHasOpticalUdfps = SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL;
     public boolean mHasUdfps = SemBiometricFeature.FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemFingerprintServiceExtImpl$1, reason: invalid class name */
     public final class AnonymousClass1
             implements SemBiometricDisplayStateMonitor.DisplayStateCallback {
@@ -87,7 +85,6 @@ public final class SemFingerprintServiceExtImpl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemFingerprintServiceExtImpl$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         public AnonymousClass2() {}
@@ -99,7 +96,6 @@ public final class SemFingerprintServiceExtImpl
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public static SemFpAodController createAodController() {
             return new SemFpAodController(

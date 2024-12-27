@@ -9,14 +9,12 @@ import com.android.systemui.bixby2.util.AudioManagerWrapper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PlayLastSongController extends MediaCommandType {
     public static final int $stable = 0;
     public static final Companion Companion = new Companion(null);
     private static final String YOUTUBE_PACKAGE = "com.google.android.youtube";
     private final int mode;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

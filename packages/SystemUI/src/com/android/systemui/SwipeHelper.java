@@ -34,7 +34,6 @@ import com.android.wm.shell.shared.animation.PhysicsAnimator;
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SwipeHelper implements Gefingerpoken, Dumpable {
     public boolean mAlreadyExecutedDragAndDrop;
     public final Callback mCallback;
@@ -66,7 +65,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     public final VelocityTracker mVelocityTracker = VelocityTracker.obtain();
     public final float mTouchSlopMultiplier = ViewConfiguration.getAmbiguousGestureMultiplier();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.SwipeHelper$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final int[] mViewOffset = new int[2];
@@ -101,7 +99,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 

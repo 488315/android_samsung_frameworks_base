@@ -13,10 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PowerStatsProcessor {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CombinedDeviceStateEstimate {
         public final List deviceStateEstimations = new ArrayList();
         public final String id;
@@ -27,7 +25,6 @@ public abstract class PowerStatsProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateEstimation {
         public final String id;
         public Object intermediates;
@@ -39,7 +36,6 @@ public abstract class PowerStatsProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerEstimationPlan {
         public final AggregatedPowerStatsConfig.PowerComponent mConfig;
         public final List deviceStateEstimations = new ArrayList();
@@ -292,7 +288,6 @@ public abstract class PowerStatsProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStateEstimate {
         public final CombinedDeviceStateEstimate combinedDeviceStateEstimate;
         public final List proportionalEstimates = new ArrayList();
@@ -306,7 +301,6 @@ public abstract class PowerStatsProcessor {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidStateProportionalEstimate {
         public final int[] stateValues;
 

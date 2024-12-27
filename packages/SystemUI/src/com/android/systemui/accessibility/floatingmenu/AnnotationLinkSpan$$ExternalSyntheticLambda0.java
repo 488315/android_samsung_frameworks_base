@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class AnnotationLinkSpan$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId = 1;
     public final /* synthetic */ Object f$0;

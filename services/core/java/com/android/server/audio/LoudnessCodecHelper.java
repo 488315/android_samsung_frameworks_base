@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LoudnessCodecHelper {
     static final int SPL_RANGE_LARGE = 3;
     static final int SPL_RANGE_MEDIUM = 2;
@@ -39,7 +38,6 @@ public final class LoudnessCodecHelper {
     public final SparseIntArray mPiidToPidCache = new SparseIntArray();
     public final HashMap mCachedProperties = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LoudnessCodecInputProperties {
         public final int mDeviceSplRange;
         public final boolean mIsDownmixing;
@@ -85,7 +83,6 @@ public final class LoudnessCodecHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LoudnessRemoteCallbackList extends RemoteCallbackList {
         public final LoudnessCodecHelper mLoudnessCodecHelper;
 
@@ -177,7 +174,6 @@ public final class LoudnessCodecHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class LoudnessTrackId {
         public final int mPid;
         public final int mSessionId;

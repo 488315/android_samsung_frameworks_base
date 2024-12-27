@@ -26,7 +26,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SpatializerHelper {
     public static final AudioAttributes DEFAULT_ATTRIBUTES;
     public static final AudioFormat DEFAULT_FORMAT;
@@ -64,12 +63,10 @@ public final class SpatializerHelper {
     public boolean mSecHeadTrackerAvailable = false;
     public boolean mGlobalHeadTrackerAvailable = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.SpatializerHelper$1, reason: invalid class name */
     public final class AnonymousClass1 extends SparseIntArray {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HelperDynamicSensorCallback extends SensorManager.DynamicSensorCallback {
         public HelperDynamicSensorCallback() {
         }
@@ -85,7 +82,6 @@ public final class SpatializerHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpatializerCallback extends INativeSpatializerCallback.Stub {
         public SpatializerCallback() {
         }
@@ -135,7 +131,6 @@ public final class SpatializerHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpatializerHeadTrackingCallback extends ISpatializerHeadTrackingCallback.Stub {
         public SpatializerHeadTrackingCallback() {
         }

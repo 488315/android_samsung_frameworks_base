@@ -9,7 +9,6 @@ import android.util.Slog;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.am.DynamicHiddenApp;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CustomEFKManager {
     public int addBonusEFK;
     public boolean isBlockDecEFK;
@@ -33,7 +32,6 @@ public final class CustomEFKManager {
         DynamicHiddenApp.decodeToStr("Y29tLnNlYy5hbmRyb2lkLmFwcC5jYW1lcmE=")
     };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.bgslotmanager.CustomEFKManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends CountDownTimer {
         public final /* synthetic */ int $r8$classId;
@@ -101,7 +99,6 @@ public final class CustomEFKManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WatermarkScaleTimer extends CountDownTimer {
         public int count;
         public final int reserve;

@@ -2,7 +2,6 @@ package android.app.backup;
 
 import java.util.function.BiFunction;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class BackupRestoreEventLogger$$ExternalSyntheticLambda0
         implements BiFunction {
     @Override // java.util.function.BiFunction

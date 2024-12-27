@@ -9,7 +9,6 @@ import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PersisterQueue {
     public static final PersisterQueue$$ExternalSyntheticLambda0 EMPTY_ITEM =
             new PersisterQueue$$ExternalSyntheticLambda0();
@@ -20,7 +19,6 @@ public final class PersisterQueue {
     public final long mPreTaskDelayMs;
     public final ArrayList mWriteQueue;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LazyTaskWriterThread extends Thread {
         public LazyTaskWriterThread() {
             super("LazyTaskWriterThread");
@@ -51,10 +49,8 @@ public final class PersisterQueue {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WriteQueueItem {
         default boolean matches(WriteQueueItem writeQueueItem) {
             return false;

@@ -7,7 +7,6 @@ import com.android.internal.content.PackageMonitor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PackageUpdateMonitor extends PackageMonitor {
     public final Handler bgHandler;
     public final Runnable callback;
@@ -16,7 +15,6 @@ public final class PackageUpdateMonitor extends PackageMonitor {
     public final String packageName;
     public final UserHandle user;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         PackageUpdateMonitor create(UserHandle userHandle, String str, Runnable runnable);
     }

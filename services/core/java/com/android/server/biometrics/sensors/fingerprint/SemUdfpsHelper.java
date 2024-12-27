@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemUdfpsHelper {
     public static final boolean DEBUG = Utils.DEBUG;
     public static final boolean IS_OPTICAL = SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL;
@@ -44,7 +43,6 @@ public final class SemUdfpsHelper {
     public String mSemSensorDraggingArea = "5.00";
     public final Rect mFodRect = new Rect();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BurnInHelper {
         public final int[] mIconArray;
         public int mIconLocationIndex;
@@ -88,13 +86,11 @@ public final class SemUdfpsHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class InstanceHolder {
         public static final SemUdfpsHelper INSTANCE =
                 new SemUdfpsHelper(
                         new AnonymousClass1(), new SemUdfpsHelper$$ExternalSyntheticLambda0(1));
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemUdfpsHelper$InstanceHolder$1, reason: invalid class name */
         public final class AnonymousClass1 implements SemBioSysFsProvider {}
     }

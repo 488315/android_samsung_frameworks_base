@@ -3,7 +3,6 @@ package android.media;
 import java.util.Map;
 import java.util.function.Function;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class MediaRouter2$$ExternalSyntheticLambda10 implements Function {
     public final /* synthetic */ Map f$0;
 

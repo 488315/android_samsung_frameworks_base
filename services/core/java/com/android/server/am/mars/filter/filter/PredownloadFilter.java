@@ -11,18 +11,15 @@ import com.android.server.am.mars.filter.IFilter;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PredownloadFilter implements IFilter {
     public final ArrayList mTempAllowlist = new ArrayList();
     public Context mContext = null;
     public PredownloadRequestReceiver mReceiver = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PredownloadFilterHolder {
         public static final PredownloadFilter INSTANCE = new PredownloadFilter();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PredownloadRequestReceiver extends BroadcastReceiver {
         public boolean registered = false;
 
@@ -63,7 +60,6 @@ public final class PredownloadFilter implements IFilter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TargetPackageTuple {
         public final String pkgName;
         public final int uid;

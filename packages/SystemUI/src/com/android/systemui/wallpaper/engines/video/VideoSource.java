@@ -29,7 +29,6 @@ import com.sec.ims.configuration.DATA;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VideoSource implements WallpaperSource {
     public final String TAG;
     public final Context mContext;
@@ -40,7 +39,6 @@ public final class VideoSource implements WallpaperSource {
     public final Point mVideoSize;
     public final int mWhich;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface VideoLocation {
         void release();
 
@@ -49,7 +47,6 @@ public final class VideoSource implements WallpaperSource {
         void useMediaRetriever(Consumer consumer);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VideoResource implements VideoLocation {
         public AssetFileDescriptor mAssetFdForPlay;
         public final Context mContext;
@@ -288,7 +285,6 @@ public final class VideoSource implements WallpaperSource {
         return z2;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VideoFile implements VideoLocation {
         public final String mFilePathName;
 

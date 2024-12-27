@@ -4,7 +4,6 @@ import com.android.systemui.power.shared.model.WakeSleepReason;
 import com.android.systemui.power.shared.model.WakefulnessModel;
 import com.android.systemui.power.shared.model.WakefulnessState;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface PowerRepository {
     static void updateWakefulness$default(PowerRepository powerRepository, WakefulnessState wakefulnessState, WakeSleepReason wakeSleepReason, WakeSleepReason wakeSleepReason2, boolean z, int i) {
         if ((i & 1) != 0) {

@@ -18,13 +18,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AbstractLocationProvider {
     public final Controller mController;
     public final Executor mExecutor;
     public final AtomicReference mInternalState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Controller {
         public boolean mStarted = false;
 
@@ -94,7 +92,6 @@ public abstract class AbstractLocationProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InternalState {
         public final Listener listener;
         public final State state;
@@ -105,14 +102,12 @@ public abstract class AbstractLocationProvider {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Listener {
         void onReportLocation(LocationResult locationResult);
 
         void onStateChanged(State state, State state2);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class State {
         public static final State EMPTY_STATE =
                 new State(false, null, null, Collections.emptySet());

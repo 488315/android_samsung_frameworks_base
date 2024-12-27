@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BiometricUnlockMode {
     public static final /* synthetic */ BiometricUnlockMode[] $VALUES;
     public static final Companion Companion;
@@ -23,7 +22,6 @@ public final class BiometricUnlockMode {
     public static final Set dismissesKeyguardModes;
     public static final Set wakeAndUnlockModes;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

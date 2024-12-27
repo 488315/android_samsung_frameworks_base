@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSliceView extends LinearLayout {
     public float mDarkAmount;
     public boolean mHasHeader;
@@ -42,7 +41,6 @@ public class KeyguardSliceView extends LinearLayout {
     public int mTextColor;
     TextView mTitle;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class KeyguardSliceTextView extends TextView {
         public KeyguardSliceTextView(Context context) {
             super(context, null, 0, R.style.TextAppearance_Keyguard_Secondary);
@@ -87,7 +85,6 @@ public class KeyguardSliceView extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Row extends LinearLayout {
         public float mDarkAmount;
         public final KeepAwakeAnimationListener mKeepAwakeListener;

@@ -13,13 +13,11 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @Dependencies({@DependsOn(target = QSIconView.class), @DependsOn(target = Callback.class), @DependsOn(target = Icon.class), @DependsOn(target = State.class)})
 @ProvidesInterface(version = 4)
 public interface QSTile {
     public static final int VERSION = 4;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public class AdapterState extends State {
         public static final int VERSION = 1;
@@ -51,7 +49,6 @@ public interface QSTile {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public class BooleanState extends AdapterState {
         public static final int VERSION = 1;
@@ -64,7 +61,6 @@ public interface QSTile {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 2)
     public interface Callback {
         public static final int VERSION = 2;
@@ -72,7 +68,6 @@ public interface QSTile {
         void onStateChanged(State state);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public abstract class Icon {
         public static final int VERSION = 1;
@@ -96,7 +91,6 @@ public interface QSTile {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 1)
     public class State {
         public static final int DEFAULT_STATE = 2;

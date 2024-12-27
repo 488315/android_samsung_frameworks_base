@@ -22,7 +22,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ChimeraQuotaMonitor {
     public static final ChimeraQuotaMonitor INSTANCE = new ChimeraQuotaMonitor();
     public long mLastNativeDRAMUsed;
@@ -32,7 +31,6 @@ public final class ChimeraQuotaMonitor {
     public final RingBuffer mTaskHistory = new RingBuffer(String.class, 10);
     public Timer mTimer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AlwaysRunningMemCollectTask extends TimerTask {
         public AlwaysRunningMemCollectTask() {}
 

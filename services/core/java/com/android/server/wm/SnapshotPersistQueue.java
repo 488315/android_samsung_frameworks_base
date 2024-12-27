@@ -14,7 +14,6 @@ import com.android.server.pm.UserManagerInternal;
 import java.io.File;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SnapshotPersistQueue {
     public boolean mPaused;
     public boolean mQueueIdling;
@@ -81,7 +80,6 @@ public final class SnapshotPersistQueue {
     public final UserManagerInternal mUserManagerInternal =
             (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CloseBufferWriteQueueItem extends WriteQueueItem {
         public HardwareBuffer mHardwareBuffer;
 
@@ -95,7 +93,6 @@ public final class SnapshotPersistQueue {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeleteWriteQueueItem extends WriteQueueItem {
         public final int mId;
 
@@ -124,7 +121,6 @@ public final class SnapshotPersistQueue {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StoreWriteQueueItem extends WriteQueueItem {
         public final int mId;
         public final TaskSnapshot mSnapshot;
@@ -187,7 +183,6 @@ public final class SnapshotPersistQueue {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class WriteQueueItem {
         public final BaseAppSnapshotPersister$PersistInfoProvider mPersistInfoProvider;
         public final int mUserId;

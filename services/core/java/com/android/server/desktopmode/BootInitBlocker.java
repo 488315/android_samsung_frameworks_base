@@ -7,7 +7,6 @@ import com.android.server.ServiceThread;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BootInitBlocker {
     public final BootInitBlocker$$ExternalSyntheticLambda0 mBlocker =
             new BootInitBlocker$$ExternalSyntheticLambda0();
@@ -15,7 +14,6 @@ public final class BootInitBlocker {
     public final Handler mHandler;
     public final IStateManager mStateManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.BootInitBlocker$1, reason: invalid class name */
     public final class AnonymousClass1 extends StateManager.StateListener {
         public AnonymousClass1() {}

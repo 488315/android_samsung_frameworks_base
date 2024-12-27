@@ -5,7 +5,6 @@ import com.android.server.timezonedetector.LocationAlgorithmEvent;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocationTimeZoneManagerServiceState {
     public final String mControllerState;
     public final List mControllerStates;
@@ -13,7 +12,6 @@ public final class LocationTimeZoneManagerServiceState {
     public final List mPrimaryProviderStates;
     public final List mSecondaryProviderStates;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public String mControllerState;
         public List mControllerStates;

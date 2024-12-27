@@ -45,7 +45,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerHw2Compat implements ISoundTriggerHal {
     public final IHwBinder mBinder;
     public final Properties mProperties;
@@ -57,7 +56,6 @@ public final class SoundTriggerHw2Compat implements ISoundTriggerHal {
     public final ConcurrentMap mModelCallbacks = new ConcurrentHashMap();
     public final Map mDeathRecipientMap = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelCallbackWrapper extends HwBinder implements IBase {
         public final ISoundTriggerHal.ModelCallback mDelegate;
 
@@ -341,7 +339,6 @@ public final class SoundTriggerHw2Compat implements ISoundTriggerHal {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NotSupported extends Exception {
         public NotSupported(String str) {
             super(str);

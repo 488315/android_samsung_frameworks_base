@@ -74,7 +74,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSecurityContainer extends ConstraintLayout {
     static final float MIN_BACK_SCALE = 0.9f;
     public AlertDialog mAlertDialog;
@@ -91,7 +90,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
     public ViewMode mViewMode;
     public int mWidth;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum BouncerUiEvent implements UiEventLogger.UiEventEnum {
         UNKNOWN(0),
         BOUNCER_DISMISS_EXTENDED_ACCESS(413),
@@ -113,7 +111,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultViewMode implements ViewMode {
         public ConstraintLayout mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
@@ -133,7 +130,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DoubleTapListener extends GestureDetector.SimpleOnGestureListener {
         public /* synthetic */ DoubleTapListener(KeyguardSecurityContainer keyguardSecurityContainer, int i) {
             this();
@@ -148,7 +144,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OneHandedViewMode extends SidedSecurityMode {
         public ConstraintLayout mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
@@ -194,7 +189,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class SidedSecurityMode implements ViewMode {
         public int mDefaultSideSetting;
         public GlobalSettings mGlobalSettings;
@@ -223,7 +217,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public abstract void updateSecurityViewLocation(boolean z, boolean z2);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UserSwitcherViewMode extends SidedSecurityMode {
         public FalsingA11yDelegate mFalsingA11yDelegate;
         public FalsingManager mFalsingManager;
@@ -242,7 +235,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public ConstraintLayout mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface UserSwitcherCallback {
         }
 
@@ -738,7 +730,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         new GestureDetector(context, new DoubleTapListener(this, i2));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecurityContainer$2, reason: invalid class name */
     public final class AnonymousClass2 implements OnBackAnimationCallback {
         public AnonymousClass2() {
@@ -765,7 +756,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ViewMode {
         default void onDestroy() {
         }

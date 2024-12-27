@@ -78,7 +78,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerService extends SystemService {
     public AppOpsManager mAppOpsManager;
     public final Context mContext;
@@ -98,10 +97,8 @@ public final class SoundTriggerService extends SystemService {
     public final AtomicInteger mSessionIdCounter;
     public final SoundModelStatTracker mSoundModelStatTracker;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalSoundTriggerService {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class SessionImpl {
             public final MyAppOpsListener mAppOpsListener;
             public final IBinder mClient;
@@ -338,7 +335,6 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyAppOpsListener implements AppOpsManager.OnOpChangedListener {
         public final Consumer mOnOpModeChanged;
         public final Identity mOriginatorIdentity;
@@ -383,20 +379,17 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NumOps {
         public long mLastOpsHourSinceBoot;
         public final Object mLock = new Object();
         public final int[] mNumOps = new int[24];
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Operation {
         public final Runnable mDropOp;
         public final ExecuteOp mExecuteOp;
         public final Runnable mSetupOp;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public interface ExecuteOp {
             void run(int i, ISoundTriggerDetectionService iSoundTriggerDetectionService);
         }
@@ -413,11 +406,9 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundModelStatTracker {
         public final TreeMap mModelStats = new TreeMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class SoundModelStat {
             public boolean mIsStarted;
             public long mLastStartTimestampMsec;
@@ -473,7 +464,6 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundTriggerServiceStub extends ISoundTriggerService.Stub {
         public SoundTriggerServiceStub() {}
 
@@ -735,7 +725,6 @@ public final class SoundTriggerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SoundTriggerSessionStub extends ISoundTriggerSession.Stub {
         public final MyAppOpsListener mAppOpsListener;
         public final IBinder mClient;
@@ -748,7 +737,6 @@ public final class SoundTriggerService extends SystemService {
         public final TreeMap mCallbacks = new TreeMap();
         public final Identity mOriginatorIdentity = IdentityContext.getNonNull();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RemoteSoundTriggerDetectionService
                 extends IRecognitionStatusCallback.Stub implements ServiceConnection {
             public final AnonymousClass1 mClient;

@@ -20,7 +20,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppTimeLimitController {
     public static final Integer ONE = new Integer(1);
     public AlarmManager mAlarmManager;
@@ -31,7 +30,6 @@ public final class AppTimeLimitController {
     public final SparseArray mUsers = new SparseArray();
     public final SparseArray mObserverApps = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppUsageGroup extends UsageGroup {
         @Override // com.android.server.usage.AppTimeLimitController.UsageGroup
         public final void onLimitReached() {
@@ -49,7 +47,6 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppUsageLimitGroup extends UsageGroup {
         public AppUsageLimitGroup(
                 UserData userData,
@@ -86,10 +83,8 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lock {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -115,7 +110,6 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ObserverAppData {
         public SparseArray appUsageGroups;
         public SparseArray appUsageLimitGroups;
@@ -146,7 +140,6 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionUsageGroup extends UsageGroup
             implements AlarmManager.OnAlarmListener {
         public final long mNewSessionThresholdMs;
@@ -243,7 +236,6 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class UsageGroup {
         public int mActives;
         public long mLastKnownUsageTimeMs;
@@ -443,7 +435,6 @@ public final class AppTimeLimitController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserData {
         public final ArrayMap currentlyActive = new ArrayMap();
         public final ArrayMap observedMap = new ArrayMap();

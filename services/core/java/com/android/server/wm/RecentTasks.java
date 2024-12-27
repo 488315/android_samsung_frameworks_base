@@ -57,7 +57,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RecentTasks {
     public long mActiveTasksSessionDurationMs;
     public final ArrayList mCallbacks;
@@ -94,7 +93,6 @@ public final class RecentTasks {
     public static final ActivityInfo NO_ACTIVITY_INFO_TOKEN = new ActivityInfo();
     public static final ApplicationInfo NO_APPLICATION_INFO_TOKEN = new ApplicationInfo();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.RecentTasks$1, reason: invalid class name */
     public final class AnonymousClass1 implements WindowManagerPolicyConstants.PointerEventListener {
         public AnonymousClass1() {
@@ -185,11 +183,9 @@ public final class RecentTasks {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callbacks {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserToProcMap extends SparseArray {
         @Override // android.util.SparseArray
         public final HashMap get(int i) {

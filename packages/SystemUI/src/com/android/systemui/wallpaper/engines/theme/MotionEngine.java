@@ -11,7 +11,6 @@ import com.android.systemui.wallpaper.engines.WallpaperEngineCallback;
 import com.android.systemui.wallpaper.theme.MotionWallpaper;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MotionEngine extends WallpaperEngine {
     public final Context mContext;
     public MotionWallpaper mMotionWallpaper;

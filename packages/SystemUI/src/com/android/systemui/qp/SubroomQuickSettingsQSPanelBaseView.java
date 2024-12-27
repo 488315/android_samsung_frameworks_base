@@ -18,7 +18,6 @@ import com.android.systemui.qs.QSPanelControllerBase$TileRecord;
 import com.android.systemui.qs.SecPageIndicator;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
     public static final /* synthetic */ int $r8$clinit = 0;
     public SubroomBrightnessSettingsView mBrightnessView;
@@ -26,7 +25,6 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
     public SecPageIndicator mFooterPageIndicator;
     public LinearLayout mQuickSettingsContainer;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SubscreenTileRecord extends QSPanelControllerBase$TileRecord {
         public final String mTilespec;
 

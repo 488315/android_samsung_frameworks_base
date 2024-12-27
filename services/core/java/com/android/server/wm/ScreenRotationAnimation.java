@@ -37,7 +37,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ScreenRotationAnimation {
     public SurfaceControl mBackColorSurface;
     public final Context mContext;
@@ -65,7 +64,6 @@ public final class ScreenRotationAnimation {
     public final Transformation mRotateEnterTransformation = new Transformation();
     public final Matrix mSnapshotInitialMatrix = new Matrix();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SurfaceRotationAnimationController {
         public SurfaceAnimator mDisplayAnimator;
         public SurfaceAnimator mEnterBlackFrameAnimator;

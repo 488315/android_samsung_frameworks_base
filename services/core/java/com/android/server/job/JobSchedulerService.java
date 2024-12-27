@@ -153,7 +153,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import libcore.util.EmptyArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class JobSchedulerService extends SystemService {
     public static final boolean DEBUG;
     public static final boolean DEBUG_STANDBY;
@@ -237,7 +236,6 @@ public final class JobSchedulerService extends SystemService {
     public final SparseSetArray mUidToPackageCache;
     public final RemoteCallbackList mUserVisibleJobObservers;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobSchedulerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends MySimpleClock {
         public final /* synthetic */ int $r8$classId;
@@ -259,7 +257,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobSchedulerService$3, reason: invalid class name */
     public final class AnonymousClass3 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -471,7 +468,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobSchedulerService$6, reason: invalid class name */
     public final class AnonymousClass6 implements Comparator {
         @Override // java.util.Comparator
@@ -493,7 +489,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AcceptCounter {
         public long batchNetwork;
         public long batchOthers;
@@ -511,7 +506,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BatteryStateTracker extends BroadcastReceiver implements BatteryManagerInternal.ChargingPolicyChangeListener {
         public int mBatteryLevel;
         public boolean mBatteryNotLow;
@@ -599,7 +593,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CloudProviderChangeListener implements StorageManagerInternal.CloudProviderChangeListener {
         public CloudProviderChangeListener() {
         }
@@ -628,7 +621,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Constants {
         public static final SparseIntArray DEFAULT_CONN_TRANSPORT_BATCH_THRESHOLD;
         public static final int DEFAULT_MIN_READY_CPU_ONLY_JOBS_COUNT;
@@ -840,7 +832,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConstantsObserver implements DeviceConfig.OnPropertiesChangedListener {
         public boolean mCacheConfigChanges = false;
         public DeviceConfig.Properties mLastPropertiesPulled;
@@ -870,7 +861,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeferrableNetworkJobCounter {
         public long activeNetwork;
         public long batchDealyExpired;
@@ -884,7 +874,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeferredJobCounter implements Consumer {
         public int mDeferred;
 
@@ -896,7 +885,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobCountPerNetwork {
         public final Network network;
         public int totalJobCount = 0;
@@ -917,7 +905,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobHandler extends Handler {
         public JobHandler(Looper looper) {
             super(looper);
@@ -1093,7 +1080,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobOperationGroupBlockData {
         public long begin;
         public int deferedCount;
@@ -1105,7 +1091,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class JobSchedulerStub extends IJobScheduler.Stub {
         public JobSchedulerStub() {
         }
@@ -1550,7 +1535,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService implements JobSchedulerInternal {
         public LocalService() {
         }
@@ -1664,7 +1648,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MaybeReadyJobCounter {
         public long mBeginTime = 0;
         public int mOperationCount = 0;
@@ -1675,7 +1658,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MaybeReadyJobQueueFunctor implements Consumer {
         final ArrayMap mBatches = new ArrayMap();
         final List runnableJobs = new ArrayList();
@@ -1927,7 +1909,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MySimpleClock extends Clock {
         public final ZoneId mZoneId;
 
@@ -1959,7 +1940,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadyJobQueueFunctor implements Consumer {
         public final ArraySet newReadyJobs = new ArraySet();
 
@@ -1978,7 +1958,6 @@ public final class JobSchedulerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StandbyTracker extends AppStandbyInternal.AppIdleStateChangeListener {
         public StandbyTracker() {
         }

@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RecordingController implements CallbackController {
     public final BroadcastDispatcher mBroadcastDispatcher;
     public final Lazy mDevicePolicyResolver;
@@ -67,7 +66,6 @@ public final class RecordingController implements CallbackController {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.screenrecord.RecordingController$3, reason: invalid class name */
     public final class AnonymousClass3 extends CountDownTimer {
         public final /* synthetic */ PendingIntent val$startIntent;
@@ -207,7 +205,6 @@ public final class RecordingController implements CallbackController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface RecordingStateChangeCallback {
         default void onCountdownEnd() {
         }

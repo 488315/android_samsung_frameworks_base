@@ -26,7 +26,6 @@ import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable {
     public static final PathInterpolator ALPHA_INTERPOLATOR;
     public static final LinearInterpolator LINEAR_INTERPOLATOR;
@@ -40,7 +39,6 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
     public ValueAnimator shockValueAnimator;
     public int startColor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -50,7 +48,6 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RoundedCornerState extends Drawable.ConstantState {
         public final Drawable.ConstantState wrappedState;
 

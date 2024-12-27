@@ -7,13 +7,11 @@ import android.util.proto.ProtoOutputStream;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class GroupedAggregatedLogRecords {
     public final int mAggregationTimeLimitMs;
     public final SparseArray mGroupedRecords = new SparseArray();
     public final int mSizeLimit;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AggregatedLogRecord {
         public int mCount = 1;
         public final SingleLogRecord mFirst;
@@ -42,7 +40,6 @@ public abstract class GroupedAggregatedLogRecords {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SingleLogRecord {
         void dump(IndentingPrintWriter indentingPrintWriter);
 

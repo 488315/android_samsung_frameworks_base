@@ -18,7 +18,6 @@ import com.android.server.pm.UserManagerInternal;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BaseAppStateTracker {
     public final AppRestrictionController mAppRestrictionController;
     public final AppRestrictionController.BgHandler mBgHandler;
@@ -27,7 +26,6 @@ public abstract class BaseAppStateTracker {
     public final ArrayList mStateListeners = new ArrayList();
     public final Injector mInjector = new Injector();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public ActivityManagerInternal mActivityManagerInternal;
         public BaseAppStatePolicy mAppStatePolicy;

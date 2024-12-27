@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppBindingService extends Binder {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ArrayList mApps;
@@ -49,7 +48,6 @@ public final class AppBindingService extends Binder {
     public final Object mLock = new Object();
     public final SparseBooleanArray mRunningUsers = new SparseBooleanArray(2);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppServiceConnection extends PersistentConnection {
         public final AppBindingConstants mConstants;
         public final CarrierMessagingClientServiceFinder mFinder;
@@ -88,10 +86,8 @@ public final class AppBindingService extends Binder {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public final AppBindingService mService;
 

@@ -5,7 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StatusBarMode {
     public static final /* synthetic */ StatusBarMode[] $VALUES;
     public static final StatusBarMode LIGHTS_OUT;
@@ -14,7 +13,6 @@ public final class StatusBarMode {
     public static final StatusBarMode SEMI_TRANSPARENT;
     public static final StatusBarMode TRANSPARENT;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

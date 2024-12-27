@@ -23,13 +23,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageManagerAdapter implements IPackageManagerAdapter {
     public static Context mContext;
     public static IPackageManager mIPackageManager;
     public static PackageManagerAdapter mInstance;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClearUserDataObserver extends IPackageDataObserver.Stub {
         public boolean finished;
         public String packageName;
@@ -45,7 +43,6 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageDeleteObserver extends IPackageDeleteObserver.Stub {
         public boolean finished;
         public boolean result;

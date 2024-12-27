@@ -8,7 +8,6 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IImageService extends IInterface {
     public static final int CREATE_IMAGE_DEFAULT = 0;
     public static final int CREATE_IMAGE_READONLY = 1;
@@ -17,7 +16,6 @@ public interface IImageService extends IInterface {
     public static final int IMAGE_ERROR = 1;
     public static final int IMAGE_OK = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IImageService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -82,7 +80,6 @@ public interface IImageService extends IInterface {
         public void zeroFillNewImage(String str, long j) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IImageService {
         static final int TRANSACTION_backingImageExists = 5;
         static final int TRANSACTION_createBackingImage = 1;
@@ -99,7 +96,6 @@ public interface IImageService extends IInterface {
         static final int TRANSACTION_unmapImageDevice = 4;
         static final int TRANSACTION_zeroFillNewImage = 9;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IImageService {
             public IBinder mRemote;
 

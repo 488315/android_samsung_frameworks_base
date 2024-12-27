@@ -12,7 +12,6 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ShortcutParser {
     public AttributeSet mAttrs;
     public final Context mContext;
@@ -21,7 +20,6 @@ public final class ShortcutParser {
     public final int mResId;
     public Resources mResources;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Shortcut {
         public Icon icon;
         public String id;

@@ -10,7 +10,6 @@ import com.android.internal.policy.IKeyguardStateCallback;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.policy.PhoneWindowManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class KeyguardStateMonitor extends IKeyguardStateCallback.Stub {
     public final PhoneWindowManager.AnonymousClass1 mCallback;
     public final LockPatternUtils mLockPatternUtils;

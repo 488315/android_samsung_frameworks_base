@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MagnificationGestureDetector {
     public final MagnificationGestureDetector$$ExternalSyntheticLambda0 mCancelTapGestureRunnable;
     public final Handler mHandler;
@@ -21,7 +20,6 @@ public final class MagnificationGestureDetector {
     public boolean mDetectSingleTap = true;
     public boolean mDraggingDetected = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LongTouchRunnable implements Runnable {
         public final View mView;
 
@@ -38,7 +36,6 @@ public final class MagnificationGestureDetector {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnGestureListener {
         boolean onDrag(View view, float f, float f2);
 

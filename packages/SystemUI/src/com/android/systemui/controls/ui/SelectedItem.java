@@ -9,13 +9,11 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SelectedItem {
     public static final Companion Companion = new Companion(null);
     public static final StructureItem EMPTY_SELECTION;
     public static final ComponentItem EMPTY_SELECTION_COMPONENT;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -25,7 +23,6 @@ public abstract class SelectedItem {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ComponentItem extends SelectedItem {
         public final CharSequence appName;
         public final ComponentInfo componentInfo;
@@ -84,7 +81,6 @@ public abstract class SelectedItem {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PanelItem extends SelectedItem {
         public final CharSequence appName;
         public final ComponentName componentName;
@@ -129,7 +125,6 @@ public abstract class SelectedItem {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StructureItem extends SelectedItem {
         public final ComponentName componentName;
         public final boolean hasControls;

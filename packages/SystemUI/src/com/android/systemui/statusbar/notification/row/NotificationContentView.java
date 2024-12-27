@@ -80,7 +80,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.ArrayIterator;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationContentView extends FrameLayout implements NotificationFadeAware, PanelScreenShotLogger.LogProvider {
     public static final /* synthetic */ int $r8$clinit = 0;
     public boolean mAnimate;
@@ -154,7 +153,6 @@ public class NotificationContentView extends FrameLayout implements Notification
     public boolean mUserExpanding;
     public int mVisibleType;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RemoteInputViewData {
         public RemoteInputViewController mController;
         public RemoteInputView mView;

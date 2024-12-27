@@ -49,13 +49,11 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardBottomAreaViewBinder {
     public static final Companion Companion = new Companion(null);
     public static final KeyguardBottomAreaViewBinder INSTANCE = new KeyguardBottomAreaViewBinder();
     public final String TAG = "KeyguardBottomAreaViewBinder";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Binding {
         void destroy();
 
@@ -64,7 +62,6 @@ public class KeyguardBottomAreaViewBinder {
         boolean shouldConstrainToTopOfLockIcon();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -74,7 +71,6 @@ public class KeyguardBottomAreaViewBinder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConfigurationBasedDimensions {
         public final Size buttonSizePx;
         public final int defaultBurnInPreventionYOffsetPx;
@@ -104,7 +100,6 @@ public class KeyguardBottomAreaViewBinder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnClickListener implements View.OnClickListener {
         public final FalsingManager falsingManager;
         public final KeyguardQuickAffordanceViewModel viewModel;
@@ -127,7 +122,6 @@ public class KeyguardBottomAreaViewBinder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OnLongClickListener implements View.OnLongClickListener {
         public final FalsingManager falsingManager;
         public final KeyguardQuickAffordanceOnTouchListener onTouchListener;
@@ -279,12 +273,10 @@ public class KeyguardBottomAreaViewBinder {
         keyguardBottomAreaViewBinder.getClass();
         Object collect = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new Flow() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder$updateButtonAlpha$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder$updateButtonAlpha$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardBottomAreaViewBinder$updateButtonAlpha$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

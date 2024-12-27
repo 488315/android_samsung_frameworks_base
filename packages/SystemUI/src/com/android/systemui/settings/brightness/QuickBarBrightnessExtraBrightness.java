@@ -12,7 +12,6 @@ import com.android.systemui.qs.SecQSSwitchPreference;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QuickBarBrightnessExtraBrightness {
     public final Context context;
     public View divider;
@@ -20,7 +19,6 @@ public final class QuickBarBrightnessExtraBrightness {
     public TextView extraBrightnessSummary;
     public SwitchCompat extraBrightnessSwitch;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

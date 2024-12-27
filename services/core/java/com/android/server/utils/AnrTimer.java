@@ -14,7 +14,6 @@ import com.android.internal.util.RingBuffer;
 import java.io.PrintWriter;
 import java.util.Comparator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AnrTimer implements AutoCloseable {
     public static final Injector sDefaultInjector = new Injector();
     public final FeatureDisabled mFeature;
@@ -24,7 +23,6 @@ public abstract class AnrTimer implements AutoCloseable {
     public final SparseArray mTimerArgMap;
     public final int mWhat;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.utils.AnrTimer$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -33,15 +31,12 @@ public abstract class AnrTimer implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Args {
         public final Injector mInjector = AnrTimer.sDefaultInjector;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Error {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureDisabled {
         public final /* synthetic */ AnrTimer this$0$1;
 
@@ -50,7 +45,6 @@ public abstract class AnrTimer implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {}
 
     static {

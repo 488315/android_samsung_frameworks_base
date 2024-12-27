@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsController, AppOpsManager.OnOpActiveChangedListener, AppOpsManager.OnOpNotedInternalListener, IndividualSensorPrivacyController.Callback, Dumpable {
     public static final int[] OPS;
     public static final int[] OPS_CAMERA;
@@ -52,7 +51,6 @@ public final class AppOpsControllerImpl extends BroadcastReceiver implements App
     public final SparseArray mRecordingsByUid = new SparseArray();
     public final AnonymousClass1 mAudioRecordingCallback = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.appops.AppOpsControllerImpl$1, reason: invalid class name */
     public final class AnonymousClass1 extends AudioManager.AudioRecordingCallback {
         public AnonymousClass1() {
@@ -81,7 +79,6 @@ public final class AppOpsControllerImpl extends BroadcastReceiver implements App
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);

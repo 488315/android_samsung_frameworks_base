@@ -83,7 +83,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObserver {
     public static DexObserver mDexObserver;
     public static boolean mEnableUsbHiddenMenu;
@@ -116,7 +115,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
             };
     public final AnonymousClass2 mHostConnectionReceiver = new AnonymousClass2();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.usb.UsbDeviceManager$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
         @Override // android.content.BroadcastReceiver
@@ -133,7 +131,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class UsbHandler extends Handler {
         public long mAccessoryConnectionStartTime;
         public boolean mAudioAccessoryConnected;
@@ -181,7 +178,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         public int mUsbSpeed;
         public final boolean mUseUsbNotification;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.usb.UsbDeviceManager$UsbHandler$1, reason: invalid class name */
         public final class AnonymousClass1 implements ServiceConnection {
             @Override // android.content.ServiceConnection
@@ -191,7 +187,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
             public final void onServiceDisconnected(ComponentName componentName) {}
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class AdbTransport extends IAdbTransport.Stub {
             public final UsbHandler mHandler;
 
@@ -713,7 +708,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbHandlerHal extends UsbHandler {
         public int mCurrentRequest;
         public boolean mCurrentUsbFunctionsRequested;
@@ -1021,7 +1015,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbHandlerLegacy extends UsbHandler {
         public String mCurrentFunctionsStr;
         public String mCurrentOemFunctions;
@@ -1216,7 +1209,6 @@ public class UsbDeviceManager implements ActivityTaskManagerInternal.ScreenObser
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbUEventObserver extends UEventObserver {
         public UsbUEventObserver() {}
 

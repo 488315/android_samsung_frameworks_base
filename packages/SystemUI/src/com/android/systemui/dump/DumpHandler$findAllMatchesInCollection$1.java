@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class DumpHandler$findAllMatchesInCollection$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ Collection<DumpsysEntry.DumpableEntry> $dumpables;
     final /* synthetic */ Collection<DumpsysEntry.LogBufferEntry> $logBuffers;

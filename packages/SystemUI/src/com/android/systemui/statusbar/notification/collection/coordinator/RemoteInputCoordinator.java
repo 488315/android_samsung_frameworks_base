@@ -31,7 +31,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
 public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     public static final int $stable = 8;
@@ -46,7 +45,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     private final SmartReplyController mSmartReplyController;
     private final SmartReplyHistoryExtender mSmartReplyHistoryExtender;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RemoteInputActiveExtender extends SelfTrackingLifetimeExtender {
         /* JADX WARN: Illegal instructions before constructor call */
         /*
@@ -74,7 +72,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RemoteInputHistoryExtender extends SelfTrackingLifetimeExtender {
         /* JADX WARN: Illegal instructions before constructor call */
         /*
@@ -116,7 +113,6 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartReplyHistoryExtender extends SelfTrackingLifetimeExtender {
         /* JADX WARN: Illegal instructions before constructor call */
         /*

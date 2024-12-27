@@ -109,7 +109,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ImageWallpaper extends LiveWallpaperService {
     public static final RectF LOCAL_COLOR_BOUNDS = new RectF(0.0f, 0.0f, 1.0f, 1.0f);
     public final CoverWallpaper mCoverWallpaper;
@@ -158,7 +157,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ WakefulnessLifecycle.Observer val$observer;
@@ -173,7 +171,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ WakefulnessLifecycle.Observer val$observer;
@@ -188,7 +185,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BaseEngine extends LiveWallpaperService.BaseEngine {
         public int mWhich;
 
@@ -208,7 +204,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IntegratedEngine extends BaseEngine {
         public static final /* synthetic */ int $r8$clinit = 0;
         public String TAG;
@@ -220,7 +215,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         public WallpaperManager mWallpaperManager;
         public final int mWallpaperType;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$1, reason: invalid class name */
         public final class AnonymousClass1 {
             public AnonymousClass1() {
@@ -289,7 +283,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$2, reason: invalid class name */
         public final class AnonymousClass2 implements WallpaperEngineCallback {
             public BLASTBufferQueue mBbqOfPendingTransactionRequest;
@@ -580,7 +573,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         return handlerThread != null ? handlerThread.getLooper() : super.onProvideEngineLooper();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CanvasEngine extends BaseEngine implements DisplayManager.DisplayListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         static final int MIN_SURFACE_HEIGHT = 128;
@@ -611,14 +603,12 @@ public class ImageWallpaper extends LiveWallpaperService {
         public final WallpaperLocalColorExtractor mWallpaperLocalColorExtractor;
         public WallpaperManager mWallpaperManager;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$3, reason: invalid class name */
         public final class AnonymousClass3 implements ImageWallpaperCanvasHelper.Callback {
             public AnonymousClass3() {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$4, reason: invalid class name */
         public final class AnonymousClass4 implements WakefulnessLifecycle.Observer {
             public AnonymousClass4() {
@@ -632,7 +622,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$7, reason: invalid class name */
         public final class AnonymousClass7 implements Consumer {
             public AnonymousClass7() {
@@ -647,7 +636,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$8, reason: invalid class name */
         public final class AnonymousClass8 implements Consumer {
             public AnonymousClass8() {
@@ -662,7 +650,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DrawState {
             public final boolean mDarkModeFilterApplied;
             public final boolean mHighlightFilterApplied;

@@ -31,13 +31,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SnapshotManager {
     public final SnapshotCallback mCallback;
     public final Context mContext;
     public final SparseArray mSnapshotRepositories = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PerWhichSnapshot implements Cloneable {
         public WallpaperData wallpaper;
         public Map settings = new HashMap();
@@ -59,7 +57,6 @@ public final class SnapshotManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SnapshotData {
         public boolean isFromPairedService;
         public final int key;
@@ -171,7 +168,6 @@ public final class SnapshotManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SnapshotHistory {
         public String desc;
         public int key;
@@ -245,7 +241,6 @@ public final class SnapshotManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SnapshotRepository {
         public final int userId;
         public int key = 0;

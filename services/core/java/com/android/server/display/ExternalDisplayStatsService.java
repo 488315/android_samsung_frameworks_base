@@ -15,7 +15,6 @@ import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.display.utils.DebugUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ExternalDisplayStatsService {
     public static final boolean DEBUG = DebugUtils.isDebuggable("ExternalDisplayStatsService");
     public final Injector mInjector;
@@ -163,7 +162,6 @@ public final class ExternalDisplayStatsService {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.ExternalDisplayStatsService$1, reason: invalid class name */
     public final class AnonymousClass1 extends AudioManager.AudioPlaybackCallback {
         public final ExternalDisplayStatsService$1$$ExternalSyntheticLambda0
@@ -257,7 +255,6 @@ public final class ExternalDisplayStatsService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public AudioManager mAudioManager;
         public final Context mContext;

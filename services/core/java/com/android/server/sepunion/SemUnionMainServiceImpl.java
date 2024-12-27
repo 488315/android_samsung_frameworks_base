@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.Map;
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemUnionMainServiceImpl extends IUnionManager.Stub {
     public final Context mContext;
     public boolean mIsBootCompleted = false;
@@ -98,7 +97,6 @@ public final class SemUnionMainServiceImpl extends IUnionManager.Stub {
     public static final Map sPendingSepUnionServiceCreators = new ArrayMap();
     public static final Object sLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SepUnionServiceCreator {
         public final String mName;
 

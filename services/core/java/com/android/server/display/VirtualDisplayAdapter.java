@@ -32,7 +32,6 @@ import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class VirtualDisplayAdapter extends DisplayAdapter {
     static final String UNIQUE_ID_PREFIX = "virtual:";
     public static final AtomicInteger sNextUniqueIndex = new AtomicInteger(0);
@@ -42,7 +41,6 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
     public final SurfaceControlDisplayFactory mSurfaceControlDisplayFactory;
     public final ArrayMap mVirtualDisplayDevices;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.VirtualDisplayAdapter$1, reason: invalid class name */
     public final class AnonymousClass1 implements SurfaceControlDisplayFactory {
         @Override // com.android.server.display.VirtualDisplayAdapter.SurfaceControlDisplayFactory
@@ -56,7 +54,6 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Callback extends Handler {
         public final IVirtualDisplayCallback mCallback;
 
@@ -85,7 +82,6 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaProjectionCallback extends IMediaProjectionCallback.Stub {
         public final IBinder mAppToken;
 
@@ -105,14 +101,12 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SurfaceControlDisplayFactory {
         IBinder createDisplay(String str, boolean z, String str2, float f);
 
         void destroyDisplay(IBinder iBinder);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VirtualDisplayDevice extends DisplayDevice
             implements IBinder.DeathRecipient {
         public final IBinder mAppToken;

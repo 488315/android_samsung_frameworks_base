@@ -23,7 +23,6 @@ import com.android.server.infra.AbstractPerUserSystemService;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SearchUiPerUserService extends AbstractPerUserSystemService
         implements RemoteSearchUiService.RemoteSearchUiServiceCallbacks {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,7 +30,6 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService
     public final ArrayMap mSessionInfos;
     public boolean mZombie;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SearchSessionInfo {
         public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
         public final IBinder.DeathRecipient mDeathRecipient;

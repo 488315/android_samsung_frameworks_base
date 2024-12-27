@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppCompatConfigurationPersister {
     public final Consumer mCompletionCallback;
     public final AtomicFile mConfigurationFile;
@@ -29,7 +28,6 @@ public final class AppCompatConfigurationPersister {
     public volatile int mLetterboxPositionForVerticalReachability;
     public final PersisterQueue mPersisterQueue;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateValuesCommand implements PersisterQueue.WriteQueueItem {
         public final int mBookModeReachability;
         public final AtomicFile mFileToUpdate;

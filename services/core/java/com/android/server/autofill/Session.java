@@ -143,7 +143,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Session
         implements RemoteFillService.FillServiceCallbacks,
                 ViewState.Listener,
@@ -218,13 +217,11 @@ public final class Session
     public final int uid;
     public final int userId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.Session$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.Session$3, reason: invalid class name */
     public final class AnonymousClass3 implements InlineFillUi.InlineSuggestionUiCallback {
         public final /* synthetic */ int $r8$classId;
@@ -307,7 +304,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AssistDataReceiverImpl extends IAssistDataReceiver.Stub {
         public FillRequest mLastFillRequest;
         public FillRequest mPendingFillRequest;
@@ -572,7 +568,6 @@ public final class Session
         public final void onHandleAssistScreenshot(Bitmap bitmap) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AugmentedAutofillErrorCallback implements Runnable {
         public WeakReference mSessionWeakRef;
 
@@ -593,7 +588,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AugmentedAutofillInlineSuggestionRendererOnResultListener
             implements RemoteCallback.OnResultListener {
         public final AutofillId mFocusedId;
@@ -623,7 +617,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AugmentedAutofillInlineSuggestionRequestConsumer implements Consumer {
         public final AutofillValue mCurrentValue;
         public final AutofillId mFocusedId;
@@ -691,7 +684,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AugmentedAutofillInlineSuggestionsResponseCallback implements Function {
         public WeakReference mSessionWeakRef;
 
@@ -717,7 +709,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClassificationState {
         public ArrayMap mClassificationCombinedHintsMap;
         public ArrayMap mClassificationGroupHintsMap;
@@ -806,7 +797,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PccAssistDataReceiverImpl extends IAssistDataReceiver.Stub {
         public PccAssistDataReceiverImpl() {}
 
@@ -1050,7 +1040,6 @@ public final class Session
         public final void onHandleAssistScreenshot(Bitmap bitmap) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SaveResult {
         public final boolean mLogSaveShown;
         public final boolean mRemoveSession;
@@ -1073,7 +1062,6 @@ public final class Session
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionFlags {
         public boolean mAugmentedAutofillOnly;
         public boolean mExpiredResponse;

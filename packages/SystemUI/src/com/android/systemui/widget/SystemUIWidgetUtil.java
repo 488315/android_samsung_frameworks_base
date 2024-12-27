@@ -5,7 +5,6 @@ import com.android.systemui.R;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SystemUIWidgetUtil {
     public static long convertFlag(String str) {
         if (str == null) {

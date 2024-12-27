@@ -36,7 +36,6 @@ import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TransitionController {
     public static final boolean SHELL_TRANSITIONS_ROTATION =
             SystemProperties.getBoolean("persist.wm.debug.shell_transit_rotate", false);
@@ -72,7 +71,6 @@ public final class TransitionController {
     public boolean mIsWaitingForDisplayEnabled = false;
     public final ArrayList mCleanUpRunnableList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lock {
         public int mTransitionWaiters = 0;
 
@@ -126,7 +124,6 @@ public final class TransitionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Logger implements Runnable {
         public long mAbortTimeNs;
         public long mCollectTimeNs;
@@ -192,12 +189,10 @@ public final class TransitionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnStartCollect {
         void onCollectStarted(boolean z);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class QueuedTransition {
         public final BLASTSyncEngine.SyncGroup mLegacySync;
         public final OnStartCollect mOnStartCollect;
@@ -219,12 +214,10 @@ public final class TransitionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemotePlayer {
         public final ActivityTaskManagerService mAtm;
         public final ArrayMap mDelegateProcesses = new ArrayMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class DelegateProcess implements Runnable {
             public boolean mNeedReport;
             public final WindowProcessController mProc;
@@ -297,7 +290,6 @@ public final class TransitionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransitionMetricsReporter extends ITransitionMetricsReporter.Stub {
         public final ArrayMap mMetricConsumers = new ArrayMap();
 
@@ -319,7 +311,6 @@ public final class TransitionController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransitionPlayerRecord {
         public TransitionController$TransitionPlayerRecord$$ExternalSyntheticLambda0 mDeath;
         public final ITransitionPlayer mPlayer;

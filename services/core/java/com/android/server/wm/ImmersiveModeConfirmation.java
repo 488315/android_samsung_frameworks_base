@@ -39,7 +39,6 @@ import android.widget.RelativeLayout;
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ImmersiveModeConfirmation {
     public static boolean sConfirmed;
     public ClingWindowView mClingWindow;
@@ -52,7 +51,6 @@ public final class ImmersiveModeConfirmation {
     public int mWindowContextRootDisplayAreaId = -1;
     public final AnonymousClass1 mConfirm = new AnonymousClass1(0, this);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.ImmersiveModeConfirmation$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -111,7 +109,6 @@ public final class ImmersiveModeConfirmation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClingWindowView extends FrameLayout {
         public ViewGroup mClingLayout;
         public final ColorDrawable mColor;
@@ -296,7 +293,6 @@ public final class ImmersiveModeConfirmation {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);

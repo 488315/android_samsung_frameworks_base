@@ -3,7 +3,6 @@ package com.android.systemui.blur;
 import android.content.Context;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSColorCurve {
     public final Context context;
     public float curve;
@@ -15,7 +14,6 @@ public final class QSColorCurve {
     public float maxX = 255.0f;
     public float maxY = 255.0f;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

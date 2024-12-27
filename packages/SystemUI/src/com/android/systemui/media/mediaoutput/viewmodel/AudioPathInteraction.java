@@ -3,7 +3,6 @@ package com.android.systemui.media.mediaoutput.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import com.android.systemui.media.mediaoutput.entity.AudioDevice;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface AudioPathInteraction {
     void adjustVolume(AudioDevice audioDevice, int i);
 

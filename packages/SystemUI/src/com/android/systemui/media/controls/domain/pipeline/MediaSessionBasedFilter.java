@@ -25,7 +25,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaSessionBasedFilter implements MediaDataManager.Listener {
     public final Executor backgroundExecutor;
     public final Executor foregroundExecutor;
@@ -41,7 +40,6 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TokenId {
         public final int id;
 

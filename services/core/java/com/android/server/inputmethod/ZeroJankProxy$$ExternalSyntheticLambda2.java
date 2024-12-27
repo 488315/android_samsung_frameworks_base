@@ -8,7 +8,6 @@ import com.android.internal.inputmethod.IBooleanListener;
 import com.android.internal.inputmethod.IInputMethodClient;
 import com.android.internal.util.FunctionalUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class ZeroJankProxy$$ExternalSyntheticLambda2
         implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId = 0;

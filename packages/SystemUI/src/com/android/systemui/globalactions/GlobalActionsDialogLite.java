@@ -122,7 +122,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class GlobalActionsDialogLite implements DialogInterface.OnDismissListener, DialogInterface.OnShowListener, ConfigurationController.ConfigurationListener, GlobalActionsPanelPlugin.Callbacks, LifecycleOwner {
     static final String GLOBAL_ACTION_KEY_POWER = "power";
     public final ActivityStarter mActivityStarter;
@@ -187,7 +186,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
     public boolean mIsWaitingForEcmExit = false;
     public int mDialogPressDelay = 850;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Action {
         View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater);
 
@@ -208,7 +206,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         boolean showBeforeProvisioning();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class ActionsDialogLite extends SystemUIDialog implements DialogInterface, ColorExtractor.OnColorsChangedListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final MyAdapter mAdapter;
@@ -620,7 +617,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AirplaneModeAction extends ToggleAction {
         public AirplaneModeAction() {
             super(GlobalActionsDialogLite.this, android.R.drawable.ic_lockscreen_silent_normal, android.R.drawable.ic_lockscreen_soundon_activated, android.R.string.mediasize_na_junior_legal, android.R.string.mediasize_na_index_5x8, android.R.string.mediasize_na_index_4x6);
@@ -655,7 +651,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class BugReportAction extends SinglePressAction implements LongPressAction {
         public BugReportAction() {
             super(android.R.drawable.ic_lockscreen_soundon_normal, android.R.string.config_gnssLocationProviderPackageName);
@@ -714,7 +709,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CurrentUserProvider {
         public boolean mFetched;
         public UserInfo mUserInfo;
@@ -737,7 +731,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class EmergencyAction extends SinglePressAction {
         public EmergencyAction(int i, int i2) {
             super(i, i2);
@@ -766,7 +759,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EmergencyAffordanceAction extends EmergencyAction {
         public EmergencyAffordanceAction() {
             super(android.R.drawable.expander_close_mtrl_alpha, android.R.string.mediasize_iso_c7);
@@ -778,7 +770,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class EmergencyDialerAction extends EmergencyAction {
         public /* synthetic */ EmergencyDialerAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -803,7 +794,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum GlobalActionsEvent implements UiEventLogger.UiEventEnum {
         GA_POWER_MENU_OPEN(337),
         GA_POWER_MENU_CLOSE(471),
@@ -842,7 +832,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class LockDownAction extends SinglePressAction {
         public LockDownAction() {
             super(android.R.drawable.ic_lockscreen_text_normal, android.R.string.mediasize_japanese_jis_b1);
@@ -867,7 +856,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LogoutAction extends SinglePressAction {
         public /* synthetic */ LogoutAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -888,12 +876,10 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface LongPressAction extends Action {
         boolean onLongPress();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyAdapter extends MultiListLayout.MultiListAdapter {
         public MyAdapter() {
         }
@@ -979,7 +965,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyOverflowAdapter extends BaseAdapter {
         public MyOverflowAdapter() {
         }
@@ -1019,7 +1004,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MyPowerOptionsAdapter extends BaseAdapter {
         public MyPowerOptionsAdapter() {
         }
@@ -1067,7 +1051,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PowerOptionsAction extends SinglePressAction {
         public /* synthetic */ PowerOptionsAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -1107,7 +1090,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class RestartAction extends SinglePressAction implements LongPressAction {
         public RestartAction() {
             super(android.R.drawable.ic_swap_horiz, android.R.string.mediasize_japanese_kaku2);
@@ -1143,7 +1125,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class ScreenshotAction extends SinglePressAction {
         public ScreenshotAction() {
             super(android.R.drawable.ic_test_icon_badge_experiment, android.R.string.mediasize_japanese_oufuku);
@@ -1173,7 +1154,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class ShutDownAction extends SinglePressAction implements LongPressAction {
         public ShutDownAction() {
             super(android.R.drawable.ic_lock_power_off, android.R.string.mediasize_japanese_jis_b4);
@@ -1209,7 +1189,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SilentModeToggleAction extends ToggleAction {
         public SilentModeToggleAction() {
             super(GlobalActionsDialogLite.this, android.R.drawable.ic_chevron_end, android.R.drawable.ic_checkmark_holo_light, android.R.string.mediasize_na_foolscap, android.R.string.mediasize_na_arch_b, android.R.string.mediasize_na_arch_a);
@@ -1231,7 +1210,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class SystemUpdateAction extends SinglePressAction {
         public SystemUpdateAction() {
             super(R.drawable.ic_system_update, R.string.system_update_settings_list_item_title);
@@ -1252,7 +1230,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class ToggleAction implements Action {
         public final int mDisabledIconResid;
         public final int mDisabledStatusMessageResId;
@@ -1330,7 +1307,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         public abstract void onToggle(boolean z);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum ToggleState {
         Off(false),
         TurningOn(true),
@@ -1883,7 +1859,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         this.mWindowManagerFuncs.onGlobalActionsShown();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class SinglePressAction implements Action {
         public final Drawable mIcon;
         public final int mIconResId;
@@ -1945,7 +1920,6 @@ public final class GlobalActionsDialogLite implements DialogInterface.OnDismissL
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SilentModeTriStateAction implements Action, View.OnClickListener {
         public static final int[] ITEM_IDS = {android.R.id.reask_hint, android.R.id.recents, android.R.id.reconfigurable};
         public final AudioManager mAudioManager;

@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.ViewController;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardMessageAreaController extends ViewController {
     public final AnnounceRunnable mAnnounceRunnable;
     public final ConfigurationController mConfigurationController;
@@ -26,7 +25,6 @@ public class KeyguardMessageAreaController extends ViewController {
     public Pair mMessageBiometricSource;
     public final AnonymousClass1 mTextWatcher;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class AnnounceRunnable implements Runnable {
         public final WeakReference mHost;
         public CharSequence mTextToAnnounce;
@@ -45,7 +43,6 @@ public class KeyguardMessageAreaController extends ViewController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final ConfigurationController mConfigurationController;
         public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -145,7 +142,6 @@ public class KeyguardMessageAreaController extends ViewController {
         setMessage(i != 0 ? ((KeyguardMessageArea) this.mView).getResources().getString(i) : null);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardMessageAreaController$1, reason: invalid class name */
     public final class AnonymousClass1 implements TextWatcher {
         public AnonymousClass1() {

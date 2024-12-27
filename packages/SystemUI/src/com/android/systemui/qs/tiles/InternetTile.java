@@ -41,7 +41,6 @@ import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.connectivity.WifiIndicators;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class InternetTile extends QSTileImpl {
     public static final Intent WIFI_SETTINGS = new Intent("android.settings.WIFI_SETTINGS");
     public final AccessPointController mAccessPointController;
@@ -52,7 +51,6 @@ public final class InternetTile extends QSTileImpl {
     public int mLastTileState;
     public final InternetSignalCallback mSignalCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CellularCallbackInfo {
         public boolean mAirplaneModeEnabled;
         public CharSequence mDataContentDescription;
@@ -113,7 +111,6 @@ public final class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class EthernetCallbackInfo {
         public boolean mConnected;
         public String mEthernetContentDescription;
@@ -136,7 +133,6 @@ public final class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class InternetSignalCallback implements SignalCallback {
         public final CellularCallbackInfo mCellularInfo;
         public final EthernetCallbackInfo mEthernetInfo;
@@ -327,7 +323,6 @@ public final class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SignalIcon extends QSTile.Icon {
         public final int mState;
 
@@ -348,7 +343,6 @@ public final class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WifiCallbackInfo {
         public boolean mAirplaneModeEnabled;
         public boolean mConnected;

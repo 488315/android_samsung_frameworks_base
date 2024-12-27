@@ -108,7 +108,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgeBackGestureHandler implements PluginListener {
     public static final int MAX_LONG_PRESS_TIMEOUT;
     public boolean mAllowGesture;
@@ -255,7 +254,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
     };
     public final VelocityTracker mVelocityTracker = VelocityTracker.obtain();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISystemGestureExclusionListener.Stub {
         public AnonymousClass1() {
@@ -287,7 +285,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Factory {
         public final Provider mBackGestureTfClassifierProviderProvider;
         public final BackPanelController.Factory mBackPanelControllerFactory;
@@ -330,7 +327,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class LogArray extends ArrayDeque<String> {
         private final int mLength;
 
@@ -1317,7 +1313,6 @@ public final class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$8, reason: invalid class name */
     public final class AnonymousClass8 implements InputManager.InputDeviceListener {
         public AnonymousClass8() {

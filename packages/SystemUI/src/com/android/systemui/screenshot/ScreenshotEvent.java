@@ -4,7 +4,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.samsung.android.knox.net.vpn.VpnErrorValues;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public enum ScreenshotEvent implements UiEventLogger.UiEventEnum {
     SCREENSHOT_REQUESTED_GLOBAL_ACTIONS(302),
     SCREENSHOT_REQUESTED_KEY_CHORD(303),

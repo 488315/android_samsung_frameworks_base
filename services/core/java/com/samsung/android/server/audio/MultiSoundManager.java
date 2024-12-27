@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiSoundManager {
     public static final Set MULTI_SOUND_SUPPORTED_DEVICE_SET;
     public static final Object sLastSetDeviceToNativeLock = new Object();
@@ -67,7 +66,6 @@ public final class MultiSoundManager {
     public final HashMap mPinAppInfoList = new HashMap();
     public boolean mEnabled = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MultiSoundItem {
         public int mDevice;
         public int mRatio;
@@ -91,7 +89,6 @@ public final class MultiSoundManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PreventOverheatState {
         public float mLimitedVolumeForOverheat = 1.0f;
         public int mCurDevice = 0;
@@ -112,7 +109,6 @@ public final class MultiSoundManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SetVolumeRunnable implements Runnable {
         public final /* synthetic */ int $r8$classId;
         public final int mUid;

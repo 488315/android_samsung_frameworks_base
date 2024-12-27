@@ -34,7 +34,6 @@ import com.android.server.wm.WindowManagerService;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserSwitchingDialog extends Dialog {
     public final boolean mDisableAnimations;
     public final Handler mHandler;

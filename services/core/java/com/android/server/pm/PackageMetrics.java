@@ -2,13 +2,11 @@ package com.android.server.pm;
 
 import android.util.SparseArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageMetrics {
     public final InstallRequest mInstallRequest;
     public final SparseArray mInstallSteps = new SparseArray();
     public final long mInstallStartTimestampMillis = System.currentTimeMillis();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComponentStateMetrics {
         public int mCallingUid;
         public String mClassName;
@@ -19,7 +17,6 @@ public final class PackageMetrics {
         public int mUid;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InstallStep {
         public long mDurationMillis;
         public final long mStartTimestampMillis;

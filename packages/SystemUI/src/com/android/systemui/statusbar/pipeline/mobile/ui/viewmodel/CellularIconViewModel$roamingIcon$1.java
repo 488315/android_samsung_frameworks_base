@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class CellularIconViewModel$roamingIcon$1 extends SuspendLambda implements Function5 {
     /* synthetic */ int I$0;
     /* synthetic */ Object L$0;

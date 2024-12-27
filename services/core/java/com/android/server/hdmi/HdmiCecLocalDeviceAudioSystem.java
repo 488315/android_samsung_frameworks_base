@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HdmiCecLocalDeviceAudioSystem extends HdmiCecLocalDeviceSource {
     public static final HashMap AUDIO_CODECS_MAP;
     public boolean mArcEstablished;
@@ -40,7 +39,6 @@ public final class HdmiCecLocalDeviceAudioSystem extends HdmiCecLocalDeviceSourc
     public final HashMap mTvInputsToDeviceInfo;
     public Boolean mTvSystemAudioModeSupport;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDeviceAudioSystem$2, reason: invalid class name */
     public final class AnonymousClass2
             implements HdmiControlService.SendMessageCallback, TvSystemAudioModeSupportedCallback {
@@ -78,7 +76,6 @@ public final class HdmiCecLocalDeviceAudioSystem extends HdmiCecLocalDeviceSourc
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface TvSystemAudioModeSupportedCallback {
         void onResult(boolean z);
     }

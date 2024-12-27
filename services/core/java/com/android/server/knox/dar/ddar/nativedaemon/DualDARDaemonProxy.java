@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DualDARDaemonProxy extends IProxyAgentService
         implements INativeDaemonConnectorCallbacks {
     public static Context mContext;
@@ -54,7 +53,6 @@ public final class DualDARDaemonProxy extends IProxyAgentService
     public final List mBlockedClearablePackages = new ArrayList();
     public final List mDualDARDOPolicyPackages = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ClearUserDataObserver extends IPackageDataObserver.Stub {
         public boolean finished;
         public String packageName;

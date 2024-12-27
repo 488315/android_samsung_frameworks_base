@@ -20,7 +20,6 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OemNetdAdapterImpl implements OemNetdAdapter {
     public static final String TAG = "OemNetdAdapterImpl.ztd";
     public ConnectivityManager mConnectivityManager;
@@ -40,7 +39,6 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkInfo {
         public String mInterfaceName;
         public Network mNetwork;
@@ -94,7 +92,6 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PacketTracingHandler extends Handler {
         public static final int DISABLE = 2;
         public static final int ENABLE = 1;

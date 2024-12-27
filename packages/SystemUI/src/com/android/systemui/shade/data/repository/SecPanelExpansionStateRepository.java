@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecPanelExpansionStateRepository {
     public final StateFlowImpl _qsFraction;
     public final StateFlowImpl _screenOffState;
@@ -31,13 +30,11 @@ public final class SecPanelExpansionStateRepository {
     public final ReadonlyStateFlow shadeFraction;
     public final ReadonlyStateFlow statusBarState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.shade.data.repository.SecPanelExpansionStateRepository$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Function1 $notify;
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.shade.data.repository.SecPanelExpansionStateRepository$1$1, reason: invalid class name and collision with other inner class name */
         final class C01851 extends SuspendLambda implements Function2 {
             final /* synthetic */ Function1 $notify;
@@ -119,7 +116,6 @@ public final class SecPanelExpansionStateRepository {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

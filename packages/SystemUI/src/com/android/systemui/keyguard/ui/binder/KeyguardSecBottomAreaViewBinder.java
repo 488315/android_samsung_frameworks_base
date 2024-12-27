@@ -19,7 +19,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecBottomAreaViewBinder extends KeyguardBottomAreaViewBinder {
     public static final KeyguardSecBottomAreaViewBinder INSTANCE = new KeyguardSecBottomAreaViewBinder();
 
@@ -46,7 +45,6 @@ public final class KeyguardSecBottomAreaViewBinder extends KeyguardBottomAreaVie
         return new KeyguardSecBottomAreaViewBinder$bind$1(MutableStateFlow, keyguardSecBottomAreaView, keyguardBottomAreaViewModel, RepeatWhenAttachedKt.repeatWhenAttached(keyguardSecBottomAreaView, EmptyCoroutineContext.INSTANCE, keyguardSecBottomAreaViewBinder$bind$disposableHandle$1));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ConfigurationBasedDimensions {
         public Size buttonSizePx;
         public final int defaultBurnInPreventionYOffsetPx;

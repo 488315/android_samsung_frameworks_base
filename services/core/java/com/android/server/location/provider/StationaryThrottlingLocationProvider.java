@@ -22,7 +22,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Collections;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class StationaryThrottlingLocationProvider extends AbstractLocationProvider
         implements DeviceIdleHelper$DeviceIdleListener,
                 DeviceIdleInternal.StationaryListener,
@@ -43,7 +42,6 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
     public ProviderRequest mOutgoingRequest;
     public long mThrottlingIntervalMs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeliverLastLocationRunnable implements Runnable {
         public DeliverLastLocationRunnable() {}
 

@@ -15,7 +15,6 @@ import com.android.systemui.pluginlock.PluginLockMediator;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockShortcut extends AbstractPluginLockItem {
     private static final String KEY_SHORTCUT_ENABLED = "lockscreen_show_shortcut";
     private static final String KEY_SHORTCUT_VISIBILITY = "shortcut_visibility";

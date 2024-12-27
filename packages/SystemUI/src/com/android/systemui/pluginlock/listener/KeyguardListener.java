@@ -6,10 +6,8 @@ import android.view.ViewGroup;
 import com.samsung.android.cover.CoverState;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface KeyguardListener {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Basic {
         boolean hasBackupWallpaper(int i);
 
@@ -40,14 +38,12 @@ public interface KeyguardListener {
         void setQsExpansion(float f);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface UserSwitch {
         void onUserSwitchComplete(int i);
 
         void onUserSwitching(int i);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface SPlugin {
         void onCoverStateChanged(CoverState coverState);
 

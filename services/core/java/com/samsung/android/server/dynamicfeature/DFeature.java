@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DFeature {
     public final CircularQueue abComment;
     public final JSONArray abInfo;
@@ -34,7 +33,6 @@ public final class DFeature {
     public String value;
     public int version;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CircularQueue {
         public int size = 0;
         public int front = 0;

@@ -7,7 +7,6 @@ import android.util.Slog;
 
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class HdmiLogger {
     public static final boolean DEBUG = Log.isLoggable("HDMI", 3);
     public static final ThreadLocal sLogger = new ThreadLocal();

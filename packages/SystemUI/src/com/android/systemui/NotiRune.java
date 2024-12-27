@@ -7,7 +7,6 @@ import com.android.systemui.util.DeviceType;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotiRune extends Rune {
     public static final boolean NOTI_AOSP_DISABLE_EMPTY_SHADE_VIEW;
     public static final boolean NOTI_INSIGNIFICANT;

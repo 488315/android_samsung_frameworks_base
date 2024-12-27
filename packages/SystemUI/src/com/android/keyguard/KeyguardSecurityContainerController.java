@@ -77,7 +77,6 @@ import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardSecurityContainerController extends ViewController implements KeyguardSecurityView {
     public final AdminSecondaryLockScreenController mAdminSecondaryLockScreenController;
     public final AudioManager mAudioManager;
@@ -118,7 +117,6 @@ public class KeyguardSecurityContainerController extends ViewController implemen
     public final ViewMediatorCallback mViewMediatorCallback;
     public boolean mWillRunDismissFromKeyguard;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecurityContainerController$8, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass8 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;

@@ -3,7 +3,6 @@ package com.android.systemui.keyguard.domain.interactor;
 import com.android.systemui.communal.domain.interactor.CommunalInteractor;
 import com.android.systemui.keyguard.data.repository.KeyguardTransitionRepository;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class GlanceableHubTransitions {
     public final CommunalInteractor communalInteractor;
     public final KeyguardTransitionInteractor transitionInteractor;

@@ -5,10 +5,8 @@ import com.android.systemui.log.table.Diffable;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface NetworkNameModel extends Diffable {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Default implements NetworkNameModel {
         public final String name;
 
@@ -53,7 +51,6 @@ public interface NetworkNameModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class IntentDerived implements NetworkNameModel {
         public final String name;
 
@@ -98,7 +95,6 @@ public interface NetworkNameModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SimDerived implements NetworkNameModel {
         public final String name;
 
@@ -143,7 +139,6 @@ public interface NetworkNameModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SubscriptionDerived implements NetworkNameModel {
         public final String name;
 

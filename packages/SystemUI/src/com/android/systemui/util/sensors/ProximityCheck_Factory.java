@@ -3,7 +3,6 @@ package com.android.systemui.util.sensors;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import dagger.internal.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ProximityCheck_Factory implements Provider {
     private final javax.inject.Provider delayableExecutorProvider;
     private final javax.inject.Provider sensorProvider;

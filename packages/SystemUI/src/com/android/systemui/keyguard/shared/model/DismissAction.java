@@ -2,10 +2,8 @@ package com.android.systemui.keyguard.shared.model;
 
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface DismissAction {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class None implements DismissAction {
         public static final None INSTANCE = new None();
         public static final Function0 onDismissAction = new Function0() { // from class: com.android.systemui.keyguard.shared.model.DismissAction$None$onDismissAction$1
@@ -53,7 +51,6 @@ public interface DismissAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RunImmediately implements DismissAction {
         public final String message;
         public final Runnable onCancelAction;

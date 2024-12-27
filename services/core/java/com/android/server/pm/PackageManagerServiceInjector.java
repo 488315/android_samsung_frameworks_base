@@ -14,7 +14,6 @@ import com.android.server.pm.permission.LegacyPermissionManagerService;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class PackageManagerServiceInjector {
     public final PackageAbiHelper mAbiHelper;
     public final Singleton mApexManagerProducer;
@@ -59,19 +58,16 @@ public class PackageManagerServiceInjector {
     public final Singleton mUpdateOwnershipHelperProducer;
     public final Singleton mUserManagerProducer;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Producer {
         Object produce(
                 PackageManagerService packageManagerService,
                 PackageManagerServiceInjector packageManagerServiceInjector);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ServiceProducer {
         Object produce(Class cls);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Singleton {
         public volatile Object mInstance = null;
         public final Producer mProducer;

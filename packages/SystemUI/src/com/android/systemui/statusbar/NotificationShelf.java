@@ -48,7 +48,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationShelf extends ActivatableNotificationView implements StatusBarStateController.StateListener, PanelScreenShotLogger.LogProvider, AmbientState.KeyguardNotiExpandListener {
     public float mActualWidth;
     public AmbientState mAmbientState;
@@ -75,7 +74,6 @@ public class NotificationShelf extends ActivatableNotificationView implements St
     public static final SourceType$Companion$from$1 BASE_VALUE = SourceType.from("BaseValue");
     public static final SourceType$Companion$from$1 SHELF_SCROLL = SourceType.from("ShelfScroll");
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShelfState extends ExpandableViewState {
         public ExpandableView firstViewInShelf;
         public boolean hasItemsInStableShelf;

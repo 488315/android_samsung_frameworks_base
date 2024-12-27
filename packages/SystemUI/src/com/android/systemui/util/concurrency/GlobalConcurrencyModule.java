@@ -6,7 +6,6 @@ import android.os.Looper;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class GlobalConcurrencyModule {
     public static final String PRE_HANDLER = "pre_handler";
 

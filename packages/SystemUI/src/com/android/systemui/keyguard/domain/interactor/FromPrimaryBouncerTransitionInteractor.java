@@ -17,7 +17,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FromPrimaryBouncerTransitionInteractor extends TransitionInteractor {
     public static final Companion Companion = new Companion(null);
     public static final long DEFAULT_DURATION;
@@ -34,7 +33,6 @@ public final class FromPrimaryBouncerTransitionInteractor extends TransitionInte
     public final Flow surfaceBehindVisibility;
     public final KeyguardTransitionRepository transitionRepository;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -44,7 +42,6 @@ public final class FromPrimaryBouncerTransitionInteractor extends TransitionInte
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

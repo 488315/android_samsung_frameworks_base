@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.android.settingslib.Utils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PinShapeHintingView extends LinearLayout {
     public final int mColor;
     public final int mDotDiameter;

@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DreamyNfcLedCoverController extends BaseNfcLedCoverController {
     public final ArrayList mCoverAuthCallbacks;
     public final ArrayDeque mEnquedFactoryCommands;
@@ -33,7 +32,6 @@ public final class DreamyNfcLedCoverController extends BaseNfcLedCoverController
     public final PowerManager.WakeLock mSendLedDataWakeLock;
     public final PowerManager.WakeLock mTouchResponseWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthCallbackInfo extends NfcLedTouchListenerInfo {
         public AuthCallbackInfo(
                 IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
@@ -50,7 +48,6 @@ public final class DreamyNfcLedCoverController extends BaseNfcLedCoverController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FotaInProgressCallbackInfo extends NfcLedTouchListenerInfo {
         public FotaInProgressCallbackInfo(
                 IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
@@ -68,7 +65,6 @@ public final class DreamyNfcLedCoverController extends BaseNfcLedCoverController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfcLedCoverControllerHandler extends Handler {
         public NfcLedCoverControllerHandler(Looper looper) {
             super(looper, null, true);
@@ -204,7 +200,6 @@ public final class DreamyNfcLedCoverController extends BaseNfcLedCoverController
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NfcLedTouchListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;

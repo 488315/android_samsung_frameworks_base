@@ -43,7 +43,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageSetting extends SettingBase implements PackageStateInternal {
     public int categoryOverride;
     public InstallSource installSource;
@@ -86,7 +85,6 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
     public long versionCode;
     public String volumeUuid;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pm.PackageSetting$1, reason: invalid class name */
     public final class AnonymousClass1 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache

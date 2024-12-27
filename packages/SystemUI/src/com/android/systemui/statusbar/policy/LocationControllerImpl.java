@@ -34,7 +34,6 @@ import com.samsung.android.feature.SemCarrierFeature;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class LocationControllerImpl extends BroadcastReceiver implements LocationController, AppOpsController.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AppOpsController mAppOpsController;
@@ -56,7 +55,6 @@ public final class LocationControllerImpl extends BroadcastReceiver implements L
     public AppOpItem mActiveAppOpItem = null;
     public final ArrayList mSettingsChangeCallbacks = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -108,7 +106,6 @@ public final class LocationControllerImpl extends BroadcastReceiver implements L
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum LocationIndicatorEvent implements UiEventLogger.UiEventEnum {
         LOCATION_INDICATOR_MONITOR_HIGH_POWER(935),
         LOCATION_INDICATOR_SYSTEM_APP(936),

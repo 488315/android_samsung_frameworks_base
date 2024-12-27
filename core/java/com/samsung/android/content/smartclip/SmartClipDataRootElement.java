@@ -3,7 +3,6 @@ package com.samsung.android.content.smartclip;
 import android.graphics.Rect;
 import android.text.TextUtils;
 
-/* compiled from: SemSmartClipDataRepository.java */
 class SmartClipDataRootElement extends SmartClipDataElementImpl {
     SmartClipDataRootElement() {}
 

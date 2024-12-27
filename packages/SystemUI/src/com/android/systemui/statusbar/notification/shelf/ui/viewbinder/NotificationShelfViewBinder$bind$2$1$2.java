@@ -17,13 +17,11 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class NotificationShelfViewBinder$bind$2$1$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationShelf $this_apply;
     final /* synthetic */ NotificationShelfViewModel $viewModel;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder$bind$2$1$2$1, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass1 implements FlowCollector, FunctionAdapter {
         public final /* synthetic */ NotificationShelf $tmp0;
@@ -83,12 +81,10 @@ final class NotificationShelfViewBinder$bind$2$1$2 extends SuspendLambda impleme
             final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 isShelfStatic = this.$viewModel.interactor.isShelfStatic();
             Flow flow = new Flow() { // from class: com.android.systemui.statusbar.notification.shelf.ui.viewmodel.NotificationShelfViewModel$special$$inlined$map$1
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.notification.shelf.ui.viewmodel.NotificationShelfViewModel$special$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                     /* renamed from: com.android.systemui.statusbar.notification.shelf.ui.viewmodel.NotificationShelfViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
                     public final class AnonymousClass1 extends ContinuationImpl {
                         Object L$0;

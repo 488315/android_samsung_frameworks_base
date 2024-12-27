@@ -34,7 +34,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AiAgentEffect {
     public static final AnimHelper.AnimProperty HIDE_ANIM_ALPHA_PROPERTY;
     public static final AnimHelper.AnimProperty HIDE_ANIM_TRANSLATION_Y_PROPERTY;
@@ -66,7 +65,6 @@ public final class AiAgentEffect {
     public AnimHelper.AnimationState animState = AnimHelper.AnimationState.HIDING;
     public final TransparentVideoView.Configs config = new TransparentVideoView.Configs(0.2f, "putUniqueIdForThisView", null, false, true, true, Float.valueOf(30.0f));
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -76,7 +74,6 @@ public final class AiAgentEffect {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HideAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super("AiAgentEffect", str, true);
@@ -111,7 +108,6 @@ public final class AiAgentEffect {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ShowAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super("AiAgentEffect", str, true);
@@ -194,7 +190,6 @@ public final class AiAgentEffect {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

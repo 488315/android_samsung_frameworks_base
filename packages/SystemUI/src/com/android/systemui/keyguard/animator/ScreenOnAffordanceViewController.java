@@ -26,14 +26,12 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__LimitKt$drop$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenOnAffordanceViewController extends ViewAnimationController {
     public boolean initPivot;
     public final List restoreSpringAnimationList;
     public final List screenONAffordanceViews;
     public final List screenOnSpringAnimationList;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.keyguard.animator.ScreenOnAffordanceViewController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ DozeParameters $dozeParameters;
@@ -167,7 +165,6 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

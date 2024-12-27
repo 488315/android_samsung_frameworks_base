@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemBiometricSysUiManager
         implements ServiceConnection, IBinder.DeathRecipient, SemBiometricConstants {
     public static SemBiometricSysUiManager sInstance;
@@ -50,7 +49,6 @@ public final class SemBiometricSysUiManager
                             .getBiometricCallbackHandler());
     public final AnonymousClass1 mSysUiServiceReceiver = new AnonymousClass1();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.SemBiometricSysUiManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISemBiometricSysUiCallback.Stub {
         public AnonymousClass1() {}
@@ -114,7 +112,6 @@ public final class SemBiometricSysUiManager
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SysUiListener {
         default void onDismissed(int i, byte[] bArr) {}
 
@@ -125,7 +122,6 @@ public final class SemBiometricSysUiManager
         default void onTryAgainPressed(int i) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SysUiServiceSession {
         public final int mId = hashCode();
         public SysUiListener mListener;

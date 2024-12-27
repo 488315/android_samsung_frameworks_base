@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class ManagedServices {
     public final boolean DEBUG;
     public final String TAG;
@@ -87,7 +86,6 @@ public abstract class ManagedServices {
     public final UserProfiles mUserProfiles;
     public final ArrayMap mUserSetServices;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.ManagedServices$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
         public ManagedServiceInfo mRemovedInfo;
@@ -285,7 +283,6 @@ public abstract class ManagedServices {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Config {
         public String bindPermission;
         public String caption;
@@ -297,7 +294,6 @@ public abstract class ManagedServices {
         public String xmlTag;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ManagedServiceInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final ServiceConnection connection;
@@ -446,7 +442,6 @@ public abstract class ManagedServices {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserProfiles {
         public final SparseArray mCurrentProfiles = new SparseArray();
 

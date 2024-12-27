@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContentProtectionAllowlistManager {
     public final ContentCaptureManagerService mContentCaptureManagerService;
     public final Handler mHandler;
@@ -25,7 +24,6 @@ public final class ContentProtectionAllowlistManager {
     final PackageMonitor mPackageMonitor = createPackageMonitor();
     final IContentProtectionAllowlistCallback mAllowlistCallback = createAllowlistCallback();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContentProtectionAllowlistCallback
             extends IContentProtectionAllowlistCallback.Stub {
         public ContentProtectionAllowlistCallback() {}
@@ -55,7 +53,6 @@ public final class ContentProtectionAllowlistManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContentProtectionPackageMonitor extends PackageMonitor {
         public ContentProtectionPackageMonitor() {}
 

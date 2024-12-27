@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SnoozeOptionManager {
     public static final int[] sAccessibilityActions = {R.id.action_snooze_shorter, R.id.action_snooze_short, R.id.action_snooze_long, R.id.action_snooze_longer};
     public final Context mContext;
@@ -34,7 +33,6 @@ public final class SnoozeOptionManager {
     public final MetricsLogger mMetricsLogger = new MetricsLogger();
     public final KeyValueListParser mParser = new KeyValueListParser(',');
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationSnoozeOption implements NotificationSwipeActionHelper.SnoozeOption {
         public final AccessibilityNodeInfo.AccessibilityAction mAction;
         public final CharSequence mConfirmation;

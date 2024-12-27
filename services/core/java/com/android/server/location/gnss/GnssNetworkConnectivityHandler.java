@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 class GnssNetworkConnectivityHandler {
     public InetAddress mAGpsDataConnectionIpAddr;
     public int mAGpsDataConnectionState;
@@ -67,7 +66,6 @@ class GnssNetworkConnectivityHandler {
     public final HashMap mAvailableNetworkAttributes = new HashMap(5);
     public int mActiveSubId = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.gnss.GnssNetworkConnectivityHandler$3, reason: invalid class name */
     public final class AnonymousClass3 extends ConnectivityManager.NetworkCallback {
         public final /* synthetic */ int $r8$classId;
@@ -137,14 +135,12 @@ class GnssNetworkConnectivityHandler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkAttributes {
         public String mApn;
         public NetworkCapabilities mCapabilities;
         public int mType;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SubIdPhoneStateListener extends PhoneStateListener {
         public final Integer mSubId;
 

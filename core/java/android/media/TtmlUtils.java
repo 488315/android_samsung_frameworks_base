@@ -7,7 +7,6 @@ import android.hardware.scontext.SContextConstants;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: TtmlRenderer.java */
 final class TtmlUtils {
     public static final String ATTR_BEGIN = "begin";
     public static final String ATTR_DURATION = "dur";

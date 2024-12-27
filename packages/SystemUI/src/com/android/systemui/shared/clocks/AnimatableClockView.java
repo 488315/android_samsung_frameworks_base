@@ -40,7 +40,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnimatableClockView extends TextView {
     public static final Logger DEFAULT_LOGGER;
     public static final Interpolator MOVE_INTERPOLATOR;
@@ -68,7 +67,6 @@ public final class AnimatableClockView extends TextView {
     public final Calendar time;
     public boolean translateForCenterAnimation;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -78,7 +76,6 @@ public final class AnimatableClockView extends TextView {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Patterns {
         public static final Patterns INSTANCE = new Patterns();
         public static String sCacheKey;

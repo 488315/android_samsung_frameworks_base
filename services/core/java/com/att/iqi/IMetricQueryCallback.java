@@ -9,11 +9,9 @@ import android.os.RemoteException;
 
 import com.att.iqi.lib.Metric;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IMetricQueryCallback extends IInterface {
     public static final String DESCRIPTOR = "com.att.iqi.IMetricQueryCallback";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IMetricQueryCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,11 +22,9 @@ public interface IMetricQueryCallback extends IInterface {
         public void onMetricQueried(Metric.ID id, byte[] bArr) throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IMetricQueryCallback {
         static final int TRANSACTION_onMetricQueried = 1;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         class Proxy implements IMetricQueryCallback {
             private IBinder mRemote;
 
@@ -100,7 +96,6 @@ public interface IMetricQueryCallback extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class _Parcel {
         /* JADX INFO: Access modifiers changed from: private */
         public static Object readTypedObject(Parcel parcel, Parcelable.Creator creator) {

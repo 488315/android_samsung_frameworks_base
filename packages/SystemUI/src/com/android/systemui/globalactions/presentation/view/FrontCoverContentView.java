@@ -36,7 +36,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FrontCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
     public CoverViewAnimatorFSM mAnimatorFSM;
@@ -62,14 +61,12 @@ public final class FrontCoverContentView implements ContentView, ViewStateContro
     public boolean mLastFoldedState = true;
     public boolean mIsSecureConfirming = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.globalactions.presentation.view.FrontCoverContentView$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentAdapter extends BaseAdapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
@@ -115,7 +112,6 @@ public final class FrontCoverContentView implements ContentView, ViewStateContro
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentGridView extends GridView {
         public ContentGridView(Context context) {
             super(context);
@@ -132,7 +128,6 @@ public final class FrontCoverContentView implements ContentView, ViewStateContro
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);

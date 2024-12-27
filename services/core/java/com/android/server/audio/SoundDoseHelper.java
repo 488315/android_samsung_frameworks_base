@@ -40,7 +40,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundDoseHelper {
     public final AlarmManager mAlarmManager;
     public final AudioService.AudioHandler mAudioHandler;
@@ -78,7 +77,6 @@ public final class SoundDoseHelper {
     public int mMcc = 0;
     public final Object mSafeMediaVolumeStateLock = new Object();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StreamVolumeCommand {
         public final int mDevice;
         public final int mFlags;

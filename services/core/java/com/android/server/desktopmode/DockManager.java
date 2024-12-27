@@ -24,7 +24,6 @@ import com.samsung.android.lib.dexcontrol.model.dexpad.DexPad;
 import com.samsung.android.lib.dexcontrol.model.dexstation.DexStation;
 import com.samsung.android.lib.dexcontrol.utils.SLog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DockManager {
     public final Context mContext;
     public final SparseBooleanArray mDockControlLibError;
@@ -41,7 +40,6 @@ public final class DockManager {
     public int mDockChargerPower = 0;
     public int mDockChargerSupport = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.DockManager$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public Object this$0;
@@ -90,7 +88,6 @@ public final class DockManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DockHandler extends Handler {
         public DockHandler(Looper looper) {
             super(looper);

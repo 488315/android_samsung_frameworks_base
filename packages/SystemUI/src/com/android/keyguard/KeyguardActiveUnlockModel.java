@@ -11,7 +11,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
     public static final List TABLE_HEADERS;
     public final Lazy asStringList$delegate;
@@ -26,7 +25,6 @@ public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
     public boolean userCanDismissLockScreen;
     public int userId;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Buffer {
         public final RingBuffer buffer = new RingBuffer(20, new Function0() { // from class: com.android.keyguard.KeyguardActiveUnlockModel$Buffer$buffer$1
             @Override // kotlin.jvm.functions.Function0
@@ -36,7 +34,6 @@ public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
         });
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

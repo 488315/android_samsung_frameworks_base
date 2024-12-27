@@ -17,12 +17,10 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class DiskStatsLoggingService extends JobService {
     public static final ComponentName sDiskStatsLoggingService =
             new ComponentName("android", DiskStatsLoggingService.class.getName());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class LogRunnable implements Runnable {
         public static final long TIMEOUT_MILLIS = TimeUnit.MINUTES.toMillis(10);
         public AppCollector mCollector;

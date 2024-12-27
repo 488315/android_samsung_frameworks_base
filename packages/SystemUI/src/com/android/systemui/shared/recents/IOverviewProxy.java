@@ -8,7 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import com.android.systemui.shared.navigationbar.NavBarEvents;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface IOverviewProxy extends IInterface {
     void disable(int i, int i2, int i3, boolean z);
 
@@ -58,11 +57,9 @@ public interface IOverviewProxy extends IInterface {
 
     void onTaskbarToggled();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class Stub extends Binder implements IOverviewProxy {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Proxy implements IOverviewProxy {
             public final IBinder mRemote;
 

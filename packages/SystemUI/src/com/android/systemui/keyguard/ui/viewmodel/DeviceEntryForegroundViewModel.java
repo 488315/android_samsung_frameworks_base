@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DeviceEntryForegroundViewModel {
     public final Context context;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 isShowingAodOrDozing;
@@ -23,7 +22,6 @@ public final class DeviceEntryForegroundViewModel {
     public final ChannelFlowTransformLatest useAodIconVariant;
     public final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 viewModel;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ForegroundIconViewModel {
         public final int padding;
         public final int tint;

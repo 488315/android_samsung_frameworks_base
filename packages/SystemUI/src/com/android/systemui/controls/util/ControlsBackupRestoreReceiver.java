@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ControlsBackupRestoreReceiver extends BroadcastReceiver {
     public final ControlsController controlsController;
     public final ControlsFileLoader controlsFileLoader;
@@ -34,7 +33,6 @@ public final class ControlsBackupRestoreReceiver extends BroadcastReceiver {
     public final SecControlsUiController secControlsUiController;
     public final SecureSettings secureSettings;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

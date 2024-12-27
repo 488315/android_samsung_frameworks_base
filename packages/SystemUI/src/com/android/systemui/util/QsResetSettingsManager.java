@@ -8,7 +8,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class QsResetSettingsManager {
     private static final String TAG = "QsResetSettingsManager";
     private final BroadcastDispatcher mBroadcastDispatcher;
@@ -17,12 +16,10 @@ public class QsResetSettingsManager {
     private ArrayList<ResetSettingsApplier> mAppliers = new ArrayList<>();
     private ArrayList<DemoResetSettingsApplier> mDemoAppliers = new ArrayList<>();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface DemoResetSettingsApplier {
         void applyDemoResetSetting();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface ResetSettingsApplier {
         void applyResetSetting();
     }

@@ -24,13 +24,11 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddlewareService.Stub {
     public final Context mContext;
     public final ISoundTriggerMiddlewareInternal mDelegate;
     public final SoundTriggerInjection mInjection;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
         public Lifecycle(Context context) {
             super(context);
@@ -60,7 +58,6 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModuleService extends ISoundTriggerModule.Stub {
         public final ISoundTriggerModule mDelegate;
 

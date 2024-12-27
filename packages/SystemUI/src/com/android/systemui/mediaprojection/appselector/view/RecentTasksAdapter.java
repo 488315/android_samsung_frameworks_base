@@ -29,18 +29,15 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RecentTasksAdapter extends RecyclerView.Adapter {
     public final List items;
     public final RecentTaskClickListener listener;
     public final RecentTaskViewHolder.Factory viewHolderFactory;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         RecentTasksAdapter create(List list, RecentTaskClickListener recentTaskClickListener);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface RecentTaskClickListener {
     }
 

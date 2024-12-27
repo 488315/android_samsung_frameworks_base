@@ -52,7 +52,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BrightnessTracker {
     public AmbientBrightnessStatsTracker mAmbientBrightnessStatsTracker;
     public Receiver mBroadcastReceiver;
@@ -85,7 +84,6 @@ public final class BrightnessTracker {
     public final TrackerHandler mBgHandler =
             new TrackerHandler(BackgroundThread.getHandler().getLooper());
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrightnessChangeValues {
         public final float brightness;
         public final boolean isDefaultBrightnessConfig;
@@ -116,7 +114,6 @@ public final class BrightnessTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayListener implements DisplayManager.DisplayListener {
         public DisplayListener() {}
 
@@ -145,10 +142,8 @@ public final class BrightnessTracker {
         public final void onDisplayRemoved(int i) {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
         public Receiver() {}
 
@@ -232,7 +227,6 @@ public final class BrightnessTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SensorListener implements SensorEventListener {
         public SensorListener() {}
 
@@ -291,7 +285,6 @@ public final class BrightnessTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);
@@ -315,7 +308,6 @@ public final class BrightnessTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrackerHandler extends Handler {
         public TrackerHandler(Looper looper) {
             super(looper, null, true);

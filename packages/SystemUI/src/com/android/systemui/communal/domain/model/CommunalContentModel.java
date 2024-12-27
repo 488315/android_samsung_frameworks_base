@@ -10,10 +10,8 @@ import java.util.UUID;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface CommunalContentModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CtaTileInViewMode implements CommunalContentModel {
         public final String key = "cta_tile_in_view_mode";
         public final CommunalContentSize size = CommunalContentSize.HALF;
@@ -29,11 +27,9 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KEY {
         public static final Companion Companion = new Companion(null);
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Companion {
             private Companion() {
             }
@@ -44,14 +40,12 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Ongoing extends CommunalContentModel {
         long getCreatedTimestampMillis();
 
         void setSize(CommunalContentSize communalContentSize);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Tutorial implements CommunalContentModel {
         public final String key;
         public final CommunalContentSize size;
@@ -73,7 +67,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WidgetPlaceholder implements CommunalContentModel {
         public final String key;
         public final CommunalContentSize size;
@@ -99,7 +92,6 @@ public interface CommunalContentModel {
 
     CommunalContentSize getSize();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Umo implements Ongoing {
         public final long createdTimestampMillis;
         public final String key;
@@ -137,7 +129,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Smartspace implements Ongoing {
         public final long createdTimestampMillis;
         public final String key;
@@ -177,10 +168,8 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface WidgetContent extends CommunalContentModel {
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class DisabledWidget implements WidgetContent {
             public final int appWidgetId;
             public final String key;
@@ -230,7 +219,6 @@ public interface CommunalContentModel {
             }
         }
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class Widget implements WidgetContent {
             public final CommunalAppWidgetHost appWidgetHost;
             public final int appWidgetId;
@@ -286,7 +274,6 @@ public interface CommunalContentModel {
 
         int getAppWidgetId();
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class PendingWidget implements WidgetContent {
             public final int appWidgetId;
             public final Bitmap icon;

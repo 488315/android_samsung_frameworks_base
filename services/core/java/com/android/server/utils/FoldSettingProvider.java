@@ -9,7 +9,6 @@ import com.android.internal.util.SettingsWrapper;
 
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FoldSettingProvider {
     public static final Set SETTING_VALUES =
             Set.of("stay_awake_on_fold_key", "selective_stay_awake_key", "sleep_on_fold_key");

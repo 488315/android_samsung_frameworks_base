@@ -8,14 +8,12 @@ import android.util.Log;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.plm.impl.BindServiceImpl;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ProcessAdapter extends Handler {
     public final BindServiceImpl mKeepAliveImpl;
     public IStateDelegate mStateDelegate;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class TryReason {
         public static final /* synthetic */ TryReason[] $VALUES;
         public static final TryReason ALIVE;

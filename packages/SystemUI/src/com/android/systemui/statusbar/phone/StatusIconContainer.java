@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.notification.stack.AnimationProperties;
 import com.android.systemui.statusbar.notification.stack.ViewState;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     public static final AnonymousClass1 ADD_ICON_PROPERTIES;
     public static final AnonymousClass3 ANIMATE_ALL_PROPERTIES;
@@ -34,7 +33,6 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     public boolean mShouldRestrictIcons;
     public SidelingCutoutContainerInfo mSidelingCutoutContainerInfo;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class StatusIconState extends ViewState {
         public int visibleState = 0;
         public boolean justAdded = true;

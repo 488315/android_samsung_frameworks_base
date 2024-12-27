@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MultiWindowEnableController implements IController {
     public final ActivityTaskManagerService mAtm;
     public CoreStateController mCoreStateController;
@@ -50,7 +49,6 @@ public final class MultiWindowEnableController implements IController {
     public final ArrayList mNaviStarSplitImmersiveModeRequestLog = new ArrayList();
     public final ArrayList mCornerGestureRequestLogs = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransitionListener extends WindowManagerInternal.AppTransitionListener {
         public final List mExitAnimatingTasks;
         public final TransitionController mTransitionController;

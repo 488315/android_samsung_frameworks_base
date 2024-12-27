@@ -2,11 +2,9 @@ package com.android.systemui.authentication.shared.model;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class AuthenticationMethodModel {
     public final boolean isSecure;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AdminLock extends AuthenticationMethodModel {
         public static final AdminLock INSTANCE = new AdminLock();
 
@@ -27,7 +25,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FMM extends AuthenticationMethodModel {
         public static final FMM INSTANCE = new FMM();
 
@@ -48,7 +45,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ForgotPassword extends AuthenticationMethodModel {
         public static final ForgotPassword INSTANCE = new ForgotPassword();
 
@@ -69,7 +65,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KNOXGUARD extends AuthenticationMethodModel {
         public static final KNOXGUARD INSTANCE = new KNOXGUARD();
 
@@ -90,7 +85,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class None extends AuthenticationMethodModel {
         public static final None INSTANCE = new None();
 
@@ -111,7 +105,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Password extends AuthenticationMethodModel {
         public static final Password INSTANCE = new Password();
 
@@ -132,7 +125,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Pattern extends AuthenticationMethodModel {
         public static final Pattern INSTANCE = new Pattern();
 
@@ -153,7 +145,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Permanent extends AuthenticationMethodModel {
         public static final Permanent INSTANCE = new Permanent();
 
@@ -174,7 +165,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Pin extends AuthenticationMethodModel {
         public static final Pin INSTANCE = new Pin();
 
@@ -195,7 +185,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RMM extends AuthenticationMethodModel {
         public static final RMM INSTANCE = new RMM();
 
@@ -216,7 +205,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SKTCarrierLock extends AuthenticationMethodModel {
         public static final SKTCarrierLock INSTANCE = new SKTCarrierLock();
 
@@ -237,7 +225,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Sim extends AuthenticationMethodModel {
         public static final Sim INSTANCE = new Sim();
 
@@ -258,7 +245,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SmartcardPIN extends AuthenticationMethodModel {
         public static final SmartcardPIN INSTANCE = new SmartcardPIN();
 
@@ -279,7 +265,6 @@ public abstract class AuthenticationMethodModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Swipe extends AuthenticationMethodModel {
         public static final Swipe INSTANCE = new Swipe();
 

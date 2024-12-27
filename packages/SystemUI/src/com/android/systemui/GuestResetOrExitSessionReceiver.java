@@ -15,7 +15,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
     public final BroadcastDispatcher mBroadcastDispatcher;
     public SystemUIDialog mExitSessionDialog;
@@ -24,14 +23,12 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
     public final ResetSessionDialogFactory mResetSessionDialogFactory;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExitSessionDialogClickListener implements DialogInterface.OnClickListener {
         public final DialogInterface mDialog;
         public final boolean mIsEphemeral;
         public final int mUserId;
         public final UserSwitcherController mUserSwitcherController;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Factory {
             ExitSessionDialogClickListener create(boolean z, int i, DialogInterface dialogInterface);
         }
@@ -70,7 +67,6 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ExitSessionDialogFactory {
         public final ExitSessionDialogClickListener.Factory mClickListenerFactory;
         public final SystemUIDialog.Factory mDialogFactory;
@@ -83,14 +79,12 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResetSessionDialogClickListener implements DialogInterface.OnClickListener {
         public final DialogInterface mDialog;
         public final UiEventLogger mUiEventLogger;
         public final int mUserId;
         public final UserSwitcherController mUserSwitcherController;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public interface Factory {
             ResetSessionDialogClickListener create(int i, DialogInterface dialogInterface);
         }
@@ -116,7 +110,6 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ResetSessionDialogFactory {
         public final ResetSessionDialogClickListener.Factory mClickListenerFactory;
         public final SystemUIDialog.Factory mDialogFactory;

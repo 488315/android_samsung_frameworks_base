@@ -2,7 +2,6 @@ package com.android.systemui.statusbar.commandline;
 
 import kotlin.Result;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ValueParserKt$parseString$1 implements ValueParser {
     public static final ValueParserKt$parseString$1 INSTANCE = new ValueParserKt$parseString$1();
 

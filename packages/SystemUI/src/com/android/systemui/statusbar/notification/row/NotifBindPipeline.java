@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotifBindPipeline {
     public final AnonymousClass1 mCollectionListener;
     public final NotifBindPipelineLogger mLogger;
@@ -31,12 +30,10 @@ public final class NotifBindPipeline {
     public final Map mBindEntries = new ArrayMap();
     public final List mScratchCallbacksList = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface BindCallback {
         void onBindFinished(NotificationEntry notificationEntry);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BindEntry {
         public final Set callbacks;
         public boolean invalidated;

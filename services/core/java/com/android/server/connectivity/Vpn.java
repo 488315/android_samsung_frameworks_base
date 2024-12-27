@@ -171,7 +171,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import libcore.io.IoUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class Vpn {
     public static final int AUTOMATIC_KEEPALIVE_DELAY_SECONDS = 30;
     static final int DEFAULT_LONG_LIVED_TCP_CONNS_EXPENSIVE_TIMEOUT_SEC = 60;
@@ -234,7 +233,6 @@ public class Vpn {
     public static final long[] DATA_STALL_RECOVERY_DELAYS_MS = {1000, 5000, 30000, 60000, 120000, 240000, 480000, 960000};
     public static final boolean DBG = Debug.semIsProductDev();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.connectivity.Vpn$2, reason: invalid class name */
     public final class AnonymousClass2 extends BaseNetworkObserver {
         public AnonymousClass2() {
@@ -284,7 +282,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.connectivity.Vpn$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$android$net$NetworkInfo$DetailedState;
@@ -311,7 +308,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CarrierConfigInfo {
         public final int encapType;
         public final int ipVersion;
@@ -337,7 +333,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements ServiceConnection {
         public IBinder mService;
 
@@ -352,7 +347,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {
         public static InetAddress resolve(final String str) {
             try {
@@ -427,7 +421,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class IkeSessionWrapper {
         public final IkeSession mImpl;
 
@@ -436,7 +429,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IkeV2VpnRunner extends VpnRunner implements IkeV2VpnRunnerCallback {
         public static final /* synthetic */ int $r8$clinit = 0;
         public Network mActiveNetwork;
@@ -1201,15 +1193,12 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IkeV2VpnRunnerCallback {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Ikev2SessionCreator {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LegacyVpnRunner extends VpnRunner {
         public List ipAddresses;
         public final String[] mArguments;
@@ -1666,7 +1655,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class SystemServices {
         public final Context mContext;
 
@@ -1679,12 +1667,10 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface ValidationStatusCallback {
         void onValidationStatus(int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class VpnNetworkAgentWrapper extends NetworkAgent {
         public final ValidationStatusCallback mCallback;
 
@@ -1704,7 +1690,6 @@ public class Vpn {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     abstract class VpnRunner extends Thread {
         public VpnRunner(String str) {
             super(str);

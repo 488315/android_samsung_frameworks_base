@@ -42,7 +42,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppWarnings {
     public final ActivityTaskManagerService mAtm;
     public final AtomicFile mConfigFile;
@@ -57,7 +56,6 @@ public final class AppWarnings {
     public final ArraySet mAlwaysShowUnsupportedCompileSdkWarningActivities = new ArraySet();
     public final WriteConfigTask mWriteConfigTask = new WriteConfigTask();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BaseDialog {
         public AnonymousClass1 mCloseReceiver;
         public AlertDialog mDialog;
@@ -113,7 +111,6 @@ public final class AppWarnings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UiHandler extends Handler {
         public UiHandler(Looper looper) {
             super(looper, null, true);
@@ -399,7 +396,6 @@ public final class AppWarnings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WriteConfigTask implements Runnable {
         public final AtomicReference mPendingPackageFlags = new AtomicReference();
 

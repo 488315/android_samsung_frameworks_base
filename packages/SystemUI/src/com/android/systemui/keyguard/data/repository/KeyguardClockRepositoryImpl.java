@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardClockRepositoryImpl implements KeyguardClockRepository {
     public final StateFlowImpl _clockSize;
     public final CoroutineDispatcher backgroundDispatcher;
@@ -49,13 +48,11 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardClockRepositoryImpl$selectedClockSize$1(null), SettingsProxyExt.INSTANCE.observerFlow(secureSettings, 0, "lockscreen_use_double_line_clock"));
         Flow flow = new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ KeyguardClockRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -164,12 +161,10 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
         final CallbackFlowBuilder callbackFlow = FlowKt.callbackFlow(new KeyguardClockRepositoryImpl$currentClockId$1(this, null));
         final ?? r5 = new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$mapNotNull$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$mapNotNull$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$mapNotNull$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -256,13 +251,11 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
         this.currentClockId = r5;
         this.currentClock = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ KeyguardClockRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$2$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;
@@ -355,13 +348,11 @@ public final class KeyguardClockRepositoryImpl implements KeyguardClockRepositor
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), clockRegistry.createCurrentClock());
         this.previewClock = new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$3
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
                 public final /* synthetic */ KeyguardClockRepositoryImpl this$0;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$special$$inlined$map$3$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

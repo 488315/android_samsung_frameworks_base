@@ -41,7 +41,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UnderlyingNetworkController {
     public final VcnActiveDataSubscriptionIdListener mActiveDataSubIdListener;
     public PersistableBundleUtils.PersistableBundleWrapper mCarrierConfig;
@@ -62,7 +61,6 @@ public final class UnderlyingNetworkController {
     public ConnectivityManager.NetworkCallback mWifiEntryRssiThresholdCallback;
     public ConnectivityManager.NetworkCallback mWifiExitRssiThresholdCallback;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CapabilityMatchCriteria {
         public final int capability;
         public final int matchCriteria;
@@ -87,13 +85,10 @@ public final class UnderlyingNetworkController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Dependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NetworkBringupCallback extends ConnectivityManager.NetworkCallback {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NetworkEvaluatorCallbackImpl
             implements UnderlyingNetworkEvaluator.NetworkEvaluatorCallback {
         public NetworkEvaluatorCallbackImpl() {}
@@ -115,11 +110,9 @@ public final class UnderlyingNetworkController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UnderlyingNetworkControllerCallback {}
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class UnderlyingNetworkListener extends ConnectivityManager.NetworkCallback {
         public UnderlyingNetworkListener() {
             super(1);
@@ -311,7 +304,6 @@ public final class UnderlyingNetworkController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VcnActiveDataSubscriptionIdListener extends TelephonyCallback
             implements TelephonyCallback.ActiveDataSubscriptionIdListener {
         public VcnActiveDataSubscriptionIdListener() {}

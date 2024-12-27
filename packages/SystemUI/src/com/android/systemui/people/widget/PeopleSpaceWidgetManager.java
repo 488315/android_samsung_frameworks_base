@@ -83,7 +83,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PeopleSpaceWidgetManager implements Dumpable {
     public static final Map mListeners = new HashMap();
     public static final Map mTiles = new HashMap();
@@ -113,7 +112,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
     public final UserManager mUserManager;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$3, reason: invalid class name */
     public final class AnonymousClass3 extends BroadcastReceiver {
         public AnonymousClass3() {
@@ -125,7 +123,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$people$widget$PeopleBackupHelper$SharedFileEntryType;
@@ -152,7 +149,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TileConversationListener implements PeopleManager.ConversationListener {
         public TileConversationListener() {
         }
@@ -866,7 +862,6 @@ public final class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$2, reason: invalid class name */
     public final class AnonymousClass2 implements NotificationListener.NotificationHandler {
         public AnonymousClass2() {

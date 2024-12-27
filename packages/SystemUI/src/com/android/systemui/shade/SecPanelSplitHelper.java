@@ -46,7 +46,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecPanelSplitHelper implements ShadeExpansionListener, SettingsHelper.OnChangedCallback, StatusBarStateController.StateListener, LockscreenShadeTransitionController.Callback {
     public static final Companion Companion = new Companion(null);
     public static final Uri SPLIT_URI = Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL);
@@ -81,7 +80,6 @@ public final class SecPanelSplitHelper implements ShadeExpansionListener, Settin
     public final UserTracker.Callback userChanged;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

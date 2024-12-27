@@ -170,7 +170,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import libcore.util.EmptyArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BatteryStatsImpl extends BatteryStats {
     public static final int CELL_SIGNAL_STRENGTH_LEVEL_COUNT;
     public static final int MAX_WAKELOCKS_PER_UID;
@@ -515,7 +514,6 @@ public final class BatteryStatsImpl extends BatteryStats {
     public final BatteryStatsImpl$$ExternalSyntheticLambda3 mWriteAsyncRunnable;
     public final ReentrantLock mWriteLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.BatteryStatsImpl$1, reason: invalid class name */
     public final class AnonymousClass1 extends BatteryStats.LongCounter {
         public final long getCountForProcessState(int i) {
@@ -531,14 +529,12 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.BatteryStatsImpl$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.BatteryStatsImpl$4, reason: invalid class name */
     public final class AnonymousClass4 extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
@@ -584,7 +580,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.power.stats.BatteryStatsImpl$7, reason: invalid class name */
     public final class AnonymousClass7 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -656,7 +651,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BatchTimer extends Timer {
         public boolean mInDischarge;
         public long mLastAddedDurationUs;
@@ -728,17 +722,14 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface BatteryCallback {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BatteryStatsConfig {
         public final Long mDefaultPowerStatsThrottlePeriod;
         public final int mFlags;
         public final Map mPowerStatsThrottlePeriods;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Builder {
             public static final long DEFAULT_POWER_STATS_THROTTLE_PERIOD = TimeUnit.HOURS.toMillis(1);
             public static final long DEFAULT_POWER_STATS_THROTTLE_PERIOD_CPU = TimeUnit.MINUTES.toMillis(1);
@@ -771,7 +762,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BinderCallStats {
         public Class binderClass;
         public long callCount;
@@ -812,7 +802,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothActivityInfoCache {
         public long energy;
         public long idleTimeMs;
@@ -836,7 +825,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BluetoothStatsRetrieverImpl {
         public final BluetoothManager mBluetoothManager;
 
@@ -845,7 +833,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Constants extends ContentObserver {
         public int BATTERY_CHARGED_DELAY_MS;
         public int BATTERY_CHARGING_ENFORCE_LEVEL;
@@ -1037,7 +1024,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ControllerActivityCounterImpl extends BatteryStats.ControllerActivityCounter implements Parcelable {
         public final Clock mClock;
         public TimeMultiStateCounter mIdleTimeMillis;
@@ -1245,7 +1231,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Counter extends BatteryStats.Counter implements TimeBaseObs {
         public final AtomicInteger mCount = new AtomicInteger();
         public final TimeBase mTimeBase;
@@ -1305,7 +1290,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class CpuDeltaPowerAccumulator {
         public final CpuPowerCalculator mCalculator;
         public final double[] totalClusterChargesMah;
@@ -1341,7 +1325,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CustomTelephonyCallback extends TelephonyCallback implements TelephonyCallback.ServiceStateListener {
         public CustomTelephonyCallback() {
         }
@@ -1416,7 +1399,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayBatteryStats {
         public int screenBrightnessBin;
         public StopwatchTimer[] screenBrightnessTimers;
@@ -1426,7 +1408,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         public int screenStateAtLastEnergyMeasurement;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DualTimer extends DurationTimer {
         public final DurationTimer mSubTimer;
 
@@ -1481,7 +1462,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class DurationTimer extends StopwatchTimer {
         public long mCurrentDurationMs;
         public long mMaxDurationMs;
@@ -1589,7 +1569,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DutyTimer extends Timer {
         public long mAcquireTime;
         public int mDutyCycle;
@@ -1682,15 +1661,12 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface EnergyStatsRetriever {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FrameworkStatsLogger {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HistoryStepDetailsCalculatorImpl implements BatteryStatsHistory.HistoryStepDetailsCalculator {
         public long mCurStepCpuSystemTimeMs;
         public long mCurStepCpuUserTimeMs;
@@ -1879,7 +1855,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class LongSamplingCounter extends BatteryStats.LongCounter implements TimeBaseObs {
         public long mCount;
         public final TimeBase mTimeBase;
@@ -1936,7 +1911,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class LongSamplingCounterArray extends BatteryStats.LongCounterArray implements TimeBaseObs {
         public static final /* synthetic */ int $r8$clinit = 0;
         public long[] mCounts;
@@ -2006,7 +1980,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModemActivityCounterImpl extends BatteryStats.ModemActivityCounter implements Parcelable {
         public final LongSamplingCounter mIdleTimeMillis;
         public final ModemTxRxCounterImpl mLcModemActivityInfo;
@@ -2050,7 +2023,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModemTxRxCounterImpl extends BatteryStats.ModemTxRxCounter {
         public final LongSamplingCounter mRxByte;
         public final LongSamplingCounter mRxTimeMillis;
@@ -2133,7 +2105,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper, null, true);
@@ -2197,7 +2168,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkStatsDelta {
         public long mRxBytes;
         public long mRxPackets;
@@ -2211,11 +2181,9 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PlatformIdleStateCallback {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerStatsCollectorInjector {
         public BluetoothStatsRetrieverImpl mBluetoothStatsRetriever;
         public PowerStatsCollector.ConsumedEnergyRetrieverImpl mConsumedEnergyRetriever;
@@ -2233,7 +2201,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RadioAccessTechnologyBatteryStats {
         public final StopwatchTimer[][] perStateTimers;
         public boolean mActive = false;
@@ -2315,7 +2282,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RxTxConsumption {
         public final double rxConsumptionMah;
         public final double txConsumptionMah;
@@ -2333,7 +2299,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SamplingTimer extends Timer {
         public int mBaseReportedCount;
         public long mBaseReportedTotalTimeUs;
@@ -2428,7 +2393,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class StopwatchTimer extends Timer {
         public long mAcquireTimeUs;
         public boolean mInList;
@@ -2604,7 +2568,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeBase {
         public final Collection mObservers;
         public long mPastRealtimeUs;
@@ -2682,7 +2645,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface TimeBaseObs {
         void detach();
 
@@ -2697,7 +2659,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         boolean reset(long j, boolean z);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeInFreqMultiStateCounter implements TimeBaseObs {
         public final LongArrayMultiStateCounter mCounter;
         public final TimeBase mTimeBase;
@@ -2748,7 +2709,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeMultiStateCounter extends BatteryStats.LongCounter implements TimeBaseObs {
         public final LongMultiStateCounter mCounter;
         public final TimeBase mTimeBase;
@@ -2819,7 +2779,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Timer extends BatteryStats.Timer implements TimeBaseObs {
         public final Clock mClock;
         public int mCount;
@@ -2900,7 +2859,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Uid extends BatteryStats.Uid {
         public static final BinderCallStats sTempBinderCallStats = new BinderCallStats();
         public DualTimer mAggregatedPartialWakelockTimer;
@@ -2973,7 +2931,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         public final SparseArray mPids = new SparseArray();
         public final ArraySet mBinderCallStats = new ArraySet();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.power.stats.BatteryStatsImpl$Uid$1, reason: invalid class name */
         public final class AnonymousClass1 {
             public final /* synthetic */ int $r8$classId;
@@ -3146,7 +3103,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ChildUid {
             public final TimeMultiStateCounter cpuActiveCounter;
             public final LongArrayMultiStateCounter cpuTimeInFreqCounter;
@@ -3167,13 +3123,11 @@ public final class BatteryStatsImpl extends BatteryStats {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Pkg extends BatteryStats.Uid.Pkg implements TimeBaseObs {
             public final BatteryStatsImpl mBsi;
             public final ArrayMap mWakeupAlarms = new ArrayMap();
             public final ArrayMap mServiceStats = new ArrayMap();
 
-            /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             public final class Serv extends BatteryStats.Uid.Pkg.Serv implements TimeBaseObs {
                 public BatteryStatsImpl mBsi;
                 public boolean mLaunched;
@@ -3262,7 +3216,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proc extends BatteryStats.Uid.Proc implements TimeBaseObs {
             public boolean mActive;
             public BatteryStatsImpl mBsi;
@@ -3357,7 +3310,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Sensor extends BatteryStats.Uid.Sensor {
             public final int mHandle;
             public DualTimer mTimer;
@@ -3383,7 +3335,6 @@ public final class BatteryStatsImpl extends BatteryStats {
             }
         }
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Wakelock extends BatteryStats.Uid.Wakelock {
             public StopwatchTimer mTimerDraw;
             public StopwatchTimer mTimerFull;
@@ -4757,7 +4708,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UidToRemove {
         public final int mEndUid;
         public final int mStartUid;
@@ -4770,7 +4720,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsageComparator implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
@@ -4783,7 +4732,6 @@ public final class BatteryStatsImpl extends BatteryStats {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class UserInfoProvider {
         public int[] userIds;
 

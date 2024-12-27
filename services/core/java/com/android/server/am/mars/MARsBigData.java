@@ -16,19 +16,16 @@ import com.android.server.pm.pu.ProfileUtilizationService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MARsBigData {
     public String PLEVdata;
     public Context mContext;
     public SemHqmManager mHQM;
     public AnonymousClass1 mIntentReceiver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LevelInfo {
         public int totalSize;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MARsBigDataHolder {
         public static final MARsBigData INSTANCE;
 
@@ -65,7 +62,6 @@ public final class MARsBigData {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsageInfo {
         public final String batteryUsage;
         public final String disableLevelSize;

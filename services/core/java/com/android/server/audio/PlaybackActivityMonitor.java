@@ -47,7 +47,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PlaybackActivityMonitor
         implements AudioPlaybackConfiguration.PlayerDeathMonitor, PlayerFocusEnforcer {
     public static final Set ACTIVE_CHECK_PLAYER_TYPES;
@@ -109,7 +108,6 @@ public final class PlaybackActivityMonitor
     public final Object mPlayerLock = new Object();
     public final HashMap mPlayers = new HashMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioAttrEvent extends EventLogger.Event {
         public final /* synthetic */ int $r8$classId = 0;
         public final Object mPlayerAttr;
@@ -144,7 +142,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DuckEvent extends VolumeShaperEvent {
         public final boolean mUseStrongDuck;
 
@@ -164,11 +161,9 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DuckingManager {
         public final HashMap mDuckers = new HashMap();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class DuckedApp {
             public final ArrayList mDuckedPlayers = new ArrayList();
             public final int mUid;
@@ -334,7 +329,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FadeInEvent extends VolumeShaperEvent {
         public final /* synthetic */ int $r8$classId;
 
@@ -360,7 +354,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MuteAwaitConnectionEvent extends EventLogger.Event {
         public final int[] mUsagesToMute;
 
@@ -374,7 +367,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NewPlayerEvent extends EventLogger.Event {
         public final String mClientPackageName;
         public final int mClientPid;
@@ -414,7 +406,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PlayMonitorClient implements IBinder.DeathRecipient {
         public static PlaybackActivityMonitor sListenerDeathMonitor;
         public final IPlaybackConfigDispatcher mDispatcherCb;
@@ -479,7 +470,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PlayerEvent extends EventLogger.Event {
         public final int mEvent;
         public final int mEventValue;
@@ -544,7 +534,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PlayerOpPlayAudioEvent extends EventLogger.Event {
         public final boolean mHasOp;
         public final int mPlayerIId;
@@ -567,7 +556,6 @@ public final class PlaybackActivityMonitor
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class VolumeShaperEvent extends EventLogger.Event {
         public final int mClientPid;
         public final int mClientUid;

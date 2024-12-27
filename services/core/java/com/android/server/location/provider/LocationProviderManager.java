@@ -106,7 +106,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class LocationProviderManager extends ListenerMultiplexer
         implements AbstractLocationProvider.Listener {
     public final HashSet mActiveOriginalRegistrations;
@@ -166,7 +165,6 @@ public class LocationProviderManager extends ListenerMultiplexer
     public final LocationProviderManager$$ExternalSyntheticLambda0 mUserChangedListener;
     public final LocationManagerService.Lifecycle.LifecycleUserInfoHelper mUserHelper;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalWakeLockReleaser extends IRemoteCallback.Stub {
         public final CallerIdentity mIdentity;
         public final PowerManager.WakeLock mWakeLock;
@@ -202,7 +200,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetCurrentLocationListenerRegistration extends Registration
             implements IBinder.DeathRecipient, AlarmManager.OnAlarmListener {
         public long mExpirationRealtimeMs;
@@ -408,7 +405,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GetCurrentLocationTransport implements LocationTransport {
         public final ILocationCallback mCallback;
 
@@ -439,7 +435,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LastLocation {
         public Location mCoarseBypassLocation;
         public Location mCoarseLocation;
@@ -447,7 +442,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         public Location mFineLocation;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationListenerRegistration extends LocationRegistration
             implements IBinder.DeathRecipient {
         public LocationListenerRegistration(
@@ -530,7 +524,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationListenerTransport implements LocationTransport, ProviderTransport {
         public final ILocationListener mListener;
 
@@ -580,7 +573,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationPendingIntentRegistration extends LocationRegistration
             implements PendingIntent.CancelListener {
         public LocationPendingIntentRegistration(
@@ -651,7 +643,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocationPendingIntentTransport
             implements LocationTransport, ProviderTransport {
         public final Context mContext;
@@ -774,7 +765,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LocationRegistration extends Registration
             implements AlarmManager.OnAlarmListener,
                     LocationManagerInternal.ProviderEnabledListener {
@@ -1073,7 +1063,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LocationTransport {
         void deliverOnFlushComplete(int i);
 
@@ -1081,12 +1070,10 @@ public class LocationProviderManager extends ListenerMultiplexer
                 LocationResult locationResult, ExternalWakeLockReleaser externalWakeLockReleaser);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProviderTransport {
         void deliverOnProviderEnabledChanged(String str, boolean z);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Registration extends RemovableListenerRegistration {
         public boolean isListenerType;
         public final LocationRequest mBaseRequest;
@@ -1599,7 +1586,6 @@ public class LocationProviderManager extends ListenerMultiplexer
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StateChangedListener {}
 
     public LocationProviderManager(

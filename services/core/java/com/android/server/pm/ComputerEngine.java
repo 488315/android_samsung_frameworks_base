@@ -143,7 +143,6 @@ import java.util.Objects;
 import java.util.Set;
 import libcore.util.EmptyArray;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class ComputerEngine implements Computer {
     public static final ComputerEngine$$ExternalSyntheticLambda1 sProviderInitOrderSorter = new ComputerEngine$$ExternalSyntheticLambda1();
     public final ApexManager mApexManager;
@@ -180,7 +179,6 @@ public class ComputerEngine implements Computer {
     public final int mVersion;
     public final WatchedSparseBooleanArray mWebInstantAppsDisabled;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Settings {
         public final com.android.server.pm.Settings mSettings;
 

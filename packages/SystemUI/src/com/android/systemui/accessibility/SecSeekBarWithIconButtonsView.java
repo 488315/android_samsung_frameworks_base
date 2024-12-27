@@ -18,7 +18,6 @@ import com.android.systemui.accessibility.MagnificationSettingsController;
 import com.android.systemui.accessibility.WindowMagnificationSettings;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SecSeekBarWithIconButtonsView extends LinearLayout {
     public final ImageView mIconEnd;
     public final ViewGroup mIconEndFrame;
@@ -29,7 +28,6 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
     public final SeslSeekBar mSeekbar;
     public boolean mSetProgressFromButtonFlag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AccessibilityDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ AccessibilityDelegate(SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView, int i) {
             this();
@@ -50,11 +48,9 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnSeekBarWithIconButtonsChangeListener extends SeslSeekBar.OnSeekBarChangeListener {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SeekBarChangeListener implements SeslSeekBar.OnSeekBarChangeListener {
         public OnSeekBarWithIconButtonsChangeListener mOnSeekBarChangeListener;
 

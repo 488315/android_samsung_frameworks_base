@@ -22,7 +22,6 @@ import com.android.systemui.util.time.SystemClock;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInflateFinishedListener {
     public boolean mCancelled;
     public NotificationEntry mEntry;
@@ -32,7 +31,6 @@ public final class RowInflaterTask implements InflationTask, AsyncLayoutInflater
     public final RowInflaterTaskLogger mLogger;
     public final SystemClock mSystemClock;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class RowAsyncLayoutInflater implements AsyncLayoutFactory {
         public final NotificationEntry mEntry;
         public final RowInflaterTaskLogger mLogger;
@@ -78,7 +76,6 @@ public final class RowInflaterTask implements InflationTask, AsyncLayoutInflater
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface RowInflationFinishedListener {
     }
 

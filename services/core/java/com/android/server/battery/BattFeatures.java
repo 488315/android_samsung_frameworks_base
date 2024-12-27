@@ -7,7 +7,6 @@ import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BattFeatures {
     public static final boolean FEATURE_FULL_BATTERY_CYCLE;
     public static final boolean FEATURE_SAVE_BATTERY_CYCLE;

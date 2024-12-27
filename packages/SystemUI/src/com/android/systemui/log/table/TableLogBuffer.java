@@ -23,7 +23,6 @@ import kotlin.text.StringsKt___StringsKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
     public final RingBuffer buffer;
     public final Map lastEvictedValues;
@@ -158,7 +157,6 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
         Trace.endSection();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TableRowLoggerImpl {
         public String columnPrefix;
         public boolean isInitial;

@@ -34,7 +34,6 @@ import com.android.systemui.util.ViewController;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardPatternViewController extends KeyguardInputViewController {
     public final AnonymousClass2 mCancelPatternRunnable;
     public CountDownTimer mCountdownTimer;
@@ -275,7 +274,6 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         return true;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class UnlockPatternListener implements LockPatternView.OnPatternListener {
         public UnlockPatternListener() {
         }

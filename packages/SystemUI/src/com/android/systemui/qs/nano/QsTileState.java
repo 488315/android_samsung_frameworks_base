@@ -7,7 +7,6 @@ import com.google.protobuf.nano.InternalNano;
 import com.google.protobuf.nano.MessageNano;
 import java.io.IOException;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QsTileState extends MessageNano {
     private static volatile QsTileState[] _emptyArray;
     private Object identifier_;

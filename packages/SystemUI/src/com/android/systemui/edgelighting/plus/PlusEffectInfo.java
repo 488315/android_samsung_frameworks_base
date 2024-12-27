@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PlusEffectInfo {
     public final AccelerationRange accelerationRange;
     public final float alpha;
@@ -18,7 +17,6 @@ public final class PlusEffectInfo {
     public final ValueRange valueRange;
     public final float width;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AccelerationRange {
         public final Pos maxPos;
         public final float maxRotation;
@@ -37,7 +35,6 @@ public final class PlusEffectInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Pos {
         public final float value;
         public final float x;
@@ -50,7 +47,6 @@ public final class PlusEffectInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Scale {
         public final float value;
         public final float x;
@@ -63,7 +59,6 @@ public final class PlusEffectInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SpeedRange {
         public final Pos maxPos;
         public final float maxRotation;
@@ -82,7 +77,6 @@ public final class PlusEffectInfo {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ValueRange {
         public final Pos maxPos;
         public final float maxRotation;

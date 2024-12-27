@@ -63,7 +63,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 import kotlin.collections.EmptySet;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardStatusViewController extends ViewController implements Dumpable {
     public static final AnimationProperties CLOCK_ANIMATION_PROPERTIES;
     static final String TAG = "KeyguardStatusViewController";
@@ -91,7 +90,6 @@ public final class KeyguardStatusViewController extends ViewController implement
     public final AnonymousClass2 mStatusAreaLayoutChangeListener;
     public Boolean mStatusViewCentered;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class SplitShadeTransitionAdapter extends Transition {
         public static final String[] TRANSITION_PROPERTIES = {"splitShadeTransitionAdapter:boundsLeft", "splitShadeTransitionAdapter:boundsRight", "splitShadeTransitionAdapter:xInWindow"};
         public final KeyguardClockSwitchController mController;

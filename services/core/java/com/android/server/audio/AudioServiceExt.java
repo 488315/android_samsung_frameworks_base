@@ -39,7 +39,6 @@ import com.samsung.android.server.audio.utils.SoundAliveUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AudioServiceExt {
     public static int mKaraokeListenbackEnabled;
     public int mAdaptSoundEnabled;
@@ -78,7 +77,6 @@ public final class AudioServiceExt {
     public int mVoiceCallMonsterSoundMode = -1;
     public int mVideoCallMonsterSoundMode = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExtBroadcastReceiver extends BroadcastReceiver {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AudioServiceExt this$0;
@@ -285,7 +283,6 @@ public final class AudioServiceExt {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExtSettingsObserver extends ContentObserver {
         public ExtSettingsObserver() {
             super(new Handler());

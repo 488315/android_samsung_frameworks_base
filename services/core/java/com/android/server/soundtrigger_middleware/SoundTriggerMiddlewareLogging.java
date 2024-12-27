@@ -34,7 +34,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SoundTriggerMiddlewareLogging
         implements ISoundTriggerMiddlewareInternal, Dumpable {
     public final Supplier mBatteryStatsInternalSupplier;
@@ -45,13 +44,11 @@ public final class SoundTriggerMiddlewareLogging
     public final Deque mDetachedSessionEventLoggers = new LinkedBlockingDeque(4);
     public final AtomicInteger mSessionCount = new AtomicInteger(0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BatteryStatsHolder {
         public static final BatteryStatsInternal INSTANCE =
                 (BatteryStatsInternal) LocalServices.getService(BatteryStatsInternal.class);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackLogging implements ISoundTriggerCallback {
         public final ISoundTriggerCallback mCallbackDelegate;
         public final EventLogger mEventLogger;
@@ -197,7 +194,6 @@ public final class SoundTriggerMiddlewareLogging
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModuleLogging implements ISoundTriggerModule {
         public ISoundTriggerModule mDelegate;
         public EventLogger mEventLogger;
@@ -443,7 +439,6 @@ public final class SoundTriggerMiddlewareLogging
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModulePropertySummary {
         public int mId;
         public String mImplementor;
@@ -459,7 +454,6 @@ public final class SoundTriggerMiddlewareLogging
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceEvent extends EventLogger.Event {
         public final Exception mException;
         public final String mPackageName;
@@ -469,7 +463,6 @@ public final class SoundTriggerMiddlewareLogging
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Type {
             public static final /* synthetic */ Type[] $VALUES;
             public static final Type ATTACH;
@@ -545,7 +538,6 @@ public final class SoundTriggerMiddlewareLogging
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionEvent extends EventLogger.Event {
         public final Exception mException;
         public final Object[] mParams;
@@ -554,7 +546,6 @@ public final class SoundTriggerMiddlewareLogging
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Type {
             public static final /* synthetic */ Type[] $VALUES;
             public static final Type DETACH;

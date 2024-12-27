@@ -4,12 +4,10 @@ import com.android.systemui.qs.tiles.base.actions.QSTileIntentUserInputHandler;
 import com.android.systemui.qs.tiles.base.interactor.QSTileUserActionInteractor;
 import com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AirplaneModeTileUserActionInteractor implements QSTileUserActionInteractor {
     public final AirplaneModeInteractor airplaneModeInteractor;
     public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

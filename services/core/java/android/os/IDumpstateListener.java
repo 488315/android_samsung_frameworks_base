@@ -1,6 +1,5 @@
 package android.os;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IDumpstateListener extends IInterface {
     public static final int BUGREPORT_ERROR_ANOTHER_REPORT_IN_PROGRESS = 5;
     public static final int BUGREPORT_ERROR_INVALID_INPUT = 1;
@@ -10,7 +9,6 @@ public interface IDumpstateListener extends IInterface {
     public static final int BUGREPORT_ERROR_USER_DENIED_CONSENT = 3;
     public static final String DESCRIPTOR = "android.os.IDumpstateListener";
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IDumpstateListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +31,6 @@ public interface IDumpstateListener extends IInterface {
         public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IDumpstateListener {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onFinished = 3;
@@ -41,7 +38,6 @@ public interface IDumpstateListener extends IInterface {
         static final int TRANSACTION_onScreenshotTaken = 4;
         static final int TRANSACTION_onUiIntensiveBugreportDumpsFinished = 5;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IDumpstateListener {
             public IBinder mRemote;
 

@@ -28,7 +28,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecBrightnessSliderController {
     public static final Companion Companion = new Companion(null);
     public static final String TAG = Reflection.getOrCreateKotlinClass(SecBrightnessSliderController.class).getSimpleName();
@@ -81,7 +80,6 @@ public final class SecBrightnessSliderController {
     public boolean sliderEnabled = true;
     public int thumbThreshold = 26;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

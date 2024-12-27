@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Searchables {
     public static final AnonymousClass1 GLOBAL_SEARCH_RANKER = new AnonymousClass1();
     public final Context mContext;
@@ -44,7 +43,6 @@ public final class Searchables {
     public ArraySet mKnownSearchablePackageNames = new ArraySet();
     public final IPackageManager mPm = AppGlobals.getPackageManager();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.search.Searchables$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator

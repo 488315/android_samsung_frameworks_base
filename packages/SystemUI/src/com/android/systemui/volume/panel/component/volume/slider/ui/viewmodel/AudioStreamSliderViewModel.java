@@ -40,7 +40,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AudioStreamSliderViewModel implements SliderViewModel {
     public final int audioStream;
     public final AudioVolumeInteractor audioVolumeInteractor;
@@ -55,7 +54,6 @@ public final class AudioStreamSliderViewModel implements SliderViewModel {
     public final UiEventLogger uiEventLogger;
     public final StateFlowImpl volumeChanges;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.AudioStreamSliderViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ int I$0;
@@ -101,7 +99,6 @@ public final class AudioStreamSliderViewModel implements SliderViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -111,12 +108,10 @@ public final class AudioStreamSliderViewModel implements SliderViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         AudioStreamSliderViewModel create(FactoryAudioStreamWrapper factoryAudioStreamWrapper, CoroutineScope coroutineScope);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FactoryAudioStreamWrapper {
         public final int audioStream;
 
@@ -129,7 +124,6 @@ public final class AudioStreamSliderViewModel implements SliderViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class State implements SliderState {
         public final String a11yClickDescription;
         public final String a11yStateDescription;

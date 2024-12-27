@@ -28,7 +28,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class DNDDetailItems extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Adapter mAdapter;
@@ -42,7 +41,6 @@ public class DNDDetailItems extends FrameLayout {
     public String mSelectedMenu;
     public String mTag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Adapter extends BaseAdapter {
         public /* synthetic */ Adapter(DNDDetailItems dNDDetailItems, int i) {
             this();
@@ -165,11 +163,9 @@ public class DNDDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -211,7 +207,6 @@ public class DNDDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Item {
         public String line1;
         public CheckedTextView ctv = null;

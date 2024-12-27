@@ -4,7 +4,6 @@ import android.app.ActivityThread;
 import android.content.Context;
 import android.view.inputmethod.ImeTracker;
 
-/* compiled from: D8$$SyntheticClass */
 public final /* synthetic */ class InsetsController$$ExternalSyntheticLambda2
         implements ImeTracker.InputMethodLatencyContext {
     @Override // android.view.inputmethod.ImeTracker.InputMethodLatencyContext

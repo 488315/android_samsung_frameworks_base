@@ -28,14 +28,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerStatsSpan {
     public static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
     public final Metadata mMetadata;
     public final List mSections;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Metadata {
         public static final Comparator COMPARATOR =
                 Comparator.comparing(new PowerStatsSpan$Metadata$$ExternalSyntheticLambda0());
@@ -135,7 +133,6 @@ public final class PowerStatsSpan {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Section {
         public final String mType;
 
@@ -148,10 +145,8 @@ public final class PowerStatsSpan {
         public abstract void write(TypedXmlSerializer typedXmlSerializer);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SectionReader {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeFrame {
         public final long duration;
         public final long startMonotonicTime;

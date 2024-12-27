@@ -33,12 +33,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageDexUsage extends AbstractStatsBase {
     static final int MAX_SECONDARY_FILES_PER_OWNER = 100;
     public final Map mPackageUseInfoMap;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexUseInfo {
         public String mClassLoaderContext;
         public boolean mIsUsedByOtherApps;
@@ -89,7 +87,6 @@ public final class PackageDexUsage extends AbstractStatsBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageUseInfo {
         public final Map mDexUseInfoMap;
         public final String mPackageName;

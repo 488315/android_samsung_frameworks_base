@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RefreshRateModeManager {
     public static final HashMap mControllerByToken = new HashMap();
     public Context mContext;
@@ -34,7 +33,6 @@ public final class RefreshRateModeManager {
     public Object mLock;
     public ModeSettingsObserver mModeSettingsObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.mode.RefreshRateModeManager$1, reason: invalid class name */
     public final class AnonymousClass1 implements DisplayManagerInternal.DisplayStateListener {
         public AnonymousClass1() {}
@@ -79,7 +77,6 @@ public final class RefreshRateModeManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeSettingsObserver extends ContentObserver {
         public final Context mContext;
         public final Uri mRefreshRateModeSetting;

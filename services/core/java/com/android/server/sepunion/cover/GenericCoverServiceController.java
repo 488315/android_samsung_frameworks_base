@@ -17,14 +17,12 @@ import com.samsung.android.sepunion.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class GenericCoverServiceController {
     public final PowerManager.WakeLock mDisableLcdOffWakeLock;
     public final GenericPressServiceControllerHandler mHandler;
     public final ArrayList mListeners;
     public final PowerManager.WakeLock mSendPowerKeyWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GenericPressEventListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;
@@ -75,7 +73,6 @@ public final class GenericCoverServiceController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GenericPressServiceControllerHandler extends Handler {
         public GenericPressServiceControllerHandler(Looper looper) {
             super(looper, null, true);
@@ -146,10 +143,8 @@ public final class GenericCoverServiceController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ListenerTypes {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SystemEvents {}
 
     public GenericCoverServiceController(Looper looper, Context context) {

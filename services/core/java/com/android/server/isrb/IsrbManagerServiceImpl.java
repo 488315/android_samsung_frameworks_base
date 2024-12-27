@@ -18,7 +18,6 @@ import android.provider.Settings;
 import android.util.Log;
 import com.samsung.android.isrb.IIsrbManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class IsrbManagerServiceImpl extends IIsrbManager.Stub {
     public boolean mBootComplete;
     public long mBuildtime;
@@ -35,7 +34,6 @@ public final class IsrbManagerServiceImpl extends IIsrbManager.Stub {
     public AnonymousClass1 mReceiver;
     public boolean mSystemReady;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);

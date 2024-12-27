@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PackageDynamicCodeLoading extends AbstractStatsBase {
     static final int MAX_FILES_PER_OWNER = 100;
     public static final Pattern PACKAGE_LINE_PATTERN =
@@ -31,7 +30,6 @@ public final class PackageDynamicCodeLoading extends AbstractStatsBase {
     public final Object mLock;
     public Map mPackageMap;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DynamicCodeFile {
         public final char mFileType;
         public final Set mLoadingPackages;
@@ -50,7 +48,6 @@ public final class PackageDynamicCodeLoading extends AbstractStatsBase {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageDynamicCode {
         public final Map mFileUsageMap;
 

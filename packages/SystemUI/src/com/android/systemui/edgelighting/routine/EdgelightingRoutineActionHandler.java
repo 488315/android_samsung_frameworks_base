@@ -13,7 +13,6 @@ import com.android.systemui.edgelighting.effect.container.EdgeLightingDialog;
 import com.android.systemui.edgelighting.effect.data.EdgeEffectInfo;
 import com.android.systemui.edgelighting.effectservice.EdgeLightingDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgelightingRoutineActionHandler {
     public Context mContext;
     public EdgeLightingDispatcher mController;
@@ -68,7 +67,6 @@ public final class EdgelightingRoutineActionHandler {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ScreenStateReceiver extends BroadcastReceiver {
         public /* synthetic */ ScreenStateReceiver(EdgelightingRoutineActionHandler edgelightingRoutineActionHandler, int i) {
             this();

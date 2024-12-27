@@ -37,7 +37,6 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationCon
 import com.android.server.accessibility.magnification.MagnificationGestureHandler;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class FullScreenMagnificationGestureHandler extends MagnificationGestureHandler {
     public static final boolean DEBUG_DETECTING;
     public static final boolean DEBUG_PANNING_SCALING;
@@ -65,12 +64,10 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
     final SinglePanningState mSinglePanningState;
     final ViewportDraggingState mViewportDraggingState;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$2, reason: invalid class name */
     public final class AnonymousClass2 implements MagnificationLogger {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DelegatingState implements State {
         public long mLastDelegatedDownEventTime;
 
@@ -94,7 +91,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class DetectingState implements State, Handler.Callback {
         public final Context mContext;
         public MotionEventInfo mDelayedEventQueue;
@@ -297,18 +293,15 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class GestureException extends Exception {
         public GestureException(String str) {
             super(str);
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface MagnificationLogger {
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MotionEventInfo {
         public static final Object sLock = new Object();
         public static MotionEventInfo sPool;
@@ -365,7 +358,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OverscrollHandler {
         int mOverscrollState = 0;
         public final PointF mPivotEdge = new PointF(Float.NaN, Float.NaN);
@@ -497,7 +489,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PanningScalingState extends GestureDetector.SimpleOnGestureListener implements ScaleGestureDetector.OnScaleGestureListener, State {
         static final float CHECK_DETECTING_PASS_PERSISTED_SCALE_THRESHOLD = 0.2f;
         static final float PASSING_PERSISTED_SCALE_THRESHOLD = 0.01f;
@@ -723,7 +714,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenStateReceiver extends BroadcastReceiver {
         public final Context mContext;
         public final FullScreenMagnificationGestureHandler mGestureHandler;
@@ -739,7 +729,6 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SinglePanningState extends GestureDetector.SimpleOnGestureListener implements State {
         public final GestureDetector mScrollGestureDetector;
         public final /* synthetic */ FullScreenMagnificationGestureHandler this$0;
@@ -802,12 +791,10 @@ public final class FullScreenMagnificationGestureHandler extends MagnificationGe
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface State {
         void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ViewportDraggingState implements State {
         public boolean mLastMoveOutsideMagnifiedRegion;
         protected float mScaleToRecoverAfterDraggingEnd = Float.NaN;

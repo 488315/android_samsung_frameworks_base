@@ -5,7 +5,6 @@ import android.service.timezone.ITimeZoneProvider;
 
 import com.android.server.servicewatcher.ServiceWatcher$BinderOperation;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class RealLocationTimeZoneProviderProxy$$ExternalSyntheticLambda0
         implements ServiceWatcher$BinderOperation {
     public final /* synthetic */ TimeZoneProviderRequest f$0;

@@ -6,7 +6,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnimationBuilder {
     public ImageView imageView;
     public float r = 0.0f;
@@ -43,7 +42,6 @@ public final class AnimationBuilder {
     public boolean isAnimationStarted = false;
     public TimeInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ParabolaEvaluator implements TypeEvaluator {
         public final float key;
         public final float pX;
@@ -63,7 +61,6 @@ public final class AnimationBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ParabolaEvaluatorReverse implements TypeEvaluator {
         public final float key;
         public final float pX;
@@ -84,7 +81,6 @@ public final class AnimationBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SinXEvaluator implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -105,7 +101,6 @@ public final class AnimationBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SinXEvaluatorReverse implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -127,7 +122,6 @@ public final class AnimationBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SinYEvaluator implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -148,7 +142,6 @@ public final class AnimationBuilder {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SinYEvaluatorReverse implements TypeEvaluator {
         public final float adjust;
         public final float key;

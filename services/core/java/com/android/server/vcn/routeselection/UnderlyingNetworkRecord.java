@@ -6,14 +6,12 @@ import android.net.NetworkCapabilities;
 
 import java.util.Objects;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UnderlyingNetworkRecord {
     public final boolean isBlocked;
     public final LinkProperties linkProperties;
     public final Network network;
     public final NetworkCapabilities networkCapabilities;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Builder {
         public boolean mIsBlocked;
         public LinkProperties mLinkProperties;

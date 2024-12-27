@@ -19,7 +19,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class SnackbarScaffoldKt {
     /* JADX WARN: Type inference failed for: r5v1, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$1, kotlin.jvm.internal.Lambda] */
     /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt$SnackbarScaffold$2, kotlin.jvm.internal.Lambda] */

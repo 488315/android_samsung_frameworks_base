@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TouchExplorer extends BaseEventStreamTransformation
         implements GestureManifold.Listener {
     public static final boolean DEBUG = Log.isLoggable("TouchExplorer", 3);
@@ -55,7 +54,6 @@ public final class TouchExplorer extends BaseEventStreamTransformation
     public Region mTouchExplorationPassthroughRegion;
     public final int mTouchSlop;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExitGestureDetectionModeDelayed implements Runnable {
         public ExitGestureDetectionModeDelayed() {}
 
@@ -70,7 +68,6 @@ public final class TouchExplorer extends BaseEventStreamTransformation
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SendAccessibilityEventDelayed implements Runnable {
         public int mDelay;
         public final int mEventType;
@@ -101,7 +98,6 @@ public final class TouchExplorer extends BaseEventStreamTransformation
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SendHoverExitDelayed implements Runnable {
         public final /* synthetic */ int $r8$classId;
         public int mPointerIdBits;

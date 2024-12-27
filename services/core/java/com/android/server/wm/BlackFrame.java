@@ -8,14 +8,12 @@ import com.android.internal.protolog.ProtoLogImpl_54989576;
 
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BlackFrame {
     public final BlackSurface[] mBlackSurfaces;
     public final Rect mInnerRect;
     public final Rect mOuterRect;
     public final Supplier mTransactionFactory;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BlackSurface {
         public final int left;
         public final SurfaceControl surface;

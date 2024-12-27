@@ -26,7 +26,6 @@ import java.io.OutputStream;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MusicRecognitionManagerPerUserService extends AbstractPerUserSystemService
         implements AbstractRemoteService.VultureCallback {
     public final AppOpsManager mAppOpsManager;
@@ -35,7 +34,6 @@ public final class MusicRecognitionManagerPerUserService extends AbstractPerUser
     public RemoteMusicRecognitionService mRemoteService;
     public ServiceInfo mServiceInfo;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MusicRecognitionServiceCallback
             extends IMusicRecognitionServiceCallback.Stub {
         public final IMusicRecognitionManagerCallback mClientCallback;

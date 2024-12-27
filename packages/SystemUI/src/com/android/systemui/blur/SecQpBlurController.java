@@ -41,7 +41,6 @@ import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQpBlurController implements ShadeExpansionListener, StatusBarStateController.StateListener, ConfigurationController.ConfigurationListener, SettingsHelper.OnChangedCallback, PanelScreenShotLogger.LogProvider, LockscreenShadeTransitionController.Callback {
     public final int backgroundColorId;
     public float mAnimatedFraction;
@@ -71,7 +70,6 @@ public final class SecQpBlurController implements ShadeExpansionListener, Status
     public final SecQpBlurController$$ExternalSyntheticLambda0 mUpdateBlurCallback;
     public float mWindowBlurRadius;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.blur.SecQpBlurController$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {

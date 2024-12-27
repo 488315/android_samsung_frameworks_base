@@ -9,7 +9,6 @@ import com.android.internal.infra.ServiceConnector;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class RemoteCredentialService$$ExternalSyntheticLambda0 implements ServiceConnector.Job {
     public final /* synthetic */ int $r8$classId = 0;
     public final /* synthetic */ RemoteCredentialService f$0;

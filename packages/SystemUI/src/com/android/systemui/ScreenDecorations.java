@@ -80,7 +80,6 @@ import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScreenDecorations implements ConfigurationController.ConfigurationListener, Dumpable {
     public CameraAvailabilityListener mCameraListener;
     public final CameraProtectionLoader mCameraProtectionLoader;
@@ -161,7 +160,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
     };
     public final int mFaceScanningViewId = R.id.face_scanning_anim;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.ScreenDecorations$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {
@@ -195,21 +193,18 @@ public final class ScreenDecorations implements ConfigurationController.Configur
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.ScreenDecorations$2, reason: invalid class name */
     public final class AnonymousClass2 implements PrivacyDotViewController.ShowingListener {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.ScreenDecorations$3, reason: invalid class name */
     public final class AnonymousClass3 implements PrivacyDotViewController.CreateListener {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class DisplayCutoutView extends DisplayCutoutBaseView {
         public final Rect mBoundingRect;
         public final List mBounds;
@@ -302,7 +297,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RestartingPreDrawListener implements ViewTreeObserver.OnPreDrawListener {
         public final Point mTargetDisplaySize;
         public final int mTargetRotation;
@@ -334,7 +328,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ValidatingPreDrawListener implements ViewTreeObserver.OnPreDrawListener {
         public final View mView;
 
@@ -1283,7 +1276,6 @@ public final class ScreenDecorations implements ConfigurationController.Configur
         this.mExecutor.execute(new ScreenDecorations$$ExternalSyntheticLambda2(this, view));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.ScreenDecorations$4, reason: invalid class name */
     public final class AnonymousClass4 implements ComponentCallbacks {
         public AnonymousClass4() {

@@ -13,7 +13,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class UnfoldLatencyTracker implements ScreenLifecycle.Observer, UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final ContentResolver contentResolver;
     public final Context context;
@@ -27,7 +26,6 @@ public final class UnfoldLatencyTracker implements ScreenLifecycle.Observer, Unf
     public final Executor uiBgExecutor;
     public boolean unfoldInProgress;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FoldStateListener extends DeviceStateManager.FoldStateListener {
         public FoldStateListener(final UnfoldLatencyTracker unfoldLatencyTracker, Context context) {
             super(context, new Consumer() { // from class: com.android.systemui.unfold.UnfoldLatencyTracker.FoldStateListener.1

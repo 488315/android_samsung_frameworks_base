@@ -22,7 +22,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class LockSettingsStrongAuth {
     public static final boolean DEBUG;
     protected static final String NON_STRONG_BIOMETRIC_IDLE_TIMEOUT_ALARM_TAG =
@@ -346,7 +345,6 @@ public class LockSettingsStrongAuth {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {
         public AlarmManager getAlarmManager(Context context) {
             return (AlarmManager) context.getSystemService(AlarmManager.class);
@@ -369,7 +367,6 @@ public class LockSettingsStrongAuth {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NonStrongBiometricIdleTimeoutAlarmListener
             implements AlarmManager.OnAlarmListener {
         public final int mUserId;
@@ -384,7 +381,6 @@ public class LockSettingsStrongAuth {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class NonStrongBiometricTimeoutAlarmListener implements AlarmManager.OnAlarmListener {
         public final int mUserId;
 
@@ -398,7 +394,6 @@ public class LockSettingsStrongAuth {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class StrongAuthTimeoutAlarmListener implements AlarmManager.OnAlarmListener {
         public long mLatestStrongAuthTime;
         public final int mUserId;

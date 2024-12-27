@@ -2,10 +2,8 @@ package com.android.systemui.volume.panel.component.volume.ui.viewmodel;
 
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface SlidersExpandableViewModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Expandable implements SlidersExpandableViewModel {
         public final boolean isExpanded;
 
@@ -29,7 +27,6 @@ public interface SlidersExpandableViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Fixed implements SlidersExpandableViewModel {
         public static final Fixed INSTANCE = new Fixed();
 
@@ -49,7 +46,6 @@ public interface SlidersExpandableViewModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Unavailable implements SlidersExpandableViewModel {
         public static final Unavailable INSTANCE = new Unavailable();
 

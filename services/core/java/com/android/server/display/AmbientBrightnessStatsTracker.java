@@ -17,7 +17,6 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AmbientBrightnessStatsTracker {
     static final int MAX_DAYS_TO_TRACK = 7;
     public int mCurrentUserId;
@@ -51,7 +50,6 @@ public final class AmbientBrightnessStatsTracker {
                     });
     public float mCurrentAmbientBrightness = -1.0f;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AmbientBrightnessStats {
         public Map mStats = new HashMap();
 
@@ -235,15 +233,12 @@ public final class AmbientBrightnessStatsTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
         long elapsedTimeMillis();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Timer {
         public final Clock clock;
         public long startTimeMillis;

@@ -9,7 +9,6 @@ import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOu
 import com.android.systemui.R;
 import com.android.systemui.qs.tiles.UserDetailItemView;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class KeyguardUserDetailItemView extends UserDetailItemView {
     public static final /* synthetic */ int $r8$clinit = 0;
     public float mDarkAmount;

@@ -3,10 +3,8 @@ package com.android.systemui.mediaprojection.taskswitcher.domain.model;
 import android.app.ActivityManager;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface TaskSwitchState {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotProjectingTask implements TaskSwitchState {
         public static final NotProjectingTask INSTANCE = new NotProjectingTask();
 
@@ -14,7 +12,6 @@ public interface TaskSwitchState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TaskSwitched implements TaskSwitchState {
         public final ActivityManager.RunningTaskInfo foregroundTask;
         public final ActivityManager.RunningTaskInfo projectedTask;
@@ -44,7 +41,6 @@ public interface TaskSwitchState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TaskUnchanged implements TaskSwitchState {
         public static final TaskUnchanged INSTANCE = new TaskUnchanged();
 

@@ -36,7 +36,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MusicShareDeviceController extends DeviceController {
     public static final Companion Companion = new Companion(null);
     public final AudioManager audioManager;
@@ -48,7 +47,6 @@ public final class MusicShareDeviceController extends DeviceController {
     public final LocalBluetoothManager localBluetoothManager;
     public Job updateJob;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -110,7 +108,6 @@ public final class MusicShareDeviceController extends DeviceController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -161,7 +158,6 @@ public final class MusicShareDeviceController extends DeviceController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         int label;
@@ -224,7 +220,6 @@ public final class MusicShareDeviceController extends DeviceController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function2 {
         int label;
@@ -279,7 +274,6 @@ public final class MusicShareDeviceController extends DeviceController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

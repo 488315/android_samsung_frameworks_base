@@ -53,7 +53,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppProfiler {
     public boolean mAllowLowerMemLevel;
     public Map mAppAgentMap;
@@ -93,7 +92,6 @@ public final class AppProfiler {
     public final ArrayList mPendingPssOrRssProfiles = new ArrayList();
     public final AtomicInteger mActivityStartingNesting = new AtomicInteger(0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.AppProfiler$2, reason: invalid class name */
     public final class AnonymousClass2 implements Comparator {
         @Override // java.util.Comparator
@@ -118,7 +116,6 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgHandler extends Handler {
         public BgHandler(Looper looper) {
             super(looper);
@@ -191,7 +188,6 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CachedAppsWatermarkData {
         public int mAverageFrozenTimeInSeconds;
         public int mBinderProxySnapshot;
@@ -336,7 +332,6 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpuBinder extends Binder {
         public final AnonymousClass1 mPriorityDumper =
                 new PriorityDump
@@ -382,10 +377,8 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnTrimReclaimer extends UnifiedMemoryReclaimer.Reclaimer {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessCpuThread extends Thread {
         public ProcessCpuThread() {
             super("CpuTracker");
@@ -429,7 +422,6 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProfileData {
         public String mProfileApp = null;
         public ProcessRecord mProfileProc = null;
@@ -506,7 +498,6 @@ public final class AppProfiler {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RecordPssRunnable implements Runnable {
         public final ContentResolver mContentResolver;
         public final Uri mDumpUri;

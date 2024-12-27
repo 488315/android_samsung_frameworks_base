@@ -5,7 +5,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 
 import java.util.Arrays;
 
-/* compiled from: WebVttRenderer.java */
 class TextTrackCue extends SubtitleTrack.Cue {
     static final int ALIGNMENT_END = 202;
     static final int ALIGNMENT_LEFT = 203;

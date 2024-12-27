@@ -11,7 +11,6 @@ import android.util.Pair;
 
 import java.util.PriorityQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
     public final AlarmPriorityQueue mAlarmPriorityQueue;
     public final String mAlarmTag;
@@ -27,7 +26,6 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
     public long mTriggerTimeElapsed;
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class AlarmPriorityQueue extends PriorityQueue {
         public static final AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0
                 sTimeComparator = new AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0();
@@ -49,7 +47,6 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {}
 
     public AlarmQueue(Context context, Looper looper, String str, String str2, boolean z, long j) {

@@ -69,7 +69,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ActivityStarter {
     public static final long REACTIVE_COOLDOWN_TIME;
     public static KMTDManager mtdManager;
@@ -126,7 +125,6 @@ public final class ActivityStarter {
     Request mRequest = new Request();
     public boolean mIsFreeformLaunching = false;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultFactory implements Factory {
         public ActivityStartController mController;
         public ActivityStartInterceptor mInterceptor;
@@ -160,7 +158,6 @@ public final class ActivityStarter {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Factory {
         ActivityStarter obtain();
 
@@ -169,7 +166,6 @@ public final class ActivityStarter {
         void setController(ActivityStartController activityStartController);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Request {
         public ActivityInfo activityInfo;
         public SafeActivityOptions activityOptions;

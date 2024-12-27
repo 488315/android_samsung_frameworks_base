@@ -36,14 +36,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class BrightnessMappingStrategy {
     public static final Plog$SystemPlog PLOG = new Plog$SystemPlog();
     public static int sScreenExtendedBrightnessRangeMaximum;
     public boolean mLoggingEnabled;
     public final UserOffsetManager mUserOffsetManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class PhysicalMappingStrategy extends BrightnessMappingStrategy {
         public static final SimpleDateFormat FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
         public final Spline mAdjustedNitsToBrightnessSpline;
@@ -424,7 +422,6 @@ public abstract class BrightnessMappingStrategy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SimpleMappingStrategy extends BrightnessMappingStrategy {
         public float mAutoBrightnessAdjustment;
         public final float[] mBrightness;
@@ -647,14 +644,12 @@ public abstract class BrightnessMappingStrategy {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserOffsetManager {
         public static boolean sDebugLogging;
         public Pair mCurve;
         public float mLastAddedLux;
         public ArrayList mUserPoints;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UserPoint implements Comparable {
             public final float mBrightness;
             public final float mBrightnessOffset;

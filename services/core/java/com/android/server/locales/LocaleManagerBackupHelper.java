@@ -30,7 +30,6 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class LocaleManagerBackupHelper {
     public static final Duration STAGE_DATA_RETENTION_PERIOD = Duration.ofDays(3);
     public final File mArchivedPackagesFile;
@@ -43,7 +42,6 @@ public final class LocaleManagerBackupHelper {
     public final Object mStagedDataLock = new Object();
     public final UserMonitor mUserMonitor;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalesInfo {
         public final String mLocales;
         public final boolean mSetFromDelegate;
@@ -54,7 +52,6 @@ public final class LocaleManagerBackupHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserMonitor extends BroadcastReceiver {
         public UserMonitor() {}
 

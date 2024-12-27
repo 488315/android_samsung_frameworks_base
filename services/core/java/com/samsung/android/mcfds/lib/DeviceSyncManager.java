@@ -14,7 +14,6 @@ import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
 import com.samsung.android.server.continuity.McfDeviceSyncManager;
 import com.samsung.android.server.continuity.PreconditionObserver;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceSyncManager {
     public final Context mContext;
     public McfDeviceSyncManager.AnonymousClass3 mListener;

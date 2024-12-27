@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CarrierBasedSatelliteViewModelImpl implements MobileIconViewModelCommon {
     public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 activityContainerVisible;
     public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 activityIcon;
@@ -49,12 +48,10 @@ public final class CarrierBasedSatelliteViewModelImpl implements MobileIconViewM
         final ReadonlyStateFlow readonlyStateFlow = mobileIconInteractorImpl.isSimOn;
         Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CarrierBasedSatelliteViewModelImpl$special$$inlined$map$1
 
-            /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CarrierBasedSatelliteViewModelImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
 
-                /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
                 /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CarrierBasedSatelliteViewModelImpl$special$$inlined$map$1$2$1, reason: invalid class name */
                 public final class AnonymousClass1 extends ContinuationImpl {
                     Object L$0;

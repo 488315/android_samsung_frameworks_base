@@ -11,13 +11,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecurityViewFlipperController extends ViewController {
     public final List mChildren;
     public final KeyguardInputViewController.Factory mKeyguardSecurityViewControllerFactory;
     public final LayoutInflater mLayoutInflater;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecurityViewFlipperController$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -88,7 +86,6 @@ public final class KeyguardSecurityViewFlipperController extends ViewController 
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface OnViewInflatedCallback {
         void onViewInflated(KeyguardInputViewController keyguardInputViewController);
     }

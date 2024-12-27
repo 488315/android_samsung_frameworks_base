@@ -36,7 +36,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class AppFunctionAgentPolicyManager {
     public final AppFunctionAgentPolicyCipher mAppFunctionAgentPolicyCipher;
     public final Context mContext;
@@ -55,7 +54,6 @@ public final class AppFunctionAgentPolicyManager {
     public final Object mLock = new Object();
     public String mScpmToken = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.appfunctions.agentpolicy.AppFunctionAgentPolicyManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {}
@@ -210,7 +208,6 @@ public final class AppFunctionAgentPolicyManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AgentPolicyInfo {
         public String policyVersion = "unknown";
         public final List trustedAgentList = new ArrayList();

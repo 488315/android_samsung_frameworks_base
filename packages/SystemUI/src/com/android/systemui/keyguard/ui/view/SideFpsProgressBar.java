@@ -3,7 +3,6 @@ package com.android.systemui.keyguard.ui.view;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SideFpsProgressBar {
     public final LayoutInflater layoutInflater;
     public final WindowManager.LayoutParams overlayViewParams;

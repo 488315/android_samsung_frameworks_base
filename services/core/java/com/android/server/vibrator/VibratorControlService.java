@@ -22,7 +22,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VibratorControlService extends IVibratorControlService.Stub {
     public static final DateTimeFormatter DEBUG_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
@@ -34,7 +33,6 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
     public final VibrationScaler mVibrationScaler;
     public final VibratorControllerHolder mVibratorControllerHolder;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationParamRequest {
         public final int uid;
         public final CompletableFuture future = new CompletableFuture();
@@ -46,12 +44,10 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationParamsRecords extends GroupedAggregatedLogRecords {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         final class Operation {
             public static final /* synthetic */ Operation[] $VALUES;
             public static final Operation CLEAR;
@@ -97,7 +93,6 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VibrationScaleParamRecord
             implements GroupedAggregatedLogRecords.SingleLogRecord {
         public final long mCreateTime;

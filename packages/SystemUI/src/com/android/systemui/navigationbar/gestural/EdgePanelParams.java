@@ -12,7 +12,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.ClosedFloatRange;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EdgePanelParams {
     public BackIndicatorDimens activeIndicator;
     public PathInterpolator activeWidthInterpolator;
@@ -40,7 +39,6 @@ public final class EdgePanelParams {
     public float swipeProgressThreshold;
     public PathInterpolator verticalTranslationInterpolator;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ArrowDimens {
         public final float alpha;
         public final Step alphaInterpolator;
@@ -148,7 +146,6 @@ public final class EdgePanelParams {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BackgroundDimens {
         public final float alpha;
         public final SpringForce alphaSpring;
@@ -334,7 +331,6 @@ public final class EdgePanelParams {
         this.fullyStretchedIndicator = new BackIndicatorDimens(Float.valueOf(this.resources.getDimension(R.dimen.navigation_edge_stretch_margin)), getDimenFloat(R.dimen.navigation_edge_stretch_scale), f2, new ArrowDimens(Float.valueOf(this.resources.getDimension(R.dimen.navigation_edge_stretched_arrow_length)), Float.valueOf(this.resources.getDimension(R.dimen.navigation_edge_stretched_arrow_height)), 1.0f, null, null, null, null, 64, null), new BackgroundDimens(Float.valueOf(this.resources.getDimension(R.dimen.navigation_edge_stretch_background_width)), this.resources.getDimension(R.dimen.navigation_edge_stretch_background_height), this.resources.getDimension(R.dimen.navigation_edge_stretch_edge_corners), this.resources.getDimension(R.dimen.navigation_edge_stretch_far_corners), 1.0f, null, null, null, null, null), null, null, null, 4, null);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BackIndicatorDimens {
         public final ArrowDimens arrowDimens;
         public final BackgroundDimens backgroundDimens;

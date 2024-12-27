@@ -20,7 +20,6 @@ import com.samsung.android.server.audio.utils.PlaybackUtils;
 
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VolumeMonitorService {
     public static final Uri authority =
             Uri.parse("content://com.sec.android.app.volumemonitorprovider.VolumeMonitorProvider");
@@ -36,10 +35,8 @@ public final class VolumeMonitorService {
     public boolean mAvrcpAbsVolSupported = false;
     public int mState = 0;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VolumeMonitorThread extends Thread {
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class VolumeMonitorHandler extends Handler {
             public VolumeMonitorHandler() {}
 

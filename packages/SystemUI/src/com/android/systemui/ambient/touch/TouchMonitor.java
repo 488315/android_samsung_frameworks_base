@@ -28,7 +28,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TouchMonitor {
     public final HashSet mActiveTouchSessions;
     public final Executor mBackgroundExecutor;
@@ -50,12 +49,10 @@ public final class TouchMonitor {
     public final String TAG = "DreamOverlayTouchMonitor";
     public Rect mExclusionRect = null;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Evaluator {
         boolean evaluate(GestureDetector.OnGestureListener onGestureListener);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TouchSessionImpl {
         public final Rect mBounds;
         public final TouchSessionImpl mPredecessor;

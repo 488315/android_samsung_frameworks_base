@@ -7,7 +7,6 @@ import com.android.internal.telecom.IDeviceIdleControllerAdapter;
 import com.android.internal.telecom.IInternalServiceRetriever;
 import com.android.server.DeviceIdleInternal;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class InternalServiceRepository extends IInternalServiceRetriever.Stub {
     public final DeviceIdleInternal mDeviceIdleController;
     public final AnonymousClass1 mDeviceIdleControllerAdapter =

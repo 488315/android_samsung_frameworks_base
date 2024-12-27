@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UnknownSourceAppManager {
     public final Handler mHandler;
     public final PackageSettingsDelegator mSettingsDelegator;
@@ -30,7 +29,6 @@ public final class UnknownSourceAppManager {
     public final IPackageManager mPackageManager = AppGlobals.getPackageManager();
     public final ASKSHelper mASKSManagerHelper = new ASKSHelper();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Helper {
         public static void suspendUnknownSourceAppsForAllUsers(
                 Context context, String[] strArr, boolean z) {
@@ -62,7 +60,6 @@ public final class UnknownSourceAppManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageSettingsDelegator {
         public final Supplier mGetPackagesLocked;
 

@@ -12,7 +12,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CompletableDeferred;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class WidgetConfigurationController implements WidgetConfigurator {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final ComponentActivity activity;
@@ -20,7 +19,6 @@ public final class WidgetConfigurationController implements WidgetConfigurator {
     public final CoroutineDispatcher bgDispatcher;
     public final ReadWriteProperty result$delegate = ReferenceExtKt.nullableAtomicReference$default(null, 1, null);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -30,7 +28,6 @@ public final class WidgetConfigurationController implements WidgetConfigurator {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         WidgetConfigurationController create(ComponentActivity componentActivity);
     }

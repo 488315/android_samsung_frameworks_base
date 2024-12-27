@@ -39,7 +39,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MultipackEngine extends WallpaperEngine {
     public final String TAG;
     public final WallpaperEngineCallback mCallback;
@@ -64,7 +63,6 @@ public final class MultipackEngine extends WallpaperEngine {
     public final SystemWallpaperColors mSystemWallpaperColors;
     public final Handler mWorkerHandler;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$1, reason: invalid class name */
     public final class AnonymousClass1 implements Consumer {
         public AnonymousClass1() {
@@ -83,7 +81,6 @@ public final class MultipackEngine extends WallpaperEngine {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$2, reason: invalid class name */
     public final class AnonymousClass2 implements Consumer {
         public AnonymousClass2() {

@@ -72,7 +72,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TimeZone;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ColorDisplayService extends SystemService {
     public static final ColorMatrixEvaluator COLOR_MATRIX_EVALUATOR;
     public static final float[] MATRIX_GRAYSCALE;
@@ -92,7 +91,6 @@ public final class ColorDisplayService extends SystemService {
     public final ReduceBrightColorsTintController mReduceBrightColorsTintController;
     public ContentObserver mUserSetupObserver;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class BinderService extends IColorDisplayManager.Stub {
         public BinderService() {}
 
@@ -529,7 +527,6 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ColorDisplayServiceInternal {
         public ColorDisplayServiceInternal() {}
 
@@ -591,7 +588,6 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ColorMatrixEvaluator implements TypeEvaluator {
         public final float[] mResultMatrix = new float[16];
 
@@ -611,10 +607,8 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ColorTransformController {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CustomNightDisplayAutoMode extends NightDisplayAutoMode
             implements AlarmManager.OnAlarmListener {
         public final AlarmManager mAlarmManager;
@@ -743,7 +737,6 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class NightDisplayAutoMode {
         public abstract void onActivated(boolean z);
 
@@ -756,7 +749,6 @@ public final class ColorDisplayService extends SystemService {
         public abstract void onStop();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NightDisplayTintController extends TintController {
         public Integer mColorTemp;
         public Boolean mIsAvailable;
@@ -899,7 +891,6 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TintHandler extends Handler {
         public TintHandler(Looper looper) {
             super(looper, null, true);
@@ -1127,13 +1118,11 @@ public final class ColorDisplayService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TintValueAnimator extends ValueAnimator {
         public float[] max;
         public float[] min;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TwilightNightDisplayAutoMode extends NightDisplayAutoMode
             implements TwilightListener {
         public LocalDateTime mLastActivatedTime;

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CameraKillModeManager extends CameraManager.SemCameraDeviceStateCallback {
     public static int CAMERA_DHA_VER = BgAppPropManager.getSlmkPropertyInt("cam_dha_ver", "0");
     public LinkedHashMap dha_camera_map;
@@ -27,7 +26,6 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
     public float mMinFreeMax;
     public float mSzDHAThresholdRate;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class CameraKillModeManagerLazyHolder {
         public static final CameraKillModeManager INSTANCE;
         public static boolean isinitClass;
@@ -49,7 +47,6 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraKillModeOperator {
         public int cameraState;
         public int prevCameraState;

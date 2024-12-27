@@ -122,7 +122,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class UserController implements Handler.Callback {
     public volatile boolean mAllowUserUnlocking;
     public final SparseIntArray mCompletedEventTypes;
@@ -159,7 +158,6 @@ public final class UserController implements Handler.Callback {
     public volatile int mTargetUserId = -10000;
     public final ArrayDeque mPendingTargetUserIds = new ArrayDeque();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.UserController$4, reason: invalid class name */
     public final class AnonymousClass4 {
         public final /* synthetic */ int val$userStartMode;
@@ -169,7 +167,6 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.UserController$5, reason: invalid class name */
     public final class AnonymousClass5 extends IIntentReceiver.Stub {
         public final /* synthetic */ int $r8$classId = 0;
@@ -209,14 +206,12 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.UserController$8, reason: invalid class name */
     public final class AnonymousClass8 extends IIntentReceiver.Stub {
         public final void performReceive(Intent intent, int i, String str, Bundle bundle, boolean z, boolean z2, int i2) {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
         public PowerManagerInternal mPowerManagerInternal;
         public final ActivityManagerService mService;
@@ -225,7 +220,6 @@ public final class UserController implements Handler.Callback {
         public UserSwitchingDialog mUserSwitchingDialog;
         public final Object mUserSwitchingDialogLock = new Object();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.am.UserController$Injector$1, reason: invalid class name */
         public final class AnonymousClass1 extends IIntentReceiver.Stub {
             public final PreBootBroadcaster$1 mHandler;
@@ -443,7 +437,6 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingUserStart {
         public final IProgressListener unlockListener;
         public final int userId;
@@ -460,7 +453,6 @@ public final class UserController implements Handler.Callback {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserProgressListener extends IProgressListener.Stub {
         public volatile long mUnlockStarted;
 

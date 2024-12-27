@@ -13,7 +13,6 @@ import com.android.systemui.audio.soundcraft.viewbinding.audioeffect.AudioEffect
 import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseToggleViewModel;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
     public final AudioEffectToggleItemViewBinding binding;
     public final LifecycleOwner lifecycleOwner;

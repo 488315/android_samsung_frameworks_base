@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone;
 import com.android.systemui.shade.BaseShadeControllerImpl;
 import com.android.systemui.statusbar.notification.collection.NotifCollection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final /* synthetic */ class StatusBarNotificationActivityStarter$$ExternalSyntheticLambda6 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ StatusBarNotificationActivityStarter f$0;

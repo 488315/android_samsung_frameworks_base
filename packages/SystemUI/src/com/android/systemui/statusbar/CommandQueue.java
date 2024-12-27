@@ -52,7 +52,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class CommandQueue extends IStatusBar.Stub implements CallbackController {
     public final ArrayList mCallbacks;
     public final SparseArray mDisplayDisabled;
@@ -65,7 +64,6 @@ public final class CommandQueue extends IStatusBar.Stub implements CallbackContr
     public final Lazy mPowerInteractor;
     public final CommandRegistry mRegistry;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public /* synthetic */ H(CommandQueue commandQueue, Looper looper, int i) {
             this(looper);
@@ -1637,7 +1635,6 @@ public final class CommandQueue extends IStatusBar.Stub implements CallbackContr
         disable(i, i2, i3, true);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callbacks {
         default void animateExpandNotificationsPanel() {
         }

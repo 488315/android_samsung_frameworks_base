@@ -8,14 +8,12 @@ import com.android.systemui.Flags;
 import com.android.systemui.LsRune;
 import java.util.HashMap;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface WakeLock {
     public static final int DEFAULT_LEVELS_AND_FLAGS;
     public static final long DEFAULT_MAX_TIMEOUT = 20000;
     public static final String REASON_WRAP = "wrap";
     public static final String TAG = "WakeLock";
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.util.wakelock.WakeLock$1, reason: invalid class name */
     class AnonymousClass1 implements WakeLock {
         private final HashMap<String, Integer> mActiveClients = new HashMap<>();
@@ -77,7 +75,6 @@ public interface WakeLock {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class Builder {
         public static final long NO_TIMEOUT = -1;
         private final Context mContext;

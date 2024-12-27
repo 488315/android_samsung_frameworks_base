@@ -84,7 +84,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListener<PluginLock> {
     private static final String FACE_WIDGET = "face_widget";
     private static final String INDICATION_TEXT = "indication_text_view";

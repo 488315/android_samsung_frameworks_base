@@ -12,7 +12,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceStateController {
     public final int mConcurrentDisplayDeviceState;
     public int mCurrentState;
@@ -28,7 +27,6 @@ public final class DeviceStateController {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceState {
         public static final /* synthetic */ DeviceState[] $VALUES;
         public static final DeviceState CONCURRENT;

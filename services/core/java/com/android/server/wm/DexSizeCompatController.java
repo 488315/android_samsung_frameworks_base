@@ -10,14 +10,12 @@ import com.samsung.android.core.SizeCompatInfo;
 
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexSizeCompatController {
     public float mDefaultScale = 0.72f;
     public float mAspectRatioScale = 0.72f;
     public final LaunchParamsController.LaunchParams mTmpParams =
             new LaunchParamsController.LaunchParams();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexSizeCompatPolicy {
         public boolean mEnabled;
         public final int mHeight;
@@ -325,7 +323,6 @@ public final class DexSizeCompatController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LazyHolder {
         public static final DexSizeCompatController sInstance = new DexSizeCompatController();
     }

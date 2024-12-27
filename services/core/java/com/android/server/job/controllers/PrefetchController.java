@@ -32,7 +32,6 @@ import java.io.PrintWriter;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PrefetchController extends StateController {
     public static final boolean DEBUG;
     public AppWidgetManager mAppWidgetManager;
@@ -47,13 +46,11 @@ public final class PrefetchController extends StateController {
     public final SparseArrayMap mTrackedJobs;
     public final UsageStatsManagerInternal mUsageStatsManagerInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.controllers.PrefetchController$1, reason: invalid class name */
     public final class AnonymousClass1 {
         public AnonymousClass1() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class PcConstants {
         static final String KEY_LAUNCH_TIME_ALLOWANCE_MS = "pc_launch_time_allowance_ms";
         static final String KEY_LAUNCH_TIME_THRESHOLD_MS = "pc_launch_time_threshold_ms";
@@ -64,7 +61,6 @@ public final class PrefetchController extends StateController {
         public PcConstants() {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PcHandler extends Handler {
         public PcHandler(Looper looper) {
             super(looper);
@@ -166,10 +162,8 @@ public final class PrefetchController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PrefetchChangedListener {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThresholdAlarmListener extends AlarmQueue {
         public ThresholdAlarmListener(Context context, Looper looper) {
             super(context, looper, "*job.prefetch*", "Prefetch threshold", false, 360000L);

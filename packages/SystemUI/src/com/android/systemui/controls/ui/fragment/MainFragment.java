@@ -46,7 +46,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MainFragment extends Fragment {
     public BadgeObserver badgeObserver;
     public final BadgeSubject badgeSubject;
@@ -63,7 +62,6 @@ public final class MainFragment extends Fragment {
     public final SALogger saLogger;
     public View view;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

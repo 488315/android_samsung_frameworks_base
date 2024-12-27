@@ -28,7 +28,6 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class IQIManager {
     private static final String ACTION_SERVICE_FORCE_STOPPED =
             "com.att.iqi.action.SERVICE_FORCE_STOPPED";
@@ -89,7 +88,6 @@ public class IQIManager {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class MessageDispatcherCallback implements Handler.Callback {
         public static final int MSG_ON_METRIC_QUERIED = 1;
         public static final int MSG_ON_METRIC_SOURCED = 2;
@@ -243,22 +241,18 @@ public class IQIManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface MetricQueryCallback {
         void onMetricQueried(Metric.ID id, ByteBuffer byteBuffer);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface MetricSourcingListener {
         void onMetricSourcing(Metric.ID id, ByteBuffer byteBuffer);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProfileChangeListener {
         void onProfileChanged();
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ServiceStateChangeListener {
         void onServiceChange(boolean z);
     }

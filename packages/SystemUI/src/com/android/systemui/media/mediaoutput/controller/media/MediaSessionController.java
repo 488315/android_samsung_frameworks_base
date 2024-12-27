@@ -45,7 +45,6 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaSessionController extends SessionController {
     public final Lazy appName$delegate;
     public final MediaSessionController$callback$1 callback;
@@ -57,12 +56,10 @@ public final class MediaSessionController extends SessionController {
     public final Lazy resources$delegate;
     public int thumbnailNullCount;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.media.MediaSessionController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.media.mediaoutput.controller.media.MediaSessionController$1$1, reason: invalid class name and collision with other inner class name */
         final class C01491 extends SuspendLambda implements Function2 {
             int label;
@@ -134,7 +131,6 @@ public final class MediaSessionController extends SessionController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -144,7 +140,6 @@ public final class MediaSessionController extends SessionController {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ProgressRunner {
         public final Function0 callback;
         public final ContextScope coroutineScope = CoroutineScopeKt.CoroutineScope(Dispatchers.IO);

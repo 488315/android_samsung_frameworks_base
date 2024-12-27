@@ -92,7 +92,6 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RootWindowContainer extends WindowContainer implements DisplayManager.DisplayListener {
     public final RootWindowContainer$$ExternalSyntheticLambda7 mCloseSystemDialogsConsumer;
     public String mCloseSystemDialogsReason;
@@ -136,7 +135,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
     public boolean mWallpaperActionPending;
     public WindowManagerService mWindowManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.RootWindowContainer$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId;
@@ -188,7 +186,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.RootWindowContainer$2, reason: invalid class name */
     public final class AnonymousClass2 implements Runnable {
         public final /* synthetic */ int $r8$classId = 1;
@@ -265,7 +262,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FindTaskResult implements Predicate {
         public ComponentName cls;
         public Uri documentData;
@@ -312,7 +308,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FinishDisabledPackageActivitiesHelper implements Predicate {
         public final ArrayList mCollectedActivities = new ArrayList();
         public boolean mDoit;
@@ -351,7 +346,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -394,7 +388,6 @@ public final class RootWindowContainer extends WindowContainer implements Displa
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SleepToken {
         public final long mAcquireTime = SystemClock.uptimeMillis();
         public final int mDisplayId;

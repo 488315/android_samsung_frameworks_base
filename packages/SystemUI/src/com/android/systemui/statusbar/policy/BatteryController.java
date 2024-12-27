@@ -4,10 +4,8 @@ import com.android.systemui.Dumpable;
 import com.android.systemui.demomode.DemoMode;
 import java.io.PrintWriter;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface BatteryController extends DemoMode, CallbackController {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface BatteryStateChangeCallback extends Dumpable {
         @Override // com.android.systemui.Dumpable
         default void dump(PrintWriter printWriter, String[] strArr) {

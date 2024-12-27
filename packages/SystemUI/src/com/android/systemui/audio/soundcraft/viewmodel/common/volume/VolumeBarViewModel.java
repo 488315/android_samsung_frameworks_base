@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class VolumeBarViewModel extends BaseViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
     public final ModelProvider modelProvider;
@@ -45,7 +44,6 @@ public final class VolumeBarViewModel extends BaseViewModel {
         }
     });
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

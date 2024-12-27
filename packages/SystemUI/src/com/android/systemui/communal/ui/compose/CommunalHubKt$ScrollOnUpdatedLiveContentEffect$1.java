@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final class CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ List<CommunalContentModel> $communalContent;
     final /* synthetic */ CoroutineScope $coroutineScope;
@@ -26,7 +25,6 @@ final class CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1 extends SuspendLamb
     final /* synthetic */ List<String> $liveContentKeys;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.communal.ui.compose.CommunalHubKt$ScrollOnUpdatedLiveContentEffect$1$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         final /* synthetic */ LazyGridState $gridState;

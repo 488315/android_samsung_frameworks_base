@@ -39,7 +39,6 @@ import java.util.Objects;
 import java.util.WeakHashMap;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class TaskFragmentOrganizerController extends ITaskFragmentOrganizerController.Stub {
     public final ActivityTaskManagerService mAtmService;
     public final WindowManagerGlobalLock mGlobalLock;
@@ -48,7 +47,6 @@ public final class TaskFragmentOrganizerController extends ITaskFragmentOrganize
     public final ArrayMap mPendingTaskFragmentEvents = new ArrayMap();
     public final ArraySet mTmpTaskSet = new ArraySet();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingTaskFragmentEvent {
         public final ActivityRecord mActivity;
         public long mDeferTime;
@@ -86,7 +84,6 @@ public final class TaskFragmentOrganizerController extends ITaskFragmentOrganize
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskFragmentOrganizerState implements IBinder.DeathRecipient {
         public final IApplicationThread mAppThread;
         public final boolean mIsSystemOrganizer;

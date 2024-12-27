@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.List;
 import javax.inject.Provider;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyboardUI implements CoreStartable, InputManager.OnTabletModeChangedListener {
     public final BluetoothDialogDelegate mBluetoothDialogDelegate;
     public final Provider mBluetoothManagerProvider;
@@ -58,7 +57,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
     public int mInTabletMode = -1;
     public int mScanAttempt = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BluetoothCallbackHandler implements BluetoothCallback {
         public /* synthetic */ BluetoothCallbackHandler(KeyboardUI keyboardUI, int i) {
             this();
@@ -78,7 +76,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BluetoothDialogClickListener implements DialogInterface.OnClickListener {
         public /* synthetic */ BluetoothDialogClickListener(KeyboardUI keyboardUI, int i) {
             this();
@@ -94,7 +91,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BluetoothDialogDismissListener implements DialogInterface.OnDismissListener {
         public /* synthetic */ BluetoothDialogDismissListener(KeyboardUI keyboardUI, int i) {
             this();
@@ -109,7 +105,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class BluetoothErrorListener {
         public /* synthetic */ BluetoothErrorListener(KeyboardUI keyboardUI, int i) {
             this(keyboardUI);
@@ -119,7 +114,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyboardHandler extends Handler {
         public KeyboardHandler(Looper looper) {
             super(looper, null, true);
@@ -245,7 +239,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyboardScanCallback extends ScanCallback {
         public /* synthetic */ KeyboardScanCallback(KeyboardUI keyboardUI, int i) {
             this();
@@ -284,7 +277,6 @@ public final class KeyboardUI implements CoreStartable, InputManager.OnTabletMod
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class KeyboardUIHandler extends Handler {
         public KeyboardUIHandler() {
             super(Looper.getMainLooper(), null, true);

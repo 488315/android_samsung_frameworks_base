@@ -5,14 +5,12 @@ import android.service.notification.StatusBarNotification;
 import com.android.systemui.plugins.annotations.DependsOn;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @ProvidesInterface(action = NotificationPersonExtractorPlugin.ACTION, version = 1)
 @DependsOn(target = PersonData.class)
 public interface NotificationPersonExtractorPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PEOPLE_HUB_PERSON_EXTRACTOR";
     public static final int VERSION = 1;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     @ProvidesInterface(version = 0)
     public final class PersonData {
         public static final int VERSION = 0;

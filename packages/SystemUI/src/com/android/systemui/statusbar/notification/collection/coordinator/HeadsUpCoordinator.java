@@ -61,7 +61,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$sortedWith$1;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 @CoordinatorScope
 public final class HeadsUpCoordinator implements Coordinator {
     private static final long BIND_TIMEOUT = 1000;
@@ -479,7 +478,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -866,7 +864,6 @@ public final class HeadsUpCoordinator implements Coordinator {
         });
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PostedEntry {
         public static final int $stable = 8;
         private final NotificationEntry entry;

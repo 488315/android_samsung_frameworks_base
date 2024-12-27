@@ -14,7 +14,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class OomAdjusterModernImpl extends OomAdjuster {
     public static final int[] ADJ_SLOT_VALUES = {
         -1000,
@@ -45,7 +44,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
     public final ReachableCollectingConsumer mReachableCollectingConsumer;
     public final OomAdjusterArgs mTmpOomAdjusterArgs;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComputeConnectionIgnoringReachableClientsConsumer implements BiConsumer {
         public boolean hasReachableClient;
         public OomAdjusterArgs mArgs = null;
@@ -76,7 +74,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComputeConnectionsConsumer implements Consumer {
         public ComputeConnectionsConsumer() {}
 
@@ -96,7 +93,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComputeHostConsumer implements BiConsumer {
         public OomAdjusterArgs args = null;
 
@@ -139,7 +135,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Connection {
         void computeHostOomAdjLSP(
                 OomAdjuster oomAdjuster,
@@ -151,7 +146,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
                 int i);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OomAdjusterArgs {
         public ProcessRecord mApp;
         public int mCachedAdj;
@@ -162,7 +156,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         public ActiveUids mUids;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessRecordNode {
         public final ProcessRecord mApp;
         public ProcessRecordNode mNext;
@@ -204,7 +197,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessRecordNodes {
         public int mFirstPopulatedSlot = 0;
         public final ProcessRecordNode[] mLastNode;
@@ -212,7 +204,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         public final ToIntFunction mSlotFunction;
         public final int mType;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class LinkedProcessRecordList {
             public final ProcessRecordNode HEAD;
             public final ProcessRecordNode TAIL;
@@ -549,7 +540,6 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReachableCollectingConsumer implements BiConsumer {
         public ArrayList mReachables;
 

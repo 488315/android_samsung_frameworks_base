@@ -7,10 +7,8 @@ import com.android.systemui.log.table.Diffable;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface ResolvedNetworkType extends Diffable {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CarrierMergedNetworkType implements ResolvedNetworkType {
         public static final CarrierMergedNetworkType INSTANCE = new CarrierMergedNetworkType();
         public static final String lookupKey = "cwf";
@@ -29,7 +27,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -41,7 +38,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DefaultNetworkType implements ResolvedNetworkType {
         public final String lookupKey;
 
@@ -70,7 +66,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class OverrideNetworkType implements ResolvedNetworkType {
         public final String lookupKey;
 
@@ -99,7 +94,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class UnknownNetworkType implements ResolvedNetworkType {
         public static final UnknownNetworkType INSTANCE = new UnknownNetworkType();
         public static final String lookupKey = Integer.toString(0);

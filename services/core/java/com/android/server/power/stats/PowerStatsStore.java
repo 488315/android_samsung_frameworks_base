@@ -30,7 +30,6 @@ import java.util.TreeMap;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PowerStatsStore {
     public final ReentrantLock mFileLock = new ReentrantLock();
     public FileLock mJvmLock;
@@ -41,7 +40,6 @@ public final class PowerStatsStore {
     public final File mSystemDir;
     public volatile List mTableOfContents;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DefaultSectionReader implements PowerStatsSpan.SectionReader {
         public final AggregatedPowerStatsConfig mAggregatedPowerStatsConfig;
 

@@ -24,7 +24,6 @@ import java.lang.Thread;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class MemoryMonitor implements Dumpable {
     private static final int ALLOWED_NOTI_COUNT = 100;
     private static final String DATE_FORMAT = "MM-dd HH:mm:ss.SSS";
@@ -59,7 +58,6 @@ public class MemoryMonitor implements Dumpable {
     private String mReason = "";
     private int mCurrentNotiCount = 0;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class SystemUIExceptionHandler implements Thread.UncaughtExceptionHandler {
         public /* synthetic */ SystemUIExceptionHandler(MemoryMonitor memoryMonitor, int i) {
             this();

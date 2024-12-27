@@ -24,7 +24,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.RecoilEffectUtil;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class QSDetailItems extends FrameLayout {
     public static final boolean DEBUG = Log.isLoggable("QSDetailItems", 3);
     public final Adapter mAdapter;
@@ -40,7 +39,6 @@ public class QSDetailItems extends FrameLayout {
     public final int mQsDetailIconOverlaySize;
     public String mTag;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Adapter extends BaseAdapter {
         public /* synthetic */ Adapter(QSDetailItems qSDetailItems, int i) {
             this();
@@ -175,12 +173,10 @@ public class QSDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
         void onDetailItemClick(Item item);
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -223,7 +219,6 @@ public class QSDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Item {
         public int iconResId;
         public boolean isActive;

@@ -36,7 +36,6 @@ import com.android.systemui.qs.SecPageIndicator;
 import com.android.systemui.qs.SecSubScreenQSTileHost;
 import java.util.ArrayList;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class SubscreenCustomizer extends QSPanel {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass2 mDragListener;
@@ -48,7 +47,6 @@ public class SubscreenCustomizer extends QSPanel {
     public LinearLayout mQuickSettingsContainer;
     public final SubscreenQsPanelController mSubscreenQsPanelController;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MessageObjectAnim {
         public int animationType;
         public SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord longClickedTileInfo;

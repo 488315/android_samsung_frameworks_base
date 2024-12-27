@@ -19,10 +19,8 @@ import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface ISehBiometricsFace extends IBiometricsFace {
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements ISehBiometricsFace {
         public IHwBinder mRemote;
 
@@ -446,7 +444,6 @@ public interface ISehBiometricsFace extends IBiometricsFace {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface sehGetSecurityLevelCallback {
         void onValues(int i, int i2);
     }

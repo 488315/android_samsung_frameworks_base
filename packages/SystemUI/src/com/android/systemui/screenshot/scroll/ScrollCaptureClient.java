@@ -5,12 +5,10 @@ import android.view.IWindowManager;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class ScrollCaptureClient {
     static final int MATCH_ANY_TASK = -1;
     public final Executor mBgExecutor;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Session {
     }
 

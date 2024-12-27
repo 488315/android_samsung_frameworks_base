@@ -29,7 +29,6 @@ import com.android.systemui.wallet.controller.QuickAccessWalletController$$Exter
 import com.android.systemui.wallet.util.WalletCardUtilsKt;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QuickAccessWalletTile extends QSTileImpl {
     public final WalletCardRetriever mCardRetriever;
     Drawable mCardViewDrawable;
@@ -41,7 +40,6 @@ public final class QuickAccessWalletTile extends QSTileImpl {
     public final SecureSettings mSecureSettings;
     public WalletCard mSelectedCard;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class WalletCardRetriever implements QuickAccessWalletClient.OnWalletCardsRetrievedCallback {
         public /* synthetic */ WalletCardRetriever(QuickAccessWalletTile quickAccessWalletTile, int i) {
             this();

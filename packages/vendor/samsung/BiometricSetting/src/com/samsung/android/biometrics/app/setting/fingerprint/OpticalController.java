@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
 public class OpticalController
         implements Handler.Callback,
                 HbmLockStateMonitor.Callback,
@@ -58,7 +57,6 @@ public class OpticalController
             createDisplayConstraintHandler();
     public final PowerServiceProvider mPsProvider = createPowerServiceProvider();
 
-    /* compiled from: qb/89523975 3d932b551ea0d034372835fb60fef8bf79c4dff86d0cff0c41e74d050161944e */
     public final class MaskClient {
         public final boolean mIsKeyguard;
         public final boolean mIsMaskSA = true;

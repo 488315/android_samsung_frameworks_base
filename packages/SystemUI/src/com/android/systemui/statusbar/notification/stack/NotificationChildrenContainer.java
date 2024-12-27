@@ -72,7 +72,6 @@ import java.util.List;
 import kotlin.jvm.functions.Function1;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class NotificationChildrenContainer extends ViewGroup implements NotificationFadeAware, Roundable {
     public static final SourceType$Companion$from$1 FROM_PARENT;
     static final int NUMBER_OF_CHILDREN_WHEN_COLLAPSED = 1;

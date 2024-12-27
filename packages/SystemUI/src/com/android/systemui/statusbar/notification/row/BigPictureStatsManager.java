@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class BigPictureStatsManager implements Dumpable {
     public final List durations;
     public final LatencyTracker latencyTracker;

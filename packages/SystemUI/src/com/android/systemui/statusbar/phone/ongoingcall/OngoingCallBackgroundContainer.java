@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import com.android.systemui.animation.view.LaunchableLinearLayout;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class OngoingCallBackgroundContainer extends LaunchableLinearLayout {
     public Function0 maxHeightFetcher;
 

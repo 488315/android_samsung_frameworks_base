@@ -47,7 +47,6 @@ import java.util.List;
 import java.util.Optional;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationInterruptStateProviderImpl implements NotificationInterruptStateProvider {
     public final Optional mBubbles;
     public final Context mContext;
@@ -66,7 +65,6 @@ public final class NotificationInterruptStateProviderImpl implements Notificatio
     public final List mSuppressors = new ArrayList();
     protected boolean mUseHeadsUp = false;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.interruption.NotificationInterruptStateProviderImpl$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$statusbar$notification$interruption$NotificationInterruptStateProvider$FullScreenIntentDecision;
@@ -93,7 +91,6 @@ public final class NotificationInterruptStateProviderImpl implements Notificatio
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public enum NotificationInterruptEvent implements UiEventLogger.UiEventEnum {
         FSI_SUPPRESSED_SUPPRESSIVE_GROUP_ALERT_BEHAVIOR(1235),
         FSI_SUPPRESSED_SUPPRESSIVE_BUBBLE_METADATA(1353),

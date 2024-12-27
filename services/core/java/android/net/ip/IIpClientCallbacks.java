@@ -13,14 +13,12 @@ import android.os.RemoteException;
 
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public interface IIpClientCallbacks extends IInterface {
     public static final String DESCRIPTOR = "android$net$ip$IIpClientCallbacks".replace('$', '.');
     public static final int DTIM_MULTIPLIER_RESET = 0;
     public static final String HASH = "9bd9d687ddb816baf1faabcad0d56ac15b22c56e";
     public static final int VERSION = 21;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IIpClientCallbacks {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -89,7 +87,6 @@ public interface IIpClientCallbacks extends IInterface {
         public void startReadPacketFilter() throws RemoteException {}
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IIpClientCallbacks {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -110,7 +107,6 @@ public interface IIpClientCallbacks extends IInterface {
         static final int TRANSACTION_setNeighborDiscoveryOffload = 13;
         static final int TRANSACTION_startReadPacketFilter = 11;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class Proxy implements IIpClientCallbacks {
             public String mCachedHash;
             public int mCachedVersion;
@@ -517,7 +513,6 @@ public interface IIpClientCallbacks extends IInterface {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class _Parcel {
         /* JADX INFO: Access modifiers changed from: private */
         public static void writeTypedList(Parcel parcel, List list, int i) {

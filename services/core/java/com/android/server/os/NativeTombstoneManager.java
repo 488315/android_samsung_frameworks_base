@@ -22,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NativeTombstoneManager {
     public static final File TOMBSTONE_DIR = new File("/data/tombstones");
     public final Context mContext;
@@ -32,7 +31,6 @@ public final class NativeTombstoneManager {
     public final Object mLock = new Object();
     public final SparseArray mTombstones = new SparseArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TombstoneFile {
         public int mAppId;
         public String mCrashReason;
@@ -45,7 +43,6 @@ public final class NativeTombstoneManager {
         public int mUid;
         public int mUserId;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ParcelFileDescriptorRetriever
                 extends IParcelFileDescriptorRetriever.Stub {
             public ParcelFileDescriptorRetriever() {}
@@ -106,7 +103,6 @@ public final class NativeTombstoneManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TombstoneWatcher extends FileObserver {
         public TombstoneWatcher() {
             super(

@@ -33,7 +33,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnClickListener {
     public boolean mAnimating;
     public CheckForDrag mCheckForDrag;
@@ -69,7 +68,6 @@ public final class NotificationMenuRow implements NotificationMenuRowPlugin, Vie
     public final ArrayList mLeftMenuItems = new ArrayList();
     public final ArrayList mRightMenuItems = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CheckForDrag implements Runnable {
         public /* synthetic */ CheckForDrag(NotificationMenuRow notificationMenuRow, int i) {
             this();
@@ -89,7 +87,6 @@ public final class NotificationMenuRow implements NotificationMenuRowPlugin, Vie
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationMenuItem implements NotificationMenuRowPlugin.MenuItem, GutContentInitializer {
         public final String mContentDescription;
         public final GutContentInitializer mGutContentInitializer;

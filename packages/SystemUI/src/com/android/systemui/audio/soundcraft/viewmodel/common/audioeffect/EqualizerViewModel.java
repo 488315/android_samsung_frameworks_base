@@ -21,7 +21,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
     public final Context context;
     public final ModelProvider modelProvider;
@@ -29,7 +28,6 @@ public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
     public final SoundAliveManager soundAliveManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

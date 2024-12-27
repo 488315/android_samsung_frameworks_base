@@ -32,7 +32,6 @@ import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PolicyWarningUIController {
     public final AlarmManager mAlarmManager;
     public final Context mContext;
@@ -49,7 +48,6 @@ public final class PolicyWarningUIController {
             ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
                     "PolicyWarningUIController", ".ACTION_DISMISS_NOTIFICATION");
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationController extends BroadcastReceiver {
         public final Context mContext;
         public int mCurrentUserId;

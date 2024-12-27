@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class RollbackRefreshOperation {
     public final CertificatePolicy mCertPolicy;
     public final Context mContext;
@@ -45,7 +44,6 @@ public final class RollbackRefreshOperation {
     public final EdmKeyStore mUserKeyStore = EdmKeyStore.getInstance(1);
     public final EdmKeyStore mNativeKeyStore = EdmKeyStore.getInstance(2);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TrustedStoreOperation extends AsyncTask {
         public final /* synthetic */ int $r8$classId = 1;
         public final Object mAliases;

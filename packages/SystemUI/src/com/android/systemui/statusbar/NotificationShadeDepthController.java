@@ -45,7 +45,6 @@ import java.util.function.Consumer;
 import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class NotificationShadeDepthController implements ShadeExpansionListener, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final BiometricUnlockController biometricUnlockController;
@@ -71,7 +70,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
     public boolean isClosed = true;
     public final List listeners = new ArrayList();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -81,7 +79,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DepthAnimation {
         public int pendingRadius = -1;
         public float radius;

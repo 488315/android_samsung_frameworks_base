@@ -4,7 +4,6 @@ import android.hardware.hdmi.HdmiDeviceInfo;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.util.Slog;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
     static final int STATE_WAIT_FOR_DEVICE_POWER_ON = 3;
     static final int STATE_WAIT_FOR_REPORT_POWER_STATUS = 1;
@@ -13,7 +12,6 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
     public int mPowerStatusCounter;
     public final HdmiDeviceInfo mTarget;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.DeviceSelectActionFromTv$1, reason: invalid class name */
     public final class AnonymousClass1 implements HdmiControlService.SendMessageCallback {
         public AnonymousClass1() {}

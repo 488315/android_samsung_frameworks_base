@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SyncStorageEngine {
     static final long MILLIS_IN_4WEEKS = 2419200000L;
     public static final String[] SOURCES = {"OTHER", "LOCAL", "POLL", "USER", "PERIODIC", "FEED"};
@@ -96,7 +95,6 @@ public final class SyncStorageEngine {
     public final ArrayList mSyncHistory = new ArrayList();
     public final RemoteCallbackList mChangeListeners = new RemoteCallbackList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccountAuthorityValidator {
         public final AccountManager mAccountManager;
         public final PackageManager mPackageManager;
@@ -109,7 +107,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AccountInfo {
         public final AccountAndUser accountAndUser;
         public final HashMap authorities = new HashMap();
@@ -119,7 +116,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthorityInfo {
         public long backoffDelay;
         public long backoffTime;
@@ -178,7 +174,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DayStats {
         public final int day;
         public int failureCount;
@@ -191,7 +186,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EndPoint {
         public static final EndPoint USER_ALL_PROVIDER_ALL_ACCOUNTS_ALL =
                 new EndPoint(null, null, -1);
@@ -246,7 +240,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
@@ -267,7 +260,6 @@ public final class SyncStorageEngine {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SyncHistoryItem {
         public int authorityId;
         public long downstreamActivity;

@@ -53,7 +53,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VirtualDeviceManagerService extends SystemService {
     public static final List VIRTUAL_DEVICE_COMPANION_DEVICE_PROFILES =
             Arrays.asList(
@@ -75,7 +74,6 @@ public final class VirtualDeviceManagerService extends SystemService {
     public final Object mVirtualDeviceManagerLock;
     public final SparseArray mVirtualDevices;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends VirtualDeviceManagerInternal {
         public final ArrayList mAppsOnVirtualDeviceListeners = new ArrayList();
         public final ArrayList mPersistentDeviceIdRemovedListeners = new ArrayList();
@@ -300,7 +298,6 @@ public final class VirtualDeviceManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PendingTrampolineMap {
         public final Handler mHandler;
         public final ConcurrentHashMap mMap = new ConcurrentHashMap();
@@ -310,11 +307,9 @@ public final class VirtualDeviceManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VirtualDeviceManagerImpl extends IVirtualDeviceManager.Stub {
         public final AnonymousClass1 mPendingTrampolineCallback = new AnonymousClass1();
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.companion.virtual.VirtualDeviceManagerService$VirtualDeviceManagerImpl$1, reason: invalid class name */
         public final class AnonymousClass1 implements VirtualDeviceImpl.PendingTrampolineCallback {
             public AnonymousClass1() {}
@@ -664,7 +659,6 @@ public final class VirtualDeviceManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VirtualDeviceManagerNativeImpl extends IVirtualDeviceManagerNative.Stub {
         public VirtualDeviceManagerNativeImpl() {}
 

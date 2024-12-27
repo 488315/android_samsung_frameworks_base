@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class MediaCommandType {
     public static final int $stable = 0;
     private static final String AUDIO_MIRRORING_PACKAGE_NAME = "com.samsung.android.audiomirroring";
@@ -27,7 +26,6 @@ public abstract class MediaCommandType {
     public static MediaModeInfoBixby mediaInfo;
     public static MediaSessionManager mediaSessionManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

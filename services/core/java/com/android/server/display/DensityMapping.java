@@ -5,11 +5,9 @@ import com.android.server.accessibility.magnification.WindowMagnificationGesture
 import java.util.Arrays;
 import java.util.Comparator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DensityMapping {
     public final Entry[] mSortedDensityMappingEntries;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Entry {
         public static final Entry ZEROES = new Entry(0, 0, 0);
         public final int density;

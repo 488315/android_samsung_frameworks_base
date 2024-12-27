@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.disableflags;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda2;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DisableStateTracker implements CommandQueue.Callbacks {
     public final Callback callback;
     public Integer displayId;
@@ -11,7 +10,6 @@ public final class DisableStateTracker implements CommandQueue.Callbacks {
     public final int mask1;
     public final int mask2;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Callback {
     }
 

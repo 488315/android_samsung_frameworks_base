@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class PSIDBManager {
     public static final Object LOCK_DATABASE = new Object();
     public static volatile WeakReference mContext;

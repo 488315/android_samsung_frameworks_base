@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.android.systemui.surfaceeffects.ripple.RippleShader;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaTttReceiverRippleController {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context context;
@@ -17,7 +16,6 @@ public final class MediaTttReceiverRippleController {
     public float maxRippleWidth;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }

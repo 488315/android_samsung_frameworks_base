@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class RecordingService extends Service implements ScreenMediaRecorder.ScreenMediaRecorderListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final RecordingController mController;

@@ -5,7 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class MediaTttSenderUiEvents implements UiEventLogger.UiEventEnum {
     public static final /* synthetic */ MediaTttSenderUiEvents[] $VALUES;
     public static final MediaTttSenderUiEvents MEDIA_TTT_SENDER_ALMOST_CLOSE_TO_END_CAST;

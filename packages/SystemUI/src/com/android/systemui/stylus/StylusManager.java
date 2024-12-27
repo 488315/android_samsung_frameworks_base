@@ -32,7 +32,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.Charsets;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class StylusManager implements InputManager.InputDeviceListener, InputManager.InputDeviceBatteryListener, BluetoothAdapter.OnMetadataChangedListener {
     public static final String TAG;
     public final BluetoothAdapter bluetoothAdapter;
@@ -49,7 +48,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
     public final Map inputDeviceBtSessionIdMap = new ArrayMap();
     public final InstanceIdSequence instanceIdSequence = new InstanceIdSequence(8192);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Companion {
         private Companion() {
         }
@@ -366,7 +364,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
         ((ArrayMap) this.inputDeviceBtSessionIdMap).remove(Integer.valueOf(i));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface StylusCallback {
         default void onStylusFirstUsed() {
         }

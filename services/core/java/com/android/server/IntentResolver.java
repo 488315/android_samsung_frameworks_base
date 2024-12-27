@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class IntentResolver {
     public static final AnonymousClass1 mResolvePrioritySorter = new AnonymousClass1();
     public final ArraySet mFilters = new ArraySet();
@@ -38,7 +37,6 @@ public abstract class IntentResolver {
     public final ArrayMap mActionToFilter = new ArrayMap();
     public final ArrayMap mTypedActionToFilter = new ArrayMap();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.IntentResolver$1, reason: invalid class name */
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
@@ -52,7 +50,6 @@ public abstract class IntentResolver {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IteratorWrapper implements Iterator {
         public Object mCur;
         public final Iterator mI;

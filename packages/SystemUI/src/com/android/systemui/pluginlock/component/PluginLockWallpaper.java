@@ -39,7 +39,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class PluginLockWallpaper extends AbstractPluginLockItem {
     private static final String CUSTOM_PACK = "com.samsung.custompack";
     private static final String DLS_PACK = "SamsungUX.DW.FreshP";
@@ -64,7 +63,6 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
     private PluginWallpaperCallback mWallpaperUpdateCallback;
     private boolean mWholeRecoverRequired;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     class PluginLockWallpaperData {
         private Bitmap mBitmap;
         private SemWallpaperColors mHints;

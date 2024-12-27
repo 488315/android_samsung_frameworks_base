@@ -17,7 +17,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContextHubTransactionManager {
     public final ContextHubClientManager mClientManager;
     public final IContextHubWrapper mContextHubProxy;
@@ -31,7 +30,6 @@ public final class ContextHubTransactionManager {
     public final ConcurrentLinkedEvictingDeque mTransactionRecordDeque =
             new ConcurrentLinkedEvictingDeque();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.contexthub.ContextHubTransactionManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends ContextHubServiceTransaction {
         public final /* synthetic */ int val$contextHubId;
@@ -159,7 +157,6 @@ public final class ContextHubTransactionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.contexthub.ContextHubTransactionManager$2, reason: invalid class name */
     public final class AnonymousClass2 extends ContextHubServiceTransaction {
         public final /* synthetic */ int $r8$classId;
@@ -374,7 +371,6 @@ public final class ContextHubTransactionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.contexthub.ContextHubTransactionManager$6, reason: invalid class name */
     public final class AnonymousClass6 extends ContextHubServiceTransaction {
         public final /* synthetic */ int val$contextHubId;
@@ -423,7 +419,6 @@ public final class ContextHubTransactionManager {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransactionRecord {
         public final long mTimestamp = System.currentTimeMillis();
         public final String mTransaction;

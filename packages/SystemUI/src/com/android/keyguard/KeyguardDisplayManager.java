@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardDisplayManager {
     public final ConnectedDisplayKeyguardPresentation.Factory mConnectedDisplayKeyguardPresentationFactory;
     public final Context mContext;
@@ -64,7 +63,6 @@ public final class KeyguardDisplayManager {
     public final DisplayInfo mTmpDisplayInfo = new DisplayInfo();
     public final SparseArray mPresentations = new SparseArray();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class DeviceStateHelper implements DeviceStateManager.DeviceStateCallback {
         public final int mConcurrentState;
         public boolean mIsInConcurrentDisplayState;

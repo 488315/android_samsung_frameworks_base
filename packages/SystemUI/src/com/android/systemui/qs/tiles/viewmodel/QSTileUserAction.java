@@ -2,10 +2,8 @@ package com.android.systemui.qs.tiles.viewmodel;
 
 import com.android.systemui.animation.Expandable;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface QSTileUserAction {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Click implements QSTileUserAction {
         public final Expandable expandable;
 
@@ -19,7 +17,6 @@ public interface QSTileUserAction {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class LongClick implements QSTileUserAction {
         public final Expandable expandable;
 

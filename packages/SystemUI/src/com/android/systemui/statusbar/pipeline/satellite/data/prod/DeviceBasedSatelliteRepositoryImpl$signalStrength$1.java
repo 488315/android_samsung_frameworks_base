@@ -9,7 +9,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 final /* synthetic */ class DeviceBasedSatelliteRepositoryImpl$signalStrength$1 extends FunctionReferenceImpl implements Function1 {
     public DeviceBasedSatelliteRepositoryImpl$signalStrength$1(Object obj) {
         super(1, obj, DeviceBasedSatelliteRepositoryImpl.class, "signalStrengthFlow", "signalStrengthFlow(Landroid/telephony/satellite/SatelliteManager;)Lkotlinx/coroutines/flow/Flow;", 0);

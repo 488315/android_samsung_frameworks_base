@@ -48,7 +48,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SyncTile extends SQSTileImpl {
     public SystemUIDialog mAlertDialog;
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -59,7 +58,6 @@ public final class SyncTile extends SQSTileImpl {
     public final AnonymousClass1 mReceiver;
     private final SettingsHelper mSettingsHelper;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SyncDetailAdapter implements DetailAdapter {
         public TextView mSummary;
 

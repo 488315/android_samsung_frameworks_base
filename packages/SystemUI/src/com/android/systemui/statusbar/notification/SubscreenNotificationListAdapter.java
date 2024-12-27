@@ -23,13 +23,11 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SubscreenNotificationListAdapter extends SubscreenParentAdapter {
     public static SubscreenNotificationListAdapter sInstance;
     public Animator mFooterAnimator;
     public FooterViewHolder mFooterViewHolder;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class CustomViewHolder extends SubscreenParentItemViewHolder {
         public final TextView mAppName;
         public final FrameLayout mContentView;
@@ -62,11 +60,9 @@ public final class SubscreenNotificationListAdapter extends SubscreenParentAdapt
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FooterViewHolder extends RecyclerView.ViewHolder {
         public final FrameLayout mClearAllLayout;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         /* renamed from: com.android.systemui.statusbar.notification.SubscreenNotificationListAdapter$FooterViewHolder$2, reason: invalid class name */
         public final class AnonymousClass2 implements View.OnClickListener {
             public AnonymousClass2(SubscreenNotificationListAdapter subscreenNotificationListAdapter) {
@@ -105,7 +101,6 @@ public final class SubscreenNotificationListAdapter extends SubscreenParentAdapt
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class GroupViewHolder extends SubscreenParentItemViewHolder {
         public final TextView mAppName;
         public final LinearLayout mContentLayout;
@@ -129,7 +124,6 @@ public final class SubscreenNotificationListAdapter extends SubscreenParentAdapt
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HideContentNotificationViewHolder extends SubscreenParentItemViewHolder {
         public final TextView mAppName;
 
@@ -158,14 +152,12 @@ public final class SubscreenNotificationListAdapter extends SubscreenParentAdapt
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NoNotificationViewHolder extends RecyclerView.ViewHolder {
         public NoNotificationViewHolder(SubscreenNotificationListAdapter subscreenNotificationListAdapter, View view) {
             super(view);
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class NotificationListItemViewHolder extends SubscreenParentItemViewHolder {
         public NotificationListItemViewHolder(View view) {
             super(view);

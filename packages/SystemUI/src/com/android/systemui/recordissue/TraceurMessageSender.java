@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class TraceurMessageSender {
     public final Looper backgroundLooper;
     public Messenger binder;
@@ -44,7 +43,6 @@ public final class TraceurMessageSender {
         }
     };
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class TraceurMessageHandler extends Handler {
         public final Context context;
         public final Uri screenRecord;

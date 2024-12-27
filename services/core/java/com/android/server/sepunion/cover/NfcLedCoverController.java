@@ -38,7 +38,6 @@ import java.util.TimerTask;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NfcLedCoverController extends BaseNfcLedCoverController {
     public static final byte[] mResponsePattern = {
         HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, 6, -47, 0, -1, -1
@@ -66,7 +65,6 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     public int mTestMode;
     public final PowerManager.WakeLock mTouchResponseWakeLock;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallDurationTask extends TimerTask {
         public byte prevSecond = -1;
 
@@ -98,7 +96,6 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Command {
         public int code;
         public byte[] data;
@@ -120,7 +117,6 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfcLedCoverControllerHandler extends Handler {
         public NfcLedCoverControllerHandler(Looper looper) {
             super(looper, null, true);
@@ -406,7 +402,6 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfcLedTouchListenerInfo implements IBinder.DeathRecipient {
         public final ComponentName component;
         public final int pid;

@@ -57,7 +57,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class NetdEventListenerService extends BaseNetdEventListener {
     public static final int[] ALLOWED_CALLBACK_TYPES = {0, 1, 2, 3, 4, 5};
     static final int WAKEUP_EVENT_BUFFER_LENGTH = 1024;
@@ -81,7 +80,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
     public final RingBuffer mWakeupEvents = new RingBuffer(WakeupEvent.class, 1024);
     public final TokenBucket mConnectTb = new TokenBucket(15000, 5000);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DnsEventHandler extends Handler {
         public DnsEventHandler(Looper looper) {
             super(looper);
@@ -250,7 +248,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DnsLocalLog {
         public final Deque mLog;
         public final int mMaxLines;
@@ -278,7 +275,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DnsResultParams {
         public final String mHostname;
         public final int mLatencyMs;
@@ -295,7 +291,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkMetricsSnapshot {
         public List stats;
         public long timeMs;
@@ -326,7 +321,6 @@ public final class NetdEventListenerService extends BaseNetdEventListener {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TransportForNetIdNetworkCallback
             extends ConnectivityManager.NetworkCallback {
         public final SparseArray mCapabilities = new SparseArray();

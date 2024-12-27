@@ -15,7 +15,6 @@ import android.util.proto.ProtoOutputStream;
 import com.android.internal.util.jobs.RingBufferIndices;
 import com.android.server.job.controllers.JobStatus;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class JobPackageTracker {
     public final RingBufferIndices mEventIndices = new RingBufferIndices(100);
     public final int[] mEventCmds = new int[100];
@@ -27,7 +26,6 @@ public final class JobPackageTracker {
     public DataSet mCurDataSet = new DataSet();
     public final DataSet[] mLastDataSets = new DataSet[5];
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataSet {
         public final SparseArray mEntries;
         public int mMaxFgActive;
@@ -358,7 +356,6 @@ public final class JobPackageTracker {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageEntry {
         public int activeCount;
         public int activeNesting;

@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ View.OnClickListener $clearAllNotifications;
     final /* synthetic */ FooterView $footer;
@@ -28,7 +27,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder$bindClearAllButton$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterView $footer;
@@ -83,7 +81,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder$bindClearAllButton$2$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterView $footer;
@@ -139,7 +136,6 @@ public final class FooterViewBinder$bindClearAllButton$2 extends SuspendLambda i
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.statusbar.notification.footer.ui.viewbinder.FooterViewBinder$bindClearAllButton$2$3, reason: invalid class name */
     public final class AnonymousClass3 extends SuspendLambda implements Function2 {
         final /* synthetic */ FooterView $footer;

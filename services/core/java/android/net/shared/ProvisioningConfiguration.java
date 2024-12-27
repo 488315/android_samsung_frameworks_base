@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class ProvisioningConfiguration {
     private static final int DEFAULT_TIMEOUT_MS = 18000;
     public static final int IPV6_ADDR_GEN_MODE_EUI64 = 0;
@@ -45,7 +44,6 @@ public class ProvisioningConfiguration {
     public boolean mUsingIpReachabilityMonitor;
     public boolean mUsingMultinetworkPolicyTracker;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Builder {
         protected ProvisioningConfiguration mConfig = new ProvisioningConfiguration();
 
@@ -172,13 +170,11 @@ public class ProvisioningConfiguration {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class ScanResultInfo {
         private final String mBssid;
         private final List mInformationElements;
         private final String mSsid;
 
-        /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public class InformationElement {
             private final int mId;
             private final byte[] mPayload;

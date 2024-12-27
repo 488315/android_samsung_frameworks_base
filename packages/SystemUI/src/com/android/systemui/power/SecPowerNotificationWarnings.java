@@ -72,7 +72,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecPowerNotificationWarnings implements SecWarningsUI {
     public final AudioManager mAudioManager;
     public boolean mAutomaticTestMode;
@@ -134,7 +133,6 @@ public final class SecPowerNotificationWarnings implements SecWarningsUI {
     public WindowManager mWindowManager;
     public AlertDialog mWirelessFodAlertDialog;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Receiver extends BroadcastReceiver {
         public /* synthetic */ Receiver(SecPowerNotificationWarnings secPowerNotificationWarnings, int i) {
             this();

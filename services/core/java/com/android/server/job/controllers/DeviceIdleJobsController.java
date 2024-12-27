@@ -30,7 +30,6 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DeviceIdleJobsController extends StateController {
     public static final boolean DEBUG;
     public final ArraySet mAllowInIdleJobs;
@@ -45,7 +44,6 @@ public final class DeviceIdleJobsController extends StateController {
     public int[] mPowerSaveTempWhitelistAppIds;
     public final DeviceIdleJobsController$$ExternalSyntheticLambda0 mShouldRushEvaluation;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceIdleJobsDelayHandler extends Handler {
         public DeviceIdleJobsDelayHandler(Looper looper) {
             super(looper);
@@ -77,7 +75,6 @@ public final class DeviceIdleJobsController extends StateController {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceIdleUpdateFunctor implements Consumer {
         public final ArraySet mChangedJobs = new ArraySet();
         public long mUpdateTimeElapsed = 0;

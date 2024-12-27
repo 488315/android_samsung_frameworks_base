@@ -11,7 +11,6 @@ import com.android.server.LocalServices;
 import com.android.server.contentcapture.ContentCaptureManagerService;
 import com.android.server.contentcapture.ContentCapturePerUserService;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda7 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ActivityRecord f$0;

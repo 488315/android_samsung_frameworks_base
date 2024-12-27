@@ -20,7 +20,6 @@ import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.utils.AlarmQueue;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class QuotaTracker {
     public static final String ALARM_TAG_QUOTA_CHECK =
             XmlUtils$$ExternalSyntheticOutline0.m("*", "QuotaTracker", ".quota_check*");
@@ -36,7 +35,6 @@ public abstract class QuotaTracker {
     public final SparseArrayMap mFreeQuota = new SparseArrayMap();
     public boolean mIsEnabled = true;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InQuotaAlarmQueue extends AlarmQueue {
         public InQuotaAlarmQueue(Context context, Looper looper) {
             super(context, looper, QuotaTracker.ALARM_TAG_QUOTA_CHECK, "In quota", false, 0L);
@@ -77,7 +75,6 @@ public abstract class QuotaTracker {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Injector {}
 
     public QuotaTracker(Context context, Categorizer categorizer, Injector injector) {

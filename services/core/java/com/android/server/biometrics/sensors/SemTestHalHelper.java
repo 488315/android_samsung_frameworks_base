@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class SemTestHalHelper {
     public final int mBiometricType;
     public final Callback mCallback;
@@ -17,7 +16,6 @@ public final class SemTestHalHelper {
     public final List mEnrollActionList = new ArrayList();
     public final List mAuthActionList = new ArrayList();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Action implements Runnable {
         public final Callback callback;
         public final CallbackType callbackType;
@@ -79,7 +77,6 @@ public final class SemTestHalHelper {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {
         void deliverAcquiredEvent(int i, int i2);
 
@@ -94,7 +91,6 @@ public final class SemTestHalHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CallbackType {
         public static final /* synthetic */ CallbackType[] $VALUES;
         public static final CallbackType ACQUIRED;

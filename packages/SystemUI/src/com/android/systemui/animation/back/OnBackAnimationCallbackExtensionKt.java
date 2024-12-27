@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class OnBackAnimationCallbackExtensionKt {
     /* JADX WARN: Type inference failed for: r7v0, types: [com.android.systemui.animation.back.OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$4] */
     public static OnBackAnimationCallbackExtensionKt$onBackAnimationCallbackFrom$4 onBackAnimationCallbackFrom$default(final BackAnimationSpec backAnimationSpec, final DisplayMetrics displayMetrics, final Function1 function1, final Function0 function0) {

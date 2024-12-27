@@ -43,7 +43,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class BaseHeadsUpManager implements HeadsUpManager {
     public final AccessibilityManagerWrapper mAccessibilityMgr;
     public final int mAutoDismissTime;
@@ -64,7 +63,6 @@ public abstract class BaseHeadsUpManager implements HeadsUpManager {
     public final List mCallbacks = new ArrayList();
     public final ArrayMap mHeadsUpEntryMap = new ArrayMap();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class HeadsUpEntry implements Comparable {
         public Runnable mCancelRemoveRunnable;
         public long mEarliestRemovalTime;
@@ -382,7 +380,6 @@ public abstract class BaseHeadsUpManager implements HeadsUpManager {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum NotificationPeekEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_PEEK(801);
 

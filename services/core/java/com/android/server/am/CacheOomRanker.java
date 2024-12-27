@@ -5,7 +5,6 @@ import android.util.Slog;
 
 import java.util.Comparator;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class CacheOomRanker {
     static final float DEFAULT_OOM_RE_RANKING_LRU_WEIGHT = 0.35f;
     static final int DEFAULT_OOM_RE_RANKING_NUMBER_TO_RE_RANK = 8;
@@ -139,19 +138,15 @@ public final class CacheOomRanker {
                 }
             };
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface ProcessDependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessDependenciesImpl implements ProcessDependencies {}
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RankedProcessRecord {
         public ProcessRecord proc;
         public float score;
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RssComparator implements Comparator {
         public final /* synthetic */ int $r8$classId;
 

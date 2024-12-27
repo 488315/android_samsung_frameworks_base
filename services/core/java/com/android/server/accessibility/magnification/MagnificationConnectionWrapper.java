@@ -8,12 +8,10 @@ import android.view.accessibility.MagnificationAnimationCallback;
 
 import com.android.server.accessibility.AccessibilityTraceManager;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MagnificationConnectionWrapper {
     public final IMagnificationConnection mConnection;
     public final AccessibilityTraceManager mTrace;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteAnimationCallback extends IRemoteMagnificationAnimationCallback.Stub {
         public final MagnificationAnimationCallback mCallback;
         public final AccessibilityTraceManager mTrace;

@@ -6,7 +6,6 @@ import com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.LockscreenContentViewModel;
 import com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SmartSpaceSection {
     public final AodBurnInViewModel aodBurnInViewModel;
     public final KeyguardSmartspaceViewModel keyguardSmartspaceViewModel;

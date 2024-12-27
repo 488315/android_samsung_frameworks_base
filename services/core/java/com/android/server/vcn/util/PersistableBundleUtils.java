@@ -17,12 +17,10 @@ import java.util.TreeSet;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public abstract class PersistableBundleUtils {
     public static final VcnManagementService$$ExternalSyntheticLambda10 STRING_DESERIALIZER = null;
     public static final VcnManagementService$$ExternalSyntheticLambda10 STRING_SERIALIZER = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockingReadWriteHelper {
         public final ReadWriteLock mDiskLock = new ReentrantReadWriteLock();
         public final String mPath;
@@ -74,7 +72,6 @@ public abstract class PersistableBundleUtils {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PersistableBundleWrapper {
         public final PersistableBundle mBundle;
 

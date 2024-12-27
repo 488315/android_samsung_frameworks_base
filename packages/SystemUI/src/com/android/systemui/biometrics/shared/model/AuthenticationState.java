@@ -7,10 +7,8 @@ import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface AuthenticationState {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Acquired implements AuthenticationState {
         public final int acquiredInfo;
         public final BiometricSourceType biometricSourceType;
@@ -58,7 +56,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Error implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final int errCode;
@@ -104,7 +101,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Failed implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -152,7 +148,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Help implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final int helpCode;
@@ -198,7 +193,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Started implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -238,7 +232,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Stopped implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -278,7 +271,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Succeeded implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final boolean isStrongBiometric;
@@ -326,7 +318,6 @@ public interface AuthenticationState {
 
     AuthenticationReason getRequestReason();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Idle implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;

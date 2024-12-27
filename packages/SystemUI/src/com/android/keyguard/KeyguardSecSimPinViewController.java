@@ -45,7 +45,6 @@ import com.android.systemui.widget.SystemUIImageView;
 import com.android.systemui.widget.SystemUITextView;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewController {
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass1 mConfigurationListener;
@@ -60,7 +59,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
     public final SystemUITextView mSimCardName;
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecSimPinViewController$2, reason: invalid class name */
     class AnonymousClass2 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass2() {
@@ -129,7 +127,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.keyguard.KeyguardSecSimPinViewController$3, reason: invalid class name */
     public final class AnonymousClass3 extends SecCheckSimPin {
         public final /* synthetic */ KeyguardSecurityCallback val$keyguardSecurityCallback;
@@ -212,7 +209,6 @@ public final class KeyguardSecSimPinViewController extends KeyguardSimPinViewCon
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public abstract class SecCheckSimPin extends KeyguardSimPinViewController.CheckSimPin {
         public SecCheckSimPin(String str, int i) {
             super(str, i);

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implements Dumpable, LockscreenShadeTransitionController.Callback, PanelTransitionStateListener {
     public final SecQSDetailController mDetailController;
     public final DumpManager mDumpManager;
@@ -42,7 +41,6 @@ public final class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implem
     public final ShadeExpansionStateManager mShadeExpansionStateManager;
     public final QsTransitionAnimator mTransitionAnimator;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.qs.animator.SecQSImplAnimatorManager$2, reason: invalid class name */
     public final class AnonymousClass2 {
         public AnonymousClass2() {

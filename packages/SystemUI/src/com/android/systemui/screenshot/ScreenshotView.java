@@ -47,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class ScreenshotView extends FrameLayout implements ViewTreeObserver.OnComputeInternalInsetsListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public HorizontalScrollView mActionsContainer;
@@ -77,7 +76,6 @@ public class ScreenshotView extends FrameLayout implements ViewTreeObserver.OnCo
     public final ArrayList mSmartChips;
     public UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     enum PendingInteraction {
         /* JADX INFO: Fake field, exist only in values array */
         PREVIEW,

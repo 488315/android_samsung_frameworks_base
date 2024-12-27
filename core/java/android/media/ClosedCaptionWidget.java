@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.CaptioningManager;
 
-/* compiled from: ClosedCaptionRenderer.java */
 abstract class ClosedCaptionWidget extends ViewGroup implements SubtitleTrack.RenderingWidget {
     private static final CaptioningManager.CaptionStyle DEFAULT_CAPTION_STYLE =
             CaptioningManager.CaptionStyle.DEFAULT;
@@ -17,7 +16,6 @@ abstract class ClosedCaptionWidget extends ViewGroup implements SubtitleTrack.Re
     protected SubtitleTrack.RenderingWidget.OnChangedListener mListener;
     private final CaptioningManager mManager;
 
-    /* compiled from: ClosedCaptionRenderer.java */
     interface ClosedCaptionLayout {
         void setCaptionStyle(CaptioningManager.CaptionStyle captionStyle);
 

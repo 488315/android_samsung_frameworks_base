@@ -10,13 +10,11 @@ import android.view.ContextThemeWrapper;
 
 import com.android.internal.accessibility.util.AccessibilityUtils;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ScreenRotation extends CornerActionType {
     public String mAccelerometerRotationUri;
     public Context mContext;
     public int mUserId;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.accessibility.autoaction.actiontype.ScreenRotation$1, reason: invalid class name */
     public final class AnonymousClass1 implements DialogInterface.OnClickListener {
         @Override // android.content.DialogInterface.OnClickListener

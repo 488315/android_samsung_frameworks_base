@@ -21,7 +21,6 @@ import kotlin.Unit;
 import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class BackPanel extends View {
     public final Set allAnimatedFloat;
     public final AnimatedFloat arrowAlpha;
@@ -252,7 +251,6 @@ public class BackPanel extends View {
         this.arrowBackgroundPaint.setColor(Utils.getColorAttrDefaultColor(getContext(), z ? R.^attr-private.materialColorSurface : R.^attr-private.materialColorSurfaceContainer, 0));
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimatedFloat {
         public final SpringAnimation animation;
         public float pos;

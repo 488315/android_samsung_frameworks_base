@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class WifiPowerStatsCollector extends PowerStatsCollector {
     public PowerStatsCollector.ConsumedEnergyRetrieverImpl mConsumedEnergyRetriever;
     public long[] mDeviceStats;
@@ -39,7 +38,6 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
     public volatile WifiManager mWifiManager;
     public volatile BatteryStatsImpl.AnonymousClass2 mWifiStatsRetriever;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class WifiScanTimes {
         public long basicScanTimeMs;
         public long batchedScanTimeMs;

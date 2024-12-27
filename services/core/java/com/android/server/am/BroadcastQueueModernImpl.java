@@ -66,7 +66,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class BroadcastQueueModernImpl extends BroadcastQueue {
     public final BroadcastAnrTimer mAnrTimer;
     public final BroadcastConstants mBgConstants;
@@ -97,7 +96,6 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     public static final BroadcastQueueModernImpl$$ExternalSyntheticLambda7 BROADCAST_PREDICATE_ANY =
             new BroadcastQueueModernImpl$$ExternalSyntheticLambda7(0);
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastAnrTimer extends AnrTimer {
         @Override // com.android.server.utils.AnrTimer
         public final int getPid(Object obj) {

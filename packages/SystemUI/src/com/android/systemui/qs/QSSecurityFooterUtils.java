@@ -28,7 +28,6 @@ import com.android.systemui.statusbar.policy.SecurityControllerImpl;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class QSSecurityFooterUtils implements DialogInterface.OnClickListener {
     public final ActivityStarter mActivityStarter;
     public final Handler mBgHandler;
@@ -56,7 +55,6 @@ public final class QSSecurityFooterUtils implements DialogInterface.OnClickListe
     public final QSSecurityFooterUtils$$ExternalSyntheticLambda3 mWorkProfileMonitoringStringSupplier;
     public final QSSecurityFooterUtils$$ExternalSyntheticLambda3 mWorkProfileNetworkStringSupplier;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VpnSpan extends ClickableSpan {
         public VpnSpan() {
         }

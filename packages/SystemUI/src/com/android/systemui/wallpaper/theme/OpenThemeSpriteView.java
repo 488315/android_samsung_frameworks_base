@@ -11,7 +11,6 @@ import com.android.systemui.wallpaper.theme.particle.Sprite;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public class OpenThemeSpriteView extends OpenThemeSurfaceView {
     public final String TAG;
     public Bitmap mBackgroundBitmap;

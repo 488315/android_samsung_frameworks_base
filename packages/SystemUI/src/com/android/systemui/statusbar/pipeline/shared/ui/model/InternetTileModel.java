@@ -6,10 +6,8 @@ import com.android.systemui.plugins.qs.QSTile;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public interface InternetTileModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Active implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final QSTile.Icon icon;
@@ -96,7 +94,6 @@ public interface InternetTileModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Inactive implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final QSTile.Icon icon;

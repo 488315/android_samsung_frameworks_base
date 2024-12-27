@@ -14,7 +14,6 @@ import android.view.ContextThemeWrapper;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import com.android.settingslib.Utils;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class PeopleStoryIconFactory implements AutoCloseable {
     public final int mAccentColor;
     public final Context mContext;
@@ -37,7 +36,6 @@ public final class PeopleStoryIconFactory implements AutoCloseable {
         this.mAccentColor = Utils.getColorAttr(R.^attr-private.colorAccentPrimaryVariant, contextThemeWrapper).getDefaultColor();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class PeopleStoryIconDrawable extends Drawable {
         public final RoundedBitmapDrawable mAvatar;
         public final Drawable mBadgeIcon;

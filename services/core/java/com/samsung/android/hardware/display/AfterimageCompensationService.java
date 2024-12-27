@@ -22,7 +22,6 @@ import java.lang.Thread;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public class AfterimageCompensationService {
     public static final String[] mAFPC_KEYS = {"ApplyCount", "JND", "AvgLum", "MaxBDI", "NBDI", "EffAvgLum", "EffMaxBDI", "EffNBDI", "ApplyCount_sub", "JND_sub", "AvgLum_sub", "MaxBDI_sub", "NBDI_sub", "EffAvgLum_sub", "EffMaxBDI_sub", "EffNBDI_sub"};
     public boolean AfcStateCondition;
@@ -73,7 +72,6 @@ public class AfterimageCompensationService {
     public SemHqmManager mSemHqmManager = null;
     public WindowManager mWindowManager = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AfcThread extends Thread {
         public boolean mDataValid = false;
         public boolean mNormalValid = false;
@@ -101,7 +99,6 @@ public class AfterimageCompensationService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
         public ScreenWatchingReceiver() {
         }

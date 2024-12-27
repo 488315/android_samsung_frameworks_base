@@ -69,7 +69,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AuthContainerView extends LinearLayout implements AuthDialog, WakefulnessLifecycle.Observer, CredentialView.Host {
     public final AuthContainerView$$ExternalSyntheticLambda3 mBackCallback;
     public final DelayableExecutor mBackgroundExecutor;
@@ -99,7 +98,6 @@ public final class AuthContainerView extends LinearLayout implements AuthDialog,
     public final WindowManager mWindowManager;
     public final IBinder mWindowToken;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     final class BiometricCallback implements Spaghetti.Callback {
         public BiometricCallback() {
         }
@@ -188,7 +186,6 @@ public final class AuthContainerView extends LinearLayout implements AuthDialog,
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class Config {
         public AuthController mCallback;
         public Context mContext;
@@ -594,7 +591,6 @@ public final class AuthContainerView extends LinearLayout implements AuthDialog,
         requestFocus();
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.biometrics.AuthContainerView$2, reason: invalid class name */
     public final class AnonymousClass2 implements Animator.AnimatorListener {
         public final /* synthetic */ long val$timeout;

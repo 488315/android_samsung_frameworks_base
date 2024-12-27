@@ -60,7 +60,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaRouter2ServiceImpl {
     public final ActivityManager mActivityManager;
     public final AppOpsManager mAppOpsManager;
@@ -83,7 +82,6 @@ public final class MediaRouter2ServiceImpl {
     public final ArrayMap mAllManagerRecords = new ArrayMap();
     public int mCurrentActiveUserId = -1;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ManagerRecord implements IBinder.DeathRecipient {
         public final boolean mHasMediaContentControl;
         public final boolean mHasMediaRoutingControl;
@@ -133,7 +131,6 @@ public final class MediaRouter2ServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RouterRecord implements IBinder.DeathRecipient {
         public final AtomicBoolean mHasBluetoothRoutingPermission;
         public final boolean mHasConfigureWifiDisplayPermission;
@@ -268,7 +265,6 @@ public final class MediaRouter2ServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionCreationRequest {
         public final long mManagerRequestId;
         public final RoutingSessionInfo mOldSession;
@@ -290,7 +286,6 @@ public final class MediaRouter2ServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserHandler extends Handler
             implements MediaRoute2ProviderWatcher.Callback, MediaRoute2Provider.Callback {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -681,7 +676,6 @@ public final class MediaRouter2ServiceImpl {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserRecord {
         public final UserHandler mHandler;
         public final int mUserId;

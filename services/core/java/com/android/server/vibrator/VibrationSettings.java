@@ -47,7 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class VibrationSettings {
     public AudioManager mAudioManager;
     public boolean mBatterySaverMode;
@@ -82,7 +81,6 @@ public final class VibrationSettings {
     public final List mListeners = new ArrayList();
     public final SparseIntArray mCurrentVibrationIntensities = new SparseIntArray();
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SettingsBroadcastReceiver extends BroadcastReceiver {
         public SettingsBroadcastReceiver() {}
 
@@ -101,7 +99,6 @@ public final class VibrationSettings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class SettingsContentObserver extends ContentObserver {
         public SettingsContentObserver(Handler handler) {
             super(handler);
@@ -116,7 +113,6 @@ public final class VibrationSettings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class VibrationUidObserver extends UidObserver {
         public final SparseArray mProcStatesCache = new SparseArray();
 
@@ -133,7 +129,6 @@ public final class VibrationSettings {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class VibrationUserSwitchObserver extends SynchronousUserSwitchObserver {
         public VibrationUserSwitchObserver() {}
 

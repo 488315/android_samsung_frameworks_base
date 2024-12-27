@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class MediaResourceMonitorService extends SystemService {
     public static final boolean DEBUG = Log.isLoggable("MediaResourceMonitor", 3);
     public static final boolean mServiceEnabled =
@@ -37,7 +36,6 @@ public final class MediaResourceMonitorService extends SystemService {
     public final MediaResourceMonitorImpl mMediaResourceMonitorImpl;
     public PackageManager mPackageManager;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaResourceMonitorImpl extends IMediaResourceMonitor.Stub {
         public MediaResourceMonitorImpl() {}
 

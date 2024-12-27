@@ -10,13 +10,11 @@ import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.window.flags.Flags;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class Dimmer {
     public final DimmerAnimationHelper.AnimationAdapterFactory mAnimationAdapterFactory;
     public DimState mDimState;
     public final WindowContainer mHost;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DimState {
         public final DimmerAnimationHelper mAnimationHelper;
         public final SurfaceControl mDimSurface;

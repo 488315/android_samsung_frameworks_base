@@ -55,7 +55,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, HearingDevicesListAdapter.HearingDeviceItemCallback, BluetoothCallback {
     static final String ACTION_BLUETOOTH_DEVICE_DETAILS = "com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS";
     static final Intent LIVE_CAPTION_INTENT = new Intent("com.android.settings.action.live_caption");
@@ -81,7 +80,6 @@ public final class HearingDevicesDialogDelegate implements SystemUIDialog.Delega
     public final AnonymousClass1 mPresetCallback = new AnonymousClass1();
     public final List mHearingDeviceItemFactoryList = List.of(new ActiveHearingDeviceItemFactory(), new AvailableHearingDeviceItemFactory(), new ConnectedDeviceItemFactory(), new SavedHearingDeviceItemFactory());
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1, reason: invalid class name */
     public final class AnonymousClass1 implements HearingDevicesPresetsController.PresetCallback {
         public AnonymousClass1() {
@@ -93,7 +91,6 @@ public final class HearingDevicesDialogDelegate implements SystemUIDialog.Delega
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$bluetooth$qsdialog$DeviceItemType;
@@ -120,7 +117,6 @@ public final class HearingDevicesDialogDelegate implements SystemUIDialog.Delega
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public interface Factory {
         HearingDevicesDialogDelegate create(boolean z);
     }

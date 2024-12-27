@@ -4,7 +4,6 @@ import java.util.UUID;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FromLockscreenTransitionInteractor$listenForLockscreenToPrimaryBouncerDragging$1$1 implements FlowCollector {
     public final /* synthetic */ Ref$ObjectRef $transitionId;
     public final /* synthetic */ FromLockscreenTransitionInteractor this$0;

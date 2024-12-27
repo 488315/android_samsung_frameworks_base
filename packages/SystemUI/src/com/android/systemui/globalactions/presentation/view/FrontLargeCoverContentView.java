@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class FrontLargeCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
     public CoverViewAnimatorFSM mAnimatorFSM;
@@ -74,21 +73,18 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
     public ActionViewModel mSelectedViewModel;
     public ViewAnimationState mState;
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     /* renamed from: com.android.systemui.globalactions.presentation.view.FrontLargeCoverContentView$3, reason: invalid class name */
     public final class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentAdapter extends RecyclerView.Adapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
         public final List mTempViewModelList = new ArrayList();
         public boolean mIsConfirmView = false;
 
-        /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
         public final class ViewHolder extends RecyclerView.ViewHolder {
             public static final /* synthetic */ int $r8$clinit = 0;
             public final ViewGroup parent;
@@ -134,7 +130,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class ContentGridView extends RecyclerView {
         public ContentGridView(Context context) {
             super(context);
@@ -151,7 +146,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class FrontLargeCoverGlobalActionsBackgroundView extends FrameLayout {
         public FrontLargeCoverGlobalActionsBackgroundView(FrontLargeCoverContentView frontLargeCoverContentView, Context context) {
             super(context);
@@ -159,7 +153,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
         public final int horizontalSpaceHeight;
 
@@ -176,7 +169,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);
@@ -200,7 +192,6 @@ public final class FrontLargeCoverContentView implements ContentView, ViewStateC
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
         public final int verticalSpaceHeight;
 

@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class DozeLog implements Dumpable {
     public final SummaryStats mEmergencyCallStats;
     public final DozeLogger mLogger;
@@ -122,7 +121,6 @@ public final class DozeLog implements Dumpable {
     public final long mSince = System.currentTimeMillis();
     public final SummaryStats[][] mProxStats = (SummaryStats[][]) Array.newInstance((Class<?>) SummaryStats.class, 13, 2);
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class SummaryStats {
         public int mCount;
 

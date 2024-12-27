@@ -40,7 +40,6 @@ import java.io.FileDescriptor;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class ContextualSearchManagerService extends SystemService {
     public final AnonymousClass1 mAssistDataCallbacks;
     public final AssistDataRequester mAssistDataRequester;
@@ -55,7 +54,6 @@ public final class ContextualSearchManagerService extends SystemService {
     public long mTokenValidDurationMs;
     public final WindowManagerInternal mWmInternal;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.contextualsearch.ContextualSearchManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 extends Handler {
         public final /* synthetic */ int $r8$classId;
@@ -96,7 +94,6 @@ public final class ContextualSearchManagerService extends SystemService {
         }
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ContextualSearchManagerStub extends IContextualSearchManager.Stub {
         public CallbackToken mToken;
         public AnonymousClass2 mTokenHandler;

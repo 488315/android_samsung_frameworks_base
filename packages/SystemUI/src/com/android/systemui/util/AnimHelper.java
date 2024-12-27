@@ -16,12 +16,10 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public final class AnimHelper {
     public static final int $stable = 0;
     public static final AnimHelper INSTANCE = new AnimHelper();
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimPairSet {
         public static final int $stable = 8;
         private final AnimProperty animProperty;
@@ -83,7 +81,6 @@ public final class AnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimProperty {
         public static final int $stable = 8;
         private AnimationType animType;
@@ -214,7 +211,6 @@ public final class AnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationState {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationState[] $VALUES;
@@ -250,7 +246,6 @@ public final class AnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class AnimationType {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationType[] $VALUES;
@@ -283,7 +278,6 @@ public final class AnimHelper {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -367,7 +361,6 @@ public final class AnimHelper {
         return animatorSet;
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public class BaseAnimatorListener implements Animator.AnimatorListener {
         public static final int $stable = 8;
         private final boolean debug;

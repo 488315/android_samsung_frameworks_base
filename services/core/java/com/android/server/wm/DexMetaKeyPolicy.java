@@ -17,7 +17,6 @@ import com.samsung.android.rune.CoreRune;
 
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 public final class DexMetaKeyPolicy {
     public final ActivityTaskManagerService mAtm;
     public final DexController mDexController;
@@ -37,7 +36,6 @@ public final class DexMetaKeyPolicy {
     public Task mSnappingTask = null;
     public Rect mOtherSnappingBounds = null;
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class MetaKeyBoundsProvider {
         public MetaKeyBoundsProvider() {}
 
@@ -94,7 +92,6 @@ public final class DexMetaKeyPolicy {
         public abstract void updateTaskBoundsInfoIfNeeded(Task task, Rect rect);
     }
 
-    /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpMetaKeyBoundsProvider extends MetaKeyBoundsProvider {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DexMetaKeyPolicy this$0;

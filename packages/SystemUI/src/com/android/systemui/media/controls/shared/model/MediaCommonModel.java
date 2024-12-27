@@ -6,10 +6,8 @@ import com.android.systemui.media.controls.shared.model.MediaDataLoadingModel;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
 public abstract class MediaCommonModel {
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaControl extends MediaCommonModel {
         public final boolean canBeRemoved;
         public final boolean isMediaFromRec;
@@ -51,7 +49,6 @@ public abstract class MediaCommonModel {
         }
     }
 
-    /* compiled from: qb/89523975 427a50d40ec74a85ca352b86f77450b1c52ece5389e11158752b0d641a3a5098 */
     public final class MediaRecommendations extends MediaCommonModel {
         public final SmartspaceMediaLoadingModel recsLoadingModel;
 
